@@ -1,0 +1,40 @@
+<html>
+<head>
+<link href="engstyle.css" rel="stylesheet" type="text/css">
+<title>Transparent div</title>
+<script src="cues_taglib.js" language="JavaScript"></script>
+<script>
+//LPM must size these iframes as well
+var resizeTimer = null;
+function onresizeHandler()
+{
+  if(resizeTimer!=null)clearTimeout(resizeTimer);
+  resizeTimer = setTimeout("resize()",200);
+}
+function resize()
+{
+  cuesExpandHeight("tocList", 30);
+}
+</script>
+</head>
+<body onload="resize()" onresize="onresizeHandler()">
+
+
+<table><tr><td>
+<script type="text/JavaScript">
+if(top.kubDropin!=""){
+document.write("<iframe style=\"height: 50px;\" name=\"navframe1\" id=\"navframe1\" allowtransparency=\"true\" src=\"navtabs_toc.html\" width=\"100%\" frameborder=\"0\" ></iframe>");
+}else{
+document.write("<iframe style=\"height: 20px;\" name=\"navframe1\" id=\"navframe1\" allowtransparency=\"true\" src=\"navtabs_toc.html\" width=\"100%\" frameborder=\"0\" ></iframe>");
+}
+</script>
+</td></tr>
+<tr><td>
+<iframe style="height: 620px;" name="tocList" id="tocList" allowtransparency="true" src="tocFrame.html" width="100%" frameborder="0" ></iframe>
+</td></tr>
+<tr><td>
+<iframe name="navframe3" id="navframe3" style="height: 20px;" allowtransparency="true" src="tocExpand.html" width="100%" frameborder="0"></iframe>
+</td></tr>
+</table>
+</body>
+</html>

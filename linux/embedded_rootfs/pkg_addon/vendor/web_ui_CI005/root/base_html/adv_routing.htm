@@ -1,0 +1,503 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	ripStatus();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chSubmit(F)
+{
+	selAll(F.staticRouteList);
+	F.submitStatus.value=1;
+	F.log_ch.value=1;
+	F.submit();
+}
+
+function HOPCheck(I)
+{
+	return validatenum(I, 16, 1, aHopCountCheck);
+}
+
+function RouteaddSel(i1,s1,g1,hc,f,s) /* */
+{
+    var p=-1;
+    if (i1.value=="")
+    {
+    	alert(aIPAddressDes);
+    	return;
+    }
+    else if (s1.value=="")
+    {
+    	alert(aMask);
+    	return;
+    }
+    else if (g1.value=="")
+    {
+    	alert(aGateway);
+    	return;
+    } 
+    else if (hc.value=="")
+    {
+    	alert(aHopCount);
+    	return;
+    }
+    
+    if(IPCheck(i1)<0)
+    {
+    	i1.select();
+    	return;
+    }
+    if(IPCheck(s1)<0)
+    {
+    	s1.select();
+    	return;
+    }
+    if(IPCheck(g1)<0)
+    {
+    	g1.select();
+    	return;
+    }
+    
+	if(s.form.AddToListButton.value==sUpdateIP)
+	{
+		p=-1;
+		while(s.form.staticRouteList.options[++p].selected != true);
+		if(ckDestIPAlready(i1, s, p) < 0)//select p, update p service apper
+			return;
+	}
+	
+	for(var i=0; i < s.form.staticRouteList.length; i++)
+	{
+	  	s.form.staticRouteList.options[i].selected=false;
+	}
+  
+	  if(s.form.AddToListButton.value==sAddtoList)
+	  {
+		if (s.length>=LimitRouting)
+		{
+			alert(aLimitRouting+LimitRouting+aLimitEnd);
+			return;
+		}
+		if(ckDestIPAlready(i1, s, s.length) < 0)//before s.length service apper
+			return;
+		p=s.length;
+		s.length+=1;
+	}
+	s.options[p].value =i1.value;
+	s.options[p].value +="{";
+	s.options[p].value +=s1.value;
+ 	s.options[p].value +=";";
+	s.options[p].value +=g1.value;
+ 	s.options[p].value +=";";
+	s.options[p].value +=hc.value;
+	s.options[p].value +=";";
+	//s.options[p].value +=f.selectedIndex;
+	s.options[p].value +=f.options[f.selectedIndex].value;
+	s.options[p].value +="}";
+	s.options[p].text =i1.value;
+	clearContent(s.form);
+	//s.form.DeleteButton.disabled=true;
+	SetButtonStatus("DeleteButton", "disabled");
+  SetButtonStatus("newAddButton", "disabled");
+}
+
+function showStaticRouteList(s)
+{
+	if (s.selectedIndex==-1)
+  	return;
+  	
+	var p;
+	var q; 
+	var routeString=s.options[s.selectedIndex].value;
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(6);
+
+	rightString=routeString;
+	q=rightString.length;
+	p=rightString.indexOf("{");
+	ts[1]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q); 
+	/*--------------------------------------------*/
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[2]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q); 
+
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[3]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[4]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+
+	q=rightString.length;
+	p=rightString.indexOf("}");
+	ts[5]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+    /*)*/
+    /*----------------------------------------------*/
+    s.form.dstIP.value=ts[1];
+    s.form.dstMsk.value=ts[2]; 
+    s.form.gwIP.value=ts[3];
+    s.form.Cost.value=ts[4];
+    
+	for (var i=0; i < s.form.iFace.length; i++)
+	{
+	    if (s.form.iFace.options[i].value==ts[5])
+	    {
+	    	s.form.iFace.selectedIndex=i;
+	    }
+	}
+//    s.form.iFace.selectedIndex=parseInt(ts[14],10);
+	
+  s.form.AddToListButton.value=sUpdateIP; 
+  //s.form.DeleteButton.disabled=false;
+  SetButtonStatus("DeleteButton", "");
+  //s.form.newAddButton.disabled=false;
+  SetButtonStatus("newAddButton", "");
+	//MM_showHideLayers('btnNew','','show');
+}
+
+function ckDestIPAlready(I, s, p)
+{
+	var rightString, dstIPIndex, dstIP;
+	
+  for (var i=0; i < s.length; i++)
+  {
+  	rightString=s.options[i].value;
+  	dstIPIndex=rightString.indexOf(";");
+  	dstIP=rightString.substring(0, dstIPIndex);
+	 if(dstIP==I.value)
+	{
+		if (p != i)
+		{
+			alert(aDestIPAlready);
+			return -1;
+		}
+	}
+  }
+  return 1;
+}
+
+function ripStatus()
+{
+	if(document.formRouting.RIPEnable[0].checked==true)
+	{
+		document.formRouting.RipRx.disabled=false;
+	  document.formRouting.RipTx.disabled=false;
+	}
+	else if(document.formRouting.RIPEnable[1].checked==true)
+	{
+		document.formRouting.RipRx.disabled=true;
+		document.formRouting.RipTx.disabled=true;
+	}
+}
+
+function clearContent(F)
+{
+	F.dstIP.value="";
+	F.dstMsk.value="";
+	F.gwIP.value="";
+	F.Cost.value="";
+	F.iFace.options[0].selected=true; 
+	for (var i=0; i < F.staticRouteList.length; i++)
+	{
+		F.staticRouteList.options[i].selected=false;
+	}
+	var sAddtoList="Add to list";
+	F.AddToListButton.value=sAddtoList; 
+	//F.DeleteButton.disabled=true;
+	//F.newAddButton.visibility="hidden";
+	SetButtonStatus("DeleteButton", "disabled");
+	SetButtonStatus("newAddButton", "disabled");
+	//MM_showHideLayers('btnNew','','hidden');
+	//F.dstIP0.select();
+}
+
+function chChangeIPmode(val)
+{	
+	var serviceName="IPv6 Advanced Routing";
+
+	if ('<!--#nk_get RadioHandle="setIpMode:0"-->'== "checked")
+	{
+		if (confirm(alertMessageBegin+serviceName+selectMessage)){
+			document.location.href="network.htm";
+		}
+
+	}else{
+		document.location.href="adv_routing1.htm"
+	}
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "ShowTableOkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formRouting);";
+var Cancellink = ""; 
+var Backlink = "";
+var Tablelink ="openTable('Routing_table.htm')";
+var helplink ='help_adv_routing.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=194;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	document.write('<table width="100%" class="block" border="0" cellpadding="0" cellspacing="0">');
+	document.write('<tr><td>');
+	PrintIPTypeTab('IPv4','true','IPv6','false');
+	document.write('</td></tr>');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#CBD8E1" style="border-left:1px solid #666;border-right:1px solid #666;border-bottom:1px solid #666;"><tr><td>');
+	PrintDynamicRouting(1);
+	PrintRouting(0);
+	document.write('</td></tr></table>');
+	document.write('</td></tr>');
+	PrintEndContent();
+}
+
+
+function PrintDynamicRouting(hasUnderLine)
+{
+	document.write('<br>');
+	PrintBeginBlock(1, "Dynamic Routing");
+	document.write('<table width="'+SmallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Working Mode&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="wkMode" value="4" <!--#nk_get RadioHandle="wkMode:4"--> >');    
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Gateway');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="wkMode" value="1" <!--#nk_get RadioHandle="wkMode:1"--> >');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Router');
+	document.write('</td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('RIP&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="RIPEnable" value="1" onClick="ripStatus();" <!--#nk_get RadioHandle="RIPEnable:1"--> >');    
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Enabled');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="RIPEnable" value="0" onClick="ripStatus();" <!--#nk_get RadioHandle="RIPEnable:0"--> >');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Disabled');
+	document.write('</td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Receive RIP versions&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<select name="RipRx" class="Select" style="width:135px">');
+	document.write('<option value="0" <!--#nk_get SelectHandle="RipRx:0"-->> None</option>');
+	document.write('<option value="1" <!--#nk_get SelectHandle="RipRx:1"-->> RIPv1</option>');
+	document.write('<option value="2" <!--#nk_get SelectHandle="RipRx:2"-->> RIPv2</option>');
+	document.write('<option value="3" <!--#nk_get SelectHandle="RipRx:3"-->> Both RIP v1 and v2</option>');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Transmit RIP versions&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<select name="RipTx" class="Select" style="width:135px">');
+	document.write('<option value="0" <!--#nk_get SelectHandle="RipTx:0"-->> None</option>');
+	document.write('<option value="1" <!--#nk_get SelectHandle="RipTx:1"-->> RIPv1</option>');
+	document.write('<option value="2" <!--#nk_get SelectHandle="RipTx:2"-->> RIPv2 - Broadcast</option>');
+	document.write('<option value="3" <!--#nk_get SelectHandle="RipTx:3"-->> RIPv2 - Multicast</option>');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td colspan="2" height="10"></td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintRouting(hasUnderLine)
+{
+	var in_head_width = head_width - 5;
+	PrintBeginBlock(1, "Static Routing");
+	
+	document.write('<table class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Destination IP&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="dstIP" maxlength="15" size="15" onFocus="this.select();" onKeypress="return Check_User_Input(event)" >');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Subnet Mask&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="dstMsk" maxlength="15" size="15" onFocus="this.select();" onKeypress="return Check_User_Input(event)" >');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Default Gateway&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="gwIP" maxlength="15" size="15" onFocus="this.select();" onKeypress="return Check_User_Input(event)" >');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Hop Count (Metric, max. is 15)&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="Cost" maxlength="2" size="2" onFocus="this.select();" onBlur="HOPCheck(this);" onKeypress="return Check_User_Input(event)" >');//add
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Interface&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<select name="iFace" size="1" class="Select">');
+	document.write('<option value="0">LAN</option>'); //Lang_LAN[languagetype]
+	var RealWanNumber;
+	RealWanNumber = parseInt(document.formRouting.wanNumbers.value);
+	for(var WanNumberTemp=1; WanNumberTemp<=RealWanNumber; WanNumberTemp++ )
+	{
+		if((WanNumberTemp == RealWanNumber) && (document.formRouting.isDMZmode.value=="1"))
+		{
+			document.write('<option value="'+RealWanNumber+'">');
+			document.write('DMZ');
+			document.write("</option>");
+		}
+		else
+		{
+			document.write('<option value="'+WanNumberTemp+'">');
+			document.write('WAN'+WanNumberTemp);
+			document.write("</option>");
+		}
+	}
+	if (!ShareDMZPort)
+	{
+		document.write('<option value="8">');
+		document.write('DMZ');
+		document.write("</option>");
+	}
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("AddToListButton", "Add to list", "RouteaddSel(this.form.dstIP,this.form.dstMsk,this.form.gwIP,this.form.Cost,this.form.iFace,this.form.staticRouteList);");//document.write(' onClick="'+ClickFun+'"');
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th colspan="2">'); 
+	document.write('<select multiple class="Multiselect" name="staticRouteList" size="10" onChange="showStaticRouteList(this.form.staticRouteList);" style="width: 100%">');
+	document.write('<!--#nk_get StaticRouteList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("DeleteButton","Delete","delSel(this.form.staticRouteList, this);");
+	SetButtonStatus("DeleteButton", "disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	PrintSTButton("newAddButton","Add New","clearContent(this.form);");
+	SetButtonStatus("newAddButton", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('<br>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 10);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formRouting" method="post" action="adv_routing.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>			
+		
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="adv_routing.htm"-->
+<!--#nk_get RoutingUpdate=""-->

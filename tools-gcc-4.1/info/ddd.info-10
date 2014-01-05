@@ -1,0 +1,928 @@
+This is ../../../src/ddd/ddd/ddd.info, produced by makeinfo version 4.3
+from ../../../src/ddd/ddd/ddd.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD: (ddd).                     The Data Display Debugger.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 15 January, 2004, of `Debugging with DDD'
+for DDD Version 3.3.11.
+
+Copyright (C) 2004 Universität des Saarlandes
+Lehrstuhl Softwaretechnik
+Postfach 15 11 50
+66041 Saarbrücken
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd.info,  Node: Label Index,  Next: Key Index,  Prev: Documentation License,  Up: Top
+
+Label Index
+***********
+
+* Menu:
+
+* ():                                    GDB Argument Commands.
+* 3-D Lines:                             Plot Appearance.
+* Abort <1>:                             Program Menu.
+* Abort:                                 Quitting.
+* About DDD:                             Help Menu.
+* Align on Grid:                         Data Menu.
+* All Signals:                           Signals.
+* Apply:                                 Commands Menu.
+* Attach:                                Attaching to a Process.
+* Attach to Process <1>:                 Attaching to a Process.
+* Attach to Process:                     File Menu.
+* Auto-align Displays on Nearest Grid Point: Aligning Displays.
+* Automatic Display of Button Hints:     Button tips.
+* Automatic Display of Variable Values:  Value Tips.
+* Backtrace:                             Status Menu.
+* Bash Console:                          View Menu.
+* Bash Reference <1>:                    Getting Help.
+* Bash Reference:                        Help Menu.
+* Break <1>:                             Setting Breakpoints.
+* Break:                                 Tool Bar.
+* Breakpoints:                           Source Menu.
+* Button:                                GDB Simple Commands.
+* Cache Machine Code:                    Customizing Machine Code.
+* Cache source files:                    Customizing Source Lookup.
+* Change Directory <1>:                  Working Directory.
+* Change Directory:                      File Menu.
+* Clear <1>:                             Disabling Breakpoints.
+* Clear <2>:                             Deleting Breakpoints.
+* Clear <3>:                             Tool Bar.
+* Clear:                                 Edit Menu.
+* Clear Line:                            Commands Menu.
+* Clear Undo Buffer:                     Customizing Undo.
+* Clear Window:                          Commands Menu.
+* Close:                                 File Menu.
+* Close data window when deleting last display: Deleting Displays.
+* Cluster:                               Clustering.
+* Cluster Data Displays:                 Clustering.
+* clustered:                             Clustering.
+* Color:                                 Printing the Graph.
+* Command <1>:                           GDB Simple Commands.
+* Command:                               Entering Plotting Commands.
+* Command History:                       Commands Menu.
+* Command Tool:                          View Menu.
+* Commands <1>:                          Commands Menu.
+* Commands:                              Menu Bar.
+* Complete:                              Commands Menu.
+* Cont:                                  Command Tool.
+* Continue <1>:                          Continuing Somewhere Else.
+* Continue <2>:                          Resuming Execution.
+* Continue:                              Program Menu.
+* Continue Automatically when Mouse Pointer is Frozen: Stopping X Programs.
+* Continue Until Here:                   Temporary Breakpoints.
+* Continue Without Signal <1>:           Signals.
+* Continue Without Signal:               Program Menu.
+* Contour:                               Plot Appearance.
+* Copy <1>:                              Deleting Displays.
+* Copy:                                  Edit Menu.
+* Ctrl+A is:                             Customizing the Edit Menu.
+* Ctrl+C is:                             Customizing the Edit Menu.
+* Cut <1>:                               Deleting Displays.
+* Cut:                                   Edit Menu.
+* Data <1>:                              Data Menu.
+* Data:                                  Menu Bar.
+* Data Scrolling:                        Scrolling Data.
+* Data Window:                           View Menu.
+* DBX Console:                           View Menu.
+* DBX Reference <1>:                     Getting Help.
+* DBX Reference:                         Help Menu.
+* DBX Settings:                          Edit Menu.
+* DDD License:                           Help Menu.
+* DDD News:                              Help Menu.
+* DDD Reference <1>:                     Getting Help.
+* DDD Reference:                         Help Menu.
+* DDD Splash Screen:                     Splash Screen.
+* DDD WWW Page <1>:                      Getting Help.
+* DDD WWW Page:                          Help Menu.
+* Debug DDD:                             Maintenance Menu.
+* Debugger Reference <1>:                Getting Help.
+* Debugger Reference:                    Help Menu.
+* Debugger Settings:                     Edit Menu.
+* Debugger Type:                         Debugger Invocation.
+* Define Command:                        Commands Menu.
+* Delete <1>:                            Editing Breakpoint Properties.
+* Delete <2>:                            Deleting Breakpoints.
+* Delete <3>:                            Edit Menu.
+* Delete:                                Deleting Sessions.
+* Delete Breakpoint:                     Deleting Breakpoints.
+* Detach Process <1>:                    Attaching to a Process.
+* Detach Process:                        File Menu.
+* Detect Aliases <1>:                    Shared Structures.
+* Detect Aliases:                        Data Menu.
+* Determine Automatically from Arguments: Debugger Invocation.
+* Disable <1>:                           Editing Breakpoint Properties.
+* Disable:                               Disabling Breakpoints.
+* Disable Breakpoint:                    Disabling Breakpoints.
+* Disp *:                                Dereferencing Pointers.
+* Display <1>:                           Creating Single Displays.
+* Display <2>:                           Display Basics.
+* Display:                               Tool Bar.
+* Display ():                            Data Menu.
+* Display *:                             Dereferencing Pointers.
+* Display *():                           Dereferencing Pointers.
+* Display Arguments <1>:                 Displaying Local Variables.
+* Display Arguments:                     Data Menu.
+* Display Line Numbers:                  Source Menu.
+* Display Local Variables <1>:           Displaying Local Variables.
+* Display Local Variables:               Data Menu.
+* Display Machine Code:                  Source Menu.
+* Display Source Line Numbers:           Customizing Source Appearance.
+* Display Two-Dimensional Arrays as Tables: Arrays as Tables.
+* Displays:                              Data Menu.
+* Do Nothing:                            Maintenance Menu.
+* Down <1>:                              Selecting a frame.
+* Down <2>:                              Command Tool.
+* Down:                                  Status Menu.
+* Dump Core:                             Maintenance Menu.
+* Dump Core Now:                         Maintenance Menu.
+* Edit <1>:                              Editing Source Code.
+* Edit <2>:                              Command Tool.
+* Edit <3>:                              Edit Menu.
+* Edit:                                  Menu Bar.
+* Edit <<:                               GDB Simple Commands.
+* Edit >> <1>:                           GDB Simple Commands.
+* Edit >>:                               Breakpoint Commands.
+* Edit Buttons <1>:                      Defining Buttons.
+* Edit Buttons:                          Commands Menu.
+* Edit Menu:                             Display Shortcuts.
+* Edit Source <1>:                       Editing Source Code.
+* Edit Source:                           Source Menu.
+* Edit Sources:                          Editing Source Code.
+* Edit Themes:                           Editing Themes.
+* Enable <1>:                            Editing Breakpoint Properties.
+* Enable:                                Disabling Breakpoints.
+* Enable Breakpoint:                     Disabling Breakpoints.
+* Enable supported buttons only:         Defining Buttons.
+* End <1>:                               GDB Simple Commands.
+* End:                                   Breakpoint Commands.
+* Execute:                               GDB Simple Commands.
+* Execution Window <1>:                  Customizing the Execution Window.
+* Execution Window:                      View Menu.
+* Exit <1>:                              File Menu.
+* Exit:                                  Quitting.
+* File <1>:                              File Menu.
+* File:                                  Menu Bar.
+* File Name:                             Printing the Graph.
+* Find <<:                               Textual Search.
+* Find << ():                            Source Menu.
+* Find >> <1>:                           Textual Search.
+* Find >>:                               Tool Bar.
+* Find >> ():                            Source Menu.
+* Find Backward:                         Commands Menu.
+* Find Case Sensitive:                   Source Menu.
+* Find Forward:                          Commands Menu.
+* Find Words Only <1>:                   Textual Search.
+* Find Words Only:                       Source Menu.
+* Finish <1>:                            Resuming Execution.
+* Finish <2>:                            Command Tool.
+* Finish:                                Program Menu.
+* GDB Console:                           View Menu.
+* GDB Reference <1>:                     Getting Help.
+* GDB Reference:                         Help Menu.
+* GDB Settings:                          Edit Menu.
+* Get Core File:                         Customizing Sessions.
+* Help <1>:                              Getting Help.
+* Help <2>:                              Help Menu.
+* Help:                                  Menu Bar.
+* Hide <1>:                              Showing and Hiding Details.
+* Hide:                                  Tool Bar.
+* Iconify all windows at once:           Icons.
+* Ignore Count:                          Breakpoint Ignore Counts.
+* Include Core Dump:                     Saving Sessions.
+* Interrupt <1>:                         Interrupting.
+* Interrupt <2>:                         Command Tool.
+* Interrupt:                             Program Menu.
+* JDB Console:                           View Menu.
+* JDB Reference <1>:                     Getting Help.
+* JDB Reference:                         Help Menu.
+* JDB Settings:                          Edit Menu.
+* Kill <1>:                              Killing the Program.
+* Kill <2>:                              Command Tool.
+* Kill:                                  Program Menu.
+* Ladebug Console:                       View Menu.
+* Ladebug Reference <1>:                 Getting Help.
+* Ladebug Reference:                     Help Menu.
+* Ladebug Settings:                      Edit Menu.
+* Landscape:                             Printing Plots.
+* Layout Graph <1>:                      Automatic Layout.
+* Layout Graph:                          Data Menu.
+* Left to right:                         Placement.
+* List Processes:                        Attaching to a Process.
+* Lookup <1>:                            Editing Breakpoint Properties.
+* Lookup <2>:                            Looking up Definitions.
+* Lookup:                                Tool Bar.
+* Lookup ():                             Source Menu.
+* Machine Code Indentation:              Customizing Machine Code.
+* Machine Code Window:                   View Menu.
+* Maintenance <1>:                       Maintenance Menu.
+* Maintenance:                           Menu Bar.
+* Make <1>:                              Recompiling.
+* Make <2>:                              Command Tool.
+* Make:                                  File Menu.
+* Memory <1>:                            Examining Memory.
+* Memory:                                Data Menu.
+* New Display:                           Display Shortcuts.
+* New Game:                              Maintenance Menu.
+* Next <1>:                              Resuming Execution.
+* Next <2>:                              Command Tool.
+* Next <3>:                              Commands Menu.
+* Next:                                  Program Menu.
+* Next Instruction <1>:                  Machine Code Execution.
+* Next Instruction:                      Program Menu.
+* Nexti <1>:                             Machine Code Execution.
+* Nexti:                                 Command Tool.
+* On item:                               Help Menu.
+* Open <1>:                              Opening Source Files.
+* Open <2>:                              Opening Core Dumps.
+* Open:                                  Opening Programs.
+* Open Class <1>:                        Opening Programs.
+* Open Class:                            File Menu.
+* Open Core Dump:                        File Menu.
+* Open Program <1>:                      Attaching to a Process.
+* Open Program <2>:                      Opening Programs.
+* Open Program:                          File Menu.
+* Open Recent <1>:                       Opening Programs.
+* Open Recent:                           File Menu.
+* Open Session <1>:                      File Menu.
+* Open Session:                          Resuming Sessions.
+* Open Source <1>:                       Opening Source Files.
+* Open Source:                           File Menu.
+* Orientation:                           Printing the Graph.
+* Other:                                 Display Shortcuts.
+* Overview:                              Help Menu.
+* Paper Size <1>:                        Printing Plots.
+* Paper Size:                            Printing the Graph.
+* Pass:                                  Signals.
+* Paste <1>:                             Deleting Displays.
+* Paste:                                 Edit Menu.
+* Perl Console:                          View Menu.
+* Perl Reference <1>:                    Getting Help.
+* Perl Reference:                        Help Menu.
+* Perl Settings:                         Edit Menu.
+* Placement <1>:                         Clustering.
+* Placement:                             Placement.
+* Plot <1>:                              Gnuplot Invocation.
+* Plot <2>:                              Plot Appearance.
+* Plot:                                  Tool Bar.
+* Plot Window:                           Gnuplot Invocation.
+* Portrait:                              Printing Plots.
+* Preferences:                           Edit Menu.
+* Previous:                              Commands Menu.
+* Print <1>:                             Printing Values.
+* Print <2>:                             Signals.
+* Print <3>:                             Editing all Watchpoints.
+* Print <4>:                             Editing Watchpoint Properties.
+* Print:                                 Tool Bar.
+* Print ():                              Data Menu.
+* Print Command:                         Printing the Graph.
+* Print Graph <1>:                       Printing the Graph.
+* Print Graph:                           File Menu.
+* Print Plot:                            Printing Plots.
+* Program <1>:                           Program Menu.
+* Program:                               Menu Bar.
+* PYDB Console:                          View Menu.
+* PYDB Reference <1>:                    Getting Help.
+* PYDB Reference:                        Help Menu.
+* PYDB Settings:                         Edit Menu.
+* Quit Search:                           Commands Menu.
+* Record <1>:                            GDB Simple Commands.
+* Record:                                Breakpoint Commands.
+* Red Background:                        Applying Data Themes to Several Values.
+* Redo <1>:                              Undoing Program Execution.
+* Redo <2>:                              Looking up Previous Locations.
+* Redo <3>:                              Undo and Redo.
+* Redo <4>:                              Command Tool.
+* Redo:                                  Edit Menu.
+* Refer to Program Sources:              Customizing Source Lookup.
+* Refresh:                               Data Menu.
+* Refresh Displays <1>:                  Repeated Values.
+* Refresh Displays:                      Refreshing the Data Window.
+* Registers <1>:                         Registers.
+* Registers:                             Status Menu.
+* Reload Source <1>:                     Editing Source Code.
+* Reload Source:                         Source Menu.
+* Remove Menu:                           Maintenance Menu.
+* Reset:                                 Signals.
+* Restart:                               File Menu.
+* Rotate:                                Tool Bar.
+* Rotate Graph <1>:                      Rotating the Graph.
+* Rotate Graph:                          Data Menu.
+* Run <1>:                               Starting Program Execution.
+* Run <2>:                               Command Tool.
+* Run:                                   Program Menu.
+* Run Again <1>:                         Starting Program Execution.
+* Run Again:                             Program Menu.
+* Run in Execution Window <1>:           Using the Execution Window.
+* Run in Execution Window:               Program Menu.
+* Save Data As:                          Exporting Plot Data.
+* Save Options <1>:                      Signals.
+* Save Options:                          Edit Menu.
+* Save Session As <1>:                   Signals.
+* Save Session As <2>:                   File Menu.
+* Save Session As:                       Saving Sessions.
+* Scale:                                 Plot Appearance.
+* Search path for source files:          Source Path.
+* Select All:                            Edit Menu.
+* Selected Only <1>:                     Printing Plots.
+* Selected Only:                         Printing the Graph.
+* Send:                                  Signals.
+* Set <1>:                               Assignment.
+* Set:                                   Tool Bar.
+* Set Execution Position:                Continuing Somewhere Else.
+* Set Temporary Breakpoint:              Temporary Breakpoints.
+* Set Value:                             Assignment.
+* Show <1>:                              Showing and Hiding Details.
+* Show:                                  Tool Bar.
+* Show All:                              Showing and Hiding Details.
+* Show Just:                             Showing and Hiding Details.
+* Show More:                             Showing and Hiding Details.
+* Show Position and Breakpoints:         Customizing Glyphs.
+* Signals <1>:                           Signals.
+* Signals:                               Status Menu.
+* Small Titles:                          Using Data Themes.
+* Small Values:                          Using Data Themes.
+* Source <1>:                            Source Menu.
+* Source:                                Menu Bar.
+* Source indentation:                    Customizing Source Appearance.
+* Source Window:                         View Menu.
+* Status <1>:                            Status Menu.
+* Status:                                Menu Bar.
+* Status Displays <1>:                   Displaying Program Status.
+* Status Displays:                       Data Menu.
+* Step <1>:                              Resuming Execution.
+* Step <2>:                              Command Tool.
+* Step:                                  Program Menu.
+* Step Instruction <1>:                  Machine Code Execution.
+* Step Instruction:                      Program Menu.
+* Stepi <1>:                             Machine Code Execution.
+* Stepi:                                 Command Tool.
+* Stop:                                  Signals.
+* Suppress Values <1>:                   Using Data Themes.
+* Suppress Values:                       Deleting Displays.
+* Suppress X warnings:                   X Warnings.
+* Tab Width:                             Customizing Source Appearance.
+* Temp:                                  Editing Breakpoint Properties.
+* Theme:                                 Using Data Themes.
+* Themes:                                Editing Themes.
+* Threads <1>:                           Threads.
+* Threads:                               Status Menu.
+* Threshold for repeated print elements: Repeated Values.
+* Tic Tac Toe:                           Maintenance Menu.
+* Tiny Values:                           Using Data Themes.
+* Tip of the Day:                        Help Menu.
+* Tool Bar Appearance:                   Window Layout.
+* Tool Buttons Location:                 Disabling the Command Tool.
+* Top to bottom:                         Placement.
+* Uncluster:                             Clustering.
+* Uncompress:                            Help Helpers.
+* Undisp <1>:                            Deleting Displays.
+* Undisp:                                Tool Bar.
+* Undisplay:                             Display Basics.
+* Undo <1>:                              Deleting Displays.
+* Undo <2>:                              Showing and Hiding Details.
+* Undo <3>:                              Undoing Program Execution.
+* Undo <4>:                              Selecting a frame.
+* Undo <5>:                              Looking up Previous Locations.
+* Undo <6>:                              Undo and Redo.
+* Undo <7>:                              Command Tool.
+* Undo:                                  Edit Menu.
+* Undo Buffer Size:                      Customizing Undo.
+* Uniconify When Ready:                  Program Stop.
+* Until <1>:                             Resuming Execution.
+* Until <2>:                             Command Tool.
+* Until:                                 Program Menu.
+* Unwatch:                               Tool Bar.
+* Up <1>:                                Selecting a frame.
+* Up <2>:                                Command Tool.
+* Up:                                    Status Menu.
+* View <1>:                              Plot Appearance.
+* View <2>:                              View Menu.
+* View:                                  Menu Bar.
+* Warn if Multiple DDD Instances are Running: Multiple Instances.
+* Watch <1>:                             Editing Watchpoint Properties.
+* Watch <2>:                             Setting Watchpoints.
+* Watch:                                 Tool Bar.
+* Watchpoints:                           Data Menu.
+* Web Browser:                           Help Helpers.
+* What Now? <1>:                         Getting Help.
+* What Now?:                             Help Menu.
+* When DDD Crashes:                      Maintenance Menu.
+* Window Layout:                         Window Layout.
+* Writing into executable and core files: Patching.
+* XDB Console:                           View Menu.
+* XDB Reference <1>:                     Getting Help.
+* XDB Reference:                         Help Menu.
+* XDB Settings:                          Edit Menu.
+
+
+File: ddd.info,  Node: Key Index,  Next: Command Index,  Prev: Label Index,  Up: Top
+
+Key Index
+*********
+
+* Menu:
+
+* Alt+1:                                 View Menu.
+* Alt+2:                                 View Menu.
+* Alt+3:                                 View Menu.
+* Alt+4 <1>:                             Source Menu.
+* Alt+4:                                 View Menu.
+* Alt+8:                                 View Menu.
+* Alt+9:                                 View Menu.
+* Alt+A:                                 Data Menu.
+* Alt+G:                                 Data Menu.
+* Alt+I:                                 Source Menu.
+* Alt+L:                                 Data Menu.
+* Alt+N:                                 Source Menu.
+* Alt+R:                                 Data Menu.
+* Alt+U:                                 Data Menu.
+* Alt+W:                                 Source Menu.
+* Alt+Y:                                 Data Menu.
+* Ctrl+,:                                Source Menu.
+* Ctrl+-:                                Data Menu.
+* Ctrl+.:                                Source Menu.
+* Ctrl+/:                                Source Menu.
+* Ctrl+=:                                Data Menu.
+* Ctrl+\ <1>:                            Program Menu.
+* Ctrl+\:                                Quitting.
+* Ctrl+A:                                Edit Menu.
+* Ctrl+B <1>:                            Command History.
+* Ctrl+B:                                Commands Menu.
+* Ctrl+C <1>:                            Interrupting.
+* Ctrl+C <2>:                            Customizing the Edit Menu.
+* Ctrl+C <3>:                            Program Menu.
+* Ctrl+C <4>:                            Edit Menu.
+* Ctrl+C:                                Quitting.
+* Ctrl+D:                                Quitting.
+* Ctrl+Down <1>:                         Selecting a frame.
+* Ctrl+Down:                             Status Menu.
+* Ctrl+F <1>:                            Command History.
+* Ctrl+F:                                Commands Menu.
+* Ctrl+F1:                               Getting Help.
+* Ctrl+Ins:                              Edit Menu.
+* Ctrl+L:                                Data Menu.
+* Ctrl+M:                                File Menu.
+* Ctrl+N:                                File Menu.
+* Ctrl+O:                                File Menu.
+* Ctrl+Q <1>:                            File Menu.
+* Ctrl+Q <2>:                            Quitting.
+* Ctrl+Q:                                Invocation.
+* Ctrl+S:                                File Menu.
+* Ctrl+Shift+A <1>:                      Customizing the Edit Menu.
+* Ctrl+Shift+A:                          Edit Menu.
+* Ctrl+U <1>:                            Commands Menu.
+* Ctrl+U:                                Edit Menu.
+* Ctrl+Up <1>:                           Selecting a frame.
+* Ctrl+Up:                               Status Menu.
+* Ctrl+V:                                Edit Menu.
+* Ctrl+W:                                File Menu.
+* Ctrl+X:                                Edit Menu.
+* Ctrl+Y:                                Edit Menu.
+* Ctrl+Z:                                Edit Menu.
+* Down <1>:                              Command History.
+* Down <2>:                              Moving Displays.
+* Down <3>:                              Selecting Displays.
+* Down:                                  Commands Menu.
+* ESC <1>:                               Command History.
+* ESC <2>:                               Interrupting.
+* ESC:                                   Customizing the Edit Menu.
+* Esc <1>:                               Commands Menu.
+* Esc:                                   Program Menu.
+* ESC:                                   Quitting.
+* F1:                                    Getting Help.
+* F12:                                   Maintenance Menu.
+* F2:                                    Program Menu.
+* F3:                                    Program Menu.
+* F4:                                    Program Menu.
+* F5:                                    Program Menu.
+* F6:                                    Program Menu.
+* F7:                                    Program Menu.
+* F8:                                    Program Menu.
+* F9:                                    Program Menu.
+* Home:                                  Customizing the Edit Menu.
+* Left <1>:                              Moving Displays.
+* Left:                                  Selecting Displays.
+* Return <1>:                            Command History.
+* Return:                                Commands Menu.
+* Right <1>:                             Moving Displays.
+* Right:                                 Selecting Displays.
+* Shift:                                 Selecting Displays.
+* Shift+Ctrl+L:                          Source Menu.
+* Shift+Ctrl+U:                          Commands Menu.
+* Shift+Ctrl+V:                          Source Menu.
+* Shift+Del:                             Edit Menu.
+* Shift+F5:                              Program Menu.
+* Shift+F6:                              Program Menu.
+* Shift+F9:                              Program Menu.
+* Shift+Ins:                             Edit Menu.
+* TAB:                                   Tool Bar.
+* Tab:                                   Commands Menu.
+* Up <1>:                                Command History.
+* Up <2>:                                Moving Displays.
+* Up <3>:                                Selecting Displays.
+* Up:                                    Commands Menu.
+
+
+File: ddd.info,  Node: Command Index,  Next: Resource Index,  Prev: Key Index,  Up: Top
+
+Command Index
+*************
+
+* Menu:
+
+* cont <1>:                              Undoing Program Execution.
+* cont:                                  Customizing Grab Checking.
+* contuntil:                             GDB Argument Commands.
+* directory:                             Source Path.
+* down:                                  Selecting a frame.
+* file:                                  Remote Program.
+* gcore:                                 Customizing Sessions.
+* gd:                                    Commands with Other Debuggers.
+* graph apply theme:                     Applying Data Themes to Several Values.
+* graph disable display:                 Showing and Hiding Details.
+* graph display <1>:                     Displaying Program Status.
+* graph display:                         Creating Single Displays.
+* graph enable display:                  Showing and Hiding Details.
+* graph plot:                            Plotting Arrays.
+* graph refresh:                         Refreshing the Data Window.
+* graph toggle theme:                    Applying Data Themes to Several Values.
+* graph unapply theme:                   Applying Data Themes to Several Values.
+* gunzip:                                Help Helpers.
+* gzip:                                  Help Helpers.
+* hbreak:                                Hardware-Assisted Breakpoints.
+* help:                                  Getting Help.
+* kill:                                  Customizing Grab Checking.
+* mwm:                                   Gnuplot Invocation.
+* print:                                 Printing Values.
+* quit <1>:                              Customizing Grab Checking.
+* quit:                                  Quitting.
+* remsh:                                 Remote Debugger.
+* replot:                                Entering Plotting Commands.
+* rsh:                                   Remote Debugger.
+* run:                                   Starting Program Execution.
+* set environment:                       Environment.
+* set output:                            Entering Plotting Commands.
+* set term:                              Entering Plotting Commands.
+* target remote:                         Remote Program.
+* thbreak:                               Hardware-Assisted Breakpoints.
+* tty:                                   Debugger Communication.
+* unset environment:                     Environment.
+* up:                                    Selecting a frame.
+* zcat:                                  Help Helpers.
+
+
+File: ddd.info,  Node: Resource Index,  Next: File Index,  Prev: Command Index,  Up: Top
+
+Resource Index
+**************
+
+* Menu:
+
+* activeButtonColorKey:                  Customizing the Tool Bar.
+* align2dArrays:                         Arrays as Tables.
+* appDefaultsVersion:                    Customizing Diagnostics.
+* arrayOrientation:                      Rotating Displays.
+* autoCloseDataWindow:                   Display Resources.
+* autoDebugger:                          Debugger Invocation.
+* autoRaiseMenu:                         Auto-Raise Menus.
+* autoRaiseMenuDelay:                    Auto-Raise Menus.
+* autoRaiseTool:                         Customizing Tool Position.
+* bash:                                  Bash Initialization.
+* bashDisplayShortcuts:                  Display Shortcuts.
+* bashInitCommands:                      Bash Initialization.
+* blockTTYInput:                         Debugger Communication.
+* break_at:                              Images.
+* bufferGDBOutput:                       Debugger Communication.
+* bumpDisplays:                          Display Resources.
+* buttonCaptionGeometry:                 Customizing the Tool Bar.
+* buttonCaptions:                        Customizing the Tool Bar.
+* buttonColorKey:                        Customizing the Tool Bar.
+* buttonDocs:                            Button tips.
+* buttonImageGeometry:                   Customizing the Tool Bar.
+* buttonImages:                          Customizing the Tool Bar.
+* buttonTips:                            Button tips.
+* cacheGlyphImages:                      Customizing Glyphs.
+* cacheMachineCode:                      Customizing Machine Code.
+* cacheSourceFiles:                      Customizing Source Lookup.
+* checkConfiguration:                    Customizing Diagnostics.
+* checkGrabDelay:                        Customizing Grab Checking.
+* checkGrabs:                            Customizing Grab Checking.
+* checkOptions:                          Multiple Instances.
+* CLASSPATH:                             Source Path.
+* clear_at:                              Images.
+* clusterDisplays:                       Display Resources.
+* commandToolBar:                        Disabling the Command Tool.
+* commonToolBar:                         Window Layout.
+* consoleButtons:                        Customizing Buttons.
+* consoleHasFocus:                       Typing in the Source Window.
+* contInterruptDelay:                    Debugger Communication.
+* cutCopyPasteBindings:                  Customizing the Edit Menu.
+* dataButtons:                           Customizing Buttons.
+* dataFont:                              Customizing Fonts.
+* dataFontSize:                          Customizing Fonts.
+* dbxDisplayShortcuts:                   Display Shortcuts.
+* dbxInitCommands:                       DBX Initialization.
+* dbxSettings:                           DBX Initialization.
+* ddd:                                   Images.
+* DDD:                                   Environment.
+* DDD_NO_SIGNAL_HANDLERS:                Debugging DDD.
+* DDD_SESSION:                           Resources.
+* DDD_SESSIONS:                          Customizing Sessions.
+* DDD_STATE:                             Resources.
+* dddinitVersion:                        Customizing Diagnostics.
+* debugCoreDumps:                        Customizing Diagnostics.
+* debugger:                              Debugger Invocation.
+* debuggerCommand:                       Debugger Invocation.
+* decorateTool:                          Customizing Tool Decoration.
+* defaultFont:                           Customizing Fonts.
+* defaultFontSize:                       Customizing Fonts.
+* delete:                                Images.
+* deleteAliasDisplays:                   Shared Structures.
+* detectAliases:                         Shared Structures.
+* disable:                               Images.
+* disassemble:                           Customizing Machine Code.
+* display:                               Images.
+* DISPLAY <1>:                           Remote Host.
+* DISPLAY:                               X Options.
+* displayGlyphs:                         Customizing Glyphs.
+* displayLineNumbers:                    Customizing Source Appearance.
+* displayPlacement:                      Placement.
+* displayTimeout:                        Debugger Communication.
+* dispref:                               Images.
+* drag_arrow:                            Images.
+* drag_cond:                             Images.
+* drag_stop:                             Images.
+* drag_temp:                             Images.
+* dumpCore:                              Customizing Diagnostics.
+* editCommand:                           Customizing Editing.
+* EDITOR:                                Customizing Editing.
+* enable:                                Images.
+* expandRepeatedValues:                  Repeated Values.
+* filterFiles:                           Customizing File Filtering.
+* find_backward:                         Images.
+* find_forward:                          Images.
+* findCaseSensitive:                     Customizing Searching.
+* findWordsOnly:                         Customizing Searching.
+* fixedWidthFont:                        Customizing Fonts.
+* fixedWidthFontSize:                    Customizing Fonts.
+* flatDialogButtons:                     Customizing the Tool Bar.
+* flatToolbarButtons:                    Customizing the Tool Bar.
+* fontSelectCommand:                     Customizing Fonts.
+* gdbDisplayShortcuts:                   Display Shortcuts.
+* gdbInitCommands:                       GDB Initialization.
+* gdbSettings:                           GDB Initialization.
+* getCoreCommand:                        Customizing Sessions.
+* globalTabCompletion:                   Command Completion.
+* glyphUpdateDelay:                      Customizing Glyphs.
+* grabAction:                            Customizing Grab Checking.
+* grabActionDelay:                       Customizing Grab Checking.
+* grey_arrow:                            Images.
+* grey_cond:                             Images.
+* grey_stop:                             Images.
+* grey_temp:                             Images.
+* groupIconify:                          Icons.
+* hide:                                  Images.
+* hideInactiveDisplays:                  Display Resources.
+* indentCode:                            Customizing Machine Code.
+* indentScript:                          Customizing Source Appearance.
+* indentSource:                          Customizing Source Appearance.
+* initSymbols:                           Finding a Place to Start.
+* jdbDisplayShortcuts:                   Display Shortcuts.
+* jdbInitCommands:                       JDB Initialization.
+* jdbSettings:                           JDB Initialization.
+* labelDelimiter:                        Customizing Buttons.
+* lessTifVersion:                        LessTif.
+* lineBufferedConsole:                   Input/Output.
+* lineNumberWidth:                       Customizing Source Appearance.
+* linesAboveCursor:                      Customizing Source Scrolling.
+* linesBelowCursor:                      Customizing Source Scrolling.
+* listCoreCommand:                       Customizing Remote Debugging.
+* listDirCommand:                        Customizing Remote Debugging.
+* listExecCommand:                       Customizing Remote Debugging.
+* listSourceCommand:                     Customizing Remote Debugging.
+* lookup:                                Images.
+* maintenance:                           Customizing Diagnostics.
+* maketemp:                              Images.
+* maxDisassemble:                        Customizing Machine Code.
+* maxGlyphs:                             Customizing Glyphs.
+* maxUndoDepth:                          Customizing Undo.
+* maxUndoSize:                           Customizing Undo.
+* new_break:                             Images.
+* new_display:                           Images.
+* new_watch:                             Images.
+* openDataWindow:                        Toggling Windows.
+* openDebuggerConsole:                   Toggling Windows.
+* openSelection:                         Opening the Selection.
+* openSourceWindow:                      Toggling Windows.
+* PAGER <1>:                             Customizing Diagnostics.
+* PAGER:                                 Environment.
+* pannedGraphEditor:                     Scrolling Data.
+* paperSize:                             Printing the Graph.
+* perlDisplayShortcuts:                  Display Shortcuts.
+* perlInitCommands:                      Perl Initialization.
+* perlSettings:                          Perl Initialization.
+* plain_arrow:                           Images.
+* plain_cond:                            Images.
+* plain_stop:                            Images.
+* plain_temp:                            Images.
+* plot2dSettings:                        Gnuplot Settings.
+* plot3dSettings:                        Gnuplot Settings.
+* plotCommand:                           Gnuplot Invocation.
+* plotInitCommands:                      Gnuplot Settings.
+* plotTermType:                          Gnuplot Invocation.
+* plotWindowClass:                       Gnuplot Invocation.
+* plotWindowDelay:                       Gnuplot Invocation.
+* popdownHistorySize:                    Text Fields.
+* positionTimeout:                       Debugger Communication.
+* print:                                 Images.
+* printCommand:                          Printing the Graph.
+* properties:                            Images.
+* psCommand:                             Customizing Attaching to Processes.
+* pydbDisplayShortcuts:                  Display Shortcuts.
+* pydbInitCommands:                      PYDB Initialization.
+* pydbSettings:                          PYDB Initialization.
+* questionTimeout:                       Debugger Communication.
+* rotate:                                Images.
+* rshCommand:                            Customizing Remote Debugging.
+* runInterruptDelay:                     Debugger Communication.
+* saveHistoryOnExit:                     Command History.
+* saveOptionsOnExit:                     Saving Options.
+* selectAllBindings:                     Customizing the Edit Menu.
+* separateDataWindow:                    Window Layout.
+* separateExecWindow:                    Customizing the Execution Window.
+* separateSourceWindow:                  Window Layout.
+* set:                                   Images.
+* SHELL:                                 Arguments.
+* show:                                  Images.
+* showBaseDisplayTitles:                 Display Resources.
+* showConfiguration:                     Customizing Diagnostics.
+* showDependentDisplayTitles:            Display Resources.
+* showFonts:                             Customizing Diagnostics.
+* showInvocation:                        Customizing Diagnostics.
+* showLicense:                           Customizing Diagnostics.
+* showManual:                            Customizing Diagnostics.
+* showMemberNames:                       Rotating Displays.
+* showNews:                              Customizing Diagnostics.
+* showVersion:                           Customizing Diagnostics.
+* signal_arrow:                          Images.
+* sortPopdownHistory:                    Text Fields.
+* sourceButtons:                         Customizing Buttons.
+* sourceEditing:                         In-Place Editing.
+* sourceInitCommands:                    GDB Initialization.
+* splashScreen:                          Splash Screen.
+* splashScreenColorKey:                  Splash Screen.
+* startupTipCount:                       Tip of the day.
+* startupTips:                           Tip of the day.
+* statusAtBottom:                        Window Layout.
+* stickyTool:                            Customizing Tool Position.
+* stopAndContinue:                       Debugger Communication.
+* structOrientation:                     Rotating Displays.
+* suppressTheme:                         Display Resources.
+* suppressWarnings <1>:                  Customizing Diagnostics.
+* suppressWarnings:                      X Warnings.
+* synchronousDebugger:                   Debugger Communication.
+* tabWidth:                              Customizing Source Appearance.
+* TERM <1>:                              Customizing the Execution Window.
+* TERM:                                  Environment.
+* TERMCAP:                               Environment.
+* termCommand:                           Customizing the Execution Window.
+* terminateOnEOF:                        Debugger Communication.
+* termType:                              Customizing the Execution Window.
+* themes:                                Display Resources.
+* tip:                                   Tip of the day.
+* toolbarsAtBottom:                      Window Layout.
+* toolButtons:                           Customizing Buttons.
+* toolRightOffset:                       Customizing Tool Position.
+* toolTopOffset:                         Customizing Tool Position.
+* trace:                                 Customizing Diagnostics.
+* typedAliases:                          Shared Structures.
+* uncompressCommand:                     Help Helpers.
+* undisplay:                             Images.
+* uniconifyWhenReady:                    Icons.
+* unwatch:                               Images.
+* useSourcePath:                         Customizing Source Lookup.
+* useTTYCommand:                         Debugger Communication.
+* valueDocs:                             Value Tips.
+* valueTips:                             Value Tips.
+* variableWidthFont:                     Customizing Fonts.
+* variableWidthFontSize:                 Customizing Fonts.
+* verifyButtons:                         Customizing Buttons.
+* vslBaseDefs:                           VSL Resources.
+* vslDefs:                               VSL Resources.
+* vslLibrary:                            VSL Resources.
+* vslPath:                               VSL Resources.
+* warnIfLocked:                          Multiple Instances.
+* watch:                                 Images.
+* WWWBROWSER:                            Help Helpers.
+* wwwCommand:                            Help Helpers.
+* wwwPage:                               Help Helpers.
+* xdbDisplayShortcuts:                   Display Shortcuts.
+* xdbInitCommands:                       XDB Initialization.
+* xdbSettings:                           XDB Initialization.
+* XEDITOR:                               Customizing Editing.
+
+
+File: ddd.info,  Node: File Index,  Next: Concept Index,  Prev: Resource Index,  Up: Top
+
+File Index
+**********
+
+* Menu:
+
+* .emacs:                                Integrating DDD.
+* .gdbinit <1>:                          Debugging DDD.
+* .gdbinit <2>:                          Remote Program.
+* .gdbinit:                              GDB Options.
+* ChangeLog:                             Contributors.
+* dbx:                                   Options.
+* Ddd <1>:                               Application Defaults.
+* Ddd <2>:                               More Customizations.
+* Ddd:                                   Resources.
+* ddd-3.3.11-html-manual.tar.gz:         About this Manual.
+* ddd-3.3.11-pics.tar.gz:                About this Manual.
+* ddd-3.3.11.tar.gz:                     About this Manual.
+* ddd-VERSION-html-manual.tar.gz:        Getting DDD.
+* ddd-VERSION-pics.tar.gz:               Getting DDD.
+* ddd-VERSION.tar.gz:                    Getting DDD.
+* emacs <1>:                             Integrating DDD.
+* emacs <2>:                             Customizing Editing.
+* emacs:                                 Help Helpers.
+* emacsclient:                           Customizing Editing.
+* emacsserver:                           Customizing Editing.
+* fig2dev:                               Printing the Graph.
+* file:                                  Customizing Remote Debugging.
+* gdb:                                   Options.
+* gdbserver:                             Remote Program.
+* gnuclient:                             Customizing Editing.
+* gnudoit:                               Help Helpers.
+* gnuplot:                               Plot Appearance.
+* gnuserv:                               Customizing Editing.
+* init:                                  Resources.
+* java.prof:                             JDB Options.
+* jdb:                                   Options.
+* ladebug:                               Options.
+* less:                                  Customizing Diagnostics.
+* log <1>:                               Logging.
+* log <2>:                               Entering Plotting Commands.
+* log:                                   Options.
+* lynx:                                  Help Helpers.
+* make:                                  Recompiling.
+* more:                                  Customizing Diagnostics.
+* mosaic:                                Help Helpers.
+* mozilla:                               Help Helpers.
+* netscape:                              Help Helpers.
+* on:                                    Customizing Remote Debugging.
+* perl:                                  Options.
+* ps:                                    Customizing Attaching to Processes.
+* pydb:                                  Options.
+* remsh:                                 Customizing Remote Debugging.
+* rsh:                                   Customizing Remote Debugging.
+* sample:                                Sample Session.
+* sample.c <1>:                          Sample Program.
+* sample.c:                              Sample Session.
+* sessions:                              Customizing Sessions.
+* ssh:                                   Customizing Remote Debugging.
+* stty:                                  Input/Output.
+* suppress.vsl:                          Display Resources.
+* TODO:                                  Contributors.
+* transfig:                              Printing the Graph.
+* vi:                                    Customizing Editing.
+* wdb:                                   Options.
+* xdb:                                   Options.
+* xemacs <1>:                            Integrating DDD.
+* xemacs <2>:                            Customizing Editing.
+* xemacs:                                Help Helpers.
+* xfig:                                  Printing the Graph.
+* xfontsel:                              Customizing Fonts.
+* xmgr:                                  Exporting Plot Data.
+* xsm:                                   Resuming Sessions.
+* xterm:                                 Customizing the Execution Window.
+* xxgdb:                                 Integrating DDD.
+* ~ <1>:                                 Resources.
+* ~:                                     Options.
+

@@ -1,0 +1,113 @@
+;***********************************************************************
+; SSLDrv NDIS WAN/TAPI device installer script.
+;***********************************************************************
+;File Version	= 1.0.0.1
+[version]
+Signature       = "$Windows NT$"
+Compatible      = 1
+Class           = Net
+ClassGUID       = {4D36E972-E325-11CE-BFC1-08002BE10318}
+Provider        = %VER_PROVIDER_NAME_STR%
+CatalogFile     = SSLDrv.cat
+DriverVer       = 03/12/2007, 1.6.0.1
+
+[Manufacturer]
+%VER_VENDOR_NAME_STR% = Devices
+
+[Devices]
+%VER_DEVICE_STR%" Adapter" = SSLDrv.Ndi, VirtualPassageSSLDrv
+
+;****************************************************************************
+; SSLDrv Main Install Section
+;****************************************************************************
+[SSLDrv.Ndi.NT]
+AddReg          = SSLDrv.Ndis.Reg.NT, SSLDrv.Isdn.Params.NT, SSLDrv.Gen.Params.NT
+Characteristics = 0x81  ; NCF_HAS_UI | NCF_VIRTUAL
+CopyFiles       = SSLDrv.CopyFiles.NT
+
+[SSLDrv.Ndi.NT.Services]
+AddService      = SSLDrv, 2, SSLDrv.Service.NT, Common.EventLog.NT
+
+;****************************************************************************
+; SSLDrv Base Section
+;****************************************************************************
+[SSLDrv.Ndis.Reg.NT]
+; key,subkey,valuname,type,value
+HKR, Ndi,               Service,    0, "SSLDrv"
+HKR, Ndi\Interfaces,    UpperRange, 0, "ndiscowan" ; must be lower case
+HKR, Ndi\Interfaces,    LowerRange, 0, "isdn"      ; must be lower case
+
+;****************************************************************************
+; ISDN Parameters
+;****************************************************************************
+[SSLDrv.Isdn.Params.NT]
+; key,subkey,valuname,type,value
+HKR, , IsdnAutoSwitchDetect,0x00010001, "0"
+HKR, , IsdnSwitchTypes,     0x00010001, "0x0000000E"
+HKR, , IsdnNumDChannels,    0x00010001, "1"
+HKR, , IsdnNumBChannels,    0x00010001, "1"
+HKR, , WanEndPoints,        0x00010001, "1"
+; WanEndPoints should normally be set to (IsdnNumDChannels * IsdnNumBChannels)
+
+;****************************************************************************
+; General Parameters
+;****************************************************************************
+[SSLDrv.Gen.Params.NT]
+; key,subkey,valuname,type,value
+HKR, , DebugFlags,          0x00010001, "0x00008043"
+
+;****************************************************************************
+; NT Service Section
+;****************************************************************************
+[SSLDrv.Service.NT]
+DisplayName     = %VER_DEVICE_STR%" Adapter"
+ErrorControl    = 1 ; SERVICE_ERROR_NORMAL
+LoadOrderGroup  = NDIS
+ServiceBinary   = %12%\SSLDrv.sys  ; System32\Drivers
+ServiceType     = 1 ; SERVICE_KERNEL_DRIVER
+StartType       = 3 ; 3=SERVICE_DEMAND_START 2=SERVICE_AUTO_START
+
+[Common.EventLog.NT]
+AddReg          = Common.AddEventLog.Reg.NT
+
+[Common.AddEventLog.Reg.NT]
+; key,subkey,valuname,type,value
+HKR, , EventMessageFile,    0x00020000, "%%SystemRoot%%\System32\netevent.dll"
+HKR, , TypesSupported,      0x00010001, "7"
+
+;****************************************************************************
+; Source Directories
+;****************************************************************************
+[SourceDisksNames]
+; The name of the disk that the user will be prompted for
+1                       = %DISK_NAME%, "SSLDrv.sys",
+
+[SourceDisksFiles]
+; Which disk the files are located on
+SSLDrv.sys              = 1
+
+;****************************************************************************
+; Destination Directories
+;****************************************************************************
+[DestinationDirs]
+DefaultDestDir          = 12 ; System32\Drivers
+SSLDrv.CopyFiles.NT     = 12 ; System32\Drivers
+
+[SSLDrv.CopyFiles.NT]
+SSLDrv.sys,,,2          ; The name of the driver
+
+;****************************************************************************
+; Localizable Strings
+;****************************************************************************
+[strings]
+; Provider
+VER_PROVIDER_NAME_STR   = "Qno Technology"
+
+; Manufacturer
+VER_VENDOR_NAME_STR     = "Qno Technology Inc."
+
+; Device Descriptions
+VER_DEVICE_STR          = "Virtual Passage SSLDrv"
+
+; Name on install disk
+DISK_NAME               = "Virtual Passage SSLDrv Install Disk"

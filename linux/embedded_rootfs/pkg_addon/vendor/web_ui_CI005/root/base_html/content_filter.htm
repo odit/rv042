@@ -1,0 +1,756 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	if(document.formdualwan.firewall0.value == "checked")
+ 		window.location.replace('content_filter0.htm');
+	if(document.formContent_filter.forbiddenEnable_check.checked==true || document.formContent_filter.keywordsEnable_check.checked==true)
+		chSchedule();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function hours_minutes_Check(I,mod_1,mod_2)
+{
+  var d;
+  var single;
+  if(I.value.length == 0)
+   return ;
+  var q = I.value.indexOf(':');
+ 
+  if( q == -1 )
+  {
+  	alert("the time should be like:\'hh:mm\'");
+  	I.value="";
+  	I.select();
+  	return	
+  }
+  else
+  {
+  	var hours= I.value.substring(0,q);
+  	var minutes= I.value.substring(q+1,I.value.length);
+  	
+  	if(minutes.indexOf(':')!= -1 )
+  	{
+  		I.select();
+  		I.value="";
+  		return ;
+  	}
+  	 if (isNaN(hours) == true)
+  	{
+  		I.select();
+  		I.value="";
+  		return ;
+  	}
+  	 if (isNaN(minutes) == true)
+  	{
+  		I.select();
+  		I.value="";
+  		return ;
+  	}
+  
+ 
+  if(mod_1 == "h")
+  {
+  	 d=parseInt(hours,10);
+  	 if (!(d<24 && d>=0))
+    {
+      alert('The value (Hour) is out of range [0~23] !');
+    I.select();
+    I.value="";
+	  return; 
+    }
+		hours=d;
+    if (hours.toString().length==1) 
+    {
+      single=hours;
+      hours="0"+single;
+    }  	
+  }
+   if(mod_2 == "m")
+  {
+  	d=parseInt(minutes,10);
+ 
+  	if (!(d<60 && d>=0))
+    {
+      alert('The value (Minute) is out of range [0~59] !');
+    I.select();
+    I.value="";
+	  return;
+    }
+	  minutes = d;
+	 
+    if (minutes.toString().length==1) 
+    {
+      single=minutes;
+      minutes="0"+single;
+     
+    }  	
+  }
+   I.value = hours.toString()+":"+ minutes.toString() ; 
+   return ;
+  } 
+}
+function StringTrim(thisV)
+{
+	if(thisV)
+	{
+		var s = thisV.value;
+		var reg = /\s/g;
+		var ss = s.replace(reg, "");
+		thisV.value = ss ;
+  }
+}
+function chSubmit(F)
+{
+	if (F.local_forbiddenURLs_del)
+	selAll(F.local_forbiddenURLs_del);
+
+	if (F.keywords_list) 
+	selAll(F.keywords_list);  
+      
+       if(F.forbiddenEnable_check.checked==true)
+	{
+	    	F.forbiddenEnable.value = 1;
+	  	F.forifdisable.value=0;
+	}
+	else
+	{
+	    	F.forbiddenEnable.value = 0;
+	  	F.forifdisable.value=1;
+	}
+	
+	if(F.keywordsEnable_check.checked==true)
+	{
+	    	F.keywordsEnable.value = 1;
+	  	F.keyifdisable.value=0;
+	}
+	else
+	{
+	        F.keywordsEnable.value = 0;
+	  	F.keyifdisable.value=1;
+	}
+	     
+	if(document.getElementById("TOD_start"))
+   		F.TOD_start.value=F.TOD_startHM.value;
+	if(document.getElementById("TOD_end"))
+	    	F.TOD_end.value=F.TOD_endHM.value;
+	if(document.formContent_filter.forbiddenEnable_check.checked==true || document.formContent_filter.keywordsEnable_check.checked==true)
+	{
+		if (document.formContent_filter.rangeSchedule1.selectedIndex==1)
+		if(checkHourMinuteRange(document.formContent_filter.TOD_startHM, document.formContent_filter.TOD_endHM)<0) return ;
+	
+		if(F.content_filter_days[0].checked == false && F.content_filter_days[1].checked == false && F.content_filter_days[2].checked == false && F.content_filter_days[3].checked == false && F.content_filter_days[4].checked == false && F.content_filter_days[5].checked == false && F.content_filter_days[6].checked == false && F.content_filter_days[7].checked == false)
+		{
+				alert(ScheduleNotFinish);
+				return;
+		}
+	}
+	F.log_ch.value=1;
+	F.submitStatus.value = "1";
+	   window.status=wSave;
+	MM_showHideLayers('AutoNumber15','','hide');  
+	F.submit();
+}
+
+function chSchedule()
+{
+	if (document.formContent_filter.rangeSchedule1)
+	if (document.formContent_filter.rangeSchedule1.selectedIndex==0)
+	{
+		document.formContent_filter.content_filter_days[0].checked=true;
+		document.formContent_filter.content_filter_days[0].disabled=true;
+		document.formContent_filter.TOD_startHM.disabled=true;
+		document.formContent_filter.TOD_endHM.disabled=true;
+	 }
+	 else
+	 {
+		document.formContent_filter.content_filter_days[0].disabled=false;
+		document.formContent_filter.TOD_startHM.disabled=false;
+		document.formContent_filter.TOD_endHM.disabled=false;
+	}
+	if (document.formContent_filter.content_filter_days[0].checked==false)
+	{
+		document.formContent_filter.content_filter_days[1].disabled=false;
+		document.formContent_filter.content_filter_days[2].disabled=false;
+		document.formContent_filter.content_filter_days[3].disabled=false;
+		document.formContent_filter.content_filter_days[4].disabled=false;
+		document.formContent_filter.content_filter_days[5].disabled=false;
+		document.formContent_filter.content_filter_days[6].disabled=false;
+		document.formContent_filter.content_filter_days[7].disabled=false;
+	}
+	else
+	{
+		document.formContent_filter.content_filter_days[1].disabled=true;
+		document.formContent_filter.content_filter_days[2].disabled=true;
+		document.formContent_filter.content_filter_days[3].disabled=true;
+		document.formContent_filter.content_filter_days[4].disabled=true;
+		document.formContent_filter.content_filter_days[5].disabled=true;
+		document.formContent_filter.content_filter_days[6].disabled=true;
+		document.formContent_filter.content_filter_days[7].disabled=true;
+	}
+	
+}
+
+function addSel2(t,s)
+{
+	var p=-1;
+	var tip;
+	var aip;
+	var g;
+	var q; 
+	var forwardString; 
+	var rightString;
+	var tname;  
+	
+    if (t.value == "")
+    {
+        alert(aForbiddenDomain);
+	    s.form.forbiddenURLs_add.select();
+	    return;
+    }
+
+    if(Check_Special_Words(t)==-1)
+	 return;
+
+    if (s.form.btnAddToList.value==sUpdateDomain)
+    {
+      p=-1;
+      while (s.form.local_forbiddenURLs_del.options[++p].selected != true);
+    }	
+	
+	for (var i=0; i < s.length; i++)
+    {
+		forwardString=s.options[i].value;
+		rightString=forwardString;
+	/* name */
+		q=rightString.length;
+		g=rightString.indexOf(";");
+		tname=rightString.substring(0,g);
+		
+          if (tname==t.value)
+  	      {
+		      if (p != i)
+			  {
+                  alert(aForbiddenDomainAlready);
+	              return;
+			  }
+	      }
+    }
+	
+	for (var i=0; i < s.form.local_forbiddenURLs_del.length; i++)
+    {
+        s.form.local_forbiddenURLs_del.options[i].selected=false;
+    }
+	
+	if (s.form.btnAddToList.value==sAddtoList)
+	{
+	    	if (s.length>=LimitForbiddenDomains)
+	    	{
+	        	alert(aLimitForbiddenDomains+LimitForbiddenDomains+aLimitEnd);
+	        	return;
+	    	}            	
+		p=s.length;
+		s.length+=1;
+	}	
+
+    s.options[p].text=t.value;	
+	s.options[p].value=t.value;
+	s.options[p].value+=";";
+
+    clearContent(t, '2');
+}
+
+function addSel3(t, s)
+{
+    var p=-1;
+    var tip,aip;
+    var g;
+    var q; 
+    var forwardString; 
+    var rightString;
+    var tmpString;
+    var tname;
+    var beg;
+
+    if (t.value == "")
+    {   
+        alert(aKeyword);
+	    s.form.keywords_add.select();		
+				
+	    return;
+    }
+
+    if(Check_Special_Words(t)==-1)
+	 return;
+
+    if (s.form.keyAddToList.value==sUpdateKeyword)
+    {
+      p=-1;
+      while (s.form.keywords_list.options[++p].selected != true);
+    }	
+	
+	for (var i=0; i < s.length; i++)
+    {
+		forwardString=s.options[i].value;
+		rightString=forwardString;
+		/* name */
+		q=rightString.length;
+		g=rightString.indexOf(";");
+		tname=rightString.substring(0,g);
+		
+          if (tname==t.value)
+  	      {
+		      if (p != i)
+			  {
+                  alert(aLimitKeyword);
+	              return;
+			  }
+	      }
+    }
+	
+	for (var i=0; i < s.form.keywords_list.length; i++)
+    {
+        s.form.keywords_list.options[i].selected=false;
+    }
+	
+	if ( s.form.keyAddToList.value == sAddtoList )
+	{
+		if (s.length>=LimitKeywords)
+		{
+			alert(aLimitKeywords+LimitKeywords+aLimitEnd);
+			return;
+		}            	
+		p=s.length;
+		s.length+=1;
+	}	
+    
+    s.options[p].text=t.value;
+	s.options[p].value=t.value;
+	s.options[p].value+=";";
+    clearContent(t, '3');
+}
+
+function showdeleteButton2(F)
+{  
+	var p;
+	var q; 
+	var forwardString=F.local_forbiddenURLs_del.options[F.local_forbiddenURLs_del.selectedIndex].text; 
+	var listIndex=F.local_forbiddenURLs_del.selectedIndex;
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(1); 
+
+//name;stype;ip or group or all;ip1.ip2.ip3.ip4.:ip5;groupname;
+
+	if (F.local_forbiddenURLs_del.selectedIndex==-1) return;
+	
+	blurList2(F);
+   
+/* name */
+    ts[1]=forwardString 
+  
+	
+	F.forbiddenURLs_add.value=ts[1]
+	F.local_forbiddenURLs_del.options[listIndex].selected=true;
+	F.btnAddToList.value=sUpdateDomain; 
+	SetButtonStatus("deleteForbidden", "");
+	SetButtonStatus("showNew1", "");
+}
+
+function showdeleteButton3(F)
+{
+	var p;
+	var q; 
+	var forwardString=F.keywords_list.options[F.keywords_list.selectedIndex].text; 
+	var listIndex=F.keywords_list.selectedIndex;
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(1); 
+
+//name;stype;ip or group or all;ip1.ip2.ip3.ip4.:ip5;groupname;
+
+	if (F.keywords_list.selectedIndex==-1) return;
+	
+	blurList3(F);
+   
+	/* name */
+	ts[1]=forwardString; 
+
+	F.keywords_add.value=ts[1];
+   
+
+	F.keyAddToList.value=sUpdateKeyword; 
+	F.keywords_list.options[listIndex].selected=true;
+	SetButtonStatus("deleteKey", "");
+	SetButtonStatus("showNew2", "");
+}
+
+function clearContent(I, listIndex)
+{
+    if (listIndex=="2")
+	{
+		blurList2(I.form);
+		SetButtonStatus("deleteForbidden", "disabled");
+		SetButtonStatus("showNew1", "disabled");
+	}
+
+	if (listIndex=="3")
+	{
+		blurList3(I.form);
+		SetButtonStatus("showNew2", "disabled");
+		SetButtonStatus("deleteKey", "disabled");
+	}
+    
+    I.value="";
+	I.select();
+}
+
+function blurList2(F)
+{
+    for (var i=0; i < F.local_forbiddenURLs_del.length; i++)
+    {
+		F.local_forbiddenURLs_del.options[i].selected=false;
+    }
+  
+    F.btnAddToList.value=sAddtoList; 
+}
+
+function blurList3(F)
+{
+    for (var i=0; i < F.keywords_list.length; i++)
+    {
+      F.keywords_list.options[i].selected=false;
+    }
+    F.keyAddToList.value=sAddtoList;
+}
+
+function delSel(s, listIndex)
+{
+	var z;  
+	var k;
+
+	if (s.length > 0)
+	{
+		tmp=new tmpWord(s.length);
+		tmpChanged=new tmpWord(s.length); 
+		opvtmp=new tmpWord(s.length);
+		opvtmpChanged=new tmpWord(s.length);
+	 	
+		for (var i=0; i < s.length; i++)
+		{
+			tmp[i+1]=s.options[i].text;
+			opvtmp[i+1]=s.options[i].value;
+		}	
+		
+		for (var i=0; i < s.length; i++)
+		{
+			if (s.options[i].selected==true)
+			{ 
+				s.options[i].text="";
+				s.options[i].value="";
+				tmp[i+1]=" ";
+				opvtmp[i+1]=" ";	
+				s.options[i].selected=false;
+		  	}
+		}
+
+		k=1;
+		z=0;
+		for (var j=1; j<=s.length; j++) 
+		{ 
+			if (tmp[j]!=" ") 
+			{
+				tmpChanged[k]=tmp[j];
+				opvtmpChanged[k]=opvtmp[j];
+				k++;
+			}
+			else
+			{
+				z++;
+			}
+		}
+
+		for (var i=0; i < s.length-z; i++)
+		{
+			s.options[i].text=tmpChanged[i+1];  
+			s.options[i].value=opvtmpChanged[i+1];
+			
+		}
+		s.length-=z;
+  }
+  
+  if (listIndex=="2") clearContent(s.form.forbiddenURLs_add, "2");
+  if (listIndex=="3") clearContent(s.form.keywords_add, "3");
+}
+
+function falseSubmit(F)
+{
+    if (F.forbiddenEnable_check.checked==true)
+        F.forbiddenEnable.value="1";
+    else 
+        F.forbiddenEnable.value="0";
+
+	if (F.keywordsEnable_check.checked==true)
+        F.keywordsEnable.value="1";
+    else 
+        F.keywordsEnable.value="0";
+
+	F.submitStatus.value=0; 
+	MM_showHideLayers('AutoNumber15','','hide');  	
+    F.submit();
+
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formContent_filter);";
+var Cancellink = ""; 
+var helplink ='help_content_filter.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 650;
+var head_width = 60;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintForbiddenDomains(1);
+	PrintWebsiteBlocking(1);
+	if (document.formContent_filter.forbiddenEnable_check.checked == true || document.formContent_filter.keywordsEnable_check.checked == true)
+		PrintScheduling(0);
+	PrintEndContent();
+}
+
+function PrintForbiddenDomains(hasUnderLine)
+{
+	var in_head_width= head_width - 5;
+	PrintBeginBlock(1, "Forbidden Domains");
+	document.write('<table width="'+SmallLayoutwidth+'" border='+Tableborder+' bordercolor="'+Tablebordercolor+'" cellpadding="'+Tablecellpadding+'" cellspacing="'+Tablecellspacing+'" style="'+Tablestyle+'">');
+	document.write('<tr>');
+	document.write('<td width="30">');
+	document.write('<input type=hidden name="forbiddenEnable" value=\'<!--#nk_get CheckboxSave="forbiddenEnable"-->\'>');
+	document.write('<input type="checkbox" name="forbiddenEnable_check" value="2" onClick="falseSubmit(this.form);" <!--#nk_get CheckboxStatus="forbiddenEnable"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');		
+	document.write('</td>');
+	document.write('<td align="left">');
+	document.write('Enable Block Forbidden Domains');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td colspan="2">');
+	document.write('<img border="0" src="images/_blank.gif" width="1" height="10">');	
+	document.write('</td></tr>');
+	document.write('</table>');
+	
+	document.write('<table id="Forbidden_Domains" class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=6></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Add&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input maxlength="31" name="forbiddenURLs_add" size="20" onFocus="this.select();" onBlur="sTrim(this);">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("btnAddToList","Add to list","addSel2(this.form.forbiddenURLs_add,this.form.local_forbiddenURLs_del);");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple name="local_forbiddenURLs_del" size="10" onChange="showdeleteButton2(this.form);" style="width: 100%">');	
+	document.write('<!--#nk_get forbiddenURLsList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("deleteForbidden","Delete","delSel(this.form.local_forbiddenURLs_del, \'2\');");
+	SetButtonStatus("deleteForbidden", "disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	PrintSTButton("showNew1","Add New","clearContent(this.form.forbiddenURLs_add, \'2\');");
+	SetButtonStatus("showNew1", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');		
+	document.write('</table>');
+	if(document.formContent_filter.forbiddenEnable.value=="1")
+		document.getElementById("Forbidden_Domains").style.display="";
+	else
+		document.getElementById("Forbidden_Domains").style.display="none";
+	PrintEndBlock(hasUnderLine);
+}
+function PrintWebsiteBlocking(hasUnderLine)
+{
+	var in_head_width= head_width - 5;
+	PrintBeginBlock(1,"Website Blocking by Keywords");
+	document.write('<table width="'+SmallLayoutwidth+'" border='+Tableborder+' bordercolor="'+Tablebordercolor+'" cellpadding="'+Tablecellpadding+'" cellspacing="'+Tablecellspacing+'" style="'+Tablestyle+'">');
+	document.write('<tr>');
+	document.write('<td width="30">');
+	document.write('<input type=hidden name="keywordsEnable" value=\'<!--#nk_get CheckboxSave="keywordsEnable"-->\'>');
+	document.write('<input type="checkbox" name="keywordsEnable_check" value="1" onClick="falseSubmit(this.form)" <!--#nk_get CheckboxStatus="keywordsEnable"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');		
+	document.write('</td>');
+	document.write('<td align="left">');
+	document.write('Enable Website Blocking by Keywords');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td colspan="2">');
+	document.write('<img border="0" src="images/_blank.gif" width="1" height="10">');	
+	document.write('</td></tr>');
+	document.write('</table>');
+	
+	document.write('<table id="Website_Blocking" class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=6></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Add&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input maxlength="23" name="keywords_add" size="20" onFocus="this.select();" onBlur="sTrim(this);">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("keyAddToList","Add to list","addSel3(this.form.keywords_add,this.form.keywords_list);");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple name="keywords_list" size="10" onChange="showdeleteButton3(this.form);" style="width: 100%">');
+	document.write('<!--#nk_get keywordsList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("deleteKey","Delete","delSel(this.form.keywords_list, \'3\');");
+	SetButtonStatus("deleteKey", "disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	PrintSTButton("showNew2","Add New","clearContent(this.form.keywords_add, \'3\');");
+	SetButtonStatus("showNew2", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');		
+	document.write('</table>');
+	if(document.formContent_filter.keywordsEnable.value=="1")
+		document.getElementById("Website_Blocking").style.display="";
+	else
+		document.getElementById("Website_Blocking").style.display="none";
+	if (document.formContent_filter.forbiddenEnable_check.checked == true || document.formContent_filter.keywordsEnable_check.checked == true)
+		PrintEndBlock(hasUnderLine);
+	else
+		PrintEndBlock(0);
+}
+function PrintScheduling(hasUnderLine)
+{
+	PrintBeginBlock(1, "Scheduling");
+	document.write('<table width="'+NormallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');	
+	document.write('<td>');
+	document.write('Time&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<select name="rangeSchedule1" class="Select" onChange="chSchedule();">');
+	document.write('<option value="0" <!--#nk_get SelectHandle="rangeSchedule1:0"-->>Always</option>');
+	document.write('<option value="1" <!--#nk_get SelectHandle="rangeSchedule1:1"-->>Interval</option>');                    
+	document.write('</select>');	
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');	
+	document.write('<td>');
+	document.write('From&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<input type="hidden" name="TOD_start" id="TOD_start" value=\'<!--#nk_get 1to1_Handle="TOD_start"-->\'>');	
+	document.write('<input type="hidden" name="TOD_end" id="TOD_end" value=\'<!--#nk_get 1to1_Handle="TOD_end"-->\'>');
+	document.write('<input type="text" name="TOD_startHM" size="12" maxlength="5" value=\'<!--#nk_get TimeSchedule="TOD_start:HM"-->\' maxlength="2" size="3" onFocus="this.select();" onBlur="StringTrim(this);hours_minutes_Check(this,\'h\',\'m\');">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('(hh:mm)');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('To&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<input type="text" name="TOD_endHM" size="12" maxlength="5" value=\'<!--#nk_get TimeSchedule="TOD_end:HM"-->\' maxlength="2" size="3" onFocus="this.select();" onBlur="StringTrim(this);hours_minutes_Check(this,\'h\',\'m\');">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('(hh:mm)');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Effective on&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<input type="checkbox" name="content_filter_days" value="7" onClick="chSchedule()" <!--#nk_get EverydayCheckbox="content_filter_days:1"--> >');
+	document.write(' Everyday '); 	
+	document.write('<!--#nk_get WeekScheduleContent="content_filter_days"-->');
+	document.write('</td>')
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<form name="formdualwan" method="post" action="">
+		<input type="hidden" name="firewall0" value='<!--#nk_get RadioHandle2="firewall:0"-->'> 
+	</form>
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 6, 3);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formContent_filter" method="post" action="content_filter.htm">
+	<input type="hidden" name="submitStatus" value="0">
+   	<input type="hidden" name="forifdisable" value='0'>
+	<input type="hidden" name="keyifdisable" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get ContentFilterUpdate=""-->
+<!--#nk_get SysLogChange="content_filter.htm"-->

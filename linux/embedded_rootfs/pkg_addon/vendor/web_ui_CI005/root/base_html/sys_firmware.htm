@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta name="Expires" content="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	if (window.ActiveXObject)
+		document.formFU.image.style.width = "280px";
+	
+	SetButtonStatus("firmware", "");
+	SetButtonStatus("Download", "");
+    	document.formFU.image.disabled=false; 
+}
+
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chSubmit(F)
+{
+  var y;
+  y=cFirmware;
+  
+  if (F.image.value.length==0)
+  {
+	  alert(aSelectFile);
+	  return; 
+  }
+     
+  if (confirm(y))
+  {
+	var obj = document.getElementById("ShowProgress");
+	document.getElementById("disablemask").style.display = "";	
+	if (obj && window.ActiveXObject)
+	{
+		obj.innerHTML = '<font class="bottomfont">Firmware Upgrade...</font><br><br>';
+		obj.innerHTML += '<img src="images/loading.gif">';
+	}
+    	window.status=wUpgradeFirmware;			
+	F.submit();		
+  }
+}
+//=============== End of Javascript ===============*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Cancellink = ""; 
+var helplink ='help_sys_firmware.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 800;
+var head_width=80;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintUpgradeFirmwarePage(1);
+	PrintDownloadLink(0);
+	PrintEndContent();
+}
+
+function PrintUpgradeFirmwarePage(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+FixedTableWidth+'" border="'+Tableborder+'" style="'+Tablestyle+'">');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'"></td>');
+	document.write('<td width="'+(FixedTableWidth -(head_width * 3)) +'">');
+	document.write('<table width="100%" class="opacitytable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td height="10"></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td align="center">');
+	document.write('<input type="FILE" name="image" style="font-family:Arial;font-size: 12px; height:22px;">');
+	document.write('</td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td align="center">');	
+	PrintSTButton("firmware", "Upgrade", "chSubmit(document.formFU);");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td colspan="2">');
+	document.write('<table width="100%" border='+Tableborder+' style="'+Tablestyle+'">');	
+	document.write('<tr>');
+	document.write('<td colspan="2"><img border="0" src="images/_blank.gif" width="1" height="15"></td>');
+	document.write('</tr>');		
+	document.write('<tr>');		
+	document.write('<td width="40" valign="top" rowspan="3">');
+	document.write('<img border="0" src="images/warning.gif">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('</td>');
+	document.write('<td width="5" valign="top">');
+	document.write('<div class="Warning">');
+	document.write('1.');
+	document.write('</div>');
+	document.write('</td>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('When choosing previous firmware versions, all settings will restore back to default value.');
+	document.write('</div>');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('2.');
+	document.write('</div>');
+	document.write('</td>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('Upgrading firmware may take a few minutes, please don\'t turn off the power or press the reset button.<br>');	
+	document.write('</div>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('3.');
+	document.write('</div>');
+	document.write('</td>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('Please don\'t close the window or disconnect the link, during the upgrade process. ');	
+	document.write('</div>');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td colspan="2"><img border="0" src="images/_blank.gif" width="1" height="15"></td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');		
+	document.write('</form>');		
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintDownloadLink(hasUnderLine)
+{
+	PrintBeginBlock(1, "Firmware Download");
+	document.write('<table width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'"></td>');	
+	document.write('<td>');
+	if (ModelName == "RV016")
+		PrintSTButton("Download", "Firmware Download from Web Site", "window.open(\'http://www.cisco.com/en/US/products/ps9924/index.html\')");
+	else if (ModelName == "RV042")
+		PrintSTButton("Download", "Firmware Download from Web Site", "window.open(\'http://www.cisco.com/en/US/products/ps9925/index.html\')");
+	else
+		PrintSTButton("Download", "Firmware Download from Web Site", "window.open(\'http://www.cisco.com/en/US/products/ps9926/index.html\')");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize(FixedTableWidth);" style="overflow:hidden">
+<script>PrintBackground();PrintMask("Firmware Upgrade...","images/loading.gif");</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<form name="formFW" method="post" action="sys_firmware.htm">
+		<input type="hidden" name="submitStatus" value='0'>
+		<input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+		<input type="hidden" name="aftersubmit" value='<!--#nk_get IfAfterSubmit=""-->'>
+	</form>
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 6);		// Set Selected Node
+   	  if (document.formFW.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+
+	<form name="formFU" ENCTYPE="multipart/form-data" action="/cgi-bin/fw_upgrade.cgi" method="post">				
+	<input type="hidden" name="submitStatus" value='0'>
+	
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

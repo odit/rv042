@@ -1,0 +1,368 @@
+`configure' configures Net-SNMP 5.4.1.2 to adapt to many kinds of systems.
+
+Usage: ./configure [OPTION]... [VAR=VALUE]...
+
+To assign environment variables (e.g., CC, CFLAGS...), specify them as
+VAR=VALUE.  See below for descriptions of some of the useful variables.
+
+Defaults for the options are specified in brackets.
+
+Configuration:
+  -h, --help              display this help and exit
+      --help=short        display options specific to this package
+      --help=recursive    display the short help of all the included packages
+  -V, --version           display version information and exit
+  -q, --quiet, --silent   do not print `checking...' messages
+      --cache-file=FILE   cache test results in FILE [disabled]
+  -C, --config-cache      alias for `--cache-file=config.cache'
+  -n, --no-create         do not create output files
+      --srcdir=DIR        find the sources in DIR [configure dir or `..']
+
+Installation directories:
+  --prefix=PREFIX         install architecture-independent files in PREFIX
+			  [/usr/local]
+  --exec-prefix=EPREFIX   install architecture-dependent files in EPREFIX
+			  [PREFIX]
+
+By default, `make install' will install all the files in
+`/usr/local/bin', `/usr/local/lib' etc.  You can specify
+an installation prefix other than `/usr/local' using `--prefix',
+for instance `--prefix=$HOME'.
+
+For better control, use the options below.
+
+Fine tuning of the installation directories:
+  --bindir=DIR           user executables [EPREFIX/bin]
+  --sbindir=DIR          system admin executables [EPREFIX/sbin]
+  --libexecdir=DIR       program executables [EPREFIX/libexec]
+  --datadir=DIR          read-only architecture-independent data [PREFIX/share]
+  --sysconfdir=DIR       read-only single-machine data [PREFIX/etc]
+  --sharedstatedir=DIR   modifiable architecture-independent data [PREFIX/com]
+  --localstatedir=DIR    modifiable single-machine data [PREFIX/var]
+  --libdir=DIR           object code libraries [EPREFIX/lib]
+  --includedir=DIR       C header files [PREFIX/include]
+  --oldincludedir=DIR    C header files for non-gcc [/usr/include]
+  --infodir=DIR          info documentation [PREFIX/info]
+  --mandir=DIR           man documentation [PREFIX/man]
+
+System types:
+  --build=BUILD     configure for building on BUILD [guessed]
+  --host=HOST       cross-compile to build programs to run on HOST [BUILD]
+  --target=TARGET   configure for building compilers for TARGET [HOST]
+
+Optional Features:
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-as-needed              Link libperl against Net-SNMP libraries
+                                  rather than applications. We recommend to
+                                  use this option if it works.
+  --enable-silent-libtool         Pass --silent to libtool.
+
+  --enable-mini-agent             Build a minimal agent.
+  --disable-agent                 Do not build the agent (snmpd).
+  --disable-applications          Do not build the apps (snmpget, ...).
+  --disable-manuals               Do not install the manuals.
+  --disable-scripts               Do not install the scripts (mib2c, ...).
+  --disable-mibs                  Do not install the mib files.
+  --disable-mib-loading           Do not include code that parses and
+                                  manipulates the mib files.
+  --disable-snmpv1                Do not include code that implements SNMPv1.
+  --disable-snmpv2c               Do not include code that implements SNMPv2c.
+  --disable-set-support           Do not allow SNMP set requests.
+  --disable-des                   Do not support DES encryption.
+  --disable-privacy               Don't compile in support for privacy (encryption).
+  --disable-md5                   Do not support MD5 authentication.
+  --enable-internal-md5           Use the internal MD5 support.
+  --enable-ipv6                   Generate IPv6 ready version.
+  --enable-local-smux             Restrict SMUX connections to localhost (by default).
+  --enable-debugging              Outputs extra debugging information at all
+                                  times.  Normally, you should not enable this,
+                                  but instead use the -D flag of the commands,
+                                  which toggles debuging output at runtime.
+  --disable-debugging             Disallows debugging code to be built in.
+                                  This might provide some speed benefits.
+  --enable-developer              Turns on super-duper-extra-compile-warnings
+                                  when using gcc.
+  --enable-agentx-dom-sock-only   Disable UDP/TCP transports for agentx.
+  --disable-snmptrapd-subagent    Disable agentx subagent code in snmptrapd.
+  --enable-mib-config-checking    Turns on extra checks during configuration
+                                  of mib modules. Any conflicts will cause
+                                  configure to abort (default is to issue a
+                                  warning and continue.)
+  --enable-mib-config-debug       Turns on verbose output during mib module
+                                  configure processing.)
+  --enable-mfd-rewrites           Use new MFD rewrites of mib modules,
+                                  where available. (default is to use
+                                  original mib module code).
+  --enable-testing-code           Enables some code sections that should
+                                  only be used for testing of certain
+                                  SNMP functionalities.  This should *not*
+                                  be turned on for production use.  Ever.
+  --enable-reentrant              Enables locking functions that protect
+                                  library resources in some multi-threading
+                                  environments.  This does not guarantee
+                                  thread-safe operation.
+                                  Currently an experimental setting.
+  --disable-embedded-perl         Disable embedded Perl in the SNMP agent and
+                                  snmptrapd. enabled by default
+  --disable-perl-cc-checks        Disable configure checks for whether Perl's
+                                  C Compiler is compatible with ours when
+                                  embedded Perl is enabled.
+  --enable-ucd-snmp-compatibility Install ucd-snmp look-alike headers and libs.
+
+  --enable-shared[=PKGS]
+                          build shared libraries [default=yes]
+  --enable-static[=PKGS]
+                          build static libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+
+Compiler Options:
+  --with-cc=CC                    use CC to compile (default=gcc).
+
+  --with-linkcc=CC                use CC to link (default=gcc).
+  --with-ar=AR                    use AR as the archiver.
+  --with-endianness=big|little    define endianness of target platform when
+                                  cross-compiling.
+  --with-cflags=CFLAGS            use CFLAGS as compile time arguments.
+  --with-ldflags=LDFLAGS          use LDFLAGS as link time arguments to ld.
+  --with-libs=LIBS                use LIBS as link time arguments to ld.
+  --with-install-prefix=PATH      Just for installing, prefix all
+                                  directories with PATH.  This is known not
+                                  to work on some systems with shared
+                                  libraries (eg, HPUX)
+
+  --with-dmalloc=PATH             Use dmalloc library (www.dmalloc.com)
+  --with-efence                   Look for and use libefence (malloc).
+  --with-rsaref=PATH              Look for librsaref in PATH/lib.
+  --with-openssl=PATH             Look for openssl in PATH/lib.
+  --with-krb5=PATH                Look for krb5 in PATH/lib.
+  --without-rpm                   Don't include support for the RPM package
+                                  management system when building the host MIB
+                                  module.
+  --without-opaque-special-types  Don't use special opaque encodings.
+                                  SNMP normally cannot handle
+                                  floating numbers, nor large 64 bit
+                                  integers well.  By default, the
+                                  net-snmp package compiles in
+                                  support for these extra datatypes
+                                  (in a legal way)
+  --with-mibdirs=\"dir1:dir2:\"   Default directories to look for mibs.
+                                  (Default: \$HOME/.snmp/mibs:DATADIR/snmp/mibs)
+  --with-mibs=\"item1:item2:\"    Default mib IDs to read.
+                                  (The default list is \"IP-MIB:IF-MIB:
+                                  TCP-MIB:UDP-MIB:SNMPv2-MIB:RFC1213-MIB\"
+                                  with the addition of any mibs used
+                                  by the mib modules the agent is
+                                  configured with)
+  --with-mibfiles=\"file1:file2\" Default mib files to load.
+                                  (Default:  none.  uses IDs above instead.)
+  --with-pkcs=PATH                Look for pkcs11 in PATH/lib.
+
+Configuring the agent:
+  --without-root-access           The snmpd agent won't require root access to
+                                  run it.  The information it returns in the
+                                  mib-II tree may not be correct, however.
+  --without-kmem-usage            Do not include any code related to the use
+                                  of kmem.
+  --with-dummy-values             Provide 'placeholder' dummy values where
+                                  the necessary information is not available.
+                                  This is technically not compliant with the
+                                  SNMP specifications, but was how the agent
+                                  operated for versions < 4.0.
+  --with-persistent-directory=\"directory\"
+                                  Default directory for persistent data storage.
+  --with-persistent-mask=\"mask\"  Default mask for persistent data storage.
+                                  (Default: 077)
+  --with-copy-persistent-files=\"no\" Don't copy persistent files
+                                     (or use \"yes\" to copy them).
+                                     (Default: yes)
+  --with-agentx-socket=FILE         AgentX socket (Default: /var/agentx/master as specified in RFC2741)
+  --with-default-snmp-version=\"3\" Default version of SNMP to use.
+                                    (Default: 3)
+                                    Legal values: 1, 2 (for SNMPv2c) or 3.
+  --with-sys-contact=\"who@where\"  Default system contact.
+                                    (Default: LOGIN@DOMAINNAME)
+  --with-sys-location=\"location\"  Default system location.
+                                    (Default: Unknown)
+  --with-logfile=\"location\"       Default log file location for snmpd.
+  --with-transports=\"t1 t2 ...\"   Compile in the given SNMP transport
+                                    modules (space separated list).
+  --with-out-transports=\"t1 ...\"  Exclude listed SNMP transports
+                                    (space separated list).
+
+  Available SNMP transport modules are:
+
+    UDP         support for SNMP over UDP/IP.
+                This transport is always compiled in.
+    UDPIPv6     support for SNMP over UDP/IPv6.
+                This transport is available for Linux, Solaris and
+                FreeBSD at least.
+                It is never compiled in by default.
+    TCPIPv6     support for SNMP over UDP/IPv6.
+                This transport is available for Linux, Solaris and
+                FreeBSD at least.
+                It is never compiled in by default.
+    TCP         support for SNMP over TCP/IP.
+                This transport is compiled in by default, but may be omitted.
+    Unix        support for SNMP over Unix domain protocols.
+                This transport is compiled in by default except on Win32
+                platforms, and may be omitted.
+    Callback    support for SNMP over an internal locally connected pair
+                of snmp_sessions.
+    AAL5PVC     support for SNMP over AAL5 PVCs.
+                This transport is presently only available for Linux,
+                is never compiled in by default and may be omitted.
+    IPX         support for SNMP over IPX per RFC 1420.
+                This transport is presently only available for Linux,
+                is never compiled in by default and may be omitted.
+
+  --with-security-modules=\"s1 s2 ...\"   Compile in the given SNMP security
+                                    module services (space separated list).
+
+  Available SNMP security services:
+
+        usm                support for user based SNMP security
+                           (required and always compiled in)
+        ksm                support for kerberos based SNMP security
+
+  --with-mib-modules=\"item1 ...\"  Compile with additional mib modules
+                                    (Space separated list).
+  --with-out-mib-modules=\"list\"   Compile without these mib modules.
+
+  Default mib modules compiled into the agent (which can be removed):
+
+    mibII                  support for the mib-II tree.
+    snmpv3mibs             support for the snmpv3 mib modules.
+    ucd_snmp               UCD-SNMP-MIB specific extensions.
+    agent_mibs             NET-SNMP-AGENT-MIB extensions
+    agentx                 AgentX support (see below)
+    notification           mibs supporting specification of trap destinations.
+    target                 Support for the SNMP WGs TARGET-MIB.
+    utilities              general agent configuration utilities.
+    disman/event           support for the DISMAN-EVENT-MIB
+                             (supports self monitoring and notification
+                              delivery when error conditions are found)
+    disman/schedule        support for the DISMAN-SCHEDULE-MIB
+                             (trigger SET requests at specified times)
+    host                   host resources mib support.
+                             (only on major supported platforms)
+
+  Optional mib modules that can be built into the agent include:
+    smux                   smux support to allow subagents to attach to snmpd.
+    mibII/mta_sendmail     Sendmail statistics monitoring (MTA-MIB)
+    ucd-snmp/diskio        Table of io-devices and how much data they have
+                           read/written.  (only tested on Solaris, Linux)
+    disman/old-event-mib   previous implementation of the DISMAN-EVENT-MIB
+
+  Optional modules for specific platforms
+    Linux
+      ucd-snmp/lmSensors   hardware monitoring (LM-SENSORS-MIB)
+      ip-mib/ipv4InterfaceTable  (experimental)
+      ip-mib/ipv6InterfaceTable  (experimental)
+      tunnel               Linux TUNNEL-MIB support (ifTable extension)
+      mibII/interfaces     (old ifTable implementation)
+      misc/ipfwacc         accounting rules IP firewall information
+      ipfwchains/ipfwchains  firewall chains under ipfw
+                             (See agent/mibgroup/ipfwchains/README)
+
+    Solaris
+      ucd-snmp/lmSensors   hardware monitoring (LM-SENSORS-MIB)
+      if-mib               IF-MIB rewrite (add --enable-mfd-rewrites)
+      tcp-mib              TCP-MIB rewrite (tcpConnectionTable and
+                             tcpListenerTable; add --enable-mfd-rewrites)
+      udp-mib              UDP-MIB rewrite (udpEndpointTable;
+                             add --enable-mfd-rewrites)
+
+    FreeBSD/OpenBSD
+      if-mib               IF-MIB rewrite (add --enable-mfd-rewrites)
+
+  AgentX support:
+    agentx/subagent        allows the agent to run as either a snmp agent
+                           or as an agentX sub-agent.
+    agentx/master          makes the agent run as an agentX master agent
+                           as well as a normal snmp agent.
+    agentx                 includes both agentx/master and agentx/client.
+
+  Optional modules for C coders to look at and/or include as extension examples:
+
+    examples/ucdDemoPublic  SNMPv3 interoperability testing mib.
+    examples/example        example C code extension.
+Enterprise OIDs:  (warning: this should be used with caution.)
+
+  --with-enterprise-oid              The enterprise number assigned to the
+                                     vendor by IANA.  See
+                                     http://www.iana.org/cgi-bin/enterprise.pl
+                                     to get one, though using the default is
+                                     probably the right choice is most cases.
+                                     (default 8072 = "enterprise.net-snmp")
+
+  --with-enterprise-sysoid           The base OID for the sysObjectID
+                                     of the system group
+                                     (default .1.3.6.1.4.1.8072.3.2... =
+                                      "netSnmpAgentOIDs...")
+
+  --with-enterprise-notification-oid The OID used for the root of
+				     enterprise specific notifications.
+                                     (default .1.3.6.1.4.1.8072.4 =
+                                      "netSnmpNotificationPrefix")
+
+Perl:
+  --with-perl-modules=ARGS      Install the Perl modules along with the rest
+                                  of the net-snmp toolkit.  If ARGS is
+                                  specified, they're passed to the
+                                  Makefile.PL script.
+
+Python:
+  --with-python-modules=ARGS    Install the python bindings along with the
+                                  rest of the net-snmp toolkit.  If ARGS is
+                                  specified, they're passed to the
+                                  setup.py script as arguments.
+
+Network Buffers:
+  --with-server-send-buf=ARG    Use ARG for the default UDP/TCP send buffer instead
+                                  of the OS buffer for server sockets that are
+                                  created (snmpd, snmptrapd).
+                                  This default can be overridden in the runtime
+                                  configuration files.
+                                  The ARG should be the size in bytes
+  --with-server-recv-buf=ARG    Similar as previous option, but for receive buffer
+  --with-client-send-buf=ARG    Similar as previous options, but for the
+                                  receive buffer of client sockets
+  --with-client-recv-buf=ARG    Similar as previous options, but for the send buffer
+
+Miscellaneous:
+  --with-defaults         Use defaults for prompted values.
+  --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
+  --with-pic              try to use only PIC/non-PIC objects [default=use
+                          both]
+  --with-tags[=TAGS]
+                          include additional configurations [automatic]
+  --without-elf           use elf libraries
+  --with-libwrap=LIBPATH  Compile in libwrap (tcp_wrappers) support.
+  --with-zlib=DIR         use libz in DIR
+  --with-bzip2=DIR        use libbz2 in DIR
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  CPPFLAGS    C/C++ preprocessor flags, e.g. -I<include dir> if you have
+              headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  CXXCPP      C++ preprocessor
+  F77         Fortran 77 compiler command
+  FFLAGS      Fortran 77 compiler flags
+
+Use these variables to override the choices made by `configure' or to help
+it to find libraries and programs with nonstandard names/locations.
+
+Report bugs to <net-snmp-coders@lists.sourceforge.net>.

@@ -1,0 +1,2 @@
+youku
+^get /.*l$|^get /a|^get /.*5$|^get /.*get /$|^get /get|^connect /pxptree/20070110/1000|^get /.*7$|^get /p|^get /.*s$|^post /nba\.php http/1\.1\x0d\x0aaccept.*pg" style="border:0;">\x0d\x0a</a>\x0d\x0a$|^get /s

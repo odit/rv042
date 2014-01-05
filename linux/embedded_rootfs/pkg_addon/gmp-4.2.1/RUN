@@ -1,0 +1,18 @@
+COMPILELIB64=${OCTEON_ROOT}/tools/mips64-octeon-linux-gnu/sys-root/usr/lib64/
+COMPILEINCLUDEDIR=${OCTEON_ROOT}/tools/mips64-octeon-linux-gnu/sys-root/usr/include/
+echo " ${COMPILEINCLUDEDIR}" " COMPILELIB64=${COMPILELIB64}"
+
+################### NK-modify start ###################
+# purpose:   Build Machine  # author:    Chihmou
+# date:      2010-07-25   # description: Change prefix path
+#./configure --host=${CROSS} --prefix="/tmp" CFLAGS=" ${CFLAGS} -DNO_ASM "  LDFLAGS=" ${LDFLAFGS} " --disable-cxx --disable-fft ABI=64 --libdir=${DESTLIB} --includedir=${KERNEL_DIR}/include --disable-static
+./configure --host=${CROSS} --prefix="${ROOT}/.." CFLAGS=" ${CFLAGS} -DNO_ASM "  LDFLAGS=" ${LDFLAFGS} " --disable-cxx --disable-fft ABI=64 --libdir=${ROOT}/usr/lib64 --includedir=${KERNEL_DIR}/include --disable-static
+###################  NK-modify end  ###################
+
+make
+make install
+cp -f .libs/libgmp.so.3.4.1 ${COMPILELIB64}
+cp -f gmp.h ${COMPILEINCLUDEDIR}
+cd ${COMPILELIB64}
+ln -s -f libgmp.so.3.4.1 libgmp.so
+ln -s -f libgmp.so.3.4.1 libgmp.so.3

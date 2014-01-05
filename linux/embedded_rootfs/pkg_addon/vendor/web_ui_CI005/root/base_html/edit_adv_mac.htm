@@ -1,0 +1,430 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<!--#nk_get RedirectPage="adv_mac.htm:0"-->
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+
+function Entryfunction()
+{
+	chMode(document.formedit_MAC);
+	initMode(document.formedit_MAC);
+}
+
+function Leavefunction()
+{
+	chLeave();
+}
+
+function setiName()
+{
+	if (document.formedit_MAC.editInterface.value==2) document.formedit_MAC.iName.value="WAN2";
+	else if (document.formedit_MAC.editInterface.value==3) document.formedit_MAC.iName.value="WAN3";
+	else if (document.formedit_MAC.editInterface.value==4) document.formedit_MAC.iName.value="WAN4";
+	else if (document.formedit_MAC.editInterface.value==5) document.formedit_MAC.iName.value="WAN5";
+	else if (document.formedit_MAC.editInterface.value==6) document.formedit_MAC.iName.value="WAN6";
+	else if (document.formedit_MAC.editInterface.value==7) document.formedit_MAC.iName.value="WAN7";
+	else if (document.formedit_MAC.editInterface.value==8) document.formedit_MAC.iName.value="WAN8";	
+	else 
+	{
+		document.formedit_MAC.editInterface.value=1
+		document.formedit_MAC.iName.value="WAN1";
+	}
+}
+
+function initMode(F)
+{
+	if(F.wanMacType1.value == "0")
+	{
+		F.w1_MAC_select[0].checked=true;
+		F.sMAC.disabled=false;
+	}
+	else if(F.wanMacType1.value == "1")
+	{
+		F.w1_MAC_select[1].checked=true;
+		F.sMAC.disabled=true;
+	}
+}
+function chMode(F)
+{
+	if(F.w1_MAC_select[1].checked == true)
+	{
+		F.sMAC.disabled=true;
+	}
+	else
+	{
+		F.sMAC.disabled=false;
+	}
+}
+
+function chSubmit(F)
+{
+	var wanthisMAC;
+	if (document.formedit_MAC.w1_MAC_select[0].checked==true)
+		wanthisMAC=document.formedit_MAC.sMAC.value.toUpperCase();
+	else
+  		wanthisMAC=document.formedit_MAC.wanPC.value;
+ 
+	var start,end;
+	var forwardString;
+	var wanthisMAC_cp = "";
+	forwardString=wanthisMAC;
+	end=forwardString.length;
+	if((forwardString.indexOf(":")==-1) && (forwardString.indexOf("-")==-1))
+	{
+		tmpString = forwardString;
+		for(var i=0; i<5; ++i)
+		{			
+			wanthisMAC_cp+=tmpString.substring(0,2);
+			wanthisMAC_cp+="-";
+			tmpString = tmpString.substring(2,end);
+		}
+		wanthisMAC_cp+=tmpString;
+	}
+	else if(forwardString.indexOf("-")==-1)
+	{
+		tmpString = forwardString;
+		for(var i=0; i<5; ++i)
+		{			
+			start=tmpString.indexOf(":");
+			wanthisMAC_cp += tmpString.substring(start-2,2);
+			wanthisMAC_cp += "-";
+			tmpString = tmpString.substring(start+1, end);
+		}
+		wanthisMAC_cp+=tmpString;
+	}
+	else
+	wanthisMAC_cp = wanthisMAC;
+	
+	if (document.formedit_MAC.editInterface.value!="1")
+	{
+	if (wanthisMAC_cp==document.formedit_MAC.wan1MAC.value.toUpperCase())
+	{
+		alert(cMACAddrWAN1);
+		return;
+	}
+		if (wanthisMAC_cp==document.formedit_MAC.defaultMAC[0].value.toUpperCase())
+	{
+		alert(aMACDefaultWAN1);
+		return;
+	}	  
+	}
+	
+	if (document.formedit_MAC.editInterface.value!="2")
+	{ 
+	if (wanthisMAC_cp==document.formedit_MAC.wan2MAC.value.toUpperCase())
+	{
+		alert(cMACAddrWAN2);
+		return;
+	}
+		if (wanthisMAC_cp==document.formedit_MAC.defaultMAC[1].value.toUpperCase())
+	{
+		alert(aMACDefaultWAN2);
+		return;
+	}	 	  
+	}
+	
+	if (document.formedit_MAC.editInterface.value!="3")
+	{
+		if (wanthisMAC_cp==document.formedit_MAC.wan3MAC.value.toUpperCase())
+	{
+		alert(cMACAddrWAN3);
+		return;
+	}
+		if (wanthisMAC_cp==document.formedit_MAC.defaultMAC[2].value.toUpperCase())
+	{
+		alert(aMACDefaultWAN3);
+		return;
+	}	 	  
+	}
+	
+	if (document.formedit_MAC.editInterface.value!="4")
+	{
+	if (wanthisMAC_cp==document.formedit_MAC.wan4MAC.value.toUpperCase())
+	{
+		alert(cMACAddrWAN4);
+		return;
+	}
+		if (wanthisMAC_cp==document.formedit_MAC.defaultMAC[3].value.toUpperCase())
+	{
+		alert(aMACDefaultWAN4);
+		return;
+	}	  	  
+	}
+	if (document.formedit_MAC.editInterface.value!="5" && (document.formedit_MAC.isDMZmode.value !="1" || document.formedit_MAC.wanNumbers.value !=5))
+	{
+	if (wanthisMAC_cp==document.formedit_MAC.wan5MAC.value.toUpperCase())
+	{
+		alert(cMACAddrWAN5);
+		return;
+	}
+		if (wanthisMAC_cp==document.formedit_MAC.defaultMAC[4].value.toUpperCase())
+	{
+		alert(aMACDefaultWAN5);
+		return;
+	}	  	  
+	}
+		if(document.formedit_MAC.wanNumbers.value>5)
+	if (document.formedit_MAC.editInterface.value!="6" && (document.formedit_MAC.isDMZmode.value !="1" || document.formedit_MAC.wanNumbers.value !=6))
+	{
+	if (wanthisMAC_cp==document.formedit_MAC.wan6MAC.value.toUpperCase())
+	{
+		alert(cMACAddrWAN6);
+		return;
+	}
+		if (wanthisMAC_cp==document.formedit_MAC.defaultMAC[5].value.toUpperCase())
+	{
+		alert(aMACDefaultWAN6);
+		return;
+	}	  	  
+	}
+		if(document.formedit_MAC.wanNumbers.value>6)
+	if (document.formedit_MAC.editInterface.value!="7" && (document.formedit_MAC.isDMZmode.value !="1" || document.formedit_MAC.wanNumbers.value !=7))
+	{
+	if (wanthisMAC_cp==document.formedit_MAC.wan7MAC.value.toUpperCase())
+	{
+		alert(cMACAddrWAN7);
+		return;
+	}
+		if (wanthisMAC_cp==document.formedit_MAC.defaultMAC[6].value.toUpperCase())
+	{
+		alert(aMACDefaultWAN7);
+		return;
+	}	  	  
+	}
+	
+	if (document.formedit_MAC.editInterface.value!="99" && (document.formedit_MAC.isDMZmode.value =="1" || TotalPortNumber == 16))
+	{
+	if (wanthisMAC_cp==document.formedit_MAC.DMZMAC.value.toUpperCase())
+	{
+		alert(cMACAddrDMZ);
+		return;
+	}
+	}
+  if (wanthisMAC_cp==document.formedit_MAC.lanMAC.value.toUpperCase())
+  {
+	  alert(cMACAddrLAN);
+	  return;
+  }       
+/*2007/3/12 new ui*/  
+  var start,end;
+  var forwardString;
+
+  document.formedit_MAC.submitStatus.value=1;
+  if (document.formedit_MAC.w1_MAC_select[0].checked==true)
+  {
+	forwardString=document.formedit_MAC.sMAC.value;
+	if((forwardString.indexOf(":")==-1) && (forwardString.indexOf("-")==-1))
+	{
+		document.formedit_MAC.wanMac1.value = document.formedit_MAC.sMAC.value;
+	}
+	else
+	{
+		document.formedit_MAC.wanMac1.value="";
+		for(var i=0; i<5; ++i)
+		{
+			tmpString=forwardString;
+			end=forwardString.length;
+			start=forwardString.indexOf(":");
+			if(start == -1)
+				start=forwardString.indexOf("-");
+			document.formedit_MAC.wanMac1.value+=forwardString.substring(start-2,2);
+			forwardString=tmpString.substring(start+1, end);
+		}
+		document.formedit_MAC.wanMac1.value+=forwardString;
+	}
+	document.formedit_MAC.wanMacType1.value=0;
+  }
+   else
+   {
+	forwardString=document.formedit_MAC.wanPC.value;
+	document.formedit_MAC.wanMac1.value="";
+	for(var i=0; i<5; ++i)
+	{
+		tmpString=forwardString;
+		end=forwardString.length;
+		start=forwardString.indexOf("-");
+     		document.formedit_MAC.wanMac1.value+=forwardString.substring(start-2,2);
+		forwardString=tmpString.substring(start+1, end);
+	}
+	document.formedit_MAC.wanMac1.value+=forwardString;
+	document.formedit_MAC.wanMacType1.value=1;
+   }
+   if(ModelName == "RV042")
+   {
+	if(F.w1_MAC_select[0].checked==true && F.wan2MAC_T.value == "0")
+	{
+		F.MACCloneType.value=0;
+	}
+	else if(F.w1_MAC_select[0].checked==true && F.wan1MAC_T.value == "0")
+	{
+		F.MACCloneType.value=0;
+	}
+	else
+	{
+		F.MACCloneType.value=F.editInterface.value;
+	}
+	if(F.editInterface.value == "1" && F.wan2MAC_T.value == "1")
+	{
+		if(F.w1_MAC_select[1].checked==true)
+		{
+			F.MACCloneType.value=F.editInterface.value;
+			if ( !confirm(cMACClone_one) )
+			{
+				F.MACCloneType.value=0;
+				return 0;
+			}
+		}	
+	}
+	if(F.editInterface.value == "2" && F.wan1MAC_T.value == "1")
+	{
+		if(F.w1_MAC_select[1].checked==true)
+		{
+			if ( !confirm(cMACClone_one) )
+			{
+				F.MACCloneType.value=0;
+				return 0;
+			}
+		}
+	}
+   }
+	F.log_ch.value=1;
+	window.status=wSave;
+	//document.formedit_MAC.action="adv_mac.htm";
+	MM_showHideLayers('AutoNumber15','','hide');  
+	if(F.w1_MAC_select[0].checked==true)
+		F.sMAC.disabled=false;
+	document.formedit_MAC.submit();
+}
+
+//=============== End of Javascript ===============*/
+
+/***************************************************/
+/*												   */	
+/*      	Begin of content    				   */
+/*												   */	
+/***************************************************/
+
+var ButtonType = "BackOkCancel";
+var Savelink = "chSubmit(document.formedit_MAC)";
+var Cancellink = "";
+var Backlink = "adv_mac.htm";
+var helplink ='help_edit_adv_mac.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=200;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintMacClone(0);
+	PrintEndContent();
+}
+
+function PrintMacClone(hasUnderLine)
+{
+	setiName();
+	PrintBeginBlock(1, "Edit MAC Address Clone");  
+	document.write('<table class="Setuptable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Interface&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td><font color="#8e8e8e">');
+	document.write(document.formedit_MAC.iName.value);
+	document.write('</font></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write("User Defined WAN MAC Address&nbsp;:&nbsp;");
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="w1_MAC_select" value="1" onClick="chMode(this.form);">');
+	document.write('<input type="hidden" name="wanMacType1" value=\'<!--#nk_get 1to1_HandleByInf="wanMacType1"-->\'>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<input type="hidden" name="wanMac1" value=\'<!--#nk_get 1to1_HandleByInf="wanMac1"-->\'>');
+	var temp = '<!--#nk_get MACHandleByInf="wanMac1:1"--><!--#nk_get MACHandleByInf="wanMac1:2"--><!--#nk_get MACHandleByInf="wanMac1:3"--><!--#nk_get MACHandleByInf="wanMac1:4"--><!--#nk_get MACHandleByInf="wanMac1:5"--><!--#nk_get MACHandleByInf="wanMac1:6"-->';
+	var WANMAC = filterMAC(temp);
+	document.write('<input type=text name="sMAC" size="17" maxlength="17" onBlur="MACCheck(this)" onFocus="this.select()" value="'+WANMAC+'">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write("(Default&nbsp;:&nbsp;");
+	document.write(filterMAC('<!--#nk_get DisplayMACByInf="wanMacDefault"-->'));
+	document.write(')');
+	document.write('</td></tr>');
+	document.write('<tr><td>');
+	document.write("MAC Address from this PC&nbsp;:&nbsp;");
+	document.write('</td><td>');
+	document.write('<input type="radio" name="w1_MAC_select" value="2" onClick="chMode(this.form);">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');		
+	document.write(filterMAC('<!--#nk_get Wan1MacClone="pc"-->'));
+	document.write('</td></tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 1);
+}
+
+//=============== End of Javascript ===============
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	
+	<script>
+      	SetItemInit(foldersTree, 2, 8);
+      	initializeTree(foldersTree); 
+	</script>
+	<form name="formedit_MAC" method="post" action="edit_adv_mac.htm">
+		<input type="hidden" name="page" value="edit_adv_mac.htm">
+		<input type="hidden" name="iName" value="">
+		<input type="hidden" name="wanPC" value='<!--#nk_get Wan1MacClone="pc"-->'> 
+		<input type="hidden" name="editInterface" value='<!--#nk_get WanEditInterface=""-->'> 
+		<input type="hidden" name="submitStatus" value="10">
+		<input type="hidden" name="log_ch" value="0">
+		<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+		<input type="hidden" name="wan1MAC" value='<!--#nk_get DisplayMAC="wanMac11"-->'> 
+		<input type="hidden" name="wan2MAC" value='<!--#nk_get DisplayMAC="wanMac12"-->'> 
+		<input type="hidden" name="wan3MAC" value='<!--#nk_get DisplayMAC="wanMac13"-->'> 
+		<input type="hidden" name="wan4MAC" value='<!--#nk_get DisplayMAC="wanMac14"-->'>
+		<input type="hidden" name="wan5MAC" value='<!--#nk_get DisplayMAC="wanMac15"-->'>
+		<input type="hidden" name="wan6MAC" value='<!--#nk_get DisplayMAC="wanMac16"-->'>
+		<input type="hidden" name="wan7MAC" value='<!--#nk_get DisplayMAC="wanMac17"-->'>
+		<input type="hidden" name="wan8MAC" value='<!--#nk_get DisplayMAC="wanMac18"-->'>
+		<input type="hidden" name="DMZMAC" value='<!--#nk_get GetDMZ_MAC=""-->'> 
+		<input type="hidden" name="lanMAC" value='<!--#nk_get DisplayMAC="lanmac"-->'>
+		<input type="hidden" name="defaultMAC" value='<!--#nk_get DisplayMAC="wanMacDefault1"-->'>  
+		<input type="hidden" name="defaultMAC" value='<!--#nk_get DisplayMAC="wanMacDefault2"-->'>
+		<input type="hidden" name="defaultMAC" value='<!--#nk_get DisplayMAC="wanMacDefault3"-->'>
+		<input type="hidden" name="defaultMAC" value='<!--#nk_get DisplayMAC="wanMacDefault4"-->'>			
+		<input type="hidden" name="defaultMAC" value='<!--#nk_get DisplayMAC="wanMacDefault5"-->'>  
+		<input type="hidden" name="defaultMAC" value='<!--#nk_get DisplayMAC="wanMacDefault6"-->'>
+		<input type="hidden" name="defaultMAC" value='<!--#nk_get DisplayMAC="wanMacDefault7"-->'>
+		<input type="hidden" name="defaultMAC" value='<!--#nk_get DisplayMAC="wanMacDefault8"-->'>		
+		<input type="hidden" name="VLAN_enable" value=''>
+		<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+		<input type="hidden" name="wan1MAC_T" value='<!--#nk_get DisplayOnly="wanMacType11"-->'> 
+		<input type="hidden" name="wan2MAC_T" value='<!--#nk_get DisplayOnly="wanMacType12"-->'> 
+		<input type="hidden" name="wan3MAC_T" value='<!--#nk_get DisplayOnly="wanMacType13"-->'> 
+		<input type="hidden" name="wan4MAC_T" value='<!--#nk_get DisplayOnly="wanMacType14"-->'>
+		<input type="hidden" name="wan5MAC_T" value='<!--#nk_get DisplayOnly="wanMacType15"-->'>
+		<input type="hidden" name="wan6MAC_T" value='<!--#nk_get DisplayOnly="wanMacType16"-->'>
+		<input type="hidden" name="wan7MAC_T" value='<!--#nk_get DisplayOnly="wanMacType17"-->'>
+		<input type="hidden" name="wan8MAC_T" value='<!--#nk_get DisplayOnly="wanMacType18"-->'>
+		<input type="hidden" name="MACCloneType" value='<!--#nk_get MACCloneType=""-->'>
+		<script>PrintContent();</script>
+		<script>PrintRight();</script>      
+		<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="edit_adv_mac.htm"-->
+<!--#nk_get MacCloneUpdate=""-->

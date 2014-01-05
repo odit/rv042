@@ -1,0 +1,53 @@
+include ./make-include-uClinux.mk
+
+all:
+	$(MAKE) -C lib -f Makefile.uClinux
+	$(MAKE) -C libgcgi -f Makefile.uClinux
+	$(MAKE) -C libsslcert -f Makefile.uClinux
+	$(MAKE) -C libauth -f Makefile.uClinux
+	$(MAKE) -C smm -f Makefile.uClinux
+	$(MAKE) -C firebase -f Makefile.uClinux
+	$(MAKE) -C ftp -f Makefile.uClinux
+	$(MAKE) -C single_bin -f Makefile.uClinux
+	$(MAKE) -C httpd -f Makefile.uClinux
+	$(MAKE) -C httprp -f Makefile.uClinux
+	$(MAKE) -C WWW -f Makefile.uClinux
+	$(MAKE) -C firewall -f Makefile.uClinux
+	$(MAKE) -C utils -f Makefile.uClinux
+
+clean:
+	$(MAKE) -C lib clean -f Makefile.uClinux
+	$(MAKE) -C libgcgi clean -f Makefile.uClinux
+	$(MAKE) -C libsslcert clean -f Makefile.uClinux
+	$(MAKE) -C libauth clean -f Makefile.uClinux
+	$(MAKE) -C smm clean -f Makefile.uClinux
+	$(MAKE) -C firebase clean -f Makefile.uClinux
+	$(MAKE) -C ftp clean -f Makefile.uClinux
+	$(MAKE) -C single_bin clean -f Makefile.uClinux
+	$(MAKE) -C httpd clean -f Makefile.uClinux
+	$(MAKE) -C httprp clean -f Makefile.uClinux
+	$(MAKE) -C WWW clean -f Makefile.uClinux
+	$(MAKE) -C firewall clean -f Makefile.uClinux
+	$(MAKE) -C utils clean -f Makefile.uClinux
+
+install:
+	$(MAKE) -C httpd install -f Makefile.uClinux
+	$(MAKE) -C smm install -f Makefile.uClinux
+	$(MAKE) -C firebase install -f Makefile.uClinux
+	$(MAKE) -C ftp install -f Makefile.uClinux
+	$(MAKE) -C single_bin install -f Makefile.uClinux
+	$(MAKE) -C WWW install -f Makefile.uClinux
+	$(MAKE) -C httprp install -f Makefile.uClinux
+	$(MAKE) -C firewall install -f Makefile.uClinux
+	$(MAKE) -C utils install -f Makefile.uClinux
+	$(MAKE) -C AccessPointDial install 
+	$(MAKE) -C COMWebCacheCleaner install 
+	$(MAKE) -C VirtualTransport install 
+	$(MAKE) -C TSAC install
+	$(MAKE) -C posixvpclient install 
+	$(MAKE) -C MacOS install 
+ifeq "$(CONFIG_EPS)" "y"
+	$(MAKE) -C EPS install 
+endif
+
+un-install:

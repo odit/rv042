@@ -1,0 +1,531 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	<!--#nk_get DevTrafReport="RxPks:ixp1234"-->
+	<!--#nk_get DevTrafReport="RxRateDivBand:ixp1234"-->	
+}
+function Leavefunction()
+{
+	chLeave();
+}
+//=============== End of Javascript ===============*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "Refresh";
+var Reloadlink = "document.location='log_report2.htm'";
+var helplink ='help_log_report.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 700;
+var head_width=160;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintStatistic(0);
+	PrintEndContent();
+}
+
+function PrintPrePage()
+{
+	document.write('<td width="35%" align="left"><a href="log_report1.htm">');
+	document.write("&lt;&lt;Previous Page");
+	document.write('</a></td>');
+	document.write('<td></td>');
+}
+
+function PrintPortStatus(StatusValue)
+{
+	if (StatusValue == 1)
+		document.write('<font color="'+Connectlinkcolor+'">Connected</font></a>');
+	else if (StatusValue == 2) 
+		document.write('<font color="'+Disablelinkcolor+'">Disabled</font></a>');
+	else
+		document.write('<font color="'+Enablelinkcolor+'">Enabled</font></a>');	
+}
+
+function PrintStatistic(hasUnderLine)
+{
+	var i;
+	PrintBeginBlock(0);
+	document.write('<table width="'+FixedTableWidth+'" class="Infotable" border="'+Tableborder+'">');
+	document.write('<tr>'); 
+	PrintPrePage();	
+	document.write('<td width="35%" align="center"></td>');
+	document.write('</tr>');
+	document.write('</table>');
+
+	document.write('<table width="'+FixedTableWidth+'"class="STtable" border="1">');	
+	document.write('<tr><td>');	
+	document.write('<table width="100%" class="Porttable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<th width="'+head_width+'">Interface</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<th align="center" width="115"><center>');
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+		document.write('WAN7');
+	else
+		document.write('&nbsp;');
+	document.write('</center></th>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+		document.write('<th width="115" height="24"><center>');
+		document.write('&nbsp;');
+		document.write('</center></th>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" colspan="13" style="height:1px"></td>');
+	document.write('</tr>');	   
+	// Device Name
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Device Name');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="center">'); 
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+		document.write('eth7');
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td align="center" colspan="3" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');		
+	// Link Status
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Status');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td align="center" class="EvenRow"><center>');
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+		PrintPortStatus(document.formlog_report.DevStateReportstatus7.value);	
+	document.write('</center></td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td colspan="3" class="EvenRow" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');		
+	// IP Address
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('IP Address');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td align="center">'); 
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+		document.write('<!--#nk_get DisplayOnly="wan7IP"-->');	
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td align="center" colspan="3" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// MAC Address
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('MAC Address');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="center" class="EvenRow"><center>');
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+		document.write(filterMAC(document.formlog_report.DevStateReportmac7.value));	
+	document.write('</center></td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td colspan="3" class="EvenRow" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Subnet Mask
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Subnet Mask');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td align="center">'); 
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+		document.write(document.formlog_report.DevStateReportmask7.value);	
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td align="center" colspan="3" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Default Gateway
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Default Gateway');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td align="center" class="EvenRow"><center>'); 
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+		document.write('<!--#nk_get DisplayOnly="ISPGateway7"-->');	
+	document.write('</center></td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td colspan="3" class="EvenRow" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// DNS
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('DNS');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="center" colspan="3" height="24">');
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+		document.write('<!--#nk_get DevStateReport="dns:ixp7"-->');
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td align="center" colspan="3" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>'); 
+	// Received Packets
+	document.write('</tr> '); 
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Received Packets');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="RxPks:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td colspan="3" class="EvenRow" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Sent Packets
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Sent Packets');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="right" colspan="3">&nbsp;'); 
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="TxPks:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td align="right" colspan="3" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Total Packets
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Total Packets');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="TotalPks:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td colspan="3" class="EvenRow" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Received Bytes
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Received Bytes');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="right" colspan="3">&nbsp;'); 
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="RxBytes:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td align="right" colspan="3" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Sent Bytes
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Sent Bytes');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="TxBytes:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td colspan="3" class="EvenRow" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Total Bytes
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Total Bytes');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="right" colspan="3">&nbsp;'); 
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="TotalBytes:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td align="right" colspan="3" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Error Packets Received	
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Error Packets Received');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="RxPksErr:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{		
+		document.write('<td colspan="3" class="EvenRow" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Dropped Packets Received
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Dropped Packets Received');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="right" colspan="3">&nbsp;'); 
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="RxPksDrop:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td align="right" colspan="3" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Upstream Bandwidth Usage(%)
+	document.write('<tr>'); 
+	document.write('<th>');
+	document.write('<div style="padding-top:3px">Upstream Bandwidth</div><div style="padding-top:3px;padding-bottom:3px;">Usage(%)</div>');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="TxRateDivBand:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{	
+		document.write('<td colspan="3" class="EvenRow" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');	
+	// Downstream Bandwidth Usage(%)	
+	document.write('<tr>'); 
+	document.write('<th>');
+	document.write('<div style="padding-top:3px">Downstream Bandwidth</div><div style="padding-top:3px;padding-bottom:3px;">Usage(%)</div>');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="right" colspan="3">&nbsp;'); 
+	if (parseInt(document.formlog_report.wanNumbers.value) == 8)
+	{
+		document.write('<!--#nk_get DevTrafReport="RxRateDivBand:ixp7"-->');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	}
+	document.write('</td>');
+	for(i=0; i<3; i++)
+	{
+		document.write('<td align="right" colspan="3" height="24">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');		
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0"  >
+
+        <!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+
+	<script>
+         SetItemInit(foldersTree, 8, 2);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+                                                  
+    <form name="formlog_report" method="post" action="log_report2.htm">
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+	<input type="hidden" name="DevStateReportstatus7" id="DevStateReportstatus7" value='<!--#nk_get DevStateReport="status:ixp7"-->'>
+	<input type="hidden" name="DevStateReportmac7" id="DevStateReportmac7" value='<!--#nk_get DisplayMAC="wanMac17"-->'>
+	<input type="hidden" name="DevStateReportmask7" id="DevStateReportmask7" value='<!--#nk_get DisplayOnly="isp7Mask"-->'>
+	
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>
+	<script>PrintBottom();</script>
+</table>
+</body>
+</html>

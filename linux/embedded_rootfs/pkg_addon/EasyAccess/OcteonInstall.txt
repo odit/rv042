@@ -1,0 +1,174 @@
+Cavium Networks, EasyAccess Installation procedure on Octeon 30XX, 31XX and 38XX:
+---------------------------------------------------------------------------------
+
+Dependencies
+------------
+This release requires the following Octeon RPMS:
+   a) Octeon SDK v1.5.0 (Build 187)
+   b) Octeon Linux v1.5.0 (Build 187)
+   c) Octeon Crypto Core RPM v1.1.1-32
+   d) Octeon OpenSSL Crypto Engine RPM v0.3.0-05.
+
+Octeon SDK is usually installed under /usr/local/Cavium_Networks folder
+as CN3XXX-SDK.
+
+Supported Operating Modes
+-------------------------
+This release supports the following Operating modes
+        - Linux N32
+        - Linux N64
+
+Pre-requisites to Compiling the EasyAccess 
+------------------------------------------
+a) Setup the Octeon Development environment.
+     # cd /usr/local/Cavium_Networks/CN3XXX-SDK
+     # source ./env-setup OCTEON_CN30XX
+     (Valid Octeon Models are available in octeon-models.txt)
+        This will setup the OCTEON_ROOT environment variable.
+
+Building EasyAccess
+--------------------
+1. Install SDK 1.5.0 release
+   rpm -i CN3XXX-SDK-1.5.0-187.i386.rpm
+
+2. Install Linux 1.5.0 component
+   rpm -i CN3XXX-LINUX-1.5.0-187.i386.rpm
+
+3. Install Crypto Core rpm 
+   rpm -i CN3XXX-CRYPTO-CORE-1.1.1-32.i386.rpm
+
+4. Install Linux Crypto Engine rpm
+   rpm -i CN3XXX-ENGINE-LINUX-0.3.0-05.i386.rpm
+
+5. Install EasyAccess rpm (EA rpm installation patches iptables.mk to fix iptables error while configuring iptables).
+
+6. Default configuration setup for EasyAccess (for manual setup refer step 7).
+   Run /usr/local/Cavium_Networks/CN3XXX-SDK/EA_setup.sh. 
+   This script setup the kernel configuration, embedded-rootfs configuration required for EA.
+   Goto step 9.
+
+7. Configure the kernel for EasyAccess
+
+   a. Steps to apply the kernel configuration with kernel.config file. 
+      
+      cd $CN3XXX-SDK/linux/kernel_2.6
+      mv kernel.config kernel.config.old 
+      cp kernel.config.EA kernel.config
+   
+   b. Steps to apply the kernel configuration manually.
+  
+      Setup the Octeon Development environment.
+      #cd $OCTEON_ROOT; source ./env-setup OCTEON_CN30XX
+      cd $OCTEON_ROOT/linux
+      make clean
+      cd kernel_2.6
+      cp kernel.config linux/.config
+      cd linux
+      make menuconfig      
+
+ ----------------------------------------------------------------------
+    Networking -> Networking options ->
+      [ ] INET: socket monitoring interface (disabled)
+      [*] Network packet filtering (replaces ipchains)  --->  
+      Core Netfilter Configuration  --->   
+        <*> Netfilter Xtables support (required for ip_tables) 
+            <*>   "conntrack" connection tracking match support 
+            <*>   "limit" match support 
+            <*>   "state" match support
+      IP: Netfilter Configuration  ---> 
+        <*> Connection tracking (required for masq/NAT)  
+            [*]   Connection tracking flow accounting 
+            [*]   Connection mark tracking support     
+            [*]   Connection tracking events (EXPERIMENTAL) 
+            <*>   FTP protocol support  
+            <*>   IRC protocol support 
+        <*> IP tables support (required for filtering/masq/NAT)  
+            <*>   IP range match support 
+            <*>   Packet filtering 
+            <*>     REJECT target support 
+            <*>   LOG target support 
+            <*>   ULOG target support (OBSOLETE) 
+            <*>   Full NAT 
+            <*>     MASQUERADE target support 
+            <*>     REDIRECT target support 
+    Device Drivers -> Network Device Support ->
+      <*> PPP (point-to-point protocol) support 
+      [*]   PPP multilink support (EXPERIMENTAL) 
+      [*]   PPP filtering
+      <*>   PPP support for async serial ports
+      <*>   PPP support for sync tty ports 
+      <*>   PPP Deflate compression 
+      <*>   PPP over Ethernet (EXPERIMENTAL)   
+    Device Drivers -> Character Devices ->
+      [*] Non-standard serial port support 
+      <M>   HDLC line discipline support 
+      [ ] Legacy (BSD) PTY support (disabled)
+    Profiling support  ---> 
+      [ ] Profiling support (disabled)
+    Kernel hacking  --->
+      [ ] Kernel debugging (disabled)
+----------------------------------------------------------------------
+
+8. Configure the embedded rootfs for EasyAccess
+
+   a. Steps to apply the root file system configuration with .config file. 
+      
+      cd $CN3XXX-SDK/linux/embedded_rootfs
+      cp EA.config .config
+      cd $CN3XXX-SDK/linux/embedded_rootfs/storage
+      cp busybox.config.EA busybox.config
+   
+   b. Steps to apply the root file system configuration manually.
+  
+      Setup the Octeon Development environment.
+      #cd $OCTEON_ROOT; source ./env-setup OCTEON_CN30XX
+      cd $OCTEON_ROOT/embedded_rootfs
+      make clean
+      make menuconfig      
+ ----------------------------------------------------------------------
+     Toolchain ABI (N32)  --->  
+	( ) N32 (disabled)
+        (X) N64 
+      [*] n_hdlc 
+      [*] kerberos  
+      [*] openldap
+      [*] octcrypto
+      [*]   engine
+      [ ] ipsec-tools (disabled)
+      [*] ntp
+      [*] samba
+      [*] smtpclient
+      [*] pppd
+      [*] syslog
+      [*] logrotate
+     SDK Examples  ---> 
+      [ ] Include SDK Examples (disabld)
+      [*] zip
+      [*] easyaccess	
+----------------------------------------------------------------------
+      
+   c. Steps to apply the busybox configuration manually.
+      Turn off syslogd in busybox configuration.
+
+      cd $OCTEON_ROOT/embedded_rootfs/storage
+      edit busybox.config
+	# CONFIG_SYSLOGD is not set
+	# CONFIG_FEATURE_ROTATE_LOGFILE is not set
+	# CONFIG_FEATURE_REMOTE_LOG is not set
+	# CONFIG_FEATURE_IPC_SYSLOG is not set
+	CONFIG_FEATURE_IPC_SYSLOG_BUFFER_SIZE=0
+	# CONFIG_LOGREAD is not set
+	# CONFIG_FEATURE_LOGREAD_REDUCED_LOCKING is not set
+	# CONFIG_KLOGD is not set
+
+9. Build the target
+     # cd /usr/local/Cavium_Networks/CN3XXX-SDK/linux     
+     # make kernel-deb -j4
+     (Please refer to SDK Documentation on HOWTO boot Linux
+      on Octeon)
+     # cd /usr/local/Cavium_Networks/CN3XXX-SDK/linux/embedded_rootfs
+     # make all ext3
+
+Known Issues:
+-------------
+1. IPv6 is not enabled in EA

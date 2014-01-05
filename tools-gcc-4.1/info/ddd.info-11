@@ -1,0 +1,505 @@
+This is ../../../src/ddd/ddd/ddd.info, produced by makeinfo version 4.3
+from ../../../src/ddd/ddd/ddd.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD: (ddd).                     The Data Display Debugger.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 15 January, 2004, of `Debugging with DDD'
+for DDD Version 3.3.11.
+
+Copyright (C) 2004 Universität des Saarlandes
+Lehrstuhl Softwaretechnik
+Postfach 15 11 50
+66041 Saarbrücken
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd.info,  Node: Concept Index,  Prev: File Index,  Up: Top
+
+Concept Index
+*************
+
+* Menu:
+
+* Aborting execution <1>:                Program Menu.
+* Aborting execution:                    Quitting.
+* Ada:                                   Summary.
+* Aliases, detecting:                    Shared Structures.
+* Animating plots:                       Animating Plots.
+* Arguments, displaying:                 Displaying Local Variables.
+* Arguments, of the debugged program:    Arguments.
+* Arguments, program:                    Starting Program Execution.
+* Array slices:                          Array Slices.
+* Array, artificial:                     Array Slices.
+* Array, plotting:                       Plotting Arrays.
+* Artificial arrays:                     Array Slices.
+* Assertions and breakpoints:            Breakpoint Conditions.
+* Assertions and watchpoints:            Watchpoints.
+* Assignment:                            Assignment.
+* Assistance:                            Help and Assistance.
+* Auto-command:                          Commands with Other Debuggers.
+* Automatic Layout:                      Automatic Layout.
+* Balloon help:                          Getting Help.
+* Bash:                                  Summary.
+* Bash, invoking DDD with:               Choosing an Inferior Debugger.
+* Box library:                           History.
+* Breakpoint:                            Stopping.
+* Breakpoint commands:                   Breakpoint Commands.
+* Breakpoint commands, vs. conditions:   Breakpoint Conditions.
+* Breakpoint conditions:                 Breakpoint Conditions.
+* Breakpoint ignore counts:              Breakpoint Ignore Counts.
+* Breakpoint properties:                 Editing Breakpoint Properties.
+* Breakpoint, copying:                   Moving and Copying Breakpoints.
+* Breakpoint, deleting:                  Deleting Breakpoints.
+* Breakpoint, disabling:                 Disabling Breakpoints.
+* Breakpoint, dragging:                  Moving and Copying Breakpoints.
+* Breakpoint, editing:                   Editing Breakpoint Properties.
+* Breakpoint, enabling:                  Disabling Breakpoints.
+* Breakpoint, hardware-assisted:         Hardware-Assisted Breakpoints.
+* Breakpoint, looking up:                Looking up Breakpoints.
+* Breakpoint, moving:                    Moving and Copying Breakpoints.
+* Breakpoint, setting:                   Setting Breakpoints.
+* Breakpoint, temporary:                 Temporary Breakpoints.
+* Breakpoint, toggling:                  Tool Bar.
+* Breakpoints, editing:                  Editing all Breakpoints.
+* Button editor:                         Defining Buttons.
+* Button tip:                            Getting Help.
+* Button tip, turning off:               Button tips.
+* Buttons, defining:                     Defining Buttons.
+* C:                                     Summary.
+* C++:                                   Summary.
+* Call stack:                            Stack.
+* Chill:                                 Summary.
+* Class, opening:                        Opening Programs.
+* Clipboard:                             Edit Menu.
+* Clipboard, putting displays:           Deleting Displays.
+* Cluster:                               Clustering.
+* Cluster, and plotting:                 Scalars and Composites.
+* Clustered display, creating:           Creating Single Displays.
+* Command completion:                    Command Completion.
+* Command history:                       Command History.
+* Command tool:                          Windows.
+* Command, argument:                     GDB Argument Commands.
+* Command, auto:                         Commands with Other Debuggers.
+* Command, breakpoint:                   Breakpoint Commands.
+* Command, defining:                     Defining Commands.
+* Command, defining in GDB:              GDB Simple Commands.
+* Command, defining with other debuggers: Commands with Other Debuggers.
+* Command, recording:                    GDB Simple Commands.
+* Command, repeating:                    Command History.
+* Command, searching:                    Command History.
+* Command, user-defined:                 Defining Commands.
+* Command-line debugger:                 Summary.
+* Compact Layout:                        Automatic Layout.
+* Completion of commands:                Command Completion.
+* Completion of quoted strings:          Command Completion.
+* Conditions on breakpoints:             Breakpoint Conditions.
+* Context-sensitive help:                Getting Help.
+* Continue, at different address:        Continuing Somewhere Else.
+* Continue, one line:                    Resuming Execution.
+* Continue, to location:                 Resuming Execution.
+* Continue, to next line:                Resuming Execution.
+* Continue, until function returns:      Resuming Execution.
+* Continue, until greater line is reached: Resuming Execution.
+* Continuing execution:                  Resuming Execution.
+* Continuing process execution:          Attaching to a Process.
+* Contour lines, in plots:               Plot Appearance.
+* Contributors:                          Contributors.
+* Copying displays:                      Deleting Displays.
+* Core dump, opening:                    Opening Core Dumps.
+* Core file, in sessions:                Saving Sessions.
+* Cutting displays:                      Deleting Displays.
+* Data Theme:                            Using Data Themes.
+* Data Window:                           Displaying Values.
+* Data window:                           Windows.
+* DBX:                                   Summary.
+* DBX, invoking DDD with:                Choosing an Inferior Debugger.
+* Debugger console:                      Windows.
+* Debugger, on remote host:              Remote Debugger.
+* Debugging DDD:                         Debugging DDD.
+* Debugging flags:                       Patching.
+* Debugging optimized code:              Compiling for Debugging.
+* Default session:                       Resuming Sessions.
+* Deferred display:                      Creating Single Displays.
+* Deferred display, in sessions:         Saving Sessions.
+* Deleting displays <1>:                 Deleting Displays.
+* Deleting displays:                     Tool Bar.
+* Deleting displays, undoing:            Deleting Displays.
+* Dependent display:                     Creating Single Displays.
+* Dereferencing:                         Dereferencing Pointers.
+* Detail toggling with Show/Hide:        Tool Bar.
+* Detail, hiding:                        Showing and Hiding Details.
+* Detail, showing:                       Showing and Hiding Details.
+* Directory, of the debugged program:    Working Directory.
+* Disabled displays:                     Showing and Hiding Details.
+* Disabling displays, undoing:           Showing and Hiding Details.
+* Display:                               Displaying Values.
+* Display Editor:                        Editing all Displays.
+* Display name:                          Selecting Displays.
+* Display position:                      Creating Single Displays.
+* Display selection:                     Selecting Displays.
+* Display title:                         Selecting Displays.
+* Display value:                         Selecting Displays.
+* Display, aligning on grid:             Aligning Displays.
+* Display, clustered:                    Creating Single Displays.
+* Display, clustering:                   Clustering.
+* Display, copying:                      Deleting Displays.
+* Display, creating <1>:                 Creating Single Displays.
+* Display, creating:                     Tool Bar.
+* Display, customizing:                  Customizing Displays.
+* Display, cutting:                      Deleting Displays.
+* Display, deferred:                     Creating Single Displays.
+* Display, deleting <1>:                 Deleting Displays.
+* Display, deleting:                     Tool Bar.
+* Display, dependent <1>:                Dependent Values.
+* Display, dependent:                    Creating Single Displays.
+* Display, disabled:                     Showing and Hiding Details.
+* Display, frozen:                       Stopping X Programs.
+* Display, hiding details:               Showing and Hiding Details.
+* Display, locked:                       Stopping X Programs.
+* Display, moving:                       Moving Displays.
+* Display, pasting:                      Deleting Displays.
+* Display, placement:                    Placement.
+* Display, plotting the history:         Plotting Histories.
+* Display, refreshing:                   Refreshing the Data Window.
+* Display, rotating <1>:                 Rotating Displays.
+* Display, rotating:                     Tool Bar.
+* Display, selecting:                    Selecting Displays.
+* Display, setting <1>:                  Tool Bar.
+* Display, setting:                      Remote Host.
+* Display, setting when invoking DDD:    X Options.
+* Display, showing details:              Showing and Hiding Details.
+* Display, suppressing:                  Deleting Displays.
+* Display, toggling detail:              Tool Bar.
+* Display, updating:                     Refreshing the Data Window.
+* Displaying values <1>:                 Displaying Values.
+* Displaying values:                     Examining Data.
+* Displaying values with Display:        Tool Bar.
+* Dumping values:                        Examining Data.
+* Edge:                                  Dependent Values.
+* Edge hint <1>:                         Automatic Layout.
+* Edge hint:                             Shared Structures.
+* Editing source code:                   Editing Source Code.
+* Emacs, integrating DDD:                Integrating DDD.
+* Emergency repairs:                     Patching.
+* Environment, of the debugged program:  Environment.
+* EPROM code debugging:                  Hardware-Assisted Breakpoints.
+* Examining memory contents:             Examining Memory.
+* Execution position, dragging:          Continuing Somewhere Else.
+* Execution window <1>:                  Using the Execution Window.
+* Execution window:                      Windows.
+* Execution, "undoing":                  Undoing Program Execution.
+* Execution, aborting <1>:               Program Menu.
+* Execution, aborting:                   Quitting.
+* Execution, at different address:       Continuing Somewhere Else.
+* Execution, continuing:                 Resuming Execution.
+* Execution, interrupting:               Quitting.
+* Execution, interrupting automatically: Debugger Communication.
+* Execution, one line:                   Resuming Execution.
+* Execution, to location:                Resuming Execution.
+* Execution, to next line:               Resuming Execution.
+* Execution, until function returns:     Resuming Execution.
+* Execution, until greater line is reached: Resuming Execution.
+* Exiting:                               Quitting.
+* Extending display selection:           Selecting Displays.
+* FIG file, printing as:                 Printing the Graph.
+* Files, opening:                        Opening Files.
+* Finding items:                         Tool Bar.
+* Fonts:                                 Customizing Fonts.
+* FORTRAN:                               Summary.
+* Frame <1>:                             Frames.
+* Frame:                                 Stack.
+* Frame changes, undoing:                Selecting a frame.
+* Frame number:                          Frames.
+* Frame pointer:                         Frames.
+* Frame, selecting:                      Selecting a frame.
+* GCC:                                   Compiling for Debugging.
+* GDB:                                   Summary.
+* GDB, invoking DDD with:                Choosing an Inferior Debugger.
+* Glyph:                                 Customizing Glyphs.
+* GPL:                                   Free Software.
+* Grabbed pointer:                       Stopping X Programs.
+* Graph, printing:                       Printing the Graph.
+* Graph, rotating:                       Rotating the Graph.
+* Grid, aligning displays:               Aligning Displays.
+* Grid, in plots:                        Plot Appearance.
+* Help <1>:                              Help and Assistance.
+* Help:                                  Getting Help.
+* Help, in the status line:              Getting Help.
+* Help, on buttons:                      Getting Help.
+* Help, on commands:                     Getting Help.
+* Help, on items:                        Getting Help.
+* Help, when stuck:                      Getting Help.
+* Hiding display details:                Showing and Hiding Details.
+* Historic mode:                         Undoing Program Execution.
+* History:                               History.
+* History, plotting:                     Plotting Histories.
+* Host, remote:                          Remote Host.
+* HTML manual:                           About this Manual.
+* IBMGL file, printing as:               Printing the Graph.
+* Icon, invoking DDD as:                 X Options.
+* Ignore count:                          Breakpoint Ignore Counts.
+* Indent, source code:                   Customizing Source Appearance.
+* Inferior debugger:                     Summary.
+* Info manual:                           About this Manual.
+* Initial frame:                         Frames.
+* Innermost frame:                       Frames.
+* Input of the debugged program:         Input/Output.
+* Instruction, stepping:                 Machine Code Execution.
+* Integrating DDD:                       Integrating DDD.
+* Interrupting DDD:                      Quitting.
+* Interrupting execution:                Quitting.
+* Interrupting execution, automatically: Debugger Communication.
+* Invoking:                              Invoking.
+* Java:                                  Summary.
+* JDB:                                   Summary.
+* JDB, invoking DDD with:                Choosing an Inferior Debugger.
+* Jump to different address:             Continuing Somewhere Else.
+* Killing DDD:                           Quitting.
+* Killing the debugged program:          Killing the Program.
+* Ladebug:                               Summary.
+* Ladebug, invoking DDD with:            Choosing an Inferior Debugger.
+* License <1>:                           License.
+* License:                               Free Software.
+* License, Documentation:                Documentation License.
+* License, showing on standard output:   Options.
+* Line numbers:                          Customizing Source Appearance.
+* Local variables, displaying:           Displaying Local Variables.
+* Logging:                               Logging.
+* Logging, disabling:                    Disabling Logging.
+* Looking up breakpoints:                Looking up Breakpoints.
+* Looking up items:                      Tool Bar.
+* Lookups, redoing:                      Looking up Previous Locations.
+* Lookups, undoing:                      Looking up Previous Locations.
+* Lütkehaus, Dorothea <1>:               History.
+* Lütkehaus, Dorothea:                   Contributors.
+* Machine code window:                   Windows.
+* Machine code, examining:               Machine Code.
+* Machine code, executing:               Machine Code Execution.
+* Mailing list:                          Help and Assistance.
+* Make, invoking:                        Recompiling.
+* Manual, showing on standard output:    Options.
+* Memory, dumping contents:              Examining Data.
+* Memory, examining:                     Examining Memory.
+* Modula-2:                              Summary.
+* Modula-3:                              Summary.
+* Mouse pointer, frozen:                 Stopping X Programs.
+* Name, display:                         Selecting Displays.
+* News, showing on standard output:      Options.
+* NORA:                                  History.
+* Optimized code, debugging:             Compiling for Debugging.
+* Option:                                Invoking.
+* Outermost frame:                       Frames.
+* Output of the debugged program:        Input/Output.
+* Pascal:                                Summary.
+* Pasting displays:                      Deleting Displays.
+* Patching:                              Patching.
+* PDF manual:                            About this Manual.
+* Perl:                                  Summary.
+* Perl, invoking DDD with:               Choosing an Inferior Debugger.
+* PIC file, printing as:                 Printing the Graph.
+* Pipe:                                  Input/Output.
+* Placement:                             Placement.
+* Plot appearance:                       Plot Appearance.
+* Plot, animating:                       Animating Plots.
+* Plot, exporting:                       Exporting Plot Data.
+* Plot, printing:                        Printing Plots.
+* Plot, scrolling:                       Plot Appearance.
+* Plotting style:                        Plot Appearance.
+* Plotting values <1>:                   Plotting Values.
+* Plotting values <2>:                   Examining Data.
+* Plotting values:                       Tool Bar.
+* Pointers, dereferencing:               Dereferencing Pointers.
+* Position, of display:                  Creating Single Displays.
+* PostScript manual:                     About this Manual.
+* PostScript, printing as:               Printing the Graph.
+* Print, output formats:                 Printing Values.
+* Printing plots:                        Printing Plots.
+* Printing the Graph:                    Printing the Graph.
+* Printing values <1>:                   Printing Values.
+* Printing values:                       Examining Data.
+* Printing values with Print:            Tool Bar.
+* Process, attaching:                    Attaching to a Process.
+* Program arguments:                     Starting Program Execution.
+* Program counter, displaying:           Machine Code Execution.
+* Program output, confusing:             Input/Output.
+* Program, on remote host:               Remote Program.
+* Program, opening:                      Opening Programs.
+* Program, patching:                     Patching.
+* PSG:                                   History.
+* PYDB:                                  Summary.
+* PYDB, invoking DDD with:               Choosing an Inferior Debugger.
+* Python:                                Summary.
+* Quitting:                              Quitting.
+* Quotes in commands:                    Command Completion.
+* Readline:                              TTY mode.
+* Recompiling:                           Recompiling.
+* Recording commands:                    GDB Simple Commands.
+* Redirecting I/O of the debugged program: Input/Output.
+* Redirecting I/O to the execution window: Using the Execution Window.
+* Redirection:                           Input/Output.
+* Redirection, to execution window <1>:  Using the Execution Window.
+* Redirection, to execution window:      Debugger Communication.
+* Redoing commands:                      Undo and Redo.
+* Redoing lookups:                       Looking up Previous Locations.
+* Refreshing displayed values:           Refreshing the Data Window.
+* Registers, examining:                  Registers.
+* Reloading source code:                 Editing Source Code.
+* Remote debugger:                       Remote Debugger.
+* Remote host:                           Remote Host.
+* Remote program:                        Remote Program.
+* Resource, setting when invoking DDD:   X Options.
+* Resources:                             Resources.
+* ROM code debugging:                    Hardware-Assisted Breakpoints.
+* Rotating displays with Rotate:         Tool Bar.
+* Rotating the graph:                    Rotating the Graph.
+* Running the debugged program:          Running.
+* Scalars, plotting:                     Scalars and Composites.
+* Scales, in plots:                      Plot Appearance.
+* Scrolling:                             Scrolling Data.
+* Search, using Find >>:                 Tool Bar.
+* Searching commands:                    Command History.
+* Selecting frames:                      Selecting a frame.
+* Selecting multiple displays:           Selecting Displays.
+* Selecting single displays:             Selecting Displays.
+* Session:                               Sessions.
+* Session, active:                       Saving Sessions.
+* Session, default:                      Resuming Sessions.
+* Session, deleting:                     Deleting Sessions.
+* Session, opening:                      Resuming Sessions.
+* Session, resuming:                     Resuming Sessions.
+* Session, saving:                       Saving Sessions.
+* Session, setting when invoking DDD:    Options.
+* Setting variables:                     Assignment.
+* Setting variables with Set:            Tool Bar.
+* Shared structures, detecting:          Shared Structures.
+* Showing display details:               Showing and Hiding Details.
+* SIGABRT signal <1>:                    Program Menu.
+* SIGABRT signal:                        Quitting.
+* SIGALRM signal:                        Signals.
+* SIGINT signal <1>:                     Signals.
+* SIGINT signal:                         Interrupting.
+* Signal settings, editing:              Signals.
+* Signal settings, saving:               Signals.
+* Signal, fatal:                         Signals.
+* Signal, sending to DDD:                Quitting.
+* Signals:                               Signals.
+* SIGSEGV signal:                        Signals.
+* SIGTRAP signal:                        Signals.
+* SIGUSR1 signal <1>:                    Debugging DDD.
+* SIGUSR1 signal:                        Maintenance Menu.
+* Source code, editing:                  Editing Source Code.
+* Source code, recompiling:              Recompiling.
+* Source code, reloading:                Editing Source Code.
+* Source directory:                      Source Path.
+* Source file, opening:                  Opening Source Files.
+* Source file, typing into:              Typing in the Source Window.
+* Source path:                           Source Path.
+* Source path, specifying:               Source Path.
+* Source window:                         Windows.
+* Source, accessing:                     Source Path.
+* Stack Frame:                           Frames.
+* Stack frame:                           Stack.
+* Stack, moving within:                  Selecting a frame.
+* Status display:                        Displaying Program Status.
+* Status line:                           Getting Help.
+* Status line, location:                 Window Layout.
+* Suppressing values:                    Deleting Displays.
+* Tab width:                             Customizing Source Appearance.
+* TeX file, printing as:                 Printing the Graph.
+* TeXinfo manual:                        About this Manual.
+* Theme, Data:                           Using Data Themes.
+* Theme, editing:                        Editing Themes.
+* Theme, for suppressing values:         Deleting Displays.
+* Threads:                               Threads.
+* Tic Tac Toe game:                      Maintenance Menu.
+* Tip of the day:                        Getting Help.
+* Tip of the day, turning off:           Tip of the day.
+* Tip, on buttons:                       Getting Help.
+* Tip, value <1>:                        Value Tips.
+* Tip, value:                            Examining Data.
+* Title, display:                        Selecting Displays.
+* Tool Bar, location:                    Window Layout.
+* Tool tip:                              Getting Help.
+* Tornado:                               WindRiver GDB.
+* TTY interface:                         TTY mode.
+* TTY mode, setting when invoking DDD:   Options.
+* TTY settings:                          Input/Output.
+* Undo deleting displays:                Deleting Displays.
+* Undo disabling displays:               Showing and Hiding Details.
+* Undoing commands:                      Undo and Redo.
+* Undoing frame changes:                 Selecting a frame.
+* Undoing lookups:                       Looking up Previous Locations.
+* Undoing program execution:             Undoing Program Execution.
+* Undoing signal handling:               Signals.
+* Updating displayed values:             Refreshing the Data Window.
+* User-defined command:                  Defining Commands.
+* Value tip <1>:                         Value Tips.
+* Value tip:                             Examining Data.
+* Value, display:                        Selecting Displays.
+* Value, displaying <1>:                 Displaying Values.
+* Value, displaying:                     Examining Data.
+* Value, dumping:                        Examining Data.
+* Value, plotting:                       Examining Data.
+* Value, plotting the history:           Plotting Histories.
+* Value, printing <1>:                   Printing Values.
+* Value, printing:                       Examining Data.
+* Values, displaying with Display:       Tool Bar.
+* Values, plotting:                      Plotting Values.
+* Values, plotting with Plot:            Tool Bar.
+* Values, printing with Print:           Tool Bar.
+* Values, suppressing:                   Deleting Displays.
+* Variables, setting:                    Assignment.
+* Variables, setting with Set:           Tool Bar.
+* virtual machine:                       JDB Options.
+* VM:                                    JDB Options.
+* VSL:                                   History.
+* Watchpoint <1>:                        Watchpoints.
+* Watchpoint:                            Stopping.
+* Watchpoint properties:                 Editing Watchpoint Properties.
+* Watchpoint, deleting:                  Deleting Watchpoints.
+* Watchpoint, editing:                   Editing Watchpoint Properties.
+* Watchpoint, setting:                   Setting Watchpoints.
+* Watchpoint, toggling:                  Tool Bar.
+* Watchpoints, editing:                  Editing all Watchpoints.
+* WDB:                                   WDB.
+* WDB, invoking DDD with <1>:            WDB.
+* WDB, invoking DDD with:                Choosing an Inferior Debugger.
+* WildeBeest:                            WDB.
+* WindRiver GDB:                         WindRiver GDB.
+* Working directory, of the debugged program: Working Directory.
+* X programs, stopping:                  Stopping X Programs.
+* X server, frozen:                      Stopping X Programs.
+* X server, locked:                      Stopping X Programs.
+* X session:                             Resuming Sessions.
+* X Warnings, suppressing:               X Warnings.
+* XDB:                                   Summary.
+* XDB, invoking DDD with:                Choosing an Inferior Debugger.
+* XEmacs, integrating DDD:               Integrating DDD.
+* XXGDB, integrating DDD:                Integrating DDD.
+* Zeller, Andreas <1>:                   History.
+* Zeller, Andreas:                       Contributors.
+
+

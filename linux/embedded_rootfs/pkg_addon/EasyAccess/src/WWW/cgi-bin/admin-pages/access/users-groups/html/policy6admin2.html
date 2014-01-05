@@ -1,0 +1,116 @@
+// End -->
+</script>
+<script language="JavaScript">	
+</script></head>
+<body class="bodyback" leftmargin=0 topmargin=0 onLoad="displayPolicyPort('RDP5');" marginwidth=0 marginheight=0>
+<form name="addpolicy" action="/cgi-bin/addpolicy" method="get">
+<center>  
+<table border=0 class="centertable"  cellpadding=0 cellspacing=0  style="left:0px;">
+<tbody>
+<tr>
+<td class="bookmarktop" cellspacing=0 colspan=4 width=400 height=21>
+<img src="/images/shim.gif" border=0 height=20 width=398></td>
+</tr>
+<tr><td width=1 height=295 class=darkback><img src="/images/shim.gif" width=1 height=295></td>  
+<td class="mainback" valign="top" width=398 height=245>		    
+<table border=0 class="mainback" cellpadding=0 cellspacing=0 valign="top">
+<tbody><tr><td width=15><img src="/images/shim.gif" border=0 width=15 height=1></td>
+<td valign="top"><img src="/images/shim.gif" height=18><br>
+<table border=0 cellpadding=0 cellspacing=0 valign="top">
+<tbody><tr><td width=368 height=21 class="titlerow" valign="center"><img src="/images/shim.gif" border=0 height=3 width=1><BR>
+&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title(baddpolicy); </script></td></tr></tbody></table>
+<img src="/images/shim.gif" height=18><br>
+<table>
+<tbody>
+<tr cellpadding=0 cellspacing=0> 
+<td cellpadding=0 cellspacing=0 align="right" width=155 class="toolbar" height=30>
+<font class="toolbar" >Apply Policy To:</font></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=200 height=29> 
+<SELECT name="destinationtype"  style="width: 175px; height: 20px;" onChange="checkMenu(this.options[this.selectedIndex].value)">
+<OPTION value="policyresource">Network Resource</OPTION>
+<OPTION value="policyadmin" >IP Address </OPTION>
+<OPTION value="policyrange" >IP Address Range</OPTION>
+<OPTION value="policyall">All Addresses</OPTION>
+<OPTION value="policy6admin" SELECTED>IPV6 Address </OPTION>
+<OPTION value="policy6range" >IPV6 Address Range</OPTION>
+<OPTION value="policy6all">All IPV6 Addresses</OPTION>
+&nbsp;</SELECT>
+</td>
+</tr>
+<tr cellpadding=0 cellspacing=0> 
+<td cellpadding=0 cellspacing=0 align="right" width=155 class="toolbar" height=30>
+<font class="toolbar" id="f1n">Policy Name:</font></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=200 height=29> 
+<input type="text" name="policyname" style="width:174px" onchange="notnull(this, 'f1n', true);" id="f1">	    
+</td>
+</tr>
+<tr cellpadding=0 cellspacing=0> 
+<td cellpadding=0 cellspacing=0 align="right" width=155 class="toolbar" height=30>
+<font class="toolbar" id="f2n">IPV6 Address:</font></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=200 height=29> 
+<input type="text" name="policy6ip" style="width:174px" onchange="validateipv6(this, 'f2n', true);" id="f2">	    
+</td>
+</tr>
+<tr cellpadding=0 cellspacing=0> 
+<td cellpadding=0 cellspacing=0 align="right" width=155 class="toolbar" height=30>
+<font class="toolbar">Service:</font></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=200 height=29> 
+<select name="service" size=1 style="width:175px" onChange="displayPolicyPort(this.options[this.selectedIndex].value);">
+<option value="RDP5">Terminal Services (RDP5)</option>
+<option value="VNC">Virtual Network Computing </option>
+<option value="FTP">File Transer Protocol </option>
+<option value="CIFS">CIFS </option>
+<option value="Telnet">Telnet </option>
+<option value="SSH">Secure Shell  (SSH)</option>
+<option value="HTTP">Web (HTTP)</option>
+<option value="HTTPS">Secure Web (HTTPS) </option>
+<option value="VIRTUAL-PASSAGE">Virtual Passage </option>
+<option value="VIRTUAL-TRANSPORT">Virtual Transport </option>
+<option value="All">All Services </option>
+</select>
+</td>
+</tr>
+<tr cellpadding=0 cellspacing=0>
+<td cellpadding=0 cellspacing=0 align="right" width=155 class="toolbar" height=30>
+<font class="toolbar" id="f3n">Port Range/Port Number:</font></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=200 height=29>
+<input type="text" name="policyportnumber" style="width:174px" onchange="notnull(this, 'f3n', true);" id="f3">
+<font class="toolbar" id="f5n">All Ports</font>
+</td>
+</tr>
+<tr cellpadding=0 cellspacing=0> 
+<td cellpadding=0 cellspacing=0 align="right" width=155 class="toolbar" height=30>
+<font class="toolbar">Status:</font></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=200 height=29> 
+<select name="status" size=1 style="width:175px">
+<option value="Permit">PERMIT </option>
+<option value="Deny">DENY &nbsp;&nbsp;&nbsp;</option>
+</select>
+</td>
+</tr>
+<tr>
+<td colspan=3 align="right"><img src="/images/shim.gif" height=12 width=1 border=0><br>
+<table border=0 cellpadding=0 cellspacing=0 valign="top">
+<tbody><tr><td width=240>&nbsp;</td>
+<td width=73 height=22  valign="top" align="center">
+<INPUT type="hidden"  name="Set" value=true>
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td width=74 class=bbcenter align=center onClick="JavaScript:validateOnSubmit();"   onMouseOver="JavaScript:this.className='bbcenteron';window.status='';" onMouseOut="JavaScript:this.className='bbcenter';">
+<SCRIPT type="text/JavaScript" language="JavaScript">bbutton(bsubmit); </script> 
+</a></td>
+</tr></table>
+</td>
+<td width=24>&nbsp;</td></tr></tbody></table></td></tr></tbody></table>
+</td>
+<td width=14><img src="/images/shim.gif" border=0 width=14 height=1></td></tr></tbody></table></td> <td width=1 height=295 class="darkback"><img src="/images/shim.gif" width=1 height=295></td>   </tr>
+<tr>
+<td class="bookmarkbottom" colspan=4 width=400 height=17>
+<img src="/images/shim.gif" border=0 width=399 height=16></td>
+</tr>
+</tbody></table>

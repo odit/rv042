@@ -1,0 +1,246 @@
+--- ./configure.orig	2006-03-30 10:23:13.000000000 +0530
++++ ./configure	2006-12-12 15:55:00.000000000 +0530
+@@ -19333,177 +19333,6 @@
+ rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+ 
+ #
+-#
+-#
+-case "$host_os" in
+-    *linux*)
+-       # glibc <= 2.3.2 has a broken getgrouplist
+-       if test "$cross_compiling" = yes; then
+-  { { echo "$as_me:$LINENO: error: cannot run test program while cross compiling
+-See \`config.log' for more details." >&5
+-echo "$as_me: error: cannot run test program while cross compiling
+-See \`config.log' for more details." >&2;}
+-   { (exit 1); exit 1; }; }
+-else
+-  cat >conftest.$ac_ext <<_ACEOF
+-/* confdefs.h.  */
+-_ACEOF
+-cat confdefs.h >>conftest.$ac_ext
+-cat >>conftest.$ac_ext <<_ACEOF
+-/* end confdefs.h.  */
+-
+-#include <unistd.h>
+-#include <sys/utsname.h>
+-main() {
+-       /* glibc up to 2.3 has a broken getgrouplist */
+-#if defined(__GLIBC__) && defined(__GLIBC_MINOR__)
+-       int libc_major = __GLIBC__;
+-       int libc_minor = __GLIBC_MINOR__;
+-
+-       if (libc_major < 2)
+-              exit(1);
+-       if ((libc_major == 2) && (libc_minor <= 3))
+-              exit(1);
+-#endif
+-       exit(0);
+-}
+-
+-_ACEOF
+-rm -f conftest$ac_exeext
+-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+-  (eval $ac_link) 2>&5
+-  ac_status=$?
+-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); } && { ac_try='./conftest$ac_exeext'
+-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+-  (eval $ac_try) 2>&5
+-  ac_status=$?
+-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); }; }; then
+-  linux_getgrouplist_ok=yes
+-else
+-  echo "$as_me: program exited with status $ac_status" >&5
+-echo "$as_me: failed program was:" >&5
+-sed 's/^/| /' conftest.$ac_ext >&5
+-
+-( exit $ac_status )
+-linux_getgrouplist_ok=no
+-fi
+-rm -f core *.core gmon.out bb.out conftest$ac_exeext conftest.$ac_objext conftest.$ac_ext
+-fi
+-       if test x"$linux_getgrouplist_ok" = x"yes"; then
+-
+-cat >>confdefs.h <<\_ACEOF
+-#define HAVE_GETGROUPLIST 1
+-_ACEOF
+-
+-       fi
+-       ;;
+-    *)
+-
+-for ac_func in getgrouplist
+-do
+-as_ac_var=`echo "ac_cv_func_$ac_func" | $as_tr_sh`
+-echo "$as_me:$LINENO: checking for $ac_func" >&5
+-echo $ECHO_N "checking for $ac_func... $ECHO_C" >&6
+-if eval "test \"\${$as_ac_var+set}\" = set"; then
+-  echo $ECHO_N "(cached) $ECHO_C" >&6
+-else
+-  cat >conftest.$ac_ext <<_ACEOF
+-/* confdefs.h.  */
+-_ACEOF
+-cat confdefs.h >>conftest.$ac_ext
+-cat >>conftest.$ac_ext <<_ACEOF
+-/* end confdefs.h.  */
+-/* Define $ac_func to an innocuous variant, in case <limits.h> declares $ac_func.
+-   For example, HP-UX 11i <limits.h> declares gettimeofday.  */
+-#define $ac_func innocuous_$ac_func
+-
+-/* System header to define __stub macros and hopefully few prototypes,
+-    which can conflict with char $ac_func (); below.
+-    Prefer <limits.h> to <assert.h> if __STDC__ is defined, since
+-    <limits.h> exists even on freestanding compilers.  */
+-
+-#ifdef __STDC__
+-# include <limits.h>
+-#else
+-# include <assert.h>
+-#endif
+-
+-#undef $ac_func
+-
+-/* Override any gcc2 internal prototype to avoid an error.  */
+-#ifdef __cplusplus
+-extern "C"
+-{
+-#endif
+-/* We use char because int might match the return type of a gcc2
+-   builtin and then its argument prototype would still apply.  */
+-char $ac_func ();
+-/* The GNU C library defines this for functions which it implements
+-    to always fail with ENOSYS.  Some functions are actually named
+-    something starting with __ and the normal name is an alias.  */
+-#if defined (__stub_$ac_func) || defined (__stub___$ac_func)
+-choke me
+-#else
+-char (*f) () = $ac_func;
+-#endif
+-#ifdef __cplusplus
+-}
+-#endif
+-
+-int
+-main ()
+-{
+-return f != $ac_func;
+-  ;
+-  return 0;
+-}
+-_ACEOF
+-rm -f conftest.$ac_objext conftest$ac_exeext
+-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+-  (eval $ac_link) 2>conftest.er1
+-  ac_status=$?
+-  grep -v '^ *+' conftest.er1 >conftest.err
+-  rm -f conftest.er1
+-  cat conftest.err >&5
+-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); } &&
+-	 { ac_try='test -z "$ac_c_werror_flag"
+-			 || test ! -s conftest.err'
+-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+-  (eval $ac_try) 2>&5
+-  ac_status=$?
+-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); }; } &&
+-	 { ac_try='test -s conftest$ac_exeext'
+-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+-  (eval $ac_try) 2>&5
+-  ac_status=$?
+-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+-  (exit $ac_status); }; }; then
+-  eval "$as_ac_var=yes"
+-else
+-  echo "$as_me: failed program was:" >&5
+-sed 's/^/| /' conftest.$ac_ext >&5
+-
+-eval "$as_ac_var=no"
+-fi
+-rm -f conftest.err conftest.$ac_objext \
+-      conftest$ac_exeext conftest.$ac_ext
+-fi
+-echo "$as_me:$LINENO: result: `eval echo '${'$as_ac_var'}'`" >&5
+-echo "${ECHO_T}`eval echo '${'$as_ac_var'}'`" >&6
+-if test `eval echo '${'$as_ac_var'}'` = yes; then
+-  cat >>confdefs.h <<_ACEOF
+-#define `echo "HAVE_$ac_func" | $as_tr_cpp` 1
+-_ACEOF
+-
+-fi
+-done
+-
+-       ;;
+-esac
+ 
+ #
+ # stat64 family may need <sys/stat.h> on some systems, notably ReliantUNIX
+
+--- ./libsmb/libsmbclient.c	2006-01-25 05:16:35.000000000 +0530
++++ ../samba-3.0.22_EA/source/libsmb/libsmbclient.c	2006-12-08 16:58:50.000000000 +0530
+@@ -587,7 +587,7 @@
+  * info we need, unless the username and password were passed in.
+  */
+ 
+-static SMBCSRV *
++SMBCSRV *
+ smbc_server(SMBCCTX *context,
+             BOOL connect_if_not_found,
+             const char *server,
+@@ -1028,7 +1028,7 @@
+ 	/* Hmmm, the test for a directory is suspect here ... FIXME */
+ 
+ 	if (strlen(path) > 0 && path[strlen(path) - 1] == '\\') {
+-    
++
+ 		fd = -1;
+ 
+ 	}
+@@ -1038,6 +1038,7 @@
+ 
+ 		if (!file) {
+ 
++
+ 			errno = ENOMEM;
+ 			return NULL;
+ 
+@@ -1061,7 +1062,6 @@
+ 		}
+ 		
+ 		if ((fd = cli_open(targetcli, targetpath, flags, DENY_NONE)) < 0) {
+-
+ 			/* Handle the error ... */
+ 
+ 			SAFE_FREE(file);
+@@ -1117,10 +1117,12 @@
+ 	/* Check if opendir needed ... */
+ 
+ 	if (fd == -1) {
++
+ 		int eno = 0;
+ 
+ 		eno = smbc_errno(context, &srv->cli);
+ 		file = context->opendir(context, fname);
++
+ 		if (!file) errno = eno;
+ 		return file;
+ 
+@@ -3174,7 +3176,6 @@
+                           server, share, workgroup, user, password);
+ 
+ 	if (!srv) {
+-
+ 		return -1;  /* errno set by smbc_server */
+ 
+ 	}
+@@ -3193,7 +3194,6 @@
+ 		return -1;
+ 
+ 	} 
+-
+ 	return 0;
+ 
+ }

@@ -1,0 +1,249 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""XTSAC.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,6,1,1
+ PRODUCTVERSION 1,6,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "XTSAC ActiveX Control Module\0"
+            VALUE "FileVersion", "1, 6, 1, 1\0"
+            VALUE "InternalName", "XTSAC\0"
+            VALUE "LegalCopyright", "Copyright (C) 2004\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OLESelfRegister", "\0"
+            VALUE "OriginalFilename", "XTSAC.OCX\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "XTSAC ActiveX Control Module\0"
+            VALUE "ProductVersion", "1, 6, 1, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_XTSAC               BITMAP  DISCARDABLE     "XTSACCtl.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROPPAGE_XTSAC DIALOG DISCARDABLE  0, 0, 250, 62
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "TODO: Place controls to manipulate properties of XTSAC Control on this dialog.",
+                    IDC_STATIC,7,25,229,16
+END
+
+IDD_TS_LOGIN DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CLIPCHILDREN | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Secure Remote Desktop Client"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+IDD_PROXY_AUTH_DLG DIALOG DISCARDABLE  0, 0, 179, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Proxy Authentication"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_USERNAME,65,27,106,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSWD,65,47,106,12,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,25,68,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,104,68,50,14
+    LTEXT           "User Name",IDC_STATIC,13,29,52,11
+    LTEXT           "Password",IDC_STATIC,13,50,52,11
+    LTEXT           "Proxy Server : ",IDC_STATIC,13,9,45,11
+    LTEXT           "HTTP - 10.0.0.234",IDC_PROXYTYPE,65,9,107,13
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PROPPAGE_XTSAC, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 243
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_TS_LOGIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_PROXY_AUTH_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 172
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 83
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_XTSAC               "XTSAC Control"
+    IDS_XTSAC_PPG           "XTSAC Property Page"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_XTSAC_PPG_CAPTION   "General"
+    IDS_SVR_ABSENT          """The specified remote computer could not be found. Verify that you have typed the correct computer name or IP address, and then try connecting again."""
+    IDS_LOW_MEM             """The local computer is low on memory. Close some programs, and then connect to the remote computer again."""
+    IDS_TIMEOUT             """The remote connection has timed out. Please try connecting to the remote computer again."""
+    IDS_NO_RESPONSE         """The client could not connect to the remote computer. Remote connections might not be enabled or the computer might be too busy to accept new connections.It is also possible that network problems are preventing your connection.Please try connecting again later. If the problem continues to occur, contact your administrator."""
+    IDS_NW_ERR              """The connection was ended because of a network error. Please try connecting to the remote computer again."""
+    IDS_SECURITY_ERR        """Because of a security error, the client could not connect to the remote computer. Verify that you are logged on to the network, and then try connecting again."""
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_INT_LIC_ERR         """The remote session was disconnected because there was an internal error in the remote computer's licensing protocol."""
+    IDS_NO_LIC_SVR          """The remote session was disconnected because there are no Terminal Server License Servers available to provide a license.Please contact the server administrator."""
+    IDS_NO_LIC              """The remote session was disconnected because there are no Terminal Server client access licenses available for this computer.Please contact the server administrator."""
+    IDS_INVALID_LIC         """The remote session was disconnected because the remote computer received an invalid licensing message from this computer."""
+    IDS_MOD_LIC_ERR         """The remote session was disconnected because the Terminal Server client access license stored on this computer has been modified."""
+    IDS_INVALID_LIC_STORE   """The remote session was disconnected because the Terminal Server client access license stored on this computer is in an invalid format."""
+    IDS_LIC_NW_ERR          """The remote session was disconnected because there were network problems during the licensing protocol.Please try connecting to the remote computer again."""
+    IDS_PREMATURE_LIC       """The remote session was disconnected because the client prematurely ended the licensing protocol."""
+    IDS_LIC_ENC_ERR         """The remote session was disconnected because a licensing message was incorrectly encrypted."""
+    IDS_LIC_RENEW_ERR       """The remote session was disconnected because the local computer's client access license could not be upgraded or renewed.Please contact the server administrator."""
+    IDS_NO_LIC_ACC          """The remote session was disconnected because the remote computer is not licensed to accept remote connections.Please contact the server administrator."""
+    IDS_INT_PROT_ERR        """Client disconnected due to internal protocol error"""
+    IDS_GEN_ERROR           """Error connecting to remote computer"""
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_INVALID_SVR         """The specified computer name contains invalid characters. Please verify the name and try again."""
+    IDS_ENC_ERR             """Because of an error in data encryption, this session will end. Please try connecting to the remote computer again."""
+    IDS_LOOPBACK_ERR        """The client could not connect. You cannot connect to the console from a console session of the same computer."""
+    IDS_LIC_ERR             """The remote computer disconnected the session because of an error in the licensing protocol.Please try connecting to the remote computer again or contact your server administrator."""
+    IDS_DEC_ERR             """The remote session was disconnected because of a decompression failure at the client side. Please try connecting to the remote computer again."""
+    IDS_PROT_ERR            """Because of a protocol error, this session will be disconnected. Please try connecting to the remote computer again."""
+    IDS_INT_ERR             """An internal error has occurred."""
+    IDS_BASE_ERR            """Remote Desktop Disconnected"""
+    IDS_SVR_DISC            """The remote computer has ended the connection."""
+    IDS_ADMIN_DISC          """The remote session to the remote computer was ended by means of an administration tool.Your administrator might have ended your connection."""
+    IDS_SESS_DISC           """The remote session was disconnected because your session was logged off at the remote computer.Your administrator or another user might have ended your connection."""
+    IDS_IDLE_TIMEOUT        """The remote session was ended because the idle timeout limit was reached. This limit is set by the server administrator or by network policies."""
+    IDS_LOGON_TIMEOUT       """The remote session ended because the total logon time limit was reached. This limit is set by the server administrator or by network policies."""
+    IDS_ANOTHER_USR         """The remote session was disconnected because another user has connected to the session."""
+    IDS_LOW_MEM_REMOTE      """The connection was disconnected because the remote computer is low on memory."""
+    IDS_CONN_DENIED         """The client could not establish a connection to the remote computer.The most likely causes for this error are:1) Remote connections might not be enabled at the remote computer.2) The maximum number of connections was exceeded at the remote computer.3) A network error occurred while establishing the connection."""
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "XTSAC.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

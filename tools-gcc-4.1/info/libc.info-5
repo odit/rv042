@@ -1,0 +1,1310 @@
+This is libc.info, produced by makeinfo version 4.3 from
+/usr/local/Cavium_Networks/toolchain/src/newlib/libc/libc.texinfo.
+
+START-INFO-DIR-ENTRY
+* libc::                        The ANSI C library.
+END-INFO-DIR-ENTRY
+
+   This file documents the ANSI C library.
+
+   Copyright (C) 1992, 1993, 1994-2004 Red Hat, Inc.
+
+   `libc' includes software developed by the University of California,
+Berkeley and its contributors.
+
+   libc includes software developed by Martin Jackson, Graham Haley and
+Steve Chamberlain of Tadpole Technology and released to Cygnus.
+
+   libc uses floating-point conversion software developed at AT&T, which
+includes this copyright information:
+
+   The author of this software is David M. Gay.
+
+   Copyright (c) 1991 by AT&T.
+
+   Permission to use, copy, modify, and distribute this software for any
+purpose without fee is hereby granted, provided that this entire notice
+is included in all copies of any software which is or includes a copy
+or modification of this software and in all copies of the supporting
+documentation for such software.
+
+   THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR
+IMPLIED  WARRANTY.  IN PARTICULAR, NEITHER THE AUTHOR NOR AT&T MAKES ANY
+REPRESENTATION OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY
+OF THIS SOFTWARE OR ITS FITNESS FOR ANY PARTICULAR PURPOSE.
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, subject to the
+terms of the GNU General Public License, which includes the provision
+that the entire resulting derived work is distributed under the terms
+of a permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions.
+
+
+File: libc.info,  Node: strrchr,  Next: strspn,  Prev: strpbrk,  Up: Strings
+
+`strrchr'--reverse search for character in string
+=================================================
+
+*Synopsis*
+     #include <string.h>
+     char * strrchr(const char *STRING, int C);
+   *Description*
+This function finds the last occurence of C (converted to a char) in
+the string pointed to by STRING (including the terminating null
+character).
+
+*Returns*
+Returns a pointer to the located character, or a null pointer if C does
+not occur in STRING.
+
+*Portability*
+`strrchr' is ANSI C.
+
+   `strrchr' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strspn,  Next: strstr,  Prev: strrchr,  Up: Strings
+
+`strspn'--find initial match
+============================
+
+*Synopsis*
+     #include <string.h>
+     size_t strspn(const char *S1, const char *S2);
+   *Description*
+This function computes the length of the initial segment of the string
+pointed to by S1 which consists entirely of characters from the string
+pointed to by S2 (excluding the terminating null character).
+
+*Returns*
+`strspn' returns the length of the segment found.
+
+*Portability*
+`strspn' is ANSI C.
+
+   `strspn' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strstr,  Next: strtok,  Prev: strspn,  Up: Strings
+
+`strstr'--find string segment
+=============================
+
+*Synopsis*
+     #include <string.h>
+     char *strstr(const char *S1, const char *S2);
+   *Description*
+Locates the first occurence in the string pointed to by S1 of the
+sequence of characters in the string pointed to by S2 (excluding the
+terminating null  character).
+
+*Returns*
+Returns a pointer to the located string segment, or a null pointer if
+the string S2 is not found. If S2 points to a string with zero length,
+the S1 is returned.
+
+*Portability*
+`strstr' is ANSI C.
+
+   `strstr' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strtok,  Next: strupr,  Prev: strstr,  Up: Strings
+
+`strtok', `strtok_r', `strsep'--get next token from a string
+============================================================
+
+*Synopsis*
+     #include <string.h>
+     char *strtok(char *SOURCE, const char *DELIMITERS)
+     char *strtok_r(char *SOURCE, const char *DELIMITERS,
+         char **LASTS)
+     char *strsep(char **SOURCE_PTR, const char *DELIMITERS)
+   *Description*
+The `strtok' function is used to isolate sequential tokens in a
+null-terminated string, `*SOURCE'. These tokens are delimited in the
+string by at least one of the characters in `*DELIMITERS'.  The first
+time that `strtok' is called, `*SOURCE' should be specified; subsequent
+calls, wishing to obtain further tokens from the same string, should
+pass a null pointer instead.  The separator string, `*DELIMITERS', must
+be supplied each time and may change between calls.
+
+   The `strtok' function returns a pointer to the beginning of each
+subsequent token in the string, after replacing the separator character
+itself with a null character.  When no more tokens remain, a null
+pointer is returned.
+
+   The `strtok_r' function has the same behavior as `strtok', except a
+pointer to placeholder `*LASTS' must be supplied by the caller.
+
+   The `strsep' function is similar in behavior to `strtok', except a
+pointer to the string pointer must be supplied `SOURCE_PTR' and the
+function does not skip leading delimiters.  When the string starts with
+a delimiter, the delimiter is changed to the null character and the
+empty string is returned.  Like `strtok_r' and `strtok', the
+`*SOURCE_PTR' is updated to the next character following the last
+delimiter found or NULL if the end of string is reached with no more
+delimiters.
+
+*Returns*
+`strtok', `strtok_r', and `strsep' all return a pointer to the next
+token, or `NULL' if no more tokens can be found.  For `strsep', a token
+may be the empty string.
+
+*Portability*
+`strtok' is ANSI C.  `strtok_r' is POSIX.  `strsep' is a BSD extension.
+
+   `strtok', `strtok_r', and `strsep' require no supporting OS
+subroutines.
+
+
+File: libc.info,  Node: strupr,  Next: strxfrm,  Prev: strtok,  Up: Strings
+
+`strupr'--force string to uppercase
+===================================
+
+*Synopsis*
+     #include <string.h>
+     char *strupr(char *A);
+   *Description*
+`strupr' converts each character in the string at A to uppercase.
+
+*Returns*
+`strupr' returns its argument, A.
+
+*Portability*
+`strupr' is not widely portable.
+
+   `strupr' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strxfrm,  Next: swab,  Prev: strupr,  Up: Strings
+
+`strxfrm'--transform string
+===========================
+
+*Synopsis*
+     #include <string.h>
+     size_t strxfrm(char *S1, const char *S2, size_t N);
+   *Description*
+This function transforms the string pointed to by S2 and places the
+resulting string into the array pointed to by S1. The transformation is
+such that if the `strcmp' function is applied to the two transformed
+strings, it returns a value greater than, equal to, or less than zero,
+correspoinding to the result of a `strcoll' function applied to the
+same two original strings.
+
+   No more than N characters are placed into the resulting array
+pointed to by S1, including the terminating null character. If N is
+zero, S1 may be a null pointer. If copying takes place between objects
+that overlap, the behavior is undefined.
+
+   With a C locale, this function just copies.
+
+*Returns*
+The `strxfrm' function returns the length of the transformed string
+(not including the terminating null character). If the value returned
+is N or more, the contents of the array pointed to by S1 are
+indeterminate.
+
+*Portability*
+`strxfrm' is ANSI C.
+
+   `strxfrm' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: swab,  Prev: strxfrm,  Up: Strings
+
+`swab'--swap adjacent bytes
+===========================
+
+*Synopsis*
+     #include <unistd.h>
+     void swab(const void *IN, void *OUT, ssize_t N);
+   *Description*
+This function copies N bytes from the memory region pointed to by IN to
+the memory region pointed to by OUT, exchanging adjacent even and odd
+bytes.
+
+*Portability*
+`swab' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: Wchar strings,  Next: Signals,  Prev: Strings,  Up: Top
+
+Wide Character Strings (`wchar.h')
+**********************************
+
+This chapter describes wide-character string-handling functions and
+managing areas of memory containing wide characters.  The corresponding
+declarations are in `wchar.h'.
+
+* Menu:
+
+* wmemchr::     Find wide character in memory
+* wmemcmp::     Compare two wide-character memory areas
+* wmemcpy::     Copy wide-character memory regions
+* wmemmove::    Move possibly overlapping wide-character memory
+* wmemset::     Set an area of memory to a specified wide character
+* wcscat::      Concatenate wide-character strings
+* wcschr::      Search for wide character in string
+* wcscmp::      Wide-character string compare
+* wcscoll::     Locale-specific wide-character string compare
+* wcscpy::      Copy wide-character string
+* wcscspn::     Count wide characters not in string
+* wcslcat::     Concatenate wide-character strings to specified length
+* wcslcpy::     Copy wide-character string to specified length
+* wcslen::      Wide-character string length
+* wcsncat::     Concatenate wide-character strings
+* wcsncmp::     Wide-character string compare
+* wcsncpy::     Counted copy wide-character string
+* wcsnlen::     Wide-character string length with maximum limit
+* wcspbrk::     Find wide characters in string
+* wcsrchr::     Reverse search for wide character in string
+* wcsspn::      Find initial match in wide-character string
+* wcsstr::      Find wide-character string segment
+* wcswidth::    Number of column positions of a wide-character string
+* wcwidth::     Number of column positions of a wide-character code
+
+
+File: libc.info,  Node: wmemchr,  Next: wmemcmp,  Up: Wchar strings
+
+`wmemchr'--find a wide character in memory
+==========================================
+
+   *Synopsis*
+     #include <wchar.h>
+     wchar_t	*wmemchr(const wchar_t *S, wchar_t C, size_t N);
+   *Description*
+The `wmemchr' function locates the first occurrence of C in the initial
+N wide characters of the object pointed to be S. This function is not
+affected by locale and all wchar_t values are treated identically.  The
+null wide character and wchar_t values not corresponding to valid
+characters are not treated specially.
+
+   If N is zero, S must be a valid pointer and the function behaves as
+if no valid occurrence of C is found.
+
+*Returns*
+The `wmemchr' function returns a pointer to the located wide character,
+or a null pointer if the wide character does not occur in the object.
+
+*Portability*
+`wmemchr' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wmemcmp,  Next: wmemcpy,  Prev: wmemchr,  Up: Wchar strings
+
+`wmemcmp'--compare wide characters in memory
+============================================
+
+*Synopsis*
+     #include <wchar.h>
+     int wmemcmp(const wchar_t *S1, const wchar_t *S2, size_t N);
+   *Description*
+The `wmemcmp' function compares the first N wide characters of the
+object pointed to by S1 to the first N wide characters of the object
+pointed to by S2. This function is not affected by locale and all
+wchar_t values are treated identically. The null wide character and
+wchar_t values not corresponding to valid characters are not treated
+specially.
+
+   If N is zero, S1 and S2 must be a valid pointers and the function
+behaves as if the two objects compare equal.
+
+*Returns*
+The `wmemcmp' function returns an integer greater than, equal to, or
+less than zero, accordingly as the object pointed to by S1 is greater
+than, equal to, or less than the object pointed to by S2.
+
+*Portability*
+`wmemcmp' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wmemcpy,  Next: wmemmove,  Prev: wmemcmp,  Up: Wchar strings
+
+`wmemcpy'--copy wide characters in memory
+=========================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wmemcpy(wchar_t *D, const wchar_t *S, size_t N);
+   *Description*
+The `wmemcpy' function copies N wide characters from the object pointed
+to by S to the object pointed to be D. This function is not affected by
+locale and all wchar_t values are treated identically.  The null wide
+character and wchar_t values not corresponding to valid characters are
+not treated specially.
+
+   If N is zero, D and S must be a valid pointers, and the function
+copies zero wide characters.
+
+*Returns*
+The `wmemcpy' function returns the value of D.
+
+*Portability*
+`wmemcpy' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wmemmove,  Next: wmemset,  Prev: wmemcpy,  Up: Wchar strings
+
+`wmemmove'--copy wide characters in memory with overlapping areas
+=================================================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wmemmove(wchar_t *D, const wchar_t *S, size_t N);
+   *Description*
+The `wmemmove' function copies N wide characters from the object
+pointed to by S to the object pointed to by D. Copying takes place as
+if the N wide characters from the object pointed to by S are first
+copied into a temporary array of N wide characters that does not
+overlap the objects pointed to by D or S, and then the N wide
+characters from the temporary array are copied into the object pointed
+to by D.
+
+   This function is not affected by locale and all wchar_t values are
+treated identically. The null wide character and wchar_t values not
+corresponding to valid characters are not treated specially.
+
+   If N is zero, D and S must be a valid pointers, and the function
+copies zero wide characters.
+
+*Returns*
+The `wmemmove' function returns the value of D.
+
+*Portability*
+`wmemmove' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wmemset,  Next: wcscat,  Prev: wmemmove,  Up: Wchar strings
+
+`wmemset'--set wide characters in memory
+========================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wmemset(wchar_t *S, wchar_t C, size_t N);
+   *Description*
+The `wmemset' function copies the value of C into each of the first N
+wide characters of the object pointed to by S.  This function is not
+affected by locale and all wchar_t values are treated identically.  The
+null wide character and wchar_t values not corresponding to valid
+characters are not treated specially.
+
+   If N is zero, S must be a valid pointer and the function copies zero
+wide characters.
+
+*Returns*
+The `wmemset' function returns the value of S.
+
+*Portability*
+`wmemset' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcscat,  Next: wcschr,  Prev: wmemset,  Up: Wchar strings
+
+`wcscat'--concatenate two wide-character strings
+================================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wcscat(wchar_t *S1, const wchar_t *S2);
+   *Description*
+The `wcscat' function appends a copy of the wide-character string
+pointed to by S2 (including the terminating null wide-character code)
+to the end of the wide-character string pointed to by S1.  The initial
+wide-character code of S2 overwrites the null wide-character code at
+the end of S1. If copying takes place between objects that overlap, the
+behaviour is undefined.
+
+*Returns*
+The `wcscat' function returns S1; no return value is reserved to
+indicate an error.
+
+*Portability*
+`wcscat' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcschr,  Next: wcscmp,  Prev: wcscat,  Up: Wchar strings
+
+`wcschr'--wide-character string scanning operation
+==================================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wcschr(const wchar_t *S, wchar_t C);
+   *Description*
+The `wcschr' function locates the first occurrence of C in the
+wide-character string pointed to by S. The value of C must be a
+character representable as a type wchar_t and must be a wide-character
+code corresponding to a valid character in the current locale.  The
+terminating null wide-character string.
+
+*Returns*
+Upon completion, `wcschr' returns a pointer to the wide-character code,
+or a null pointer if the wide-character code is not found.
+
+*Portability*
+`wcschr' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcscmp,  Next: wcscoll,  Prev: wcschr,  Up: Wchar strings
+
+`wcscmp'--compare two wide-character strings
+============================================
+
+*Synopsis*
+     #include <wchar.h>
+     int wcscmp(const wchar_t *S1, *S2);
+   *Description*
+The `wcscmp' function compares the wide-character string pointed to by
+S1 to the wide-character string pointed to by S2.
+
+   The sign of a non-zero return value is determined by the sign of the
+difference between the values of the first pair of wide-character codes
+that differ in the objects being compared.
+
+*Returns*
+Upon completion, `wcscmp' returns an integer greater than, equal to or
+less than 0, if the wide-character string pointed to by S1 is greater
+than, equal to or less than the wide-character string pointed to by S2
+respectively.
+
+*Portability*
+`wcscmp' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcscoll,  Next: wcscpy,  Prev: wcscmp,  Up: Wchar strings
+
+`wcscoll'--locale-specific wide-character string compare
+========================================================
+
+*Synopsis*
+     #include <wchar.h>
+     int wcscoll(const wchar_t *STRA, const wchar_t * STRB);
+   *Description*
+`wcscoll' compares the wide-character string pointed to by STRA to the
+wide-character string pointed to by STRB, using an interpretation
+appropriate to the current `LC_COLLATE' state.
+
+   The current implementation of `wcscoll' simply uses `wcscmp' and
+does not support any language-specific sorting.
+
+*Returns*
+If the first string is greater than the second string, `wcscoll'
+returns a number greater than zero.  If the two strings are equivalent,
+`wcscoll' returns zero.  If the first string is less than the second
+string, `wcscoll' returns a number less than zero.
+
+*Portability*
+`wcscoll' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+
+File: libc.info,  Node: wcscpy,  Next: wcscspn,  Prev: wcscoll,  Up: Wchar strings
+
+`wcscpy'--copy a wide-character string
+======================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wcscpy(wchar_t *S1, const wchar_t *,S2);
+   *Description*
+The `wcscpy' function copies the wide-character string pointed to by S2
+(including the terminating null wide-character code) into the array
+pointed to by S1. If copying takes place between objects that overlap,
+the behaviour is undefined.
+
+*Returns*
+The `wcscpy' function returns S1; no return value is reserved to
+indicate an error.
+
+*Portability*
+`wcscpy' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcscspn,  Next: wcslcat,  Prev: wcscpy,  Up: Wchar strings
+
+`wcscspn'--get length of a complementary wide substring
+=======================================================
+
+*Synopsis*
+     #include <wchar.h>
+     size_t wcscspn(const wchar_t *S, wchar_t *SET);
+   *Description*
+The `wcscspn' function computes the length of the maximum initial
+segment of the wide-character string pointed to by S which consists
+entirely of wide-character codes not from the wide-character string
+pointed to by SET.
+
+*Returns*
+The `wcscspn' function returns the length of the initial substring of
+S1; no return value is reserved to indicate an error.
+
+*Portability*
+`wcscspn' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcslcat,  Next: wcslcpy,  Prev: wcscspn,  Up: Wchar strings
+
+`wcslcat'--concatenate wide-character strings to specified length
+=================================================================
+
+*Synopsis*
+     #include <wchar.h>
+     size_t wcslcat(wchar_t *DST, const wchar_t *SRC, size_t SIZ);
+   *Description*
+The `wcslcat' function appends wide characters from SRC to end of the
+DST wide-character string so that the resultant wide-character string
+is not more than SIZ wide characters including the terminating null
+wide-character code.  A terminating null wide character is always added
+unless SIZ is 0.  Thus, the maximum number of wide characters that can
+be appended from SRC is SIZ - 1. If copying takes place between objects
+that overlap, the behaviour is undefined.
+
+*Returns*
+Wide-character string length of initial DST plus the wide-character
+string length of SRC (does not include terminating null
+wide-characters).  If the return value is greater than or equal to SIZ,
+then truncation occurred and not all wide characters from SRC were
+appended.
+
+*Portability*
+No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcslcpy,  Next: wcslen,  Prev: wcslcat,  Up: Wchar strings
+
+`wcslcpy'--copy a wide-character string to specified length
+===========================================================
+
+*Synopsis*
+     #include <wchar.h>
+     size_t wcslcpy(wchar_t *DST, const wchar_t *SRC, size_t SIZ);
+   *Description*
+`wcslcpy' copies wide characters from SRC to DST such that up to SIZ -
+1 characters are copied.  A terminating null is appended to the result,
+unless SIZ is zero.
+
+*Returns*
+`wcslcpy' returns the number of wide characters in SRC, not including
+the terminating null wide character.  If the return value is greater
+than or equal to SIZ, then not all wide characters were copied from SRC
+and truncation occurred.
+
+*Portability*
+No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcslen,  Next: wcsncat,  Prev: wcslcpy,  Up: Wchar strings
+
+`wcslen'--get wide-character string length
+==========================================
+
+*Synopsis*
+     #include <wchar.h>
+     size_t wcslen(const wchar_t *S);
+   *Description*
+The `wcslen' function computes the number of wide-character codes in
+the wide-character string to which S points, not including the
+terminating null wide-character code.
+
+*Returns*
+The `wcslen' function returns the length of S; no return value is
+reserved to indicate an error.
+
+*Portability*
+`wcslen' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcsncat,  Next: wcsncmp,  Prev: wcslen,  Up: Wchar strings
+
+`wcsncat'--concatenate part of two wide-character strings
+=========================================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wcsncat(wchar_t *S1, const wchar_t *S2, size_t N);
+   *Description*
+The `wcsncat' function appends not more than N wide-character codes (a
+null wide-character code and wide-character codes that follow it are
+not appended) from the array pointed to by S2 to the end of the
+wide-character string pointed to by S1. The initial wide-character code
+of S2 overwrites the null wide-character code at the end of S1.  A
+terminating null wide-character code is always appended to the result.
+If copying takes place between objects that overlap, the behaviour is
+undefined.
+
+*Returns*
+The `wcsncat' function returns S1; no return value is reserved to
+indicate an error.
+
+*Portability*
+`wcsncat' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcsncmp,  Next: wcsncpy,  Prev: wcsncat,  Up: Wchar strings
+
+`wcsncmp'--compare part of two wide-character strings
+=====================================================
+
+*Synopsis*
+     #include <wchar.h>
+     int wcsncmp(const wchar_t *S1, const wchar_t *S2, size_t N);
+   *Description*
+The `wcsncmp' function compares not more than N wide-character codes
+(wide-character codes that follow a null wide-character code are not
+compared) from the array pointed to by S1 to the array pointed to by S2.
+
+   The sign of a non-zero return value is determined by the sign of the
+difference between the values of the first pair of wide-character codes
+that differ in the objects being compared.
+
+*Returns*
+Upon successful completion, `wcsncmp' returns an integer greater than,
+equal to or less than 0, if the possibly null-terminated array pointed
+to by S1 is greater than, equal to or less than the possibly
+null-terminated array pointed to by S2 respectively.
+
+*Portability*
+`wcsncmp' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcsncpy,  Next: wcsnlen,  Prev: wcsncmp,  Up: Wchar strings
+
+`wcsncpy'--copy part of a wide-character string
+===============================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wcsncpy(wchar_t *S1, const wchar_t *S2, size_t N);
+   *Description*
+The `wcsncpy' function copies not more than n wide-character codes
+(wide-character codes that follow a null wide-character code are not
+copied) from the array pointed to by S2 to the array pointed to by S1.
+If copying takes place between objects that overlap, the behaviour is
+undefined.
+
+   If the array pointed to by S2 is a wide-character string that is
+shorter than N wide-character codes, null wide-character codes are
+appended to the copy in the array pointed to by S1, until N
+wide-character codes in all are written.
+
+*Returns*
+The `wcsncpy' function returns S1; no return value is reserved to
+indicate an error.
+
+*Portability*
+`wcsncpy' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcsnlen,  Next: wcspbrk,  Prev: wcsncpy,  Up: Wchar strings
+
+`wcsnlen'--get fixed-size wide-character string length
+======================================================
+
+*Synopsis*
+     #include <wchar.h>
+     size_t wcsnlen(const wchar_t *S, size_t MAXLEN);
+   *Description*
+The `wcsnlen' function computes the number of wide-character codes in
+the wide-character string pointed to by S not including the terminating
+L'\0' wide character but at most MAXLEN wide characters.
+
+*Returns*
+`wcsnlen' returns the length of S if it is less then MAXLEN, or MAXLEN
+if there is no L'\0' wide character in first MAXLEN characters.
+
+*Portability*
+`wcsnlen' is a GNU extension.
+
+   `wcsnlen' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: wcspbrk,  Next: wcsrchr,  Prev: wcsnlen,  Up: Wchar strings
+
+`wcspbrk'---scan wide-character string for a wide-character code
+================================================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wcspbrk(const wchar_t *S, const wchar_t *SET);
+   *Description*
+The `wcspbrk' function locates the first occurrence in the
+wide-character string pointed to by S of any wide-character code from
+the wide-character string pointed to by SET.
+
+*Returns*
+Upon successful completion, `wcspbrk' returns a pointer to the
+wide-character code or a null pointer if no wide-character code from
+SET occurs in S.
+
+*Portability*
+`wcspbrk' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcsrchr,  Next: wcsspn,  Prev: wcspbrk,  Up: Wchar strings
+
+`wcsrchr'--wide-character string scanning operation
+===================================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wcsrchr(const wchar_t *S, wchar_t C);
+   *Description*
+The `wcsrchr' function locates the last occurrence of C in the
+wide-character string pointed to by S. The value of C must be a
+character representable as a type wchar_t and must be a wide-character
+code corresponding to a valid character in the current locale.  The
+terminating null wide-character code is considered to be part of the
+wide-character string.
+
+*Returns*
+Upon successful completion, `wcsrchr' returns a pointer to the
+wide-character code or a null pointer if C does not occur in the
+wide-character string.
+
+*Portability*
+`wcsrchr' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcsspn,  Next: wcsstr,  Prev: wcsrchr,  Up: Wchar strings
+
+`wcsspn'--get length of a wide substring
+========================================
+
+*Synopsis*
+     #include <wchar.h>
+     size_t wcsspn(const wchar_t *S, const wchar_t *SET);
+   *Description*
+The `wcsspn' function computes the length of the maximum initial
+segment of the wide-character string pointed to by S which consists
+entirely of wide-character codes from the wide-character string pointed
+to by SET.
+
+*Returns*
+The wcsspn() function returns the length S1; no return value is
+reserved to indicate an error.
+
+*Portability*
+`wcsspn' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wcsstr,  Next: wcswidth,  Prev: wcsspn,  Up: Wchar strings
+
+`wcsstr'--find a wide-character substring
+=========================================
+
+*Synopsis*
+     #include <wchar.h>
+     wchar_t *wcsstr(const wchar_t *BIG, const wchar_t *LITTLE);
+   *Description*
+The `wcsstr' function locates the first occurrence in the
+wide-character string pointed to by BIG of the sequence of wide
+characters (excluding the terminating null wide character) in the
+wide-character string pointed to by LITTLE.
+
+*Returns*
+On successful completion, `wcsstr' returns a pointer to the located
+wide-character string, or a null pointer if the wide-character string
+is not found.
+
+   If LITTLE points to a wide-character string with zero length, the
+function returns BIG.
+
+*Portability*
+`wcsstr' is ISO/IEC 9899/AMD1:1995 (ISO C).
+
+
+File: libc.info,  Node: wcswidth,  Next: wcwidth,  Prev: wcsstr,  Up: Wchar strings
+
+`wcswidth'--number of column positions of a wide-character string
+=================================================================
+
+*Synopsis*
+     #include <wchar.h>
+     int wcswidth(const wchar_t *PWCS, size_t N);
+   *Description*
+The `wcswidth' function shall determine the number of column positions
+required for N wide-character codes (or fewer than N wide-character
+codes if a null wide-character code is encountered before N
+wide-character codes are exhausted) in the string pointed to by PWCS.
+
+*Returns*
+The `wcswidth' function either shall return 0 (if PWCS points to a null
+wide-character code), or return the number of column positions to be
+occupied by the wide-character string pointed to by PWCS, or return -1
+(if any of the first N wide-character codes in the wide-character
+string pointed to by PWCS is not a printable wide-character code).
+
+*Portability*
+`wcswidth' has been introduced in the Single UNIX Specification Volume
+2.  `wcswidth' has been marked as an extension in the Single UNIX
+Specification Volume 3.
+
+
+File: libc.info,  Node: wcwidth,  Prev: wcswidth,  Up: Wchar strings
+
+`wcwidth'--number of column positions of a wide-character code
+==============================================================
+
+*Synopsis*
+     #include <wchar.h>
+     int wcwidth(const wchar_t WC);
+   *Description*
+The `wcwidth' function shall determine the number of column positions
+required for the wide character WC. The application shall ensure that
+the value of WC is a character representable as a wchar_t, and is a
+wide-character code corresponding to a valid character in the current
+locale.
+
+*Returns*
+The `wcwidth' function shall either return 0 (if WC is a null
+wide-character code), or return the number of column positions to be
+occupied by the wide-character code WC, or return -1 (if WC does not
+correspond to a printable wide-character code).
+
+   The current implementation of `wcwidth' simply sets the width of all
+printable characters to 1 since newlib has no character tables around.
+
+*Portability*
+`wcwidth' has been introduced in the Single UNIX Specification Volume 2.
+`wcwidth' has been marked as an extension in the Single UNIX
+Specification Volume 3.
+
+
+File: libc.info,  Node: Signals,  Next: Timefns,  Prev: Wchar strings,  Up: Top
+
+Signal Handling (`signal.h')
+****************************
+
+A "signal" is an event that interrupts the normal flow of control in
+your program.  Your operating environment normally defines the full set
+of signals available (see `sys/signal.h'), as well as the default means
+of dealing with them--typically, either printing an error message and
+aborting your program, or ignoring the signal.
+
+   All systems support at least the following signals:
+`SIGABRT'
+     Abnormal termination of a program; raised by the <<abort>>
+     function.
+
+`SIGFPE'
+     A domain error in arithmetic, such as overflow, or division by
+     zero.
+
+`SIGILL'
+     Attempt to execute as a function data that is not executable.
+
+`SIGINT'
+     Interrupt; an interactive attention signal.
+
+`SIGSEGV'
+     An attempt to access a memory location that is not available.
+
+`SIGTERM'
+     A request that your program end execution.
+
+   Two functions are available for dealing with asynchronous
+signals--one to allow your program to send signals to itself (this is
+called "raising" a signal), and one to specify subroutines (called
+"handlers" to handle particular signals that you anticipate may
+occur--whether raised by your own program or the operating environment.
+
+   To support these functions, `signal.h' defines three macros:
+
+`SIG_DFL'
+     Used with the `signal' function in place of a pointer to a handler
+     subroutine, to select the operating environment's default handling
+     of a signal.
+
+`SIG_IGN'
+     Used with the `signal' function in place of a pointer to a
+     handler, to ignore a particular signal.
+
+`SIG_ERR'
+     Returned by the `signal' function in place of a pointer to a
+     handler, to indicate that your request to set up a handler could
+     not be honored for some reason.
+
+   `signal.h' also defines an integral type, `sig_atomic_t'.  This type
+is not used in any function declarations; it exists only to allow your
+signal handlers to declare a static storage location where they may
+store a signal value.  (Static storage is not otherwise reliable from
+signal handlers.)
+
+* Menu:
+
+* raise::   Send a signal
+* signal::  Specify handler subroutine for a signal
+
+
+File: libc.info,  Node: raise,  Next: signal,  Up: Signals
+
+`raise'--send a signal
+======================
+
+   *Synopsis*
+     #include <signal.h>
+     int raise(int SIG);
+     
+     int _raise_r(void *REENT, int SIG);
+   *Description*
+Send the signal SIG (one of the macros from ``sys/signal.h'').  This
+interrupts your program's normal flow of execution, and allows a signal
+handler (if you've defined one, using `signal') to take control.
+
+   The alternate function `_raise_r' is a reentrant version.  The extra
+argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+The result is `0' if SIG was successfully raised, `1' otherwise.
+However, the return value (since it depends on the normal flow of
+execution) may not be visible, unless the signal handler for SIG
+terminates with a `return' or unless `SIG_IGN' is in effect for this
+signal.
+
+*Portability*
+ANSI C requires `raise', but allows the full set of signal numbers to
+vary from one implementation to another.
+
+   Required OS subroutines: `getpid', `kill'.
+
+
+File: libc.info,  Node: signal,  Prev: raise,  Up: Signals
+
+`signal'--specify handler subroutine for a signal
+=================================================
+
+*Synopsis*
+     #include <signal.h>
+     void (*signal(int SIG, void(*FUNC)(int))) (int);
+     
+     void (*_signal_r(void *REENT, int SIG, void(*FUNC)(int))) (int);
+   *Description*
+`signal' provides a simple signal-handling implementation for embedded
+targets.
+
+   `signal' allows you to request changed treatment for a particular
+signal SIG.  You can use one of the predefined macros `SIG_DFL' (select
+system default handling) or `SIG_IGN' (ignore this signal) as the value
+of FUNC; otherwise, FUNC is a function pointer that identifies a
+subroutine in your program as the handler for this signal.
+
+   Some of the execution environment for signal handlers is
+unpredictable; notably, the only library function required to work
+correctly from within a signal handler is `signal' itself, and only
+when used to redefine the handler for the current signal value.
+
+   Static storage is likewise unreliable for signal handlers, with one
+exception: if you declare a static storage location as ``volatile
+sig_atomic_t'', then you may use that location in a signal handler to
+store signal values.
+
+   If your signal handler terminates using `return' (or implicit
+return), your program's execution continues at the point where it was
+when the signal was raised (whether by your program itself, or by an
+external event).  Signal handlers can also use functions such as `exit'
+and `abort' to avoid returning.
+
+   The alternate function `_signal_r' is the reentrant version.  The
+extra argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+If your request for a signal handler cannot be honored, the result is
+`SIG_ERR'; a specific error number is also recorded in `errno'.
+
+   Otherwise, the result is the previous handler (a function pointer or
+one of the predefined macros).
+
+*Portability*
+ANSI C requires `signal'.
+
+   No supporting OS subroutines are required to link with `signal', but
+it will not have any useful effects, except for software generated
+signals, without an operating system that can actually raise exceptions.
+
+
+File: libc.info,  Node: Timefns,  Next: Locale,  Prev: Signals,  Up: Top
+
+Time Functions (`time.h')
+*************************
+
+This chapter groups functions used either for reporting on time
+(elapsed, current, or compute time) or to perform calculations based on
+time.
+
+   The header file `time.h' defines three types.  `clock_t' and
+`time_t' are both used for representations of time particularly
+suitable for arithmetic.  (In this implementation, quantities of type
+`clock_t' have the highest resolution possible on your machine, and
+quantities of type `time_t' resolve to seconds.)  `size_t' is also
+defined if necessary for quantities representing sizes.
+
+   `time.h' also defines the structure `tm' for the traditional
+representation of Gregorian calendar time as a series of numbers, with
+the following fields:
+
+`tm_sec'
+     Seconds, between 0 and 60 inclusive (60 allows for leap seconds).
+
+`tm_min'
+     Minutes, between 0 and 59 inclusive.
+
+`tm_hour'
+     Hours, between 0 and 23 inclusive.
+
+`tm_mday'
+     Day of the month, between 1 and 31 inclusive.
+
+`tm_mon'
+     Month, between 0 (January) and 11 (December).
+
+`tm_year'
+     Year (since 1900), can be negative for earlier years.
+
+`tm_wday'
+     Day of week, between 0 (Sunday) and 6 (Saturday).
+
+`tm_yday'
+     Number of days elapsed since last January 1, between 0 and 365
+     inclusive.
+
+`tm_isdst'
+     Daylight Savings Time flag: positive means DST in effect, zero
+     means DST not in effect, negative means no information about DST
+     is available.
+
+* Menu:
+
+* asctime::     Format time as string
+* clock::       Cumulative processor time
+* ctime::       Convert time to local and format as string
+* difftime::    Subtract two times
+* gmtime::      Convert time to UTC (GMT) traditional representation
+* localtime::   Convert time to local representation
+* mktime::      Convert time to arithmetic representation
+* strftime::    Flexible calendar time formatter
+* time::        Get current calendar time (as single number)
+* __tz_lock::   Lock time zone global variables
+* tzset::       Set timezone info
+
+
+File: libc.info,  Node: asctime,  Next: clock,  Up: Timefns
+
+`asctime'--format time as string
+================================
+
+   *Synopsis*
+     #include <time.h>
+     char *asctime(const struct tm *CLOCK);
+     char *asctime_r(const struct tm *CLOCK, char *BUF);
+   *Description*
+Format the time value at CLOCK into a string of the form
+      Wed Jun 15 11:38:07 1988\n\0
+   The string is generated in a static buffer; each call to `asctime'
+overwrites the string generated by previous calls.
+
+*Returns*
+A pointer to the string containing a formatted timestamp.
+
+*Portability*
+ANSI C requires `asctime'.
+
+   `asctime' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: clock,  Next: ctime,  Prev: asctime,  Up: Timefns
+
+`clock'--cumulative processor time
+==================================
+
+*Synopsis*
+     #include <time.h>
+     clock_t clock(void);
+   *Description*
+Calculates the best available approximation of the cumulative amount of
+time used by your program since it started.  To convert the result into
+seconds, divide by the macro `CLOCKS_PER_SEC'.
+
+*Returns*
+The amount of processor time used so far by your program, in units
+defined by the machine-dependent macro `CLOCKS_PER_SEC'.  If no
+measurement is available, the result is (clock_t)`-1'.
+
+*Portability*
+ANSI C requires `clock' and `CLOCKS_PER_SEC'.
+
+   Supporting OS subroutine required: `times'.
+
+
+File: libc.info,  Node: ctime,  Next: difftime,  Prev: clock,  Up: Timefns
+
+`ctime'--convert time to local and format as string
+===================================================
+
+*Synopsis*
+     #include <time.h>
+     char *ctime(const time_t *CLOCK);
+     char *ctime_r(const time_t *CLOCK, char *BUF);
+   *Description*
+Convert the time value at CLOCK to local time (like `localtime') and
+format it into a string of the form
+      Wed Jun 15 11:38:07 1988\n\0
+   (like `asctime').
+
+*Returns*
+A pointer to the string containing a formatted timestamp.
+
+*Portability*
+ANSI C requires `ctime'.
+
+   `ctime' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: difftime,  Next: gmtime,  Prev: ctime,  Up: Timefns
+
+`difftime'--subtract two times
+==============================
+
+*Synopsis*
+     #include <time.h>
+     double difftime(time_t TIM1, time_t TIM2);
+   *Description*
+Subtracts the two times in the arguments: ``TIM1 - TIM2''.
+
+*Returns*
+The difference (in seconds) between TIM2 and TIM1, as a `double'.
+
+*Portability*
+ANSI C requires `difftime', and defines its result to be in seconds in
+all implementations.
+
+   `difftime' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: gmtime,  Next: localtime,  Prev: difftime,  Up: Timefns
+
+`gmtime'--convert time to UTC traditional form
+==============================================
+
+*Synopsis*
+     #include <time.h>
+     struct tm *gmtime(const time_t *CLOCK);
+     struct tm *gmtime_r(const time_t *CLOCK, struct tm *RES);
+   *Description*
+`gmtime' assumes the time at CLOCK represents a local time.  `gmtime'
+converts it to UTC (Universal Coordinated Time, also known in some
+countries as GMT, Greenwich Mean time), then converts the
+representation from the arithmetic representation to the traditional
+representation defined by `struct tm'.
+
+   `gmtime' constructs the traditional time representation in static
+storage; each call to `gmtime' or `localtime' will overwrite the
+information generated by previous calls to either function.
+
+*Returns*
+A pointer to the traditional time representation (`struct tm').
+
+*Portability*
+ANSI C requires `gmtime'.
+
+   `gmtime' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: localtime,  Next: mktime,  Prev: gmtime,  Up: Timefns
+
+`localtime'--convert time to local representation
+=================================================
+
+*Synopsis*
+     #include <time.h>
+     struct tm *localtime(time_t *CLOCK);
+     struct tm *localtime_r(time_t *CLOCK, struct tm *RES);
+   *Description*
+`localtime' converts the time at CLOCK into local time, then converts
+its representation from the arithmetic representation to the
+traditional representation defined by `struct tm'.
+
+   `localtime' constructs the traditional time representation in static
+storage; each call to `gmtime' or `localtime' will overwrite the
+information generated by previous calls to either function.
+
+   `mktime' is the inverse of `localtime'.
+
+*Returns*
+A pointer to the traditional time representation (`struct tm').
+
+*Portability*
+ANSI C requires `localtime'.
+
+   `localtime' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: mktime,  Next: strftime,  Prev: localtime,  Up: Timefns
+
+`mktime'--convert time to arithmetic representation
+===================================================
+
+*Synopsis*
+     #include <time.h>
+     time_t mktime(struct tm *TIMP);
+   *Description*
+`mktime' assumes the time at TIMP is a local time, and converts its
+representation from the traditional representation defined by `struct
+tm' into a representation suitable for arithmetic.
+
+   `localtime' is the inverse of `mktime'.
+
+*Returns*
+If the contents of the structure at TIMP do not form a valid calendar
+time representation, the result is `-1'.  Otherwise, the result is the
+time, converted to a `time_t' value.
+
+*Portability*
+ANSI C requires `mktime'.
+
+   `mktime' requires no supporting OS subroutines.
+

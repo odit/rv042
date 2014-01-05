@@ -1,0 +1,71 @@
+<script src="/js/mainframe.js"></script>
+<SCRIPT src="/js/formval.js" type=text/javascript></script>
+<SCRIPT LANGUAGE=JAVASCRIPT TYPE="TEXT/JAVASCRIPT"> 
+<!-- Hide 
+function checkMenu(param) {
+if (param != "'','','',''") 
+eval('loadFrames(' + param + ')');
+}
+function loadFrames(page1) {
+window.location=page1;
+}
+function validateOnSubmit() {
+var elem;
+var errs=0;
+if (!notnull  (window.document.adddomain.f1, 'f1n', true)) errs += 1; 
+if (errs>1)  alert('Please correct two or more fields before submitting');
+if (errs==1) alert('Please correct a field before submitting');
+if (errs==0){window.document.adddomain.submit();}
+}
+// End -->
+</SCRIPT> 
+</head>
+<body margin=0 TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0 onload=resizer() style="overflow-x:hidden;overflow-y:hidden" class="mainback">
+<table border=0 cellpadding=0 cellspacing=0 class="mainback2"  width=542 valign=top>
+<TR>
+<td width=29  ><img src="/images/shim.gif" height=4 width=29></td>
+<td width=513 valign="top"><!--Form Start-->
+<FORM NAME="adddomain" action=/cgi-bin/adddomain method=POST enctype=x-www-form-encoded>
+<table border=0 cellpadding=0 cellspacing=0 valign=top class="centertable">
+<tr class=titlerow>
+<td width=513 height=22 class=titlerow valign=center>
+&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title(stradddomain); </script><BR><img src="/images/shim.gif" height=1 width=1><br></td>
+</tr>
+</table>
+<img src="/images/shim.gif" height=21 width=1><BR>
+<table width="" height="" cellspacing=0 cellpadding=0 border=0 valign=top>
+<tr>
+<td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+<td width="" align="center">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class="headingstyle" >
+<tr class="HeadingStyle"><td width=513 height=21 class="HeadingStyle" valign=center colspan=3>
+&nbsp;
+<font class="HeadingStyle"><B>&nbsp;Add New Domain</b></font></td>
+</tr>
+</table>
+<table border=0 cellpadding=0 cellspacing=0 valign=top class="centertable" width=513>
+<TR><td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td></tr>
+<TR><td width="" height=2 colspan=3  ><img src="/images/shim.gif" width=1 height=16 border=0></td></tr>
+<tr><td colspan=3><table border=0 CELLSPACING=0 WIDTH="95%"><TR>
+<TD align=right  width=195 height=28><div class=toolbar>Authentication Type:&nbsp;&nbsp;</div>
+</td><td height=28><!--Dynamic Authentication-->
+<SELECT name="domainauthenticationtype" class="select" style="width: 280px; height: 20px;" onChange="checkMenu(this.options[this.selectedIndex].value)">
+<option value="'/cgi-bin/adddomainradius?auth_type=radius_pap'">Radius - PAP</option>
+<option value="'/cgi-bin/adddomainradius?auth_type=radius_chap'">Radius - CHAP</option>
+<option value="'/cgi-bin/adddomainradius?auth_type=radius_mschap'">Radius - MSCHAP</option>
+<option value="'/cgi-bin/adddomainradius?auth_type=radius_mschapv2'">Radius - MSCHAPV2</option>
+<option value="'/cgi-bin/adddomainntdomain'">NT Domain</option>
+<option value="'/cgi-bin/adddomainactivedirectory?auth_type=active-directory'">Active Directory</option>
+<option value="'/cgi-bin/adddomainactivedirectory?auth_type=kerberos'">Kerberos</option>
+<option value="'/cgi-bin/adddomainldap'">LDAP</option>
+<option selected="selected" value="'/cgi-bin/adddomain'">Local User Database</option>
+&nbsp;</SELECT>
+</td></tr>
+<TR>
+<TD align=right width=195 height=28><div class=toolbar id="f1n">Domain Name:&nbsp;&nbsp;</div>
+</td><td height=28><!--Dynamic Domain Name Field-->
+<INPUT class="input" type="text" NAME="domainName"  style="width: 280px;" MAXLENGTH=20 onchange="notnull(this, 'f1n', true);" id="f1" >
+</td></tr>

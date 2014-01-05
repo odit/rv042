@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta name="Expires" content="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	if (window.ActiveXObject)
+		document.formFU.image.style.width = "280px";
+
+	countSecond();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+var watchID = null;
+var watchRun = false;
+var BarLength=0;
+var Setup = 1;
+var percount=0;
+var mmsize;
+
+function countSecond()
+{
+	var sscount;
+	if (isNaN(document.formFU.imageSize.value) || parseInt(document.formFU.imageSize.value, 10) == 0)
+		document.formFU.imageSize.value = "29000000";
+
+	if (Setup == 2)
+		mmsize = (document.formFU.imageSize.value /1000000) * (document.formFU.imageSize.value /(5600000 * 8));
+	else
+		mmsize = document.formFU.imageSize.value /1000000;
+	sscount = mmsize *78/12;
+	percount=500/sscount;
+	startwatch(); 
+}
+
+function stopwatch()
+{
+  	if(watchRun) clearTimeout(watchID);
+  	watchRun = false;
+} 
+function startwatch()
+{
+ 	stopwatch();
+  	dayTime();
+} 
+
+function dayTime() 
+{
+	var Process = 0;
+	watchID = setTimeout("dayTime()",1000);
+	watchRun = true;
+	
+	BarLength = BarLength + percount;
+	if (Setup == 1 && BarLength >= 500)
+	{
+		Setup = 2;
+		BarLength = 0;
+		countSecond();
+		return;
+	}	
+	
+	if((Setup == 2 && parseInt(BarLength)/500)*100>=100)
+	{
+		document.formFU.percent.value="100%";
+		document.location.href="Rebooting.htm";
+	}
+	else
+	{	
+		Process = parseInt((parseInt(BarLength)/500)*100);
+		if (Setup == 2)
+			document.formFU.percent.value= 'Flash Update... ' + Process +"%";
+		else
+			document.formFU.percent.value= 'Flash Erase... ' + Process +"%";
+		
+		for (var i=1;i<16;i++)
+		{
+			var step = 's'+i;
+			if ((Process * 15) / 100 > i)
+			{
+				document.getElementById(step).src="images/step.gif";
+			}	
+			else
+				document.getElementById(step).src="images/space.gif";
+		}
+	}	
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Cancellink = ""; 
+var helplink ='';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 800;
+var head_width=80;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintUpgradeFirmwarePage(1);
+	PrintDownloadLink(0);
+	PrintEndContent();
+}
+
+function PrintUpgradeFirmwarePage(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+FixedTableWidth+'" border="'+Tableborder+'" style="'+Tablestyle+'">');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'"></td>');
+	document.write('<td width="'+(FixedTableWidth -(head_width * 3)) +'">');
+	document.write('<table width="100%" class="opacitytable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td height="10"></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td align="center">');
+	document.write('<input type="FILE" name="image" style="font-family:Arial;font-size: 12px; height:22px; background: url(\'images/opacity40.png\')" disabled>');
+	document.write('</td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td align="center">');	
+	PrintSTButton("firmware", "Upgrade", "chSubmit(this.form);");
+	SetButtonStatus("firmware", "disabled");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td colspan="2">');
+	document.write('<table width="100%" border='+Tableborder+' style="'+Tablestyle+'">');	
+	document.write('<tr>');
+	document.write('<td colspan="2"><img border="0" src="images/_blank.gif" width="1" height="15"></td>');
+	document.write('</tr>');		
+	document.write('<tr>');		
+	document.write('<td width="40" valign="top" rowspan="3">');
+	document.write('<img border="0" src="images/warning.gif">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('</td>');
+	document.write('<td width="5" valign="top">');
+	document.write('<div class="Warning">');
+	document.write('1.');
+	document.write('</div>');
+	document.write('</td>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('When choosing previous firmware versions, all settings will restore back to default value.');
+	document.write('</div>');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('2.');
+	document.write('</div>');
+	document.write('</td>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('Upgrading firmware may take a few minutes, please don\'t turn off the power or press the reset button.<br>');	
+	document.write('</div>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('3.');
+	document.write('</div>');
+	document.write('</td>');	
+	document.write('<td valign="top">');
+	document.write('<div class="Warning">');
+	document.write('Please don\'t close the window or disconnect the link, during the upgrade process. ');	
+	document.write('</div>');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td colspan="2"><img border="0" src="images/_blank.gif" width="1" height="15"></td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width="'+(FixedTableWidth -(head_width * 3)) +'">');
+	document.write('<table id="Process" align="center" border="'+Tableborder+'" style="border-collapse: collapse;">');
+	document.write('<tr>');	
+	document.write('<th align="center" style="padding-bottom:5px">');
+	document.write('<input type="text" class="FwDisplay" name="percent" id="percent" value="" size="17"  style="border-width:0px;background: url(\'images/opacity30.png\');border-style:none" readOnly>');
+	document.write('</th>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td class="UploadBar">');
+	document.write('<img border="0" src="images/space.gif" width="3" height="14" style="border-left: #BDBDC2 1px solid;">');	
+	document.write('<img border="0" id="s1" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s2" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s3" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s4" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s5" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s6" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s7" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s8" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s9" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s10" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s11" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s12" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s13" src="images/space.gif" width="11" height="14">');
+	document.write('<img border="0" id="s14" src="images/space.gif" width="11" height="14">');	
+	document.write('<img border="0" id="s15" src="images/space.gif" width="11" height="14">');	
+	document.write('<img border="0" src="images/space.gif" width="1" height="14" style="border-right:#BDBDC2 1px solid;">');		
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('</form>');		
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintDownloadLink(hasUnderLine)
+{
+	PrintBeginBlock(1, "Firmware Download");
+	document.write('<table width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'"></td>');	
+	document.write('<td>');
+	PrintSTButton("Download", "Firmware Download from Web Site", "window.open(\'http://www.linksysbycisco.com/US/en/support\')");
+	SetButtonStatus("Download", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize();" style="overflow:hidden">
+<script>PrintBackground("",FixedTableWidth);</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <form name="formdualwan" method="post" action="">
+      <input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+    </form>
+    
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 6);		// Set Selected Node
+   	  if (document.formdualwan.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");
+         initializeTree(foldersTree, 1); 		// Draw Menu & Layout
+	</script>
+
+	<form name="formFU" ENCTYPE="multipart/form-data" action="/cgi-bin/fw_upgrade.cgi" method="post">				
+	<input type="hidden" name="imageSize" value='<!--#nk_get GetImageSize=""-->'>
+	<input type="hidden" name="aftersubmit" value='<!--#nk_get IfAfterSubmit=""-->'>
+	
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

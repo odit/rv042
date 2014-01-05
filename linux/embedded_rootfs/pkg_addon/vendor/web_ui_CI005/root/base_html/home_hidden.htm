@@ -1,0 +1,298 @@
+<!--#nk_get WanConnActionSetup=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="no-cache">
+<meta name="Expires" content="-1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script language="JavaScript">
+var Layoutwidth = "90%";	
+var TableAlign ="center" ;
+var SpecialTableThclass = "TableSTG";			// Special Table Title
+var SpecialTablealign="center";				// Special Table Align
+var ColumTitleclass = "TableSTD";
+var ColumTitlealign = "center";
+var Contentclass = "TableSTH";					// Content Style for table
+var RowTitleclass = "TableSTG";				// Row Title Style for table
+var RowTitlealign = "right";
+
+function PrintContent()
+{
+	document.write('<center>');
+	PrintWanStatusTable();
+	document.write('<br>');
+	PrintPortStatusTable();
+	document.write('<br>');
+	PrintSystemInfo();
+	document.write('</center>');
+}
+
+function PrintWanStatusTable(isBegin)
+{
+
+	var num_wan=parseInt( document.formHomeHidden.wanNumbers.value );
+	var isdmz=parseInt( document.formHomeHidden.isDMZmode.value );
+	var wan_count=0;
+	var table_count=0;	
+
+	wan_count=num_wan;	
+	for(;wan_count>=5;)
+	{
+		table_count++;
+		if(wan_count==5 && num_wan==5)
+		{
+			eval("var table_"+table_count+"=5");
+			wan_count=wan_count-5;
+		}
+		if(wan_count>=5)
+		{
+			eval("var table_"+table_count+"=4");
+			wan_count=wan_count-4;
+		}
+		if(wan_count<5 && wan_count !=0)
+		{
+			table_count++;
+			eval("var table_"+table_count+"="+wan_count);
+		}
+	}
+	var wan_start=1;
+	var wan_end=0;
+	var wan_count=0;
+	for(i=1;i<=table_count;i++)
+	{
+		eval("var this_num=table_"+i);
+		wan_end=wan_end+this_num;
+		wan_count=0;
+		document.write('<table width="'+Layoutwidth+'" align="'+TableAlign+'" border="1" bordercolor="'+Tablebordercolor+'" cellspacing="'+Tablecellspacing+'" cellpadding="'+Tablecellpadding+'" style="'+Tablestyle+'">');
+		
+		//interface
+		document.write('<tr>');
+		document.write('<th class="'+SpecialTableThclass+'" height="23" align="center"  valign="middle">');
+		document.write('Interface');
+		document.write('</th>');
+
+		for(j=wan_start;j<=wan_end; j++)
+		{
+			wan_count++;
+			document.write('<td class ="'+ColumTitleclass+'" align="'+ColumTitlealign+'" width="'+(100/(this_num+1))+'%" valign="middle">');
+			if(j==num_wan && isdmz==1)
+				document.write('DMZ');
+			else
+				document.write('WAN'+j);
+			document.write('</td>');
+		}
+		document.write('</tr>');
+		//WAN IP
+		document.write('<tr>');
+		document.write('<th class ="'+SpecialTableThclass+'" height="23" align="center"  valign="middle">');
+		document.write('IP');
+		document.write('</th>');
+
+		for(j=wan_start;j<=wan_end; j++)
+		{
+			wan_count++;
+			if(j==num_wan && isdmz==1)
+				eval("var obj = document.getElementById(\"DisplayDMZIp\");"); 
+			else
+				eval("var obj = document.getElementById("+"\"wan"+j+"IP\""+");"); 
+			document.write('<td class ="'+ColumTitleclass+'" align="'+ColumTitlealign+'" width="'+(100/(this_num+1))+'%" valign="middle">');
+			document.write(obj.value);
+			document.write('</td>');
+		}
+		document.write('</tr>');
+		//WAN connectipn type
+		document.write('<tr>');
+		document.write('<th class ="'+SpecialTableThclass+'" height="23" align="center"  valign="middle">');
+		document.write('Connection Type');
+		document.write('</th>');
+
+		for(j=wan_start;j<=wan_end; j++)
+		{
+			wan_count++;
+			if(j==num_wan && isdmz==1)
+				eval("var obj = document.getElementById(\"DMZconn\");"); 
+			else
+				eval("var obj = document.getElementById("+"\"wan"+j+"conn\""+");"); 
+			document.write('<td class ="'+ColumTitleclass+'" align="'+ColumTitlealign+'" width="'+(100/(this_num+1))+'%" valign="middle">');
+			document.write(obj.value);
+			document.write('</td>');
+		}
+		document.write('</tr>');
+
+		document.write('</table>');
+		wan_start=wan_start+this_num;
+	}
+}
+
+function PrintPortStatusTable(isBegin)
+{
+	var num_lan=parseInt( document.formHomeHidden.totalNumbers.value ) - parseInt( document.formHomeHidden.wanNumbers.value );
+	var num_wan=parseInt( document.formHomeHidden.wanNumbers.value );
+
+	document.write('<table width="'+Layoutwidth+'" align="'+TableAlign+'" border="1" bordercolor="'+Tablebordercolor+'" cellspacing="'+Tablecellspacing+'" cellpadding="'+Tablecellpadding+'" style="'+Tablestyle+'">');
+	//Port ID
+	document.write('<tr>');
+	document.write('<td class ="'+SpecialTableThclass+'" width="18%" height="18" align="'+SpecialTablealign+'"  valign="middle">');
+	document.write("Port ID");
+	document.write('</td>');
+	for(var i=1 ; i<= num_lan; i++ )
+	{
+		document.write('<td class ="'+ColumTitleclass+'" align="'+ColumTitlealign+'" valign="middle">');
+		if(i<=eval( document.formHomeHidden.totalNumbers.value ) - eval( document.formHomeHidden.wanNumbers.value ))
+		{
+			document.write(i);
+		}
+		document.write('&nbsp;</td>');
+	}
+	document.write('</tr>');
+	
+	//Interface
+	document.write('<tr>');
+	document.write('<td class ="'+SpecialTableThclass+'" height="23" align="'+SpecialTablealign+'"  valign="middle">');
+	document.write("Interface");
+	document.write('</td>');
+	document.write('<td colspan='+num_lan+' class ="'+Contentclass+'" align="'+ColumTitlealign+'"  valign="middle">');
+	document.write("LAN ");
+	document.write('</td>');
+	document.write('</tr>');
+
+	document.write('<tr>');
+	document.write('<td class ="'+SpecialTableThclass+'" height="18" align="'+SpecialTablealign+'"  valign="middle">');
+	document.write("Status");
+	document.write('</td>');
+
+	for(var i=1; i<= num_lan; i++)
+	{
+		document.write('<td class ="'+Contentclass+'" align="'+ColumTitlealign+'" valign="middle">');
+		eval("var obj = document.getElementById("+"\"port"+i+"Status\""+");"); 
+		if (obj.value=="1") document.write("<font color="+Connectlinkcolor+">" + "Connect"+ "</font>");
+		else if (obj.value=="2") document.write("<font color="+Disablelinkcolor+">" + "Disabled" + "</font>");  
+		else document.write("<font color="+Enablelinkcolor+">" + "Enabled" + "</font>");
+		document.write('</td>');
+	}
+	
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('<br>');
+	
+	document.write('<table width="'+Layoutwidth+'" align="'+TableAlign+'" border="1" bordercolor="'+Tablebordercolor+'" cellspacing="'+Tablecellspacing+'" cellpadding="'+Tablecellpadding+'" style="'+Tablestyle+'">');
+	//Port ID
+	document.write('<tr>');
+	document.write('<td class ="'+SpecialTableThclass+'" width="18%" height="18" align="'+SpecialTablealign+'"  valign="middle">');
+	document.write("Port ID");
+	document.write('</td>');
+
+	for(var i=1;i<=num_wan;i++)
+	{
+		document.write('<td class ="'+ColumTitleclass+'" align="'+ColumTitlealign+'" valign="middle">');
+		if(i==document.formHomeHidden.wanNumbers.value  && document.formHomeHidden.isDMZmode.value =="1" )
+		{
+			 document.write("Interface"+"/DMZ");
+		}
+		else
+		{
+			document.write("Interface");
+		}
+		document.write('&nbsp;</td>');
+	}
+	document.write('</tr>');
+	//Interface
+	document.write('<tr>');
+	document.write('<th class ="'+SpecialTableThclass+'" width="18%" height="18" align="'+SpecialTablealign+'"  valign="middle">');
+	document.write("Interface");
+	document.write('</td>');
+	for(var i=1; i<= num_wan;i++)
+	{
+		document.write('<td class ="'+Contentclass+'" align="center">')
+
+		if(i<=num_wan - parseInt(document.formHomeHidden.isDMZmode.value))
+		{
+			document.write("WAN "+i);
+		}
+		else if(i==document.formHomeHidden.wanNumbers.value  && document.formHomeHidden.isDMZmode.value =="1" )
+		{
+			document.write("DMZ");
+		}
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	//status
+	document.write('<tr><td class ="'+SpecialTableThclass+'" height="18" align="'+SpecialTablealign+'"  valign="middle">');
+	document.write("Status");
+	document.write('</td>');
+	
+	for(var i = parseInt( document.formHomeHidden.totalNumbers.value ) - parseInt( document.formHomeHidden.wanNumbers.value ) + 1; i <= parseInt( document.formHomeHidden.totalNumbers.value ); i++ )
+	{
+		document.write('<td class ="'+ColumTitleclass+'" align="'+ColumTitlealign+'" valign="middle">');
+		eval("var obj = document.getElementById("+"\"port"+i+"Status\""+");"); 
+		if (obj.value=="1") document.write("<font color="+Connectlinkcolor+">" + "Connect"+ "</font>");
+		else if (obj.value=="2") document.write("<font color="+Disablelinkcolor+">" + "Disabled" + "</font>");  
+		else document.write("<font color="+Enablelinkcolor+">" + "Enabled" + "</font>");
+	}
+	document.write('</td></tr>');
+
+	document.write('</table>');
+}
+
+function PrintSystemInfo()
+{
+	document.write('<table align="'+TableAlign+'" border="1" bordercolor="'+Tablebordercolor+'" cellspacing="'+Tablecellspacing+'" cellpadding="'+Tablecellpadding+'" style="'+Tablestyle+'">');
+	document.write('<tr><th class="'+RowTitleclass+'" align="'+RowTitlealign+'" height="23">');
+	document.write("Current Time");
+	document.write('</th><td class="'+Contentclass+'">&nbsp;')
+	document.write('<!--#config timefmt="%a %b %e %Y %H:%M:%S"-->');
+	document.write('<!--#echo var="DATE_LOCAL"-->');
+	document.write('</td></tr>');
+	document.write('</table>');
+}
+</script>
+</head>
+<body >
+	<form name="formHomeHidden" method="post">
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name ="totalNumbers" value='<!--#nk_get GetSystemNum="total_port_num"-->'>
+	<input type="hidden" name="port1Status" id="port1Status" value='<!--#nk_get PortInformation="1"-->'>
+	<input type="hidden" name="port2Status" id="port2Status" value='<!--#nk_get PortInformation="2"-->'>
+	<input type="hidden" name="port3Status" id="port3Status" value='<!--#nk_get PortInformation="3"-->'>
+	<input type="hidden" name="port4Status" id="port4Status" value='<!--#nk_get PortInformation="4"-->'>
+	<input type="hidden" name="port5Status" id="port5Status" value='<!--#nk_get PortInformation="5"-->'>
+	<input type="hidden" name="port6Status" id="port6Status" value='<!--#nk_get PortInformation="6"-->'>
+	<input type="hidden" name="port7Status" id="port7Status" value='<!--#nk_get PortInformation="7"-->'>
+	<input type="hidden" name="port8Status" id="port8Status" value='<!--#nk_get PortInformation="8"-->'>
+	<input type="hidden" name="port9Status" id="port9Status" value='<!--#nk_get PortInformation="9"-->'>
+	<input type="hidden" name="port10Status" id="port10Status" value='<!--#nk_get PortInformation="10"-->'>
+	<input type="hidden" name="port11Status" id="port11Status" value='<!--#nk_get PortInformation="11"-->'>
+	<input type="hidden" name="port12Status" id="port12Status" value='<!--#nk_get PortInformation="12"-->'>
+	<input type="hidden" name="port13Status" id="port13Status" value='<!--#nk_get PortInformation="13"-->'>
+	<input type="hidden" name="port14Status" id="port14Status" value='<!--#nk_get PortInformation="14"-->'>
+	<input type="hidden" name="port15Status" id="port15Status" value='<!--#nk_get PortInformation="15"-->'>
+	<input type="hidden" name="port16Status" id="port16Status" value='<!--#nk_get PortInformation="16"-->'>
+	<input type="hidden" name="port17Status" id="port17Status" value='<!--#nk_get PortInformation="17"-->'>
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>		
+	<input type="hidden" name="DisplayDMZIp" id="DisplayDMZIp" value='<!--#nk_get DisplayDMZIp=""-->'>	
+	<input type="hidden" name="DMZconn" id="DMZconn" value='---'>	
+	<input type="hidden" name="wan1IP" id="wan1IP" value='<!--#nk_get WanIP="1"-->'>
+	<input type="hidden" name="wan2IP" id="wan2IP" value='<!--#nk_get WanIP="2"-->'>
+	<input type="hidden" name="wan3IP" id="wan3IP" value='<!--#nk_get WanIP="3"-->'>
+	<input type="hidden" name="wan4IP" id="wan4IP" value='<!--#nk_get WanIP="4"-->'>
+	<input type="hidden" name="wan5IP" id="wan5IP" value='<!--#nk_get WanIP="5"-->'>
+	<input type="hidden" name="wan6IP" id="wan6IP" value='<!--#nk_get WanIP="6"-->'>
+	<input type="hidden" name="wan7IP" id="wan7IP" value='<!--#nk_get WanIP="7"-->'>
+	<input type="hidden" name="wan8IP" id="wan8IP" value='<!--#nk_get WanIP="8"-->'>
+	<input type="hidden" name="wan1conn" id="wan1conn" value='<!--#nk_get WanConnectionType="1"-->'>
+	<input type="hidden" name="wan2conn" id="wan2conn" value='<!--#nk_get WanConnectionType="2"-->'>
+	<input type="hidden" name="wan3conn" id="wan3conn" value='<!--#nk_get WanConnectionType="3"-->'>
+	<input type="hidden" name="wan4conn" id="wan4conn" value='<!--#nk_get WanConnectionType="4"-->'>
+	<input type="hidden" name="wan5conn" id="wan5conn" value='<!--#nk_get WanConnectionType="5"-->'>
+	<input type="hidden" name="wan6conn" id="wan6conn" value='<!--#nk_get WanConnectionType="6"-->'>
+	<input type="hidden" name="wan7conn" id="wan7conn" value='<!--#nk_get WanConnectionType="7"-->'>
+	<input type="hidden" name="wan8conn" id="wan8conn" value='<!--#nk_get WanConnectionType="8"-->'>
+	
+	<script>PrintContent();</script>
+	</form>
+</body>
+</html>
+

@@ -1,0 +1,2210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+
+var wQos_table=null;
+function Entryfunction()
+{
+	if (GetURLParam() != "")
+		document.getElementById("Bandwidth Management Type").scrollIntoView(true);	
+	clearContent(document.formQOS);
+	chDismatch();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function chDismatch()
+{
+	var RateControl=document.getElementById("RateControlTable");
+	var Priority=document.getElementById("PriorityTable");
+	if(document.formQOS.qosType[1].checked==true)
+	{
+		RateControl.style.display="none";
+		Priority.style.display="";
+	}
+	else
+	{
+		RateControl.style.display="";
+		Priority.style.display="none";
+	}
+}
+function chSubmit(F)
+{
+	var p=-1;
+	if (document.formQOS.qosType[0].checked==true)
+	{
+		clearRateContent(F);
+		F.RC_valid.checked=false;
+		if (ckSaveRate(F.RC_link, F.Percent, F.RC_valid, F.qosRateList, p) < 0)
+		{	 
+		    return;
+		}
+		selAll(F.qosRateList);
+	}
+	else if (document.formQOS.qosType[1].checked==true)
+	{
+		clearPrioContent(F);
+		selAll(F.qosPrioList);
+	}
+	window.status=wSave;
+	F.log_ch.value=1;
+	F.submitStatus.value=1;
+	F.submit();
+}
+
+function falseSubmit(F)
+{
+	var RateControl=document.getElementById("RateControlTable");
+	var Priority=document.getElementById("PriorityTable");
+	if(document.formQOS.qosType[0].checked==true)
+	{
+		RateControl.style.display="";
+		Priority.style.display="none";
+	}
+	else 
+	{
+		RateControl.style.display="none";
+		Priority.style.display="";
+	}
+
+	F.submitStatus.value=0; 
+	F.action="qos.htm#1";
+	F.submit();
+}
+
+var serviceWindow01=null;
+var serviceWindow02=null;
+function openService(n)
+{
+	if (n=="01") serviceWindow01=window.open('service01.htm','sW2','menubar=no,scrollbars=no,width=500,height=420');
+	if (n=="02") serviceWindow02=window.open('service02.htm','sW3','menubar=no,scrollbars=no,width=500,height=420');
+}	
+function closeService()
+{
+	timer1=setTimeout("closeChild()",1000);
+	timer2=setTimeout("refreshMe()",3000);
+}
+function refreshMe()
+{
+	document.formQOS.submitStatus.value=0;
+	document.formQOS.submit();
+}
+function closeChild()
+{ 
+	if (serviceWindow01!=null)
+	{
+		serviceWindow01.close();
+		serviceWindow01=null;
+	}
+	if (serviceWindow02!=null)
+	{
+		serviceWindow02.close();
+		serviceWindow02=null;
+	}
+	return;
+}
+
+function closeQosTable()
+{
+    if (wQos_table!=null)
+	{
+	    closeTable(wQos_table);
+	}
+}
+function selectEntry(t, n)
+{
+	if ( t==1 )
+	if ( document.formQOS.qosRateList )
+	{
+		for (var i=0; i < document.formQOS.qosRateList.length; i++)
+			document.formQOS.qosRateList.options[i].selected=false;
+		document.formQOS.qosRateList.options[n].selected=true;
+		showRateList(document.formQOS.qosRateList,document.formQOS.RatewanEnable,document.formQOS.wanNumbers);
+	}
+
+	if ( t==2 )
+	if ( document.formQOS.qosPrioList )
+	{
+		for (var i=0; i < document.formQOS.qosPrioList.length; i++)
+	    		document.formQOS.qosPrioList.options[i].selected=false;
+		document.formQOS.qosPrioList.options[n].selected=true;
+		showPrioList(document.formQOS.qosPrioList,document.formQOS.PrioritywanEnable,document.formQOS.wanNumbers);
+	}
+}
+function ckSaveRate(direct, rate, status, s, pp)
+{
+    var wanChecks=0;
+    var maxUpstream=0;
+	var maxDownstream=0;
+	var listUpstream=0;
+	var listDownstream=0;
+	var inputStream=0;
+	var p;
+  	var q; 
+  	var forwardString; 
+  	var rightString;
+  	var tmpString;
+  	var ts=new tmpWord(14); 
+	
+	var wanNumbers=parseInt(document.formQOS.wanNumbers.value) - parseInt(document.formQOS.isDMZmode.value );
+	if(wanNumbers>1)
+	{
+		if (document.formQOS.RatewanEnable[0].checked == true)
+		{
+			maxUpstream+=parseInt(document.formQOS.wan1Upstream.value);
+			maxDownstream+=parseInt(document.formQOS.wan1Downstream.value);
+			wanChecks +=1;
+		}
+		if (document.formQOS.RatewanEnable[1].checked == true)
+		{
+			maxUpstream+=parseInt(document.formQOS.wan2Upstream.value);
+			maxDownstream+=parseInt(document.formQOS.wan2Downstream.value);
+			wanChecks +=1;
+		}
+		if (document.formQOS.RatewanEnable[2])
+		if (document.formQOS.RatewanEnable[2].checked == true)
+		{
+			maxUpstream+=parseInt(document.formQOS.wan3Upstream.value);
+			maxDownstream+=parseInt(document.formQOS.wan3Downstream.value);
+			wanChecks +=1;
+		}
+		if (document.formQOS.RatewanEnable[3])
+		if (document.formQOS.RatewanEnable[3].checked == true)
+		{
+			maxUpstream+=parseInt(document.formQOS.wan4Upstream.value);
+			maxDownstream+=parseInt(document.formQOS.wan4Downstream.value);
+			wanChecks +=1;
+		}
+			if (document.formQOS.RatewanEnable[4])
+		if (document.formQOS.RatewanEnable[4].checked == true)
+		{
+			maxUpstream+=parseInt(document.formQOS.wan5Upstream.value);
+			maxDownstream+=parseInt(document.formQOS.wan5Downstream.value);
+			wanChecks +=1;
+		}
+			if (document.formQOS.RatewanEnable[5])
+		if (document.formQOS.RatewanEnable[5].checked == true)
+		{
+			maxUpstream+=parseInt(document.formQOS.wan6Upstream.value);
+			maxDownstream+=parseInt(document.formQOS.wan6Downstream.value);
+			wanChecks +=1;
+		}
+			if (document.formQOS.RatewanEnable[6])
+		if (document.formQOS.RatewanEnable[6].checked == true)
+		{
+
+			maxUpstream+=parseInt(document.formQOS.wan7Upstream.value);
+			maxDownstream+=parseInt(document.formQOS.wan7Downstream.value);
+			wanChecks +=1;
+		}
+			if (document.formQOS.RatewanEnable[7])
+		if (document.formQOS.RatewanEnable[7].checked == true)
+		{
+
+	    maxUpstream+=parseInt(document.formQOS.wan8Upstream.value);
+		maxDownstream+=parseInt(document.formQOS.wan8Downstream.value);
+		wanChecks +=1;
+		}
+	}
+	else
+	{
+		if (document.formQOS.RatewanEnable.checked == true)
+		{
+			maxUpstream+=parseInt(document.formQOS.wan1Upstream.value);
+			maxDownstream+=parseInt(document.formQOS.wan1Downstream.value);
+			wanChecks +=1;
+		}
+	}
+	if (wanChecks == 0) return 1;
+	
+	for (var i=0; i < s.length; i++)
+  	{
+		forwardString=s.options[i].value;
+
+		rightString=forwardString;
+		q=rightString.length;      
+		p=rightString.lastIndexOf("{");  
+		ts[1]=rightString.substring(0,p);
+		tmpString=rightString; 
+		rightString=tmpString.substring(p+1,q);      
+
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[2]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		q=rightString.length;
+		p=rightString.indexOf(".");
+
+
+		ts[3]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[4]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);   
+		q=rightString.length;
+		p=rightString.indexOf(";");
+		ts[5]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf("(");
+		ts[6]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[7]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[8]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[9]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(")");
+		ts[10]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+
+		p=rightString.indexOf(";");
+		ts[11]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+
+		p=rightString.indexOf(";");
+		ts[12]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+
+		p=rightString.indexOf(";");
+		ts[13]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+
+		p=rightString.indexOf("}");
+		ts[14]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		if (pp != i)
+		{
+			if (ts[14]=="1")
+			{
+			    if (ts[11]=="2")
+			        listUpstream+=parseInt(ts[12]);
+				else
+				    listDownstream+=parseInt(ts[12]);
+			}
+		}    	
+  	}
+
+	if (parseInt(listUpstream) > parseInt(maxUpstream))
+	{   	        		
+		alert(aLimitQosStream+maxUpstream+"(Kbit/Sec)");
+		return -1;	
+	}
+
+	if (parseInt(listDownstream) > parseInt(maxDownstream))
+	{   	        		
+		alert(aLimitQosStream+maxDownstream+"(Kbit/Sec)");
+		return -1;	
+	}
+  	return 1;
+}//ckSaveRate
+function PrintRateControlServiceData(I)
+{
+	var i=0, j=-1;
+	var k=0, l, m;
+	var tmp, tmp2, tmp3;
+	var outputer="";
+	tmp=I.value;
+	k=tmp.length;
+	index=tmp.indexOf("</option>");
+	tmp2=tmp.substring(0,index);
+	tmp=tmp.substring(index+8,k);
+	outputer+=tmp2;
+	outputer+="</option>";
+	do{
+		k=tmp.length;
+		index=tmp.indexOf("</option>");
+		tmp2=tmp.substring(0,index);
+		tmp=tmp.substring(index+8,k);
+		/*trace tmp2*/
+		tmp3=tmp2;
+		l=tmp3.indexOf('option value="');
+		m=tmp3.indexOf('">',l+14);
+		PT=tmp3.substring(l+14,m);
+		/*trace tmp2*/
+		if(PT!="16777235")
+		{
+		outputer+=tmp2;
+		outputer+="</option>";
+		}
+	}while(index != "-1");
+
+	document.write(outputer);
+	
+}	
+function PrintPrioityControlServiceData(I)
+{
+	var i=0, j=-1;
+	var k=0, l, m;
+	var tmp, tmp2, tmp3;
+	var outputer="";
+	tmp=I.value;
+	do{
+		k=tmp.length;
+		index=tmp.indexOf("</option>");
+		tmp2=tmp.substring(0,index);
+		tmp=tmp.substring(index+8,k);
+		/*trace tmp2*/
+		tmp3=tmp2;
+		l=tmp3.indexOf('option value="');
+		m=tmp3.indexOf('">',l+14);
+		PT=tmp3.substring(l+14,m);
+		/*trace tmp2*/
+		if(PT!="16777235")
+		{
+		   outputer+=tmp2;
+		   outputer+="</option>";
+		}
+	}while(index != "-1");
+	document.write(outputer);
+}
+
+function RateKbitCheck(I)
+{
+	return validatenum(I, 100000, 1, aRateKbitCheckBegin+"1~100000"+aRateKbitCheckEnd);
+}
+
+function ckDuplicate(Pro,IPBeg4,IPBeg1,IPBeg2,IPBeg3,IPEnd4, addr1, addr2, addr3, addr4, direct, s, p,wan,status,rate,maxrate)
+{
+  var sString, pos;
+  var entryString, inputString,temp,rightString,tmpString,wantemp;
+  var aa,q,enable,pp=0,minbandwidth=0,maxbandwidth=0,bandwitah=0,temp1=0;
+  var WanEnable="";
+  var bandwitah_up=new tmpWord(8);
+  var bandwitah_dn=new tmpWord(8);
+  var pos2,pos3,entryString1,entryString2,startIP,endIP;
+  var wanNumbers=parseInt(document.formQOS.wanNumbers.value) - parseInt(document.formQOS.isDMZmode.value );
+  for (var i=0; i < s.length; i++)
+  {
+	sString=s.options[i].value;
+	pos=sString.lastIndexOf(")");
+
+	entryString=sString.substring(0,pos+2); 
+	aa=entryString.indexOf(";");
+	entryString1=entryString.substring(0,aa)
+	pos2=entryString1.lastIndexOf(".");
+	startIP=entryString1.substring(pos2+1,aa);
+	entryString1=entryString1.substring(0,pos2);	
+
+	pos3=sString.lastIndexOf("(");	
+	endIP=sString.substring(aa+1,pos3);
+	entryString2=sString.substring(pos3,pos+2);
+
+	entryString=entryString1+entryString2;
+	q=sString.length
+	rightString=sString.substring(pos+3,q);
+	
+	aa=rightString.indexOf(";");
+  	minbandwidth=rightString.substring(0,aa); // min
+  	tmpString=rightString;
+  	rightString=tmpString.substring(aa+1,q);
+  	q=rightString.length;
+
+	aa=rightString.indexOf(";");
+  	temp=rightString.substring(0,aa); // max
+  	tmpString=rightString;
+  	rightString=tmpString.substring(aa+1,q);
+  	q=rightString.length;
+   
+	aa=rightString.indexOf(";");
+  	enable=rightString.substring(0,aa); // enable
+  	tmpString=rightString;
+  	rightString=tmpString.substring(aa+1,q);
+  	q=rightString.length;
+	
+	aa=rightString.indexOf(";");
+  	temp=rightString.substring(0,aa); 
+  	tmpString=rightString;
+  	rightString=tmpString.substring(aa+1,q);
+  	q=rightString.length;
+	
+  	aa=rightString.indexOf("}");
+  	wantemp=rightString.substring(0,aa); // WANnumber
+  	tmpString=rightString;
+  	rightString=tmpString.substring(aa+1,q); 	
+	if (p != i)
+	if(enable==1)//for bandwidth
+	{
+		bandwitah=parseInt(wantemp);
+		for(var k=0;k<parseInt(document.formQOS.wanNumbers.value) - parseInt(document.formQOS.isDMZmode.value );k++)
+		{
+		 pp=parseInt(bandwitah)%10;	
+		 if(pp!=0)
+		  {
+		  if(sString.substring(pos+1,pos+2)==2)
+		  bandwitah_up[pp]=parseInt(bandwitah_up[pp])+parseInt(minbandwidth);
+		  else
+		  bandwitah_dn[pp]=parseInt(bandwitah_dn[pp])+parseInt(minbandwidth);	  
+		  }
+		  if(pp==0)
+		  k=parseInt(document.formQOS.wanNumbers.value) - parseInt(document.formQOS.isDMZmode.value );
+		bandwitah=(bandwitah-pp)/10;
+		}
+	}
+	
+	inputString=Pro.value;
+	inputString+="{";
+	inputString+=IPBeg1;
+	inputString+=".";
+	inputString+=IPBeg2;
+	inputString+=".";
+	inputString+=IPBeg3;
+	inputString+="(";
+	inputString+=addr1.value;
+	inputString+=".";
+	inputString+=addr2.value;
+	inputString+=".";
+	inputString+=addr3.value;
+	inputString+=".";
+	inputString+=addr4.value;
+	inputString+=")";
+	
+	if (direct.selectedIndex==0) inputString+="2";
+	else if (direct.selectedIndex==1) inputString+="1"; 
+	else if (direct.selectedIndex==2) inputString+="4";
+	else if (direct.selectedIndex==3) inputString+="3";		
+	else inputString+="6"; 
+	if (entryString==inputString)
+	{
+		if(status.checked==true)
+		if(enable==1)	
+	        if (p != i)
+		{
+			if (wan)
+			{
+				for(var j=0;j<parseInt(document.formQOS.wanNumbers.value) - parseInt(document.formQOS.isDMZmode.value );j++)//for entry
+				{
+				
+					pp=parseInt(wantemp)%10;
+					if(pp!=0)
+					for(temp1=0;temp1<parseInt(document.formQOS.wanNumbers.value) - parseInt(document.formQOS.isDMZmode.value );temp1++)//for input
+					if(wan[temp1])
+					if(wan[temp1].checked==true)
+					if(pp==(temp1+1))
+					{
+						if( (IPBeg4<=startIP&&IPEnd4>=startIP)||(IPEnd4>=endIP&&IPBeg4<=endIP ))
+							{
+			        	   alert(aDuplicatedEntry);
+					        return -1;
+							}
+					}
+					wantemp=(parseInt(wantemp)-pp)/10;
+					if(pp==0)
+					j=parseInt(document.formQOS.wanNumbers.value) - parseInt(document.formQOS.isDMZmode.value );
+				}
+			}
+		}
+	}
+  }
+
+	if(status.checked==true)
+	for(temp1=0;temp1<wanNumbers;temp1++)//for input
+	{
+		if(wan[temp1])
+		if(wan[temp1].checked==true)
+		{
+		if (direct.selectedIndex==0||direct.selectedIndex==2)
+			bandwitah_up[temp1+1]=parseInt(bandwitah_up[temp1+1])+parseInt(rate.value);//* counter
+		else
+			bandwitah_dn[temp1+1]=parseInt(bandwitah_dn[temp1+1])+parseInt(rate.value);
+		} 
+	}
+
+	if(document.formQOS.ibwuWAN1)
+	{
+		if(document.formQOS.ibwuWAN1.value<bandwitah_up[1])
+		{
+			alert(aLimitMinRate+"1"+aRateEnd+document.formQOS.ibwuWAN1.value+"(Kbit/Sec)");
+			return -1;
+		}
+		if(document.formQOS.ibwWAN1.value<bandwitah_dn[1])
+		{
+			alert(aLimitMinRate+"1"+aRateEnd+document.formQOS.ibwWAN1.value+"(Kbit/Sec)");
+			return -1;
+		}
+		if(wan)
+		if(wan.checked==true)	
+		if (direct.selectedIndex==0||direct.selectedIndex==2)
+		{
+			if(parseInt(document.formQOS.ibwuWAN1.value)<parseInt(maxrate.value))
+			{
+				alert(aLimitMaxRate+"1"+aRateEnd+document.formQOS.ibwuWAN1.value+"(Kbit/Sec)");
+				return -1;
+			}
+		}
+		else
+		{
+			if(parseInt(document.formQOS.ibwWAN1.value)<parseInt(maxrate.value))
+			{
+				alert(aLimitMaxRate+"1"+aRateEnd+document.formQOS.ibwWAN1.value+"(Kbit/Sec)");
+				return -1;
+			}
+		}
+		if(wan[0])
+		if(wan[0].checked==true)	
+		if (direct.selectedIndex==0||direct.selectedIndex==2)
+		{
+			if(parseInt(document.formQOS.ibwuWAN1.value)<parseInt(maxrate.value))
+			{
+				alert(aLimitMaxRate+"1"+aRateEnd+document.formQOS.ibwuWAN1.value+"(Kbit/Sec)");
+				return -1;
+			}
+		}
+		else
+		{
+			if(parseInt(document.formQOS.ibwWAN1.value)<parseInt(maxrate.value))
+			{
+				alert(aLimitMaxRate+"1"+aRateEnd+document.formQOS.ibwWAN1.value+"(Kbit/Sec)");
+				return -1;
+			}
+		}
+	}
+	if(document.formQOS.ibwuWAN2)
+	{
+		if(document.formQOS.ibwuWAN2.value<bandwitah_up[2])
+		{
+			alert(aLimitMinRate+"2"+aRateEnd+document.formQOS.ibwuWAN2.value+"(Kbit/Sec)");
+			return -1;
+		}
+		if(document.formQOS.ibwWAN2.value<bandwitah_dn[2])
+		{
+			alert(aLimitMinRate+"2"+aRateEnd+document.formQOS.ibwWAN2.value+"(Kbit/Sec)");
+			return -1;
+		}
+		if(wan[1])
+		if(wan[1].checked==true)		
+		if (direct.selectedIndex==0||direct.selectedIndex==2)
+		{
+			if(parseInt(document.formQOS.ibwuWAN2.value)<parseInt(maxrate.value))
+			{
+				alert(aLimitMaxRate+"2"+aRateEnd+document.formQOS.ibwuWAN2.value+"(Kbit/Sec)");
+				return -1;
+			}
+		}
+		else
+		if(parseInt(document.formQOS.ibwWAN2.value)<parseInt(maxrate.value))
+		{
+			alert(aLimitMaxRate+"2"+aRateEnd+document.formQOS.ibwWAN2.value+"(Kbit/Sec)");
+			return -1;
+		}	
+	}
+	if(document.formQOS.ibwuWAN3)
+	{
+		if(document.formQOS.ibwuWAN3.value<bandwitah_up[3])
+		{
+			alert(aLimitMinRate+"3"+aRateEnd+document.formQOS.ibwuWAN3.value+"(Kbit/Sec)");
+			return -1;
+		}
+		if(document.formQOS.ibwWAN3.value<bandwitah_dn[3])
+		{
+			alert(aLimitMinRate+"3"+aRateEnd+document.formQOS.ibwWAN3.value+"(Kbit/Sec)");
+			return -1;
+		}
+		if(wan[2])
+		if(wan[2].checked==true)		
+		if (direct.selectedIndex==0||direct.selectedIndex==2)
+		{
+			if(parseInt(document.formQOS.ibwuWAN3.value)<parseInt(maxrate.value))
+			{
+				alert(aLimitMaxRate+"3"+aRateEnd+document.formQOS.ibwuWAN3.value+"(Kbit/Sec)");
+				return -1;
+			}
+		}
+		else
+		if(parseInt(document.formQOS.ibwWAN3.value)<parseInt(maxrate.value))
+		{
+			alert(aLimitMaxRate+"3"+aRateEnd+document.formQOS.ibwWAN3.value+"(Kbit/Sec)");
+			return -1;
+		}	
+	}
+	if(document.formQOS.ibwuWAN4)
+	{
+		if(document.formQOS.ibwuWAN4.value<bandwitah_up[4])
+		{
+			alert(aLimitMinRate+"4"+aRateEnd+document.formQOS.ibwuWAN4.value+"(Kbit/Sec)");
+			return -1;
+		}
+		if(document.formQOS.ibwWAN4.value<bandwitah_dn[4])
+		{
+			alert(aLimitMinRate+"4"+aRateEnd+document.formQOS.ibwWAN4.value+"(Kbit/Sec)");
+			return -1;
+		}
+		if(wan[3])
+		if(wan[3].checked==true)	
+		if (direct.selectedIndex==0||direct.selectedIndex==2)
+		{
+			if(parseInt(document.formQOS.ibwuWAN4.value)<parseInt(maxrate.value))
+			{
+				alert(aLimitMaxRate+"4"+aRateEnd+document.formQOS.ibwuWAN4.value+"(Kbit/Sec)");
+				return -1;
+			}
+		}
+		else
+		if(parseInt(document.formQOS.ibwWAN4.value)<parseInt(maxrate.value))
+		{
+			alert(aLimitMaxRate+"4"+aRateEnd+document.formQOS.ibwWAN4.value+"(Kbit/Sec)");
+			return -1;
+		}	
+	}
+	
+	if(document.formQOS.ibwuWAN5)
+	{
+		if(document.formQOS.ibwuWAN5.value<bandwitah_up[5])
+		{
+			alert(aLimitMinRate+"5"+aRateEnd+document.formQOS.ibwuWAN5.value+"(Kbit/Sec)");
+			return -1;
+		}
+		if(document.formQOS.ibwWAN5.value<bandwitah_dn[5])
+		{
+			alert(aLimitMinRate+"5"+aRateEnd+document.formQOS.ibwWAN5.value+"(Kbit/Sec)");
+			return -1;
+		}
+	if(wan[4])
+	if(wan[4].checked==true)	
+	if (direct.selectedIndex==0||direct.selectedIndex==2)
+	{
+		if(parseInt(document.formQOS.ibwuWAN5.value)<parseInt(maxrate.value))
+		{
+			alert(aLimitMaxRate+"5"+aRateEnd+document.formQOS.ibwuWAN5.value+"(Kbit/Sec)");
+			return -1;
+		}
+	}
+	else
+	if(parseInt(document.formQOS.ibwWAN5.value)<parseInt(maxrate.value))
+	{
+		alert(aLimitMaxRate+"5"+aRateEnd+document.formQOS.ibwWAN5.value+"(Kbit/Sec)");
+		return -1;
+	}	
+}
+
+if(document.formQOS.ibwuWAN6)
+{
+	if(document.formQOS.ibwuWAN6.value<bandwitah_up[6])
+	{
+		alert(aLimitMinRate+"6"+aRateEnd+document.formQOS.ibwuWAN6.value+"(Kbit/Sec)");
+		return -1;
+	}
+	if(document.formQOS.ibwWAN6.value<bandwitah_dn[6])
+	{
+		alert(aLimitMinRate+"6"+aRateEnd+document.formQOS.ibwWAN6.value+"(Kbit/Sec)");
+		return -1;
+	}
+	if(wan[5])
+	if(wan[5].checked==true)	
+	if (direct.selectedIndex==0||direct.selectedIndex==2)
+	{
+		if(parseInt(document.formQOS.ibwuWAN6.value)<parseInt(maxrate.value))
+		{
+			alert(aLimitMaxRate+"6"+aRateEnd+document.formQOS.ibwuWAN6.value+"(Kbit/Sec)");
+			return -1;
+		}
+	}
+	else
+	if(parseInt(document.formQOS.ibwWAN6.value)<parseInt(maxrate.value))
+	{
+		alert(aLimitMaxRate+"6"+aRateEnd+document.formQOS.ibwWAN6.value+"(Kbit/Sec)");
+		return -1;
+	}	
+}
+if(document.formQOS.ibwuWAN7)
+{
+	if(document.formQOS.ibwuWAN7.value<bandwitah_up[7])
+	{
+		alert(aLimitMinRate+"7"+aRateEnd+document.formQOS.ibwuWAN7.value+"(Kbit/Sec)");
+		return -1;
+	}
+	if(document.formQOS.ibwWAN7.value<bandwitah_dn[7])
+	{
+		alert(aLimitMinRate+"7"+aRateEnd+document.formQOS.ibwWAN7.value+"(Kbit/Sec)");
+		return -1;
+	}
+	if(wan[6])
+	if(wan[6].checked==true)	
+	if (direct.selectedIndex==0||direct.selectedIndex==2)
+	{
+		if(parseInt(document.formQOS.ibwuWAN7.value)<parseInt(maxrate.value))
+		{
+			alert(aLimitMaxRate+"7"+aRateEnd+document.formQOS.ibwuWAN7.value+"(Kbit/Sec)");
+			return -1;
+		}
+	}
+	else
+	if(parseInt(document.formQOS.ibwWAN7.value)<parseInt(maxrate.value))
+	{
+		alert(aLimitMaxRate+"7"+aRateEnd+document.formQOS.ibwWAN7.value+"(Kbit/Sec)");
+		return -1;
+	}	
+}
+if(document.formQOS.ibwuWAN8)
+{
+	if(document.formQOS.ibwuWAN8.value<bandwitah_up[8])
+	{
+		alert(aLimitMinRate+"8"+aRateEnd+document.formQOS.ibwuWAN8.value+"(Kbit/Sec)");
+		return -1;
+	}
+	if(document.formQOS.ibwWAN8.value<bandwitah_dn[8])
+	{
+		alert(aLimitMinRate+"8"+aRateEnd+document.formQOS.ibwWAN8.value+"(Kbit/Sec)");
+		return -1;
+	}
+	if(wan[7])
+	if(wan[7].checked==true)	
+	if (direct.selectedIndex==0||direct.selectedIndex==2)
+	{
+		if(parseInt(document.formQOS.ibwuWAN8.value)<parseInt(maxrate.value))
+		{
+			alert(aLimitMaxRate+"8"+aRateEnd+document.formQOS.ibwuWAN8.value+"(Kbit/Sec)");
+			return -1;
+		}
+	}
+	else
+	if(parseInt(document.formQOS.ibwWAN8.value)<parseInt(maxrate.value))
+	{
+		alert(aLimitMaxRate+"8"+aRateEnd+document.formQOS.ibwWAN8.value+"(Kbit/Sec)");
+		return -1;
+	}	
+}
+  return 1;
+}//ckDuplicate
+function clearRateContent(F)
+{
+	if (F.qosRateList)
+	{
+		if (F.RC_protocol.options[0])
+	    		F.RC_protocol.options[0].selected=true;
+		F.IPbegin.value="";
+		F.IPend.value="";
+		F.Addr1.value="0";
+		F.Addr2.value="0";
+		F.Addr3.value="0";
+		F.Addr4.value="0";
+		F.Percent.value="";
+		F.Maxrate.value="";
+	   
+	    	F.RC_valid.checked=false;  
+
+
+	    	for (var i=0; i < F.qosRateList.length; i++)
+	    	{
+	      		F.qosRateList.options[i].selected=false;
+	    	}	    
+		var wantotalnumber=parseInt(document.formQOS.wanNumbers.value)-parseInt(document.formQOS.isDMZmode.value);
+		if(wantotalnumber>1)
+		{
+			for (var j=0 ; j < wantotalnumber ; j++)
+			{
+				if(F.RatewanEnable[j])
+				{
+					if(F.RatewanEnable[j].checked )
+					F.RatewanEnable[j].checked=false;
+				}
+			}
+		}
+		else
+		{
+			if(F.RatewanEnable)
+			{
+				if(F.RatewanEnable.checked )
+				F.RatewanEnable.checked=false;
+			}
+		}
+
+	    	F.addRate.value="Add to list"; 
+		SetButtonStatus('deleteRate','disabled');		
+		SetButtonStatus('showNew1','disabled'); 
+	}
+}//clearRateContent
+function clearPrioContent(F)
+{
+	if (F.qosPrioList)
+	{
+		if (F.P_protocol.options[0])
+	      		F.P_protocol.options[0].selected=true;
+			    
+	        F.P_valid.checked=false;  
+	        for (var i=0; i < F.qosPrioList.length; i++)
+	        {
+	            F.qosPrioList.options[i].selected=false;
+	        }
+		if(parseInt(F.wanNumbers.value-F.isDMZmode.value)>1)
+		{
+			for (var j=0;j<F.wanNumbers.value;j++)
+			if(F.PrioritywanEnable[j])
+			F.PrioritywanEnable[j].checked=false;
+		}
+		else
+		{
+			if(F.PrioritywanEnable)
+				F.PrioritywanEnable.checked=false;
+		}
+	
+		F.addPrio.value="Add to list"; 
+		SetButtonStatus('deletePrio','disabled');		
+		SetButtonStatus('showNew2','disabled'); 
+	}
+}
+function clearContent(F)
+{
+	if (F.qosRateList) clearRateContent(F);
+	if (F.qosPrioList) clearPrioContent(F);
+}
+function IP0to254Check(I)
+{
+	return  validatenum(I, 255, 0, aIP0to254Check);
+}
+
+function RateaddSel(Pro,IPBeg,IPEnd, addr1, addr2, addr3, addr4, direct, rate, maxrate, status, s,wan)
+{
+	var SBeg;
+	var SEnd;
+	var pos;
+	var p=-1;
+	var sd,ss;
+	var maxratparseIntue=0,ratparseIntue=0,j=0;
+	var sString,sName,sEnable;
+	var WanEnable="";
+	var usbEnable="";
+	var ScheduleString="";
+	var notcheckwan=1;
+	var IPBeg1,IPBeg2,IPBeg3,IPBeg4,IPEnd1,IPEnd2,IPEnd3,IPEnd4;
+	var pp,qq,rightString,tmpString;
+	var wanNumbers = parseInt(document.formQOS.wanNumbers.value)-parseInt(document.formQOS.isDMZmode.value);
+	if (Pro.length==0) 
+	{
+		alert(aPressService);
+		return;
+	}
+	if (wan)
+	{
+		if(wanNumbers>1)
+		{
+			for(var temp=0;temp<wanNumbers;temp++)
+			{	
+				if(wan[temp])
+				{	
+					if(wan[temp].checked==true)
+					{
+						notcheckwan=0;
+						break;
+					}
+				}
+			}
+		}
+		else
+		{
+			if(wan)
+				if(wan.checked==true)
+					notcheckwan=0;
+		}
+	}
+	if(notcheckwan)
+	{
+		alert(aOneMoreQosWan);
+		return;
+	}
+	
+
+if (IPBeg.value=="" || IPEnd.value=="")   
+    {
+        alert(aIPRange);	 
+	    if (IPBeg.value=="") IPBeg.select();
+	    else IPEnd.select(); 
+	    return;
+    }
+  
+    if(addr1.value==""||addr2.value==""||addr3.value==""||addr4.value=="")
+    {
+  	    alert(aIPAddressDes);
+	    if(addr1.value=="") addr1.select();
+	    else if(addr2.value=="") addr1.select();
+	    else if(addr3.value=="") addr1.select();
+	    else if(addr4.value=="") addr1.select();
+	    return;
+    }
+	
+	if (rate.value=="")
+	{
+	    alert(aMinRate);
+		rate.select();
+		return;
+		
+	}
+	if (maxrate.value=="")
+	{
+	    alert(aMaxRate);
+		maxrate.select();
+		return;
+		
+	}
+	maxratparseIntue=maxrate.value;
+	ratparseIntue=rate.value;
+	if (maxrate.value=="")
+	maxratparseIntue=0;
+	if (rate.value=="")
+	ratparseIntue=0;
+	if (IPRangeCheck(IPBeg,IPEnd,IPBeg)<0) return;
+	if (direct.selectedIndex==0) sd=2;
+	else if (direct.selectedIndex==1) sd=1;
+	else if (direct.selectedIndex==2) sd=4;
+	else if (direct.selectedIndex==3) sd=3;
+	else sd=6;	
+	
+	if (!(ratparseIntue==0 && maxratparseIntue==0))
+	{
+		if (!(rate.value==""))
+			if (RateKbitCheck(rate)<0) return;
+		if (!(maxrate.value==""))
+			if (RateKbitCheck(maxrate)<0) return;
+	}
+	if (status.checked==true)
+	{
+		sEnable=" [Enabled]";
+	  	ss="1";
+	}
+	else
+	{
+		sEnable=" [Disabled]";
+	  	ss="0";
+	}
+
+	SBeg=IPBeg.value;
+	SEnd=IPEnd.value;
+
+	qq=SBeg.length;
+	pp=SBeg.indexOf(".");
+	IPBeg1=SBeg.substring(0,pp);
+	rightString=SBeg.substring(pp+1,qq);
+	
+	qq=rightString.length;
+	pp=rightString.indexOf(".");
+	IPBeg2=rightString.substring(0,pp);
+	tmpString=rightString;
+	rightString=tmpString.substring(pp+1,qq);
+	
+	qq=rightString.length;
+	pp=rightString.indexOf(".");
+	IPBeg3=rightString.substring(0,pp);
+	tmpString=rightString;
+	rightString=tmpString.substring(pp+1,qq);
+	
+	IPBeg4=rightString;
+	
+	qq=SEnd.length;
+	pp=SEnd.indexOf(".");
+	IPEnd1=SEnd.substring(0,pp);
+	rightString=SEnd.substring(pp+1,qq);
+	
+	qq=rightString.length;
+	pp=rightString.indexOf(".");
+	IPEnd2=rightString.substring(0,pp);
+	tmpString=rightString;
+	rightString=tmpString.substring(pp+1,qq);
+	
+	qq=rightString.length;
+	pp=rightString.indexOf(".");
+	IPEnd3=rightString.substring(0,pp);
+	tmpString=rightString;
+	rightString=tmpString.substring(pp+1,qq);
+	
+	IPEnd4=rightString;
+
+
+	if (!(ratparseIntue==0||maxratparseIntue==0))
+	if (parseInt(rate.value)>parseInt(maxrate.value))   
+	{
+		alert(aMiniMaxRateCheck);
+		rate.select();
+		return;
+	}
+	
+  	if (s.form.addRate.value=="Update")
+  	{
+	      	p=-1;
+	      	while (s.form.qosRateList.options[++p].selected != true);
+  	}
+
+	if (ckDuplicate(Pro,IPBeg4,IPBeg1,IPBeg2,IPBeg3,IPEnd4, addr1, addr2, addr3, addr4, direct, s, p,wan,status,rate,maxrate) < 0) return;
+
+
+  	for (var i=0; i < s.form.qosRateList.length; i++)
+  	{
+	        s.form.qosRateList.options[i].selected=false;
+  	}
+  	if (s.form.addRate.value=="Add to list")
+  	{
+		if (s.length>=LimitQosRate)
+		{
+			alert(aLimitQosRate+LimitQosRate+aLimitEnd);
+			return;
+		}
+
+		p=s.length;
+		s.length+=1;
+  	}	
+
+	if (Pro.selectedIndex == 0)
+	{
+	    if ((IPBeg.value == 0) && (IPEnd.value == 0) && (addr1.value == 0) && (addr2.value == 0) && (addr3.value == 0) && (addr4.value == 0))
+		{
+		    alert(aQosAllTraffic);
+		}
+	}
+ 
+
+	if (wan)
+	{
+		if(wanNumbers>1)
+		{
+			for(var temp=0;temp<wanNumbers;temp++)
+			{
+				if(wan[temp])
+				{
+					if(wan[temp].checked==true)
+					{
+						WanEnable=WanEnable+(temp+1);
+					}
+				}
+			}
+		}
+		else
+		{
+			var temp=0;
+			if(wan)
+			{
+				if(wan.checked==true)
+				{
+					WanEnable=WanEnable+(temp+1);
+				}
+			}
+		}
+	}
+	if (wan)
+	{
+		var WanEnableText="";
+		var usbEnableText="";
+		var counter=0;
+		j=0;
+		if(wanNumbers>1)
+		{
+			for(var temp=0;temp<wanNumbers;temp++)
+			{
+				if(wan[temp])
+				{
+					if(wan[temp].checked==true)
+					{
+						if(counter>0)
+							WanEnableText=WanEnableText+", ";
+						WanEnableText=WanEnableText+(temp+1);
+						counter++;
+					}
+				}	
+			}
+		}
+		else
+		{
+			var temp=0;
+			if(wan)
+			{
+				if(wan.checked==true)
+				{
+					if(counter>0)
+						WanEnableText=WanEnableText+", ";
+					WanEnableText=WanEnableText+(temp+1);
+					counter++;
+				}
+			}
+		}
+	}	
+
+	var assignIPcounter;	
+	assignIPcounter=0;
+
+	s.options[p].value=Pro.value;
+	s.options[p].value+="{";
+	s.options[p].value+=IPBeg.value;
+	s.options[p].value+=";";
+	s.options[p].value+=IPEnd4;
+	s.options[p].value+="(";
+	s.options[p].value+=addr1.value;
+	s.options[p].value+=".";
+	s.options[p].value+=addr2.value;
+	s.options[p].value+=".";
+	s.options[p].value+=addr3.value;
+	s.options[p].value+=".";
+	s.options[p].value+=addr4.value;
+	s.options[p].value+=")";
+	s.options[p].value+=sd;
+	s.options[p].value+=";";
+	s.options[p].value+=ratparseIntue; 
+	s.options[p].value+=";";
+	s.options[p].value+=maxratparseIntue;
+	s.options[p].value+=";";
+	s.options[p].value+=ss+";"+assignIPcounter+";"+WanEnable+"}";
+	sString=Pro.options[Pro.selectedIndex].text;
+
+	s.options[p].text=sString+"->"+IPBeg.value+"~"+IPEnd4+"("+direct.options[direct.selectedIndex].text+")"+"=>"+ratparseIntue+"~"+maxratparseIntue+"Kbit/sec"+"->";
+	if(WanEnableText!="")
+		s.options[p].text+="WAN"+WanEnableText;
+	s.options[p].text+=sEnable;
+
+	clearRateContent(s.form);
+}
+function showRateList(s,wan,wantotal)
+{
+     if (s.selectedIndex==-1) return;
+     var p;
+     var q; 
+     var forwardString=s.options[s.selectedIndex].value; 
+     var textString=s.options[s.selectedIndex].text;  //no used!
+     var rightString;
+     var tmpString;
+     var ts=new tmpWord(18); 
+     var wannumber=0;
+     var usbnumber=0;
+     var k ,m;
+     var is_portGroup,portGroupName;
+     var strlength;
+     var start;
+     var end;
+     var str1;
+     var wan;
+     var IPBegin,IPEnd;
+
+     start=forwardString.lastIndexOf("{");
+     strlength=forwardString.length;
+     str1=forwardString.substring(start+1,strlength);
+
+     start=str1.indexOf(";");
+     end=str1.indexOf("(");  
+    
+    is_portGroup = 0 ;
+   	rightString=forwardString;
+    q=rightString.length;      
+	p=rightString.lastIndexOf("{");  
+	ts[1]=rightString.substring(0,p);
+	    
+    tmpString=rightString; 
+	rightString=tmpString.substring(p+1,q);  
+
+    if(end-start>0)                        
+    {
+		document.formQOS.Sbutton.value="0";
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[2]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		  
+		ts[3]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[4]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);   
+		q=rightString.length;
+		p=rightString.indexOf(";");
+		ts[5]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf("(");
+		ts[6]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[7]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[8]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[9]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(")");
+		ts[10]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		
+		p=rightString.indexOf(";");
+		ts[11]=rightString.substring(0,p); // direct
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+	
+		p=rightString.indexOf(";");
+		ts[12]=rightString.substring(0,p); // minirate
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+	
+		p=rightString.indexOf(";");
+		ts[13]=rightString.substring(0,p); // maxrate
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+	
+		p=rightString.indexOf(";");
+		ts[14]=rightString.substring(0,p); // enabled
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+	
+		p=rightString.indexOf(";");
+		ts[15]=rightString.substring(0,p); // assign each
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		
+		p=rightString.indexOf("}");
+		ts[16]=rightString.substring(0,p); // WANnumber
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		
+	}
+	else
+	{
+		document.formQOS.Sbutton.value="1";
+	
+		q=rightString.length;
+		p=rightString.indexOf("(");
+		str1=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[7]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[8]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(".");
+		ts[9]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		p=rightString.indexOf(")");
+		ts[10]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+		
+		p=rightString.indexOf(";");
+		ts[11]=rightString.substring(0,p); // direct
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+	
+		p=rightString.indexOf(";");
+		ts[12]=rightString.substring(0,p); // minirate
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+	
+		p=rightString.indexOf(";");
+		ts[13]=rightString.substring(0,p); // maxrate
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+	
+		p=rightString.indexOf(";");
+		ts[14]=rightString.substring(0,p); // enabled
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+	
+		p=rightString.indexOf(";");
+		ts[15]=rightString.substring(0,p); // assign each
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		q=rightString.length;
+
+  
+	   	p=rightString.indexOf("}");
+		ts[16]=rightString.substring(0,p); // WANnumber
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+		
+		ts[2]="0";
+		ts[3]="0";
+		ts[4]="0";
+		ts[5]="0";
+		ts[6]="0";
+	}
+	for (var i=0; i < s.form.RC_protocol.length; i++)
+  	{
+  		if (s.form.RC_protocol.options[i].value==ts[1] || s.form.RC_protocol.options[i].text==ts[1] )
+    		s.form.RC_protocol.options[i].selected=true;
+  	}
+	IPBegin=ts[2]+"."+ts[3]+"."+ts[4]+"."+ts[5];
+	IPEnd=ts[2]+"."+ts[3]+"."+ts[4]+"."+ts[6];
+	
+  	s.form.IPbegin.value=IPBegin;	
+  	s.form.IPend.value=IPEnd;
+  	s.form.Addr1.value=ts[7];
+  	s.form.Addr2.value=ts[8];
+  	s.form.Addr3.value=ts[9];
+  	s.form.Addr4.value=ts[10];  
+	
+	if(end-start<0)                       
+	{
+		for (var i=0; i < document.formQOS.ipGroup.length; i++)
+  	    {
+  			if (document.formQOS.ipGroup.options[i].text==str1)
+				document.formQOS.ipGroup.options[i].selected=true;
+		}
+	}
+	
+	if (ts[11]=="1") s.form.RC_link.selectedIndex=1;
+	else if (ts[11]=="2") s.form.RC_link.selectedIndex=0;
+	else if (ts[11]=="4") s.form.RC_link.selectedIndex=2;
+	else if (ts[11]=="3") s.form.RC_link.selectedIndex=3;
+	else s.form.RC_link.selectedIndex=4;	
+	
+	if(ts[12]==0)
+	ts[12]="";
+	if(ts[13]==0)
+	ts[13]="";	
+
+	s.form.Percent.value=ts[12];  
+	s.form.Maxrate.value=ts[13];  
+	   
+  	if (ts[14]=="1") s.form.RC_valid.checked=true;
+  	else s.form.RC_valid.checked=false;  
+
+	wannumber=parseInt(ts[16]);
+	var temp=0,wantotalnumber=0,j=0;
+	wantotalnumber=parseInt(wantotal.value)-parseInt(document.formQOS.isDMZmode.value);
+	if(wantotalnumber>1)
+	{
+		for(j=0;j<wantotalnumber;j++)
+		{
+			if (wan[j])	
+			wan[j].checked=false;	
+		}
+		for(j=0;j<wantotalnumber;j++)
+		{
+			 if(wannumber!=0)
+			 {
+				 temp=wannumber%10-1;
+				 if(wan[temp])
+				 wan[temp].checked=true;
+				 wannumber=(parseInt(wannumber)-temp-1)/10;
+			 }
+		}
+	}
+	else
+	{
+		if (wan)	
+			wan.checked=false;
+		if(wannumber==1)
+		{
+			if(wan)
+			wan.checked=true;
+		}
+	}
+				
+
+  	s.form.addRate.value="Update"; 
+  	SetButtonStatus('showNew1','show'); 
+	SetButtonStatus('deleteRate','show');       
+}
+
+function showPrioList(s,wan,wantotal)
+{
+  if (s.selectedIndex==-1) return;
+  var p;
+  var q; 
+  var forwardString=s.options[s.selectedIndex].value; 
+  var textString=s.options[s.selectedIndex].text;  //no used!
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(5); 
+    var wannumber=0;
+    var portGroupName,is_portGroup;
+
+    rightString=forwardString;
+
+    is_portGroup = 0 ;
+    
+	q=rightString.length;      
+	p=rightString.lastIndexOf("{");  
+	ts[1]=rightString.substring(0,p);
+
+    tmpString=rightString; 
+    rightString=tmpString.substring(p+1,q);      
+
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[2]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q); 
+	
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[3]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q); 
+
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[4]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q); 	
+	  
+	q=rightString.length;
+	p=rightString.indexOf("}");
+  	ts[5]=rightString.substring(0,p); 
+
+
+  	for (var i=0; i < s.form.P_protocol.length; i++)
+  	{
+  		if (s.form.P_protocol.options[i].value==ts[1] || s.form.P_protocol.options[i].text==ts[1] )
+    	s.form.P_protocol.options[i].selected=true;
+  	}
+	
+	if (ts[2]=="1") s.form.P_link.selectedIndex=1;
+	else if (ts[2]=="2") s.form.P_link.selectedIndex=0;
+	else if (ts[2]=="4") s.form.P_link.selectedIndex=2;
+	else s.form.P_link.selectedIndex=3;			
+	s.form.Priority.selectedIndex=parseInt(ts[3])-1;
+	  
+  	if (ts[4]=="1") s.form.P_valid.checked=true;
+  	else s.form.P_valid.checked=false; 
+
+	wannumber=parseInt(ts[5]);
+	var temp=0,wantotalnumber=0,j=0;
+	wantotalnumber=parseInt(wantotal.value)-parseInt(document.formQOS.isDMZmode.value);
+	if(wantotalnumber>1)
+	{
+		for(j=0;j<wantotalnumber;j++)
+		wan[j].checked=false;	
+		for(j=0;j<wantotalnumber;j++)
+			if(wannumber!=0)
+			{
+				temp=wannumber%10-1;
+				if(wan[temp])
+				wan[temp].checked=true;
+				wannumber=(parseInt(wannumber)-temp-1)/10;
+			}
+	}
+	else
+	{
+		wan.checked=false;
+		if(wannumber=="1")
+		{
+			wan.checked=true;
+		}
+	}
+	 
+  	s.form.addPrio.value="Update"; 
+  	s.form.deletePrio.disabled=false;  
+	SetButtonStatus("showNew2", "show");     
+	SetButtonStatus("deletePrio", "show");    
+}
+
+function ckDuplicate2(Pro, direct, s, p,wan,status)
+{
+  var sString, pos;
+  var entryString, inputString;
+  var temp,rightString,tmpString;
+  var aa,q,enable,pp=0;
+  var WanEnable="";  
+  for (var i=0; i < s.length; i++)
+  {
+    sString=s.options[i].value;
+    pos=sString.indexOf(";");
+    entryString=sString.substring(0,pos); 
+	
+	q=sString.length
+	rightString=sString.substring(pos+3,q);
+	
+	aa=rightString.indexOf(";");
+  	enable=rightString.substring(0,aa); // pass
+  	tmpString=rightString;
+  	rightString=tmpString.substring(aa+1,q);
+  	q=rightString.length;
+
+  	aa=rightString.indexOf("}");
+  	temp=rightString.substring(0,aa); // WANnumber
+  	tmpString=rightString;
+  	rightString=tmpString.substring(aa+1,q); 
+
+	inputString=Pro.value;
+    inputString+="{";    
+	
+	if (direct.selectedIndex==0) inputString+="2";
+	else if (direct.selectedIndex==2) inputString+="4";
+	else if (direct.selectedIndex==3) inputString+="3";		
+	else inputString+="1"; 
+
+    if (entryString==inputString)
+	{
+		if(status.checked==true)
+		if(enable==1)		
+        if (p != i)
+	    {
+		if (wan)
+			{
+			for(var j=0;j<7;j++)//for entry
+			{
+			
+			pp=parseInt(temp)%10;
+			if(pp!=0)
+				for(var temp1=0;temp1<7;temp1++)//for input
+				if(wan[temp1])
+				if(wan[temp1].checked==true)
+				if(pp==(temp1+1))
+				{
+	            alert(aDuplicatedEntry);
+		        return -1;
+				}
+			temp=(parseInt(temp)-pp)/10;
+			if(pp==0)
+			j=7;
+			}
+			}
+
+	    }
+	}
+  }
+  return 1;
+}
+
+function PrioaddSel(Pro, direct, prio, status, s,wan)
+{
+    var pos;
+	var p=-1;
+    var pr,ss,sd;
+	var sString1,sString2, sEnable;
+		var WanEnable="";
+	var notcheckwan=1;
+	var wanNumbers=parseInt(document.formQOS.wanNumbers.value) - parseInt(document.formQOS.isDMZmode.value);
+	if (Pro.length==0) 
+	{
+		alert(aPressService);
+		 return;
+	}
+	if (wan)
+	{
+		if(wanNumbers>1)
+		{
+			for(var temp=0;temp<wanNumbers;temp++)
+				if(wan[temp])
+					if(wan[temp].checked==true)
+					{
+						notcheckwan=0;
+						break;
+					}
+		}
+		else
+		{
+			if(wan)
+				if(wan.checked==true)
+				{
+					notcheckwan=0;
+				}
+		}
+	}
+	if(notcheckwan)
+	{
+		alert(aOneMoreQosWan);
+		return;
+	}
+   
+	if (direct.selectedIndex==0) sd=2;
+	else if (direct.selectedIndex==1) sd=1;
+	else if (direct.selectedIndex==2) sd=4;	
+	else sd=3;	
+   
+  pr=prio.selectedIndex+1;
+
+  if (status.checked==true)
+	{
+		sEnable=" [Enabled]";
+	  	ss="1";
+	}
+	else
+	{
+		sEnable=" [Disabled]";
+	  	ss="0";
+	}
+
+  if (s.form.addPrio.value==sUpdateAp || s.form.addPrio.value=="Update")
+  {
+      p=-1;
+      while (s.form.qosPrioList.options[++p].selected != true);
+  }
+  if (ckDuplicate2(Pro, direct, s, p,wan,status) < 0) return;
+  
+  for (var i=0; i < s.form.qosPrioList.length; i++)
+  {
+        s.form.qosPrioList.options[i].selected=false;
+  }
+  if (s.form.addPrio.value=="Add to list")
+  {
+
+   	    if (s.length>=LimitQosPrio)
+   	    {
+       	    alert(aLimitQosPrio+LimitQosPrio+aLimitEnd);
+       	    return;
+   	    }
+	
+    p=s.length;
+	s.length+=1;
+  }	
+	if (wan)
+	{
+		if(wanNumbers>1)
+		{
+			for(var temp=0;temp<wanNumbers;temp++)
+			if(wan[temp])	
+			if(wan[temp].checked==true)
+			WanEnable=WanEnable+(temp+1);
+		}
+		else
+		{
+			var temp=0;
+			if(wan)	
+			if(wan.checked==true)
+			WanEnable=WanEnable+(temp+1);
+		}
+	}  
+	if (wan)
+	{
+	var WanEnableText="";
+	var counter=0;
+		if(wanNumbers>1)
+		{
+			for(var temp=0;temp<wanNumbers;temp++)
+			if(wan[temp])
+			if(wan[temp].checked==true)
+			{
+				if(counter>0)
+				WanEnableText=WanEnableText+", ";
+				WanEnableText=WanEnableText+(temp+1);
+				counter++;
+			}
+		}
+		else
+		{
+			var temp=0;
+			if(wan)
+			if(wan.checked==true)
+			{
+				if(counter>0)
+				WanEnableText=WanEnableText+", ";
+				WanEnableText=WanEnableText+(temp+1);
+				counter++;
+			}
+		}
+
+	}
+
+    s.options[p].value=Pro.value;
+    s.options[p].value+="{";
+	s.options[p].value+=sd+";";
+    s.options[p].value+=pr+";";
+    s.options[p].value+=ss+";"+WanEnable+"}";
+    sString1=Pro.options[Pro.selectedIndex].text;
+	sString2=prio.options[prio.selectedIndex].text;
+	s.options[p].text=sString1;
+	s.options[p].text+="(";
+	s.options[p].text+=direct.options[direct.selectedIndex].text;
+	s.options[p].text+=")";
+    s.options[p].text+="=>";
+	s.options[p].text+=sString2+"=>WAN"+WanEnableText;
+	s.options[p].text+=sEnable;
+    clearPrioContent(s.form);
+    s.form.deletePrio.disabled=true;
+}//PrioaddSel
+
+function streamCheck(I)
+{
+	validatenum(I, 100001, 1, aStreamCheck);
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "ShowTableOkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formQOS)";
+var Cancellink = ""; 
+var Backlink = "";
+var Tablelink ="";
+var helplink ='help_qos.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 600;
+var head_width=95;
+
+function PrintUPDownstream()
+{
+	document.write('<input type="hidden" name="ibwuWAN1_hidden" value=\'<!--#nk_get 1to1_Handle="ibwuWAN1"-->\'>');
+	document.write('<input type="hidden" name="ibwuWAN2_hidden" value=\'<!--#nk_get 1to1_Handle="ibwuWAN2"-->\'>');
+	document.write('<input type="hidden" name="ibwuWAN3_hidden" value=\'<!--#nk_get 1to1_Handle="ibwuWAN3"-->\'>');
+	document.write('<input type="hidden" name="ibwuWAN4_hidden" value=\'<!--#nk_get 1to1_Handle="ibwuWAN4"-->\'>');
+	document.write('<input type="hidden" name="ibwuWAN5_hidden" value=\'<!--#nk_get 1to1_Handle="ibwuWAN5"-->\'>');
+	document.write('<input type="hidden" name="ibwuWAN6_hidden" value=\'<!--#nk_get 1to1_Handle="ibwuWAN6"-->\'>');
+	document.write('<input type="hidden" name="ibwuWAN7_hidden" value=\'<!--#nk_get 1to1_Handle="ibwuWAN7"-->\'>');
+	document.write('<input type="hidden" name="ibwuWAN8_hidden" value=\'<!--#nk_get 1to1_Handle="ibwuWAN8"-->\'>');
+	document.write('<input type="hidden" name="ibwWAN1_hidden" value=\'<!--#nk_get 1to1_Handle="ibwWAN1"-->\'>');
+	document.write('<input type="hidden" name="ibwWAN2_hidden" value=\'<!--#nk_get 1to1_Handle="ibwWAN2"-->\'>');
+	document.write('<input type="hidden" name="ibwWAN3_hidden" value=\'<!--#nk_get 1to1_Handle="ibwWAN3"-->\'>');
+	document.write('<input type="hidden" name="ibwWAN4_hidden" value=\'<!--#nk_get 1to1_Handle="ibwWAN4"-->\'>');
+	document.write('<input type="hidden" name="ibwWAN5_hidden" value=\'<!--#nk_get 1to1_Handle="ibwWAN5"-->\'>');
+	document.write('<input type="hidden" name="ibwWAN6_hidden" value=\'<!--#nk_get 1to1_Handle="ibwWAN6"-->\'>');
+	document.write('<input type="hidden" name="ibwWAN7_hidden" value=\'<!--#nk_get 1to1_Handle="ibwWAN7"-->\'>');
+	document.write('<input type="hidden" name="ibwWAN8_hidden" value=\'<!--#nk_get 1to1_Handle="ibwWAN8"-->\'>');
+	var wanNumbers = parseInt(document.formQOS.wanNumbers.value)-parseInt(document.formQOS.isDMZmode.value);
+	var wanUpstream1=parseInt(document.formQOS.wan1Upstream.value);
+	var wanUpstream2=parseInt(document.formQOS.wan2Upstream.value);
+	var wanUpstream3=parseInt(document.formQOS.wan3Upstream.value);
+	var wanUpstream4=parseInt(document.formQOS.wan4Upstream.value);
+	var wanUpstream5=parseInt(document.formQOS.wan5Upstream.value);
+	var wanUpstream6=parseInt(document.formQOS.wan6Upstream.value);
+	var wanUpstream7=parseInt(document.formQOS.wan7Upstream.value);
+	var wanUpstream8=parseInt(document.formQOS.wan8Upstream.value);
+	var wanDownstream1=parseInt(document.formQOS.wan1Downstream.value);
+	var wanDownstream2=parseInt(document.formQOS.wan2Downstream.value);
+	var wanDownstream3=parseInt(document.formQOS.wan3Downstream.value);
+	var wanDownstream4=parseInt(document.formQOS.wan4Downstream.value);
+	var wanDownstream5=parseInt(document.formQOS.wan5Downstream.value);
+	var wanDownstream6=parseInt(document.formQOS.wan6Downstream.value);
+	var wanDownstream7=parseInt(document.formQOS.wan7Downstream.value);
+	var wanDownstream8=parseInt(document.formQOS.wan8Downstream.value);
+	for(var i =1;i<=wanNumbers;i++)	
+	{
+		if(i==1)
+			Print_table_tr_cell("OddRow","WAN1",wanUpstream1,wanDownstream1);
+		else if(i==2)
+			Print_table_tr_cell("EvenRow","WAN2",wanUpstream2,wanDownstream2);
+		else if(i==3)
+			Print_table_tr_cell("OddRow","WAN3",wanUpstream3,wanDownstream3);
+		else if(i==4)
+			Print_table_tr_cell("EvenRow","WAN4",wanUpstream4,wanDownstream4);
+		else if(i==5)
+			Print_table_tr_cell("OddRow","WAN5",wanUpstream5,wanDownstream5);
+		else if(i==6)
+			Print_table_tr_cell("EvenRow","WAN6",wanUpstream6,wanDownstream6);
+		else if(i==7)
+			Print_table_tr_cell("OddRow","WAN7",wanUpstream7,wanDownstream7);
+	}
+}
+function Print_table_tr_cell(cell_type,wan,Upstream,Downstream)
+{
+	var ibwuwan="ibwu"+wan;
+	var ibwwan="ibw"+wan;
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td>'+wan+'</td>');
+	document.write('<td width="200"><input type=text name='+ibwuwan+' size=6 maxlength=6 onBlur="streamCheck(this);" onFocus="this.select();" onKeypress="return Check_User_Input(event)" value='+Upstream+'></td>');
+	document.write('<td width="200"><input type=text name='+ibwwan+' size=6 maxlength=6 onBlur="streamCheck(this);" onFocus="this.select();" onKeypress="return Check_User_Input(event)" value='+Downstream+'></td>');	
+	document.write('</tr>');
+}		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintMaximumBandwidth(1);
+	PrintQosSetupMode(0);
+	PrintRateControl(0);
+	PrintPriority(0);
+	PrintEndContent();
+}
+function PrintMaximumBandwidth(hasUnderLine)
+{
+	PrintBeginBlock(1, "The Maximum Bandwidth Provided by ISP");
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td bgcolor="#D9E3E9" >');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Interface');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="214" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');	
+	document.write('Upstream (Kbit/sec)');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="215" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');	
+	document.write('Downstream (Kbit/sec)');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');
+	PrintUPDownstream();	
+	document.write('</table>');	
+	document.write('</td></tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+
+function PrintQosSetupMode(hasUnderLine)
+{
+  	PrintBeginBlock(1, "Bandwidth Management Type");	
+	document.write('<table width="'+SmallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width='+(head_width+5)+'>Type&nbsp;:&nbsp;</td>');
+	document.write('<td><input type="radio" id="type" name="qosType" value="1" onClick="falseSubmit(this.form);" <!--#nk_get RadioHandle="qosType:1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">Rate Control<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" id="type" name="qosType" value="2" onClick="falseSubmit(this.form);" <!--#nk_get RadioHandle="qosType:2"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">Priority</td>');		
+	document.write('</tr>');	
+	document.write('</table>');
+	if (document.formQOS.qosType[0].checked == true)
+		Tablelink = "openTable('QosRate_table1.htm')";
+	else
+		Tablelink = "openTable('QosPrio_table1.htm')";
+	PrintEndBlock(hasUnderLine);
+}
+function PrintRateControl(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table name="RateControlTable" id="RateControlTable"  class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2" align="center">');
+	document.write('</td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+head_width+'>Interface&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	PrintRateWAN();
+	document.write('</td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>Service&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<select name="RC_protocol" class="Select">');
+	PrintRateControlServiceData(document.formQOS.service_menu1);
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td></td>');
+	document.write('<td align="left">');
+	PrintSTButton("sM2","Service Management","openService(\'01\')");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>IP&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="hidden" name="Addr1" value="0">');
+	document.write('<input type="hidden" name="Addr2" value="0">');
+	document.write('<input type="hidden" name="Addr3" value="0">');
+	document.write('<input type="hidden" name="Addr4" value="0">');
+	document.write('<input type="text" name="IPbegin" onFocus="this.select();" maxlength="15" size="20" onKeypress="return Check_User_Input(event)" >');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">to<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="text" name="IPend" onFocus="this.select();" maxlength="15"  size="20" onKeypress="return Check_User_Input(event)" >');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>Direction&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<select name="RC_link" class="Select">');
+	document.write('<option value="2">Upstream</option>');
+	document.write('<option value="1">Downstream</option>');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td>Min. Rate&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="Percent" size="5" onFocus="this.select();" maxlength="5" onKeypress="return Check_User_Input(event)">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">Kbit/sec');
+	document.write('</td>');
+	document.write('<td></td>');		
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td>Max. Rate&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="text" size="5" name="Maxrate" onFocus="this.select();" maxlength="5" onKeypress="return Check_User_Input(event)">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">Kbit/sec');
+	document.write('</td>');
+	document.write('<td></td>');		
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>Enable&nbsp;:&nbsp;</td>');
+	document.write('<td><input type="checkbox" name="RC_valid" value="1" >');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');						
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("addRate","Add to list","RateaddSel(this.form.RC_protocol,this.form.IPbegin,this.form.IPend,this.form.Addr1,this.form.Addr2,this.form.Addr3,this.form.Addr4,this.form.RC_link,this.form.Percent,this.form.Maxrate,this.form.RC_valid,this.form.qosRateList,this.form.RatewanEnable);");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td colspan="2">');
+	document.write('<select multiple name="qosRateList" class="MultiSelect" size="10" onChange="showRateList(this.form.qosRateList,this.form.RatewanEnable,this.form.wanNumbers);" style="width: 100%">');
+	document.write('<!--#nk_get QosRateList=""-->');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" valign="top" colspan="2">');
+	PrintSTButton("deleteRate","Delete","delSel(this.form.qosRateList,this);");
+	SetButtonStatus("deleteRate", "disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("showNew1","Add New","clearRateContent(this.form)");
+	SetButtonStatus("showNew1", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+
+}
+
+function PrintRateWAN()
+{
+	var wanNumbers=parseInt(document.formQOS.wanNumbers.value)-parseInt(document.formQOS.isDMZmode.value);
+
+	document.write('<table class="STtable" cellpadding="0" cellspacing="0"  border='+Tableborder+' >');
+	document.write('<tr >');
+	for(var i=1;i<=wanNumbers;i++)
+		document.write('<td ><input type="checkbox" name="RatewanEnable" value="'+i+'"><img border="0" src="images/_blank.gif" width="8" height="1">WAN'+i+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+
+	document.write('</tr>');	
+	document.write('</table>');
+}
+
+function PrintPriorityWAN()
+{
+	var wanNumbers=parseInt(document.formQOS.wanNumbers.value)-parseInt(document.formQOS.isDMZmode.value);
+
+	document.write('<table class="STtable" cellpadding="0" cellspacing="0"  border='+Tableborder+' >');
+	document.write('<tr >');
+	for(var i=1;i<=wanNumbers;i++)
+		document.write('<td ><input type="checkbox" name ="PrioritywanEnable" value="'+i+'"><img border="0" src="images/_blank.gif" width="8" height="1">WAN'+i+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+
+	document.write('</tr>');	
+	document.write('</table>');
+}
+
+function PrintPriority(hasUnderLine)
+{
+	var wanNumbers=parseInt(document.formQOS.wanNumbers.value)-parseInt(document.formQOS.isDMZmode.value);
+
+	PrintBeginBlock(0);
+	document.write('<table name="PriorityTable" id="PriorityTable"  class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2" align="center">');
+	document.write('</td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+head_width+'>Interface&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	PrintPriorityWAN(wanNumbers);
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>Service&nbsp;:&nbsp;</td>');
+	document.write('<td><select name="P_protocol" class="Select">');
+	PrintPrioityControlServiceData(document.formQOS.service_menu2);
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td></td>');
+	document.write('<td align="left">');
+	PrintSTButton("sM3","Service Management","openService(\'02\')");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>Direction&nbsp;:&nbsp;</td>');
+	document.write('<td><select name="P_link" class="Select">');
+	document.write('<option value="2">Upstream</option>');
+	document.write('<option value="1">Downstream</option>');
+	document.write('</select></td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>Priority&nbsp;:&nbsp;</td>');
+	document.write('<td><select name="Priority" class="Select">');
+	document.write('<option value="1">High</option>');
+	document.write('<option value="2">Low</option>');
+	document.write('</select></td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>Enable&nbsp;:&nbsp;</td>');
+	document.write('<td><input type=checkbox name="P_valid" value="1"></td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td align="center" colspan="2" >');
+	PrintSTButton('addPrio','Add to list','PrioaddSel(this.form.P_protocol,this.form.P_link,this.form.Priority,this.form.P_valid,this.form.qosPrioList,this.form.PrioritywanEnable);');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td colspan="2">');
+	document.write('<select multiple class="MultiSelect" name="qosPrioList" size="10" onChange="showPrioList(this.form.qosPrioList,this.form.PrioritywanEnable,this.form.wanNumbers);" style="width: 100%">');
+	document.write('<!--#nk_get QosPriorityList=""-->');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" valign="top" colspan="4">');
+	PrintSTButton("deletePrio","Delete","delSel(this.form.qosPrioList,this);");
+	SetButtonStatus("deletePrio", "disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("showNew2","Add New","clearPrioContent(this.form)");
+	SetButtonStatus("showNew2", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize();" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0"  >
+    <form name="formdualwan" method="post" action="">
+      <input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+    </form>
+    
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 2);		// Set Selected Node
+   	  if (document.formdualwan.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formQOS" method="post" action="qos.htm">
+	<input type="hidden" name="submitStatus" value='1'>
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="wan1Upstream" value='<!--#nk_get DisplayOnly="ibwuWAN1"-->'>
+	<input type="hidden" name="wan2Upstream" value='<!--#nk_get DisplayOnly="ibwuWAN2"-->'>
+	<input type="hidden" name="wan3Upstream" value='<!--#nk_get DisplayOnly="ibwuWAN3"-->'>
+	<input type="hidden" name="wan4Upstream" value='<!--#nk_get DisplayOnly="ibwuWAN4"-->'>
+	<input type="hidden" name="wan5Upstream" value='<!--#nk_get DisplayOnly="ibwuWAN5"-->'>
+	<input type="hidden" name="wan6Upstream" value='<!--#nk_get DisplayOnly="ibwuWAN6"-->'>
+	<input type="hidden" name="wan7Upstream" value='<!--#nk_get DisplayOnly="ibwuWAN7"-->'>
+	<input type="hidden" name="wan8Upstream" value='<!--#nk_get DisplayOnly="ibwuWAN8"-->'>
+	<input type="hidden" name="wan1Downstream" value='<!--#nk_get DisplayOnly="ibwWAN1"-->'>
+	<input type="hidden" name="wan2Downstream" value='<!--#nk_get DisplayOnly="ibwWAN2"-->'>
+	<input type="hidden" name="wan3Downstream" value='<!--#nk_get DisplayOnly="ibwWAN3"-->'>
+	<input type="hidden" name="wan4Downstream" value='<!--#nk_get DisplayOnly="ibwWAN4"-->'>
+	<input type="hidden" name="wan5Downstream" value='<!--#nk_get DisplayOnly="ibwWAN5"-->'>
+	<input type="hidden" name="wan6Downstream" value='<!--#nk_get DisplayOnly="ibwWAN6"-->'>
+	<input type="hidden" name="wan7Downstream" value='<!--#nk_get DisplayOnly="ibwWAN7"-->'>
+	<input type="hidden" name="wan8Downstream" value='<!--#nk_get DisplayOnly="ibwWAN8"-->'>
+	<input type="hidden" name="service_menu1" value="<!--#nk_get applicationList=3-->">
+	<input type="hidden" name="service_menu2" value="<!--#nk_get applicationList=4-->">
+	<input type="hidden" name="Sbutton" value='0'>
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="qos.htm"-->
+<!--#nk_get QosUpdate=""-->

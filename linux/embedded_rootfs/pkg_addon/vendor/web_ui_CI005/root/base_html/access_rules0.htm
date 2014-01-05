@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "NULL";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(this.form);";
+var Cancellink = ""; 
+var helplink ='';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintAccessRules(0);
+	PrintEndContent();
+}
+
+function PrintAccessRules(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Infotable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<th>');
+    	document.write('<font color="#8E8E8E">Because Firewall had been disabled, you could not do the Access Rules setting here !');
+	document.write('</th>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+	SetItemInit(foldersTree, 6, 2);		// Set Selected Node
+	SetItemlink(foldersTree, 6, 2, "access_rules0.htm");	
+	SetItemlink(foldersTree, 6, 3, "content_filter0.htm");
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formaccess_rules" method="post" action="access_rules.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

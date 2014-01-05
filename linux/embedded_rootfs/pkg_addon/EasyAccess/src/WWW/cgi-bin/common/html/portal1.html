@@ -1,0 +1,90 @@
+var j8Name="apportal";
+</script>
+<script src="/js/treeControladmin.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+var winpopper=0;
+var netwin=0;
+function resizeapps(heights){
+document.getElementById("main").style.height=heights;
+document.getElementById("main").src='/cgi-bin/services';
+}
+function resizeme(heights){
+document.getElementById("main").style.height=heights;
+}
+docObj = (document.all) ? "document.all." : "document."
+function launchMenu(){
+var framer;
+framer = window.main.location.toString();
+var newvar=framer.lastIndexOf('cgi-bin');
+var startvar=newvar+8;
+var endvar=newvar+12;
+var temps=framer.substring(startvar,endvar);
+var popurl='/WebHelp/EndUserGuide.htm#' + temps + '.htm';
+winpopper=window.open(popurl,"OnlineHelp","width=700,height=500,resizable");
+winpopper.focus(); return false;
+}
+function NetworkPls(){
+var popurl='/cgi-bin/cifs/';
+netwin=window.open(popurl,"network","width=770,height=545,scrollbars=yes,resizable");
+netwin.focus(); return false;
+}
+function userslogout(){
+if (winpopper!=0){if(!winpopper.closed) winpopper.close();}
+if (netwin!=0){if(!netwin.closed) netwin.close();}
+window.location.href='/cgi-bin/userLogout/';
+window.main.closechildren();
+}
+function closevpinstallwindow(){
+var installWindow;
+installWindow = window.open('','install');
+if(installWindow != null){
+installWindow.close();
+}
+}
+
+// End hiding script -->
+</script>
+<title></title>
+</head>
+<body class="bodyback" onbeforeunload="closeIt();" onunload="closevpinstallwindow();">
+<script type="text/javascript">
+<!--
+function no_error(){return true;}
+window.onerror=no_error;
+//-->
+</script>
+<center>
+<table border=0 cellpadding=0 cellspacing=0 width=743 class=newtable>
+<tr>
+<td class="maintop0" height=33 width=175 valign="bottom"><img src="/images/shim.gif" alt="SSL VPN" border=0 width=170 height=32><br></td>
+<td height=33 class="maintop1" width=568><img src="/images/shim.gif" alt="SSL VPN" border=0 width=560 height=30></td>
+</tr>
+<tr>
+<td class="maintop2" height=44 colspan=2 width=743><img src="/images/shim.gif" alt="SSL VPN" border=0 width=741 height=9></td>
+</tr>
+<tr>
+<td colspan=2>
+<table border=0 cellpadding=0 cellspacing=0 class="mainback" valign="top" width=743>
+<tr>
+<td width=1 class="darkback" height=400><img src="/images/shim.gif" height=400 width=1></td>
+<td width=176 class="mainback" height=400 valign="top">
+<!--menu-->
+<table height=314 width=176 border=0 cellpadding=0 cellspacing=0 valign="top">
+<tr valign="top">
+<td width=176 class="menubackground" valign="top" height=6><img src="/images/shim.gif" border=0 height=6 width=175></td>
+</tr>
+<tr valign="top">
+<td width=176 background="/images/shim.gif" valign="top" height=190>
+<script type="text/javascript" language="JavaScript">
+k7=new foldoutMenuObj('k7')
+k7.sub1stay=false;
+k7.sub2stay=false;
+k7.doHighlights= 1;
+k7.doMouseOvers= 1;
+k7.clCont="position:relative;"
+var logger='Logout<BR><img src=/images/shim.gif width=175 height=5 border=0><BR><span style="background-color:'+unselect1+'"><img src='+q9+' width=175 height=10 border=0><\/span><BR><img src='+q8+' width=175 height=1 border=0>';
+if (navigator.appName != "Microsoft Internet Explorer"){
+logger='Logout<BR><span style="background-color:'+unselect1+';width:175px;border-right:1px '+navborder+' solid;border-bottom:1px '+navborder+' solid;"><img src=/images/shim.gif width=175 height=7 border=0></span>';
+}
+k7.makeStyle()

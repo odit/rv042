@@ -1,0 +1,62 @@
+<script src="/js/mainframe.js"></script>
+<SCRIPT src="/js/formval.js" type=text/javascript></script>
+<script type="TEXT/JAVASCRIPT" language="JAVASCRIPT">
+<!-- Begin
+function validateOnSubmit() {
+var elem;
+var errs=0;
+if (!validateip  (window.document.etchosts.field1input, 'field1', true)) errs += 1; 
+if (!asciicharacters (window.document.etchosts.field2input, 'field2', true)) errs += 1;
+if (!asciicharacters (window.document.etchosts.field3input, 'field3', false)) errs += 1; 
+if (errs>1)  alert('Please correct two or more fields before submitting');
+if (errs==1) alert('Please correct a field before submitting');
+if (errs==0){window.document.etchosts.submit();}
+}
+// End -->
+</script>
+</head>
+<body style="" onload="resizer()" marginheight=0 marginwidth=0 leftmargin=0 topmargin=0 margin=0 class="mainback">
+<table border=0 cellpadding=0 cellspacing=0 class="mainback2" width=542 valign=top>
+<TR>
+<td width=29><img src="/images/shim.gif" height=4 width=29></td>
+<td width=513 valign="top">
+<!--Form Start-->
+<form  method="post" action="/cgi-bin/etchosts" name="etchosts">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=titletable>
+<tr class="titlerow"><!--form-->
+<td width=513 height=22 class="titlerow" valign=center>
+&nbsp;&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title(stretchosts); </script><BR><img border=0 height=1 width=1 src="/images/shim.gif"><BR></td>
+</tr>
+</table><img src="/images/shim.gif" height=21 width=1 class=titleimage><BR>
+<table valign="top" border=0 cellpadding=0 cellspacing=0 height="" width="">
+<tbody>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td class="darkback" height="" width=1><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+<td align="center" width="">
+<table class="headingstyle" valign="top" cellspacing=0 cellpadding=0 border=0>
+<tbody>
+<tr class="HeadingStyle">
+<td valign="center" class="HeadingStyle" height=21 width=513>&nbsp; <font class="HeadingStyle"><b>&nbsp;Configured Host Names</b></font></td>
+</tr>
+</table>
+<table class="centertable" valign="top" cellspacing=0 cellpadding=0 border=0 width=513>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td colspan=3 height=2 width=""><img border=0 height=14 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td>
+<table width="99%" cellspacing=0 border=0>
+<tbody>
+<tr>
+<td width=25></td>
+<td class="toolbar" width=130><b>IP Address</b></td>
+<td class="toolbar" width=190><b>Host Name</b></td>
+<td align="left" width=135 class="toolbar"><b>Optional Alias</b></td>
+<td width=30 align="left"></td>
+</tr>

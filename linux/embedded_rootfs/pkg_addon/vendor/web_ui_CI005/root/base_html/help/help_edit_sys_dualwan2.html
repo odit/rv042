@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:13" />
+    <title>Editing the Dual WAN Settings</title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=0;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998293"> </a><h2 class="pHeading2">
+Editing the Dual WAN Settings
+</h2>
+<a name="wp998972"> </a><p class="pBody">
+The <em class="cEmphasis">Dual WAN Settings</em> page appears after you click the <b class="cBold">Edit</b> icon for a WAN 
+interface on the <em class="cEmphasis">Dual WAN</em> page. Enter the interface settings, as needed.
+
+</p>
+<a name="wp999108"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp998294"> </a><h3 class="pHeading3">
+<b class="cBold">Max Bandwidth Provided by ISP:</b>
+</h3>
+<a name="wp998754"> </a><p class="pBody">
+In this section, enter the maximum bandwidth settings as specified by your 
+Internet Service Provider. If the bandwidth exceeds the specified number, then the 
+router uses another WAN interface for the next connection.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998295"> </a><li class="pSmartList1"><b class="cBold">Upstream:</b> Enter the maximum upstream bandwidth provided by your ISP. 
+The default is 512 kbit/sec.
+</li>
+<a name="wp998296"> </a><li class="pSmartList1"><b class="cBold">Downstream:</b> Enter the maximum downstream bandwidth provided by 
+your ISP. The default is 512 kbit/sec.
+</li>
+</ul></div>
+<a name="wp998297"> </a><h3 class="pHeading3">
+<b class="cBold">Network Service Detection:</b> 
+</h3>
+<a name="wp998758"> </a><p class="pBody">
+Optionally, check the box to allow the router to detect network connectivity by 
+pinging specified devices. Then enter the settings below. Uncheck the box to 
+disable this feature.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998298"> </a><li class="pSmartList1"><b class="cBold">Retry count</b>: Enter the number of times to ping a device. The default is 5.
+</li>
+<a name="wp998299"> </a><li class="pSmartList1"><b class="cBold">Retry timeout:</b> Enter the number of seconds to wait between pings. The 
+default is 30 seconds.
+</li>
+<a name="wp998300"> </a><li class="pSmartList1"><b class="cBold">When Fail:</b> Choose the action that will be taken if a ping test fails. If you 
+choose <b class="cBold">Generate the Error Condition in the System Log</b>, the router 
+records the failure in the System Log. There is no failover to the other 
+interface. If you choose <b class="cBold">Remove the Connection</b>, failover occurs and the 
+backup interface is used. When the WAN port&#39;s connectivity is restored, its 
+traffic is restored.
+</li>
+<a name="wp998301"> </a><li class="pSmartList1"><b class="cBold">Default Gateway, ISP Host, Remote Host, </b>and <b class="cBold">DNS Lookup Host:</b> Check 
+the box for each device that you want to ping to determine network 
+connectivity. For an ISP host or a remote host, enter the IP address. For a 
+DNS Lookup host, enter a host name or domain name. Uncheck a box if you 
+do not want to ping this device for network service detection.
+</li>
+</ul></div>
+<a name="wp998646"> </a><h3 class="pHeading3">
+<b class="cBold">Protocol Binding</b> (for Cisco RV016 only, when Load Balancer is selected): 
+</h3>
+<a name="wp998809"> </a><p class="pBody">
+Use this feature to require this interface to be used for specified protocols and 
+specified source and destination addresses. If you enabled IP Group mode, this 
+feature is not available.
+
+</p>
+<a name="wp999085"> </a><p class="pBody">
+Add or update entries as needed. Remember that your entries are not saved until 
+you click the Save button.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998919"> </a><li class="pSmartList1"><b class="cBold">To add a new entry to the list: </b>Enter the settings as described below, and 
+then click <b class="cBold">Add to list</b>. 
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998920"> </a><li class="pSmartList2"><b class="cBold">Service:</b> Choose a service (or All Traffic) to bind to this WAN interface. If a service is not listed, you can click <b class="cBold">Service Management</b> to add it. For more information, see <a href="#wp998991">Adding a service</a> at the end of this help topic.</li>
+<a name="wp998866"> </a><li class="pSmartList2"><b class="cBold">Source IP </b>and <b class="cBold">Destination IP:</b> Specify the internal sources and the external destinations for the traffic that goes through this WAN port. For a range of IP addresses, enter the first address in the first field and the final address in the <em class="cEmphasis">To</em> field. For a single IP address, enter the same address in both fields.</li>
+<a name="wp998868"> </a><li class="pSmartList2"><b class="cBold">Enable: </b>Check the box to enable this rule, or uncheck the box to disable it.</li>
+</ul></div>
+<a name="wp998702"> </a><li class="pSmartList1"><b class="cBold">To add another entry to the list: </b>Enter the information, and then click <b class="cBold">Add 
+to list</b>.
+</li>
+<a name="wp998703"> </a><li class="pSmartList1"><b class="cBold">To modify an entry in the list:</b> Click the entry that you want to modify. The 
+information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the entry and clear the text fields.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp999333"> </a><li class="pSmartList2"><b class="cBold">To delete an entry from the list:</b> Click the entry that you want to delete, and then click <b class="cBold">Delete</b>. To select a block of entries, click the first entry, hold down the Shift key, and then click the final entry in the block. To select individual entries, press the Ctrl key while clicking each entry. To de-select an entry, press the Ctrl key while clicking the entry.</li>
+</ul></div>
+</ul></div>
+<a name="wp998991"> </a><h3 class="pHeading3">
+Adding a service
+</h3>
+<a name="wp998992"> </a><p class="pBody">
+To add a new entry to the <em class="cEmphasis">Service</em> list, or to change an entry that you created 
+previously, click <b class="cBold">Service Management</b>. If the web browser displays a warning 
+about the pop-up window, allow the blocked content.
+
+</p>
+<a name="wp999160"> </a><p class="pBody">
+In the <em class="cEmphasis">Service </em>Management window, add or update entries as needed. Before 
+closing this window, click <span style="font-weight: bold">OK</span> to save your settings, or click <b class="cBold">Cancel</b> to undo them. 
+Any unsaved changes are abandoned.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998995"> </a><li class="pSmartList1"><b class="cBold">To add a service to the list:</b> Enter the following information, and then click 
+<b class="cBold">Add to List</b>. You can have up to 30 services in the list.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998996"> </a><li class="pSmartList2"><b class="cBold">Service Name:</b> Enter a short description.</li>
+<a name="wp998997"> </a><li class="pSmartList2"><b class="cBold">Protocol:</b> Choose the required protocol. Refer to the documentation for the service that you are hosting.</li>
+<a name="wp998998"> </a><li class="pSmartList2"><b class="cBold">Port Range:</b> Enter the required port range. </li>
+<a name="wp998999"> </a><li class="pSmartList2"><b class="cBold">To add another new service: </b>Enter the information, and then click <b class="cBold">Add to list</b>.</li>
+<a name="wp999000"> </a><li class="pSmartList2"><b class="cBold">To modify a service you created: </b>Click the service in the list. The information appears in the text fields. Make the changes, and then click <b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-select the service and clear the text fields.</li>
+<a name="wp999001"> </a><li class="pSmartList2"><b class="cBold">To delete a service from the list:</b> Click the entry that you want to delete. To select a block of entries, click the first entry, hold down the Shift key, and click the final entry in the block. To select individual entries, hold down the Ctrl key while clicking. Click <b class="cBold">Delete</b>.</li>
+</ul></div>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

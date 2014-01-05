@@ -1,0 +1,21 @@
+all:
+	$(MAKE) -C single_cgi -f Makefile.uClinux
+	$(MAKE) -C cgi-bin/common -f Makefile.uClinux
+	$(MAKE) -C cgi-bin/user-pages/cifs -f Makefile.uClinux
+
+clean:
+	$(MAKE) -C single_cgi clean -f Makefile.uClinux
+	$(MAKE) -C cgi-bin/common clean -f Makefile.uClinux
+	$(MAKE) -C cgi-bin/user-pages/cifs clean -f Makefile.uClinux
+
+install:
+	$(MAKE) -C single_cgi install -f Makefile.uClinux
+	$(MAKE) -C cgi-bin/common install -f Makefile.uClinux
+	$(MAKE) -C cgi-bin/user-pages/cifs install -f Makefile.uClinux
+	$(MAKE) -C Java copy
+	$(MAKE) -C cgi-bin content-install
+
+un-install:
+	$(MAKE) -C single_cgi un-install -f Makefile.uClinux
+	$(MAKE) -C cgi-bin/common un-install -f Makefile.uClinux
+	$(MAKE) -C cgi-bin/user-pages/cifs un-install -f Makefile.uClinux

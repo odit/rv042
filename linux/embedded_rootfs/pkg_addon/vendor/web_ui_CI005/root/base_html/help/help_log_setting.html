@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:18" />
+    <title>Setting Up the System Log and Alerts </title>
+    <!-- Copyright ï¿?2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+		document.getElementById("thisModel").innerHTML=top.mymodel+"&nbsp;";
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=50;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1073341"> </a><h1 class="pTitle">
+Setting Up the System Log and Alerts
+
+</h1>
+<a name="wp1074591"> </a><p class="pBody">
+Use the Log &gt; <em class="cEmphasis">System Log</em> page to configure logs and alerts and to view the log 
+tables.
+
+</p>
+<a name="wp1075922"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> <span style="font-weight: normal">Before navigating away from this page, click </span><span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp1074876"> </a><p class="pBody">
+This page has the following sections:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1074877"> </a><li class="pSmartList1"><a href="#wp1073593">Syslog section</a>
+</li>
+<a name="wp1074885"> </a><li class="pSmartList1"><a href="#wp1076011">E-mail section</a>
+</li>
+<a name="wp1074890"> </a><li class="pSmartList1"><a href="#wp1073792">Log Setting</a>
+</li>
+<a name="wp1074895"> </a><li class="pSmartList1"><a href="#wp1073379">Buttons</a>
+</li>
+</ul></div>
+<a name="wp1073593"> </a><h2 class="pHeading2">
+Syslog section
+</h2>
+<a name="wp1074830"> </a><p class="pBody">
+You can enable the router to send detailed log files to your syslog server when 
+events are logged.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1073612"> </a><li class="pSmartList1"><b class="cBold">Enable Syslog:</b> Syslog is an industry-standard protocol used to capture 
+information about network activity. 
+When this feature is enabled, the router will send all log activities, 
+including every source/ destination IP address and service, to syslog server. 
+Check the box to enable syslog. 
+Uncheck the box to disable this feature. 
+</li>
+<a name="wp1076009"> </a><li class="pSmartList1"><b class="cBold">Syslog Server: </b>Enter the Syslog server name or IP address (IPv4 or IPv6). Restart 
+the Cisco <span id="thisModel"></span>for the change to take effect. 
+</li>
+</ul></div>
+<a name="wp1076011"> </a><h2 class="pHeading2">
+E-mail section
+</h2>
+<a name="wp1074845"> </a><p class="pBody">
+You can enable the router to send email alerts when events are logged.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1073659"> </a><li class="pSmartList1"><b class="cBold">Enable E-Mail Alert:</b> Check this box to enable the router to send email 
+alerts to the specified email address. Uncheck the box to disable this 
+feature.
+</li>
+<a name="wp1073665"> </a><li class="pSmartList1"><b class="cBold">Mail Server:</b> Enter the IP address (IPv4 or IPv6) or name of your ISP&#39;s SMTP server.
+</li>
+<a name="wp1073697"> </a><p class="pListBodyLevel1">
+<b class="cBold">NOTE: </b>Your ISP may require that you identify your router by entering a host 
+name on the <em class="cEmphasis">Setup &gt; Network</em> page.
+
+</p>
+<a name="wp1073674"> </a><li class="pSmartList1"><b class="cBold">Send Email to: </b>Enter the email address where you want to send the alerts.
+</li>
+<a name="wp1073686"> </a><li class="pSmartList1"><b class="cBold">Log Queue Length:</b> Specify the number of log entries to include in the 
+email. The default is 50.
+</li>
+<a name="wp1075818"> </a><li class="pSmartList1"><b class="cBold">Log Time Threshold:</b> Log time threshold is the maximum wait time before a 
+email log message is sent. When the Log Time Threshold expires, an email 
+is sent whether the email log buffer is full or not. Specify the number of 
+minutes to collect data before sending the log. The default is 10.
+</li>
+<a name="wp1073817"> </a><li class="pSmartList1"><b class="cBold">E</b><b class="cBold">mail Log Now:</b> Click this button to immediately send a message to the 
+specified email address, to test your settings.
+</li>
+</ul></div>
+<a name="wp1073792"> </a><h2 class="pHeading2">
+Log Setting
+</h2>
+<a name="wp1074859"> </a><p class="pBody">
+Choose the events to report in the logs:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1073869"> </a><li class="pSmartList1"><b class="cBold">Alert Log:</b> These events include common types of attacks as well as 
+unauthorized login attempts. Check each type of attack to include in the 
+alert log. Uncheck each event to omit from the alert log.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1073871"> </a><li class="pSmartList2"><b class="cBold">S</b><b class="cBold">yn Flooding:</b> An attacker sends a succession of SYN packets, causing the router to open so many sessions that it is overwhelmed and denies service to legitimate traffic.</li>
+<a name="wp1073866"> </a><li class="pSmartList2"><b class="cBold">IP Spoofing:</b> An attacker sends packets with a forged source IP address to disguise an attack as legitimate traffic.</li>
+<a name="wp1073783"> </a><li class="pSmartList2"><b class="cBold">Win Nuke:</b> An attacker sends an Out-of-Band message to a Windows machine with the purpose of causing the target computer to crash.</li>
+<a name="wp1073785"> </a><li class="pSmartList2"><b class="cBold">Ping of Death: </b>An attacker sends a very large IP packet with the purpose of causing the target computer to crash. </li>
+<a name="wp1075841"> </a><li class="pSmartList2"><b class="cBold">Unauthorized Login Attempt: </b>Someone tried to log in to the router configuration utility without providing the correct username or password.</li>
+<a name="wp1075848"> </a><li class="pSmartList2"><b class="cBold">Output Blocking Event: </b>There was an event in ProtectLink web reputation or URL filtering. </li>
+</ul></div>
+<a name="wp1075843"> </a><li class="pSmartList1"><b class="cBold">G</b><b class="cBold">eneral Log: </b>These events include actions that are performed to enforce 
+configured policies as well as routine events such as authorized logins and 
+configuration changes. Check each type of event to include in the general 
+log. Uncheck each event to omit from the general log.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1073377"> </a><li class="pSmartList2"><b class="cBold">S</b><b class="cBold">ystem Error Messages:</b> All system error messages.</li>
+<a name="wp1074027"> </a><li class="pSmartList2"><b class="cBold">Deny Policies:</b> Instances when the router denied access based on your Access Rules. </li>
+<a name="wp1074029"> </a><li class="pSmartList2"><b class="cBold">Allow Policies:</b> Instances when the router allowed access based on your Access Rules.</li>
+<a name="wp1074581"> </a><li class="pSmartList2"><b class="cBold">C</b><b class="cBold">onfiguration Changes: </b>Instances when someone saved changes in the configuration.</li>
+<a name="wp1074036"> </a><li class="pSmartList2"><b class="cBold">Authorized Login: </b>Instances when someone successfully logged into the router configuration utility after entering the correct username and password.</li>
+</ul></div>
+</ul></div>
+<a name="wp1073379"> </a><h2 class="pHeading2">
+Buttons
+</h2>
+<a name="wp1074867"> </a><p class="pBody">
+Use the following buttons to view additional information:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1074190"> </a><li class="pSmartList1"><b class="cBold">View System Log:</b> Click this button to view the System Log. The 
+information appears in a new window. If the web browser displays a 
+warning about the pop-up window, allow the blocked content.
+</li>
+<a name="wp1074191"> </a><p class="pListBodyLevel1">
+In the <em class="cEmphasis">System Log</em> window, you can use the drop-down list to choose a 
+particular log to display. Click <b class="cBold">Refresh</b> to update the data, or click <b class="cBold">Clear</b> to 
+erase all displayed information. When you finish viewing the log, click <b class="cBold">Close</b> 
+to close the pop-up window.
+
+</p>
+<a name="wp1074603"> </a><p class="pListBodyLevel1">
+Log entries include the date and time of the event, the event type, and a 
+message.The message specifies the type of policy, such as Access Rule, 
+the LAN IP address of the source (SRC), and the MAC address
+
+</p>
+<a name="wp1073383"> </a><li class="pSmartList1"><b class="cBold">Outgoing Log Table: </b>Click this button to view the outgoing packet 
+information. The information appears in a new window. 
+</li>
+<a name="wp1074256"> </a><p class="pListBodyLevel1">
+In the <em class="cEmphasis">Outgoing Log Table</em> window, you can click <b class="cBold">Refresh</b> to update the 
+data. When you finish viewing the log, click <b class="cBold">Close</b> to close the pop-up 
+window.
+
+</p>
+<a name="wp1073386"> </a><li class="pSmartList1"><b class="cBold">Incoming Log Table: </b>Click this button to display the incoming packet 
+information. The information appears in a new window. If the web browser 
+displays a warning about the pop-up window, allow the blocked content.
+</li>
+<a name="wp1074326"> </a><p class="pListBodyLevel1">
+In the <em class="cEmphasis">Incoming Log Table</em> window, you can click <b class="cBold">Refresh</b> to update the 
+data. When you finish viewing the log, click <b class="cBold">Close</b> to close the pop-up 
+window.
+
+</p>
+<a name="wp1073389"> </a><li class="pSmartList1"><b class="cBold">Clear Log Now: </b>Click this button to clear out your log without emailing it. 
+Use this button only if you do not want to view the information again in the 
+future. 
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:11" />
+    <title>Editing a DMZ Connection</title>
+    <!-- Copyright ? 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=0;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998294"> </a><h1 class="pTitle">
+Router Advertisement
+</h1>
+<a name="wp999616"> </a><p class="pBody">
+The router can send multicast packets to advertise itself in Local Area Network, or responds to router solicitations from LAN Node.
+
+</p>
+
+<a name="wp999637"> </a><p class="pBody">
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1079746"> </a><li class="pSmartList1"><b class="cBold">Enable/Disable:</b> Indicating whether or not the router sends periodic router advertisements and responds for router solicitations automatically. This option no longer has to be specified first, but it needs to be on to enable advertisement on this interface.<br>
+Default: Enabled
+
+</li>
+
+<a name="wp1079799"> </a><li class="pSmartList1"><b class="cBold">Prefix:</b> Router can provide network prefixes or the addresses of the LAN interface automatically, or receive queries from clients by router solicitation.
+
+</li>
+
+<a name="wp1079746"> </a><li class="pSmartList1"><b class="cBold">Advertisement Mode</b>
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998298"> </a><li class="pSmartList2"><b class="cBold">Unsolicited Multicast/Unicast Only:</b> Indicates that the interface link type only supports unicast mode. This will prevent unsolicited advertisements from being sent, and will cause solicited advertisements to be unicast to the soliciting node.  This option is necessary for non-broadcast, multiple-access links, such as ISATAP.<br>
+Default: Multicast
+
+</li>
+</ul></div>
+
+<a name="wp1079746"> </a><li class="pSmartList1"><b class="cBold">Advertisement Interval:</b> The interval time allows between sending unsolicited between sending unsolicited multicast router advertisements from the interface. 
+
+</li>
+
+
+<a name="wp1079746"> </a><li class="pSmartList1"><b class="cBold">RA Flags</b>
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998300"> </a><li class="pSmartList2"><b class="cBold">Managed:</b> When set, hosts use the administered (stateful) protocol for address auto-configuration in addition to any addresses auto-configured using stateless address auto-configuration.<br>
+Default: Enabled
+
+</li>
+<a name="wp998301"> </a><li class="pSmartList2"><b class="cBold">Other:</b> When set, hosts use the administered (stateful) protocol for auto-configuration of other (non-address) information.<br>
+Default: Enabled
+
+</li>
+</ul></div>
+
+<a name="wp1079746"> </a><li class="pSmartList1"><b class="cBold">Router Preference:</b> The router can prioritize routes into high, medium, or low, and the default is set as "high". 
+
+</li>
+
+<a name="wp1079746"> </a><li class="pSmartList1"><b class="cBold">MTU:</b> The MTU option is used in router advertisement messages to insure that all nodes on a link use the same MTU value in those cases where the link MTU is not well known. If specified, i.e. not 0, must not be smaller than 1280 and not greater than the maximum MTU allowed for this link.<br>
+Default: 1500
+
+</li>
+
+<a name="wp1079746"> </a><li class="pSmartList1"><b class="cBold">Router Lifetime:</b> The lifetime associated with the default router in units of seconds.  The maximum value corresponds to 18.2 hours.  A lifetime of 0 indicates that the router is not a default router and should not appear on the default router list.  The router life-time applies only to the router's usefulness as a default router; it does not apply to information contained in other message fields or options.  Options that need time limits for their information include their own lifetime fields. Must be either zero or between Router Advertisement Interval and 9000 seconds.<br>
+Default: 3600
+
+</li>
+
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

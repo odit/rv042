@@ -1,0 +1,47 @@
+version 1,6,1,1(May 31 2007)
+--------------------------------
+1.version changed for release.
+
+version 1,6,0,1(March 14 2007)
+--------------------------------
+1.version changed for release.
+
+version 1,5,1,1(January 12 2007)
+--------------------------------
+1.version changed for release.
+
+version 1,5,0,1(october 17 2006)
+--------------------------------
+1.version changed for release.
+
+Version 1.4.0.1 (Jan 09 2006)
+-----------------------------
+1. Bug #292 - VP BSOD - Fixed
+2. Bug #296 - VP IE Crash - Fixed
+
+Version 1.3.0.1 (Jul 27 2005)
+-----------------------------
+1. Version changed for release
+
+Version 0.0.4.1 (Jul 22 2005)
+-----------------------------
+1. Fixed the 0xD1 BSOD on the receive path
+	WinPPP accesses more buffer than supplied when the buffer supplied ends close to but less than
+	0xnnnnn000. The current fix allocates 32 bytes more than what is needed for the buffer.
+2. Calls to NdisQueryBuffer were replaced with calls to NdisQueryBufferSafe
+3. SSL_ADAPTER_FRAME_SIZE altered to reflect the actual size passed from XTunnel.dll
+4. In Receive.c - Packets and Buffers are freed before the actual memory is freed
+
+
+Version 0.0.3.1 (Apr 25 2005)
+-----------------------------
+1. ISDN Parameters added to INF to fix the multiple adapters issue
+2. SSLDrv.txt version set to 1.0.0.1
+
+Version 0.00.02 (Jan 12 2004)
+-----------------------------
+1. Changed Menlologic string to Virtual Passage
+
+Version 0.00.01
+---------------
+1. Default version

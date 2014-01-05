@@ -1,0 +1,129 @@
+<script src="/js/mainframe.js"></script>
+</head>
+<body  class="mainback" margin=0 TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0 onload=resizer() style="overflow-x:hidden;overflow-y:hidden">
+<table border=0 cellpadding=0 cellspacing=0 class="mainback2" width=542 valign=top>
+<tr><td width=29><img src="/images/shim.gif" height=4 width=29></td>
+<td width=513 valign="top">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=titletable>
+<tr class=titlerow><td width=513 height=22 class=titlerow valign=center>&nbsp;&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title(strsslcert); </script><BR><img src="/images/shim.gif" height=1 width=1><BR></td></tr>
+</table><img src="/images/shim.gif" height=21 width=1 class=titleimage><BR>
+<table width="" height="" cellspacing=0 cellpadding=0 border=0 valign=top>
+<tr>
+<td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+<td width="" align="center">
+<form name="importcert" action="/cgi-bin/importcert" method="post" enctype="multipart/form-data" >
+<table border=0 cellpadding=0 cellspacing=0 valign=top class="headingstyle">
+<tr class="HeadingStyle"><td width=513 height=21 class="HeadingStyle" valign=center>
+&nbsp;
+<font class="HeadingStyle"><B>&nbsp;Import Digital Certificate</b></font></td></tr>
+</table>
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="centertable">
+<TR><td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td></tr>
+<tr><td width="" height=2 colspan=3><img src="/images/shim.gif" width=1 height=20 border=0></td></tr>
+<tr><td valign=top><table border=0 cellpadding=0 cellspacing=0 valign=top >
+<tr><td colspan=4 height=3><img src="/images/shim.gif" width=1 height=3 border=0></td></tr>
+<TR>
+<td width=140 height=28  align=right class="toolbar">File:</font>
+</td><td width=8>&nbsp;&nbsp;</td>
+<td width=250 height=28  align=left class="toolbar">
+<input class="input" size=34 style="width: 270px; height: 20px;" type="file" name="certfile">
+</td><td width=80>
+</td>
+</tr></table>
+<table border=0 cellpadding=0 cellspacing=0 valign="top" >
+<tr>
+<td width=145 height=30  align="right" class="toolbar">
+</td><td width=8>&nbsp;&nbsp;</td>
+<td width=85 height=30  align="left" class="toolbar" valign="bottom">
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td class=bleft></td><input type=hidden name=import value=true>
+<td class=bcenter width=40 align=center onClick="JavaScript:window.document.importcert.submit()" onMouseOver="JavaScript:window.status='Upload'; return true;"   onMouseOut="JavaScript:window.status=''; return true;">
+<font class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(bupload); </script> </td>
+<td class=bright></td></tr></table></td><td width=135 height=30  align="left" class="toolbar" valign="bottom">
+&nbsp;&nbsp;
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td class=bleft></td>
+<td width=40 class=bcenter align=center onClick="JavaScript:window.document.importcert.reset()"  onMouseOver="JavaScript:window.status='Cancel'; return true;"   onMouseOut="JavaScript:window.status=''; return true;">
+<font class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(bcancel); </script> </td>
+<td class=bright></td></tr></table>
+</td><td width=150>
+</td></tr>
+</tbody></table>
+<img src="/images/shim.gif" width=1 height=14 border=0>
+<center><font class=toolbar2>Upload a zip file containing "server.key" and "server.crt" files.</font></center>
+<img src="/images/shim.gif" width=1 height=17 border=0>
+</td></form></tr></table>
+</td>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+</table><img src="/images/shim.gif" height=21><BR>
+<table width="" height="" cellspacing=0 cellpadding=0 border=0 valign=top>
+<tr>
+<td width="" height=1 colspan=4 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+<td width="" align="center">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class="headingstyle">
+<tr class="HeadingStyle"><td width=513 height=21 class="HeadingStyle" valign=center colspan=2>
+&nbsp;
+<font class="HeadingStyle"><B>&nbsp;Digital Certificate Management</b></font></td></tr>
+</table>
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="centertable" width=513>
+<TR><td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td></tr>
+<tr><td width="" height=2 colspan=3><img src="/images/shim.gif" width=1 height=10 border=0></td></tr>
+<tr><TD width=10><img src="/images/shim.gif" width=10></td><td>
+<TABLE BORDER=0><TR>
+<td height=38><!-- Create a CSR -->
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td class=bleft><img src="/images/shim.gif" height=1 border=0 width=3></td>
+<td width=40 class=bcenter align=center onMouseOver="JavaScript:window.status='New Certificate Signing Request'; return true;"   onMouseOut="JavaScript:window.status=''; return true;"><a href="/cgi-bin/newcsr" class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(bnewcsr); </script> </td>
+<td class=bright width=3><img src="/images/shim.gif" height=1 border=0 width=3></td></tr></table>
+</td><td valign=center height=38><div class=toolbar> &nbsp;Create a Certificate Signing Request for an SSL certificate OR<BR> &nbsp;Create a Self-signed Certificate<BR><img src="/images/shim.gif" height=3><BR></div>
+</TD></TR>
+</TABLE>
+<img src="/images/shim.gif" height=9><BR>
+</td></tr></table>
+</td>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width="" height=1 colspan=4 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+</table>
+<img src="/images/shim.gif" width=1 height=21 border=0><BR>
+<table border=0 cellpadding=0 cellspacing=0  width=513 class=titletable valign=top>
+<form name="setcert" action="/cgi-bin/sslcert" method="post">
+<tr class=titlerow>
+<td width=513 height=22 class=titlerow valign=center>
+&nbsp;&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title(strmycert); </script></td>
+</tr>
+</table><img src="/images/shim.gif" height=21 width=1 class=titleimage><BR>
+<table width="" height="" cellspacing=0 cellpadding=0 border=0 valign=top>
+<tr>
+<td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+<td width="" align="center">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class="HeadingStyle" >
+<tr  class="HeadingStyle"><td width=7 class="HeadingStyle"><img src="/images/shim.gif" width=9 height=21></td>
+<td width=63 height=21 class="HeadingStyle"><font class=headingstyle><B>Enable</b></font></td>
+<td width=160 height=21 class="HeadingStyle"><font class=headingstyle><B>Cert Description</b></font></td>
+<td width=64 height=21 class="HeadingStyle"><font class=headingstyle><B>Status</b></font></td>
+<td width=211 height=21 colspan=2 class="HeadingStyle"><font class=headingstyle><b>Expiration</b></font></td>
+<td class="HeadingStyle">&nbsp;</td>
+</tr>
+</table>
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="centertablenb">
+<tr><td height=1 class="darkback" colspan=6><img src="/images/shim.gif" width=7 height=1></td>
+</tr>

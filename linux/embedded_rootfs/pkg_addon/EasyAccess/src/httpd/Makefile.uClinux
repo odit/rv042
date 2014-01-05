@@ -1,0 +1,66 @@
+HTTPD_HEADERS=Httpd.h\
+	HttpdErrors.h\
+        HttpdRewrite.h \
+	Config.h
+
+HTTPD_SOURCES= HttpdAlias.o\
+	HttpdBuffer.o\
+	Httpd.o\
+	HttpdCgi.o\
+	HttpdConfig.o\
+	HttpdGet.o\
+	HttpdLog.o\
+	HttpdMain.o\
+	HttpdRead.o\
+	HttpdResponse.o\
+	HttpdSSL.o\
+	HttpdTunnel.o\
+        HttpdRewrite.o\
+	HttpdUtils.o
+
+BIN=httpd
+
+all: $(BIN)
+
+include ../make-include-uClinux.mk
+
+CFLAGS+=-I$(TOP_DIR)/src
+
+CFLAGS+=-DHTTPD_DEBUG -UHTTPD_ASSERT -UUSE_FORK -UHTTPD_USE_BLOCKING_TUNNEL_FD -UHTTPD_READ_CONFIG_FILE \
+        -DHTTPD_ALTER_SOCKBUFSIZE -DHTTPD_USE_TCPNODELAY -UHTTPD_MULTIPLE_LOOP \
+ 	-DHTTPD_URL_REWRITE -DHTTPD_ENABLE_CLIENT_CERTS
+
+ifdef CONFIG_IPV6
+CFLAGS+=-DHTTPD_IPV6
+endif
+
+LDFLAGS += -Wl,--defsym,__stack_size__=1048576
+
+$(BIN): $(HTTPD_SOURCES) $(HTTPD_HEADERS)
+	${CC} $(CFLAGS) $(LDFLAGS) -o $@ $(HTTPD_SOURCES) -L$(SYS_LIB) -lSys $(SSL_LIBS) -lutil
+	$(STRIP) $(BIN)
+
+cleanbin:
+	rm $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+clean:
+	rm -f *.o
+	rm -f $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+install:
+	install -d ${INSTALL_TOP_DIR}/bin
+	install -d ${INSTALL_TOP_DIR}/www
+	install -d ${INSTALL_TOP_DIR}/www/cgi-bin
+	install -d ${INSTALL_TOP_DIR}/www/cert-bin
+	install -d ${INSTALL_TOP_DIR}/www/htdocs
+	install -d ${INSTALL_TOP_DIR}/www/htdocs/graphs
+	ln -sf /etc/EasyAccess ${INSTALL_TOP_DIR}/www/conf
+	ln -sf /etc/EasyAccess/var ${INSTALL_TOP_DIR}/var
+	ln -sf /etc/EasyAccess/uiaddon ${INSTALL_TOP_DIR}/uiaddon
+	$(INSTALL) *.png ${INSTALL_TOP_DIR}/www/htdocs/graphs
+	if [ -n '$(BIN)' ]; then $(INSTALL) $(BIN) $(ACCESS_POINT_BIN); fi
+
+un-install:
+	if [ -n '$(BIN)' ]; then cd $(ACCESS_POINT_BIN); rm -rf $(BIN); fi

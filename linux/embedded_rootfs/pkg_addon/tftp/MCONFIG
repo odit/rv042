@@ -1,0 +1,52 @@
+# Changes made for KS8695
+# add DEST to point to the source root, only it need to be changed if
+# the source root is different.
+#
+# add include directory to $(DEST)/tools/include
+# removed the man file installation.
+
+# Prefixes
+prefix      = 
+exec_prefix = ${prefix}
+
+# Directory for user binaries
+BINDIR  = ${exec_prefix}/bin
+
+# Man page tree
+MANDIR  = ${prefix}/man
+
+# System binaries
+SBINDIR = ${exec_prefix}/bin
+
+# Install into chroot area
+ifndef SH
+INSTALLROOT = ../ramdisk
+else
+INSTALLROOT = ../../ramdisk
+endif
+
+# Install program
+INSTALL         = /usr/bin/install -c
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_DATA    = ${INSTALL} -m 644
+
+# Compiler and compiler flags
+CROSS = arm-linux-
+CC = $(CROSS)gcc
+STRIP = $(CROSS)strip
+CFLAGS  = -g -O2 -Wall -W -Wpointer-arith -Wbad-function-cast -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Winline -Wcast-align -pipe 
+
+# Link flags
+LDFLAGS = 
+
+# Libraries
+###LIBS    = -liberty -lwrap -lnsl 
+###LIBS    = -lnsl 
+LIBS =  -L/usr/local/arm/arm-linux/lib  
+
+# Additional library we need to build
+LIBOBJS	= 
+
+# ar and ranlib (for making libraries)
+AR	= $(CROSS)ar cq
+RANLIB	= $(CROSS)ranlib

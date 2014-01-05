@@ -1,0 +1,358 @@
+rtread_proc.o: rtread_proc.c ../lib/zebra.h ../config.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/unistd.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/features.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/cdefs.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uClibc_config.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/posix_opt.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/types.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/lib/gcc-lib/mipsisa32-brecis-uclinux/3.2/include/stddef.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/kernel_types.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/pthreadtypes.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sched.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/confname.h \
+  ../lib/getopt.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/stdio.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/types.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/time.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/endian.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/endian.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/select.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/select.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigset.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/time.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/sysmacros.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uClibc_stdio.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/wchar.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/wchar.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/lib/gcc-lib/mipsisa32-brecis-uclinux/3.2/include/stdarg.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/stdio_lim.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/stdlib.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/alloca.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/ctype.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uClibc_ctype.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/errno.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/errno.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/errno_values.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/fcntl.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/fcntl.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/signal.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/signum.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/siginfo.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigaction.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigcontext.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/sigcontext.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigstack.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigthread.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/string.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/stropts.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/stropts.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/fcntl.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/stat.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/stat.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/kernel_stat.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/time.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/param.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/lib/gcc-lib/mipsisa32-brecis-uclinux/3.2/include/limits.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/lib/gcc-lib/mipsisa32-brecis-uclinux/3.2/include/syslimits.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/limits.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/posix1_lim.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/local_lim.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/limits.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/posix2_lim.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/param.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/param.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/sysctl.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/sysctl.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/kernel.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/types.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/posix_types.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/stddef.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/posix_types.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/types.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/config.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/autoconf.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/list.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/ioctl.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/ioctls.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/ioctls.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/ioctl.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/ioctl-types.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/ttydefaults.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/syslog.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/syslog.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uClibc_clk_tck.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/uio.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uio.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/utsname.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/utsname.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/resource.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/resource.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/version.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/assert.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/socket.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/socket.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sockaddr.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/socket.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/sockios.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/in.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/stdint.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/wordsize.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/in.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/byteswap.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/in_systm.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/ip.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/tcp.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/net/if.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/net/route.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/netlink.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/rtnetlink.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netdb.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/rpc/netdb.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/netdb.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/arpa/inet.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/arpa/telnet.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/icmp6.h \
+  /work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/inttypes.h \
+  ../lib/prefix.h ../lib/log.h ../lib/if.h ../lib/linklist.h rib.h
+
+../lib/zebra.h:
+
+../config.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/unistd.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/features.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/cdefs.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uClibc_config.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/posix_opt.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/types.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/lib/gcc-lib/mipsisa32-brecis-uclinux/3.2/include/stddef.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/kernel_types.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/pthreadtypes.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sched.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/confname.h:
+
+../lib/getopt.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/stdio.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/types.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/time.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/endian.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/endian.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/select.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/select.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigset.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/time.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/sysmacros.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uClibc_stdio.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/wchar.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/wchar.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/lib/gcc-lib/mipsisa32-brecis-uclinux/3.2/include/stdarg.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/stdio_lim.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/stdlib.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/alloca.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/ctype.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uClibc_ctype.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/errno.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/errno.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/errno_values.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/fcntl.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/fcntl.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/signal.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/signum.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/siginfo.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigaction.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigcontext.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/sigcontext.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigstack.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sigthread.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/string.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/stropts.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/stropts.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/fcntl.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/stat.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/stat.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/kernel_stat.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/time.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/param.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/lib/gcc-lib/mipsisa32-brecis-uclinux/3.2/include/limits.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/lib/gcc-lib/mipsisa32-brecis-uclinux/3.2/include/syslimits.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/limits.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/posix1_lim.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/local_lim.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/limits.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/posix2_lim.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/param.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/param.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/sysctl.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/sysctl.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/kernel.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/types.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/posix_types.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/stddef.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/posix_types.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/types.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/config.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/autoconf.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/list.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/ioctl.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/ioctls.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/ioctls.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/ioctl.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/ioctl-types.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/ttydefaults.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/syslog.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/syslog.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uClibc_clk_tck.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/uio.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/uio.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/utsname.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/utsname.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/resource.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/resource.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/version.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/assert.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/sys/socket.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/socket.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/sockaddr.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/socket.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/asm/sockios.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/in.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/stdint.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/wordsize.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/in.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/byteswap.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/in_systm.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/ip.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/tcp.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/net/if.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/net/route.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/netlink.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/linux/rtnetlink.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netdb.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/rpc/netdb.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/bits/netdb.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/arpa/inet.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/arpa/telnet.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/netinet/icmp6.h:
+
+/work/NK3/CODE/8_25_TEST/NK3/uClinux/brecis/tools/mipsisa32-brecis-uclinux/mipsisa32-brecis-uclinux/sys-include/inttypes.h:
+
+../lib/prefix.h:
+
+../lib/log.h:
+
+../lib/if.h:
+
+../lib/linklist.h:
+
+rib.h:

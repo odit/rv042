@@ -1,0 +1,824 @@
+<!--#nk_get VpnSummary=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	chVMark();
+	chTunnelAvailable();
+}
+function chTunnelAvailable()
+{
+	var Max;
+	if(TotalPortNumber==6)
+                Max=50;
+        else
+                Max=100;
+	if(document.formvpn_summary.tunnelAvailable.value<Max)
+                document.formvpn_summary.tunnelAvailable.value=Max-document.formvpn_summary.tunnelUsed.value;
+	else
+		document.formvpn_summary.tunnelAvailable.value=0;
+}
+var tunnelNumWindow = null;
+var GroupTunnel = 0;
+function refreshMe()
+{
+	chTunnelAvailable();
+	document.location.href="vpn_summary.htm"; 
+}
+function closeService()
+{
+	timer1=setTimeout("closeMC()",1000);
+}
+function closeMC()
+{  
+	if(tunnelNumWindow!=null)
+	{
+		tunnelNumWindow.close();
+	    tunnelNumWindow=null;
+	}
+	timer2=setTimeout("refreshMe()",1000);
+}
+function chVMark()
+{
+    if (document.formvpn_summary.getVMark.value!="")
+	document.location="#"+document.formvpn_summary.getVMark.value;
+}
+function newtypeTunnel(F)
+{
+    document.location.href="addvpn_mode_choose.htm";
+}
+function perPageRefresh()
+{
+	document.formvpn_summary.submitStatus.value="9";
+	//window.status=wRefresh;
+	document.formvpn_summary.submit();
+}
+function reqPage(n)
+{
+	document.formvpn_summary.ReqPage.value=document.formvpn_summary.JumpPage.selectedIndex+1+parseInt(n,10);
+	document.formvpn_summary.submitStatus.value="10";
+	window.status=wDownLoad;
+	document.formvpn_summary.submit();
+}
+function PrevPage()
+{
+	if(document.formvpn_summary.totalPage.value==1)
+		return;
+	document.formvpn_summary.ReqPage.value=document.formvpn_summary.JumpPage.selectedIndex+parseInt(0,10);
+        document.formvpn_summary.submitStatus.value="10";
+        window.status=wDownLoad;
+        document.formvpn_summary.submit();
+}
+function NextPage()
+{
+        if(document.formvpn_summary.totalPage.value==1)
+                return;
+	if(document.formvpn_summary.totalPage.value==document.formvpn_summary.thisPage.value)
+                return;
+	document.formvpn_summary.ReqPage.value=document.formvpn_summary.JumpPage.selectedIndex+2+parseInt(0,10);
+        document.formvpn_summary.submitStatus.value="10";
+        window.status=wDownLoad;
+        document.formvpn_summary.submit();
+}
+function FirstPage()
+{
+	if(document.formvpn_summary.totalPage.value==1)
+                return;
+        document.formvpn_summary.ReqPage.value=0+parseInt(0,10);
+        document.formvpn_summary.submitStatus.value="10";
+        window.status=wDownLoad;
+        document.formvpn_summary.submit();
+}
+function EndPage()
+{
+	if(document.formvpn_summary.totalPage.value==1)
+                return;
+        if(document.formvpn_summary.totalPage.value>0)
+	document.formvpn_summary.ReqPage.value=document.formvpn_summary.totalPage.value;
+	document.formvpn_summary.submitStatus.value="10";
+        window.status=wDownLoad;
+        document.formvpn_summary.submit();
+}
+function perQvpnPageRefresh()
+{
+	document.formvpn_summary.submitStatus.value="29";
+	//window.status=wRefresh;
+	document.formvpn_summary.submit();
+}
+function reqQvpnPage(n)
+{
+	if(document.formvpn_summary.totalQvpnPage.value==1)
+                return;
+	document.formvpn_summary.ReqQvpnPage.value=document.formvpn_summary.JumpPage2.selectedIndex+1+parseInt(n,10);
+	document.formvpn_summary.submitStatus.value="30";
+	window.status=wDownLoad;
+	document.formvpn_summary.submit();
+}
+function PrevQvpnPage()
+{
+	if(document.formvpn_summary.totalQvpnPage.value==1)
+                return;
+	document.formvpn_summary.ReqQvpnPage.value=document.formvpn_summary.JumpPage2.selectedIndex+parseInt(0,10);
+        document.formvpn_summary.submitStatus.value="30";
+        window.status=wDownLoad;
+        document.formvpn_summary.submit();
+}
+function NextQvpnPage()
+{
+	if(document.formvpn_summary.totalQvpnPage.value==1)
+                return;
+        if(document.formvpn_summary.totalQvpnPage.value==document.formvpn_summary.thisQvpnPage.value)
+                return;
+        document.formvpn_summary.ReqQvpnPage.value=document.formvpn_summary.JumpPage2.selectedIndex+2+parseInt(0,10);
+        document.formvpn_summary.submitStatus.value="30";
+        window.status=wDownLoad;
+        document.formvpn_summary.submit();
+}
+function FirstQvpnPage()
+{
+	if(document.formvpn_summary.totalQvpnPage.value==1)
+                return;
+        document.formvpn_summary.ReqQvpnPage.value=0+parseInt(0,10);
+        document.formvpn_summary.submitStatus.value="30";
+        window.status=wDownLoad;
+        document.formvpn_summary.submit();
+}
+function EndQvpnPage()
+{
+	if(document.formvpn_summary.totalQvpnPage.value==1)
+                return;
+	document.formvpn_summary.ReqQvpnPage.value=document.formvpn_summary.totalQvpnPage.value;
+	document.formvpn_summary.submitStatus.value="30";
+        window.status=wDownLoad;
+        document.formvpn_summary.submit();
+}
+function editLine(n,p)
+{
+	document.formvpn_summary.EditLine.value=n;
+	document.formvpn_summary.submitStatus.value="1011"; 
+	if (p=="b") document.formvpn_summary.action="gateway_to_gateway.htm";
+	else if (p=="t") document.formvpn_summary.action="client_to_gateway_t.htm";
+	window.status=wEditTunnels;  
+	document.formvpn_summary.submit();
+}
+function removeLine(n)
+{
+	if (confirm(cRemoveTunnels1+n+cRightNow))
+	{
+		document.formvpn_summary.RemoveLine.value=n;
+		document.formvpn_summary.submitStatus.value="12";  
+		window.status=wRemoveTunnel; 
+		document.formvpn_summary.submit();
+	}
+}
+function testLine(n,k)
+{
+	document.formvpn_summary.TestLine.value=n;
+	document.formvpn_summary.submitStatus.value="13";  
+	document.formvpn_summary.testType.value=k;   	
+	document.formvpn_summary.action="vpn_summary.htm"+"#"+n;
+	document.formvpn_summary.submit();  
+}
+function testLineGRP(n)
+{
+	document.formvpn_summary.TestLine.value=n;
+	document.formvpn_summary.submitStatus.value="14";  
+	document.formvpn_summary.action="vpn_summary.htm"+"#"+n;
+	document.formvpn_summary.submit();  
+}
+function testClients(n)
+{
+	document.formvpn_summary.submitStatus.value="33";  
+	document.formvpn_summary.action="vpn_summary.htm"+"#"+n;
+	document.formvpn_summary.submit();  
+}
+function editGVPN(n)
+{
+	document.formvpn_summary.EditGVPN.value=n;
+	document.formvpn_summary.submitStatus.value="1021";
+	document.formvpn_summary.action="client_to_gateway_g.htm"; 
+
+	window.status=wEditGroupVPN; 
+	document.formvpn_summary.submit();
+}
+function removeGVPN(n)
+{
+	if (confirm(cRemoveGroupVPN1+(n-1000)+cRightNow))
+	{
+		document.formvpn_summary.RemoveGVPN.value=n;
+		document.formvpn_summary.submitStatus.value="22";  
+		window.status=wRemoveGroupVPN; 
+		document.formvpn_summary.submit();
+	}
+}
+function Leavefunction()
+{
+	chLeave();
+	chTunnelAvailable();
+}
+function chSubmit(F)
+{
+	F.submit();
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var helplink ='help_vpn_summary.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 920;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintSummary(1);
+	PrintTunnelStatus(1);
+	PrintGroupVPNStatus(1);
+	PrintVPNClientStatus(0);
+	PrintEndContent();
+}
+
+function PrintSummary(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Infotable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="10">');
+	document.write('<input type="text" name="tunnelUsed" value=\'<!--#nk_get VpnTunnelNo="Used"-->\'  size="4" maxlength="4" style="background-color: #cccccc" readOnly>');
+	document.write('</td>');
+	document.write('<td width="155">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Tunnel(s) Used');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('</td>');
+	document.write('<td width="10">');
+	document.write('<input type="text" name="tunnelAvailable" value=\'\'  size="4" maxlength="4" style="background-color: #cccccc" readOnly>');
+	document.write('</td>');	
+	document.write('<td width="150">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');		
+	document.write('Tunnel(s) Available');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');	
+	document.write('</td>');
+	document.write('<td>');	
+	PrintSTButton("detail", "Details", "openTable('VpnSetting.htm')");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 1);
+}
+function Qvpn_Tunnel_List(TunnelData)
+{
+	var items;
+	list=TunnelData.split(splitVarforSpecialWordField+"?");
+	if(document.formvpn_summary.QVpnListData.value=="" || list[0].substring(1, 4) == '!--')
+		return;
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable" border="0">');	
+	for(var i=0;i<list.length;i++)
+	{
+		items=list[i].split(splitVarforSpecialWordField+"#");
+		//[0]:No,[1]:UserName,[2]:Status,[3]:Start Time,[4]:End Time,[5]:Duration
+		
+		if(i%2 == 0)
+			Print_table3_tr_cell("OddRow",items[0],items[1],items[2],items[3],items[4],items[5]);
+		else
+			Print_table3_tr_cell("EvenRow",items[0],items[1],items[2],items[3],items[4],items[5]);
+	}
+	document.write('</table>');		
+	document.write('</td>');
+	document.write('</tr>');
+}
+function PrintTunnelStatus(hasUnderLine)
+{
+	PrintBeginBlock(1, "Tunnel Status");
+	document.write('<table class="Infotable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="10">');
+	document.write('<input type="hidden" name="TunnelListData" value=\'\'>');
+	document.write('<input type="text" name="tunnelEnable"  size="4" maxlength="4" style="background-color: #cccccc" readOnly value=\'<!--#nk_get tunnelEnabled=""-->\'>');
+	document.write('</td>');
+	document.write('<td width="155">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');		
+	document.write('Tunnel(s) Enabled');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('</td>');
+	document.write('<td width="10">');
+	document.write('<input type="text" name="tunnelDefined" size="4" maxlength="4" style="background-color: #cccccc" readOnly value=\'<!--#nk_get tunnelDefined=""-->\'>');
+	document.write('</td>');
+	document.write('<td width="150">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Tunnel(s) Defined');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');	
+	document.write('</td>');
+	document.write('<td><img border="0" src="images/_blank.gif" width="1" height="29"></td>');
+	document.write('</tr>');
+	document.write('</table>');	
+	
+	document.write('<table class="STtable" height="29" width="'+FixedTableWidth+'" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td align="right"><b>');
+	document.write('<!--#nk_get Items=""-->');
+	document.write('<img border="0" src="images/_blank.gif" width="8">');
+	document.write('Rows per page&nbsp;:');
+	document.write('<img border="0" src="images/_blank.gif" width="10" height="1">');
+	document.write('<!--#nk_get NewPerPageList=""-->');	
+	document.write('</b></td>');
+	document.write('</tr>');	
+	document.write('</table>');
+
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');		
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="35" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('No.');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="119" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Name');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Status');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="95" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Phase2<br>');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');	
+	document.write('Enc/Auth/Grp');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="119" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Local Group');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="119" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Remote Group');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="120" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Remote Gateway');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="115" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Tunnel Test');
+	document.write('</td>');		
+	document.write('<td bgcolor="#FFFFFF" style="padding: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding: 0px; width:1px"></td>');	
+	document.write('<td width="64" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Config.');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	if(parseInt(document.formvpn_summary.tunnelDefined.value,10) > 0)
+	{
+		document.write('<tr>');
+	        document.write('<td class="STtable">');
+	        document.write('<table width="100%"  class="STtable"  border="0">');
+		<!--#nk_get TunnelDataList=""-->	
+		document.write('</table></td></tr>');
+	}
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table class="ListButtom" height="29" width="100%" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write("<td>");	
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	PrintSTButton("B3", "Add", "newtypeTunnel(this.form);");
+	if(parseInt(document.formvpn_summary.tunnelAvailable.value,10) == 0)
+		SetButtonStatus("B3", "disabled");	
+	document.write('</td>') 
+	document.write("<td width=21>");	
+	if(parseInt(document.formvpn_summary.totalPage.value,10)> 1) PrintPageButton("first", "FirstPage()");
+	else PrintPageButton("first", "FirstPage()", "disabled");
+	document.write('</td>') 	
+	document.write("<td width=26>");	
+	if(parseInt(document.formvpn_summary.totalPage.value,10)> 1) PrintPageButton("previous", "PrevPage()");
+	else PrintPageButton("previous", "PrevPage()","disabled");
+	document.write('</td>') ;
+	document.write('<td width="100">Page');
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	document.write('<!--#nk_get NewJumpPageList=""-->');	
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	document.write('of ');
+	document.write('<!--#nk_get tunnelTotalPage=""-->');
+	document.write('<img border="0" src="images/_blank.gif" width="10" height="1">');
+	document.write('</td>');
+	document.write("<td width=21>");	
+	if(parseInt(document.formvpn_summary.totalPage.value,10) > parseInt(document.formvpn_summary.thisPage.value,10)) PrintPageButton("next", "NextPage()");
+	else PrintPageButton("next", "NextPage()", "disabled");
+	document.write('</td>') ;	
+	document.write("<td width=20>");	
+	if(parseInt(document.formvpn_summary.totalPage.value,10) > parseInt(document.formvpn_summary.thisPage.value,10)) PrintPageButton("end", "EndPage()");
+	else PrintPageButton("end", "EndPage()", "disabled");
+	document.write('</td>') ;	
+	document.write('</tr>');
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function Print_table1_tr_cell(cell_type,no,name,status,phase2,LocalGroup, RemoteGroup, Gateway, bn_name, bn_value, mode)
+{
+	var bn_fun;
+	if (bn_value == "Connect")
+		bn_fun="testLine("+no+",  0)";
+	else
+		bn_fun="testLine("+no+",  1)";
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td width="20" >'+no+'</td>');
+	document.write('<td width="105" >'+name+'</td>');
+	document.write('<td>'+status+'</td>');
+	document.write('<td width="80">'+phase2+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="105">');
+	if (LocalGroup == "")
+		document.write('N/A');
+	else	
+		document.write(LocalGroup+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td width="105">');
+	if (RemoteGroup == "")
+		document.write('N/A');
+	else	
+		document.write(RemoteGroup+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');		
+	document.write('<td width="105">'+Gateway+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="100">');
+	if (bn_value == "Wait")
+		document.write('Waiting...');
+	else if (bn_value == "")
+		document.write('N/A');
+	else		
+		PrintSTButton(bn_name, bn_value, bn_fun);
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="50"><a href="javascript: editLine('+no+',\''+mode+'\')"><img src=images/edit.gif width=20 height=16 border=0 title=Edit></a>');
+	document.write('<img border="0" src="images/_blank.gif" width="10" height="1"><a href="javascript: removeLine('+no+')"><img src=images/trash.gif width=20 height=16 border=0 title=Delete></a></td>');	
+	document.write('</tr>');
+}
+
+function GRP_Tunnel_List(TunnelData)
+{
+	var items;
+	list=TunnelData.split(splitVarforSpecialWordField+"?");
+	if(document.formvpn_summary.GRPTunnelListData.value=="" || list[0].substring(1, 4) == '!--');
+	else	
+	{
+		document.write('<tr>');
+		document.write('<td class="STtable">');
+		document.write('<table width="100%"  class="STtable"  border="0">');
+		for(var i=0;i<list.length;i++)
+		{		
+			if(list[i]=="")
+				continue;
+			items=list[i].split(splitVarforSpecialWordField);
+			if(i%2==0)
+				Print_table2_tr_cell("OddRow",items[0],items[1],items[2],items[3],items[4],items[5],items[6],items[7], items[8], items[9],items[10]);
+			else
+				Print_table2_tr_cell("EvenRow",items[0],items[1],items[2],items[3],items[4],items[5],items[6],items[7], items[8], items[9],items[10]);
+			GroupTunnel++;
+		}
+		document.write('</table>');		
+		document.write('</td>');
+		document.write('</tr>');
+	}
+}
+
+function PrintGroupVPNStatus(hasUnderLine)
+{
+	PrintBeginBlock(1, "Group VPN Status");
+
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Group Name');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="85" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Connected');
+	document.write('<br><img border="0" src="images/_blank.gif" width="7" height="1">');	
+	document.write('Tunnels');	
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="93" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Phase2<br>');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');	
+	document.write('Enc/Auth/Grp');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="125" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Local Group');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="154" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Remote Client');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="134" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Remote Client Status');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="115" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Tunnel Test');
+	document.write('</td>');		
+	document.write('<td bgcolor="#FFFFFF" style="padding: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding: 0px; width:1px"></td>');	
+	document.write('<td width="64" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Config.');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('<input type="hidden" name="GRPTunnelListData" value=\'<!--#nk_get NewGroupList=""-->\'>');	
+	document.write('</td>');
+	document.write('</tr>');
+	GRP_Tunnel_List(document.formvpn_summary.GRPTunnelListData.value);
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table class="ListButtom" height="29" width="100%" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write("<td>");	
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	PrintSTButton("B5", "Add", "javascript:document.location.href='client_to_gateway_g.htm';");
+	if (GroupTunnel >= 2)
+		SetButtonStatus("B5", "disabled");
+	document.write('</td>') 	
+	document.write('</tr>');
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function Print_table2_tr_cell(cell_type,id,name,num,phase2,LocalIP, RemoteIP, bn_name, bn_value, bn_fun,mode,groupnum)
+{
+	if (name == "")
+		return;
+		
+	bn_fun="testLineGRP("+id+")";	
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td>'+name+'</td>');
+	document.write('<td width="70">'+num+'</td>');
+	document.write('<td width="80">'+phase2+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="110">');
+	if (LocalIP == "")
+		document.write('N/A');
+	else	
+		document.write(LocalIP+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td width="140">');
+	if (RemoteIP == "")
+		document.write('N/A');
+	else	
+		document.write(RemoteIP+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');		
+	document.write('<td width="120">');
+	document.write('<a href="javascript: openTable(\'group_list'+(parseInt(groupnum)+1)+'.htm\')">Detail List</a><img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');	
+	document.write('<td width="100">');
+	if (num == 0)
+		document.write('N/A');
+	else	
+		PrintSTButton(bn_name,"Disconnect",bn_fun);
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="50"><a href="javascript: editGVPN('+id+',\''+mode+'\')"><img src=images/edit.gif width=20 height=16 border=0 title=Edit></a>');
+	document.write('<img border="0" src="images/_blank.gif" width="10" height="1"><a href="javascript: removeGVPN('+id+')"><img src=images/trash.gif width=20 height=16 border=0 title=Delete></a></td>');	
+	document.write('</tr>');
+}
+
+
+function PrintVPNClientStatus(hasUnderLine)
+{
+	PrintBeginBlock(1, "VPN Client Status");
+	
+	document.write('<table class="STtable" height="29" width="'+FixedTableWidth+'" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td align="right"><b>');
+	document.write('<!--#nk_get QVPNItems=""-->');
+	document.write('<img border="0" src="images/_blank.gif" width="8">');
+	document.write('Rows per page&nbsp;:');
+	document.write('<img border="0" src="images/_blank.gif" width="10" height="1">');
+	document.write('<!--#nk_get QVPNPerPageList=""-->');	
+	document.write('</b></td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	
+	document.write('<input type="hidden" name="QVpnListData" value=\'<!--#nk_get QVpnDataList=""-->\'>');	
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');		
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="40" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('No.');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Username');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="94" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Status');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="174" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Start Time');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="174" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('End Time');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="195" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Duration');
+	document.write('</td>');		
+	document.write('<td bgcolor="#FFFFFF" style="padding: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding: 0px; width:1px"></td>');	
+	document.write('<td width="123" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('<br><img border="0" src="images/_blank.gif" width="7" height="1">');
+	if (document.formvpn_summary.QVpnListData.value =="");
+	else PrintSTButton("Test", "Disconnect", "testClients(200);");
+	document.write('<br><img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');
+	Qvpn_Tunnel_List(document.formvpn_summary.QVpnListData.value);
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table class="ListButtom" height="29" width="100%" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write("<td>");	
+	document.write('<img border="0" src="images/_blank.gif" width="3" height="1">');
+	document.write('</td>') 
+	document.write("<td width=21>");	
+	if(parseInt(document.formvpn_summary.totalQvpnPage.value,10)>1) PrintPageButton("first", "FirstQvpnPage()");
+	else PrintPageButton("first", "FirstQvpnPage()", "disabled");
+	document.write('</td>') 	
+	document.write("<td width=26>");	
+	if(parseInt(document.formvpn_summary.totalQvpnPage.value,10)>1) PrintPageButton("previous", "PrevQvpnPage()");
+	else PrintPageButton("previous", "PrevQvpnPage()", "disabled");
+	document.write('</td>') ;
+	document.write('<td width="108">Page');
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	document.write('<!--#nk_get QVPNJumpPageList=""-->');	
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	document.write('of ');
+	document.write('<!--#nk_get QvpnTotalPage=""-->');
+	document.write('<img border="0" src="images/_blank.gif" width="10" height="1">');
+	document.write('</td>');
+	document.write("<td width=21>");	
+	if(parseInt(document.formvpn_summary.totalQvpnPage.value,10) > parseInt(document.formvpn_summary.thisQvpnPage.value,10)) PrintPageButton("next", "NextQvpnPage()");
+	else PrintPageButton("next", "NextQvpnPage()", "disabled");
+	document.write('</td>') ;	
+	document.write("<td width=20>");	
+	if(parseInt(document.formvpn_summary.totalQvpnPage.value,10) > parseInt(document.formvpn_summary.thisQvpnPage.value,10)) PrintPageButton("end", "EndQvpnPage()");
+	else PrintPageButton("end", "EndQvpnPage()", "disabled");
+	document.write('</td>') ;	
+	document.write('</tr>');
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function Print_table3_tr_cell(cell_type,no,name,Onlinestatus,StartTime,EndTime, Duration)
+{
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td width="25" >'+no+'</td>');
+	document.write('<td>'+name+'</td>');
+	document.write('<td width="80">');
+	if (Onlinestatus == "1")
+		document.write('<font color="green">Online</font><img border="0" src="images/_blank.gif" width="8" height="1">');
+	else	
+		document.write('<font color="red">Offline</font><img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td width="160">');
+	if (StartTime == "")
+		document.write('---');
+	else	
+		document.write(StartTime+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td width="160">');
+	if (EndTime == "")
+		document.write('---');
+	else	
+		document.write(EndTime+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td width="180">');
+	if (Duration == "")
+		document.write('---');
+	else	
+		document.write(Duration+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');	
+	document.write('<td width="108">');
+	document.write('<input type="checkbox" name="discont'+no+'" value=1>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');	
+	document.write('</tr>');
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground("",FixedTableWidth);</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 7, 1);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formvpn_summary" method="post" action="vpn_summary.htm">
+	<input type="hidden" name="page" value="vpn_summary.htm">
+	<input type="hidden" name="submitStatus" value="0">
+	<input type="hidden" name="get_usb_n" value='<!--#nk_get USBKeyTunnel="qnokey_tunnelNum"-->'>
+	<input type="hidden" name="get_ipsec_n" value='<!--#nk_get VpnTunnelNo="Available"-->'>
+	<input type="hidden" name="check_ipsec_num" value='<!--#nk_get enableTunnels=""-->'>
+	<input type="hidden" name="getVMark" value='<!--#nk_get getVMark=""-->'>
+	<input type="hidden" name="getfieldInformation" value='0'>
+	<input type="hidden" name="ReqPage" value="0">
+	<input type="hidden" name="TestLine" value="0">
+	<input type="hidden" name="testType" value="0">
+	<input type="hidden" name="EditLine" value="0">
+	<input type="hidden" name="RemoveLine" value="0">
+	<input type="hidden" name="thisPage" value='<!--#nk_get currPage=""-->'>
+	<input type="hidden" name="totalPage" value='<!--#nk_get tunnelTotalPage=""-->'>
+	<input type="hidden" name="ReqQvpnPage" value="0">
+	<input type="hidden" name="thisQvpnPage" value='<!--#nk_get currQvpnPage=""-->'>
+	<input type="hidden" name="totalQvpnPage" value='<!--#nk_get QvpnTotalPage=""-->'>
+	<input type="hidden" name="EditGVPN" value="0">
+	<input type="hidden" name="RemoveGVPN" value="0">
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>  
+	</form>
+</table>
+</body>
+</html>

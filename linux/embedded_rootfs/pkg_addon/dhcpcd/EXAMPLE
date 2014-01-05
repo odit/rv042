@@ -1,0 +1,10 @@
+Two things to do to make this work:
+
+1) ln -s /var/dhcpc/resolv.conf /etc/resolv.conf
+2) add the following (or similar) to /etc/rc
+	echo "Create /var/dhcpc"
+	/bin/mkdir /var/dhcpc
+	/bin/chmod 777 /var/dhcpc
+	/sbin/dhcpcd -H eth0 &
+
+That should be it.

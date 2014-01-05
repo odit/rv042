@@ -1,0 +1,1144 @@
+This is ../../../src/ddd/ddd/ddd.info, produced by makeinfo version 4.3
+from ../../../src/ddd/ddd/ddd.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD: (ddd).                     The Data Display Debugger.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 15 January, 2004, of `Debugging with DDD'
+for DDD Version 3.3.11.
+
+Copyright (C) 2004 Universität des Saarlandes
+Lehrstuhl Softwaretechnik
+Postfach 15 11 50
+66041 Saarbrücken
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd.info,  Node: Data Display Actions,  Next: Debugger Console Actions,  Prev: General Actions,  Up: Actions
+
+Data Display Actions
+--------------------
+
+   These actions are used in the DDD graph editor.
+
+ - Action: end ()
+     End the action initiated by `select'.  Bound to a button up event.
+
+ - Action: extend ()
+     Extend the current selection.  Bound to a button down event.
+
+ - Action: extend-or-move ()
+     Extend the current selection.  Bound to a button down event.  If
+     the pointer is dragged, move the selection.
+
+ - Action: follow ()
+     Continue the action initiated by `select'.  Bound to a pointer
+     motion event.
+
+ - Action: graph-select ()
+     Equivalent to `select', but also updates the current argument.
+
+ - Action: graph-select-or-move ()
+     Equivalent to `select-or-move', but also updates the current
+     argument.
+
+ - Action: graph-extend ()
+     Equivalent to `extend', but also updates the current argument.
+
+ - Action: graph-extend-or-move ()
+     Equivalent to `extend-or-move', but also updates the current
+     argument.
+
+ - Action: graph-toggle ()
+     Equivalent to `toggle', but also updates the current argument.
+
+ - Action: graph-toggle-or-move ()
+     Equivalent to `toggle-or-move', but also updates the current
+     argument.
+
+ - Action: graph-popup-menu ([`graph'|`node'|`shortcut'])
+     Pops up a menu.  `graph' pops up a menu with global graph
+     operations, `node' pops up a menu with node operations, and
+     `shortcut' pops up a menu with display shortcuts.
+
+     If no argument is given, pops up a menu depending on the context:
+     when pointing on a node with the <Shift> key pressed, behaves like
+     `shortcut'; when pointing on a without the <Shift> key pressed,
+     behaves like `node'; otherwise, behaves as if `graph' was given.
+
+ - Action: graph-dereference ()
+     Dereference the selected display.
+
+ - Action: graph-detail ()
+     Show or hide detail of the selected display.
+
+ - Action: graph-rotate ()
+     Rotate the selected display.
+
+ - Action: graph-dependent ()
+     Pop up a dialog to create a dependent display.
+
+ - Action: hide-edges ([`any'|`both'|`from'|`to'])
+     Hide some edges.  `any' means to process all edges where either
+     source or target node are selected. `both' means to process all
+     edges where both nodes are selected. `from' means to process all
+     edges where at least the source node is selected. `to' means to
+     process all edges where at least the target node is selected.
+     Default is `any'.
+
+ - Action: layout ([`regular'|`compact'], [[`+'|`-'] degrees])
+     Layout the graph.  `regular' means to use the regular layout
+     algorithm; `compact' uses an alternate layout algorithm, where
+     successors are placed next to their parents.  Default is
+     `regular'.  DEGREES indicates in which direction the graph should
+     be layouted.  Default is the current graph direction.
+
+ - Action: move-selected (x-offset, y-offset)
+     Move all selected nodes in the direction given by X-OFFSET and
+     Y-OFFSET.  X-OFFSET and Y-OFFSET is either given as a numeric
+     pixel value, or as `+grid', or `-grid', meaning the current grid
+     size.
+
+ - Action: normalize ()
+     Place all nodes on their positions and redraw the graph.
+
+ - Action: rotate ([[`+'|`-']degrees])
+     Rotate the graph around DEGREES degrees.  DEGREES must be a
+     multiple of 90.  Default is `+90'.
+
+ - Action: select ()
+     Select the node pointed at.  Clear all other selections.  Bound to
+     a button down event.
+
+ - Action: select-all ()
+     Select all nodes in the graph.
+
+ - Action: select-first ()
+     Select the first node in the graph.
+
+ - Action: select-next ()
+     Select the next node in the graph.
+
+ - Action: select-or-move ()
+     Select the node pointed at.  Clear all other selections.  Bound to
+     a button down event. If the pointer is dragged, move the selected
+     node.
+
+ - Action: select-prev ()
+     Select the previous node in the graph.
+
+ - Action: show-edges ([`any'|`both'|`from'|`to'])
+     Show some edges.  `any' means to process all edges where either
+     source or target node are selected. `both' means to process all
+     edges where both nodes are selected. `from' means to process all
+     edges where at least the source node is selected. `to' means to
+     process all edges where at least the target node is selected.
+     Default is `any'.
+
+ - Action: snap-to-grid ()
+     Place all nodes on the nearest grid position.
+
+ - Action: toggle ()
+     Toggle the current selection--if the node pointed at is selected,
+     it will be unselected, and vice versa.  Bound to a button down
+     event.
+
+ - Action: toggle-or-move ()
+     Toggle the current selection--if the node pointed at is selected,
+     it will be unselected, and vice versa.  Bound to a button down
+     event.  If the pointer is dragged, move the selection.
+
+ - Action: unselect-all ()
+     Clear the selection.
+
+
+File: ddd.info,  Node: Debugger Console Actions,  Next: Source Window Actions,  Prev: Data Display Actions,  Up: Actions
+
+Debugger Console Actions
+------------------------
+
+   These actions are used in the debugger console and other text fields.
+
+ - Action: gdb-backward-character ()
+     Move one character to the left.  Bound to `Left'.
+
+ - Action: gdb-beginning-of-line ()
+     Move cursor to the beginning of the current line, after the prompt.
+     Bound to `HOME'.
+
+ - Action: gdb-control (control-character)
+     Send the given CONTROL-CHARACTER to the inferior debugger.
+     CONTROL-CHARACTER must be specified in the form `^X', where X is
+     an upper-case letter, or `?'.
+
+ - Action: gdb-command (command)
+     Execute COMMAND in the debugger console.  The following
+     replacements are performed on COMMAND:
+
+        * If COMMAND has the form `NAME...', insert NAME, followed by a
+          space, in the debugger console.
+
+        * All occurrences of `()' are replaced by the current contents
+          of the argument field `()'.
+
+
+ - Action: gdb-complete-arg (command)
+     Complete current argument as if COMMAND was prepended.  Bound to
+     <Ctrl+T>.
+
+ - Action: gdb-complete-command ()
+     Complete current command line in the debugger console.  Bound to
+     <TAB>.
+
+ - Action: gdb-complete-tab (command)
+     If global <TAB> completion is enabled, complete current argument
+     as if COMMAND was prepended.  Otherwise, proceed as if the <TAB>
+     key was hit.  Bound to <TAB>.
+
+ - Action: gdb-delete-or-control (control-character)
+     Like `gdb-control', but effective only if the cursor is at the end
+     of a line.  Otherwise, CONTROL-CHARACTER is ignored and the
+     character following the cursor is deleted.  Bound to <Ctrl+D>.
+
+ - Action: gdb-end-of-line ()
+     Move cursor to the end of the current line.  Bound to `End'.
+
+ - Action: gdb-forward-character ()
+     Move one character to the right.  Bound to `Right'.
+
+ - Action: gdb-insert-graph-arg ()
+     Insert the contents of the data display argument field `()'.
+
+ - Action: gdb-insert-source-arg ()
+     Insert the contents of the source argument field `()'.
+
+ - Action: gdb-interrupt ()
+     If DDD is in incremental search mode, exit it; otherwise call
+     `gdb-control(^C)'.
+
+ - Action: gdb-isearch-prev ()
+     Enter reverse incremental search mode.  Bound to <Ctrl+B>.
+
+ - Action: gdb-isearch-next ()
+     Enter incremental search mode.  Bound to <Ctrl+F>.
+
+ - Action: gdb-isearch-exit ()
+     Exit incremental search mode.  Bound to <ESC>.
+
+ - Action: gdb-next-history ()
+     Recall next command from history.  Bound to `Down'.
+
+ - Action: gdb-prev-history ()
+     Recall previous command from history.  Bound to `Up'.
+
+ - Action: gdb-previous-history ()
+     Recall previous command from history.  Bound to `Up'.
+
+ - Action: gdb-process ([action [, args...]])
+     Process the given event in the debugger console.  Bound to key
+     events in the source and data window.  If this action is bound to
+     the source window, and the source window is editable, perform
+     `ACTION(ARGS...)' on the source window instead; if ACTION is not
+     given, perform `self-insert()'.
+
+ - Action: gdb-select-all ()
+     If the `selectAllBindings' resource is set to `Motif', perform
+     `beginning-of-line'.  Otherwise, perform `select-all'.  Bound to
+     <Ctrl+A>.
+
+ - Action: gdb-set-line (value)
+     Set the current line to VALUE.  Bound to <Ctrl+U>.
+
+
+File: ddd.info,  Node: Source Window Actions,  Prev: Debugger Console Actions,  Up: Actions
+
+Source Window Actions
+---------------------
+
+   These actions are used in the source and code windows.
+
+ - Action: source-delete-glyph ()
+     Delete the breakpoint related to the glyph at cursor position.
+
+ - Action: source-double-click ([text-action [, line-action [,
+          function-action]]])
+     The double-click action in the source window.
+
+        * If this action is taken on a breakpoint glyph, edit the
+          breakpoint properties.
+
+        * If this action is taken in the breakpoint area, invoke
+          `gdb-command(LINE-ACTION)'.  If LINE-ACTION is not given, it
+          defaults to `break ()'.
+
+        * If this action is taken in the source text, and the next
+          character following the current selection is `(', invoke
+          `gdb-command(FUNCTION-ACTION)'.  If FUNCTION-ACTION is not
+          given, it defaults to `list ()'.
+
+        * Otherwise, invoke `gdb-command(TEXT-ACTION)'.  If TEXT-ACTION
+          is not given, it defaults to `graph display ()'.
+
+ - Action: source-drag-glyph ()
+     Initiate a drag on the glyph at cursor position.
+
+ - Action: source-drop-glyph ([action])
+     Drop the dragged glyph at cursor position.  ACTION is either
+     `move', meaning to move the dragged glyph, or `copy', meaning to
+     copy the dragged glyph.  If no ACTION is given, `move' is assumed.
+
+ - Action: source-end-select-word ()
+     End selecting a word.
+
+ - Action: source-follow-glyph ()
+     Continue a drag on the glyph at cursor position.  Usually bound to
+     some motion event.
+
+ - Action: source-popup-menu ()
+     Pop up a menu, depending on the location.
+
+ - Action: source-set-arg ()
+     Set the argument field to the current selection.  Typically bound
+     to some selection operation.
+
+ - Action: source-start-select-word ()
+     Start selecting a word.
+
+ - Action: source-update-glyphs ()
+     Update all visible glyphs.  Usually invoked after a scrolling
+     operation.
+
+
+File: ddd.info,  Node: Images,  Prev: Actions,  Up: Application Defaults
+
+Images
+======
+
+   DDD installs a number of images that may be used as pixmap
+resources, simply by giving a symbolic name.  For button images, three
+variants are installed as well:
+
+   * The suffix `-hi' indicates a highlighted variant (Button is
+     entered).
+
+   * The suffix `-arm' indicates an armed variant (Button is pushed).
+
+   * The suffix `-xx' indicates a disabled (insensitive) variant.
+
+ - Image: break_at
+     `Break at ()' button.
+
+ - Image: clear_at
+     `Clear at ()' button.
+
+ - Image: ddd
+     DDD icon.
+
+ - Image: delete
+     `Delete ()' button.
+
+ - Image: disable
+     `Disable' button.
+
+ - Image: dispref
+     `Display * ()' button.
+
+ - Image: display
+     `Display ()' button.
+
+ - Image: drag_arrow
+     The execution pointer (being dragged).
+
+ - Image: drag_cond
+     A conditional breakpoint (being dragged).
+
+ - Image: drag_stop
+     A breakpoint (being dragged).
+
+ - Image: drag_temp
+     A temporary breakpoint (being dragged).
+
+ - Image: enable
+     `Enable' button.
+
+ - Image: find_forward
+     `Find>> ()' button.
+
+ - Image: find_backward
+     `Find<< ()' button.
+
+ - Image: grey_arrow
+     The execution pointer (not in lowest frame).
+
+ - Image: grey_cond
+     A conditional breakpoint (disabled).
+
+ - Image: grey_stop
+     A breakpoint (disabled).
+
+ - Image: grey_temp
+     A temporary breakpoint (disabled).
+
+ - Image: hide
+     `Hide ()' button.
+
+ - Image: lookup
+     `Lookup ()' button.
+
+ - Image: maketemp
+     `Make Temporary' button.
+
+ - Image: new_break
+     `New Breakpoint' button.
+
+ - Image: new_display
+     `New Display' button.
+
+ - Image: new_watch
+     `New Watchpoint' button.
+
+ - Image: plain_arrow
+     The execution pointer.
+
+ - Image: plain_cond
+     A conditional breakpoint (enabled).
+
+ - Image: plain_stop
+     A breakpoint (enabled).
+
+ - Image: plain_temp
+     A temporary breakpoint (enabled).
+
+ - Image: print
+     `Print ()' button.
+
+ - Image: properties
+     `Properties' button.
+
+ - Image: rotate
+     `Rotate ()' button.
+
+ - Image: set
+     `Set ()' button.
+
+ - Image: show
+     `Show ()' button.
+
+ - Image: signal_arrow
+     The execution pointer (stopped by signal).
+
+ - Image: undisplay
+     `Undisplay ()' button.
+
+ - Image: unwatch
+     `Unwatch ()' button.
+
+ - Image: watch
+     `Watch ()' button.
+
+
+File: ddd.info,  Node: Bugs,  Next: Configuration Notes,  Prev: Application Defaults,  Up: Top
+
+Bugs and How To Report Them
+***************************
+
+   Sometimes you will encounter a bug in DDD.  Although we cannot
+promise we can or will fix the bug, and we might not even agree that it
+is a bug, we want to hear about bugs you encounter in case we do want to
+fix them.
+
+   To make it possible for us to fix a bug, you must report it.  In
+order to do so effectively, you must know when and how to do it.
+
+* Menu:
+
+* Where to Send Bug Reports::   Our e-mail address.
+* Is it a DDD Bug?::         DDD may not be at fault.
+* How to Report Bugs::          Report all the facts.
+* Bug Reports::                 Include all configuration information.
+* Diagnostics::                 Maintaining DDD
+
+
+File: ddd.info,  Node: Where to Send Bug Reports,  Next: Is it a DDD Bug?,  Up: Bugs
+
+Where to Send Bug Reports
+=========================
+
+   Send bug reports for DDD via electronic mail to
+
+     <bug-ddd@gnu.org>
+
+
+File: ddd.info,  Node: Is it a DDD Bug?,  Next: How to Report Bugs,  Prev: Where to Send Bug Reports,  Up: Bugs
+
+Is it a DDD Bug?
+================
+
+   Before sending in a bug report, try to find out whether the problem
+cause really lies within DDD.  A common cause of problems are
+incomplete or missing X or M*tif installations, for instance, or bugs
+in the X server or M*tif itself.  Running DDD as
+
+     $ ddd --check-configuration
+
+   checks for common problems and gives hints on how to repair them.
+
+   Another potential cause of problems is the inferior debugger;
+occasionally, they show bugs, too.  To find out whether a bug was
+caused by the inferior debugger, run DDD as
+
+     $ ddd --trace
+
+   This shows the interaction between DDD and the inferior debugger on
+standard error while DDD is running.  (If `--trace' is not given, this
+interaction is logged in the file `~/.ddd/log'; *note Logging::)
+Compare the debugger output to the output of DDD and determine which
+one is wrong.
+
+
+File: ddd.info,  Node: How to Report Bugs,  Next: Bug Reports,  Prev: Is it a DDD Bug?,  Up: Bugs
+
+How to Report Bugs
+==================
+
+   Here are some guidelines for bug reports:
+
+   * The fundamental principle of reporting bugs usefully is this:
+     *report all the facts*.  If you are not sure whether to state a
+     fact or leave it out, state it!
+
+   * Keep in mind that the purpose of a bug report is to enable someone
+     to fix the bug if it is not known.  It is not very important what
+     happens if the bug is already known.  Therefore, always write your
+     bug reports on the assumption that the bug is not known.
+
+   * Your bug report should be self-contained.  Do not refer to
+     information sent in previous mails; your previous mail may have
+     been forwarded to somebody else.
+
+   * Please report each bug in a separate message.  This makes it easier
+     for us to track which bugs have been fixed and to forward your bugs
+     reports to the appropriate maintainer.
+
+   * Please report bugs in English; this increases the chances of
+     finding someone who can fix the bug.  Do not assume one particular
+     person will receive your bug report.
+
+
+File: ddd.info,  Node: Bug Reports,  Next: Diagnostics,  Prev: How to Report Bugs,  Up: Bugs
+
+What to Include in a Bug Report
+===============================
+
+   To enable us to fix a DDD bug, you _must_ include the following
+information:
+
+   * Your DDD configuration.  Invoke DDD as
+
+          $ ddd --configuration
+
+     to get the configuration information.  If this does not work,
+     please include at least the DDD version, the type of machine you
+     are using, and its operating system name and version number.
+
+   * The debugger you are using and its version (e.g., `gdb-4.17' or
+     `dbx as shipped with Solaris 2.6').
+
+   * The compiler you used to compile DDD and its version (e.g.,
+     `gcc-2.8.1').
+
+   * A description of what behavior you observe that you believe is
+     incorrect.  For example, "DDD gets a fatal signal" or "DDD exits
+     immediately after attempting to create the data window".
+
+   * A _log file_ showing the interaction between DDD and the inferior
+     debugger.  By default, this interaction is logged in the file
+     `~/.ddd/log'.  Include all trace output from the DDD invocation up
+     to the first bug occurrence; insert own comments where necessary.
+
+   * If you wish to suggest changes to the DDD source, send us context
+     diffs.  If you even discuss something in the DDD source, refer to
+     it by context, _never_ by line number.
+
+   Be sure to include this information in _every_ single bug report.
+
+
+File: ddd.info,  Node: Diagnostics,  Prev: Bug Reports,  Up: Bugs
+
+Getting Diagnostics
+===================
+
+* Menu:
+
+* Logging::                     DDD logs all interactions.
+* Debugging DDD::            Facilities to debug DDD.
+* Customizing Diagnostics::     All diagnostics resources.
+
+
+File: ddd.info,  Node: Logging,  Next: Debugging DDD,  Up: Diagnostics
+
+Logging
+-------
+
+   If things go wrong, the first and most important information source
+is the "DDD log file".  This file, created in `~/.ddd/log' (`~' stands
+for your home directory), records the following information:
+
+   * Your DDD configuration (at the top)
+
+   * All programs invoked by DDD, shown as `$ PROGRAM ARGS...'
+
+   * All DDD messages, shown as `#  MESSAGE'.
+
+   * All information sent from DDD to the inferior debugger, shown as
+     `-> TEXT'.
+
+   * All information sent from the inferior debugger standard output to
+     DDD, shown as `<- TEXT'.
+
+   * All information sent from the inferior debugger standard error to
+     DDD, shown as `<= TEXT'.(1)
+
+   * All information sent from DDD to Gnuplot, shown as `>> TEXT'.
+
+   * All information sent from Gnuplot standard output to DDD, shown as
+     `<< TEXT'.
+
+   * All information sent from Gnuplot standard error to DDD, shown as
+     `<= TEXT'.
+
+   * If DDD crashes, a GDB backtrace of the DDD core dump is included
+     at the end.
+
+   This information, all in one place, should give you (and anyone
+maintaining DDD) a first insight of what's going wrong.
+
+* Menu:
+
+* Disabling Logging::
+
+   ---------- Footnotes ----------
+
+   (1) Since the inferior debugger is invoked through a virtual TTY,
+standard error is normally redirected to standard output, so DDD never
+receives standard error from the inferior debugger.
+
+
+File: ddd.info,  Node: Disabling Logging,  Up: Logging
+
+Disabling Logging
+.................
+
+   The log files created by DDD can become quite large, so you might
+want to turn off logging.  There is no explicit DDD feature that allows
+you to do that.  However, you can easily create a _symbolic link_ from
+`~/.ddd/log' to `/dev/null', such that logging information is lost.
+Enter the following commands at the shell prompt:
+
+     $ cd
+     $ rm .ddd/log
+     $ ln -s /dev/null .ddd/log
+     $ _
+
+   Be aware, though, that having logging turned off makes diagnostics
+much more difficult; in case of trouble, it may be hard to reproduce the
+error.
+
+
+File: ddd.info,  Node: Debugging DDD,  Next: Customizing Diagnostics,  Prev: Logging,  Up: Diagnostics
+
+Debugging DDD
+-------------
+
+   As long as DDD is compiled with `-g' (*note Compiling for
+Debugging::), you can invoke a debugger on DDD--even DDD itself, if you
+wish.  From within DDD, a special `Maintenance' menu is provided that
+invokes GDB on the running DDD process.  *Note Maintenance Menu::, for
+details.
+
+   The DDD distribution comes with a `.gdbinit' file that is suitable
+for debugging DDD.  Among others, this defines a `ddd' command that
+sets up an environment for debugging DDD and a `string' command that
+lets you print the contents of DDD `string' variables; just use `print
+VAR' followed by `string'.
+
+   You can cause DDD to dump core at any time by sending it a `SIGUSR1'
+signal.  DDD resumes execution while you can examine the core file with
+GDB.
+
+   When debugging DDD, it can be useful to make DDD not catch fatal
+errors.  This can be achieved by setting the environment variable
+`DDD_NO_SIGNAL_HANDLERS' before invoking DDD.
+
+
+File: ddd.info,  Node: Customizing Diagnostics,  Prev: Debugging DDD,  Up: Diagnostics
+
+Customizing Diagnostics
+-----------------------
+
+   You can use these additional resources to obtain diagnostics about
+DDD.  Most of them are tied to a particular invocation option.
+
+ - Resource: appDefaultsVersion (class Version)
+     The version of the DDD app-defaults file.  If this string does not
+     match the version of the current DDD executable, DDD issues a
+     warning.
+
+ - Resource: checkConfiguration (class CheckConfiguration)
+     If `on', check the DDD environment (in particular, the X
+     configuration), report any possible problem causes and exit.
+     *Note Options::, for the `--check-configuration' option.
+
+ - Resource: dddinitVersion (class Version)
+     The version of the DDD executable that last wrote the
+     `~/.ddd/init' file.  If this string does not match the version of
+     the current DDD executable, DDD issues a warning.
+
+ - Resource: debugCoreDumps (class DebugCoreDumps)
+     If `on', DDD invokes a debugger on itself when receiving a fatal
+     signal.  *Note Maintenance Menu::, for setting this resource.
+
+ - Resource: dumpCore (class DumpCore)
+     If `on' (default), DDD dumps core when receiving a fatal signal.
+     *Note Maintenance Menu::, for setting this resource.
+
+ - Resource: maintenance (class Maintenance)
+     If `on', enables the top-level `Maintenance' menu (*note
+     Maintenance Menu::) with additional options.  *Note Options::, for
+     the `--maintenance' option.
+
+ - Resource: showConfiguration (class ShowConfiguration)
+     If `on', show the DDD configuration on standard output and exit.
+     *Note Options::, for the `--configuration' option.
+
+ - Resource: showFonts (class ShowFonts)
+     If `on', show the DDD font definitions on standard output and
+     exit.  *Note Options::, for the `--fonts' option.
+
+ - Resource: showInvocation (class ShowInvocation)
+     If `on', show the DDD invocation options on standard output and
+     exit.  *Note Options::, for the `--help' option.
+
+ - Resource: showLicense (class ShowLicense)
+     If `on', show the DDD license on standard output and exit.  *Note
+     Options::, for the `--license' option.
+
+ - Resource: showManual (class ShowManual)
+     If `on', show this DDD manual page on standard output and exit.
+     If the standard output is a terminal, the manual page is shown in a
+     pager (`$PAGER', `less' or `more').  *Note Options::, for the
+     `--manual' option.
+
+ - Resource: showNews (class ShowNews)
+     If `on', show the DDD news on standard output and exit.  *Note
+     Options::, for the `--news' option.
+
+ - Resource: showVersion (class ShowVersion)
+     If `on', show the DDD version on standard output and exit.  *Note
+     Options::, for the `--version' option.
+
+ - Resource: suppressWarnings (class SuppressWarnings)
+     If `on', X warnings are suppressed.  This is sometimes useful for
+     executables that were built on a machine with a different X or
+     M*tif configuration.  By default, this is `off'.  *Note X
+     Warnings::, for details.
+
+ - Resource: trace (class Trace)
+     If `on', show the dialog between DDD and the inferior debugger on
+     standard output.  Default is `off'.  *Note Options::, for the
+     `--trace' option.
+
+
+File: ddd.info,  Node: Configuration Notes,  Next: Dirty Tricks,  Prev: Bugs,  Up: Top
+
+Configuration Notes
+*******************
+
+* Menu:
+
+* GDB::                         Using DDD with GDB
+* DBX::                         Using DDD with DBX
+* Ladebug::                     Using DDD with Ladebug
+* XDB::                         Using DDD with XDB
+* JDB::                         Using DDD with JDB
+* Perl::                        Using DDD with Perl
+* Bash::                        Using DDD with Bash
+* LessTif::                     Using DDD with LessTif
+
+
+File: ddd.info,  Node: GDB,  Next: DBX,  Up: Configuration Notes
+
+Using DDD with GDB
+==================
+
+   Some GDB settings are essential for DDD to work correctly.  These
+settings with their correct values are:
+     set height 0
+     set width 0
+     set verbose off
+     set annotate 1
+     set prompt (gdb)
+
+   DDD sets these values automatically when invoking GDB; if these
+values are changed, there may be some malfunctions, especially in the
+data display.
+
+   When debugging at the machine level with GDB 4.12 and earlier as
+inferior debugger, use a `display /x $pc' command to ensure the program
+counter value is updated correctly at each stop.  You may also enter
+the command in `~/.gdbinit' or (better yet) upgrade to the most recent
+GDB version.
+
+   Further information is available on the following GDB variants:
+
+* Menu:
+
+* WDB::                         Using DDD with WDB
+* WindRiver GDB::               Using DDD with WindRiver GDB (Tornado)
+
+
+File: ddd.info,  Node: WDB,  Next: WindRiver GDB,  Up: GDB
+
+Using DDD with WDB
+------------------
+
+   HP's WildeBeest (WDB) is essentially a variant of GDB.  To start DDD
+with WDB as inferior debugger, use
+
+     ddd --wdb PROGRAM
+
+   *Note GDB::, for further configuration notes.
+
+
+File: ddd.info,  Node: WindRiver GDB,  Prev: WDB,  Up: GDB
+
+Using DDD with WindRiver GDB (Tornado)
+--------------------------------------
+
+   DDD now supports WindRiver's version of GDB.(1) DDD can be
+integrated into the `Launch' window by placing the `launch.tcl' script
+(see below) into the the directory `~/.wind'.
+
+   Currently, DDD only supports the PowerPC and has been only tested on
+a Solaris 2.6 host.
+
+   DDD launches the version of GDB that is either in the current path,
+or the one specified on the command line using the `--debugger' command.
+
+   Normally, the Tornado environment is set up by sourcing a script file
+which, among other things, sets up the PATH variable.
+
+   It is suggested that a soft link for the version of GDB used for the
+target (i.e. `gdbppc') be made in the same directory:
+
+     bin>ls -l gdb*
+     39 Mar  6 16:14 gdb -> /usr/wind/host/sun4-solaris2/bin/gdbppc*
+     1619212 Mar 11  1997 gdbppc*
+     bin>_
+
+   This way DDD will start the correct version of GDB automatically.
+
+   It is also suggested that you use DDD's execution window to
+facilitate parsing of GDB output.  *Note Debugger Communication::, for
+details.
+
+   Tornado reads the default TCL scripts first, then the ones in the
+users `.wind' directory.  The following procedures can be cut and
+pasted into the user's `launch.tcl' file:
+
+     # Launch.tcl - Launch application Tcl user customization file.
+     #
+     
+     ######
+     #
+     # setupDDD - sets up DDD for use by the launcher
+     #
+     # This routine adds the DDD to the application bar
+     #
+     # SYNOPSIS:
+     # setupDDD
+     #
+     # PARAMETERS: N/A
+     #
+     # RETURNS: N/A
+     #
+     # ERRORS: N/A
+     #
+     
+     proc setupDDD {} {
+         # Add to the default application bar
+         objectCreate app ddd DDD {launchDDD}
+     }
+     
+     ######
+     #
+     # launchDDD - launch the DDD debugger
+     #
+     # SYNOPSIS:
+     # launchDDD
+     #
+     # PARAMETERS: N/A
+     #
+     # RETURNS: N/A
+     #
+     # ERRORS: N/A
+     #
+     
+     proc launchDDD {} {
+     
+         global tgtsvr_selected
+         global tgtsvr_cpuid
+     
+         if {$tgtsvr_selected == "" || $tgtsvr_cpuid == 0} {
+             noticePost error "Select an attached target first."
+             return
+         }
+     
+         set startFileName /tmp/dddstartup.[pid]
+     
+         if [catch {open $startFileName w} file] {
+              # couldn't create a startup file.  Oh, well.
+              exec ddd --gdb &
+         }
+         else
+         {
+              # write out a little /tmp file that attaches to the
+              # selected target server and then deletes itself.
+              puts $file "set wtx-tool-name ddd"
+              puts $file "target wtx $tgtsvr_selected"
+              puts $file "tcl exec rm $startFileName"
+              close $file
+              exec ddd --gdb --command=$startFileName &
+         }
+     }
+     
+     ######
+     #
+     # Launch.tcl - Initialization
+     #
+     # The user's resource file sourced from the initial Launch.tcl
+     #
+     
+     # Add DDD to the laucher
+       setupDDD
+
+In order for DDD to automatically display the source of a previously
+loaded file, the entry point must be named either `vxworks_main' or
+`main_vxworks'.
+
+   *Note GDB::, for further configuration notes.
+
+   ---------- Footnotes ----------
+
+   (1) This section was contributed by Gary Cliff from Computing
+Devices Canada Ltd., <gary.cliff@cdott.com>.
+
+
+File: ddd.info,  Node: DBX,  Next: Ladebug,  Prev: GDB,  Up: Configuration Notes
+
+Using DDD with DBX
+==================
+
+   When used for debugging Pascal-like programs, DDD does not infer
+correct array subscripts and always starts to count with 1.
+
+   With some DBX versions (notably Solaris DBX), DDD strips C-style and
+C++-style comments from the DBX output in order to interpret it
+properly.  This also affects the output of the debugged program when
+sent to the debugger console.  Using the separate execution window
+avoids these problems.
+
+   In some DBX versions (notably DEC DBX and AIX DBX), there is no
+automatic data display.  As an alternative, DDD uses the DBX `print'
+command to access data values.  This means that variable names are
+interpreted according to the current frame; variables outside the
+current frame cannot be displayed.
+
+
+File: ddd.info,  Node: Ladebug,  Next: XDB,  Prev: DBX,  Up: Configuration Notes
+
+Using DDD with Ladebug
+======================
+
+   All DBX limitations (*note DBX::) apply to Ladebug as well.
+
+
+File: ddd.info,  Node: XDB,  Next: JDB,  Prev: Ladebug,  Up: Configuration Notes
+
+Using DDD with XDB
+==================
+
+   There is no automatic data display in XDB.  As a workaround, DDD
+uses the `p' command to access data values.  This means that variable
+names are interpreted according to the current frame; variables outside
+the current frame cannot be displayed.
+
+
+File: ddd.info,  Node: JDB,  Next: Perl,  Prev: XDB,  Up: Configuration Notes
+
+Using DDD with JDB
+==================
+
+   There is no automatic data display in JDB.  As a workaround, DDD
+uses the `dump' command to access data values.  This means that
+variable names are interpreted according to the current frame;
+variables outside the current frame cannot be displayed.
+
+   In JDB 1.1, the `dump' and `print' commands do not support
+expression evaluation.  Hence, you cannot display arbitrary expressions.
+
+   Parsing of JDB output is quite CPU-intensive, due to the recognition
+of asynchronous prompts (any thread may output anything at any time,
+including prompts).  Hence, a program producing much console output is
+likely to slow down DDD considerably.  In such a case, have the program
+run with `-debug' in a separate window and attach JDB to it using the
+`-passwd' option.
+
+
+File: ddd.info,  Node: Perl,  Next: Bash,  Prev: JDB,  Up: Configuration Notes
+
+Using DDD with Perl
+===================
+
+   There is no automatic data display in Perl.  As a workaround, DDD
+uses the `x' command to access data values.  This means that variable
+names are interpreted according to the current frame; variables outside
+the current frame cannot be displayed.
+
+
+File: ddd.info,  Node: Bash,  Next: LessTif,  Prev: Perl,  Up: Configuration Notes
+
+Using DDD with Bash
+===================
+
+   BASH support is rather new. As a programming language, BASH is not
+feature rich: there are no record structures or hash tables (yet), no
+pointers, package variable scoping or methods. So much of the data
+display and visualization features of DDD are disabled.
+
+   As with any scripting or interpreted language like Perl, stepping a
+machine-language instructions (commands Stepi/Nexti) doesn't exist.
+
+   Some BASH settings are essential for DDD to work correctly.  These
+settings with their correct values are:
+
+     set annotate 1
+     set prompt set prompt bashdb$_Dbg_less$_Dbg_greater$_Dbg_space
+
+   DDD sets these values automatically when invoking BASH; if these
+values are changed, there may be some malfunctions.
+
+   Pay special attention when the prompt has extra angle brackets (a
+nested shell) or has any parenthesis (is in a subshell). Quitting may
+merely exit out of one of these nested (sub)shells rather than leave
+the program.
+
+
+File: ddd.info,  Node: LessTif,  Prev: Bash,  Up: Configuration Notes
+
+Using DDD with LessTif
+======================
+
+   DDD includes a number of hacks that make DDD run with _LessTif,_ a
+free M*tif library without loss of functionality.  Since a DDD binary
+may be dynamically bound and used with either an OSF/Motif or LessTif
+library, these _lesstif hacks_ can be enabled and disabled at run time.
+
+   Whether the _lesstif hacks_ are included at run-time depends on the
+setting of the `lessTifVersion' resource:
+
+ - Resource: lessTifVersion (class LessTifVersion)
+     Indicates the LessTif version DDD is running against.  For LessTif
+     version X.Y, the value is X multiplied by 1000 plus Y--for
+     instance, the value `79' stands for LessTif 0.79 and the value
+     `1005' stands for LessTif 1.5.
+
+     If the value of this resource is less than 1000, indicating LessTif
+     0.99 or earlier, DDD enables version-specific hacks to make DDD
+     work around LessTif bugs and deficiencies.
+
+     If DDD was compiled against LessTif, the default value is the
+     value of the `LessTifVersion' macro in `<Xm/Xm.h>'.  If DDD was
+     compiled against OSF/Motif, the default value is `1000', disabling
+     all LessTif-specific hacks.
+
+   To set the `lessTifVersion' resource at DDD invocation and to
+specify the version number of the LessTif library, you can also use the
+option `--lesstif-version' VERSION.
+
+   The default value of the `lessTifVersion' resource is derived from
+the LessTif library DDD was compiled against (or `1000' when compiled
+against OSF/Motif).  Hence, you normally don't need to worry about the
+value of this resource.  However, if you use a dynamically linked DDD
+binary with a library other than the one DDD was compiled against, you
+must specify the version number of the library using this resource.
+(Unfortunately, DDD cannot detect this at run-time.)
+
+   Here are a few scenarios to illustrate this scheme:
+   * Your DDD binary was compiled against OSF/Motif, but you use a
+     LessTif 0.88 dynamic library instead.  Invoke DDD with
+     `--lesstif-version 88'.
+
+   * Your DDD binary was compiled against LessTif, but you use a
+     OSF/Motif dynamic library instead.    Invoke DDD with
+     `--lesstif-version 1000'.
+
+   * Your DDD binary was compiled against LessTif 0.85, and you have
+     upgraded to LessTif 0.90.  Invoke DDD with `--lesstif-version 90'.
+
+   To find out the LessTif or OSF/Motif version DDD was compiled
+against, invoke DDD with the `--configuration' option.
+
+   In the DDD source, LessTif-specific hacks are controlled by the
+string `lesstif_version'.
+
+
+File: ddd.info,  Node: Dirty Tricks,  Next: Extending,  Prev: Configuration Notes,  Up: Top
+
+Dirty Tricks
+************
+
+   Do you miss anything in this manual?  Do you have any material that
+should be added?  Please send any contributions to <ddd@gnu.org>.
+
+
+File: ddd.info,  Node: Extending,  Next: FAQ,  Prev: Dirty Tricks,  Up: Top
+
+Extending DDD
+*************
+
+   If you have any contributions to be incorporated into DDD, please
+send them to <ddd@gnu.org>.  For suggestions on what might be done, see
+the file `TODO' in the DDD distribution.
+
+
+File: ddd.info,  Node: FAQ,  Next: License,  Prev: Extending,  Up: Top
+
+Frequently Answered Questions
+*****************************
+
+   See the DDD WWW page (http://www.gnu.org/software/ddd/) for
+frequently answered questions not covered in this manual.
+

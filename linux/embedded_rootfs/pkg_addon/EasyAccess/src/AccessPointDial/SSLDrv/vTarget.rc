@@ -1,0 +1,17 @@
+/**************************************************************************
+    This module defines the target version information.  It should be 
+    included into one of your target's resource files, so it gets linked 
+    into your target's binary file.
+
+    This file should not be changed.  The definitions used by this file 
+    are defined in <vVendor.h>, <vTarget.h>, <vProdNum.h>, and 
+    <vTargNum.h>
+
+*************************************************************************/
+
+#ifndef _VTARGET_RC_
+#define _VTARGET_RC_
+
+#include "vProduct.rc"  // Common product version resource
+
+#endif /* _VTARGET_RC_ */

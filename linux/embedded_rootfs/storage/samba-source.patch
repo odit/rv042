@@ -1,0 +1,11 @@
+--- include/popt_common.h.orig	2006-12-17 20:41:30.000000000 -0800
++++ include/popt_common.h	2006-12-17 20:41:01.000000000 -0800
+@@ -21,6 +21,8 @@
+ #ifndef _POPT_COMMON_H
+ #define _POPT_COMMON_H
+ 
++#include <popt.h>
++
+ /* Common popt structures */
+ extern struct poptOption popt_common_samba[];
+ extern struct poptOption popt_common_connection[];

@@ -1,0 +1,523 @@
+<!--#nk_get SysLogSetup=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	chLogServer();
+	chEmail();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function chSubmit(n,F)
+{
+    F.submitStatus.value=n;
+    F.log_ch.value=0;
+    if ( (n=="2") )
+    {
+        if (F.smtpServerName.value.length==0)
+        {
+            alert(aMailServer);
+            F.smtpServerName.select();
+            return;
+        }
+
+        if (F.logPrefs_logEmailAddr.value.length==0)
+        {
+            alert(aEMail);
+            F.logPrefs_logEmailAddr.select();
+            return;
+        }
+        else if (!emailCheck(F.logPrefs_logEmailAddr))
+        {
+            F.logPrefs_logEmailAddr.select();
+            return;
+        }
+    }
+    else if (n=="1")
+    {
+        F.log_ch.value=1;
+        if ((F.LogServerName.disabled==false) && (F.LogServerName.value==""))
+        {
+            alert(aLogServer);
+            F.LogServerName.select();
+            return;
+        }
+
+        if (F.enEmail.checked == true)
+        {
+            if (F.smtpServerName.value.length==0)
+            {
+                alert(aMailServer);
+                F.smtpServerName.select();
+                return;
+            }
+
+            if (F.logPrefs_logEmailAddr.value.length==0)
+            {
+                alert(aEMail);
+                F.logPrefs_logEmailAddr.select();
+                return;
+            }
+            else if (!emailCheck(F.logPrefs_logEmailAddr))
+            {
+                F.logPrefs_logEmailAddr.select();
+                return;
+            }
+        }
+		if(F.synflood_check.checked==true)
+			F.synflood.value=1;
+        else
+		    F.synflood.value=0;
+		if(F.spoofed_check.checked==true)
+			F.spoofed.value=1;
+        else
+		    F.spoofed.value=0;
+		if(F.winnuke_check.checked==true)
+			F.winnuke.value=1;
+        else
+		    F.winnuke.value=0;
+		if(F.badflag_check.checked==true)
+			F.badflag.value=1;
+        else
+		    F.badflag.value=0;
+		if(F.login_fail_check.checked==true)
+			F.login_fail.value=1;
+        else
+		    F.login_fail.value=0;
+		if(F.OutputBlock_check.checked==true)
+			F.OutputBlock.value=1;
+        else
+		    F.OutputBlock.value=0;	
+		if(F.system_errs_check.checked==true)
+			F.system_errs.value=1;
+        else
+		    F.system_errs.value=0;
+		if(F.conn_blocked_check.checked==true)
+			F.conn_blocked.value=1;
+        else
+		    F.conn_blocked.value=0;
+		if(F.conn_accepted_check.checked==true)
+			F.conn_accepted.value=1;
+        else
+		    F.conn_accepted.value=0;
+		if(F.conf_change_check.checked==true)
+			F.conf_change.value=1;
+        else
+		    F.conf_change.value=0;
+		if(F.login_success_check.checked==true)
+			F.login_success.value=1;
+        else
+		    F.login_success.value=0;
+    }
+	window.status=wSave;
+//		MM_showHideLayers('AutoNumber15','','hide'); 
+	F.submit(); 
+}
+
+
+function PortCheck(I)
+{
+    var d;
+    d=parseInt(I.value,10);
+
+    if (!(d<=65535 && d>=0)) 
+    {
+        alert(aPort0Check);
+        I.value=I.defaultValue;
+        return;    
+    }
+    I.value=d;
+}
+
+function NumCheck(I,cType)
+{
+	var d;
+	d=parseInt(I.value,10);
+	if (cType=="L")
+	{
+		if (!(d<=100 && d>=10)) 
+		{
+			alert(aLogQueueCheck);
+			I.value=10;
+			return;    
+		}
+	}
+
+	if (cType=="T")
+	{
+	        if (!(d<=10080 && d>=10)) 
+	        {
+			alert(aLogTimeCheck);
+			I.value=10;
+			return;    
+	        }
+	}
+	I.value=d;
+}
+
+function emailCheck(I)
+{
+    var p=-1;
+    p=I.value.indexOf("@");
+    if (p==-1)
+    {
+        alert(aEMailCheck);
+        I.value=I.defaultValue;
+        return 0;       
+    }
+	return 1;
+}
+
+function time24Check(I,mod)
+{
+    var d;
+    var single;
+    d=parseInt(I.value,10);
+    if (mod=="hours")
+    {
+        if (!(d<24 && d>=0))
+        {
+            alert(aHourCheck);
+            I.value=I.defaultValue;
+            return; 
+        }
+        I.value=d;
+        if (I.value.length==1) 
+        {
+            single=I.value;
+            I.value="0"+single;
+        }
+    }
+}
+
+function secCheck(I)
+{
+    var d;
+    d=parseInt(I.value,10);
+    if (!(d<1000000 && d>0))
+    {
+        alert(aSecondNums2Check);
+        I.value=I.defaultValue;
+        return;
+    }
+    I.value=d;
+}
+
+function chLogServer()
+{
+    if (document.formlog_setting.enLogServer.checked)
+    {
+        document.formlog_setting.remoteLogger.value = 1;
+        document.formlog_setting.LogServerName.disabled=false;
+    }
+    else
+    {
+        document.formlog_setting.remoteLogger.value = 0;
+        document.formlog_setting.LogServerName.disabled=true;
+    }
+}
+
+function chEmail()
+{
+    if (document.formlog_setting.enEmail.checked)
+    {
+        if (document.formlog_setting.hostName.value=="") 
+		alert(aNoHostName);
+        document.formlog_setting.mailAlert.value = 1;
+        document.formlog_setting.smtpServerName.disabled=false;
+        document.formlog_setting.logPrefs_logEmailAddr.disabled=false;
+        document.formlog_setting.LogQueueLength.disabled=false;
+        document.formlog_setting.LogTimeThreshold.disabled=false;
+        SetButtonStatus("emailLog", "");		
+    }
+    else
+    {
+        document.formlog_setting.mailAlert.value = 0;
+        document.formlog_setting.smtpServerName.disabled=true;
+        document.formlog_setting.logPrefs_logEmailAddr.disabled=true;
+        document.formlog_setting.LogQueueLength.disabled=true;
+        document.formlog_setting.LogTimeThreshold.disabled=true;
+ 	 SetButtonStatus("emailLog", "disabled");		
+    }
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit('1',document.formlog_setting);";
+var Cancellink = ""; 
+var helplink ='help_log_setting.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=160;
+var FixedTableWidth = 700;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintSyslogServer(1);
+	PrintEmail_Alert(1);
+	PrintSyslogSetting(0);
+	PrintEndContent();
+}
+
+function PrintSyslogServer(hasUnderLine)
+{
+	PrintBeginBlock(1, "Syslog");
+	document.write('<table width="'+FixedTableWidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="28" align="left">');
+	document.write('<input type=hidden name=remoteLogger value=\'<!--#nk_get CheckboxSave="remoteLogger"-->\'>');
+	document.write('<input type="checkbox" name="enLogServer" onClick="chLogServer()" <!--#nk_get CheckboxStatus="remoteLogger"-->>');
+	document.write('</td>');
+	document.write('<td width='+head_width+' align="left">');
+	document.write('Enable Syslog </td>');
+	document.write('<td>');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td width="1" align="left">');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Syslog Server&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="LogServerName" maxlength="40" size="50" value=\'<!--#nk_get 1to1_Handle="LogServerName"-->\' onFocus="this.select();" onBlur="sTrim(this);">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('(Name or IPv4 / IPv6 Address)');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 0, 1);
+}
+
+function PrintEmail_Alert(hasUnderLine)
+{
+	PrintBeginBlock(1, "Email");
+	document.write('<table width="'+FixedTableWidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="28" align="left">');
+	document.write('<input type=hidden name=mailAlert value=\'<!--#nk_get CheckboxSave="mailAlert"-->\'> ');
+	document.write('<input type="checkbox" name="enEmail" onClick="chEmail()" <!--#nk_get CheckboxStatus="mailAlert"-->>');
+	document.write('</td>');
+	document.write('<td width='+head_width+' align="left">');
+	document.write('Enable Email Alert');
+	document.write('</td>');
+	document.write('<td ></td>');
+	document.write('<td></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td width="1" align="left"></td>');
+	document.write('<td width='+head_width+' align="left">');
+	document.write('Mail Server&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="smtpServerName" maxlength="40" size="50" value=\'<!--#nk_get 1to1_Handle="smtpServerName"-->\'  onFocus="this.select();" onBlur="sTrim(this);">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('(Name or IPv4 / IPv6 Address)</td>');
+	document.write('<td></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td align="left">');
+	document.write('Send Email to');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="logPrefs_logEmailAddr" maxlength="65" size="50" onFocus="this.select();" onBlur="sTrim(this);" value=\'<!--#nk_get 1to1_Handle="logPrefs_logEmailAddr"-->\'>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('(Email Address)</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td width="1" align="left">');
+	document.write('<td align="left">Log Queue Length&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">'); 
+	document.write('<input type="text" maxlength=5 size=5 name="LogQueueLength" value=\'<!--#nk_get 1to1_Handle="LogQueueLength"-->\'  onFocus="this.select();" onBlur="sTrim(this);NumCheck(this.form.LogQueueLength,\'L\')">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Entries</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<td>Log Time Threshold&nbsp;:&nbsp;<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td> ');
+	document.write('<input type="text" maxlength=5 size=5 name="LogTimeThreshold" value=\'<!--#nk_get 1to1_Handle="LogTimeThreshold"-->\'  onFocus="this.select();" onBlur="sTrim(this);NumCheck(this.form.LogTimeThreshold,\'T\')">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Minutes</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td>');
+	PrintSTButton("emailLog","Email Log Now","chSubmit(\'2\',document.formlog_setting)"); 
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 0, 1);
+}
+
+function PrintSyslogSetting(hasUnderLine)
+{
+	PrintBeginBlock(1, "Log Setting");
+	document.write('<table width="'+FixedTableWidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<th colspan="7" align="left">Alert Log</th>');
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td colspan="7" height="10"></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td width="28">');
+	document.write('<input type=hidden name=synflood value=\'<!--#nk_get CheckboxSave="synflood"-->\'>');
+	document.write('<input type="checkbox" name="synflood_check" value="1" <!--#nk_get CheckboxStatus="synflood"-->>');
+	document.write('</td>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Syn Flooding</td>');
+	document.write('<td width="28">');
+	document.write('<input type=hidden name=spoofed value=\'<!--#nk_get CheckboxSave="spoofed"-->\'>');
+	document.write('<input type="checkbox" name="spoofed_check" value="1" <!--#nk_get CheckboxStatus="spoofed"-->>');
+	document.write('</td>');
+	document.write('<td width="'+head_width+'">');
+	document.write('IP Spoofing</td>');
+	document.write('<td width="28">');
+	document.write('<input type=hidden name=winnuke value=\'<!--#nk_get CheckboxSave="winnuke"-->\'>');
+	document.write('<input type="checkbox" name="winnuke_check" value="1" <!--#nk_get CheckboxStatus="winnuke"-->>');
+	document.write('</td>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Win Nuke</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<input type=hidden name=badflag value=\'<!--#nk_get CheckboxSave="badflag"-->\'>');
+	document.write('<input type="checkbox" name="badflag_check" value="1" <!--#nk_get CheckboxStatus="badflag"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Ping Of Death</td>');
+	document.write('<td>');
+	document.write('<input type=hidden name=login_fail value=\'<!--#nk_get CheckboxSave="login_fail"-->\'>');
+	document.write('<input type="checkbox" name="login_fail_check" value="1" <!--#nk_get CheckboxStatus="login_fail"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Unauthorized Login Attempt</td>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type=hidden name=OutputBlock value=\'<!--#nk_get CheckboxSave="OutputBlock"-->\'>');
+	document.write('<input type="checkbox" name="OutputBlock_check" value="1" <!--#nk_get CheckboxStatus="OutputBlock"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Output Blocking Event</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td colspan="7" height="10"></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<th colspan="7" align="left">General Log</th>');
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td colspan="7" height="10"></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<input type=hidden name=system_errs value=\'<!--#nk_get CheckboxSave="system_errs"-->\'>');
+	document.write('<input type="checkbox" name="system_errs_check" value="1" <!--#nk_get CheckboxStatus="system_errs"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('System Error Messages</td>');
+	document.write('<td>');
+	document.write('<input type=hidden name=conn_blocked value=\'<!--#nk_get CheckboxSave="conn_blocked"-->\'>');
+	document.write('<input type="checkbox" name="conn_blocked_check" value="1" <!--#nk_get CheckboxStatus="conn_blocked"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Deny Policies</td>');
+	document.write('<td>');
+	document.write('<input type=hidden name=conn_accepted value=\'<!--#nk_get CheckboxSave="conn_accepted"-->\'>');	
+	document.write('<input type="checkbox" name="conn_accepted_check" value="1" <!--#nk_get CheckboxStatus="conn_accepted"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Allow Policies</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<input type=hidden name=conf_change value=\'<!--#nk_get CheckboxSave="conf_change"-->\'>');	
+	document.write('<input type="checkbox" name="conf_change_check" value="1" <!--#nk_get CheckboxStatus="conf_change"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Configuration Changes</td>');
+	document.write('<td>');
+	document.write('<input type=hidden name=login_success value=\'<!--#nk_get CheckboxSave="login_success"-->\'>');	
+	document.write('<input type="checkbox" name="login_success_check" value="1" <!--#nk_get CheckboxStatus="login_success"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Authorized Login</td>');
+	document.write('<td></td>');
+	document.write('<td></td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td colspan="7" height="10"></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td colspan="7">');
+	PrintSTButton("B32", "View System Log", "openTable(\'sys_log.htm\')");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("B33", "Outgoing Log Table", "openTable(\'outgoing_log.htm\')");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("B3", "Incoming Log Table", "openTable(\'incoming_log.htm\')");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');	
+	PrintSTButton("clearLog", "Clear Log", "chSubmit(\'3\',document.formlog_setting)");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 8, 1);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formlog_setting" method="post" action="log_setting.htm">
+	<input type="hidden" name="submitStatus" value="0">
+	<input type="hidden" name="hostName" value='<!--#nk_get DisplayOnly="hostname"-->'>
+	<input type="hidden" name="log_ch" value="0">
+	
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="log_setting.htm"-->
+<!--#nk_get SysLogUpdate=""-->

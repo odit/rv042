@@ -1,0 +1,134 @@
+TD.accesspointRowOdd{Font-size:11px; overflowX:hidden; border-top:1px #5A646E solid;padding:0px;padding-left:1px;}
+td.accesspointRowEven{Font-size:11px; overflowX:hidden; border-top:1px #5A646E solid;padding:0px;padding-left:1px;}
+TD.narrowRowOdd{Font-size:11px; border-top:1px #5A646E solid;padding:0px;padding-left:1px;height:26px;overflowX:hidden;clip: rect(0px, 200px, 100px, 0px);}
+TD.narrowRowEven{Font-size:11px; border-top:1px #5A646E solid;padding:0px;padding-left:1px;height:26px;overflowX:hidden;clip: rect(0px, 200px, 100px, 0px);}
+TD.mediumRowOdd{Font-size:11px;	 border-top:1px #5A646E solid;padding:0px;padding-left:1px;text-align:right;height:26px}
+TD.mediumRowEven{Font-size:11px;  border-top:1px #5A646E solid;padding:0px;padding-left:1px;text-align:right;height:26px}
+.newtop{text-align:right;padding-top:3px;padding-bottom:0px;padding-left:0px;margin-left:0}
+TABLE.accesspointTable{
+border:1px #616872 solid;
+width:513px; overflowX:hidden;
+Font-FAMILY: tahoma, "verdana", "arial", "helvetica";
+Font-SIZE: 12px;clip: rect(0px, 513px, 1400px, 0px);
+}
+TBODY.accesspointTable{width:513px;}
+TD.accesspointTable{max-width:513;}
+TR.rows{
+background-color:#555555;
+Font-size:11px;
+}
+A.accesspointHeaderRow{
+color:black;
+Font-weight:bold;
+text-decoration:underline;
+Font-size:12px;
+}
+A.accesspointHeaderRow:visited{color:#000000;}
+A.accesspointHeaderRow:hover{
+color:#f9f90f;
+text-decoration:underline;
+}
+A.accesspointHeaderRow:active{
+text-decoration:underline;
+color:#254275;
+}
+TR.accesspointHeaderRow{
+background-color:#cccccc;
+color:#000000;
+Font-weight:bold;
+Font-size:12px;
+Font-FAMILY: "verdana",tahoma, "arial", "helvetica";
+}
+TD.accesspointHeaderRow{
+background-color:#CCCCCC;
+color:#111111;
+Font-weight:bold;
+Font-FAMILY: "verdana",tahoma, "arial", "helvetica";
+border-top:1px #5A646E solid;
+padding-top:4px;
+padding-bottom:5px;
+}
+A.accesspointFilter{
+Font-size:10px;
+text-align:center;
+text-decoration:none;
+background-color:#eae9e8;
+border-style:ridge;
+border-width:1px;
+border-color:#44484f;
+border-top-color:#EaEbEf;
+border-left-color:#EaEbEf;
+color:black;
+padding-bottom:1px;
+padding-top:2px;
+padding-left:3px;
+padding-right:4px;
+margin:5 4 0 4;
+line-height:110%;
+vertical-align:center;
+height:14px;
+}
+.accesspointFilter{
+margin: 0 5 0 5;
+padding-left:5px;
+padding-bottom:3px;
+padding-top:0px;
+}
+A.accesspointFilter:visited{
+color:black;
+}
+
+SELECT.accesspointFilter{
+ Font-size:9px;
+ Font-family:tahoma;
+ height:15px;
+ margin-right:5px;
+ margin-left:5px;
+ padding-top:0px;
+ padding-bottom:0px;
+ margin-top:0px;
+ margin-bottom:1px;
+}
+INPUT.accesspointFilter{
+ Font-size:9px;
+ height:17px;
+ margin-right:5px;
+ margin-left:5px;
+ margin-bottom:1px;
+ margin-top:3px;
+ border:1px solid #6677b3;
+}
+TD.accesspointFilter{
+Font-size:10px;
+Font-weight:normal;
+line-height:150%;
+height:11px;
+border-bottom:1px #616872 solid;
+}
+TR.accesspointFilter{
+border-bottom:1px #616872 solid;
+}
+A.dataRowLinkStyle{}
+.sort-table {
+font:	Icon;
+b-order: 1px Solid ThreeDShadow;
+color: WindowText;
+width: 513px;
+}
+
+.sort-table thead {
+}
+.sort-table td {
+padding:0px 5px;
+}
+.sort-table thead td {
+}
+.sort-table thead td:active {
+padding:3px 4px 1px 6px;
+}
+.sort-table thead td[_sortType=None]:active {
+padding:2px 5px;
+}
+.sort-arrow {}
+.sort-arrow.descending {}
+.sort-arrow.ascending {}

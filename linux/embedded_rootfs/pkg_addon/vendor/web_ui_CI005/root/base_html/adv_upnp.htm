@@ -1,0 +1,424 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chSubmit(F)
+{
+	selAll(F.UPnPList);
+	F.submitStatus.value=1;
+	F.log_ch.value=1;
+	F.submit();
+}
+
+function UPnPaddSel(Pro,lastIP,status,s) /* */
+{
+  var pos;
+  var p=-1;
+  var ss;
+  var sString,sName,sEnable;
+  if (Pro.length==0) 
+  {
+  	alert(aPressService);
+	  return;
+  }
+
+  if(Check_Special_Words(lastIP)<0)
+  {
+  	lastIP.select();
+  	return;
+  }
+
+  if (lastIP.value=="")
+  {
+  	alert(aNameIP);
+    lastIP.select();
+    return;  
+  }
+  
+  	if (status.checked==true)
+	{
+		sEnable=" [Enabled]";
+	  	ss="1";
+	}
+	else
+	{
+		sEnable=" [Disabled]";
+	  	ss="0";
+	}
+  
+  if (s.form.AddToListButton.value==sUpdateAp)
+  {
+  	p=-1;
+  	while (s.form.UPnPList.options[++p].selected != true);
+  }	
+  
+	if (ckService(Pro,s,p) < 0)
+		return;
+	
+	for (var i=0; i < s.form.UPnPList.length; i++)
+  {
+  	s.form.UPnPList.options[i].selected=false;
+  }
+	
+	if (s.form.AddToListButton.value==sAddtoList)
+	{
+		var LimitUPnP = 30;
+		if (s.length>=LimitUPnP)
+    {
+    	alert(aLimitUPnP+LimitUPnP+aLimitEnd);
+      return;
+    }	    
+	  p=s.length;
+		s.length+=1;
+	}
+	
+	s.options[p].value=Pro.value;
+  s.options[p].value+="{";
+  s.options[p].value+=lastIP.value;
+  s.options[p].value+=";";
+  s.options[p].value+=ss+"}";        
+  sString=Pro.options[Pro.selectedIndex].text;
+  s.options[p].text=sString+"->"+lastIP.value;
+	s.options[p].text+=sEnable;
+	clearContent(s.form,s.form.DeleteButton);
+}
+
+function ckService(Pro,s,p)
+{
+  var sString, pos, ssID;
+  for (var i=0; i < s.length; i++)
+  {
+    sString=s.options[i].value;
+    pos=sString.lastIndexOf("{");
+    ssID=sString.substring(0,pos);
+    if (ssID==Pro.value)
+    {
+	if (p != i)
+	{
+		alert(aServiceAlready);
+		return -1;
+	}
+    }
+  }
+  return 1;
+}
+
+function clearContent(F,I)
+{
+	if(I==F.DeleteButton)
+	{
+		F.serviceSelect.options[0].selected=true;
+		F.NameOrIP.value="";
+		F.enableCheckBox.checked=false;  
+		for (var i=0; i < F.UPnPList.length; i++)
+		{
+		     F.UPnPList.options[i].selected=false;
+		}	    
+		F.AddToListButton.value=sAddtoList; 
+		SetButtonStatus("DeleteButton", "disabled");
+		SetButtonStatus("newAddButton", "disabled"); 
+	} 
+}
+
+function showUPnPList(s)
+{
+	if (s.selectedIndex==-1)
+		return;
+	
+	var p;
+	var q; 
+	var forwardString=s.options[s.selectedIndex].value;
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(6); 
+
+	rightString=forwardString;
+	q=rightString.length;
+	p=rightString.indexOf("{"); 
+	ts[1]=rightString.substring(0,p);
+	tmpString=rightString; 
+	rightString=tmpString.substring(p+1,q);      
+
+	if (s.name=="UPnPList")
+	{
+		q=rightString.length;
+		p=rightString.lastIndexOf(";");
+		ts[2]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+	
+		q=rightString.length;
+		p=rightString.indexOf("}");
+		ts[3]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+	
+		for (var i=0; i < s.form.serviceSelect.length; i++)
+		{
+			if (s.form.serviceSelect.options[i].value==ts[1])
+			{
+				s.form.serviceSelect.options[i].selected=true;
+			}
+		}
+		s.form.NameOrIP.value=ts[2];     
+	
+		if (ts[3]=="1")
+		{
+			s.form.enableCheckBox.checked=true;
+		}
+		else
+		{
+			s.form.enableCheckBox.checked=false;  
+		}
+		s.form.AddToListButton.value=sUpdateAp;
+		
+		SetButtonStatus("DeleteButton", "");
+		SetButtonStatus("newAddButton", "");
+	}
+}
+
+var sID=0;
+var serviceWindow0=null;
+var serviceWindow1=null;
+function openService(n)
+{
+	if(n==0)
+	{
+		if(serviceWindow0 != null)
+		{
+			serviceWindow0.close();
+			serviceWindow0=null;
+		}
+		serviceWindow0=window.open('service0.htm','sW0','menubar=no,scrollbars=no,width=500,height=450');
+	}
+	if(n==1)
+	{
+		if(serviceWindow1 != null)
+		{
+			serviceWindow1.close();
+			serviceWindow1=null;
+		}
+		serviceWindow1=window.open('service1.htm','sW1','menubar=no,scrollbars=no,width=500,height=450');
+	}
+}
+
+function closeService()
+{
+	timer1=setTimeout("closeChild()",1000);
+	timer2=setTimeout("refreshMe()",3000);
+}
+
+function closeChild()
+{
+	if (serviceWindow0!=null)
+	{
+		serviceWindow0.close();
+		serviceWindow0=null;
+	}
+	if (serviceWindow1!=null)
+  {
+  	serviceWindow1.close();
+  	serviceWindow1=null;
+  }
+  return;
+}
+
+function refreshMe()
+{
+	document.location.href="adv_upnp.htm";
+  
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "ShowTableOkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formUpnp)";
+var Cancellink = ""; 
+var Tablelink = "openTable('UPnP_table.htm')";
+var helplink ='help_adv_upnp.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=194;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintUPnPSetting(0);
+	PrintUPnP(0);
+	PrintEndContent();
+}
+
+function PrintUPnPSetting(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+SmallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('UPnP Function&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="UPnP_Work" value="1" <!--#nk_get RadioHandle2="UPnP_Work:1"-->>');    
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Yes');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="UPnP_Work" value="0" <!--#nk_get RadioHandle2="UPnP_Work:0"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('No');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td colspan="2" height="10"></td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintUPnP(hasUnderLine)
+{
+	var in_head_width=head_width-5;
+	PrintBeginBlock(0);
+
+	document.write('<table class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Service&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<select name="serviceSelect" class="Select">');
+	
+	var i=0, j=-1;
+	   var k=0, l, m;
+	   var tmp, tmp2, tmp3;
+	   var outputer;
+	   tmp=document.formUpnp.service_menu.value;
+	   do{
+		  k=tmp.length;
+		  index=tmp.indexOf("</option>");
+		  tmp2=tmp.substring(0,index);
+		  tmp=tmp.substring(index+8,k);
+	/*trace tmp2*/
+		  tmp3=tmp2;
+		  l=tmp3.indexOf("[");
+		  m=tmp3.indexOf("/",l+1);
+		  PT=tmp3.substring(l+1,m);
+	/*trace tmp2*/
+		  if((PT=="TCP")||(PT=="UDP"))
+			{
+			   outputer+=tmp2;
+			   outputer+="</option>";
+			}
+	   }while(index != "-1");	
+	document.write(outputer);
+	
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td></td>');
+	document.write('<td>');		
+	PrintSTButton("serviceManagementButton","Service Management","openService(1)");	
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+    	document.write('<td width='+in_head_width+' align="left" >Name or IP Address&nbsp;:&nbsp;</td>');
+	document.write('<td align="left" >');
+	document.write('<input type="text" id="NameOrIP" name="NameOrIP" value="" size="20" maxlength="20" onFocus="this.select();" onBlur="sTrim(this);">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+    	document.write('<td width='+in_head_width+' align="left" >Enable&nbsp;:&nbsp;</td>');
+	document.write('<td align="left" >');
+	document.write('<input type="checkbox" id="enableCheckBox" name="enableCheckBox">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("AddToListButton","Add to list","UPnPaddSel(this.form.serviceSelect, this.form.NameOrIP, this.form.enableCheckBox, this.form.UPnPList);");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple class="MultiSelect" id="UPnPList" name="UPnPList" size="10" onChange="showUPnPList(this.form.UPnPList);" style="width: 100%">');
+	document.write('<!--#nk_get UPnPList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("DeleteButton","Delete","delSel(this.form.UPnPList, this);");
+	SetButtonStatus("DeleteButton","disabled")
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	PrintSTButton("newAddButton","Add New","clearContent(this.form, this.form.DeleteButton);");
+	SetButtonStatus("newAddButton", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');		
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 6);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formUpnp" method="post" action="adv_upnp.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="service_menu" value='<!--#nk_get serviceList="4"-->'>
+	
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="adv_upnp.htm"-->
+<!--#nk_get DBUpdate=""-->

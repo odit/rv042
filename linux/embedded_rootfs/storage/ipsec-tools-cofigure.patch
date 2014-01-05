@@ -1,0 +1,22 @@
+--- configure.orig	2006-08-01 16:43:32.000000000 -0700
++++ configure	2006-08-01 16:44:00.000000000 -0700
+@@ -24212,6 +24212,9 @@
+ cat >>conftest.$ac_ext <<_ACEOF
+ /* end confdefs.h.  */
+ 
++		#ifdef HAVE_SYS_TYPES_H
++		#include <sys/types.h>
++		#endif
+ 		#include <openssl/sha.h>
+ 
+ int
+--- configure.orig	2006-08-11 09:59:16.000000000 -0700
++++ configure	2006-08-11 09:59:36.000000000 -0700
+@@ -26744,6 +26744,7 @@
+ /* end confdefs.h.  */
+ 
+ 		#include <inttypes.h>
++		typedef uint32_t u_int32_t;
+ 		#include <linux/ipsec.h>
+ 
+ int

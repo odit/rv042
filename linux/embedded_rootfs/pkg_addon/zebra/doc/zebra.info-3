@@ -1,0 +1,1300 @@
+This is zebra.info, produced by makeinfo version 4.2 from zebra.texi.
+
+INFO-DIR-SECTION Routing Software:
+START-INFO-DIR-ENTRY
+* Zebra: (zebra).		The GNU Zebra routing software
+END-INFO-DIR-ENTRY
+
+   This file documents the GNU Zebra software which manages common
+TCP/IP routing protocols.
+
+   This is Edition 0.1, last updated 12 September 2002 of `The GNU
+Zebra Manual', for Zebra Version 0.93b.
+
+   Copyright (C) 1999, 2000, 2001, 2002 Kunihiro Ishiguro
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be stated in a
+translation approved by Kunihiro Ishiguro.
+
+
+File: zebra.info,  Node: Using BGP Communities Attribute,  Prev: Display BGP Routes by Community,  Up: BGP Communities Attribute
+
+Using BGP Communities Attribute
+-------------------------------
+
+   Following configuration is the most typical usage of BGP communities
+attribute.  AS 7675 provides upstream Internet connection to AS 100.
+When following configuration exists in AS 7675, AS 100 networks
+operator can set local preference in AS 7675 network by setting BGP
+communities attribute to the updates.
+
+     router bgp 7675
+      neighbor 192.168.0.1 remote-as 100
+      neighbor 192.168.0.1 route-map RMAP in
+     !
+     ip community-list 70 permit 7675:70
+     ip community-list 70 deny
+     ip community-list 80 permit 7675:80
+     ip community-list 80 deny
+     ip community-list 90 permit 7675:90
+     ip community-list 90 deny
+     !
+     route-map RMAP permit 10
+      match community 70
+      set local-preference 70
+     !
+     route-map RMAP permit 20
+      match community 80
+      set local-preference 80
+     !
+     route-map RMAP permit 30
+      match community 90
+      set local-preference 90
+
+   Following configuration announce 10.0.0.0/8 from AS 100 to AS 7675.
+The route has communities value 7675:80 so when above configuration
+exists in AS 7675, announced route's local preference will be set to
+value 80.
+
+     router bgp 100
+      network 10.0.0.0/8
+      neighbor 192.168.0.2 remote-as 7675
+      neighbor 192.168.0.2 route-map RMAP out
+     !
+     ip prefix-list PLIST permit 10.0.0.0/8
+     !
+     route-map RMAP permit 10
+      match ip address prefix-list PLIST
+      set community 7675:80
+
+   Following configuration is an example of BGP route filtering using
+communities attribute.  This configuration only permit BGP routes which
+has BGP communities value 0:80 or 0:90.  Network operator can put
+special internal communities value at BGP border router, then limit the
+BGP routes announcement into the internal network.
+
+     router bgp 7675
+      neighbor 192.168.0.1 remote-as 100
+      neighbor 192.168.0.1 route-map RMAP in
+     !
+     ip community-list 1 permit 0:80 0:90
+     !
+     route-map RMAP permit in
+      match community 1
+
+   Following exmaple filter BGP routes which has communities value 1:1.
+When there is no match community-list returns deny.  To avoid filtering
+all of routes, we need to define permit any at last.
+
+     router bgp 7675
+      neighbor 192.168.0.1 remote-as 100
+      neighbor 192.168.0.1 route-map RMAP in
+     !
+     ip community-list standard FILTER deny 1:1
+     ip community-list standard FILTER permit
+     !
+     route-map RMAP permit 10
+      match community FILTER
+
+   Communities value keyword `internet' has special meanings in
+standard community lists.  In below example `internet' act as match
+any.  It matches all of BGP routes even if the route does not have
+communities attribute at all.  So community list `INTERNET' is same as
+above example's `FILTER'.
+
+     ip community-list standard INTERNET deny 1:1
+     ip community-list standard INTERNET permit internet
+
+   Following configuration is an example of communities value deletion.
+With this configuration communities value 100:1 and 100:2 is removed
+from BGP updates.  For communities value deletion, only `permit'
+community-list is used.  `deny' community-list is ignored.
+
+     router bgp 7675
+      neighbor 192.168.0.1 remote-as 100
+      neighbor 192.168.0.1 route-map RMAP in
+     !
+     ip community-list standard DEL permit 100:1 100:2
+     !
+     route-map RMAP permit 10
+      set comm-list DEL delete
+
+
+File: zebra.info,  Node: BGP Extended Communities Attribute,  Next: Displaying BGP routes,  Prev: BGP Communities Attribute,  Up: BGP
+
+BGP Extended Communities Attribute
+==================================
+
+   BGP extended communities attribute is introduced with MPLS VPN/BGP
+technology.  MPLS VPN/BGP expands capability of network infrastructure
+to provide VPN functionality.  At the same time it requires a new
+framework for policy routing.  With BGP Extended Communities Attribute
+we can use Route Target or Site of Origin for implementing network
+policy for MPLS VPN/BGP.
+
+   BGP Extended Communities Attribute is similar to BGP Communities
+Attribute.  It is an optional transitive attribute.  BGP Extended
+Communities Attribute can carry multiple Extended Community value.
+Each Extended Community value is eight octet length.
+
+   BGP Extended Communities Attribute provides an extended range
+compared with BGP Communities Attribute.  Adding to that there is a
+type field in each value to provides community space structure.
+
+   There are two format to define Extended Community value.  One is AS
+based format the other is IP address based format.
+
+`AS:VAL'
+     This is a format to define AS based Extended Community value.
+     `AS' part is 2 octets Global Administrator subfield in Extended
+     Community value.  `VAL' part is 4 octets Local Administrator
+     subfield.  `7675:100' represents AS 7675 policy value 100.
+
+`IP-Address:VAL'
+     This is a format to define IP address based Extended Community
+     value.  `IP-Address' part is 4 octets Global Administrator
+     subfield.  `VAL' part is 2 octets Local Administrator subfield.
+     `10.0.0.1:100' represents
+
+* Menu:
+
+* BGP Extended Community Lists::
+* BGP Extended Communities in Route Map::
+
+
+File: zebra.info,  Node: BGP Extended Community Lists,  Next: BGP Extended Communities in Route Map,  Prev: BGP Extended Communities Attribute,  Up: BGP Extended Communities Attribute
+
+BGP Extended Community Lists
+----------------------------
+
+   Expanded Community Lists is a user defined BGP Expanded Community
+Lists.
+
+ - Command: ip extcommunity-list standard NAME {permit|deny}
+EXTCOMMUNITY
+     This command defines a new standard extcommunity-list.
+     EXTCOMMUNITY is extended communities value.  The EXTCOMMUNITY is
+     compiled into extended community structure.  We can define
+     multiple extcommunity-list under same name.  In that case match
+     will happen user defined order.  Once the extcommunity-list
+     matches to extended communities attribute in BGP updates it return
+     permit or deny based upon the extcommunity-list definition.  When
+     there is no matched entry, deny will be returned.  When
+     EXTCOMMUNITY is empty it matches to any routes.
+
+ - Command: ip extcommunity-list expanded NAME {permit|deny} LINE
+     This command defines a new expanded extcommunity-list.  LINE is a
+     string expression of extended communities attribute.  LINE can
+     include regular expression to match extended communities attribute
+     in BGP updates.
+
+ - Command: no ip extcommunity-list NAME
+ - Command: no ip extcommunity-list standard NAME
+ - Command: no ip extcommunity-list expanded NAME
+     These commands delete extended community lists specified by NAME.
+     All of extended community lists shares a single name space.  So
+     extended community lists can be removed simpley specifying the
+     name.
+
+ - Command: show ip extcommunity-list
+ - Command: show ip extcommunity-list NAME
+     This command display current extcommunity-list information.  When
+     NAME is specified the community list's information is shown.
+
+          # show ip extcommunity-list
+
+
+File: zebra.info,  Node: BGP Extended Communities in Route Map,  Prev: BGP Extended Community Lists,  Up: BGP Extended Communities Attribute
+
+BGP Extended Communities in Route Map
+-------------------------------------
+
+ - Route Map: match extcommunity WORD
+
+ - Route Map: set extcommunity rt EXTCOMMUNITY
+     This command set Route Target value.
+
+ - Route Map: set extcommunity soo EXTCOMMUNITY
+     This command set Site of Origin value.
+
+
+File: zebra.info,  Node: Displaying BGP routes,  Next: Capability Negotiation,  Prev: BGP Extended Communities Attribute,  Up: BGP
+
+Displaying BGP Routes
+=====================
+
+* Menu:
+
+* Show IP BGP::
+* More Show IP BGP::
+
+
+File: zebra.info,  Node: Show IP BGP,  Next: More Show IP BGP,  Prev: Displaying BGP routes,  Up: Displaying BGP routes
+
+Show IP BGP
+-----------
+
+ - Command: show ip bgp
+ - Command: show ip bgp A.B.C.D
+ - Command: show ip bgp X:X::X:X
+     This command displays BGP routes.  When no route is specified it
+     display all of IPv4 BGP routes.
+
+     BGP table version is 0, local router ID is 10.1.1.1
+     Status codes: s suppressed, d damped, h history, * valid, > best, i - internal
+     Origin codes: i - IGP, e - EGP, ? - incomplete
+     
+        Network          Next Hop            Metric LocPrf Weight Path
+     *> 1.1.1.1/32       0.0.0.0                  0         32768 i
+     
+     Total number of prefixes 1
+
+
+File: zebra.info,  Node: More Show IP BGP,  Prev: Show IP BGP,  Up: Displaying BGP routes
+
+More Show IP BGP
+----------------
+
+ - Command: show ip bgp regexp LINE
+     This command display BGP routes using AS path regular expression
+     (*note Display BGP Routes by AS Path::).
+
+ - Command: show ip bgp community COMMUNITY
+ - Command: show ip bgp community COMMUNITY exact-match
+     This command display BGP routes using COMMUNITY (*note Display BGP
+     Routes by Community::).
+
+ - Command: show ip bgp community-list WORD
+ - Command: show ip bgp community-list WORD exact-match
+     This command display BGP routes using community list (*note
+     Display BGP Routes by Community::).
+
+ - Command: show ip bgp summary
+
+ - Command: show ip bgp neighbor [PEER]
+
+ - Command: clear ip bgp PEER
+     Clear peers which have addresses of X.X.X.X
+
+ - Command: clear ip bgp PEER soft in
+     Clear peer using soft reconfiguration.
+
+ - Command: show debug
+
+ - Command: debug event
+
+ - Command: debug update
+
+ - Command: debug keepalive
+
+ - Command: no debug event
+
+ - Command: no debug update
+
+ - Command: no debug keepalive
+
+
+File: zebra.info,  Node: Capability Negotiation,  Next: Route Reflector,  Prev: Displaying BGP routes,  Up: BGP
+
+Capability Negotiation
+======================
+
+   When adding IPv6 routing information exchange feature to BGP.  There
+were some proposals.  IETF IDR working group finally take a proposal
+called Multiprotocol Extension for BGP.  The specification is described
+in RFC2283.  The protocol does not define new protocols.  It defines
+new attributes to existing BGP.  When it is used exchanging IPv6
+routing information it is called BGP-4+.  When it is used for
+exchanging multicast routing information it is called MBGP.
+
+   `bgpd' supports Multiprotocol Extension for BGP.  So if remote peer
+supports the protocol, `bgpd' can exchange IPv6 and/or multicast routing
+information.
+
+   Traditional BGP does not have the feature to detect remote peer's
+capability whether it can handle other than IPv4 unicast routes.  This
+is a big problem using Multiprotocol Extension for BGP to operational
+network.  `draft-ietf-idr-bgp4-cap-neg-04.txt' is proposing a feature
+called Capability Negotiation.  `bgpd' use this Capability Negotiation
+to detect remote peer's capabilities.  If the peer is only configured
+as IPv4 unicast neighbor, `bgpd' does not send these Capability
+Negotiation packets.
+
+   By default, Zebra will bring up peering with minimal common
+capability for the both sides.  For example, local router has unicast
+and multicast capabilitie and remote router has unicast capability.  In
+this case, the local router will establish the connection with unicast
+only capability.  When there are no common capabilities, Zebra sends
+Unsupported Capability error and then resets the connection.
+
+   If you want to completely match capabilities with remote peer.
+Please use `strict-capability-match' command.
+
+ - BGP: neighbor PEER strict-capability-match
+ - BGP: no neighbor PEER strict-capability-match
+     Strictly compares remote capabilities and local capabilities.  If
+     capabilities are different, send Unsupported Capability error then
+     reset connection.
+
+   You may want to disable sending Capability Negotiation OPEN message
+optional parameter to the peer when remote peer does not implement
+Capability Negotiation.  Please use `dont-capability-negotiate' command
+to disable the feature.
+
+ - BGP: neighbor PEER dont-capability-negotiate
+ - BGP: no neighbor PEER dont-capability-negotiate
+     Suppress sending Capability Negotiation as OPEN message optional
+     parameter to the peer.  This command only affects the peer is
+     configured other than IPv4 unicast configuration.
+
+   When remote peer does not have capability negotiation feature, remote
+peer will not send any capabilities at all.  In that case, bgp
+configures the peer with configured capabilities.
+
+   You may prefer locally configured capabilities more than the
+negotiated capabilities even though remote peer sends capabilities.  If
+the peer is configured by `override-capability', `bgpd' ignores received
+capabilities then override negotiated capabilities with configured
+values.
+
+ - BGP: neighbor PEER override-capability
+ - BGP: no neighbor PEER override-capability
+     Override the result of Capability Negotiation with local
+     configuration.  Ignore remote peer's capability value.
+
+
+File: zebra.info,  Node: Route Reflector,  Next: Route Server,  Prev: Capability Negotiation,  Up: BGP
+
+Route Reflector
+===============
+
+ - BGP: bgp cluster-id A.B.C.D
+
+ - BGP: neighbor PEER route-reflector-client
+ - BGP: no neighbor PEER route-reflector-client
+
+
+File: zebra.info,  Node: Route Server,  Next: How to set up a 6-Bone connection,  Prev: Route Reflector,  Up: BGP
+
+Route Server
+============
+
+   At an Internet Exchange point, many ISPs are connected to each other
+by external BGP peering.  Normally these external BGP connection are
+done by `full mesh' method.  As with internal BGP full mesh formation,
+this method has a scaling problem.
+
+   This scaling problem is well known.  Route Server is a method to
+resolve the problem.  Each ISP's BGP router only peers to Route Server.
+Route Server serves as BGP information exchange to other BGP routers.
+By applying this method, numbers of BGP connections is reduced from
+O(n*(n-1)/2) to O(n).
+
+   Unlike normal BGP router, Route Server must have several routing
+tables for managing different routing policies for each BGP speaker.
+We call the routing tables as different `view's.  `bgpd' can work as
+normal BGP router or Route Server or both at the same time.
+
+* Menu:
+
+* Multiple instance::
+* BGP instance and view::
+* Routing policy::
+* Viewing the view::
+
+
+File: zebra.info,  Node: Multiple instance,  Next: BGP instance and view,  Prev: Route Server,  Up: Route Server
+
+Multiple instance
+-----------------
+
+   To enable multiple view function of `bgpd', you must turn on
+multiple instance feature beforehand.
+
+ - Command: bgp multiple-instance
+     Enable BGP multiple instance feature.  After this feature is
+     enabled, you can make multiple BGP instances or multiple BGP views.
+
+ - Command: no bgp multiple-instance
+     Disable BGP multiple instance feature.  You can not disable this
+     feature when BGP multiple instances or views exist.
+
+   When you want to make configuration more Cisco like one,
+
+ - Command: bgp config-type cisco
+     Cisco compatible BGP configuration output.
+
+   When bgp config-type cisco is specified,
+
+   "no synchronization" is displayed.  "no auto-summary" is desplayed.
+
+   "network" and "aggregate-address" argument is displayed as "A.B.C.D
+M.M.M.M"
+
+   Zebra: network 10.0.0.0/8 Cisco: network 10.0.0.0
+
+   Zebra: aggregate-address 192.168.0.0/24 Cisco: aggregate-address
+192.168.0.0 255.255.255.0
+
+   Community attribute handling is also different.  If there is no
+configuration is specified community attribute and extended community
+attribute are sent to neighbor.  When user manually disable the feature
+community attribute is not sent to the neighbor.  In case of "bgp
+config-type cisco" is specified, community attribute is not sent to the
+neighbor by default.  To send community attribute user has to specify
+"neighbor A.B.C.D send-community" command.
+
+   !  router bgp 1  neighbor 10.0.0.1 remote-as 1  no neighbor 10.0.0.1
+send-community !
+
+   !  router bgp 1  neighbor 10.0.0.1 remote-as 1  neighbor 10.0.0.1
+send-community !
+
+ - Command: bgp config-type zebra
+     Zebra style BGP configuration.  This is default.
+
+
+File: zebra.info,  Node: BGP instance and view,  Next: Routing policy,  Prev: Multiple instance,  Up: Route Server
+
+BGP instance and view
+---------------------
+
+   BGP instance is a normal BGP process.  The result of route selection
+goes to the kernel routing table.  You can setup different AS at the
+same time when BGP multiple instance feature is enabled.
+
+ - Command: router bgp AS-NUMBER
+     Make a new BGP instance.  You can use arbitrary word for the NAME.
+
+     bgp multiple-instance
+     !
+     router bgp 1
+      neighbor 10.0.0.1 remote-as 2
+      neighbor 10.0.0.2 remote-as 3
+     !
+     router bgp 2
+      neighbor 10.0.0.3 remote-as 4
+      neighbor 10.0.0.4 remote-as 5
+
+   BGP view is almost same as normal BGP process. The result of route
+selection does not go to the kernel routing table.  BGP view is only
+for exchanging BGP routing information.
+
+ - Command: router bgp AS-NUMBER view NAME
+     Make a new BGP view.  You can use arbitrary word for the NAME.
+     This view's route selection result does not go to the kernel
+     routing table.
+
+   With this command, you can setup Route Server like below.
+
+     bgp multiple-instance
+     !
+     router bgp 1 view 1
+      neighbor 10.0.0.1 remote-as 2
+      neighbor 10.0.0.2 remote-as 3
+     !
+     router bgp 2 view 2
+      neighbor 10.0.0.3 remote-as 4
+      neighbor 10.0.0.4 remote-as 5
+
+
+File: zebra.info,  Node: Routing policy,  Next: Viewing the view,  Prev: BGP instance and view,  Up: Route Server
+
+Routing policy
+--------------
+
+   You can set different routing policy for a peer.  For example, you
+can set different filter for a peer.
+
+     bgp multiple-instance
+     !
+     router bgp 1 view 1
+      neighbor 10.0.0.1 remote-as 2
+      neighbor 10.0.0.1 distribute-list 1 in
+     !
+     router bgp 1 view 2
+      neighbor 10.0.0.1 remote-as 2
+      neighbor 10.0.0.1 distribute-list 2 in
+
+   This means BGP update from a peer 10.0.0.1 goes to both BGP view 1
+and view 2.  When the update is inserted into view 1, distribute-list 1
+is applied.  On the other hand, when the update is inserted into view 2,
+distribute-list 2 is applied.
+
+
+File: zebra.info,  Node: Viewing the view,  Prev: Routing policy,  Up: Route Server
+
+Viewing the view
+----------------
+
+   To display routing table of BGP view, you must specify view name.
+
+ - Command: show ip bgp view NAME
+     Display routing table of BGP view NAME.
+
+
+File: zebra.info,  Node: How to set up a 6-Bone connection,  Next: Dump BGP packets and table,  Prev: Route Server,  Up: BGP
+
+How to set up a 6-Bone connection
+=================================
+
+     zebra configuration
+     ===================
+     !
+     ! Actually there is no need to configure zebra
+     !
+     
+     bgpd configuration
+     ==================
+     !
+     ! This means that routes go through zebra and into the kernel.
+     !
+     router zebra
+     !
+     ! MP-BGP configuration
+     !
+     router bgp 7675
+      bgp router-id 10.0.0.1
+      neighbor 3ffe:1cfa:0:2:2a0:c9ff:fe9e:f56 remote-as AS-NUMBER
+     !
+      address-family ipv6
+      network 3ffe:506::/32
+      neighbor 3ffe:1cfa:0:2:2a0:c9ff:fe9e:f56 activate
+      neighbor 3ffe:1cfa:0:2:2a0:c9ff:fe9e:f56 route-map set-nexthop out
+      neighbor 3ffe:1cfa:0:2:2c0:4fff:fe68:a231 remote-as AS-NUMBER
+      neighbor 3ffe:1cfa:0:2:2c0:4fff:fe68:a231 route-map set-nexthop out
+      exit-address-family
+     !
+     ipv6 access-list all permit any
+     !
+     ! Set output nexthop address.
+     !
+     route-map set-nexthop permit 10
+      match ipv6 address all
+      set ipv6 nexthop global 3ffe:1cfa:0:2:2c0:4fff:fe68:a225
+      set ipv6 nexthop local fe80::2c0:4fff:fe68:a225
+     !
+     ! logfile FILENAME is obsolete.  Please use log file FILENAME
+     !
+     log file bgpd.log
+     !
+
+
+File: zebra.info,  Node: Dump BGP packets and table,  Prev: How to set up a 6-Bone connection,  Up: BGP
+
+Dump BGP packets and table
+==========================
+
+ - Command: dump bgp all PATH
+ - Command: dump bgp all PATH INTERVAL
+     Dump all BGP packet and events to PATH file.
+
+ - Command: dump bgp updates PATH
+ - Command: dump bgp updates PATH INTERVAL
+     Dump BGP updates to PATH file.
+
+ - Command: dump bgp routes PATH
+ - Command: dump bgp routes PATH
+     Dump whole BGP routing table to PATH.  This is heavy process.
+
+
+File: zebra.info,  Node: VTY shell,  Next: Filtering,  Prev: BGP,  Up: Top
+
+VTY shell
+*********
+
+   `vtysh' is integrated shell of Zebra software.
+
+   To use vtysh please specify --enable-vtysh to configure script.  To
+use PAM for authentication use --with-libpam option to configure script.
+
+   vtysh only searches /usr/local/etc path for vtysh.conf which is the
+vtysh configuration file.  Vtysh does not search current directory for
+configuration file because the file includes user authentication
+settings.
+
+   Currently, vtysh.conf has only one command.
+
+     !
+     username foo nopassword
+     !
+
+   With this set, user foo does not need password authentication for
+user vtysh.  With PAM vtysh uses PAM authentication mechanism.
+
+   If vtysh is compiled without PAM authentication, every user can use
+vtysh without authentication.
+
+
+File: zebra.info,  Node: Filtering,  Next: Route Map,  Prev: VTY shell,  Up: Top
+
+Filtering
+*********
+
+   Zebra provides many very flexible filtering features.  Filtering is
+used for both input and output of the routing information.  Once
+filtering is defined, it can be applied in any direction.
+
+* Menu:
+
+* IP Access List::
+* IP Prefix List::
+
+
+File: zebra.info,  Node: IP Access List,  Next: IP Prefix List,  Prev: Filtering,  Up: Filtering
+
+IP Access List
+--------------
+
+ - Command: access-list NAME permit IPV4-NETWORK
+ - Command: access-list NAME deny IPV4-NETWORK
+
+   Basic filtering is done by `access-list' as shown in the following
+example.
+
+     access-list filter deny 10.0.0.0/9
+     access-list filter permit 10.0.0.0/8
+
+
+File: zebra.info,  Node: IP Prefix List,  Prev: IP Access List,  Up: Filtering
+
+IP Prefix List
+--------------
+
+   `ip prefix-list' provides the most powerful prefix based filtering
+mechanism.  In addition to `access-list' functionality, `ip
+prefix-list' has prefix length range specification and sequential
+number specification.  You can add or delete prefix based filters to
+arbitrary points of prefix-list using sequential number specification.
+
+   If no ip prefix-list is specified, it acts as permit.  If `ip
+prefix-list' is defined, and no match is found, default deny is applied.
+
+ - Command: ip prefix-list NAME (permit|deny) PREFIX [le LEN] [ge LEN]
+ - Command: ip prefix-list NAME seq NUMBER (permit|deny) PREFIX [le
+LEN] [ge LEN]
+     You can create `ip prefix-list' using above commands.
+
+    seq
+          seq NUMBER can be set either automatically or manually.  In
+          the case that sequential numbers are set manually, the user
+          may pick any number less than 4294967295.  In the case that
+          sequential number are set automatically, the sequential
+          number will increase by a unit of five (5) per list.  If a
+          list with no specified sequential number is created after a
+          list with a specified sequential number, the list will
+          automatically pick the next multiple of five (5) as the list
+          number.  For example, if a list with number 2 already exists
+          and a new list with no specified number is created, the next
+          list will be numbered 5.  If lists 2 and 7 already exist and
+          a new list with no specified number is created, the new list
+          will be numbered 10.
+
+    le
+          `le' command specifies prefix length.  The prefix list will be
+          applied if the prefix length is less than or equal to the le
+          prefix length.
+
+    ge
+          `ge' command specifies prefix length.  The prefix list will be
+          applied if the prefix length is greater than or equal to the
+          ge prefix length.
+
+
+   Less than or equal to prefix numbers and greater than or equal to
+prefix numbers can be used together.  The order of the le and ge
+commands does not matter.
+
+   If a prefix list with a different sequential number but with the
+exact same rules as a previous list is created, an error will result.
+However, in the case that the sequential number and the rules are
+exactly similar, no error will result.
+
+   If a list with the same sequential number as a previous list is
+created, the new list will overwrite the old list.
+
+   Matching of IP Prefix is performed from the smaller sequential
+number to the larger.  The matching will stop once any rule has been
+applied.
+
+   In the case of no le or ge command,
+
+   Version 0.85: the matching rule will apply to all prefix lengths that
+matched the prefix list.
+
+   Version 0.86 or later: In the case of no le or ge command, the prefix
+length must match exactly the length specified in the prefix list.
+
+ - Command: no ip prefix-list NAME
+
+* Menu:
+
+* ip prefix-list description::
+* ip prefix-list sequential number control::
+* Showing ip prefix-list::
+* Clear counter of ip prefix-list::
+
+
+File: zebra.info,  Node: ip prefix-list description,  Next: ip prefix-list sequential number control,  Prev: IP Prefix List,  Up: IP Prefix List
+
+ip prefix-list description
+..........................
+
+ - Command: ip prefix-list NAME description DESC
+     Descriptions may be added to prefix lists.  This command adds a
+     description to the prefix list.
+
+ - Command: no ip prefix-list NAME description [DESC]
+     Deletes the description from a prefix list.  It is possible to use
+     the command without the full description.
+
+
+File: zebra.info,  Node: ip prefix-list sequential number control,  Next: Showing ip prefix-list,  Prev: ip prefix-list description,  Up: IP Prefix List
+
+ip prefix-list sequential number control
+........................................
+
+ - Command: ip prefix-list sequence-number
+     With this command, the IP prefix list sequential number is
+     displayed.  This is the default behavior.
+
+ - Command: no ip prefix-list sequence-number
+     With this command, the IP prefix list sequential number is not
+     displayed.
+
+
+File: zebra.info,  Node: Showing ip prefix-list,  Next: Clear counter of ip prefix-list,  Prev: ip prefix-list sequential number control,  Up: IP Prefix List
+
+Showing ip prefix-list
+......................
+
+ - Command: show ip prefix-list
+     Display all IP prefix lists.
+
+ - Command: show ip prefix-list NAME
+     Show IP prefix list can be used with a prefix list name.
+
+ - Command: show ip prefix-list NAME seq NUM
+     Show IP prefix list can be used with a prefix list name and
+     sequential number.
+
+ - Command: show ip prefix-list NAME A.B.C.D/M
+     If the command longer is used, all prefix lists with prefix
+     lengths equal to or longer than the specified length will be
+     displayed.  If the command first match is used, the first prefix
+     length match will be displayed.
+
+ - Command: show ip prefix-list NAME A.B.C.D/M longer
+
+ - Command: show ip prefix-list NAME A.B.C.D/M first-match
+
+ - Command: show ip prefix-list summary
+
+ - Command: show ip prefix-list summary NAME
+
+ - Command: show ip prefix-list detail
+
+ - Command: show ip prefix-list detail NAME
+
+
+File: zebra.info,  Node: Clear counter of ip prefix-list,  Prev: Showing ip prefix-list,  Up: IP Prefix List
+
+Clear counter of ip prefix-list
+...............................
+
+ - Command: clear ip prefix-list
+     Clears the counters of all IP prefix lists.  Clear IP Prefix List
+     can be used with a specified name and prefix.
+
+ - Command: clear ip prefix-list NAME
+
+ - Command: clear ip prefix-list NAME A.B.C.D/M
+
+
+File: zebra.info,  Node: Route Map,  Next: IPv6 Support,  Prev: Filtering,  Up: Top
+
+Route Map
+*********
+
+   Route map is a very useful function in zebra.  There is a match and
+set statement permitted in a route map.
+
+     route-map test permit 10
+      match ip address 10
+      set local-preference 200
+
+   This means that if a route matches ip access-list number 10 it's
+local-preference value is set to 200.
+
+* Menu:
+
+* Route Map Command::
+* Route Map Match Command::
+* Route Map Set Command::
+
+
+File: zebra.info,  Node: Route Map Command,  Next: Route Map Match Command,  Prev: Route Map,  Up: Route Map
+
+Route Map Command
+-----------------
+
+ - Command: route-map ROUTE-MAP-NAME permit PRIORITY
+
+
+File: zebra.info,  Node: Route Map Match Command,  Next: Route Map Set Command,  Prev: Route Map Command,  Up: Route Map
+
+Route Map Match Command
+-----------------------
+
+ - Route-map Command: match ip address ACCESS_LIST
+     Matches the specified ACCESS_LIST
+
+ - Route-map Command: match ip next-hop IPV4_ADDR
+     Matches the specified IPV4_ADDR.
+
+ - Route-map Command: match aspath AS_PATH
+     Matches the specified AS_PATH.
+
+ - Route-map Command: match metric METRIC
+     Matches the specified METRIC.
+
+ - Route-map Command: match community COMMUNITY_LIST
+     Matches the specified  COMMUNITY_LIST
+
+
+File: zebra.info,  Node: Route Map Set Command,  Prev: Route Map Match Command,  Up: Route Map
+
+Route Map Set Command
+---------------------
+
+ - Route-map Command: set ip next-hop IPV4_ADDRESS
+     Set the BGP nexthop address.
+
+ - Route-map Command: set local-preference LOCAL_PREF
+     Set the BGP local preference.
+
+ - Route-map Command: set weight WEIGHT
+     Set the route's weight.
+
+ - Route-map Command: set metric METRIC
+     Set the BGP attribute MED.
+
+ - Route-map Command: set as-path prepend AS_PATH
+     Set the BGP AS path to prepend.
+
+ - Route-map Command: set community COMMUNITY
+     Set the BGP community attribute.
+
+ - Route-map Command: set ipv6 next-hop global IPV6_ADDRESS
+     Set the BGP-4+ global IPv6 nexthop address.
+
+ - Route-map Command: set ipv6 next-hop local IPV6_ADDRESS
+     Set the BGP-4+ link local IPv6 nexthop address.
+
+
+File: zebra.info,  Node: IPv6 Support,  Next: Kernel Interface,  Prev: Route Map,  Up: Top
+
+IPv6 Support
+************
+
+   Zebra fully supports IPv6 routing.  As described so far, Zebra
+supports RIPng, OSPFv3 and BGP-4+.  You can give IPv6 addresses to an
+interface and configure static IPv6 routing information.  Zebra-IPv6
+also provides automatic address configuration via a feature called
+`address auto configuration'.  To do it, the router must send router
+advertisement messages to the all nodes that exist on the network.
+
+* Menu:
+
+* Router Advertisement::
+
+
+File: zebra.info,  Node: Router Advertisement,  Prev: IPv6 Support,  Up: IPv6 Support
+
+Router Advertisement
+====================
+
+ - Interface Command: ipv6 nd send-ra
+
+ - Interface Command: ipv6 nd prefix-advertisement IPV6PREFIX
+
+     interface eth0
+      ipv6 nd send-ra
+      ipv6 nd prefix-advertisement 3ffe:506:5009::/64
+
+
+File: zebra.info,  Node: Kernel Interface,  Next: SNMP Support,  Prev: IPv6 Support,  Up: Top
+
+Kernel Interface
+****************
+
+   There are several different methods for reading kernel routing table
+information, updating kernel routing tables, and for looking up
+interfaces.
+
+`ioctl'
+     The `ioctl' method is a very traditional way for reading or writing
+     kernel information.  `ioctl' can be used for looking up interfaces
+     and for modifying interface addresses, flags, mtu settings and
+     other types of information.  Also, `ioctl' can insert and delete
+     kernel routing table entries.  It will soon be available on almost
+     any platform which zebra supports, but it is a little bit ugly
+     thus far, so if a better method is supported by the kernel, zebra
+     will use that.
+
+`sysctl'
+     `sysctl' can lookup kernel information using MIB (Management
+     Information Base) syntax.  Normally, it only provides a way of
+     getting information from the kernel.  So one would usually want to
+     change kernel information using another method such as `ioctl'.
+
+`proc filesystem'
+     `proc filesystem' provides an easy way of getting kernel
+     information.
+
+`routing socket'
+
+`netlink'
+     On recent Linux kernels (2.0.x and 2.2.x), there is a kernel/user
+     communication support called `netlink'.  It makes asynchronous
+     communication between kernel and Zebra possible, similar to a
+     routing socket on BSD systems.
+
+     Before you use this feature, be sure to select (in kernel
+     configuration) the kernel/netlink support option 'Kernel/User
+     network link driver' and 'Routing messages'.
+
+     Today, the /dev/route special device file is obsolete.  Netlink
+     communication is done by reading/writing over netlink socket.
+
+     After the kernel configuration, please reconfigure and rebuild
+     Zebra.  You can use netlink as a dynamic routing update channel
+     between Zebra and the kernel.
+
+
+File: zebra.info,  Node: SNMP Support,  Next: Zebra Protocol,  Prev: Kernel Interface,  Up: Top
+
+SNMP Support
+************
+
+   SNMP (Simple Network Managing Protocol) is widely implemented feature
+for collecting network information from router and/or host.  Zebra
+itself does not support SNMP agent functionality.  But conjuction with
+SNMP agent, Zebra provides routing protocol MIBs.
+
+   Zebra uses SMUX protocol (RFC1227) for making communication with SNMP
+agent.  There are several SNMP agent which support SMUX.  We recommend
+to use the latest `ucd-snmp' software.
+
+* Menu:
+
+* How to get ucd-snmp::
+* SMUX configuration::
+
+
+File: zebra.info,  Node: How to get ucd-snmp,  Next: SMUX configuration,  Prev: SNMP Support,  Up: SNMP Support
+
+How to get ucd-snmp
+===================
+
+   ucd-snmp is a free software which distributed so called "as is"
+software license.  Please check the license which comes with
+distribution of `ucd-snmp'.  The authors of ucd-snmp are the University
+of California, the University of California at Davis, and the Electrical
+Engineering department at the University of California at Davis.
+
+   You can get ucd-snmp from <ftp://ucd-snmp.ucdavis.edu/>.  As of this
+writing we are testing with `ucd-snmp-4.1.pre1.tar.gz'.
+
+   To enable SMUX protocol support, please configure `ucd-snmp' like
+below.
+
+     % configure --with-mib-modules=smux
+
+   After compile and install `ucd-snmp', you will need to configure
+smuxpeer.  I'm now using configuration shown below.  This means SMUX
+client connects to MIB 1.3.6.1.6.3.1 with password test.
+
+     /usr/local/share/snmp/snmpd.conf
+     ================================
+     smuxpeer 1.3.6.1.6.3.1 test
+
+
+File: zebra.info,  Node: SMUX configuration,  Prev: How to get ucd-snmp,  Up: SNMP Support
+
+SMUX configuration
+==================
+
+   To enable SNMP support of Zebra, you have to configure Zebra with
+`--enable-snmp' (*note Configure the Software::).
+
+ - Command: smux peer OID
+ - Command: no smux peer OID
+
+ - Command: smux peer OID PASSWORD
+ - Command: no smux peer OID PASSWORD
+
+     !
+     smux peer .1.3.6.1.6.3.1 test
+     !
+
+
+File: zebra.info,  Node: Zebra Protocol,  Next: Packet Binary Dump Format,  Prev: SNMP Support,  Up: Top
+
+Zebra Protocol
+**************
+
+   Zebra Protocol is a protocol which is used between protocol daemon
+and zebra.  Each protocol daemon sends selected routes to zebra daemon.
+Then zebra manages which route is installed into the forwarding table.
+
+   Zebra Protocol is a TCP-based protocol.  Below is common header of
+Zebra Protocol.
+
+     0                   1                   2                   3
+     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |           Length (2)          |   Command (1) |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   Length is total packet length including this header length.  So
+minimum length is three.  Command is Zebra Protocol command.
+
+     ZEBRA_INTERFACE_ADD                1
+     ZEBRA_INTERFACE_DELETE             2
+     ZEBRA_INTERFACE_ADDRESS_ADD        3
+     ZEBRA_INTERFACE_ADDRESS_DELETE     4
+     ZEBRA_INTERFACE_UP                 5
+     ZEBRA_INTERFACE_DOWN               6
+     ZEBRA_IPV4_ROUTE_ADD               7
+     ZEBRA_IPV4_ROUTE_DELETE            8
+     ZEBRA_IPV6_ROUTE_ADD               9
+     ZEBRA_IPV6_ROUTE_DELETE           10
+     ZEBRA_REDISTRIBUTE_ADD            11
+     ZEBRA_REDISTRIBUTE_DELETE         12
+     ZEBRA_REDISTRIBUTE_DEFAULT_ADD    13
+     ZEBRA_REDISTRIBUTE_DEFAULT_DELETE 14
+     ZEBRA_IPV4_NEXTHOP_LOOKUP         15
+     ZEBRA_IPV6_NEXTHOP_LOOKUP         16
+
+     0                   1                   2                   3
+     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |             Type              |             Flags             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+File: zebra.info,  Node: Packet Binary Dump Format,  Prev: Zebra Protocol,  Up: Top
+
+Packet Binary Dump Format
+*************************
+
+   Zebra can dump routing protocol packet into file with a binary format
+(*note Dump BGP packets and table::).
+
+   It seems to be better that we share the MRT's header format for
+backward compatibility with MRT's dump logs. We should also define the
+binary format excluding the header, because we must support both IP v4
+and v6 addresses as socket addresses and / or routing entries.
+
+   In the last meeting, we discussed to have a version field in the
+header. But Masaki told us that we can define new `type' value rather
+than having a `version' field, and it seems to be better because we
+don't need to change header format.
+
+   Here is the common header format. This is same as that of MRT.
+
+     0                   1                   2                   3
+     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                              Time                             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |             Type              |            Subtype            |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                             Length                            |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   If `type' is PROTOCOL_BGP4MP, `subtype' is BGP4MP_STATE_CHANGE, and
+Address Family == IP (version 4)
+
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |        Source AS number       |     Destination AS number     |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |        Interface Index        |      Address Family           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address                      |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address                    |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |            Old State          |           New State           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   Where State is the value defined in RFC1771.
+
+   If `type' is PROTOCOL_BGP4MP, `subtype' is BGP4MP_STATE_CHANGE, and
+Address Family == IP version 6
+
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |        Source AS number       |     Destination AS number     |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |        Interface Index        |      Address Family           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address                      |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address (Cont'd)             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address (Cont'd)             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address (Cont'd)             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address                    |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address (Cont'd)           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address (Cont'd)           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address (Cont'd)           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |            Old State          |           New State           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   If `type' is PROTOCOL_BGP4MP, `subtype' is BGP4MP_MESSAGE, and
+Address Family == IP (version 4)
+
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |        Source AS number       |     Destination AS number     |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |        Interface Index        |      Address Family           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address                      |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address                    |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                       BGP Message Packet                      |
+     |                                                               |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   Where BGP Message Packet is the whole contents of the BGP4 message
+including header portion.
+
+   If `type' is PROTOCOL_BGP4MP, `subtype' is BGP4MP_MESSAGE, and
+Address Family == IP version 6
+
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |        Source AS number       |     Destination AS number     |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |        Interface Index        |      Address Family           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address                      |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address (Cont'd)             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address (Cont'd)             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Source IP address (Cont'd)             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address                    |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address (Cont'd)           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address (Cont'd)           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                     Destination IP address (Cont'd)           |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                       BGP Message Packet                      |
+     |                                                               |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   If `type' is PROTOCOL_BGP4MP, `subtype' is BGP4MP_ENTRY, and Address
+Family == IP (version 4)
+
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |            View #             |            Status             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Time Last Change                       |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |       Address Family          |    SAFI       | Next-Hop-Len  |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Next Hop Address                       |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     | Prefix Length |             Address Prefix [variable]         |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |       Attribute Length        |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |      BGP Attribute [variable length]    			|
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   If `type' is PROTOCOL_BGP4MP, `subtype' is BGP4MP_ENTRY, and Address
+Family == IP version 6
+
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |            View #             |            Status             |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Time Last Change                       |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |       Address Family          |    SAFI       | Next-Hop-Len  |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Next Hop Address                       |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Next Hop Address (Cont'd)              |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Next Hop Address (Cont'd)              |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        Next Hop Address (Cont'd)              |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     | Prefix Length |             Address Prefix [variable]         |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |     Address Prefix (cont'd) [variable]        |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |       Attribute Length        |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |      BGP Attribute [variable length]    			    |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   	BGP4 Attribute must not contain MP_UNREACH_NLRI.  	If BGP Attribute
+has MP_REACH_NLRI field, it must has 	zero length NLRI, e.g.,
+MP_REACH_NLRI has only Address 	Family, SAFI and next-hop values.
+
+   If `type' is PROTOCOL_BGP4MP and `subtype' is BGP4MP_SNAPSHOT,
+
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |           View #              |       File Name [variable]    |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   The file specified in "File Name" contains all routing entries,
+which are in the format of "subtype == BGP4MP_ENTRY".
+
+     Constants:
+       /* type value */
+       #define MSG_PROTOCOL_BGP4MP 16
+       /* subtype value */
+       #define BGP4MP_STATE_CHANGE 0
+       #define BGP4MP_MESSAGE 1
+       #define BGP4MP_ENTRY 2
+       #define BGP4MP_SNAPSHOT 3
+

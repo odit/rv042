@@ -1,0 +1,5 @@
+TOPDIR = $(shell cd ../../..; pwd)
+
+install:
+	DESTDIR="${TOPDIR}/uC-src" \
+		${MAKE} install

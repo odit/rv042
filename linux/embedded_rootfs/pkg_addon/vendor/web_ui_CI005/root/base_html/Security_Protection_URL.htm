@@ -1,0 +1,934 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	checklicense();
+	init();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function checklicense()
+{
+	var cf = document.formProtectionURL;
+	var license_status='<!--#nk_get SP_NewPurchase=""-->';
+	switch (parseInt(license_status))
+	{
+		case 1:  	        
+		break;
+		case 2:  	        
+		case 3:
+		break;
+		case 104:  	
+		case 999:
+		default :
+			cf.action="Security_Protection_new_purchase.htm";
+			cf.submit();
+		break
+	}
+}
+var CountStr='<!--#nk_get SP_Get_Web="CountStr"-->';
+var Adl_cnt = new Array(13);
+var Bus_cnt = new Array(11);  
+var Cbw_cnt = new Array(10);  
+var Cmh_cnt = new Array(14); 
+var Ccm_cnt = new Array(7);
+var Gen_cnt = new Array(9);
+var Soc_cnt = new Array(19);
+var Adl_cnt_NAME = new Array("Adult/Mature Content","Pornography","Sex Education","Intimate Apparel/Swimsuit","Nudity","Alcohol/Tobacco",
+"Illegal/Questionable","Illegal Drugs","Gambling","Violence/Hate/Racism","Weapons","Abortion","Marijuana");
+var Bus_cnt_NAME = new Array("Financial Services","Brokerage/Trading","Business/Economy","Computers/Internet","Infrastructure","Job Search/Careers",
+"Shopping","Auctions","Real Estate","Vehicles","Made for AdSense sites (MFA)");
+var Cbw_cnt_NAME = new Array("Internet Radio and TV","Internet Telephony","Photo Searches","Personal Network Storage/File Download Servers",
+"Peer-to-Peer","Streaming Media/MP3","Ringtones/Mobile Phone Downloads","Software Downloads","Pay to Surf","Joke Program");
+var Cmh_cnt_NAME = new Array("Proxy Avoidance","Potentially Malicious Software","Spyware","Phishing","Spam","Adware","Virus Accomplice",
+"Disease Vector","Cookies","Dialers","Hacking","Password Cracking Applications","Remote Access Program","Web Advertisement");
+var Ccm_cnt_NAME = new Array("Search Engines/Portals","Blogs/Web Communications","Translators (circumvent filtering)","Chat/Instant Messaging",
+"Email","Newsgroups","Web Hosting");
+var Gen_cnt_NAME = new Array("Education","Government/Legal","Military","Political Parties","Health","News/Media","Reference",
+"Religion","For Kids");
+var Soc_cnt_NAME = new Array("Tasteless","Recreation/Hobbies","Entertainment","Arts","Cult/Occult","Cultural Institutions",
+"Activist Groups","Games","Alternative Journals","Personals/Dating","Social Networking","Personal Websites","Society/Lifestyle",
+"Gay/Lesbian","Sport Hunting and Gun Clubs","Restaurants/Dining/Food","Sports","Travel","Humor/Jokes");
+
+var Bis_day = new Array("Sun_day","Mon_day","Tue_day","Web_day","Thu_day","Fir_day","Sat_day");
+var CountPrefix = new Array("AD_","BS_","CBW_","CMH_","CMC_","GEN_","SOC_");
+var CountPrefix_C = new Array("13","11","10","14","7","9","19");
+var CountBlock = new Array("Adl_cnt","Bus_cnt","Cbw_cnt","Cmh_cnt","Ccm_cnt","Gen_cnt","Soc_cnt");
+var CountChkType = new Array("_busi","_leisu"); 
+var FolderPrefix = new Array("Adult","Business","Com_band","Com_harm","Com_Com","Com_Gen","Com_Soc");
+var FolderPrefix_NAME = new Array("Adult","Business","Computers/Bandwidth","Computers/Harmful","Computers/Communication","General","Social");
+var FolderIndex = new Array("0","1","2","3","4","5","6");
+var ULApCt = new Array(6);
+var ULApTp = new Array(6);
+var Table_src = new Array("urltoap");
+var Table_obj = new Array("ULApCt");
+var Table_date = new Array("ULApCtDATA");
+var Table_tdate = new Array("ULApTpDATA");
+var Table_tobj = new Array("ULApTp");
+var Table_add =new Array("approved_add");
+var Table_name = new Array("approve");
+var Table_id =new Array("approvedurl_table");
+var Table_on = new Array("enable_approved_URL_List");
+
+var FolderPrefix_ID = new Array("adult_ID","busi_ID","comp_band_ID","comp_harm_ID","comp_Commu_ID","comp_gener_ID","comp_social_ID");
+function init()
+{
+	var cf = document.formProtectionURL;
+	var Init_i, Init_k;
+	var init_index,tot_index;
+	var tt,cc;
+	var Count_array =CountStr.split("_");
+	dataToVisible(cf);
+	Init_Categories_data();
+	init_index = 0;
+	tot_index = 0;
+	Init_busi_day();	
+	if(Count_array.length != 83)
+		alert("Init find CountStr error\n");	
+
+	while( init_index < 7 )
+	{
+		for(cc=0;cc<parseInt(CountPrefix_C[ init_index ]);cc++)
+		{
+			eval(CountBlock[init_index]+"["+cc+"]=Count_array["+tot_index+"];");
+			tot_index++
+		}
+		init_index++;
+	}
+
+	for(Init_i=0;Init_i<7;Init_i++)
+	{
+		eval("cf."+FolderPrefix[Init_i]+".src=\"images/expand_f.gif\";");
+		eval("cf."+FolderPrefix[Init_i]+".value=\"1\";");
+		check_display(FolderIndex[Init_i]);
+	}
+	for(Init_k=0;Init_k<7;Init_k++)  
+	{  	   	
+		check_dispaly_count(Init_k);
+	}
+}
+function dataToVisible(form_obj)  // both hidden & visible fields in same form
+{
+	var form_size = form_obj.elements.length;
+	var sourceField;
+	var last_name;
+	var radioIndex;
+	var baseRef;
+
+	for (var i = 0; i < form_size; i++)
+	{
+		if (form_obj.elements[i].name.substr(0,3)=="c4_")
+		{
+			baseRef =eval("form_obj." + form_obj.elements[i].name.substr(3));
+			ip1to4(form_obj.elements[i], eval(baseRef+"1"), eval(baseRef+"2"), eval(baseRef+"3"), eval(baseRef+"4"));
+		}
+
+		if (form_obj.elements[i].name.substr(0,3)=="c6_")
+		{
+			baseRef =eval("form_obj." + form_obj.elements[i].name.substr(3));
+			mac1to6(form_obj.elements[i], eval(baseRef+"1"), eval(baseRef+"2"), eval(baseRef+"3"), eval(baseRef+"4"), eval(baseRef+"5"), eval(baseRef+"6"));
+		}
+
+		sourceField = eval("form_obj.h_" + form_obj.elements[i].name);
+		if(!(sourceField))
+			continue;
+		if(sourceField.value == "")
+			continue;
+		if (form_obj.elements[i].type=="select-one")
+			form_obj.elements[i].selectedIndex = getSelIndex(form_obj.elements[i], sourceField.value);
+		if (form_obj.elements[i].type=="select-multiple")
+			setSelected(form_obj.elements[i],sourceField.value);
+		if (form_obj.elements[i].type == "checkbox")
+			form_obj.elements[i].checked = (sourceField.value == "enable");
+		if (form_obj.elements[i].type == "radio")
+		{
+			if (last_name == form_obj.elements[i].name)
+				continue; // already done this one
+			last_name = form_obj.elements[i].name;
+			radioIndex = getRadioIndex(form_obj.elements[form_obj.elements[i].name],sourceField.value);
+			if(form_obj.elements[form_obj.elements[i].name][radioIndex])
+				form_obj.elements[form_obj.elements[i].name][radioIndex].checked = true;
+			else
+				form_obj.elements[form_obj.elements[i].name].checked = true;
+		}
+	}
+}
+function Init_Categories_data()
+{
+	var DataB= document.formProtectionURL.Categories_on_B.value;
+	var DataL= document.formProtectionURL.Categories_on_L.value;
+	var Categories_arrayB =DataB;
+	var Categories_arrayL =DataL;
+	var cf = document.formProtectionURL;
+	var obj_s;
+	var Count_index = 0;
+	var Totoal_index = 0;
+	var prefix_;
+	var subCategories;
+	
+	Count_index = 0;
+	var Totoal_indexB = 0;
+	var Totoal_indexL = 0;
+	while( Count_index < 7 )
+	{
+		subCategories = parseInt(CountPrefix_C[ Count_index ]);
+		prefix_= CountPrefix[ Count_index ];
+		if( Categories_arrayB.charAt(Totoal_indexB) == "1" )
+			eval("cf." + prefix_ + "total_busi.checked = true;");
+		else 
+			eval("cf." + prefix_ + "total_busi.checked = false;");
+		if( Categories_arrayL.charAt(Totoal_indexL) == "1" )
+			eval("cf." + prefix_ + "total_leisu.checked = true;");
+		else
+			eval("cf." + prefix_ + "total_leisu.checked = false;");
+		Totoal_indexB++;
+		Totoal_indexL++;
+		for(var i = 1; i < subCategories + 1; i++ )
+		{
+			if( Categories_arrayB.charAt(Totoal_indexB) == "1" )
+				eval("cf." + prefix_ + i + "_busi.checked = true;");
+			else
+				eval("cf." + prefix_ + i + "_busi.checked = false;");				
+			if( Categories_arrayL.charAt(Totoal_indexL) == "1" )
+				eval("cf." + prefix_ + i + "_leisu.checked = true;");
+			else
+				eval("cf." + prefix_ + i + "_leisu.checked = false;");
+			Totoal_indexB++;
+			Totoal_indexL++;
+		}
+		Count_index++;
+	}
+		
+}
+var DEBUG = false;
+function getRadioIndex(radio_object, checked_value)  // find index matching checkecd_value, 0 if no match
+{
+	if (!radio_object)
+		return 0;
+	if(radio_object.value == checked_value)
+		return 0;
+	var size = radio_object.length;
+	if(isNaN(size))
+		return 0;
+	for (var i = 0; i < size; i++)
+	{
+		if(!(radio_object[i]))
+			continue;
+		if (radio_object[i].value == checked_value)
+			return  i;
+	}
+	if (DEBUG)
+		alert("DEBUG: " + radio_object.name + " (Radio button) has invalid value " + checked_value + "  Selecting 1st item instead");
+	return  0;   // if no match
+}
+function getSelIndex(sel_object, sel_text)
+{
+	if (sel_text.length == 0)
+		return 0;
+	var size = sel_object.options.length;
+	for (var i = 0; i < size; i++)
+	{
+		if ( (sel_object.options[i].text == sel_text) || (sel_object.options[i].value == sel_text) )
+			return(i);
+	}
+	if (DEBUG)
+		alert("DEBUG: " + sel_object.name + " (Select List) has invalid value " + sel_text + "  Selecting 1st item instead");
+	return 0;  // if no match
+}
+function check_dispaly_count(prefix_)
+{
+	var total_=0;
+	var obj_s;
+	var cf = document.formProtectionURL;
+	var flag="0";
+	var C_A_C=0,C_A_C_L=0;
+	if(!(prefix_>=0 && prefix_<=6 ))
+	{
+		alert("check_dispaly_count prefix_ error");	
+	}
+
+	obj_s=CountBlock[prefix_];
+
+	for(i=1;i<=parseInt(CountPrefix_C[prefix_]);i++)
+	{
+		j=i-1;
+		if((eval("cf."+CountPrefix[prefix_]+i+"_busi"+".checked")==true)||(eval("cf."+CountPrefix[prefix_]+i+"_leisu"+".checked")==true))
+		{
+			eval(CountPrefix[prefix_]+i+".innerHTML="+obj_s+"["+j+"]"+";");
+			total_+=parseInt(eval(obj_s+"["+j+"]"));
+			flag="1";
+		}
+		else
+		{
+			eval(CountPrefix[prefix_]+i+".innerHTML=\"&nbsp;\";");
+		}
+
+		if(eval("cf."+CountPrefix[prefix_]+i+"_busi"+".checked")==true)
+			C_A_C+=1;
+		if(eval("cf."+CountPrefix[prefix_]+i+"_leisu"+".checked")==true)
+			C_A_C_L+=1;
+	}
+	if((flag=="1")||(eval("cf."+CountPrefix[prefix_]+"total_busi.checked")==true)||(eval("cf."+CountPrefix[prefix_]+"total_leisu.checked")==true))
+	{
+		eval(CountPrefix[prefix_]+"total.innerHTML=total_;");
+	}
+	else
+		eval(CountPrefix[prefix_]+"total.innerHTML=\"&nbsp;\";");
+
+	if(C_A_C==CountPrefix_C[prefix_])
+		eval("cf."+CountPrefix[prefix_]+"total"+CountChkType[0]+".checked=true");
+	else
+		eval("cf."+CountPrefix[prefix_]+"total"+CountChkType[0]+".checked=false");
+	if(C_A_C_L==CountPrefix_C[prefix_])
+		eval("cf."+CountPrefix[prefix_]+"total"+CountChkType[1]+".checked=true");
+	else
+		eval("cf."+CountPrefix[prefix_]+"total"+CountChkType[1]+".checked=false");	
+}
+function setall_checkbox(prefix_,type_)
+{
+	var cf = document.formProtectionURL;
+	if(!(prefix_>=0 && prefix_<=6 ))
+	{
+		alert("setall_checkbox prefix_ error");	
+	}
+	if(!(type_>=0 && type_<=1 ))
+	{
+		alert("setall_checkbox type_ error");	
+	}
+
+	if(eval("cf."+CountPrefix[prefix_]+"total"+CountChkType[type_]+".checked")==true)
+	{
+		for(i=1;i<=parseInt(CountPrefix_C[prefix_]);i++)
+		{
+			eval("cf."+CountPrefix[prefix_]+i+CountChkType[type_]+".checked=true;")
+			eval("cf."+CountPrefix[prefix_]+i+CountChkType[type_]+".value=\"enable\";")
+		}
+	}
+	else
+	{
+		for(i=1;i<=parseInt(CountPrefix_C[prefix_]);i++)
+		{
+			eval("cf."+CountPrefix[prefix_]+i+CountChkType[type_]+".checked=false;")
+			eval("cf."+CountPrefix[prefix_]+i+CountChkType[type_]+".value=\"disable\";")	
+		}
+	}
+	check_dispaly_count(prefix_);
+}
+function Init_busi_day()
+{
+	var cf = document.formProtectionURL;
+	var busi_data=cf.WeekSave.value;
+	var bus_i;
+	if(busi_data.length !=7 )
+	{
+		alert("Init_busi_day data error");	
+	}
+	for(bus_i=0;bus_i<7;bus_i++)
+	{
+		if(busi_data.charAt(bus_i)=="1")
+			eval("cf."+Bis_day[bus_i]+".checked=true;");
+		else
+			eval("cf."+Bis_day[bus_i]+".checked=false;");
+	}
+
+	if(cf.url_f_mornSave.value==1)
+		cf.url_f_morn.checked=true;
+	else
+		cf.url_f_morn.checked=false;
+	if(cf.url_f_afteSave.value==1)
+		cf.url_f_afte.checked=true;
+	else
+		cf.url_f_afte.checked=false;
+}
+function check_display(index_i)
+{
+	var cf = document.formProtectionURL;
+	var static_name=FolderPrefix_ID[index_i];
+	var oTR = document.getElementById(static_name);
+	if (oTR.style.display == "") 
+	{    
+		oTR.style.display = "none";    
+	} 
+	else 
+	{    
+		oTR.style.display = "";    
+	}    
+}
+function change_URL_enable()
+{
+	if (document.formProtectionURL.enable_URL_Filtering.checked == true)
+		SetButtonStatus("reset_counter", "");
+	else
+		SetButtonStatus("reset_counter", "disabled");
+}
+function chang_img(index_i)
+{
+	var cf = document.formProtectionURL;
+	var tmp_img;
+	var tmp_index;
+
+	if( parseInt(index_i)>=0 && parseInt(index_i)<=6 )	
+	{
+		tmp=eval("cf."+FolderPrefix[parseInt(index_i)]+";");
+	}
+	else
+		alert("chang_img ERROR!");	
+
+	if(cf.enable_URL_Filtering.checked==true)  	
+	{
+		if(tmp.value == "0")
+		{
+			tmp.src="images/expand_f.gif";
+			tmp.value="1";
+		}
+		else
+		{
+			tmp.src="images/expand_uf.gif";
+			tmp.value="0";		
+		}
+		check_display(index_i);	
+	}
+}
+function Save_Categories_data()
+{
+	var Categories_DataB="";
+	var Categories_DataL="";
+	var Categories_DataTB="";
+	var Categories_DataTL="";
+	var cf = document.formProtectionURL;
+	var obj_s;
+	var Count_index = 0;
+	var Totoal_index = 0;
+	var prefix_;
+	var subCategories;
+	
+	Totoal_index = 0;
+	while( Count_index < 7 )
+	{
+		subCategories = parseInt(CountPrefix_C[ Count_index ]);
+		prefix_= CountPrefix[ Count_index ];
+		if( eval("cf." + prefix_ + "total_busi.checked")==true)
+		{
+			Categories_DataB += "1";
+			Categories_DataTB += "1";
+		}
+		else
+		{
+			Categories_DataB += "0";
+			Categories_DataTB += "0";
+		}
+		if( eval("cf." + prefix_ + "total_leisu.checked")==true)
+		{
+			Categories_DataL += "1";
+			Categories_DataTL += "1";
+		}
+		else 
+		{
+			Categories_DataL += "0";
+			Categories_DataTL += "0";			
+		}
+		
+		for( i = 1; i < subCategories + 1; i++ )
+		{
+			if( eval("cf." + prefix_ + i + "_busi.checked")==true)
+				Categories_DataB += "1";
+			else
+				Categories_DataB += "0";
+			if( eval("cf." + prefix_ + i + "_leisu.checked")==true)
+				Categories_DataL += "1";
+			else
+				Categories_DataL += "0";
+		}
+		Count_index++;
+	}
+	document.formProtectionURL.Categories_on_B.value = Categories_DataB;
+	document.formProtectionURL.Categories_on_L.value = Categories_DataL;
+	document.formProtectionURL.Categories_on_TB.value = Categories_DataTB;
+	document.formProtectionURL.Categories_on_TL.value = Categories_DataTL;
+}
+function set_all_Categories(Categories,count,flag)
+{
+	var cf = document.formProtectionURL;
+	var show;
+	var flag_1=0;
+	var ini;
+	for(ini=0;ini<7;ini++)
+	{
+		if(CountPrefix[ini]==Categories)
+			flag_1=1;
+	}
+	if(flag_1==0)
+	{
+		alert("set_all_Categories error table_index ");	
+		return ;
+	}
+
+	if(flag==1)
+		show="false";
+	else
+		show="true";
+	
+	for(i=1;i<=parseInt(count);i++)
+	{
+		eval("cf."+Categories+i+"_busi.disabled="+show+";");
+		eval("cf."+Categories+i+"_leisu.disabled="+show+";");
+	}
+	eval("cf."+Categories+"total_busi.disabled="+show+";");
+	eval("cf."+Categories+"total_leisu.disabled="+show+";");
+     
+}
+function ResetCounter()
+{
+	var cf = document.formProtectionURL;
+	cf.submit_Counters.value="2";
+	cf.submitStatus.value=100;
+	cf.submit();
+}
+function chSubmit(F)
+{
+	if(F.enable_URL_Filtering.checked)
+		F.urlfilterEnable.value=1;
+	else
+		F.urlfilterEnable.value=0;
+	
+	if(F.enable_Web_Reputation.checked)
+		F.wrsEnable.value=1;
+	else
+		F.wrsEnable.value=0;
+		
+	//Web categories
+	for(k=0;k<=6;k++)
+	{
+		set_all_Categories(CountPrefix[k],CountPrefix_C[k],"1");
+	}
+	F.reset_counter.disabled = false;
+		
+	if(F.url_f_morn.checked)
+		F.url_f_mornEnable.value=1;
+	else
+		F.url_f_mornEnable.value=0;
+	if(F.url_f_afte.checked)
+		F.url_f_afteEnable.value=1;
+	else
+		F.url_f_afteEnable.value=0;
+	
+	var bz_week="";
+	for(var i=0;i<Bis_day.length;i++)
+	{
+		var bz_t=eval("F."+Bis_day[i]+".checked");
+		if(bz_t==true)
+			bz_week+="1"
+		else
+			bz_week+="0"
+	}
+	F.weekEnable.value=bz_week;
+	Save_Categories_data();
+	F.log_ch.value = 1;
+	F.submitStatus.value=1;
+	F.submit();
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.formProtectionURL);";
+var Cancellink = ""; 
+var helplink ='help_Security_Protection_URL.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 700;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintWebProtection(1);
+	PrintURLFiltering(1);
+	PrintBusinessHourSetting(1);
+	PrintWebReputation(1);
+	PrintURLOverflowControl(0);
+	PrintEndContent();
+}
+
+function PrintWebProtection(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="20" align="left">');
+	document.write('<input type=hidden name="urlfilterEnable" value=\'0\'>');
+	document.write('<input type="hidden" id="urlfilterSave" name="urlfilterSave" value=\'<!--#nk_get CheckboxSave="urlfilterEnable"-->\'>');
+	document.write('<input type="checkbox" name="enable_URL_Filtering" id="enable_URL_Filtering" onClick="change_URL_enable()" <!--#nk_get CheckboxStatus="urlfilterEnable"-->>');
+	document.write('</td>');
+	document.write('<td align="left">');
+	document.write('Enable URL Filtering');
+	document.write('</td></tr>');
+	document.write('<tr>');
+	document.write('<td width="20" align="left">');
+	document.write('<input type=hidden name="wrsEnable" value=\'0\'>');
+	document.write('<input type="hidden" id="wrsSave" name="wrsSave" value=\'<!--#nk_get CheckboxSave="wrsEnable"-->\'>');
+	document.write('<input type="checkbox" name="enable_Web_Reputation" id="enable_Web_Reputation" <!--#nk_get CheckboxStatus="wrsEnable"-->>');
+	document.write('</td>');
+	document.write('<td align="left">');
+	document.write('Enable Web Reputation');
+	document.write('</td></tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintURLH()
+{
+	for (var i=0;i<FolderPrefix.length;i++)
+	{
+		document.write('<tr class="TitleRow">');	
+		document.write('<td><img src="images/expand_f.gif" name="'+FolderPrefix[i]+'" onClick="chang_img('+i+')">&nbsp;&nbsp;'+FolderPrefix_NAME[i]+'</td>');
+		document.write('<td width="100"><input type="checkbox" id="'+CountPrefix[i]+'total_busi" name="'+CountPrefix[i]+'total_busi" value="" onClick="setall_checkbox('+i+',0);"></td>');
+		document.write('<td width="100"><input type="checkbox" id="'+CountPrefix[i]+'total_leisu" name="'+CountPrefix[i]+'total_leisu" value="" onClick="setall_checkbox('+i+',1);"></td>');
+		document.write('<td width="125"><span id="'+CountPrefix[i]+'total"></span></td>');	
+		document.write('</tr>');		
+		
+		var Totoal_index = 0;
+		var subCategories = parseInt(CountPrefix_C[ i ]);
+		var prefix_= CountPrefix[ i ];
+		document.write('<tbody id="'+FolderPrefix_ID[i]+'">');
+		for(var j = 1; j < subCategories + 1; j++ )
+		{
+			if ((j-1)%2==1)
+				document.write('<tr class="OddRow">');
+			else
+				document.write('<tr class="EvenRow">');
+					
+			var test1=eval(CountBlock[i]+"_NAME["+(j-1)+"]");
+			document.write('<td>'+test1+'</td>');
+			document.write('<td width="100"><input type="checkbox" id="'+CountPrefix[i]+j+'_busi" name="'+CountPrefix[i]+j+'_busi" value="" onClick="check_dispaly_count('+i+');"></td>');
+			document.write('<td width="100"><input type="checkbox" id="'+CountPrefix[i]+j+'_leisu" name="'+CountPrefix[i]+j+'_leisu" value="" onClick="check_dispaly_count('+i+');"></td>');
+			document.write('<td width="125"><span id="'+CountPrefix[i]+j+'"></span></td>');	
+			document.write('</tr>');	
+		}
+		document.write('</tbody>');	
+	}
+}
+
+function PrintURLFiltering(hasUnderLine)
+{
+	PrintBeginBlock(1, "URL Filtering");
+	
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('URL Categories');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="114" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Business Hours');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="113" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Leisure Hours');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="141" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Instances Blocked');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td colspan="10" class="STtable">');
+	document.write('<table width="100%" class="STtable" border="0">');
+	PrintURLH();
+	document.write('</table>');		
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table class="ListButtom" height="29" width="100%" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td align="left">');
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	PrintSTButton("reset_counter", "Reset Counters", "ResetCounter()");
+	if (document.formProtectionURL.enable_URL_Filtering.checked == false)
+		SetButtonStatus("reset_counter", "disabled");
+	document.write('</td>');	
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');	
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintBusinessHourSetting(hasUnderLine)
+{
+	PrintBeginBlock(1, "Business Hour Setting");
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>'); 
+	document.write('<th colspan=7 align="left">Business Days&nbsp;:&nbsp;</th>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<input type="hidden" name="weekEnable" value=\'0000000\'>');
+	document.write('<input type="hidden" id="WeekSave" name="WeekSave" value=\'<!--#nk_get 1to1_Handle="weekEnable"-->\'>');
+	document.write('<td colspan=7>');
+	document.write('<input type="checkbox" name="Sun_day">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Sun');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="checkbox" name="Mon_day">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Mon');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="checkbox" name="Tue_day">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Tue');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="checkbox" name="Web_day">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Wed');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="checkbox" name="Thu_day">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Thu'); 
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="checkbox" name="Fir_day">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Fri'); 
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="checkbox" name="Sat_day">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Sat');
+	document.write('</td>');
+	document.write('</tr>'); 
+	document.write('<tr>'); 
+	document.write('<td colspan=7 height="12"></td>');
+	document.write('</tr>');	
+	document.write('<tr>');  
+	document.write('<th colspan=7 align="left" >Business Times&nbsp;:&nbsp;</th>'); 
+	document.write('</tr>');       		
+	document.write('<tr>');      			           	
+	document.write('<td colspan=7>');    
+	document.write('<input type="radio" value="1" name="url_fl_eday" <!--#nk_get RadioHandle2="url_fl_eday:1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('All day (24 hours)');
+	document.write('</td>');
+	document.write('</tr>');     	       		
+	document.write('<tr>');       			           	
+	document.write('<td colspan=7>');  
+	document.write('<input type="radio" value="0" name="url_fl_eday" <!--#nk_get RadioHandle2="url_fl_eday:0"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Specify business hours<br>');
+	document.write('<img border="0" src="images/_blank.gif" width="30" height="1">');
+	document.write('<b>Note : </b>Time not designated as business time will be considered leisure time.');
+	document.write('</td>');
+	document.write('</tr>');        		
+	document.write('<tr>');       			
+	document.write('<td colspan=7 height="10"></td>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');       			
+	document.write('<td width=20></td>'); 
+	document.write('<td width="85">'); 
+	document.write('<input type=hidden name="url_f_mornEnable" value=\'0\'>');
+	document.write('<input type="hidden" id="url_f_mornSave" name="url_f_mornSave" value=\'<!--#nk_get CheckboxSave="url_f_mornEnable"-->\'>');
+	document.write('<input type="checkbox" name="url_f_morn" value="">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Morning');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td width="50">From&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td width="120">');
+	document.write('<select name="url_f_m_f" class="Select" style="width:80px">');
+	document.write('<option value="0" <!--#nk_get SelectHandle="url_f_m_f:0"-->>00:00</option>');          				
+	document.write('<option value="1" <!--#nk_get SelectHandle="url_f_m_f:1"-->>01:00</option>');        	
+	document.write('<option value="2" <!--#nk_get SelectHandle="url_f_m_f:2"-->>02:00</option>');        	
+	document.write('<option value="3" <!--#nk_get SelectHandle="url_f_m_f:3"-->>03:00</option>');       	
+	document.write('<option value="4" <!--#nk_get SelectHandle="url_f_m_f:4"-->>04:00</option>');        		
+	document.write('<option value="5" <!--#nk_get SelectHandle="url_f_m_f:5"-->>05:00</option>');
+	document.write('<option value="6" <!--#nk_get SelectHandle="url_f_m_f:6"-->>06:00</option>');
+	document.write('<option value="7" <!--#nk_get SelectHandle="url_f_m_f:7"-->>07:00</option>');
+	document.write('<option value="8" <!--#nk_get SelectHandle="url_f_m_f:8"-->>08:00</option>');
+	document.write('<option value="9" <!--#nk_get SelectHandle="url_f_m_f:9"-->>09:00</option>');
+	document.write('<option value="10" <!--#nk_get SelectHandle="url_f_m_f:10"-->>10:00</option>');
+	document.write('<option value="11" <!--#nk_get SelectHandle="url_f_m_f:11"-->>11:00</option>');
+	document.write('<option value="12" <!--#nk_get SelectHandle="url_f_m_f:12"-->>12:00</option>');
+	document.write('</select>');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('</td>'); 
+	document.write('<td width="100">'); 
+	document.write('<input type=hidden name="url_f_afteEnable" value=\'0\'>');
+	document.write('<input type="hidden" id="url_f_afteSave" name="url_f_afteSave" value=\'<!--#nk_get CheckboxSave="url_f_afteEnable"-->\'>');
+	document.write('<input type="checkbox" name="url_f_afte" value="">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Afternoon');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td width="50">From : </td>');
+	document.write('<td>'); 
+	document.write('<select name="url_f_a_f" class="Select" style="width:80px">');
+	document.write('<option value="12" <!--#nk_get SelectHandle="url_f_a_f:12"-->>12:00</option>');							
+	document.write('<option value="13" <!--#nk_get SelectHandle="url_f_a_f:13"-->>13:00</option>');        				
+	document.write('<option value="14" <!--#nk_get SelectHandle="url_f_a_f:14"-->>14:00</option>');        		
+	document.write('<option value="15" <!--#nk_get SelectHandle="url_f_a_f:15"-->>15:00</option>');        	
+	document.write('<option value="16" <!--#nk_get SelectHandle="url_f_a_f:16"-->>16:00</option>');        		
+	document.write('<option value="17" <!--#nk_get SelectHandle="url_f_a_f:17"-->>17:00</option>');        		
+	document.write('<option value="18" <!--#nk_get SelectHandle="url_f_a_f:18"-->>18:00</option>');        		
+	document.write('<option value="19" <!--#nk_get SelectHandle="url_f_a_f:19"-->>19:00</option>');        			
+	document.write('<option value="20" <!--#nk_get SelectHandle="url_f_a_f:20"-->>20:00</option>');       		
+	document.write('<option value="21" <!--#nk_get SelectHandle="url_f_a_f:21"-->>21:00</option>');        		
+	document.write('<option value="22" <!--#nk_get SelectHandle="url_f_a_f:22"-->>22:00</option>');        		
+	document.write('<option value="23" <!--#nk_get SelectHandle="url_f_a_f:23"-->>23:00</option>');				
+	document.write('<option value="24" <!--#nk_get SelectHandle="url_f_a_f:24"-->>24:00</option>'); 
+	document.write('</select>');
+	document.write('</td>'); 
+	document.write('</tr>');
+	document.write('<tr>');       			
+	document.write('<td colspan="2"></td>'); 
+	document.write('<td>To : ');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<select name="url_f_m_t" class="Select" style="width:80px">');
+	document.write('<option value="0" <!--#nk_get SelectHandle="url_f_m_t:0"-->>00:00</option>');          				
+	document.write('<option value="1" <!--#nk_get SelectHandle="url_f_m_t:1"-->>01:00</option>');        	
+	document.write('<option value="2" <!--#nk_get SelectHandle="url_f_m_t:2"-->>02:00</option>');        	
+	document.write('<option value="3" <!--#nk_get SelectHandle="url_f_m_t:3"-->>03:00</option>');       	
+	document.write('<option value="4" <!--#nk_get SelectHandle="url_f_m_t:4"-->>04:00</option>');        		
+	document.write('<option value="5" <!--#nk_get SelectHandle="url_f_m_t:5"-->>05:00</option>');
+	document.write('<option value="6" <!--#nk_get SelectHandle="url_f_m_t:6"-->>06:00</option>');
+	document.write('<option value="7" <!--#nk_get SelectHandle="url_f_m_t:7"-->>07:00</option>');
+	document.write('<option value="8" <!--#nk_get SelectHandle="url_f_m_t:8"-->>08:00</option>');
+	document.write('<option value="9" <!--#nk_get SelectHandle="url_f_m_t:9"-->>09:00</option>');
+	document.write('<option value="10" <!--#nk_get SelectHandle="url_f_m_t:10"-->>10:00</option>');
+	document.write('<option value="11" <!--#nk_get SelectHandle="url_f_m_t:11"-->>11:00</option>');
+	document.write('<option value="12" <!--#nk_get SelectHandle="url_f_m_t:12"-->>12:00</option>');
+	document.write('</select>');
+	document.write('</td>'); 
+	document.write('<td></td>');
+	document.write('<td>To:</td>');
+	document.write('<td>'); 
+	document.write('<select name="url_f_a_t" class="Select" style="width:80px">');
+	document.write('<option value="12" <!--#nk_get SelectHandle="url_f_a_t:12"-->>12:00</option>');							
+	document.write('<option value="13" <!--#nk_get SelectHandle="url_f_a_t:13"-->>13:00</option>');        				
+	document.write('<option value="14" <!--#nk_get SelectHandle="url_f_a_t:14"-->>14:00</option>');        		
+	document.write('<option value="15" <!--#nk_get SelectHandle="url_f_a_t:15"-->>15:00</option>');        	
+	document.write('<option value="16" <!--#nk_get SelectHandle="url_f_a_t:16"-->>16:00</option>');        		
+	document.write('<option value="17" <!--#nk_get SelectHandle="url_f_a_t:17"-->>17:00</option>');        		
+	document.write('<option value="18" <!--#nk_get SelectHandle="url_f_a_t:18"-->>18:00</option>');        		
+	document.write('<option value="19" <!--#nk_get SelectHandle="url_f_a_t:19"-->>19:00</option>');        			
+	document.write('<option value="20" <!--#nk_get SelectHandle="url_f_a_t:20"-->>20:00</option>');       		
+	document.write('<option value="21" <!--#nk_get SelectHandle="url_f_a_t:21"-->>21:00</option>');        		
+	document.write('<option value="22" <!--#nk_get SelectHandle="url_f_a_t:22"-->>22:00</option>');        		
+	document.write('<option value="23" <!--#nk_get SelectHandle="url_f_a_t:23"-->>23:00</option>');				
+	document.write('<option value="24" <!--#nk_get SelectHandle="url_f_a_t:24"-->>24:00</option>');  
+	document.write('</select>');
+	document.write('</td>'); 
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintWebReputation(hasUnderLine)
+{
+	PrintBeginBlock(1, "Web Reputation");
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<th colspan=3 align="left">Security level&nbsp;:&nbsp;</th>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td width=20><input type="radio" name="reputation_level" value="80" <!--#nk_get RadioHandle="reputation_level:80"-->></td>');
+	document.write('<td>High</td>');
+	document.write('<td>Blocks a greater number of Web threats but increases the risk  of false positives.</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td><input  type="radio" name="reputation_level" value="65" <!--#nk_get RadioHandle="reputation_level:65"-->></td>');
+	document.write('<td>Medium</td>');
+	document.write('<td>Blocks most Web threats and does not create too many  false positives.<br>');
+	document.write('This is the recommended setting.</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td><input type="radio" name="reputation_level" value="50" <!--#nk_get RadioHandle="reputation_level:50"-->></td>');
+	document.write('<td>Low</td>');
+	document.write('<td>Blocks fewer Web threats but reduces the risk of false positives.</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintURLOverflowControl(hasUnderLine)
+{
+	PrintBeginBlock(1, "URL Overflow Control");
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="20"><input type="radio" value=0 name="url_overflow" <!--#nk_get RadioHandle="url_overflow:0"-->></td>');
+	document.write('<td>Temporarily block URL requests(This is the recommended setting)</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td><input type="radio" value=1  name="url_overflow" <!--#nk_get RadioHandle="url_overflow:1"-->></td>');
+	document.write('<td>Temporarily bypass Cisco ProtectLink URL Filtering for requested URLs</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 11, 1);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formProtectionURL" method="post" action="Security_Protection_URL.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="submit_Counters" value="1">
+	<input type="hidden" name="submitstatus" value="1">
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="Categories_on_B"  value='<!--#nk_get 1to1_Handle="Categories_on_B"-->'>
+	<input type="hidden" name="Categories_on_L"  value='<!--#nk_get 1to1_Handle="Categories_on_L"-->'>
+	<input type="hidden" name="Categories_on_TB"  value='<!--#nk_get 1to1_Handle="Categories_on_TB"-->'>
+	<input type="hidden" name="Categories_on_TL"  value='<!--#nk_get 1to1_Handle="Categories_on_TL"-->'>
+	<input type="hidden" name="todo" value="save">
+	<input type="hidden" name="this_file" value="url_filtering.htm">
+	<input type="hidden" name="next_file" value="url_filtering.htm">
+	<input type="hidden" name="message" value="">
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="Security_Protection_URL.htm"-->
+<!--#nk_get SP_Update=""-->

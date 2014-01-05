@@ -1,0 +1,22 @@
+.PHONY=all clean cleanbin install un-install
+CC=gcc
+CFLAGS+=-g $(OPTFLAG) $(ARCH) -pipe -Wall -Waggregate-return -Wcast-align -Wcast-qual -Wcomment \
+	      -Wformat -Wimplicit-int  -Wimplicit-function-declaration -Winline \
+	      -Wlong-long -Wmain -Wmissing-prototypes -Wmissing-declarations \
+	      -Wnested-externs -Wno-import  -Wparentheses -Wpointer-arith -Wredundant-decls \
+	      -Wreturn-type -Wswitch -Wunused  -Wunused-function -Wunused-label -Wunused-parameter \
+	      -Wunused-variable -Wunused-value -fPIC -Werror -DTARGET_PC_i386
+
+SYS_LIB=$(TOP_DIR)/src/lib
+AUTH_LIB=$(TOP_DIR)/src/libauth
+GCGI_LIB=$(TOP_DIR)/src/libgcgi
+SSLCERT_LIB=$(TOP_DIR)/src/libsslcert
+
+WWW_ROOT=$(TOP_DIR)/www
+ACCESS_POINT_BIN=$(TOP_DIR)/bin
+
+DEST_CERT_BIN=$(WWW_ROOT)/cert-bin
+DEST_CGI_BIN=$(WWW_ROOT)/cgi-bin
+DEST_HTDOCS=$(WWW_ROOT)/htdocs
+
+LDFLAGS=-L/usr/local/lib

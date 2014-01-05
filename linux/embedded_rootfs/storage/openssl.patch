@@ -1,0 +1,24 @@
+--- Configure_orig	2006-10-10 21:15:02.241763904 -0700
++++ Configure	2006-10-10 21:15:47.034954304 -0700
+@@ -314,6 +314,9 @@ my %table=(
+ # *-generic* is endian-neutral target, but ./config is free to
+ # throw in -D[BL]_ENDIAN, whichever appropriate...
+ "linux-generic32","gcc:-DTERMIO -O3 -fomit-frame-pointer -Wall::-D_REENTRANT::-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${no_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
++"linux-octeon-uclibc32","mips64-octeon-linux-gnu-gcc:-muclibc -O3 -DB_ENDIAN -DTERMIO  -Wall::::-ldl::${no_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):mips64-octeon-linux-gnu-ranlib:",
++"linux-octeon32","mips64-octeon-linux-gnu-gcc:-mabi=n32 -O3 -DB_ENDIAN -DTERMIO  -Wall::::-ldl::${no_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):mips64-octeon-linux-gnu-ranlib:",
++"linux-octeon64","mips64-octeon-linux-gnu-gcc:-O3 -DB_ENDIAN -DTERMIO -Wall::::-ldl:SIXTY_FOUR_BIT_LONG:${no_asm}:dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR):mips64-octeon-linux-gnu-ranlib:",
+ "linux-ppc",	"gcc:-DB_ENDIAN -DTERMIO -O3 -Wall::-D_REENTRANT::-ldl:BN_LLONG RC4_CHAR RC4_CHUNK DES_RISC1 DES_UNROLL::linux_ppc32.o::::::::::dlfcn:linux-shared:-fPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
+ #### IA-32 targets...
+ "linux-ia32-icc",	"icc:-DL_ENDIAN -DTERMIO -O2 -no_cpprt::-D_REENTRANT::-ldl:BN_LLONG ${x86_gcc_des} ${x86_gcc_opts}:${x86_elf_asm}:dlfcn:linux-shared:-KPIC::.so.\$(SHLIB_MAJOR).\$(SHLIB_MINOR)",
+--- crypto/stack/safestack.h.original   2006-12-12 19:45:12.000000000 -0800
++++ crypto/stack/safestack.h    2006-12-12 19:45:33.000000000 -0800
+@@ -58,7 +58,7 @@
+ #include <openssl/stack.h>
+
+ typedef void (*openssl_fptr)(void);
+-#define openssl_fcast(f) ((openssl_fptr)f)
++#define openssl_fcast(f) ((unsigned long)f)
+
+ #ifdef DEBUG_SAFESTACK
+
+

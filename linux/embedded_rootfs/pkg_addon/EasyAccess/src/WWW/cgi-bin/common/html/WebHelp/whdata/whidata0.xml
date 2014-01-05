@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<indexdata>
+<key name="Application Bookmarks" >
+  <topic name="Application Bookmarks" url="Application_Bookmarks.htm" />
+</key>
+<key name="Applications" >
+  <topic name="Applications Overview" url="tsca.htm" />
+</key>
+<key name="Applications Overview" >
+  <topic name="Applications Overview" url="serv.htm" />
+</key>
+<key name="Bookmarks, Application" >
+  <topic name="Application Bookmarks" url="Application_Bookmarks.htm" />
+  <topic name="Applications Overview" url="tsca.htm" />
+</key>
+<key name="Bookmarks, Desktop" >
+  <topic name="Desktop Bookmarks" url="Desktop_Bookmarks.htm" />
+</key>
+<key name="Browser Requirements" >
+  <topic name="Web Browser" url="Web_Browser.htm" />
+</key>
+<key name="CA" >
+  <topic name="Security" url="Security.htm" />
+</key>
+<key name="Certificate Authority" >
+  <topic name="Security" url="Security.htm" />
+</key>
+<key name="CIFS" >
+  <topic name="Network Places Overview" url="netw.htm" />
+</key>
+<key name="Desktop Access" >
+  <topic name="VNC Desktop Access" url="VNC_Desktop_Access.htm" />
+</key>
+<key name="Desktop and Desktop Applications Overview" >
+  <topic name="Desktop Overview" url="desk.htm" />
+</key>
+<key name="Desktop Application Only Access" >
+  <topic name="Accessing an Application" url="Accessing_an_Application.htm" />
+</key>
+<key name="Desktop Bookmarks" >
+  <topic name="Desktop Bookmarks" url="Desktop_Bookmarks.htm" />
+</key>
+<key name="File Sharing" >
+  <topic name="Network Places Overview" url="netw.htm" />
+</key>
+<key name="FTP access" >
+  <topic name="FTP Client" url="FTP_Client.htm" />
+</key>
+<key name="Home page" >
+  <topic name="home" url="home.htm" />
+  <topic name="Home Page Overview" url="Home_Page_Overview.htm" />
+</key>
+<key name="HTTPS Proxy" >
+  <topic name="HTTPS Proxy" url="HTTPS_Proxy.htm" />
+</key>
+<key name="Internet Explorer security zones" >
+  <topic name="Making the SSL VPN Portal a Trusted Site" url="Making_the_SSL_VPN_Portal_a_Trusted_Site.htm" />
+</key>
+<key name="Intranet web sites, access to" >
+  <topic name="Web Proxy" url="web_proxy.html" />
+</key>
+<key name="MacOS X Virtual Passage Installation" >
+  <topic name="MacOS X Installation" url="MacOS_X_Installation.htm" />
+</key>
+<key name="Microsoft Outlook Client Configuration" >
+  <topic name="Client Configuration" url="Client_Configuration.htm" />
+</key>
+<key name="My Applications" >
+  <topic name="Applications Overview" url="serv.htm" />
+</key>
+<key name="My Desktop" >
+  <topic name="Desktop Overview" url="desk.htm" />
+</key>
+<key name="My Network Places" >
+  <topic name="Network Places Overview" url="netw.htm" />
+</key>
+<key name="My Network Places Configuration" >
+  <topic name="Using My Network Places" url="Using_My_Network_Places.htm" />
+</key>
+<key name="Network Places" >
+  <topic name="Network Places Overview" url="netw.htm" />
+</key>
+<key name="Outlook Configuration" >
+  <topic name="Client Configuration" url="Client_Configuration.htm" />
+</key>
+<key name="Pre-master Key" >
+  <topic name="SSL Handshake" url="SSL_Handshake.htm" />
+</key>
+<key name="Public Key" >
+  <topic name="Security" url="Security.htm" />
+</key>
+<key name="Security" >
+  <topic name="Security" url="Security.htm" />
+</key>
+<key name="SSH" >
+  <topic name="SSH Client" url="SSH_Client.htm" />
+</key>
+<key name="SSL" >
+  <topic name="Security" url="Security.htm" />
+</key>
+<key name="SSL Encryption" >
+  <topic name="Security" url="Security.htm" />
+</key>
+<key name="SSL Handshake" >
+  <topic name="SSL Handshake" url="SSL_Handshake.htm" />
+</key>
+<key name="SSL server on Intranet, access to" >
+  <topic name="HTTPS Proxy" url="HTTPS_Proxy.htm" />
+</key>
+<key name="SSL VPN Client" >
+  <topic name="Virtual Passage Installation" url="Virtual_Passage_Installation.htm" />
+  <topic name="Virtual Passage Overview" url="sslv.htm" />
+</key>
+<key name="Telnet" >
+  <topic name="Telnet Client" url="Telnet_Client.htm" />
+</key>
+<key name="Theme" >
+  <topic name="Configure Portal Theme" url="them.htm" />
+</key>
+<key name="Trusted site" >
+  <topic name="Making the SSL VPN Portal a Trusted Site" url="Making_the_SSL_VPN_Portal_a_Trusted_Site.htm" />
+</key>
+<key name="Virtual Passage" >
+  <topic name="Virtual Passage Installation" url="Virtual_Passage_Installation.htm" />
+  <topic name="Virtual Passage Overview" url="sslv.htm" />
+</key>
+<key name="Virtual Passage Installation" >
+  <topic name="Virtual Passage Installation" url="Virtual_Passage_Installation.htm" />
+</key>
+<key name="Virtual Passage Installation, MacOS X" >
+  <topic name="MacOS X Installation" url="MacOS_X_Installation.htm" />
+</key>
+<key name="Virtual Transport" >
+  <topic name="Installation" url="vtransportinstallation.htm" />
+  <topic name="VirtualTransport" url="virt.htm" />
+</key>
+<key name="VNC" >
+  <topic name="VNC Desktop Access" url="VNC_Desktop_Access.htm" />
+</key>
+<key name="Web Browsers" >
+  <topic name="Web Browser" url="Web_Browser.htm" />
+</key>
+<key name="Web Proxy" >
+  <topic name="Web Proxy" url="web_proxy.html" />
+</key>
+
+</indexdata>

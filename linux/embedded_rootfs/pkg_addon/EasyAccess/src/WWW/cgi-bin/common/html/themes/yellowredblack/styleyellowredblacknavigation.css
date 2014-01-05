@@ -1,0 +1,23 @@
+body{FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+.bodyback{BACKGROUND-COLOR:#ffffff;}
+.mainback{BACKGROUND-COLOR:#fbf9b8;}
+TD.mainback{BACKGROUND-COLOR:#fbf9b8;}
+TR.mainback{BACKGROUND-COLOR:#fbf9b8;}
+A{TEXT-DECORATION:none;COLOR:#001122;}
+A:visited{TEXT-DECORATION:none;COLOR:#001122;}
+a:hover{COLOR:#001122; TEXT-DECORATION:none; cursor:pointer; cursor:hand;}
+.darkback{BACKGROUND-COLOR:#62769f;}
+TD.darkback{BACKGROUND-COLOR:#62769f;}
+DIV.clk7{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#faf1a8; border-right:1px solid #62769f;} 
+DIV.clk7k{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#f7d26f; border-right:1px solid #62769f;}
+DIV.clk7Sub1{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#faf1a8; border-right:1px solid #62769f;} 
+DIV.menubottomrow{background-color:#faf1a8;border-bottom:1px solid #62769f; border-right:1px solid #62769f;}
+DIV.clk7Sub1k{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#f7d26f; border-right:1px solid #62769f;} 
+#divk7Cont{position:relative; left:0px; top:0px; height:322px; width:175px; visibility:hidden}
+A.clk7Links{font-family: Tahoma,Arial,Verdana, Helvetica; font-size:12px; text-decoration:none; COLOR:#001122; width:175px; height:25px; line-height:180%}
+A.clk71Links{font-family: Tahoma,Arial, Verdana, Helvetica; font-size:11px; text-decoration:none; COLOR:#001122; width:175px; height:25px; line-height:180%}
+td.mainbottom{background: url("/images/bottomredcf0920.png");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop1{background: url("/images/toprightblack.png");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop0{background: url("/images/mainlogo.gif");background-repeat: no-repeat;}
+td.maintop2{background: url("/images/redtopcf0920.png");background-repeat: no-repeat;background-color:#fbf9b8;margin:0px;padding:0px;}
+.menubackground{background-color:#faf3a3;border-right:1px solid #60769f;}

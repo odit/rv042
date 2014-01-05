@@ -1,0 +1,208 @@
+<!--#nk_get SysDiagSetup=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	chDismatch();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function chDismatch()
+{
+	
+	var NSLookup=document.getElementById('NSLookup_table');
+	var Ping=document.getElementById('Ping_table');
+	 if ( document.formsys_diag.diagType[0].checked==true )
+	{
+		NSLookup.style.display=""; 
+		Ping.style.display="none";
+		document.formsys_diag.submitType.value=1;
+		document.formsys_diag.submitStatus.value=1;
+	}
+	else 
+	{
+		NSLookup.style.display="none"; 
+		Ping.style.display="";
+		document.formsys_diag.submitType.value=2;	
+		document.formsys_diag.submitStatus.value=1;
+	}
+}
+function SetDisableSubmit(type, Status)
+{
+	if (type=="Submit1")
+	{
+		if (Status == "disabled")
+		{
+			document.formsys_diag.dnsName.disabled = true;
+			SetButtonStatus("Submit1", "disabled");
+		}
+		else
+		{
+			document.formsys_diag.dnsName.disabled = false;
+			SetButtonStatus("Submit1", "");
+		}
+	}
+	else if (type=="Submit2")
+	{
+		if (Status == "disabled")
+		{
+			document.formsys_diag.pingAddr.disabled = true;	
+			SetButtonStatus("Submit2", "disabled");
+		}
+		else
+		{
+			document.formsys_diag.pingAddr.disabled = false;
+			SetButtonStatus("Submit2", "");
+		}
+	}
+}
+function dispalytable(n)
+{
+	var NSLookup=document.getElementById('NSLookup_table');
+	var Ping=document.getElementById('Ping_table');
+	if(n==1)
+	{
+		NSLookup.style.display="";
+		Ping.style.display="none";
+		document.formsys_diag.submitType.value=1;
+	}
+	else if(n==2)
+	{
+		NSLookup.style.display="none";
+		Ping.style.display="";
+		document.formsys_diag.submitType.value=2;
+	}
+    document.formsys_diag.submitStatus.value=0; 
+    document.formsys_diag.submit();
+}
+function typeSubmit(n,F)
+{
+	F.pingAddr.readOnly = true;
+	F.dnsName.readOnly = true;
+	F.submitType.value=n;
+	F.submit();
+}
+function SubmitGo(e, n,F)
+{
+	var keynum;
+	var keychar;
+	var numcheck;
+
+	if(window.event) // IE
+		keynum = e.keyCode;
+	else if(e.which) // Netscape/Firefox/Opera
+		keynum = e.which;
+	if (keynum == 13)
+		typeSubmit(n,F);
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "";
+var Cancellink = ""; 
+var Backlink = "";
+var helplink ='help_sys_diag.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=150;
+var public_vNum=8;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintDiagnosticSetupMode(0);
+	PrintEndContent();
+}
+
+function PrintDiagnosticSetupMode(hasUnderLine)
+{
+	
+	PrintBeginBlock(0);	
+	document.write('<table width="'+SmallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td><input type="radio" id="diagType" name="diagType" value="1" onClick="dispalytable(1);" <!--#nk_get DiagRadio="1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">DNS Name Lookup<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" id="diagType" name="diagType" value="2" onClick="dispalytable(2)" <!--#nk_get DiagRadio="2"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">Ping</td>');		
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('<table name="NSLookup_table" id="NSLookup_table" class="Setuptable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width='+head_width+' align="left">');
+	document.write('Look up the name&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type=text name=dnsName maxLength=64 size=30 onKeypress="SubmitGo(event, 1,this.form);" value=\'<!--#nk_get SysDiagNsLookup="1"-->\'>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	PrintSTButton("Submit1"," Go ","typeSubmit(1,this.form)",0, "submit");
+	<!--#nk_get SysDiagNsLookup="3"-->
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<!--#nk_get SysDiagNsLookup="2"-->');
+	document.write('</table>');
+	document.write('<table name="Ping_table" id="Ping_table" class="Setuptable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width='+head_width+' align="left">');
+	document.write('Ping host or IP address&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type=text name=pingAddr maxLength=64 size=30 onKeypress="SubmitGo(event, 2,this.form);" value=\'<!--#nk_get SysDiagPing="1"-->\' >');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	PrintSTButton("Submit2", " Go ", "typeSubmit(2,this.form)",0, "submit");
+	<!--#nk_get SysDiagPing="3"-->
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<!--#nk_get SysDiagPing="2"-->');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+	
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <form name="formdualwan" method="post" action="">
+      <input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+    </form>
+    
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 4);		// Set Selected Node
+   	  if (document.formdualwan.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formsys_diag" method="post" action="sys_diag.htm">
+	<input type="hidden" name="page" value="sys_diag.htm">
+	<input type="hidden" name="submitStatus" value="1">
+	<input type="hidden" name="submitType" value="1">
+	
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>

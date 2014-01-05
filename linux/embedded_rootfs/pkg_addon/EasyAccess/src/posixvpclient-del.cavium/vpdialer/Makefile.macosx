@@ -1,0 +1,78 @@
+include ../posixvpclient.mk
+
+CC = gcc
+CFLAGS = -Wall -DMACOSX 
+DEBUG = -DDEBUG -DPRINT_PACKET
+JNIFLAGS = -dynamiclib
+LDFLAGS = $(MAC_SSL_LIBS)
+OBJS=$(DIR)Dialer.o $(DIR)Mgr.o 
+STRIP=strip -u -r
+#CFLAGS += $(DEBUG)
+
+DIALER_FILES = $(JNILIB) $(PPP_WRAP) $(ROUTE_WRAP) $(DNSCOMMAND) $(ROUTE)
+
+VPDIALER_INCLUDE_MAC = -I$(SDK_ROOT)/System/Library/Frameworks/JavaVM.framework/Headers
+
+ifdef INTEL_FLAGS
+
+CFLAGS += $(INTEL_FLAGS)
+CFLAGS += -isysroot $(SDK_ROOT)
+
+else
+ifdef PPC_FLAGS
+
+CFLAGS += $(PPC_FLAGS)
+
+endif
+endif
+
+ifdef IPV6
+
+CFLAGS += -DINET6
+DIALER_FILES += $(IFCONF)
+
+endif
+
+all : $(DIALER_FILES)
+
+clean:
+	$(RM) $(DIR)*.o $(DIALER_FILES)
+
+$(JNILIB): $(OBJS) 
+	$(CC) $(CFLAGS) $(JNIFLAGS) -o $@ $(OBJS) $(LDFLAGS) -framework JavaVM
+
+$(DIR)Dialer.o: Dialer.c Common.h Dialer.h
+	$(CC) $(CFLAGS) $(VPDIALER_INCLUDE_MAC) -c Dialer.c -o $@
+	
+$(DIR)Mgr.o: Mgr.c Common.h Mgr.h getbestroute_mac.c
+	$(CC) $(CFLAGS) $(VPDIALER_INCLUDE_MAC) -c Mgr.c -o $@
+
+$(DIR)IfConf.o: IfConf.c
+	$(CC) $(CFLAGS) -o $@ -c IfConf.c
+
+$(DIR)vputil.o: vputil.c vputil.h
+	$(CC) $(CFLAGS) -o $@ -c vputil.c
+
+$(DIR)route_mac.o: route_mac.c
+	$(CC) $(CFLAGS) -o $@ -c route_mac.c
+
+$(PPP_WRAP):PPPWrap.c Common.h
+	$(CC) $(CFLAGS) -o $@ PPPWrap.c
+
+$(ROUTE_WRAP):RouteWrap.c Common.h
+	$(CC) $(CFLAGS) -o $@ RouteWrap.c
+
+$(IFCONF): $(DIR)IfConf.o $(DIR)vputil.o
+	$(CC) $(CFLAGS) -o $@ $(DIR)IfConf.o $(DIR)vputil.o ;\
+	$(STRIP) $@
+
+$(DNSCOMMAND): DNSCommand.c
+	$(CC) $(CFLAGS) -o $@ DNSCommand.c ;\
+
+$(ROUTE): $(DIR)route_mac.o $(DIR)vputil.o
+	$(CC) $(CFLAGS) -o $@ $(DIR)route_mac.o $(DIR)vputil.o ;\
+	$(STRIP) $@
+
+standalone: Dialer.c Common.h
+	$(CC) $(CFLAGS) $(DEBUG) -DSTANDALONE $(VPDIALER_INCLUDE_MAC) -o dialer Dialer.c $(LDFLAGS) 
+

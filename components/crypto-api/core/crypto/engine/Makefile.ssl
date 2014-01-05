@@ -1,0 +1,66 @@
+# Copyright (c) 2003-2005, Cavium Networks. All rights reserved.
+#  
+# This Software is the property of Cavium Networks.  The Software and all 
+# accompanying documentation are copyrighted.  The Software made available 
+# here constitutes the proprietary information of Cavium Networks.  You 
+# agree to take reasonable steps to prevent the disclosure, unauthorized use 
+# or unauthorized distribution of the Software.  You shall use this Software 
+# solely with Cavium hardware.  
+#  
+# Except as expressly permitted in a separate Software License Agreement 
+# between You and Cavium Networks, you shall not modify, decompile, 
+# disassemble, extract, or otherwise reverse engineer this Software.  You 
+# shall not make any copy of the Software or its accompanying documentation, 
+# except for copying incident to the ordinary and intended use of the 
+# Software and the Underlying Program and except for the making of a single 
+# archival copy.  
+#  
+# This Software, including technical data, may be subject to U.S.  export 
+# control laws, including the U.S.  Export Administration Act and its 
+# associated regulations, and may be subject to export or import regulations 
+# in other countries.  You warrant that You will comply strictly in all 
+# respects with all such regulations and acknowledge that you have the 
+# responsibility to obtain licenses to export, re-export or import the 
+# Software.  
+#  
+# TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE SOFTWARE IS PROVIDED "AS IS" 
+# AND WITH ALL FAULTS AND CAVIUM MAKES NO PROMISES, REPRESENTATIONS OR 
+# WARRANTIES, EITHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, WITH RESPECT 
+# TO THE SOFTWARE, INCLUDING ITS CONDITION, ITS CONFORMITY TO ANY 
+# REPRESENTATION OR DESCRIPTION, OR THE EXISTENCE OF ANY LATENT OR PATENT 
+# DEFECTS, AND CAVIUM SPECIFICALLY DISCLAIMS ALL IMPLIED (IF ANY) WARRANTIES 
+# OF TITLE, MERCHANTABILITY, NONINFRINGEMENT, FITNESS FOR A PARTICULAR 
+# PURPOSE, LACK OF VIRUSES, ACCURACY OR COMPLETENESS, QUIET ENJOYMENT, QUIET 
+# POSSESSION OR CORRESPONDENCE TO DESCRIPTION.  THE ENTIRE RISK ARISING OUT 
+# OF USE OR PERFORMANCE OF THE SOFTWARE LIES WITH YOU.  
+
+DIR=   des 
+TOP=    ../..
+ifndef OCTEON_ROOT
+OCTEON_ROOT = ../../../../
+endif
+
+INCLUDES=-I.. -I$(TOP) -I../../include
+
+CFLAGS += -W -Wall -Wno-unused-parameter -I$(INCLUDES) -I.. -I../.. -I$(OCTEON_ROOT)/target/include 
+LDFLAGS = -lcrypto -lcvmx -L$(OCTEON_ROOT)/target/lib
+
+LIB=$(TOP)/libcrypto.a
+LIBSRC= eng_err.c eng_lib.c eng_list.c eng_init.c eng_ctrl.c \
+	eng_table.c eng_pkey.c eng_fat.c eng_all.c \
+	tb_rsa.c tb_dsa.c tb_dh.c tb_rand.c tb_cipher.c tb_digest.c \
+	eng_openssl.c eng_dyn.c eng_cnf.c
+LIBOBJ= eng_err.o eng_lib.o eng_list.o eng_init.o eng_ctrl.o \
+	eng_table.o eng_pkey.o eng_fat.o eng_all.o \
+	tb_rsa.o tb_dsa.o tb_dh.o tb_rand.o tb_cipher.o tb_digest.o \
+	eng_openssl.o eng_dyn.o eng_cnf.o
+
+all:	lib
+
+lib:	$(LIBOBJ)
+	$(AR) r $(LIB) $(LIBOBJ)
+	@touch lib
+
+clean:
+		@rm -f *.o
+		@rm -f lib

@@ -1,0 +1,21 @@
+.cifsbodyback{background-image: url(/images/backallbrown.png);overflow-x:hidden;}
+.cifsmenuleft{background-color:#EaE6D2;}
+.cifstop3{background-color:#000000;border-bottom:1px #909090 solid;}
+.cifstop5{background-color:#6f6250;border-bottom:1px #909090 solid;}
+.cifstop4{background-color:#6f6250;border-bottom:1px #909090 solid;}
+.cifstop6{background-color:#6f6250;border-bottom:1px #909090 solid;}
+.other{color:#ffffff;}
+.toolbarcifs{COLOR:#ffffff; FONT-FAMILY: "Trebuchet MS",sans-serif, Arial, Helvetica; FONT-SIZE:12px; TEXT-DECORATION:none}
+A.toolbarcifs{COLOR:#0fffff; FONT-FAMILY: "Trebuchet MS",sans-serif, Arial, Helvetica; FONT-SIZE:12px; TEXT-DECORATION:none}
+.mainbackcifs{COLOR:#000000; font-FAMILY: "Trebuchet MS", Tahoma, Arial, Helvetica; FONT-SIZE:11px;}
+.onmainbackcifs{COLOR:#ffffff; background-color:#dEd8c2;FONT-FAMILY: "Trebuchet MS", Tahoma, Arial, Helvetica; FONT-SIZE:11px;}
+A.mainbackcifs{COLOR:#ffffff; font-FAMILY: "Trebuchet MS", Tahoma, Arial, Helvetica; FONT-SIZE:11px;}
+.other2{color:#000000;}
+.cifslefttable{BACKGROUND-COLOR:#6f6250;}
+.cifsleftcell{background-color:#dEd8c2;}
+.cifslefttitle{color:#ffffff;FONT-FAMILY: "Trebuchet MS", "Lucida Sans", "Lucida Console", Arial, Tahoma, Helvetica; FONT-SIZE:12px;FONT-WEIGHT: bold;}
+.disableduplink{color:#b9b6ad;FONT-FAMILY: "Trebuchet MS", Arial, Tahoma, Helvetica; FONT-SIZE:12px;}
+.demo1{color:#ffffff;font-family:"Trebuchet MS",'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:1px solid; margin:2px;border-top-color:#808790;border-left-color:#808790;border-right-color:#556066;border-bottom-color:#556066;background-color:#e6e2df; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}
+.onhovers{margin:2px;margin-color:#ccbb44;color:#dfbf4f;font-family:"Trebuchet MS",'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:2px solid #dfbf4f;background-color:#e6e2df;cursor:hand; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}}
+.navigator{color:#fcfc98; cursor:hand; font-FAMILY: "Trebuchet MS",sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+.cifsback{background-color:#fbfbf0;}

@@ -1,0 +1,472 @@
+	    EasyAccess SSL VPN - HTTP Reverse Proxy Module
+	    ----------------------------------------------
+
+1. Introduction
+2. Design
+3. Additional notes - Cookie handling
+4. Additional notes - Javascripts
+5. References
+
+1. Introduction
+===============
+
+The  HTTP  Reverse  Proxy  Module  in  the  EasyAccess SSL VPN Stack provides a
+method  by which, web content in corporate intranet servers, can be provided to
+users  (employees,  customers,  vendors,  etc.)  without exposing the intranet/
+network architecture.
+
+Brief about reverse proxies
+---------------------------
+A  forward  proxy is one where the proxy module retrieves web content on behalf
+of  the  client  and  passes  it on to the client without changing any content.
+A forward proxy for e.g. SQUID or mod_proxy in Apache only act as relays.
+
+A  reverse  proxy on the other hand, constrains the client to request resources
+from  the  web  (internet / intranet)  with  referrals to resources relative to
+the reverse proxy in question.
+
+Example:
+Scenario  of  employee  trying to get the contact information of other users on
+the intranet server.
+1. Employee logs in to the SSL VPN interface provided by the EasyAccess SSL VPN
+Stack, and clicks on the web interface to access one of the intranet servers on
+his company LAN.
+2. The  web  interface asks him to provide the name of intranet server which he
+wants to contact. The user wants to visit http://intranet.hiscompany.com.
+
+Behind  the  scene, the reverse proxy module residing on the Accesspoint stack,
+gets  the  intention  of  the  user by reading the environment variables set by
+Apache  (which  is actually the contents of the HTTP request sent by the client
+browser)  and  decides  that the contents of intranet.hiscompany.com have to be
+fetched and sent to the client browser.
+
+So, what is the complication here?
+The  complication  here  is  that,  once we  give  him  the contents of the URL
+requested,  we  should  also  take  care that  the  further resources and URI's
+referred  in  the content of intranet.hiscompany.com should also go through the
+proxy module, in order not to compromise the architecture of the network we are
+trying to protect.
+
+Once,  the  URL  which  has  to  be fetched has been decided (by looking at the
+Request  Header  which  would  normally contain GET or POST), and the host from
+which it has to be fetched, then the reverse proxy establishes either a HTTP or
+HTTPS  connection  (as  requested by the client) to the actual resource/content
+server.  It then fetches the contents from the server, parses it for well known
+media types (by looking at the Content-type headers  and/or combination of HTML
+tags in the content, and modifies it to add the  proxy information  in  all the
+references to resources, and passes it on the client browser.
+
+2. Design
+=========
+The  EasyAccess  Reverse Proxy module is currently modelled as a CGI script and
+implemented in C. The  benefits  of such design and implementation is described
+in Reference 3 (f).
+The  reverse proxy module will return complete headers to the apache server, or
+in most popular terms it will be a NPH based program.
+[More  information on "Complete (Non-Parsed) Headers" can be found in Reference
+3 (e) (Chapter 3). Though  the  examples  cited  are  in Perl, the concepts are
+useful.]
+
+The reverse proxy module (httprp) consists of the following modules:
+1. Main Module (interface with apache through CGI).
+   - CGI Interface functions
+   - URL Parsing & Construction
+2. Network Connection Module (interface with network functions).
+3. HTTP Header Parser module
+4. HTML Parser Module
+5. [Buffer Handling might be introduced in the future]
+6. Buffer handling
+
+General Control Flow
+--------------------
+
+Main (CGI I/f, URL Parsing)  --> Network Connection Module --> Handles for read
+and write returned by Network Connection Module to the Main module --> Write to
+the  server with fields from the client request  -->  Read response from server
+until  EOF  is  reached  -->  HTTP  Header  Parsing  -->  HTML  Content Parsing
+-->  Simultaneous  alternate buffer  write/copy with modifications --> Put data
+on STDOUT for apache to pickup.
+
+2.1 Main Module
+---------------
+Files: httprp.c, httprp.h
+
+Global initializations in the main module:
+ - Syslog initializations
+ - SSL initializations
+   - module wide SSL library init
+   - SSL error reporting
+   - SSL v2 v3 method init
+   - module wide SSL context init
+   - module wide certificate chain init
+   - Global password blocks [optional]
+   - Privatekey file association with the SSL context [optional]
+   - Any certificate authorities [optional] will be associated with the context
+
+The  main  module interfaces with apache and co-ordinates the operations of all
+the  other modules. Entry  point  in  to  this  module is when apache calls the
+main() function in httprp.c.
+The  main()  function  doesn't  expect  anything in argc and argv (i.e no input
+parameters),  and  all  the relevant information is read from the environmental
+variables set by CGI.
+This  module  uses  the  httprp_cgi_readenv() api provided by the CGI interface
+module, to read all CGI vars set by apache.
+The api returned by httprp_cgi_readenv() is a pretty straight forward structure
+which is a union of all CGI variables  (relevant and irrelevant) set by apache.
+Once the CGI env vars are read, the next step is to read the different elements
+in the requested URL.
+We are interested in all the elements, namely:
+a) Scheme (HTTP/HTTPS)
+b) Host (string  containing  the host name to which we should send the request)
+c) Port (The destination port in the server, to which we are going to send the
+   request)
+d) Path (URI Path)
+e) Query (normally any parameters passed along with the URL).
+f) Fragment (pointer or index to the section of the document, requested in the
+   url)
+
+For e.g.:
+http://www.sslvpngateway.com/cgi-bin/nph-httprp.cgi?url="http://www.sun.com:80/docs/index.html#sec2"
+scheme   = HTTP
+Host     = www.sun.com
+Port     = 80
+Path     = /docs/index.html
+Fragment = sec2
+
+The  function  httprp_get_urlelements()  returns  the  above information, after
+analysing/parsing the string contained with the url parameter to the httprp cgi
+script.
+
+A  network  connection  to  the  server  (requested  host)  is  the  next step.
+HTTPRP  contains  a  "Network Connection Handle" which combines the information
+and  attributes  required  for both  a normal http connection and a secure http
+(HTTPS) connection.
+"nchandle" is returned by the network connection module only after a successful
+connection establishment, i.e, we are ready to do data-transfer.
+
+2.2 Network Connection Module
+-----------------------------
+Files: httprp_nc.c, httprp_nc.h
+This  module  provides  the simple (HTTP) and the ssl client (HTTPS) connection
+interface  for  sending  and  receiving data over a channel. The entry point to
+this module is the httprp_nc_connect_to_server().
+
+API provided by the main module is the httprp_urlelements_t structure which
+contains :
+ scheme:    HTTPRP_HTTP, HTTPRP_HTTPS
+ phost:     Pointer to an alloced string which contains the host name
+ pport:     Pointer to an alloced string which contains the port specified by
+            the user in the URL. If the port is not specified this string is
+            NULL.
+ port:      Port number. atoi(pport) if the user specifies a particular port,
+            or HTTPRP_HTTP_PORT(80) is the scheme requested in the URL was
+            http:// or HTTPRP_HTTPS_PORT(443) if the scheme requested in the
+            URL was https://).
+ ppath:     Pointer to an alloced string which contains the path requested in
+            the URL.
+ pquery:    Pointer to an alloced string which contains the query requested in
+            the URL.
+ pfragment: Pointer to an alloced string which contains the fragment requested
+            in the URL.
+
+Using the above api, the network connection module constructs an API which will
+be handed over to the main module upon successful connection to the server.
+ typedef struct httprp_nc_handle_ {
+   int sockhandle; (return value of socket())
+   SSL *ssl; (return value of SSL_new())
+   BIO *bio; (return value of BIO_new_socket())	       
+ } httprp_nc_handle;
+
+HTTP connection handling:
+     - gethostbyname()
+     - socket()
+     - connect()
+If the connection type requested was a simple HTTP connection, then the module
+returns back immediately with the httprp_nc_handle api.
+
+HTTPS connection handling:
+     - lookup in the gdbm database if we already have a session structure
+	correponding to the host:port index.
+     - If we dont have a session already, then start the session connection
+     - get new ssl from the global context
+     - Get a common BIO handler for read and write
+     - Associate the read bio and write bio handlers with the socket
+     - If there is already a session in the gdbm databse, then
+     - get new ssl connection handle from the global context
+     - get a common read and write bio for the socket
+     - Set read and write bio's for the ssl connection handle
+     - connect the ssl handle
+     - Check and perform any server authentication
+
+If  everything  was  successful,   then  the  module  returns  back   with  the
+httprp_nc_handle filled with the SSL information.
+
+2.3 HTTP Header Parser
+----------------------
+
+The HTTP header parser is kept separately from the actual content parsing.
+
+Parsing  starts  after  a full buffer (until EOF is reached) has been read from
+the server.
+Content-length  is  searched  for  the   buffer  size,  or Transfer-encoding is
+searched for any chunked transfer from the server.
+If  Transfer-encoding is specified, then we can expect no more headers from the
+server, and chunks will be separated by <buffer-length><CRLF>...data...<CRLF>.
+But the read buffer will contain all the chunks in the buffer.
+
+Client side --> Server Side.
+No  special  parsing is done. All headers are transferred to the new request to
+the server.
+
+Server side --> Client Side
+Parsing is mostly controlled by the status line returned by the server.
+The httprp module currently handles the following status lines:
+301 (Moved Permanently) - Location Header is modified
+302 (Found) - Location Header is modified
+303 (See Other) - Location header is modified
+305 (Use Proxy) - Location header is modified
+
+Data after the <CRLF><CRLF> pattern in the header, upto buffer size minus the
+header size will be handed off to the content parser.
+
+2.4 HTML Parser Module
+----------------------
+
+The  HTML  Parser  module uses the libxml2 library to parse the buffer from the
+server,  and  to write a new buffer to the client. We use the SAX interface and
+the push method of the libxml2 parser.
+
+xmlSAXHandler debugSAXHandlerStruct = {
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    httprp_endDocument,
+    httprp_startElement,
+    httprp_endElement,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    1,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
+
+The  SAX  handler  structure  initilization  above,  shows the callbacks we are
+particularly  interested in, and in these call backs, we parse the document and
+write them after modification in to the new buffer.
+
+Buffer specific handling
+------------------------
+
+httprp_sax_parse_buffer()  function is the starting point of the content parser
+module,  to  which  we  give the incoming buffer(inbuf) and the outgoing buffer
+(outbuf).
+The  push  parser  context  is initialized with the SAX handler structure shown
+above, and the outbuf is passed as the user_data.  This value is returned to us
+in each call back.
+htmlParseChunk()  takes  care  of  running  through the html element descriptor
+table and calls back our handlers.
+
+Currently, we use the following element descriptor table, defined in:
+static const htmlElemDesc
+html40ElementTable[] = {
+{ "a",		0, 0, 0, 0, 0, 0, 1, "anchor ",
+	DECL html_inline , NULL , DECL a_attrs , DECL target_attr, NULL
+},
+{ "abbr",	0, 0, 0, 0, 0, 0, 1, "abbreviated form",
+	DECL html_inline , NULL , DECL html_attrs, NULL, NULL
+},
+{ "acronym",	0, 0, 0, 0, 0, 0, 1, "",
+	DECL html_inline , NULL , DECL html_attrs, NULL, NULL
+},
+{ "address",	0, 0, 0, 0, 0, 0, 0, "information on author ",
+	DECL inline_p  , NULL , DECL html_attrs, NULL, NULL
+},
+
+............... Lot of elements in between are not shown......................
+
+{ "var",	0, 0, 0, 0, 0, 0, 1, "instance of a variable or program argument",
+	DECL html_inline, NULL, DECL html_attrs, NULL, NULL
+}
+};
+
+In order for us to eleminate the handling of elements which are not interesting
+to us, we add one more field shown below:
+
+struct _htmlElemDesc {
+    const char *name;	/* The tag name */
+    char startTag;      /* Whether the start tag can be implied */
+    char endTag;        /* Whether the end tag can be implied */
+    char saveEndTag;    /* Whether the end tag should be saved */
+    char empty;         /* Is this an empty element ? */
+    char depr;          /* Is this a deprecated element ? */
+    char dtd;           /* 1: only in Loose DTD, 2: only Frameset one */
+    char isinline;      /* is this a block 0 or inline 1 element */
+    const char *desc;   /* the description */
+    const char** subelts;		/* allowed sub-elements of this element */
+    const char* defaultsubelt;	/* subelement for suggested auto-repair
+					   if necessary or NULL */
+    const char** attrs_opt;		/* Optional Attributes */
+    const char** attrs_depr;		/* Additional deprecated attributes */
+    const char** attrs_req;		/* Required attributes */
+    int   httprp_interesting; /* HTTPRP_INTERESTING / HTTPRP_NOTINTERESTING */
+};
+
+The field added  is httprp_interesting,  which is set to HTTPRP_INTERESTING, if
+we  want  to modify the attributes in the  element.  So, in every call back, we
+do a quick taglookup() which  returns the element descriptor to us, and process
+the element only if it is interesting to us.
+
+Currently, libxml2 doesn't recognize or parse java scripts. We will have to add
+the recognition of javascripts in its various forms.
+<script> </script> tag or <script language = javascript> </script>
+
+What happens when httprp_startElement() is called:
+1. Write  everything as is in to the new buffer, from the position we were last
+   called in.
+2. Now  move  to  the  start  of  the  tag/element,  see the attributes we have
+   received, and  check  them against the list of attributes passed us to us by
+   the parser.
+3. Write  each  attribute  according to the rules, e.g. url rewrite, javascript
+   handling,  etc.  Increment  the  attributes  pointer  which  points  to  the
+   attributes list given to us by the parser.
+4. Repeat step 3 until we have reached the end of the attributes list.
+5. Simply end the function, and wait for the next call back.
+
+End of the document reached:  httprp_endDocument()  is called.  We see if there
+is anything left to be written in the output buffer. Copy everything until end.
+
+At the end of content parsing, the output buffer will be ready to be written to
+STDOUT directly.
+
+2.6 Buffer Handling
+-------------------
+
+Currently,  the  httprp module, uses one static buffer, whose size depends on a
+compile time constant. This  buffer  is used to form  the request to be sent to
+the server.
+
+The output buffer is allocated with a simple formula of -
+output_buffer_size = input_buffer_size * INCREMENT_FACTOR
+The  increment  factor is the parameter which decides the length of the outbuf,
+since more length is required since we will be rewriting many tags/attrs/elems.
+
+A much better buffer handling can be done.
+
+3. Additional notes - Cookie handling
+=====================================
+
+Client --> Server
+
+Whenever  we  encounter  the "Cookie: " header when processing the request from
+the  client,  we  have  to  parse  the  entire "Cookie: " header if we have any
+cookies for  the  host  the client is trying to get some content from. If there
+exist  any  cookies, then we will have to selectively take out only this cookie
+and transmit it in the request we are sending on behalf of the client.
+
+Server --> Client
+
+The server assigns cookies to the client in the "Set-Cookie: " header, and will
+normally  contain  the  "path"  and  the "expires" attributes. Nevertheless the
+header  has  to  be  parsed  for  any  "Expires: "  header in  the message.
+Some programs set "Expires: " as a separate header.
+
+Each  application  can  set  different  cookies,  which  will be represented by
+multiple  "Set-Cookie: "  headers in the message. Each one has to be signed and
+sent to the client.
+
+Encoding example:
+
+Squirrel Mail Cookie setting:
+
+Set-Cookie: SQMSESSID=2f88e91b.....; path=/\r\n
+Expires: Thu, 19 Nov 1981 08:52:00 GMT\r\n
+
+Name: SQMSESSID
+Value/Information: 2f88e91b....
+Path: /
+Expires: Thu, 19 Nov 1981 08:52:00 GMT\r\n
+
+Bugzilla Cookie setting:
+
+Each login/session sets two cookies-
+
+Set-Cookie: Bugzilla_login=gopal@menlologic.com ; path=/; expires=Sat, 30-Jun-2029 00:00:00 GMT\r\n
+Set-Cookie: Bugzilla_logincookie=1112 ; path=/; expires=Sat, 30-Jun-2029 00:00:00 GMT\r\n
+
+First Cookie:
+Name: Bugzilla_login
+Value/Information: gopal@menlologic.com
+Path: /
+Expires: Sat, 30-Jun-2029 00:00:00 GMT
+
+Second Cookie:
+Name: Bugzilla_logincookie
+Value/Information: 1112
+Path: /
+Expires: Sat, 30-Jun-2029 00:00:00 GMT
+
+How  we should encode these cookies:
+
+Name: SQMSESSID, proxy-ssl-vpn
+Value/Information: 28fe91b....
+Path: /
+Expires: Sat, 30-Jun-2029 00:00:00 GMT
+
+In the response:
+Set-cookie: SQMSESSID-proxy-ssl-vpn=28fe91b; path=/; Expires: 30-Jun-2029 00:00:00 GMT\r\n
+
+For the second application-
+
+Set-cookie: Bugzilla_login-proxy-ssl-vpn=gopal@menlo.com; path=/; Expires: 30-Jun-2029 00:00:00 GMT\r\n
+Set-cookie: Bugzilla_logincookie-proxy-ssl-vpn=1112; path=/; Expires: 30-Jun-2029 00:00:00 GMT\r\n
+
+4. Javascript Handling
+======================
+1. Just  before  we  enter the  sax parsing of the content, we set the stage to
+   parse_content.
+2. When we encounter a script, with type or language  as javascript, we set the
+   stage  as  parse_javascript at th end of httprp_starttag_parse(). This  will
+   help  httprp_comment_parse()  and  httprp_cdata_parse() to recognize if we
+   are currently parsing comments/cdata of javascript.
+3. We  currently  get  the  full  script  data in both httprp_cdata_parse() and
+   httprp_parse_comment().
+3.1 Line parsing starts from the first character in the line
+    i.e.  the character just after the ';', and goes until the ';' character or
+    \r\n or \n).
+3.2 Parse for variables created from objects interesting to us, and rewrite the
+    URLs.
+3.3 Look for object methods which are interestng to us.
+3.4 Script parsing shall end at the end of cdata.
+
+5. References
+=============
+
+   a) proxy_faq.doc : Gopal
+   b) reference.doc : Gopal
+   c) Proxy_PRD.doc : Gopal
+   d) Professional Apache 2.0, by Peter Wainwright
+   e) CGI Programming with Perl, Scott Guelich, Shishir Gundavaram, and
+      Gunther Birznieks
+   f) Links to CGI programming in C, on www.boutell.com
+   g) www.cgi-resources.com

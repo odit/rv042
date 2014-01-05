@@ -1,0 +1,77 @@
+include ../../make-include-uClinux.mk
+
+BIN=single_cgi 
+LDFLAGS +=-L$(SYS_LIB) -lSys -L$(GCGI_LIB) -lgcgi -L$(SSLCERT_LIB) -lsslcert -lm $(SSL_LIBS) -lutil -Wl,--defsym,__stack_size__=32788
+
+FILES= welcome portal userLogout accesspoint \
+                    addUserBookmark ppp_launch themes userBookmarkEdit ftp-logout telnet editBookmark \
+                    ssh showBookmark https ftp-upload http ftp-rename ftp-frame \
+                    ftp-addnew services ftp-download servicesBookmarkDelete addservicesbookmark \
+                    tsc tscapplications clientmac sslvpnclient vpdesktopclient clientlinux \
+                    installcert homepage deskBookmarkDelete vnc tscbookmark desktop adddesktopbookmark \
+                    eventlog logconfig clientroutes clientaddresses homeconfig sitecustomization edittscapplication \
+                    portallist addpolicy adminBookmarkDelete users editPolicy policyresource \
+                    addbookmarkadmin editgroups showPolicy adduser addgroup editglobal bookmarkadmin \
+                    policyrange editusers userDelete policyall policyadmin policyDelete groupDelete adddomainldap \
+                    policy6admin policy6range policy6all \
+                    adddomainradius adddomainntdomain editdomain adddomainactivedirectory adddomain domains \
+                    addtunnel networkresource editresource addresource sslcert viewcert importcert \
+                    gencsr delcert newcsr status activeusers restart settings importlogo restoredefault importlicense \
+                    importconfig upgradefirmware saveoptions encryptoptions layout savenow exportConfigFile \
+                    date networkinterface staticroutes dnssettings ifacesettings etchosts \
+                    transportapps virtualtransport userattributes changepassword activeconnections
+
+ifdef CONFIG_EPS
+FILES+=epsglobalpolicy epsgrouppolicy epspolicy addepspolicy epsbrowserpolicy epspatchpolicy epsregistrypolicy epsavpolicy epsfwpolicy epsbrowser \
+addbrowserlist addepsbrowser editbrowserlist \
+epspatch addepspatch editpatchlist addpatchlist addregistrylist epsregistry addepsregistry editepsregistry editregistrylist addfirewalllist epsfirewall addepsfirewall editepsfirewall editepsfirewalllist addantiviruslist epsantivirus addepsantivirus editepsantivirus editantiviruslist epslogin epsverify 
+endif
+
+ifdef CONFIG_EPS
+ENV=CONFIG_EPS=$(CONFIG_EPS)
+endif
+
+
+all: $(BIN)
+
+CFLAGS +=-I$(SYS_LIB) -I$(GCGI_LIB) -I$(SSLCERT_LIB) -DUSE_NO_EXTERNAL_AAA
+CFLAGS += -DSINGLE_CGI=1 -I$(AUTH_LIB) \
+                -I../cgi-bin/user-pages/services -I../cgi-bin/user-pages/cifs \
+                -I ../cgi-bin/admin-pages/general/certificates
+CFLAGS += -DPROCESSOR_ID="\"Cavium NITROX SOHO\""
+CFLAGS +=	-DEMBUPG_DEBUG -DEMBUPG_DEBUG_LOG_EMERG \
+		-DEMBUPG_DEBUG_LOG_ALERT -DEMBUPG_DEBUG_LOG_CRIT \
+		-DEMBUPG_DEBUG_LOG_ERR -DEMBUPG_DEBUG_LOG_WARNING \
+		-DEMBUPG_DEBUG_LOG_NOTICE -UEMBUPG_DEBUG_LOG_INFO \
+		-UEMBUPG_DEBUG_LOG_DEBUG
+
+single_cgi: single_cgi.c single_cgi_files.c
+	$(CC) ${CFLAGS} single_cgi.c ${LDFLAGS} -o single_cgi
+	$(STRIP) single_cgi
+
+single_cgi_files.c:
+	$(ENV) ./make_cgi.sh
+
+install:
+#	if [ -n '$(BIN)' ]; then $(INSTALL) $(BIN) $(DEST_CGI_BIN); fi
+	if [ -n '$(BIN)' ]; then cp $(BIN) $(DEST_CGI_BIN); fi
+	cd $(DEST_CGI_BIN) && for i in $(FILES); do \
+	        ln -sf single_cgi $$i; \
+	done
+	cd $(DEST_CERT_BIN) && for i in certVerifyLogin; do \
+		ln -sf ../cgi-bin/single_cgi $$i; \
+	done
+
+clean:
+	rm -rf single_cgi
+	rm -rf single_cgi_files.c
+
+un-install:
+	rm -rf $(DEST_CGI_BIN)/single_cgi
+	cd $(DEST_CGI_BIN); for i in $(FILES); do \
+	        rm -f $$i; \
+	done
+	cd $(DEST_CERT_BIN); for i in certVerifyLogin; do \
+		rm -f $$i; \
+	done
+

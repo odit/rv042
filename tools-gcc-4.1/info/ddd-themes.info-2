@@ -1,0 +1,1321 @@
+This is ../../../src/ddd/ddd/ddd-themes.info, produced by makeinfo
+version 4.3 from ../../../src/ddd/ddd/ddd-themes.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD-Themes: (ddd-themes).       Writing DDD Themes.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 2001-02-01, of `Writing DDD themes' for DDD
+Version 3.3.11.
+
+Copyright (C) 2001 Universität Passau
+Lehrstuhl für Software-Systeme
+Innstraße 33
+D-94032 Passau
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd-themes.info,  Node: Color Functions,  Next: Arc Functions,  Prev: Font Functions,  Up: VSL Library
+
+Color Functions
+===============
+
+   The functions in this section require inclusion of the library
+`colors.vsl'.
+
+   For themes, `colors.vsl' need not be included explicitly.
+
+ - VSL Function: color (box, foreground [, background]])
+     Returns BOX, where the foreground color will be drawn using the
+     FOREGROUND color.  If BACKGROUND is specified as well, it will be
+     used for drawing the background.  Both FOREGROUND and BACKGROUND
+     are strings specifying a valid X11 color.
+
+
+File: ddd-themes.info,  Node: Arc Functions,  Next: Slope Functions,  Prev: Color Functions,  Up: VSL Library
+
+Arc Functions
+=============
+
+   The functions in this section require inclusion of the library
+`arcs.vsl'.
+
+   For themes, `arcs.vsl' _must_ be included explicitly, using a line
+     #include <arcs.vsl>
+   at the beginning of the theme.
+
+* Menu:
+
+* Arc Basics::
+* Custom Arc Functions::
+
+
+File: ddd-themes.info,  Node: Arc Basics,  Next: Custom Arc Functions,  Up: Arc Functions
+
+Arc Basics
+----------
+
+ - VSL Function: arc (start, length [, thickness])
+     Returns a stretchable box with an arc of LENGTH, starting at angle
+     START.  START and LENGTH must be multiples of 90 (degrees).  The
+     angle of START is specified clockwise relative to the 9 o'clock
+     position.  THICKNESS defaults to `arcthickness()' (see below).
+
+ - VSL Function: arcthickness ()
+     Default width of arcs.  Defaults to `rulethickness()'.
+
+
+File: ddd-themes.info,  Node: Custom Arc Functions,  Prev: Arc Basics,  Up: Arc Functions
+
+Custom Arc Functions
+--------------------
+
+ - VSL Function: oval (box)
+     Returns an oval containing BOX.  Example: `oval("33")'.
+
+ - VSL Function: ellipse (box)
+ - VSL Function: ellipse ()
+     Returns an ellipse containing BOX.  Example: `ellipse("START")'.
+     If BOX is omitted, the ellipse is stretchable and expands to the
+     available space.
+
+ - VSL Function: circle (box)
+     Returns a circle containing BOX.  Example: `circle(10)'.
+
+
+File: ddd-themes.info,  Node: Slope Functions,  Prev: Arc Functions,  Up: VSL Library
+
+Slope Functions
+===============
+
+   The functions in this section require inclusion of the library
+`slopes.vsl'.
+
+   For themes, `slopes.vsl' _must_ be included explicitly, using a line
+     #include <slopes.vsl>
+   at the beginning of the theme.
+
+* Menu:
+
+* Slope Basics::
+* Arrow Functions::
+* Custom Slope Functions::
+
+
+File: ddd-themes.info,  Node: Slope Basics,  Next: Arrow Functions,  Up: Slope Functions
+
+Slope Basics
+------------
+
+ - VSL Function: rise ([thickness])
+     Create a stretchable box with a line from the lower left to the
+     upper right corner.  THICKNESS defaults to `slopethickness()' (see
+     below).
+
+ - VSL Function: fall ([thickness])
+     Create a stretchable box with a line from the upper left to the
+     lower right corner.  THICKNESS defaults to `slopethickness()' (see
+     below).
+
+ - VSL Function: slopethickness ()
+     Default thickness of slopes.  Defaults to `rulethickness()'.
+
+
+File: ddd-themes.info,  Node: Arrow Functions,  Next: Custom Slope Functions,  Prev: Slope Basics,  Up: Slope Functions
+
+Arrow Functions
+---------------
+
+ - VSL Function: n_arrow ()
+ - VSL Function: w_arrow ()
+ - VSL Function: s_arrow ()
+ - VSL Function: e_arrow ()
+     Returns a box with an arrow pointing to the upper, left, lower, or
+     right side, respectively.
+
+ - VSL Function: nw_arrow ()
+ - VSL Function: ne_arrow ()
+ - VSL Function: sw_arrow ()
+ - VSL Function: se_arrow ()
+     Returns a box with an arrow pointing to the upper left, upper
+     right, lower left, or lower right side, respectively.
+
+
+File: ddd-themes.info,  Node: Custom Slope Functions,  Prev: Arrow Functions,  Up: Slope Functions
+
+Custom Slope Functions
+----------------------
+
+ - VSL Function: punchcard (box)
+     Returns a punchcard containing BOX.
+
+ - VSL Function: rhomb (box)
+     Returns a rhomb containing BOX.
+
+ - VSL Function: octogon (box)
+     Returns an octogon containing BOX.
+
+
+File: ddd-themes.info,  Node: VSL Reference,  Next: Documentation License,  Prev: VSL Library,  Up: Top
+
+VSL Reference
+*************
+
+   This appendix describes the VSL language.
+
+* Menu:
+
+* VSL Boxes::
+* VSL Lists::
+* VSL Expressions::
+* VSL Function Calls::
+* VSL Constant Definitions::
+* VSL Function Definitions::
+* VSL Includes::
+* VSL Operators::
+* VSL Syntax Summary::
+
+
+File: ddd-themes.info,  Node: VSL Boxes,  Next: VSL Lists,  Up: VSL Reference
+
+Boxes
+=====
+
+   VSL knows two data types.  The most common data type is the _box_.
+A box is a rectangular area with a _content_, a _size_, and a
+_stretchability_.
+
+   Boxes are either _atomic_ or _composite_.  A composite box is built
+from two or more other boxes.  These boxes can be aligned horizontally,
+vertically, or otherwise.
+
+   Boxes have a specific minimum _size_, depending on their content.
+We say `minimum' size here, because some boxes are _stretchable_--that
+is, they can fill up the available space.
+
+   If you have a vertical alignment of three boxes A, B, and C, like
+this:
+     AAAAAA
+     AAAAAA
+       B
+       B
+     CCCCCC
+     CCCCCC
+   and B is stretchable horizontally, then B will fill up the available
+horizontal space:
+     AAAAAA
+     AAAAAA
+     BBBBBB
+     BBBBBB
+     CCCCCC
+     CCCCCC
+
+   If two or more boxes compete for the same space, the space will be
+distributed in proportion to their stretchability.
+
+   An atomic stretchable box has a stretchability of 1.  An alignment of
+multiple boxes stretchable in the direction of the alignment boxes will
+have a stretchability which is the sum of all stretchabilities.
+
+   If you have a vertical alignment of three boxes A, B, C, D, and E,
+like this:
+     AAAAAA
+     AAAAAA
+     BC   D
+     BC   D
+     EEEEEE
+     EEEEEE
+   and B, C, and D are stretchable horizontally (with a stretchability
+of 1), then the horizontal alignment of B and C will have a
+stretchability of 2.  Thus, the alignment of B and C gets two thirds of
+the available space; D gets the remaining third.
+     AAAAAA
+     AAAAAA
+     BBCCDD
+     BBCCDD
+     EEEEEE
+     EEEEEE
+
+
+File: ddd-themes.info,  Node: VSL Lists,  Next: VSL Expressions,  Prev: VSL Boxes,  Up: VSL Reference
+
+Lists
+=====
+
+   Besides boxes, VSL knows _lists_.  A list is not a box--it has no
+size or stretchability.  A list is a simple means to structure data.
+
+   VSL lists are very much like lists in functional languages like Lisp
+or Scheme.  They consist of a head (typically a list element) and a tail
+(which is either a list remainder or the empty list).
+
+
+File: ddd-themes.info,  Node: VSL Expressions,  Next: VSL Function Calls,  Prev: VSL Lists,  Up: VSL Reference
+
+Expressions
+===========
+
+* Menu:
+
+* VSL String Literals::
+* VSL Number Literals::
+* VSL List Literals::
+* VSL Conditionals::
+* VSL Boolean Operators::
+* VSL Local Variables::
+* VSL Let Patterns::
+
+
+File: ddd-themes.info,  Node: VSL String Literals,  Next: VSL Number Literals,  Up: VSL Expressions
+
+String Literals
+---------------
+
+   The expression `"TEXT"' returns a box containing TEXT.  TEXT is
+parsed according to C syntax rules.
+
+   Multiple string expressions may follow each other to form a larger
+constant, as in C++.  `"TEXT1" "TEXT2"' is equivalent to `"TEXT1TEXT2"'
+
+   Strings are not stretchable.
+
+
+File: ddd-themes.info,  Node: VSL Number Literals,  Next: VSL List Literals,  Prev: VSL String Literals,  Up: VSL Expressions
+
+Number Literals
+---------------
+
+   Any constant integer N evaluates to a _number_--that is, a
+non-stretchable empty square box with size (N, N).
+
+
+File: ddd-themes.info,  Node: VSL List Literals,  Next: VSL Conditionals,  Prev: VSL Number Literals,  Up: VSL Expressions
+
+List Literals
+-------------
+
+   The expression `[A, B, ...]' evaluates to a _list_ containing the
+element A, B, ....  `[]' is the empty list.
+
+   The expression `[HEAD : TAIL]' evaluates to a list whose first
+element is HEAD and whose remainder (typically a list) is TAIL.
+
+   In most contexts, round parentheses can be used as alternatives to
+square brackets.  Thus, `(A, B)' is a list with two elements, and `()'
+is the empty list.
+
+   Within an expression, though, square parentheses must be used to
+create a list with one element.  In an expression, the form `(A)' is
+not a list, but an alternative notation for A.
+
+
+File: ddd-themes.info,  Node: VSL Conditionals,  Next: VSL Boolean Operators,  Prev: VSL List Literals,  Up: VSL Expressions
+
+Conditionals
+------------
+
+   A box A = (A1, A2) is called _true_ if A1 or A2 is non-zero.  It is
+called _false_ if both A1 or A2 are zero.
+
+   The special form
+     if A then B else C fi
+   returns B if A is true, and C otherwise.  Only one of B or C is
+evaluated.
+
+   The special form
+     elsif A2 then B2 else C fi
+   is equivalent to
+     else if A2 then B2 else C fi fi
+
+
+File: ddd-themes.info,  Node: VSL Boolean Operators,  Next: VSL Local Variables,  Prev: VSL Conditionals,  Up: VSL Expressions
+
+Boolean Operators
+-----------------
+
+   The special form
+     A and B
+   is equivalent to
+     if A then B else 0 fi
+
+   The special form
+     A or B
+   is equivalent to
+     if A then 1 else B fi
+
+   The special form
+     not A
+   is equivalent to
+     if A then 0 else 1 fi
+
+   Actually, `not' is realized as a function; *Note Negation
+Functions::, for details.
+
+
+File: ddd-themes.info,  Node: VSL Local Variables,  Next: VSL Let Patterns,  Prev: VSL Boolean Operators,  Up: VSL Expressions
+
+Local Variables
+---------------
+
+   You can introduce local variables using `let' and `where':
+
+     let V1 = E1 in E
+   makes V1 available as replacement for E1 in the expression E.
+
+   Example:
+     let pi = 3.1415 in 2 * pi => 6.2830
+
+   The special form
+     let V1 = E1, V2 = E2, ... in E
+   is equivalent to
+     let V1 = E1 in let V2 = E2 in let ... in E
+
+   As an alternative, you can also use the `where' form:
+
+     E where V1 = E1
+   is equivalent to
+     let V1 = E1 in E
+
+   Example:
+     ("here lies" | name) where
+         name = ("one whose name" | "was writ in water")
+
+   The special form
+     E where V1 = E1, V2 = E2, ...
+   is equivalent to
+     let V1 = E1, V2 = E2, ... in E
+
+
+File: ddd-themes.info,  Node: VSL Let Patterns,  Prev: VSL Local Variables,  Up: VSL Expressions
+
+Let Patterns
+------------
+
+   You can access the individual elements of a list or some composite
+box by giving an appropriate _pattern_:
+
+     let (left, right) = pair in EXPR
+
+   If `pair' has the value, say, `(3, 4)', then `left' will be
+available as a replacement for `3', and `right' will be available as a
+replacement for `4' in EXPR.
+
+   A special pattern is available for accessing the head and the tail
+of a list:
+
+     let [head : tail] = list in EXPR
+
+   If `expr' has the value, say, `[3, 4, 5]', then `head' will be `3',
+and `tail' will be `[4, 5]' in EXPR.
+
+
+File: ddd-themes.info,  Node: VSL Function Calls,  Next: VSL Constant Definitions,  Prev: VSL Expressions,  Up: VSL Reference
+
+Function Calls
+==============
+
+   A function call takes the form
+
+     NAME LIST
+
+   which invokes the (previously declared or defined) function with an
+argument of LIST.  Normally, LIST is a list literal (*note VSL List
+Literals::) written with round brackets.
+
+
+File: ddd-themes.info,  Node: VSL Constant Definitions,  Next: VSL Function Definitions,  Prev: VSL Function Calls,  Up: VSL Reference
+
+Constant Definitions
+====================
+
+   A VSL file consists of a list of _definitions_.
+
+   A constant definition takes the form
+
+     NAME = EXPRESSION;
+
+   Any later definitions can use NAME as a replacement for EXPRESSION.
+
+   Example:
+     true = 1;
+     false = 0;
+
+
+File: ddd-themes.info,  Node: VSL Function Definitions,  Next: VSL Includes,  Prev: VSL Constant Definitions,  Up: VSL Reference
+
+Function Definitions
+====================
+
+   In VSL, all functions either map a _list_ to a _box_ or a _list_ to
+a _list_.  A function definition takes the form
+
+     NAME LIST = EXPRESSION;
+
+   where LIST is a list literal (*note VSL List Literals::).
+
+   The list literal is typically written in round parentheses, making
+the above form look like this:
+
+     NAME(PARAM1, PARAM2, ...) = EXPRESSION;
+
+   The `=' is replaced by `->' if NAME is a _global_ definition--that
+is, NAME can be called from a library client such as DDD.  A _local_
+definition (with `=') can be called only from other VSL functions.(1)
+
+* Menu:
+
+* VSL Function Parameters::
+* VSL Function Patterns::
+* VSL Declaring Functions::
+* VSL Redefining Functions::
+* VSL Replacing Functions::
+* VSL Overriding Functions::
+
+   ---------- Footnotes ----------
+
+   (1) The distinction into global and local definitions is useful when
+optimizing the library: local definitions that are unused within the
+library can be removed, while global definitions cannot.
+
+
+File: ddd-themes.info,  Node: VSL Function Parameters,  Next: VSL Function Patterns,  Up: VSL Function Definitions
+
+Function Parameters
+-------------------
+
+   The parameter list LIST may contain names of formal parameters.
+Upon a function call, these are bound to the actual arguments.
+
+   If the function
+     sum(a, b) = a + b;
+   is called as
+     sum(2. 3)
+   then `a' will be bound to `2' and `b' will be bound to `3',
+evaluating to `5'.
+
+* Menu:
+
+* VSL Unused Parameters::
+
+
+File: ddd-themes.info,  Node: VSL Unused Parameters,  Up: VSL Function Parameters
+
+VSL Unused Parameters
+.....................
+
+   Unused parameters cause a warning, as in this example:
+
+     first_arg(a, dummy) = a;        // Warning
+
+   If a parameter has the name `_', it will not be bound to the actual
+argument (and can thus not be used).  Use `_' as parameter name for
+unused arguments:
+
+     first_arg(a, _) = a;            // No warning
+
+   `_' can be used multiple times in a parameter list.
+
+
+File: ddd-themes.info,  Node: VSL Function Patterns,  Next: VSL Declaring Functions,  Prev: VSL Function Parameters,  Up: VSL Function Definitions
+
+Function Patterns
+-----------------
+
+   A VSL function may have multiple definitions, each with a specific
+_pattern_.  The first definition whose pattern _matches_ the actual
+argument is used.
+
+   What does `matching' mean?  Within a pattern,
+   * An ordinary formal parameter matches any single value
+
+   * A formal parameter whose name is `...' or ends in `...' matches a
+     single value or a list or a list remainder
+
+   * A constant matches exactly the same value
+
+   * A composite box or list matches a composite box or list if
+        - the composites have the same type
+
+        - the composites have the same number of elements
+
+        - the elements match each other.
+
+   Here are some examples.  The `num()' function (*note String
+Functions::) can take either one or two arguments.  The one-argument
+definition simply invokes the two-argument definition:
+
+     num(a, base) = ...;
+     num(a) = num(a, 10);
+
+   Here's another example: The `digit' function returns a string
+representation for a single number.  It has multiple definitions, all
+dependent on the actual argument:
+
+     digit(0) = "0";
+     digit(1) = "1";
+     digit(2) = "2";
+     digit(3) = "3";
+     digit(4) = "4";
+     digit(5) = "5";
+     digit(6) = "6";
+     digit(7) = "7";
+     digit(8) = "8";
+     digit(9) = "9";
+     digit(10) = "a";
+     digit(11) = "b";
+     digit(12) = "c";
+     digit(13) = "d";
+     digit(14) = "e";
+     digit(15) = "f";
+     digit(_) = fail("invalid digit() argument");
+
+   Formal parameters ending in `...' are useful for defining _aliases_
+of functions.  The definition
+     roman(...) = rm(...);
+   makes `roman' an alias of `rm'--any parameters (regardless how many)
+passed to `roman' will be passed to `rm'.
+
+   Here's an example of how formal parameters ending in `...' can be
+used to realize _variadic functions_, taking any number of arguments
+(*note Maximum and Minimum Functions::):
+
+     max(a) = a;
+     max(a, b, ...) = if a > b then max(a, ...) else max(b, ...) fi;
+     min(a) = a;
+     min(a, b, ...) = if a < b then min(a, ...) else min(b, ...) fi;
+
+
+File: ddd-themes.info,  Node: VSL Declaring Functions,  Next: VSL Redefining Functions,  Prev: VSL Function Patterns,  Up: VSL Function Definitions
+
+Declaring Functions
+-------------------
+
+   If you want to use a function before it has been defined, just write
+down its signature without specifying a body.  Here's an example:
+
+     num(a, base);                   // declaration
+     num(a) = num(a, 10);
+
+   Remember to give a definition later on, though.
+
+
+File: ddd-themes.info,  Node: VSL Redefining Functions,  Next: VSL Replacing Functions,  Prev: VSL Declaring Functions,  Up: VSL Function Definitions
+
+Redefining Functions
+--------------------
+
+   You can redefine a VSL function even _after_ its original
+definition.  You can
+   * _replace_ the original definition, thus making all previous
+     definitions refer to your new definition;
+
+   * _override_ the original definition, thus making only later
+     definitions refer to your new definition.
+
+
+File: ddd-themes.info,  Node: VSL Replacing Functions,  Next: VSL Overriding Functions,  Prev: VSL Redefining Functions,  Up: VSL Function Definitions
+
+Replacing Functions
+-------------------
+
+   To remove an original definition, use
+
+     #pragma replace NAME
+
+   This removes all previous definitions of NAME.  Be sure to provide
+your own definitions, though.
+
+   `#pragma replace' is typically used to change defaults:
+
+     #include "fonts.vsl"            // defines stdfontsize()
+     
+     #pragma replace stdfontsize()   // replace def
+     stdfontsize() = 20;
+
+   All existing function calls will now refer to the new definition.
+
+
+File: ddd-themes.info,  Node: VSL Overriding Functions,  Prev: VSL Replacing Functions,  Up: VSL Function Definitions
+
+Overriding Functions
+--------------------
+
+   To override an original definition, use
+
+     #pragma override NAME
+
+   This makes all later definitions use your new definition of NAME.
+Earlier definitions, however, still refer to the old definition.
+
+   `#pragma override' is typically used if you want to redefine a
+function while still refering to the old definition:
+
+     #include "fonts.vsl"            // defines stdfontsize()
+     
+     // Save old definition
+     old_stdfontsize() = stdfontsize();
+     
+     #pragma override stdfontsize()
+     
+     // Refer to old definition
+     stdfontsize() = old_stdfontsize() * 2;
+
+   Since we used `#pragma override', we can use `old_stdfontsize()' to
+refer to the original definition of `stdfontsize()'.
+
+
+File: ddd-themes.info,  Node: VSL Includes,  Next: VSL Operators,  Prev: VSL Function Definitions,  Up: VSL Reference
+
+Includes
+========
+
+   In a VSL file, you can include at any part the contents of another
+VSL file, using one of the special forms
+
+     #include "FILE"
+     #include <FILE>
+
+   The form `<FILE>' looks for VSL files in a number of standard
+directories; the form `"FILE"' first looks in the directory where the
+current file resides.
+
+   Any included file is included only once.
+
+   In DDD, you can set these places using the `vslPath' resource.
+*Note Customizing Display Appearance: (ddd)Customizing Display
+Appearance, for details.
+
+
+File: ddd-themes.info,  Node: VSL Operators,  Next: VSL Syntax Summary,  Prev: VSL Includes,  Up: VSL Reference
+
+Operators
+=========
+
+   VSL comes with a number of _inline operators,_ which can be used to
+compose boxes.  With raising precedence, these are:
+
+     or
+     and
+     = <>
+     <= < >= >
+     ::
+     |
+     ^
+     ~
+     &
+     + -
+     * / %
+     not
+
+   Except for `or' and `and', these operators are mapped to function
+calls.  Each invocation of an operator `@' in the form `A @ B' gets
+translated to a call of the VSL function with the special name `(@)'.
+This VSL function can be defined just like any other VSL function.
+
+   For instance, the expression `A + B' gets translated to a function
+call `(+)(a, b)'; `A & B' invokes `(&)(a, b)'.
+
+   In the file `builtin.vsl', you can actually find definitions of these
+functions:
+
+     (&)(...) = __op_halign(...);
+     (+)(...) = __op_plus(...);
+
+   The functions `__op_halign' and `__op_plus' are the names by which
+the `(&)' and `(+)' functions are implemented.  In this document,
+though, we will not look further at these internals.
+
+   Here are the places where the operator functions are described:
+   * For `=' and `<>', *Note Comparison Functions::.
+
+   * For `<=', `<', `>=', and `>', *Note Comparison Functions::.
+
+   * For `::', *Note List Functions::.
+
+   * For `|', `^', `~', and `&', *Note Composition Functions::.
+
+   * For `+', `-', `*', `/', and `%', *Note Arithmetic Functions::.
+
+   * For `not', *Note Negation Functions::.
+
+
+File: ddd-themes.info,  Node: VSL Syntax Summary,  Prev: VSL Operators,  Up: VSL Reference
+
+Syntax Summary
+==============
+
+   The following file summarizes the syntax of VSL files.
+
+     /*** VSL file ***/
+     
+     file                    :       item_list
+     
+     item_list               :       /* empty */
+                             |       item_list item
+     
+     item                    :       function_declaration ';'
+                             |       function_definition ';'
+                             |       override_declaration
+                             |       replace_declaration
+                             |       include_declaration
+                             |       line_declaration
+                             |       ';'
+                             |       error ';'
+     
+     /*** functions ***/
+     
+     function_declaration    :       function_header
+     
+     function_header         :       function_identifier function_argument
+                             |       function_identifier
+     
+     function_identifier     :       identifier
+                             |       '(' '==' ')'
+                             |       '(' '<>' ')'
+                             |       '(' '>' ')'
+                             |       '(' '>=' ')'
+                             |       '(' '<' ')'
+                             |       '(' '<=' ')'
+                             |       '(' '&' ')'
+                             |       '(' '|' ')'
+                             |       '(' '^' ')'
+                             |       '(' '~' ')'
+                             |       '(' '+' ')'
+                             |       '(' '-' ')'
+                             |       '(' '*' ')'
+                             |       '(' '/' ')'
+                             |       '(' '%' ')'
+                             |       '(' '::' ')'
+                             |       '(' 'not' ')'
+     
+     identifier              :       IDENTIFIER
+     
+     function_definition     :       local_definition
+                             |       global_definition
+     
+     local_definition        :       local_header function_body
+     
+     local_header            :       function_header '='
+     
+     global_definition       :       global_header function_body
+     
+     global_header           :       function_header '->'
+     
+     function_body           :       box_expression_with_defs
+     
+     
+     
+     /*** expressions ***/
+     
+     /*** let, where ***/
+     
+     box_expression_with_defs:       box_expression_with_wheres
+                             |       'let' var_definition in_box_expression
+     
+     in_box_expression       :       'in' box_expression_with_defs
+                             |       ',' var_definition in_box_expression
+     
+     box_expression_with_wheres:     box_expression
+                             |       box_expression_with_where
+     
+     box_expression_with_where:      box_expression_with_wheres
+                                     'where' var_definition
+                             |       box_expression_with_where
+                                     ',' var_definition
+     
+     var_definition          :       box_expression '=' box_expression
+     
+     
+     /*** basic expressions ***/
+     
+     box_expression          :       '(' box_expression_with_defs ')'
+                             |       list_expression
+                             |       const_expression
+                             |       binary_expression
+                             |       unary_expression
+                             |       cond_expression
+                             |       function_call
+                             |       argument_or_function
+     
+     list_expression         :       '[' ']'
+                             |       '[' box_expression_list ']'
+                             |       '(' ')'
+                             |       '(' multiple_box_expression_list ')'
+     
+     box_expression_list     :       box_expression_with_defs
+                             |       multiple_box_expression_list
+     
+     multiple_box_expression_list:   box_expression ':' box_expression
+                             |       box_expression ',' box_expression_list
+                             |       box_expression '...'
+                             |       '...'
+     
+     const_expression        :       string_constant
+                             |       numeric_constant
+     
+     string_constant         :       STRING
+                             |       string_constant STRING
+     
+     numeric_constant        :       INTEGER
+     
+     function_call           :       function_identifier function_argument
+     
+     unary_expression        :       'not' box_expression
+                             |       '+' box_expression
+                             |       '-' box_expression
+     
+     
+     /*** operators ***/
+     
+     binary_expression       :       box_expression '=' box_expression
+                             |       box_expression '<>' box_expression
+                             |       box_expression '>' box_expression
+                             |       box_expression '>=' box_expression
+                             |       box_expression '<' box_expression
+                             |       box_expression '<=' box_expression
+                             |       box_expression '&' box_expression
+                             |       box_expression '|' box_expression
+                             |       box_expression '^' box_expression
+                             |       box_expression '~' box_expression
+                             |       box_expression '+' box_expression
+                             |       box_expression '-' box_expression
+                             |       box_expression '*' box_expression
+                             |       box_expression '/' box_expression
+                             |       box_expression '%' box_expression
+                             |       box_expression '::' box_expression
+                             |       box_expression 'or' box_expression
+                             |       box_expression 'and' box_expression
+     
+     cond_expression         :       'if' box_expression
+                                     'then' box_expression_with_defs
+                                     else_expression
+                                     'fi'
+     
+     else_expression         :       'elsif' box_expression
+                                     'then' box_expression_with_defs
+                                     else_expression
+                             |       'else' box_expression_with_defs
+     
+     function_argument       :       list_expression
+                             |       '(' box_expression_with_defs ')'
+     
+     argument_or_function    :       identifier
+     
+     
+     /*** directives ***/
+     
+     override_declaration    :       '#pragma' 'override' override_list
+     
+     override_list           :       override_identifier
+                             |       override_list ',' override_identifier
+     
+     override_identifier     :       function_identifier
+     
+     replace_declaration     :       '#pragma' 'replace' replace_list
+     
+     replace_list            :       replace_identifier
+                             |       replace_list ',' replace_identifier
+     
+     replace_identifier      :       function_identifier
+     
+     include_declaration     :       '#include' '"' SIMPLE_STRING '"'
+                             |       '#include' '<' SIMPLE_STRING '>'
+     
+     line_declaration        :       '#line' INTEGER
+                             |       '#line' INTEGER STRING
+
+
+File: ddd-themes.info,  Node: Documentation License,  Next: Index,  Prev: VSL Reference,  Up: Top
+
+GNU Free Documentation License
+******************************
+
+                        Version 1.1, March 2000
+     Copyright (C) 2000  Free Software Foundation, Inc.
+     59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+     
+     Everyone is permitted to copy and distribute verbatim copies
+     of this license document, but changing it is not allowed.
+
+
+  0. PREAMBLE
+
+     The purpose of this License is to make a manual, textbook, or other
+     written document "free" in the sense of freedom: to assure everyone
+     the effective freedom to copy and redistribute it, with or without
+     modifying it, either commercially or noncommercially.  Secondarily,
+     this License preserves for the author and publisher a way to get
+     credit for their work, while not being considered responsible for
+     modifications made by others.
+
+     This License is a kind of "copyleft", which means that derivative
+     works of the document must themselves be free in the same sense.
+     It complements the GNU General Public License, which is a copyleft
+     license designed for free software.
+
+     We have designed this License in order to use it for manuals for
+     free software, because free software needs free documentation: a
+     free program should come with manuals providing the same freedoms
+     that the software does.  But this License is not limited to
+     software manuals; it can be used for any textual work, regardless
+     of subject matter or whether it is published as a printed book.
+     We recommend this License principally for works whose purpose is
+     instruction or reference.
+
+
+  1. APPLICABILITY AND DEFINITIONS
+
+     This License applies to any manual or other work that contains a
+     notice placed by the copyright holder saying it can be distributed
+     under the terms of this License.  The "Document", below, refers to
+     any such manual or work.  Any member of the public is a licensee,
+     and is addressed as "you".
+
+     A "Modified Version" of the Document means any work containing the
+     Document or a portion of it, either copied verbatim, or with
+     modifications and/or translated into another language.
+
+     A "Secondary Section" is a named appendix or a front-matter
+     section of the Document that deals exclusively with the
+     relationship of the publishers or authors of the Document to the
+     Document's overall subject (or to related matters) and contains
+     nothing that could fall directly within that overall subject.
+     (For example, if the Document is in part a textbook of
+     mathematics, a Secondary Section may not explain any mathematics.)
+     The relationship could be a matter of historical connection with
+     the subject or with related matters, or of legal, commercial,
+     philosophical, ethical or political position regarding them.
+
+     The "Invariant Sections" are certain Secondary Sections whose
+     titles are designated, as being those of Invariant Sections, in
+     the notice that says that the Document is released under this
+     License.
+
+     The "Cover Texts" are certain short passages of text that are
+     listed, as Front-Cover Texts or Back-Cover Texts, in the notice
+     that says that the Document is released under this License.
+
+     A "Transparent" copy of the Document means a machine-readable copy,
+     represented in a format whose specification is available to the
+     general public, whose contents can be viewed and edited directly
+     and straightforwardly with generic text editors or (for images
+     composed of pixels) generic paint programs or (for drawings) some
+     widely available drawing editor, and that is suitable for input to
+     text formatters or for automatic translation to a variety of
+     formats suitable for input to text formatters.  A copy made in an
+     otherwise Transparent file format whose markup has been designed
+     to thwart or discourage subsequent modification by readers is not
+     Transparent.  A copy that is not "Transparent" is called "Opaque".
+
+     Examples of suitable formats for Transparent copies include plain
+     ASCII without markup, Texinfo input format, LaTeX input format,
+     SGML or XML using a publicly available DTD, and
+     standard-conforming simple HTML designed for human modification.
+     Opaque formats include PostScript, PDF, proprietary formats that
+     can be read and edited only by proprietary word processors, SGML
+     or XML for which the DTD and/or processing tools are not generally
+     available, and the machine-generated HTML produced by some word
+     processors for output purposes only.
+
+     The "Title Page" means, for a printed book, the title page itself,
+     plus such following pages as are needed to hold, legibly, the
+     material this License requires to appear in the title page.  For
+     works in formats which do not have any title page as such, "Title
+     Page" means the text near the most prominent appearance of the
+     work's title, preceding the beginning of the body of the text.
+
+  2. VERBATIM COPYING
+
+     You may copy and distribute the Document in any medium, either
+     commercially or noncommercially, provided that this License, the
+     copyright notices, and the license notice saying this License
+     applies to the Document are reproduced in all copies, and that you
+     add no other conditions whatsoever to those of this License.  You
+     may not use technical measures to obstruct or control the reading
+     or further copying of the copies you make or distribute.  However,
+     you may accept compensation in exchange for copies.  If you
+     distribute a large enough number of copies you must also follow
+     the conditions in section 3.
+
+     You may also lend copies, under the same conditions stated above,
+     and you may publicly display copies.
+
+  3. COPYING IN QUANTITY
+
+     If you publish printed copies of the Document numbering more than
+     100, and the Document's license notice requires Cover Texts, you
+     must enclose the copies in covers that carry, clearly and legibly,
+     all these Cover Texts: Front-Cover Texts on the front cover, and
+     Back-Cover Texts on the back cover.  Both covers must also clearly
+     and legibly identify you as the publisher of these copies.  The
+     front cover must present the full title with all words of the
+     title equally prominent and visible.  You may add other material
+     on the covers in addition.  Copying with changes limited to the
+     covers, as long as they preserve the title of the Document and
+     satisfy these conditions, can be treated as verbatim copying in
+     other respects.
+
+     If the required texts for either cover are too voluminous to fit
+     legibly, you should put the first ones listed (as many as fit
+     reasonably) on the actual cover, and continue the rest onto
+     adjacent pages.
+
+     If you publish or distribute Opaque copies of the Document
+     numbering more than 100, you must either include a
+     machine-readable Transparent copy along with each Opaque copy, or
+     state in or with each Opaque copy a publicly-accessible
+     computer-network location containing a complete Transparent copy
+     of the Document, free of added material, which the general
+     network-using public has access to download anonymously at no
+     charge using public-standard network protocols.  If you use the
+     latter option, you must take reasonably prudent steps, when you
+     begin distribution of Opaque copies in quantity, to ensure that
+     this Transparent copy will remain thus accessible at the stated
+     location until at least one year after the last time you
+     distribute an Opaque copy (directly or through your agents or
+     retailers) of that edition to the public.
+
+     It is requested, but not required, that you contact the authors of
+     the Document well before redistributing any large number of
+     copies, to give them a chance to provide you with an updated
+     version of the Document.
+
+  4. MODIFICATIONS
+
+     You may copy and distribute a Modified Version of the Document
+     under the conditions of sections 2 and 3 above, provided that you
+     release the Modified Version under precisely this License, with
+     the Modified Version filling the role of the Document, thus
+     licensing distribution and modification of the Modified Version to
+     whoever possesses a copy of it.  In addition, you must do these
+     things in the Modified Version:
+
+     A. Use in the Title Page (and on the covers, if any) a title
+     distinct    from that of the Document, and from those of previous
+     versions    (which should, if there were any, be listed in the
+     History section    of the Document).  You may use the same title
+     as a previous version    if the original publisher of that version
+     gives permission.
+     B. List on the Title Page, as authors, one or more persons or
+     entities    responsible for authorship of the modifications in the
+     Modified    Version, together with at least five of the principal
+     authors of the    Document (all of its principal authors, if it
+     has less than five).
+     C. State on the Title page the name of the publisher of the
+     Modified Version, as the publisher.
+     D. Preserve all the copyright notices of the Document.
+     E. Add an appropriate copyright notice for your modifications
+     adjacent to the other copyright notices.
+     F. Include, immediately after the copyright notices, a license
+     notice    giving the public permission to use the Modified Version
+     under the    terms of this License, in the form shown in the
+     Addendum below.
+     G. Preserve in that license notice the full lists of Invariant
+     Sections    and required Cover Texts given in the Document's
+     license notice.
+     H. Include an unaltered copy of this License.
+     I. Preserve the section entitled "History", and its title, and add
+     to    it an item stating at least the title, year, new authors, and
+       publisher of the Modified Version as given on the Title Page.
+     If    there is no section entitled "History" in the Document,
+     create one    stating the title, year, authors, and publisher of
+     the Document as    given on its Title Page, then add an item
+     describing the Modified    Version as stated in the previous
+     sentence.
+     J. Preserve the network location, if any, given in the Document for
+       public access to a Transparent copy of the Document, and
+     likewise    the network locations given in the Document for
+     previous versions    it was based on.  These may be placed in the
+     "History" section.     You may omit a network location for a work
+     that was published at    least four years before the Document
+     itself, or if the original    publisher of the version it refers
+     to gives permission.
+     K. In any section entitled "Acknowledgements" or "Dedications",
+     preserve the section's title, and preserve in the section all the
+      substance and tone of each of the contributor acknowledgements
+     and/or dedications given therein.
+     L. Preserve all the Invariant Sections of the Document,
+     unaltered in their text and in their titles.  Section numbers
+     or the equivalent are not considered part of the section titles.
+     M. Delete any section entitled "Endorsements".  Such a section
+     may not be included in the Modified Version.
+     N. Do not retitle any existing section as "Endorsements"    or to
+     conflict in title with any Invariant Section.
+
+     If the Modified Version includes new front-matter sections or
+     appendices that qualify as Secondary Sections and contain no
+     material copied from the Document, you may at your option
+     designate some or all of these sections as invariant.  To do this,
+     add their titles to the list of Invariant Sections in the Modified
+     Version's license notice.  These titles must be distinct from any
+     other section titles.
+
+     You may add a section entitled "Endorsements", provided it contains
+     nothing but endorsements of your Modified Version by various
+     parties-for example, statements of peer review or that the text has
+     been approved by an organization as the authoritative definition
+     of a standard.
+
+     You may add a passage of up to five words as a Front-Cover Text,
+     and a passage of up to 25 words as a Back-Cover Text, to the end
+     of the list of Cover Texts in the Modified Version.  Only one
+     passage of Front-Cover Text and one of Back-Cover Text may be
+     added by (or through arrangements made by) any one entity.  If the
+     Document already includes a cover text for the same cover,
+     previously added by you or by arrangement made by the same entity
+     you are acting on behalf of, you may not add another; but you may
+     replace the old one, on explicit permission from the previous
+     publisher that added the old one.
+
+     The author(s) and publisher(s) of the Document do not by this
+     License give permission to use their names for publicity for or to
+     assert or imply endorsement of any Modified Version.
+
+  5. COMBINING DOCUMENTS
+
+     You may combine the Document with other documents released under
+     this License, under the terms defined in section 4 above for
+     modified versions, provided that you include in the combination
+     all of the Invariant Sections of all of the original documents,
+     unmodified, and list them all as Invariant Sections of your
+     combined work in its license notice.
+
+     The combined work need only contain one copy of this License, and
+     multiple identical Invariant Sections may be replaced with a single
+     copy.  If there are multiple Invariant Sections with the same name
+     but different contents, make the title of each such section unique
+     by adding at the end of it, in parentheses, the name of the
+     original author or publisher of that section if known, or else a
+     unique number.  Make the same adjustment to the section titles in
+     the list of Invariant Sections in the license notice of the
+     combined work.
+
+     In the combination, you must combine any sections entitled
+     "History" in the various original documents, forming one section
+     entitled "History"; likewise combine any sections entitled
+     "Acknowledgements", and any sections entitled "Dedications".  You
+     must delete all sections entitled "Endorsements."
+
+  6. COLLECTIONS OF DOCUMENTS
+
+     You may make a collection consisting of the Document and other
+     documents released under this License, and replace the individual
+     copies of this License in the various documents with a single copy
+     that is included in the collection, provided that you follow the
+     rules of this License for verbatim copying of each of the
+     documents in all other respects.
+
+     You may extract a single document from such a collection, and
+     distribute it individually under this License, provided you insert
+     a copy of this License into the extracted document, and follow
+     this License in all other respects regarding verbatim copying of
+     that document.
+
+  7. AGGREGATION WITH INDEPENDENT WORKS
+
+     A compilation of the Document or its derivatives with other
+     separate and independent documents or works, in or on a volume of
+     a storage or distribution medium, does not as a whole count as a
+     Modified Version of the Document, provided no compilation
+     copyright is claimed for the compilation.  Such a compilation is
+     called an "aggregate", and this License does not apply to the
+     other self-contained works thus compiled with the Document, on
+     account of their being thus compiled, if they are not themselves
+     derivative works of the Document.
+
+     If the Cover Text requirement of section 3 is applicable to these
+     copies of the Document, then if the Document is less than one
+     quarter of the entire aggregate, the Document's Cover Texts may be
+     placed on covers that surround only the Document within the
+     aggregate.  Otherwise they must appear on covers around the whole
+     aggregate.
+
+  8. TRANSLATION
+
+     Translation is considered a kind of modification, so you may
+     distribute translations of the Document under the terms of section
+     4.  Replacing Invariant Sections with translations requires special
+     permission from their copyright holders, but you may include
+     translations of some or all Invariant Sections in addition to the
+     original versions of these Invariant Sections.  You may include a
+     translation of this License provided that you also include the
+     original English version of this License.  In case of a
+     disagreement between the translation and the original English
+     version of this License, the original English version will prevail.
+
+  9. TERMINATION
+
+     You may not copy, modify, sublicense, or distribute the Document
+     except as expressly provided for under this License.  Any other
+     attempt to copy, modify, sublicense or distribute the Document is
+     void, and will automatically terminate your rights under this
+     License.  However, parties who have received copies, or rights,
+     from you under this License will not have their licenses
+     terminated so long as such parties remain in full compliance.
+
+ 10. FUTURE REVISIONS OF THIS LICENSE
+
+     The Free Software Foundation may publish new, revised versions of
+     the GNU Free Documentation License from time to time.  Such new
+     versions will be similar in spirit to the present version, but may
+     differ in detail to address new problems or concerns.  See
+     http://www.gnu.org/copyleft/.
+
+     Each version of the License is given a distinguishing version
+     number.  If the Document specifies that a particular numbered
+     version of this License "or any later version" applies to it, you
+     have the option of following the terms and conditions either of
+     that specified version or of any later version that has been
+     published (not as a draft) by the Free Software Foundation.  If
+     the Document does not specify a version number of this License,
+     you may choose any version ever published (not as a draft) by the
+     Free Software Foundation.
+
+
+ADDENDUM: How to use this License for your documents
+====================================================
+
+   To use this License in a document you have written, include a copy of
+the License in the document and put the following copyright and license
+notices just after the title page:
+
+
+       Copyright (C)  YEAR  YOUR NAME.
+       Permission is granted to copy, distribute and/or modify this document
+       under the terms of the GNU Free Documentation License, Version 1.1
+       or any later version published by the Free Software Foundation;
+       with the Invariant Sections being LIST THEIR TITLES, with the
+       Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+       A copy of the license is included in the section entitled ``GNU
+       Free Documentation License''.
+If you have no Invariant Sections, write "with no Invariant
+Sections" instead of saying which ones are invariant.  If you have no
+Front-Cover Texts, write "no Front-Cover Texts" instead of "Front-Cover
+Texts being LIST"; likewise for Back-Cover Texts.
+
+   If your document contains nontrivial examples of program code, we
+recommend releasing these examples in parallel under your choice of
+free software license, such as the GNU General Public License, to
+permit their use in free software.
+

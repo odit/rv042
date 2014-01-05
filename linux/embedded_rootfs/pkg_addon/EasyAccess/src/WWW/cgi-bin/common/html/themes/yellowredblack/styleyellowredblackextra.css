@@ -1,0 +1,21 @@
+
+.cifsbodyback{background-image: url(/images/backallorangeandred.png);overflow-x:hidden;}
+.cifsmenuleft{background-color:#fbf9b8;}
+.cifstop3{BACKGROUND-COLOR:#cf0920;border-bottom:1px #ffffff solid;}
+.cifstop5{background-color:#000000;border-bottom:1px #969696 solid;border-left:1px #959595 solid;}
+.cifstop6{background-color:#000000;border-bottom:1px #969696 solid;}
+.other2{color:#203040;}
+.toolbarcifs{color:#ffffff;FONT-FAMILY: Arial, Tahoma, Verdana, Helvetica; FONT-SIZE:11px;}
+.mainbackcifs{COLOR:#000000; font-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.onmainbackcifs{COLOR:#000000;background-color:#fbf9b8;FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+A.mainbackcifs{COLOR:#ffffff; font-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.cifslefttable{BACKGROUND-COLOR:#cf0920;border:1px #66769f solid;}
+.cifsleftcell{BACKGROUND-COLOR:#feaf2f;border-top:1px #66769f solid;}
+.cifslefttitle{color:#ffffff;FONT-FAMILY: Tahoma, "Lucida Sans", "Lucida Console", Verdana, Arial, Helvetica; FONT-SIZE:12px;FONT-WEIGHT: bold;}
+.disableduplink{color:#999999;FONT-FAMILY: Arial, Verdana, Helvetica; FONT-SIZE:11px;}
+.demo1{color:#ffffff;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:1px solid; margin:2px;border-top-color:#808790;border-left-color:#808790;border-right-color:#556066;border-bottom-color:#556066;background-color:#e6e2df; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}
+.onhovers{margin:2px;margin-color:#ccbb44;color:#dfbf4f;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:2px solid #dfbf4f;background-color:#e6e2df;cursor:hand; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}}
+.navigator{color:#fcfc98; cursor:hand; font-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:11px;}
+
+.cifsback{background-color:#fcfce5;}
+ 

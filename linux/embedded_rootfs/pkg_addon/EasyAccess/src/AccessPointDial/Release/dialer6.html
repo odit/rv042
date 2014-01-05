@@ -1,0 +1,49 @@
+<html>
+<head>
+<script type="text/javascript">
+function writeApplet()
+{
+	var host = "3ffe:ffff:0:f101::55";
+	var session = "KLlDs1kor12gdSy02HMeCQ==::::admin";
+	var client_lower_ip = "10.0.0.100";
+	var client_higher_ip = "10.0.0.200";
+	var client_lower_ipv6 = "::f00";
+	var client_higher_ipv6 = "::ff00";
+	var force_ipv6 = 1;
+      var dns_suffix = "chn.cavium.com"
+      var network_mask = "255.255.255.0"
+      var enable_full_tunnel = "0"
+	var jar_path = "./WindowsVPInstaller.jar";
+	var dialer_jar = "./WindowsVPDialer6.jar";
+	
+	document.open();
+	document.write('<applet archive='+jar_path+' code=VPInstaller.class width=350 height=170 >');
+	document.write('<PARAM NAME=host VALUE='+host+'>');
+	document.write('<PARAM NAME=session VALUE='+session+'>');
+	document.write('<PARAM NAME=client_lower_ip VALUE='+client_lower_ip+'>');
+	document.write('<PARAM NAME=client_higher_ip VALUE='+client_higher_ip+'>');
+	document.write('<PARAM NAME=dns_suffix VALUE='+dns_suffix+'>');
+	document.write('<PARAM NAME=network_mask VALUE='+network_mask+'>');
+	document.write('<PARAM NAME=enable_full_tunnel VALUE='+enable_full_tunnel+'>');
+	document.write('<PARAM NAME=route_count VALUE="1">');
+	document.write('<PARAM NAME=route0 VALUE="10.10.0.0 255.255.0.0">');
+
+	document.write('<PARAM NAME=dialer_jar VALUE='+dialer_jar+'>');
+	document.write('<PARAM NAME=peer_ipv6_address VALUE="3ffe:fff:fe1::9a">');
+	document.write('<PARAM NAME=local_ipv6_address VALUE="3ffe:fff:fe1::9b">');
+	document.write('<PARAM NAME=ipv6_prefix VALUE="128">');
+	document.write('<PARAM NAME=client_lower_ipv6 VALUE='+client_lower_ipv6+'>');
+	document.write('<PARAM NAME=client_higher_ipv6 VALUE='+client_higher_ipv6+'>');
+	document.write('<PARAM NAME=force_ipv6 VALUE='+force_ipv6+'>');
+	document.write('<PARAM NAME=routev6_count VALUE="2">');
+	document.write('<PARAM NAME=routev60 VALUE="3ffe:ffff:0:f106::94 128">');
+	document.write('<PARAM NAME=routev61 VALUE="3ffe:ffff:0:f105:: 64">');
+
+	document.write('</applet>');
+	document.close();
+}
+</script>
+</head>
+<body onLoad = "writeApplet();">
+</body>
+</html>

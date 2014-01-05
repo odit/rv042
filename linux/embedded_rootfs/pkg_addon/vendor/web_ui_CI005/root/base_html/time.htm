@@ -1,0 +1,87 @@
+<!--#nk_get TimeSetup=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	//  Onload check function
+	document.location.href='<!--#nk_get handle_tags="settime"-->';
+}
+function Leavefunction()
+{
+	// Onunload check function
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var helplink ='help_time.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintTimeMode(0);
+	PrintEndContent();
+}
+
+function PrintTimeMode(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+NormallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="10">');
+	document.write('<input type="radio" name="setMode" value="1" onClick="document.location.href=\'time1.htm\'" <!--#nk_get RadioHandle2="setMode:1"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Set the local time using Network Time Protocol(NTP) automatically');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<input type="radio" name="setMode" value="2" onClick="document.location.href=\'time2.htm\'" <!--#nk_get RadioHandle2="setMode:2"-->>');
+	document.write('</td>');	
+	document.write('<td>');
+	document.write('Set the local time Manually');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 3);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formTime" method="post" action="time.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>

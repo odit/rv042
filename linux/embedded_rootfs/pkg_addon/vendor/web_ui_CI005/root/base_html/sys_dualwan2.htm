@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chSubmit(F)
+{
+	F.submitStatus.value=1;
+        F.log_ch.value=1;
+	window.status=wSave;  
+	MM_showHideLayers('AutoNumber15','','hide');  	
+	F.submit();	
+}
+function editInterface(n)
+{
+	var i;
+	var buf;
+	
+	if (MaxWanPortNumber == 2 && document.formsys_dualwan2.DmzMode.value == 1);
+	else	
+	for(i=1;i<=2;i++)
+	{
+		buf="modeLB"+i;
+		if(document.getElementById(buf).checked==true)
+			i=4;
+	}
+
+	if (MaxWanPortNumber == 2 && document.formsys_dualwan2.DmzMode.value == 1) 
+	{
+		document.formsys_dualwan2.editInterface.value=1;
+		document.formsys_dualwan2.submitStatus.value=100; 
+		document.formsys_dualwan2.action="edit_sys_dualwan2.htm";
+		document.formsys_dualwan2.submit();
+	}
+	else if (document.getElementById("BaLanceMode").value!=document.getElementById(buf).value)
+	{
+		  if (confirm(cModeBalanceSave))
+		  {
+			document.formsys_dualwan2.submitStatus.value=1;  
+			document.formsys_dualwan2.action="sys_dualwan2.htm";
+			window.status=wSave;  
+			document.formsys_dualwan2.submit();
+			return;
+		  }
+		  else 
+		      return;  
+	}
+	else 
+	{
+		document.formsys_dualwan2.editInterface.value=n;
+		document.formsys_dualwan2.submitStatus.value=100; 
+		document.formsys_dualwan2.action="edit_sys_dualwan2.htm";
+		document.formsys_dualwan2.submit();
+	}
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formsys_dualwan2)";
+var Cancellink = ""; 
+var helplink ='help_sys_dualwan2.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 700;
+var head_width=160;		
+
+function PrintContent()
+{
+	PrintBeginContent();
+	if(MaxWanPortNumber==2)
+	{
+		if (document.formsys_dualwan2.DmzMode.value == 1)
+			PrintDualwan_InterfaceSetting(0);
+		else
+		{
+			PrintDualWan_LoadBalance(1);
+			PrintDualwan_InterfaceSetting(0);
+		}
+	}
+	else
+	{
+	 	PrintMulti_LoadBalance(1);
+		PrintMulti_InterfaceSetting(0);
+	}
+	PrintEndContent();
+}
+
+
+function PrintDualWan_LoadBalance(hasUnderLine)
+{
+	PrintBeginBlock(1, "Load Balance");
+	document.write('<table width="'+FixedTableWidth+'" class="Infotable" border='+Tableborder+'>');
+	document.write('<tr>');	
+	document.write('<td width="1" align="left">');
+	document.write('<input type="radio" name="modeLB" id="modeLB1" onClick="" value="0" <!--#nk_get BalanceRadio="0"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<span style="font-weight:bold;">Smart Link Backup&nbsp;:&nbsp;</span> Primary WAN');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('<select class="select" name="SmartLKW" >');
+	document.write('<option value="1" <!--#nk_get SmartLKWan="1"-->>WAN1</option>');
+	document.write('<option value="2" <!--#nk_get SmartLKWan="2"-->>WAN2</option>');
+	document.write('</select>');	
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	document.write(' ( Specify which WAN is Primary , the other one will be backup )');	
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');	
+	document.write('<td width="1" align="left">');
+	document.write('<input type="radio" name="modeLB" id="modeLB2" onClick="" value="1" <!--#nk_get BalanceRadio="1"-->>');
+	document.write('</td>');
+	document.write('<td><span style="font-weight:bold;">Load Balance (Auto Mode)</span></td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine,1);
+}
+
+function PrintMulti_LoadBalance(hasUnderLine)
+{
+	PrintBeginBlock(1, "Mode");
+	document.write('<table width="'+FixedTableWidth+'" class="Infotable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="1" align="left">');
+	document.write('<input type="radio" name="modeLB" id="modeLB1" onClick="" value="1" <!--#nk_get BalanceRadio="1"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Intelligent Balancer(Auto Mode)');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td width="1" align="left">');
+	document.write('<input type="radio" name="modeLB" id="modeLB2" onClick="" value="2" <!--#nk_get BalanceRadio="2"-->>');
+	document.write('</td>');
+	document.write('<td>IP Group(By Users)</td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine,1);
+}
+function Print_table_tr_cell(cell_type,wan,Mode,edit_inf)
+{
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td width="30%" >'+wan+'</td>');
+	document.write('<td width="30%" > '+Mode+'</td>');	
+	document.write('<td  >');	
+	document.write('<a href=\'javascript: editInterface('+edit_inf+')\'><img src=images/edit.gif width=20 height=16 border=0 title=Edit></a>');	 
+	document.write('</td>')
+	document.write('</tr>');
+}		
+function PrintDualwan_InterfaceSetting(hasUnderLine)
+{
+	PrintBeginBlock(1, "Interface Setting");
+	document.write('<table width="600" class="STtable" border="1">');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="178" bgcolor="#D9E3E9" >');
+	document.write('<input type="hidden" id=BaLanceMode name="BaLanceMode" value=\'<!--#nk_get BalanceMode=""-->\'>');
+
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Interface');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="177" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Mode');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="padding: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding: 0px; width:1px"></td>');	
+	document.write('<td bgcolor="#D9E3E9" >');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Configuration');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');
+	document.write('<tr class="OddRow" >');	
+	document.write('<td width="30%">WAN1</td>');
+	document.write('<td width="30%"><!--#nk_get InterfaceMode="1"--></td>');	
+	document.write('<td  >');	
+	document.write('<a href=\'javascript: editInterface(1)\'><img src=images/edit.gif width=20 height=16 border=0 title=Edit></a>');	 
+	document.write('</td>');
+	document.write('</tr>');
+	if( document.formsys_dualwan2.DmzMode.value == 0 )
+	{
+		document.write('<tr class="EvenRow" >');	
+		document.write('<td width="30%" align="center" > WAN2 </td>');
+		document.write('<td width="30%" align="center"> <!--#nk_get InterfaceMode="2"--></td>');	
+		document.write('<td>');	
+		document.write('<a href=\'javascript: editInterface(2)\'><img src=images/edit.gif width=20 height=16 border=0 title=Edit></a>');	 
+		document.write('</td>')
+		document.write('</tr>');
+	}
+	document.write('</table>');
+	document.write('</td>')
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine,1);
+}
+
+function PrintMulti_InterfaceSetting(hasUnderLine)
+{
+	PrintBeginBlock(1, "Interface Setting");
+	document.write('<table width="600" class="STtable" border="1">');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="178" bgcolor="#D9E3E9" >');
+	document.write('<input type="hidden" id=BaLanceMode name="BaLanceMode" value=\'<!--#nk_get BalanceMode=""-->\'>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Interface');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="177" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Mode');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="padding: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding: 0px; width:1px"></td>');	
+	document.write('<td  bgcolor="#D9E3E9" >');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Configuration');
+	document.write('</td>')
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>')
+	document.write('</tr>');
+
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');
+	document.write('<tr class="OddRow" >');	
+	document.write('<td width="30%" >WAN1</td>');
+	document.write('<td width="30%" ><!--#nk_get InterfaceMode="1"--></td>');	
+	document.write('<td  >');	
+	document.write('<a href=\'javascript: editInterface(1)\'><img src=images/edit.gif width=20 height=16 border=0 title=Edit></a>');	 
+	document.write('</td>')
+	document.write('</tr>');
+	if( parseInt(document.formdualwan.wanNumber.value,10) >= 2)
+		Print_table_tr_cell("EvenRow","WAN2",'<!--#nk_get InterfaceMode="2"-->',"2");
+	if( parseInt(document.formdualwan.wanNumber.value,10) >= 3)
+		Print_table_tr_cell("OddRow","WAN3",'<!--#nk_get InterfaceMode="4"-->',"3");
+	if( parseInt(document.formdualwan.wanNumber.value,10) >= 4)
+		Print_table_tr_cell("EvenRow","WAN4",'<!--#nk_get InterfaceMode="8"-->',"4");
+	if( parseInt(document.formdualwan.wanNumber.value,10) >= 5)
+		Print_table_tr_cell("OddRow","WAN5",'<!--#nk_get InterfaceMode="16"-->',"5");
+	if( parseInt(document.formdualwan.wanNumber.value,10) >= 6)
+		Print_table_tr_cell("EvenRow","WAN6",'<!--#nk_get InterfaceMode="32"-->',"6");
+	if( parseInt(document.formdualwan.wanNumber.value,10) >= 7)
+		Print_table_tr_cell("OddRow","WAN7",'<!--#nk_get InterfaceMode="64"-->',"7");
+	document.write('</table>');
+	document.write('</td>')
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine,1);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <form name="formdualwan" method="post" action="">
+      <input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+    </form>
+	
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 1);		// Set Selected Node
+   	  if (document.formdualwan.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formsys_dualwan2" method="post" action="sys_dualwan2.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="DmzMode" value='<!--#nk_get DMZModeCheck=""-->'>	
+	<input type="hidden" name="editInterface" value='<!--#nk_get WanEditInterface=""-->'>
+
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="sys_dualwan2.htm"-->
+<!--#nk_get DualwanUpdate=""-->

@@ -1,0 +1,80 @@
+version 1,6,1,1(May 31 2007)
+--------------------------------
+Version changed for release.
+1.component versions
+	a. XTunnel.dll	- 1.6.1.1
+	b. SSLDrv.sys	- 1.6.1.1
+	c. SSLSrv.txt	- 1.0.1.1
+	d. XTunnel.inf	- 1.0.0.1
+	e. UninstallVTPassage - 1.6.1.1
+	f. Product Version - 1.6.1.0
+2. Refer Individual ChangeLog.txt files to track changes.
+
+version 1,5,1,1(January 12 2007)
+--------------------------------
+Version changed for release.
+1.component versions
+	a. XTunnel.dll	- 1.5.1.1
+	b. SSLDrv.sys	- 1.5.1.1
+	c. SSLSrv.txt	- 1.0.1.1
+	d. XTunnel.inf	- 1.0.0.1
+	e. UninstallVTPassage - 1.5.1.1
+	f. Product Version - 1.5.1.0
+2. Refer Individual ChangeLog.txt files to track changes.
+
+version 1,5,0,1(october 17 2006)
+--------------------------------
+Version changed for release.
+1.component versions
+	a. XTunnel.dll	- 1.5.0.1
+	b. SSLDrv.sys	- 1.5.0.1
+	c. SSLSrv.txt	- 1.0.0.1
+	d. XTunnel.inf	- 1.0.0.1
+	e. UninstallVTPassage - 1.5.0.1
+	f. Product Version - 1.5.0.0
+2. Refer Individual ChangeLog.txt files to track changes.
+
+Version 1,4,1,1(March 31 2006)
+------------------------------
+Version changed for release.
+1.component versions
+	a. XTunnel.dll	- 1.4.1.1
+	b. SSLDrv.sys	- 1.4.0.1
+	c. SSLSrv.txt	- 1.0.0.1
+	d. XTunnel.inf	- 1.0.0.1
+	e. UninstallVTPassage - 1.4.1.1
+	f. Product Version - 1.4.1.0
+2. Refer Individual ChangeLog.txt files to track changes.
+
+Version 1,4,0,2(Feb 28 2006)
+------------------------------
+1. Component Versions
+	a. XTunnel.dll	- 1.4.0.2
+	b. SSLDrv.sys	- 1.4.0.1
+	c. SSLSrv.txt	- 1.0.0.1
+	d. XTunnel.inf	- 1.0.0.1
+	e. UninstallVTPassage - 1.4.0.1
+	f. Product Version - 1.4.0.0
+2. Refer Individual ChangeLog.txt files to track changes.
+
+Version 1,4,0,1(Jan 09 2006)
+------------------------------
+1. Component Versions
+	a. XTunnel.dll	- 1.4.0.1
+	b. SSLDrv.sys	- 1.4.0.1
+	c. SSLSrv.txt	- 1.0.0.1
+	d. XTunnel.inf	- 1.0.0.1
+	e. UninstallVTPassage - 1.4.0.1
+	f. Product Version - 1.4.0.0
+2. Refer Individual ChangeLog.txt files to track changes.
+
+Version 1,3,0,1(July 27 2005)
+------------------------------
+1. Component Versions
+	a. XTunnel.dll	- 1.3.0.1
+	b. SSLDrv.sys	- 1.3.0.1
+	c. SSLSrv.txt	- 1.0.0.1
+	d. XTunnel.inf	- 1.0.0.1
+	e. UninstallVTPassage - 1.3.0.1
+	f. Product Version - 1.3.0.0
+2. Refer Individual ChangeLog.txt files to track changes.

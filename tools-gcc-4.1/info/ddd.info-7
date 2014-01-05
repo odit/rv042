@@ -1,0 +1,1314 @@
+This is ../../../src/ddd/ddd/ddd.info, produced by makeinfo version 4.3
+from ../../../src/ddd/ddd/ddd.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD: (ddd).                     The Data Display Debugger.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 15 January, 2004, of `Debugging with DDD'
+for DDD Version 3.3.11.
+
+Copyright (C) 2004 Universität des Saarlandes
+Lehrstuhl Softwaretechnik
+Postfach 15 11 50
+66041 Saarbrücken
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd.info,  Node: Plotting Histories,  Next: Printing Plots,  Prev: Scalars and Composites,  Up: Plotting Values
+
+Plotting Display Histories
+--------------------------
+
+   At each program stop, DDD records the values of all displayed
+variables, such that you can "undo" program execution (*note Undoing
+Program Execution::).  These _display histories_ can be plotted, too.
+The menu item `Plot => Plot history of ()' creates a plot that shows
+all previously recorded values of the selected display.
+
+
+File: ddd.info,  Node: Printing Plots,  Next: Entering Plotting Commands,  Prev: Plotting Histories,  Up: Plotting Values
+
+Printing Plots
+--------------
+
+   If you want to print the plot, select `File => Print Plot'.  This
+pops up the DDD printing dialog, set up for printing plots.  Just as
+when printing graphs, you have the choice between printing to a printer
+or a file and setting up appropriate options.
+
+   The actual printing is also performed by Gnuplot, using the
+appropriate driver.  Please note the following _caveats_ related to
+printing:
+
+   * Creating `FIG' files requires an appropriate driver built into
+     Gnuplot.  Your Gnuplot program may not contain such a driver.  In
+     this case, you will have to recompile Gnuplot, including the line
+     `#define FIG' in the Gnuplot `term.h' file.
+
+   * The `Portrait' option generates an EPS file useful for inclusion
+     in other documents.  The `Landscape' option makes DDD print the
+     plot in the size specified in the `Paper Size' option; this is
+     useful for printing on a printer.  In `Portrait' mode, the `Paper
+     Size' option is ignored.
+
+   * The Gnuplot device drivers for PostScript and X11 each have their
+     own set of colors, such that the printed colors may differ from the
+     displayed colors.
+
+   * The `Selected Only' option is set by default, such that only the
+     currently selected plot is printed.  (If you select multiple plots
+     to be printed, the respective outputs will all be concatenated,
+     which may not be what you desire.)
+
+
+File: ddd.info,  Node: Entering Plotting Commands,  Next: Exporting Plot Data,  Prev: Printing Plots,  Up: Plotting Values
+
+Entering Plotting Commands
+--------------------------
+
+   Via `File => Command', you can enter Gnuplot commands directly.
+Each command entered at the `gnuplot>' prompt is passed to Gnuplot,
+followed by a Gnuplot `replot' command to update the view.  This is
+useful for advanced Gnuplot tasks.
+
+   Here's a simple example.  The Gnuplot command
+
+     set xrange [XMIN:XMAX]
+
+sets the horizontal range that will be displayed to XMIN...XMAX.  To
+plot only the elements 10 to 20, enter:
+
+     gnuplot> set xrange [10:20]
+     gnuplot> _
+
+   After each command entered, DDD adds a `replot' command, such that
+the plot is updated automatically.
+
+   Here's a more complex example.  The following sequence of Gnuplot
+commands saves the plot in TeX format:
+
+     gnuplot> set output "plot.tex" # Set the output filename
+     gnuplot> set term latex        # Set the output format
+     gnuplot> set term x11          # Show original picture again
+     gnuplot> _
+
+   Due to the implicit `replot' command, the output is automatically
+written to `plot.tex' after the `set term latex' command.
+
+   The dialog keeps track of the commands entered; use the arrow keys to
+restore previous commands.  Gnuplot error messages (if any) are also
+shown in the history area.
+
+   The interaction between DDD and Gnuplot is logged in the file
+`~/.ddd/log' (*note Logging::).  The DDD `--trace' option logs this
+interaction on standard output.
+
+
+File: ddd.info,  Node: Exporting Plot Data,  Next: Animating Plots,  Prev: Entering Plotting Commands,  Up: Plotting Values
+
+Exporting Plot Data
+-------------------
+
+   If you want some external program to process the plot data (a
+stand-alone Gnuplot program or the `xmgr' program, for instance), you
+can save the plot data in a file, using `File => Save Data As'.  This
+pops up a dialog that lets you choose a data file to save the plotted
+data in.
+
+   The generated file starts with a few comment lines.  The actual data
+follows in X/Y or X/Y/Z format.  It is the same file as processed by
+Gnuplot.
+
+
+File: ddd.info,  Node: Animating Plots,  Next: Customizing Plots,  Prev: Exporting Plot Data,  Up: Plotting Values
+
+Animating Plots
+---------------
+
+   If you want to see how your data evolves in time, you can set a
+breakpoint whose command sequence ends in a `cont' command (*note
+Breakpoint Commands::.  Each time this "continue" breakpoint is
+reached, the program stops and DDD updates the displayed values,
+including the plots.  Then, DDD executes the breakpoint command
+sequence, resuming execution.
+
+   This way, you can set a "continue" breakpoint at some decisive point
+within an array-processing algorithm and have DDD display the progress
+graphically.  When your program has stopped for good, you can use
+`Undo' and `Redo' to redisplay and examine previous program states.
+*Note Undoing Program Execution::, for details.
+
+
+File: ddd.info,  Node: Customizing Plots,  Prev: Animating Plots,  Up: Plotting Values
+
+Customizing Plots
+-----------------
+
+   You can customize the Gnuplot program to invoke, as well as a number
+of basic settings.
+
+* Menu:
+
+* Gnuplot Invocation::
+* Gnuplot Settings::
+
+
+File: ddd.info,  Node: Gnuplot Invocation,  Next: Gnuplot Settings,  Up: Customizing Plots
+
+Gnuplot Invocation
+..................
+
+   Using `Edit => Preferences => Helpers => Plot', you can choose the
+Gnuplot program to invoke.  This is tied to the following resource:
+
+ - Resource: plotCommand (class PlotCommand)
+     The name of a Gnuplot executable.  Default is `gnuplot', followed
+     by some options to set up colors and the initial geometry.
+
+   Using `Edit => Preferences => Helpers => Plot Window', you can
+choose whether to use the Gnuplot plot window (`External') or to use
+the plot window supplied by DDD (`builtin').  This is tied to the
+following resource:
+
+ - Resource: plotTermType (class PlotTermType)
+     The Gnuplot terminal type.  Can have one of two values:
+        * If this is `x11', DDD "swallows" the _external_ Gnuplot
+          output window into its own user interface.  Some window
+          managers, notably `mwm', have trouble with swallowing
+          techniques.
+
+        * Setting this resource to `xlib' (default) makes DDD provide a
+          _builtin plot window_ instead.  In this mode, plots work well
+          with any window manager, but are less customizable (Gnuplot
+          resources are not understood).
+
+   You can further control interaction with the external plot window:
+
+ - Resource: plotWindowClass (class PlotWindowClass)
+     The class of the Gnuplot output window.  When invoking Gnuplot,
+     DDD waits for a window with this class and incorporates it into
+     its own user interface (unless `plotTermType' is `xlib'; see
+     above).  Default is `Gnuplot'.
+
+ - Resource: plotWindowDelay (class WindowDelay)
+     The time (in ms) to wait for the creation of the Gnuplot window.
+     Before this delay, DDD looks at each newly created window to see
+     whether this is the plot window to swallow.  This is cheap, but
+     unfortunately, some window managers do not pass the creation event
+     to DDD.  If this delay has passed, and DDD has not found the plot
+     window, DDD searches _all_ existing windows, which is pretty
+     expensive.  Default time is `2000'.
+
+
+File: ddd.info,  Node: Gnuplot Settings,  Prev: Gnuplot Invocation,  Up: Customizing Plots
+
+Gnuplot Settings
+................
+
+   To change Gnuplot settings, use these resources:
+
+ - Resource: plotInitCommands (class PlotInitCommands)
+     The initial Gnuplot commands issued by DDD.  Default is:
+
+          set parametric
+          set urange [0:1]
+          set vrange [0:1]
+          set trange [0:1]
+
+     The `parametric' setting is required to make Gnuplot understand the
+     data files as generated DDD.  The range commands are used to plot
+     scalars.
+
+   See the Gnuplot documentation for additional commands.
+
+ - Resource: plot2dSettings (class PlotSettings)
+     Additional initial settings for 2-D plots.  Default is `set
+     noborder'.  Feel free to customize these settings as desired.
+
+ - Resource: plot3dSettings (class PlotSettings)
+     Additional initial settings for 3-D plots.  Default is `set
+     border'.  Feel free to customize these settings as desired.
+
+
+File: ddd.info,  Node: Examining Memory,  Prev: Plotting Values,  Up: Examining Data
+
+Examining Memory
+================
+
+   Using GDB or DBX, you can examine memory in any of several formats,
+independently of your program's data types.  The item `Data => Memory'
+pops up a panel where you can choose the format to be shown.
+
+   In the panel, you can enter
+
+   * a "repeat count", a decimal integer that specifies how much memory
+     (counting by units) to display
+
+   * a "display format"--one of
+
+    `octal'
+          Print as integer in octal
+
+    `hex'
+          Regard the bits of the value as an integer, and print the
+          integer in hexadecimal.
+
+    `decimal'
+          Print as integer in signed decimal.
+
+    `unsigned'
+          Print as integer in unsigned decimal.
+
+    `binary'
+          Print as integer in binary.
+
+    `float'
+          Regard the bits of the value as a floating point number and
+          print using typical floating point syntax.
+
+    `address'
+          Print as an address, both absolute in hexadecimal and as an
+          offset from the nearest preceding symbol.
+
+    `instruction'
+          Print as machine instructions.  The unit size is ignored for
+          this display format.
+
+    `char'
+          Regard as an integer and print it as a character constant.
+
+    `string'
+          Print as null-terminated string.  The unit size is ignored
+          for this display format.
+
+   * a "unit size"--one of
+
+    `bytes'
+          Bytes.
+
+    `halfwords'
+          Halfwords (two bytes).
+
+    `words'
+          Words (four bytes).
+
+    `giants'
+          Giant words (eight bytes).
+
+   * an "address"--the starting display address.  The expression need
+     not have a pointer value (though it may); it is always interpreted
+     as an integer address of a byte of memory.
+
+   There are two ways to examine the values:
+
+   * You can dump the memory in the debugger console (using `Print').
+     If you repeat the resulting `x' command by pressing <Return> in
+     the debugger console (*note Command History::), the following area
+     of memory is shown.
+
+   * You can also display the memory dump in the data window (using
+     `Display').  If you choose to display the values, the values will
+     be updated automatically each time the program stop.
+
+
+File: ddd.info,  Node: Machine-Level Debugging,  Next: Changing the Program,  Prev: Examining Data,  Up: Top
+
+Machine-Level Debugging
+***********************
+
+   Sometimes, it is desirable to examine a program not only at the
+source level, but also at the machine level.  DDD provides special
+machine code and register windows for this task.
+
+* Menu:
+
+* Machine Code::                Examining machine code.
+* Machine Code Execution::      Stepping across instructions.
+* Registers::                   Examining registers.
+* Customizing Machine Code::    Settings.
+
+
+File: ddd.info,  Node: Machine Code,  Next: Machine Code Execution,  Up: Machine-Level Debugging
+
+Examining Machine Code
+======================
+
+   To enable machine-level support, select `Source => Display Machine
+Code'.  With machine code enabled, an additional _machine code window_
+shows up, displaying the machine code of the current function.(1)  By
+moving the sash at the right of the separating line between source and
+machine code, you can resize the source and machine code windows.
+
+   The machine code window works very much like the source window.  You
+can set, clear, and change breakpoints by selecting the address and
+pressing a `Break' or `Clear' button; the usual popup menus are also
+available.  Breakpoints and the current execution position are displayed
+simultaneously in both source and machine code.
+
+   The `Lookup' button can be used to look up the machine code for a
+specific function--or the function for a specific address.  Just click
+on the location in one window and press `Lookup' to see the
+corresponding code in the other window.
+
+   If source code is not available, only the machine code window is
+updated.
+
+   You can customize various aspects of the disassembling window.
+*Note Customizing Machine Code::, for details.
+
+   ---------- Footnotes ----------
+
+   (1) The machine code window is available with GDB and some DBX
+variants only.
+
+
+File: ddd.info,  Node: Machine Code Execution,  Next: Registers,  Prev: Machine Code,  Up: Machine-Level Debugging
+
+Machine Code Execution
+======================
+
+   All execution facilities available in the source code window are
+available in the machine code window as well.  Two special facilities
+are convenient for machine-level debugging:
+
+   To execute just one machine instruction, click on the `Stepi' button
+or select `Program => Step Instruction'.
+
+   To continue to the next instruction in the current function, click on
+the `Nexti' button select `Program => Next Instruction'..  This is
+similar to `Stepi', but any subroutine calls are executed without
+stopping.
+
+   Using GDB, it is often useful to do
+
+     graph display /i $pc
+
+when stepping by machine instructions.  This makes DDD automatically
+display the next instruction to be executed, each time your program
+stops.
+
+
+File: ddd.info,  Node: Registers,  Next: Customizing Machine Code,  Prev: Machine Code Execution,  Up: Machine-Level Debugging
+
+Examining Registers
+===================
+
+   DDD provides a _register window_ showing the machine register values
+after each program stop.  To enable the register window, select `Status
+=> Registers'.(1)
+
+   By selecting one of the registers, its name is copied to the argument
+field.  You can use it as value for `Display', for instance, to have
+its value displayed in the data window.
+
+   ---------- Footnotes ----------
+
+   (1) The machine code window is available with GDB and some DBX
+variants only.
+
+
+File: ddd.info,  Node: Customizing Machine Code,  Prev: Registers,  Up: Machine-Level Debugging
+
+Customizing Machine Code
+========================
+
+   Enabling machine code via `Source => Display Machine Code' (*note
+Machine Code::) toggles the following resource:
+
+ - Resource: disassemble (class Disassemble)
+     If this is `on', the source code is automatically disassembled.
+     The default is `off'.  *Note Options::, for the `--disassemble'
+     and `--no-disassemble' options.
+
+   You can keep disassembled code in memory, using `Edit => Preferences
+=> Source => Cache Machine Code':
+
+ - Resource: cacheMachineCode (class CacheMachineCode)
+     Whether to cache disassembled machine code (`on', default) or not
+     (`off').  Caching machine code requires more memory, but makes DDD
+     run faster.
+
+   You can control the indentation of machine code, using `Edit =>
+Preferences => Source => Machine Code Indentation':
+
+ - Resource: indentCode (class Indent)
+     The number of columns to indent the machine code, such that there
+     is enough place to display breakpoint locations.  Default: `4'.
+
+   The `maxDisassemble' resource controls how much is to be
+disassembled.  If `maxDisassemble' is set to 256 (default) and the
+current function is larger than 256 bytes, DDD only disassembles the
+first 256 bytes below the current location.  You can set the
+`maxDisassemble' resource to a larger value if you prefer to have a
+larger machine code view.
+
+ - Resource: maxDisassemble (class MaxDisassemble)
+     Maximum number of bytes to disassemble (default: `256').  If this
+     is zero, the entire current function is disassembled.
+
+
+File: ddd.info,  Node: Changing the Program,  Next: Commands,  Prev: Machine-Level Debugging,  Up: Top
+
+Changing the Program
+********************
+
+   DDD offers some basic facilities to edit and recompile the source
+code, as well as patching executables and core files.
+
+* Menu:
+
+* Editing Source Code::         You can invoke a source editor from DDD.
+* Recompiling::                 Invoking `make' from within DDD.
+* Patching::                    Changing source and object code.
+
+
+File: ddd.info,  Node: Editing Source Code,  Next: Recompiling,  Up: Changing the Program
+
+Editing Source Code
+===================
+
+   In DDD itself, you cannot change the source file currently
+displayed.  Instead, DDD allows you to invoke a _text editor_.  To
+invoke a text editor for the current source file, select the `Edit'
+button or `Source => Edit Source'.
+
+   By default, DDD tries a number of common editors.  You can customize
+DDD to use your favorite editor; *Note Customizing Editing::, for
+details.
+
+   After the editor has exited, the source code shown is automatically
+updated.
+
+   If you have DDD and an editor running in parallel, you can also
+update the source code manually via `Source => Reload Source'.  This
+reloads the source code shown from the source file.  Since DDD
+automatically reloads the source code if the debugged program has been
+recompiled, this should seldom be necessary.
+
+* Menu:
+
+* Customizing Editing::
+* In-Place Editing::
+
+
+File: ddd.info,  Node: Customizing Editing,  Next: In-Place Editing,  Up: Editing Source Code
+
+Customizing Editing
+-------------------
+
+   You can customize the editor to be used via `Edit => Preferences =>
+Helpers => Edit Sources'.  This is tied to the following resource:
+
+ - Resource: editCommand (class EditCommand)
+     A command string to invoke an editor on the specific file.
+     `@LINE@' is replaced by the current line number, `@FILE@' by the
+     file name.  The default is to invoke `$XEDITOR' first, then
+     `$EDITOR', then `vi':
+
+          Ddd*editCommand: \
+          ${XEDITOR-false} +@LINE@ @FILE@ || \
+          xterm -e ${EDITOR-vi} +@LINE@ @FILE@
+
+   This `~/.ddd/init' setting invokes an editing session for an XEmacs
+editor running `gnuserv':
+
+     Ddd*editCommand: gnuclient +@LINE@ @FILE@
+
+   This `~/.ddd/init' setting invokes an editing session for an Emacs
+editor running `emacsserver':
+
+     Ddd*editCommand: emacsclient +@LINE@ @FILE@
+
+
+File: ddd.info,  Node: In-Place Editing,  Prev: Customizing Editing,  Up: Editing Source Code
+
+In-Place Editing
+----------------
+
+   This resource is experimental:
+
+ - Resource: sourceEditing (class SourceEditing)
+     If this is `on', the displayed source code becomes editable.  This
+     is an experimental feature; Default is `off'.
+
+
+File: ddd.info,  Node: Recompiling,  Next: Patching,  Prev: Editing Source Code,  Up: Changing the Program
+
+Recompiling
+===========
+
+   To recompile the source code using `make', you can select `File =>
+Make'.  This pops up a dialog where you can enter a _Make
+Target_--typically the name of the executable.  Clicking on the `Make'
+button invokes the `make' program with the given target.
+
+   The `Make' button on the command tool re-invokes `make' with the
+most recently given arguments.
+
+
+File: ddd.info,  Node: Patching,  Prev: Recompiling,  Up: Changing the Program
+
+Patching
+========
+
+   Using GDB, you can open your program's executable code (and the core
+file) for both reading and writing.  This allows alterations to machine
+code, such that you can intentionally patch your program's binary.  For
+example, you might want to turn on internal debugging flags, or even to
+make emergency repairs.
+
+   Note that depending on your operating system, special preparation
+steps, such as setting permissions, may be needed before you can change
+executable files.
+
+   To patch the binary, enable `Edit => GDB Settings => Writing into
+executable and core files'.  This makes GDB open executable and core
+files for both reading and writing.  If you have already loaded a file,
+you must load it again (using `Edit => Open File' or `Edit => Open
+Core'), for your new setting to take effect.
+
+   Be sure to turn off `Writing into executable and core files' as soon
+as possible, to prevent accidental alterations to machine code.
+
+
+File: ddd.info,  Node: Commands,  Next: Application Defaults,  Prev: Changing the Program,  Up: Top
+
+The Command-Line Interface
+**************************
+
+   All the buttons you click within DDD get eventually translated into
+some debugger command, shown in the debugger console.  You can also
+type in and edit these commands directly.
+
+* Menu:
+
+* Entering Commands::           Direct interaction with the inferior debugger.
+* TTY mode::                    Controlling DDD from a terminal.
+* Integrating DDD::          DDD and your programming environment.
+* Defining Buttons::            Add your own DDD buttons.
+* Defining Commands::           Add your own DDD commands.
+
+
+File: ddd.info,  Node: Entering Commands,  Next: TTY mode,  Up: Commands
+
+Entering Commands
+=================
+
+   In the _debugger console_, you can interact with the command
+interface of the inferior debugger.  Enter commands at the _debugger
+prompt_--that is, `(gdb)' for GDB, `(dbx)' for DBX, `(ladebug)' for
+Ladebug, `>' for XDB, `>' and `THREAD[DEPTH]' for JDB, or `(Pydb)' for
+PYDB, or `DB<>' for Perl, or `bashdb<>' for Bash.  You can use
+arbitrary debugger commands; use the <Return> key to enter them.
+
+* Menu:
+
+* Command Completion::          Using the <TAB> key.
+* Command History::             Repeating previous commands.
+* Typing in the Source Window::
+
+
+File: ddd.info,  Node: Command Completion,  Next: Command History,  Up: Entering Commands
+
+Command Completion
+------------------
+
+   When using GDB or Perl, you can use the <TAB> key for _completing_
+commands and arguments.  This works in the debugger console as well as
+in all other text windows.
+
+   GDB can fill in the rest of a word in a command for you, if there is
+only one possibility; it can also show you what the valid possibilities
+are for the next word in a command, at any time.  This works for GDB
+commands, GDB subcommands, and the names of symbols in your program.
+
+   Press the <TAB> key whenever you want GDB to fill out the rest of a
+word.  If there is only one possibility, GDB fills in the word, and
+waits for you to finish the command (or press <RET> to enter it).  For
+example, if you type
+     (gdb) info bre_<TAB>
+
+GDB fills in the rest of the word `breakpoints', since that is the only
+`info' subcommand beginning with `bre':
+
+     (gdb) info breakpoints
+
+You can either press <RET> at this point, to run the `info breakpoints'
+command, or backspace and enter something else, if `breakpoints' does
+not look like the command you expected.  (If you were sure you wanted
+`info breakpoints' in the first place, you might as well just type
+<RET> immediately after `info bre', to exploit command abbreviations
+rather than command completion).
+
+   If there is more than one possibility for the next word when you
+press <TAB>, DDD sounds a bell.  You can either supply more characters
+and try again, or just press <TAB> a second time; GDB displays all the
+possible completions for that word.  For example, you might want to set
+a breakpoint on a subroutine whose name begins with `make_', but when
+you type `b make_<TAB>', DDD just sounds the bell.  Typing <TAB> again
+displays all the function names in your program that begin with those
+characters.  If you type <TAB> again, you cycle through the list of
+completions, for example:
+
+     (gdb) b make_ <TAB>
+DDD sounds bell; press <TAB> again, to see:
+     make_a_section_from_file     make_environ
+     make_abs_section             make_function_type
+     make_blockvector             make_pointer_type
+     make_cleanup                 make_reference_type
+     make_command                 make_symbol_completion_list
+     (gdb) b make_ <TAB>
+DDD presents one expansion after the other:
+     (gdb) b make_a_section_from_file <TAB>
+     (gdb) b make_abs_section <TAB>
+     (gdb) b make_blockvector <TAB>
+
+After displaying the available possibilities, GDB copies your partial
+input (`b make_' in the example) so you can finish the command--by
+pressing <TAB> again, or by entering the remainder manually.
+
+   Sometimes the string you need, while logically a "word", may contain
+parentheses or other characters that GDB normally excludes from its
+notion of a word.  To permit word completion to work in this situation,
+you may enclose words in `'' (single quote marks) in GDB commands.
+
+   The most likely situation where you might need this is in typing the
+name of a C++ function.  This is because C++ allows function overloading
+(multiple definitions of the same function, distinguished by argument
+type).  For example, when you want to set a breakpoint you may need to
+distinguish whether you mean the version of `name' that takes an `int'
+parameter, `name(int)', or the version that takes a `float' parameter,
+`name(float)'.  To use the word-completion facilities in this
+situation, type a single quote `'' at the beginning of the function
+name.  This alerts GDB that it may need to consider more information
+than usual when you press <TAB> to request word completion:
+
+     (gdb) b 'bubble(_<TAB>
+     bubble(double,double)    bubble(int,int)
+     (gdb) b 'bubble(_
+
+   In some cases, DDD can tell that completing a name requires using
+quotes.  When this happens, DDD inserts the quote for you (while
+completing as much as it can) if you do not type the quote in the first
+place:
+
+     (gdb) b bub_<TAB>
+DDD alters your input line to the following, and rings a bell:
+     (gdb) b 'bubble(_
+
+In general, DDD can tell that a quote is needed (and inserts it) if you
+have not yet started typing the argument list when you ask for
+completion on an overloaded symbol.
+
+   If you prefer to use the <TAB> key for switching between items,
+unset `Edit => Preferences => General => TAB Key completes in All
+Windows'.  This is useful if you have pointer-driven keyboard focus
+(see below) and no special usage for the <TAB> key.  If the option is
+set, the <TAB> key completes in the debugger console only.
+
+   This option is tied to the following resource:
+
+ - Resource: globalTabCompletion (class GlobalTabCompletion)
+     If this is `on' (default), the <TAB> key completes arguments in
+     all windows.  If this is `off', the <TAB> key completes arguments
+     in the debugger console only.
+
+
+File: ddd.info,  Node: Command History,  Next: Typing in the Source Window,  Prev: Command Completion,  Up: Entering Commands
+
+Command History
+---------------
+
+   You can _repeat_ previous and next commands by pressing the <Up> and
+<Down> arrow keys, respectively.  This presents you previous and later
+commands on the command line; use <Return> to apply the current command.
+
+   If you enter an empty line (just use <Return> at the debugger
+prompt), the last command is repeated as well.
+
+   `Commands => Command History' shows the command history.
+
+   You can _search_ for previous commands by pressing <Ctrl+B>.  This
+invokes _incremental search mode,_ where you can enter a string to be
+searched in previous commands.  Press <Ctrl+B> again to repeat the
+search, or <Ctrl+F> to search in the reverse direction.  To return to
+normal mode, press <ESC>, or use any cursor command.
+
+   The command history is automatically saved when exiting DDD.  You
+can turn off this feature by setting the following resource to `off':
+
+ - Resource: saveHistoryOnExit (class SaveOnExit)
+     If `on' (default), the command history is automatically saved when
+     DDD exits.
+
+
+File: ddd.info,  Node: Typing in the Source Window,  Prev: Command History,  Up: Entering Commands
+
+Typing in the Source Window
+---------------------------
+
+   As a special convenience, anything you type into the source window is
+automatically forwarded to the debugger console.  Thus, you don't have
+to change the keyboard focus explicitly in order to enter commands.
+
+   You can change this behaviour using the following resource:
+
+ - Resource: consoleHasFocus (class ConsoleHasFocus)
+     If `on' (default), all keyboard events in the source window are
+     automatically forwarded to the debugger console.  If `off',
+     keyboard events are not forwarded.  If `auto', keyboard events
+     forwarded only if the debugger console is open.
+
+
+File: ddd.info,  Node: TTY mode,  Next: Integrating DDD,  Prev: Entering Commands,  Up: Commands
+
+Entering Commands at the TTY
+============================
+
+   Rather than entering commands at the debugger console, you may
+prefer to enter commands at the terminal window DDD was invoked from.
+
+   When DDD is invoked using the `--tty' option, it enables its _TTY
+interface_, taking additional debugger commands from standard input and
+forwarding debugger output to standard output, just as if the inferior
+debugger had been invoked directly.  All remaining DDD functionality
+stays unchanged.
+
+   By default, the debugger console remains closed if DDD is invoked
+using the `--tty' option.  Use `View => Debugger Console' to open it.
+
+   DDD can be configured to use the `readline' library for reading in
+commands from standard input.  This GNU library provides consistent
+behavior for programs which provide a command line interface to the
+user.  Advantages are GNU Emacs-style or "vi"-style inline editing of
+commands, `csh'-like history substitution, and a storage and recall of
+command history across debugging sessions.  *Note Command Line Editing:
+(gdb)Command Line Editing, for details on command-line editing via the
+TTY interface.
+
+
+File: ddd.info,  Node: Integrating DDD,  Next: Defining Buttons,  Prev: TTY mode,  Up: Commands
+
+Integrating DDD
+===============
+
+   You can run DDD as an inferior debugger in other debugger
+front-ends, combining their special abilities with those of DDD.
+
+   To have DDD run as an inferior debugger in other front-ends, the
+general idea is to set up your debugger front-end such that `ddd --tty'
+is invoked instead of the inferior debugger.  When DDD is invoked using
+the `--tty' option, it enables its _TTY interface_, taking additional
+debugger commands from standard input and forwarding debugger output to
+standard output, just as if the inferior debugger had been invoked
+directly.  All remaining DDD functionality stays unchanged.
+
+   In case your debugger front-end uses the GDB `-fullname' option to
+have GDB report source code positions, the `--tty' option is not
+required.  DDD recognizes the `-fullname' option, finds that it has
+been invoked from a debugger front-end and automatically enables the
+TTY interface.
+
+   If DDD is invoked with the `-fullname' option, the debugger console
+and the source window are initially disabled, as their facilities are
+supposed to be provided by the integrating front-end.  In case of need,
+you can use the `View' menu to re-enable these windows.
+
+Using DDD with Emacs
+--------------------
+
+   To integrate DDD with Emacs, use `M-x gdb' or `M-x dbx' in Emacs to
+start a debugging session.  At the prompt, enter `ddd --tty' (followed
+by `--dbx' or `--gdb', if required), and the name of the program to be
+debugged.  Proceed as usual.
+
+Using DDD with XEmacs
+---------------------
+
+   To integrate DDD with XEmacs, set the variable `gdb-command-name' to
+`"ddd"', by inserting the following line in your `~/.emacs' file:
+
+     (setq gdb-command-name "ddd")
+
+   You can also evaluate this expression by pressing <ESC> <:> and
+entering it directly (<ESC> <ESC> for XEmacs 19.13 and earlier).
+
+   To start a DDD debugging session in XEmacs, use `M-x gdb' or `M-x
+gdbsrc'.  Proceed as usual.
+
+Using DDD with XXGDB
+--------------------
+
+   To integrate DDD with XXGDB, invoke `xxgdb' as
+
+     xxgdb -db_name ddd -db_prompt '(gdb) '
+
+
+File: ddd.info,  Node: Defining Buttons,  Next: Defining Commands,  Prev: Integrating DDD,  Up: Commands
+
+Defining Buttons
+================
+
+   To facilitate interaction, you can add own command buttons to DDD.
+These buttons can be added below the debugger console (`Console
+Buttons'), the source window (`Source Buttons'), or the data window
+(`Data Buttons').
+
+   To define individual buttons, use the _Button Editor_, invoked via
+`Commands => Edit Buttons'.  The button editor displays a text, where
+each line contains the command for exactly one button.  Clicking on
+`OK' creates the appropriate buttons from the text.  If the text is
+empty (the default), no button is created.
+
+   As a simple example, assume you want to create a `print i' button.
+Invoke `Commands => Edit Buttons' and enter a line saying `print i' in
+the button editor.  Then click on `OK'.  A button named `Print i' will
+now appear below the debugger console--try it!  To remove the button,
+reopen the button editor, clear the `print i' line and press `OK' again.
+
+   If a button command contains `()', the string `()' will
+automatically be replaced by the contents of the argument field.  For
+instance, a button named `return ()' will execute the GDB `return'
+command with the current content of the argument field as argument.
+
+   By default, DDD disables buttons whose commands are not supported by
+the inferior debugger.  To enable such buttons, unset the `Enable
+supported buttons only' toggle in the button editor.
+
+   DDD also allows you to specify control sequences and special labels
+for user-defined buttons.  *Note Customizing Buttons::, for details.
+
+* Menu:
+
+* Customizing Buttons::         Adding your own command buttons.
+
+
+File: ddd.info,  Node: Customizing Buttons,  Up: Defining Buttons
+
+Customizing Buttons
+-------------------
+
+   DDD allows defining additional command buttons; *Note Defining
+Buttons::, for doing this interactively.  This section describes the
+resources that control user-defined buttons.
+
+ - Resource: consoleButtons (class Buttons)
+     A newline-separated list of buttons to be added under the debugger
+     console.  Each button issues the command given by its name.
+
+     The following characters have special meanings:
+        * Commands ending with `...' insert their name, followed by a
+          space, in the debugger console.
+
+        * Commands ending with a control character (that is, `^'
+          followed by a letter or `?') insert the given control
+          character.
+
+        * The string `()' is replaced by the current contents of the
+          argument field `()'.
+
+        * The string specified in the `labelDelimiter' resource (usually
+          `//') separates the command name from the button label.  If no
+          button label is specified, the capitalized command will be
+          used as button label.
+
+     The following button names are reserved:
+
+    `Apply'
+          Send the given command to the debugger.
+
+    `Back'
+          Lookup previously selected source position.
+
+    `Clear'
+          Clear current command
+
+    `Complete'
+          Complete current command.
+
+    `Edit'
+          Edit current source file.
+
+    `Forward'
+          Lookup next selected source position.
+
+    `Make'
+          Invoke the `make' program, using the most recently given
+          arguments.
+
+    `Next'
+          Show next command
+
+    `No'
+          Answer current debugger prompt with `no'.  This button is
+          visible only if the debugger asks a yes/no question.
+
+    `Prev'
+          Show previous command
+
+    `Reload'
+          Reload source file.
+
+    `Yes'
+          Answer current debugger prompt with `yes'.  This button is
+          visible only if the debugger asks a yes/no question.
+
+     The default resource value is empty--no console buttons are
+     created.
+
+     Here are some examples to insert into your `~/.ddd/init' file.
+     These are the settings of DDD 1.x:
+          Ddd*consoleButtons: Yes\nNo\nbreak^C
+
+     This setting creates some more buttons:
+            Ddd*consoleButtons: \
+            Yes\nNo\nrun\nClear\nPrev\nNext\nApply\nbreak^C
+
+     See also the `dataButtons', `sourceButtons' and `toolButtons'
+     resources.
+
+ - Resource: dataButtons (class Buttons)
+     A newline-separated list of buttons to be added under the data
+     display.  Each button issues the command given by its name.  See
+     the `consoleButtons' resource, above, for details on button syntax.
+
+     The default resource value is empty--no source buttons are created.
+
+ - Resource: sourceButtons (class Buttons)
+     A newline-separated list of buttons to be added under the debugger
+     console.  Each button issues the command given by its name.  See
+     the `consoleButtons' resource, above, for details on button syntax.
+
+     The default resource value is empty--no source buttons are created.
+
+     Here are some example to insert into your `~/.ddd/init' file.
+     These are the settings of DDD 1.x:
+
+          Ddd*sourceButtons: \
+            run\nstep\nnext\nstepi\nnexti\ncont\n\
+            finish\nkill\nup\ndown\n\
+            Back\nForward\nEdit\ninterrupt^C
+
+     This setting creates some buttons which are not found on the
+     command tool:
+
+            Ddd*sourceButtons: \
+            print *()\ngraph display *()\nprint /x ()\n\
+            whatis ()\nptype ()\nwatch ()\nuntil\nshell
+
+     An even more professional setting uses customized button labels.
+
+            Ddd*sourceButtons: \
+            print *(()) // Print *()\n\
+            graph display *(()) // Display *()\n\
+            print /x ()\n\
+            whatis () // What is ()\n\
+            ptype ()\n\
+            watch ()\n\
+            until\n\
+            shell
+
+     See also the `consoleButtons' and `dataButtons' resources, above,
+     and the `toolButtons' resource, below.
+
+ - Resource: toolButtons (class Buttons)
+     A newline-separated list of buttons to be included in the command
+     tool or the command tool bar (*note Disabling the Command Tool::).
+     Each button issues the command given by its name.  *Note Defining
+     Buttons::, for details on button syntax.
+
+     The default resource value is
+
+          Ddd*toolButtons: \
+          run\nbreak^C\nstep\nstepi\nnext\nnexti\n\
+          until\nfinish\ncont\n\kill\n\
+          up\ndown\nBack\nForward\nEdit\nMake
+
+     For each button, its location in the command tool must be specified
+     using `XmForm' constraint resources.  See the `Ddd' application
+     defaults file for instructions.
+
+     If the `toolButtons' resource value is empty, the command tool is
+     not created.
+
+   The following resources set up button details:
+
+ - Resource: labelDelimiter (class LabelDelimiter)
+     The string used to separate labels from commands and shortcuts.
+     Default is `//'.
+
+ - Resource: verifyButtons (class VerifyButtons)
+     If `on' (default), verify for each button whether its command is
+     actually supported by the inferior debugger.  If the command is
+     unknown, the button is disabled.  If this resource is `off', no
+     checking is done: all commands are accepted "as is".
+
+
+File: ddd.info,  Node: Defining Commands,  Prev: Defining Buttons,  Up: Commands
+
+Defining Commands
+=================
+
+   Aside from breakpoint commands (*note Breakpoint Commands::), DDD
+also allows you to define user-defined commands.  A _user-defined
+command_ is a sequence of commands to which you assign a new name as a
+command.  This new command can be entered at the debugger prompt or
+invoked via a button.
+
+* Menu:
+
+* GDB Simple Commands::
+* GDB Argument Commands::
+* Commands with Other Debuggers::
+
+
+File: ddd.info,  Node: GDB Simple Commands,  Next: GDB Argument Commands,  Up: Defining Commands
+
+Defining Simple Commands using GDB
+----------------------------------
+
+   Aside from breakpoint commands (see `Breakpoint commands', above),
+DDD also allows you to store sequences of commands as a user-defined
+GDB command.  A _user-defined command_ is a sequence of GDB commands to
+which you assign a new name as a command.  Using DDD, this is done via
+the _Command Editor_, invoked via `Commands => Define Command'.
+
+   A GDB command is created in five steps:
+
+  1. Enter the name of the command in the `Command' field.  Use the
+     drop-down list on the right to select from already defined
+     commands.
+
+  2. Click on `Record' to begin the recording of the command sequence.
+
+  3. Now interact with DDD.  While recording, DDD does not execute
+     commands, but simply records them to be executed when the
+     breakpoint is hit.  The recorded debugger commands are shown in the
+     debugger console.
+
+  4. To stop the recording, click on `End' or enter `end' at the GDB
+     prompt.  To _cancel_ the recording, click on `Interrupt' or press
+     <ESC>.
+
+  5. Click on `Edit >>' to edit the recorded commands.  When done with
+     editing, click on `Edit <<' to close the commands editor.
+
+   After the command is defined, you can enter it at the GDB prompt.
+You may also click on `Execute' to test the given user-defined command.
+
+   For convenience, you can assign a button to the defined command.
+Enabling one of the `Button' locations will add a button with the given
+command to the specified location.  If you want to edit the button,
+select `Commands => Edit Buttons'.  *Note Defining Buttons::, for a
+discussion.
+
+   When user-defined GDB commands are executed, the commands of the
+definition are not printed.  An error in any command stops execution of
+the user-defined command.(1)
+
+   If used interactively, commands that would ask for confirmation
+proceed without asking when used inside a user-defined command.  Many
+GDB commands that normally print messages to say what they are doing
+omit the messages when used in a user-defined command.
+
+   Command definitions are saved across DDD sessions.
+
+   ---------- Footnotes ----------
+
+   (1) If you use DDD commands within command definitions, or if you
+include debugger commands that resume execution, these commands will be
+realized transparently as "auto-commands"--that is, they won't be
+executed directly by the inferior debugger, but result in a command
+string being sent to DDD.  This command string is then interpreted by
+DDD and sent back to the inferior debugger, possibly prefixed by some
+other commands such that DDD can update its state.  *Note Commands with
+Other Debuggers::, for a discussion.
+
+
+File: ddd.info,  Node: GDB Argument Commands,  Next: Commands with Other Debuggers,  Prev: GDB Simple Commands,  Up: Defining Commands
+
+Defining Argument Commands using GDB
+------------------------------------
+
+   If you want to pass arguments to user-defined commands, you can
+enable the `()' toggle button in the Command Editor.  Enabling `()' has
+two effects:
+
+   * While recording commands, all references to the argument field are
+     taken _symbolically_ instead of literally.  The argument field
+     value is frozen to `$arg0', which is how GDB denotes the argument
+     of a user-defined command.  When GDB executes the command, it will
+     replace `$arg0' by the current command argument.
+
+   * When assigning a button to the command, the command will be
+     suffixed by the current contents of the argument field.
+
+   While defining a command, you can toggle the `()' button as you wish
+to switch between using the argument field symbolically and literally.
+
+   As an example, let us define a command `contuntil' that will set a
+breakpoint in the given argument and continue execution.
+
+  1. Enter `contuntil' in the `Command' field.
+
+  2. Enable the `()' toggle button.
+
+  3. Now click on `Record' to start recording.  Note that the contents
+     of the argument field change to `$arg0'.
+
+  4. Click on `Break at ()' to create a breakpoint.  Note that the
+     recorded breakpoint command refers to `$arg0'.
+
+  5. Click on `Cont' to continue execution.
+
+  6. Click on `End' to end recording.  Note that the argument field is
+     restored to its original value.
+
+  7. Finally, click on one of the `Button' locations.  This creates a
+     `Contuntil ()' button where `()' will be replaced by the current
+     contents of the argument field--and thus passed to the `contuntil'
+     command.
+
+  8. You can now either use the `Contuntil ()' button or enter a
+     `contuntil' command at the GDB prompt.  (If you plan to use the
+     command frequently, you may wish to define a `cu' command, which
+     again calls `contuntil' with its argument.  This is a nice
+     exercise.)
+
+   There is a little drawback with argument commands: a user-defined
+command in GDB has no means to access the argument list as a whole; only
+the first argument (up to whitespace) is processed.  This may change in
+future GDB releases.
+
+
+File: ddd.info,  Node: Commands with Other Debuggers,  Prev: GDB Argument Commands,  Up: Defining Commands
+
+Defining Commands using Other Debuggers
+---------------------------------------
+
+   If your inferior debugger allows you to define own command sequences,
+you can also use these user-defined commands within DDD; just enter
+them at the debugger prompt.
+
+   However, you may encounter some problems:
+
+   * In contrast to the well-documented commands of the inferior
+     debugger, DDD does not know what a user-defined command does.
+     This may lead to inconsistencies between DDD and the inferior
+     debugger.  For instance, if your the user-defined command `bp'
+     sets a breakpoint, DDD may not display it immediately, because DDD
+     does not know that `bp' changes the breakpoint state.
+
+   * You cannot use DDD `graph' commands within user-defined commands.
+     This is only natural, because user-defined commands are
+     interpreted by the inferior debugger, which does not know about
+     DDD commands.
+
+   As a solution, DDD provides a simple facility called
+"auto-commands".  If DDD receives any output from the inferior debugger
+in the form `PREFIX COMMAND', it will interpret COMMAND as if it had
+been entered at the debugger prompt.  PREFIX is a user-defined string,
+for example `ddd: '.
+
+   Suppose you want to define a command `gd' that serves as
+abbreviation for `graph display'.  All the command `gd' has to do is to
+issue a string
+
+     ddd: graph display ARGUMENT
+
+   where ARGUMENT is the argument given to `gd'.  Using GDB, this can
+be achieved using the `echo' command.  In your `~/.gdbinit' file,
+insert the lines
+
+     define gd
+       echo ddd: graph display $arg0\n
+     end
+
+   To complete the setting, you must also set the `autoCommandPrefix'
+resource to the `ddd: ' prefix you gave in your command.  In
+`~/.ddd/init', write:
+
+     Ddd*autoCommandPrefix: ddd:\
+
+(Be sure to leave a space after the trailing backslash.)
+
+   Entering `gd foo' will now have the same effect as entering `graph
+display foo' at the debugger prompt.
+
+   Please note: In your commands, you should choose some other prefix
+than `ddd: '.  This is because auto-commands raise a security problem,
+since arbitrary commands can be executed.  Just imagine some malicious
+program issuing a string like `PREFIX shell rm -fr ~' when being
+debugged!  As a consequence, be sure to choose your own PREFIX; it must
+be at least three characters long.
+
+
+File: ddd.info,  Node: Application Defaults,  Next: Bugs,  Prev: Commands,  Up: Top
+
+Application Defaults
+********************
+
+   Like any good X citizen, DDD comes with a large application-defaults
+file named `Ddd'.  This appendix documents the actions and images
+referenced in `Ddd', such that you can easily modify them.
+
+* Menu:
+
+* Actions::                     All actions used in translation tables.
+* Images::                      All images used in resources,
+
+
+File: ddd.info,  Node: Actions,  Next: Images,  Up: Application Defaults
+
+Actions
+=======
+
+   The following DDD actions may be used in translation tables.
+
+* Menu:
+
+* General Actions::
+* Data Display Actions::
+* Debugger Console Actions::
+* Source Window Actions::
+
+
+File: ddd.info,  Node: General Actions,  Next: Data Display Actions,  Up: Actions
+
+General Actions
+---------------
+
+ - Action: ddd-get-focus ()
+     Assign focus to the element that just received input.
+
+ - Action: ddd-next-tab-group ()
+     Assign focus to the next tab group.
+
+ - Action: ddd-prev-tab-group ()
+     Assign focus to the previous tab group.
+
+ - Action: ddd-previous-tab-group ()
+     Assign focus to the previous tab group.
+

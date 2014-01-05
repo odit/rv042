@@ -1,0 +1,6 @@
+config CONFIG_ntp
+	bool "ntp"
+	default n
+	help
+		Include ntp
+

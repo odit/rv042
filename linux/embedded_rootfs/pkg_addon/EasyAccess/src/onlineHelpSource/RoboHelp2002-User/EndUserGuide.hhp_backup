@@ -1,0 +1,75 @@
+[OPTIONS]
+Compiled File=EndUserGuide.chm
+Title=AccessPoint User Help
+Contents File=EndUserGuide.hhc
+Index File=EndUserGuide.hhk
+Default topic=Logging_into_the_SSL_VPN_Portal.htm
+Default Window=NewWindow
+Error log file=
+Display compile progress=No
+Display compile notes=No
+Full-text search=Yes
+Binary Index=No
+Auto Index=No
+Enhanced decompilation=No
+Binary TOC=No
+Flat=No
+Full text search stop list file=C:\Program Files\RoboHelp Office\RoboHTML\Language\English\System.stp
+
+[WINDOWS]
+NewWindow="New Window Caption","EndUserGuide.hhc","EndUserGuide.hhk","","",,,,,0x420,0,0x200e,[0,0,500,400],0x0,0x0,,0,0,0
+
+[FILES]
+desk.htm
+Authenticating.htm
+netw.htm
+web_proxy.html
+FTP_Client.htm
+Telnet_Client.htm
+Java_Requirements.htm
+Logging_into_the_SSL_VPN_Portal.htm
+Security.htm
+sslv.htm
+SSH_Client.htm
+SSL_Handshake.htm
+Application_Bookmarks.htm
+HTTPS_Proxy.htm
+serv.htm
+Using_Desktop_Remote_Access.htm
+Using_My_Network_Places.htm
+AccessPoint_Overview.htm
+Accessing_an_Application.htm
+fr0explorerfiles.htm
+fr0explorercomputer.html
+netwo.htm
+fr0applications2.html
+Web_Browser.htm
+Client_Configuration.htm
+Requirements_for_MacOS_X.htm
+MacOS_X_Installation.htm
+Home_Page_Overview.htm
+Desktop_Bookmarks.htm
+Virtual_Passage_Installation.htm
+home.htm
+tsca.htm
+VNC_Desktop_Access.htm
+vtransportinstallation.htm
+expl.htm
+clie.htm
+virt.htm
+them.htm
+Change_Password.htm
+Making_the_SSL_VPN_Portal_a_Trusted_Site.htm
+eHelp.xml
+
+EndUserGuide.brs
+[ALIAS]
+#include EndUserGuide.ali
+
+[MAP]
+#include BSSCDefault.h
+
+[TEXT POPUPS]
+BSSCDefault.h
+
+

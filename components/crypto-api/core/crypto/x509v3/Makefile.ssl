@@ -1,0 +1,72 @@
+# Copyright (c) 2003-2004, Cavium Networks. All rights reserved.
+#  
+# This Software is the property of Cavium Networks.  The Software and all 
+# accompanying documentation are copyrighted.  The Software made available 
+# here constitutes the proprietary information of Cavium Networks.  You 
+# agree to take reasonable steps to prevent the disclosure, unauthorized use 
+# or unauthorized distribution of the Software.  You shall use this Software 
+# solely with Cavium hardware.  
+#  
+# Except as expressly permitted in a separate Software License Agreement 
+# between You and Cavium Networks, you shall not modify, decompile, 
+# disassemble, extract, or otherwise reverse engineer this Software.  You 
+# shall not make any copy of the Software or its accompanying documentation, 
+# except for copying incident to the ordinary and intended use of the 
+# Software and the Underlying Program and except for the making of a single 
+# archival copy.  
+#  
+# This Software, including technical data, may be subject to U.S.  export 
+# control laws, including the U.S.  Export Administration Act and its 
+# associated regulations, and may be subject to export or import regulations 
+# in other countries.  You warrant that You will comply strictly in all 
+# respects with all such regulations and acknowledge that you have the 
+# responsibility to obtain licenses to export, re-export or import the 
+# Software.  
+#  
+# TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE SOFTWARE IS PROVIDED "AS IS" 
+# AND WITH ALL FAULTS AND CAVIUM MAKES NO PROMISES, REPRESENTATIONS OR 
+# WARRANTIES, EITHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, WITH RESPECT 
+# TO THE SOFTWARE, INCLUDING ITS CONDITION, ITS CONFORMITY TO ANY 
+# REPRESENTATION OR DESCRIPTION, OR THE EXISTENCE OF ANY LATENT OR PATENT 
+# DEFECTS, AND CAVIUM SPECIFICALLY DISCLAIMS ALL IMPLIED (IF ANY) WARRANTIES 
+# OF TITLE, MERCHANTABILITY, NONINFRINGEMENT, FITNESS FOR A PARTICULAR 
+# PURPOSE, LACK OF VIRUSES, ACCURACY OR COMPLETENESS, QUIET ENJOYMENT, QUIET 
+# POSSESSION OR CORRESPONDENCE TO DESCRIPTION.  THE ENTIRE RISK ARISING OUT 
+# OF USE OR PERFORMANCE OF THE SOFTWARE LIES WITH YOU.  
+
+DIR= x509v3
+TOP=    ../..
+ifndef OCTEON_ROOT
+OCTEON_ROOT = ../../../../
+endif
+
+INCLUDES=-I.. -I$(TOP) -I../../include
+
+CFLAGS += -W -Wall -Wno-unused-parameter -I$(INCLUDES) -I.. -I../.. -I$(OCTEON_ROOT)/target/include 
+LDFLAGS = -lcrypto -lcvmx -L$(OCTEON_ROOT)/target/lib
+
+LIB=$(TOP)/libcrypto.a
+LIBSRC=	v3_akey.c v3_extku.c v3_lib.c v3_purp.c \
+	v3_alt.c v3_cpols.c v3_genn.c v3_ocsp.c v3_skey.c \
+	v3_bcons.c v3_crld.c v3_ia5.c v3_pku.c v3_sxnet.c \
+	v3_bitst.c v3_enum.c v3_info.c v3_utl.c \
+	v3_akeya.c v3_conf.c v3err.c  v3_int.c v3_prn.c 
+
+LIBOBJ=	v3_akey.o v3_extku.o v3_lib.o v3_purp.o \
+	v3_alt.o v3_cpols.o v3_genn.o v3_ocsp.o v3_skey.o \
+	v3_bcons.o v3_crld.o v3_ia5.o v3_pku.o v3_sxnet.o \
+	v3_bitst.o v3_enum.o v3_info.o v3_utl.o \
+	v3_akeya.o v3_conf.o v3err.o  v3_int.o v3_prn.o  
+
+
+SRC= $(LIBSRC)
+
+all:	lib
+
+lib:	$(LIBOBJ)
+	$(AR) r $(LIB) $(LIBOBJ)
+	@touch lib
+
+clean:
+		@rm -f *.o
+		@rm -f lib

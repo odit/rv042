@@ -1,0 +1,1182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	<!--#nk_get DevTrafReport="RxPks:ixp1234"-->
+}
+function Leavefunction()
+{
+	chLeave();
+}
+//=============== End of Javascript ===============*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "Refresh";
+var Reloadlink = "document.location='log_report.htm'";
+var helplink ='help_log_report.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 700;
+var head_width=160;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintStatistic(0);
+	PrintEndContent();
+}
+
+function PrintNextPage()
+{ 
+	document.write('<td></td>');
+	document.write('<td width="35%" align="right"><a href="log_report1.htm">');
+	document.write('Next Page &gt;&gt;');	
+	document.write('</a></td>');
+}
+
+function PrintPortStatus(StatusValue)
+{
+	if (StatusValue == 1)
+		document.write('<font color="'+Connectlinkcolor+'">Connected</font></a>');
+	else if (StatusValue == 2) 
+		document.write('<font color="'+Disablelinkcolor+'">Disabled</font></a>');
+	else
+		document.write('<font color="'+Enablelinkcolor+'">Enabled</font></a>');
+}
+
+function PrintStatistic(hasUnderLine)
+{
+	PrintBeginBlock(0);
+		
+	if (MaxWanPortNumber > 2 && document.formlog_report.wanNumbers.value > 3) 
+        {
+			document.write('<table width="'+FixedTableWidth+'" class="Infotable" border="'+Tableborder+'">');
+			document.write('<tr>'); 
+			document.write('<td width="35%" align="center"></td>');
+			PrintNextPage();			
+			document.write('</tr>');
+			document.write('</table>');
+        }			
+
+	var LoopLimit = 3;
+        var num_wan = parseInt(document.formlog_report.wanNumbers.value);
+	var isdmz = parseInt( document.formlog_report.isDMZmode.value );
+
+	document.write('<table width="'+FixedTableWidth+'"class="STtable" border="1">');	
+	document.write('<tr><td>');	
+	document.write('<table width="100%" class="Porttable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<th width="'+head_width+'">Interface</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<th align="center" width="115" height="24"><center>');
+	document.write('LAN');
+	document.write('</center></th>');	
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+		document.write('<th align="center" width="115"><center>');
+		document.write('WAN1');
+		document.write('</center></th>');
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+		document.write('<th align="center" width="115"><center>');
+		document.write('WAN2');
+		document.write('</center></th>');
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+		document.write('<th>&nbsp;</th>');
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+			document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+			if (i == LoopLimit)
+				document.write('<th><center>');
+			else	
+				document.write('<th width="115"><center>');
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i > 2);					
+				else if (isdmz == 1)
+					document.write('DMZ');
+				else
+					document.write('WAN2');
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write('WAN'+i);
+				else
+				{
+					if (i == 1)
+						document.write('DMZ');
+					else
+						document.write('WAN'+(i-1));
+				}
+			}
+			document.write('</center></th>');
+		}
+	}
+       document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" colspan="13" style="height:1px"></td>');
+	document.write('</tr>');	   
+	var DevStateReportname = new Array();
+	var DevStateReportstatus = new Array();
+	var DevStateReportip = new Array();
+	var DevStateReportmac = new Array();
+	var DevStateReportmask = new Array();
+	var DevStateReportgw = new Array();
+	var DevStateReportdns = new Array();
+	var DevTrafReportRxPks = new Array();
+	var DevTrafReportTxPks = new Array();
+	var DevTrafReportTotalPks = new Array();
+	var DevTrafReportRxBytes = new Array();
+	var DevTrafReportTxBytes = new Array();
+	var DevTrafReportTotalBytes = new Array();
+	var DevTrafReportRxPksErr = new Array();
+	var DevTrafReportRxPksDrop = new Array();
+
+        for(var i=1;i <= LoopLimit;i++)
+        {
+		if (MaxWanPortNumber > 2 && i == 3)
+		{
+			DevStateReportname[3]='eth8';
+			DevStateReportstatus[3]=document.getElementById("DevStateReportstatus8").value;
+			DevStateReportip[3]='<!--#nk_get DisplayDMZIp=""-->';
+			DevStateReportmac[3]=document.getElementById("DevStateReportmac8").value;
+			DevStateReportmask[3]='<!--#nk_get DisplayOnly="isp8Mask"-->';
+			DevStateReportgw[3]='<!--#nk_get DisplayOnly="ISPGateway8"-->';
+			DevStateReportdns[3]='---';
+			DevTrafReportRxPks[3]=document.getElementById("DevTrafReportRxPks8").value;
+			DevTrafReportTxPks[3]=document.getElementById("DevTrafReportTxPks8").value;
+			DevTrafReportTotalPks[3]=document.getElementById("DevTrafReportTotalPks8").value;
+			DevTrafReportRxBytes[3]=document.getElementById("DevTrafReportRxBytes8").value;
+			DevTrafReportTxBytes[3]=document.getElementById("DevTrafReportTxBytes8").value;
+			DevTrafReportTotalBytes[3]=document.getElementById("DevTrafReportTotalBytes8").value;
+			DevTrafReportRxPksErr[3]=document.getElementById("DevTrafReportRxPksErr8").value;
+			DevTrafReportRxPksDrop[3]=document.getElementById("DevTrafReportRxPksDrop8").value;
+		}
+		else if (i < 3)
+		{
+			DevStateReportname[i]=document.getElementById("DevStateReportname"+i).value;
+			DevStateReportstatus[i]=document.getElementById("DevStateReportstatus"+i).value;
+			DevStateReportip[i]=document.getElementById("DevStateReportip"+i).value;
+			DevStateReportmac[i]=document.getElementById("DevStateReportmac"+i).value;
+			DevStateReportmask[i]=document.getElementById("DevStateReportmask"+i).value;
+			DevStateReportgw[i]=document.getElementById("DevStateReportgw"+i).value;
+			DevStateReportdns[i]=document.getElementById("DevStateReportdns"+i).value;
+			DevTrafReportRxPks[i]=document.getElementById("DevTrafReportRxPks"+i).value;
+			DevTrafReportTxPks[i]=document.getElementById("DevTrafReportTxPks"+i).value;
+			DevTrafReportTotalPks[i]=document.getElementById("DevTrafReportTotalPks"+i).value;
+			DevTrafReportRxBytes[i]=document.getElementById("DevTrafReportRxBytes"+i).value;
+			DevTrafReportTxBytes[i]=document.getElementById("DevTrafReportTxBytes"+i).value;
+			DevTrafReportTotalBytes[i]=document.getElementById("DevTrafReportTotalBytes"+i).value;
+			DevTrafReportRxPksErr[i]=document.getElementById("DevTrafReportRxPksErr"+i).value;
+			DevTrafReportRxPksDrop[i]=document.getElementById("DevTrafReportRxPksDrop"+i).value;
+			
+		}
+	}
+	// Device Name
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Device Name');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="center">'); 
+	document.write('<!--#nk_get DisplayOnly="ixp0Name"-->');
+	document.write('</td>');
+        if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{	
+		document.write('<td colspan="3" align="center">'); 
+		document.write(DevStateReportname[1]);
+		document.write('</td>');
+		document.write('<td colspan="3" align="center">'); 
+		document.write(DevStateReportname[2]);	
+		document.write('<td colspan="3" align="center"></td>');
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{	
+			document.write('<td colspan="3" align="center">'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(DevStateReportname[2]);
+				else
+					document.write(DevStateReportname[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevStateReportname[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevStateReportname[3]);
+					else
+						document.write(DevStateReportname[i-1]);
+				}
+			}
+			document.write('</td>');
+		}
+	}
+        document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');		
+	// Link Status
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Status');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td align="center" class="EvenRow"><center>'); 
+	document.write('---');
+	document.write('</center></td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" align="center" class="EvenRow"><center>');
+		PrintPortStatus(DevStateReportstatus[1]);
+		document.write('</center></td>');
+		document.write('<td colspan="3" align="center" class="EvenRow"><center>'); 
+		PrintPortStatus(DevStateReportstatus[2]);
+		document.write('</center></td>');	
+		document.write('<td colspan="3" align="center" class="EvenRow"></td>');
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td align="center" colspan="3" class="EvenRow"><center>'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					PrintPortStatus(DevStateReportstatus[2]);
+				else
+					PrintPortStatus(DevStateReportstatus[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					PrintPortStatus(DevStateReportstatus[i]);
+				else
+				{
+					if (i == 1)
+						PrintPortStatus(DevStateReportstatus[3]);
+					else
+						PrintPortStatus(DevStateReportstatus[i-1]);
+				}
+			}						
+			document.write('</center></td>');
+		}
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');		
+	// IP Address
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('IP Address');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="center">'); 
+	document.write('<!--#nk_get DisplayOnly="ipAddr"-->');
+	document.write('</td>');
+
+        if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" align="center">');
+		document.write(DevStateReportip[1]);
+		document.write('</td>');
+		document.write('<td colspan="3" align="center">'); 
+		document.write(DevStateReportip[2]);
+		document.write('<td colspan="3" align="center"></td>');		
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" align="center">');
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write('---');
+				else
+					document.write(DevStateReportip[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevStateReportip[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevStateReportip[3]);
+					else
+						document.write(DevStateReportip[i-1]);
+				}
+			}				
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// MAC Address
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('MAC Address');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td align="center" class="EvenRow"><center>'); 
+	document.write(filterMAC('<!--#nk_get DisplayMAC="lanmac"-->'));
+	document.write('</center></td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" align="center" class="EvenRow"><center>'); //document.write(DevStateReportmac[i]);
+		document.write(filterMAC(DevStateReportmac[1]));
+		document.write('</center></td>');
+		document.write('<td colspan="3" align="center" class="EvenRow"><center>'); 
+		document.write(filterMAC(DevStateReportmac[2])); 
+		document.write('</center></td>');
+		document.write('<td colspan="3" align="center" class="EvenRow"></td>');		
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" align="center" class="EvenRow"><center>');
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(filterMAC(DevStateReportmac[2]));
+				else
+					document.write(filterMAC(DevStateReportmac[i]));
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(filterMAC(DevStateReportmac[i]));
+				else
+				{
+					if (i == 1)
+						document.write(filterMAC(DevStateReportmac[3]));
+					else
+						document.write(filterMAC(DevStateReportmac[i-1]));
+				}
+			}
+			document.write('</center></td>');
+		}
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Subnet Mask
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Subnet Mask');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="center">'); 
+	document.write('<!--#nk_get DisplayOnly="netMask"-->');
+	document.write('</td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" align="center">');
+		document.write(DevStateReportmask[1]);
+		document.write('</td>');		
+		document.write('<td colspan="3" align="center">');
+		document.write(DevStateReportmask[2]);
+		document.write('</td>');
+		document.write('<td colspan="3" align="center"></td>');	
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" align="center">');
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(DevStateReportmask[2]);
+				else
+					document.write(DevStateReportmask[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevStateReportmask[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevStateReportmask[3]);
+					else
+						document.write(DevStateReportmask[i-1]);
+				}
+			}		
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Default Gateway
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Default Gateway');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td align="center" class="EvenRow"><center>'); 
+	document.write('---');
+	document.write('</center></td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" align="center" class="EvenRow"><center>');
+		document.write(DevStateReportgw[1]);
+		document.write('</center></td>');
+		document.write('<td colspan="3" align="center" class="EvenRow"><center>');
+		document.write(DevStateReportgw[2]);
+		document.write('</center></td>');
+		document.write('<td colspan="3" align="center" class="EvenRow"></td>');		
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" align="center" class="EvenRow"><center>');
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write("0.0.0.0");
+				else
+					document.write(DevStateReportgw[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevStateReportgw[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevStateReportgw[3]);
+					else
+						document.write(DevStateReportgw[i-1]);
+				}
+			}		
+			document.write('</center></td>');
+		}
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// DNS
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('DNS');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	document.write('<td align="center">'); 
+	if (document.formlog_report.dhcpEnabled.value == " checked")
+	{  
+		if (document.formlog_report.lanDNS1.value=="0.0.0.0")
+			document.write('0.0.0.0');
+		else
+		{         
+			document.write(document.formlog_report.lanDNS1.value);
+			if(document.formlog_report.lanDNS2.value!="0.0.0.0") 
+				document.write('<br>&nbsp;'+document.formlog_report.lanDNS2.value);
+		}
+	}
+	else
+	    document.write("---");  
+	document.write('</td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" align="center">');
+		document.write(DevStateReportdns[1]);
+		document.write('</td>');
+		document.write('<td colspan="3" align="center">');
+		document.write(DevStateReportdns[2]);
+		document.write('</td>');			
+		document.write('<td colspan="3" align="center"></td>');		
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" align="center">');
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write("---");
+				else
+					document.write(DevStateReportdns[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevStateReportdns[i]);
+				else
+				{
+					if (i == 1)
+						document.write("---");
+					else
+						document.write(DevStateReportdns[i-1]);
+				}
+			}
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>'); 
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');		
+	// Received Packets	
+	document.write('</tr> '); 
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Received Packets');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td class="EvenRow" style="text-align:right">&nbsp;'); 
+        document.write('<!--#nk_get DevTrafReport="RxPks:ixp0"-->');
+	document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	document.write('</td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+		document.write(DevTrafReportRxPks[1]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;'); 
+		document.write(DevTrafReportRxPks[2]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right"></td>');	
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(DevTrafReportRxPks[2]); 
+				else
+					document.write(DevTrafReportRxPks[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevTrafReportRxPks[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevTrafReportRxPks[3]);
+					else
+						document.write(DevTrafReportRxPks[i-1]);
+				}
+			}			
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>'); 
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Sent Packets
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Sent Packets');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td align="right">&nbsp;'); 
+	document.write('<!--#nk_get DevTrafReport="TxPks:ixp0"-->');
+	document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	document.write('</td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;');
+		document.write(DevTrafReportTxPks[1]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write(DevTrafReportTxPks[2]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td align="right" colspan="3"></td>');		
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td align="right" colspan="3">&nbsp;'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(DevTrafReportTxPks[2]); 
+				else
+					document.write(DevTrafReportTxPks[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevTrafReportTxPks[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevTrafReportTxPks[3]);
+					else
+						document.write(DevTrafReportTxPks[i-1]);
+				}
+			}	
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>'); 
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Total Packets
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Total Packets');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td class="EvenRow" style="text-align:right">&nbsp;'); 
+        document.write('<!--#nk_get DevTrafReport="TotalPks:ixp0"-->');
+	document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	document.write('</td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+		document.write(DevTrafReportTotalPks[1]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;'); 
+		document.write(DevTrafReportTotalPks[2]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right"></td>');		
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(DevTrafReportTotalPks[2]); 
+				else
+					document.write(DevTrafReportTotalPks[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevTrafReportTotalPks[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevTrafReportTotalPks[3]);
+					else
+						document.write(DevTrafReportTotalPks[i-1]);
+				}
+			}	
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>'); 
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Received Bytes
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Received Bytes');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td align="right">&nbsp;'); 
+	document.write('<!--#nk_get DevTrafReport="RxBytes:ixp0"-->');
+	document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	document.write('</td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;');
+		document.write(DevTrafReportRxBytes[1]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write(DevTrafReportRxBytes[2]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td align="right" colspan="3"></td>');	
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td align="right" colspan="3">&nbsp;'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(DevTrafReportRxBytes[2]); 
+				else
+					document.write(DevTrafReportRxBytes[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevTrafReportRxBytes[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevTrafReportRxBytes[3]);
+					else
+						document.write(DevTrafReportRxBytes[i-1]);
+				}
+			}	
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>'); 
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Sent Bytes
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Sent Bytes');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td class="EvenRow" style="text-align:right">&nbsp;'); 
+	document.write('<!--#nk_get DevTrafReport="TxBytes:ixp0"-->');
+	document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	document.write('</td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+		document.write(DevTrafReportTxBytes[1]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;'); 
+		document.write(DevTrafReportTxBytes[2]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right"></td>');	
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(DevTrafReportTxBytes[2]); 
+				else
+					document.write(DevTrafReportTxBytes[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevTrafReportTxBytes[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevTrafReportTxBytes[3]);
+					else
+						document.write(DevTrafReportTxBytes[i-1]);
+				}
+			}	
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>'); 
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Total Bytes
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Total Bytes');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td align="right">&nbsp;'); 
+	document.write('<!--#nk_get DevTrafReport="TotalBytes:ixp0"-->');
+	document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	document.write('</td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;');
+		document.write(DevTrafReportTotalBytes[1]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write(DevTrafReportTotalBytes[2]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td align="right" colspan="3"></td>');
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td align="right" colspan="3">&nbsp;'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(DevTrafReportTotalBytes[2]); 
+				else
+					document.write(DevTrafReportTotalBytes[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevTrafReportTotalBytes[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevTrafReportTotalBytes[3]);
+					else
+						document.write(DevTrafReportTotalBytes[i-1]);
+				}
+			}	
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>'); 
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Error Packets Received	
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Error Packets Received');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td class="EvenRow" style="text-align:right">&nbsp;'); 
+	document.write('<!--#nk_get DevTrafReport="RxPksErr:ixp0"-->');
+	document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	document.write('</td>');
+
+        if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+		document.write('0');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;'); 
+		document.write('0');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right"></td>');	
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+			                document.write(DevTrafReportRxPksErr[2]);
+				else
+					document.write(DevTrafReportRxPksErr[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevTrafReportRxPksErr[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevTrafReportRxPksErr[3]);
+					else
+						document.write(DevTrafReportRxPksErr[i-1]);
+				}
+			}	
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>'); 
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Dropped Packets Received
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Dropped Packets Received');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	document.write('<td align="right">&nbsp;'); 
+	document.write('<!--#nk_get DevTrafReport="RxPksDrop:ixp0"-->');
+	document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+	document.write('</td>');
+
+	if(ShareDMZPort && num_wan == 2 && isdmz == 0)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;');
+		document.write('0');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write('0');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		document.write('<td align="right" colspan="3"></td>');	
+	}
+	else
+	{
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td align="right" colspan="3">&nbsp;'); 
+			if(MaxWanPortNumber == 2 && i >= 2)
+			{
+				if (i>2);
+				else if (isdmz == 1)
+					document.write(DevTrafReportRxPksDrop[2]); 
+				else
+					document.write(DevTrafReportRxPksDrop[i]);
+			}	
+			else
+			{
+				if(ShareDMZPort)
+					document.write(DevTrafReportRxPksDrop[i]);
+				else
+				{
+					if (i == 1)
+						document.write(DevTrafReportRxPksDrop[3]);
+					else
+						document.write(DevTrafReportRxPksDrop[i-1]);
+				}
+			}	
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+	}
+	document.write('</tr>'); 
+
+	if (MaxWanPortNumber > 2)
+	{
+		document.write('<tr>');
+		document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+		document.write('<td colspan="12" style="height:1px"></td>');
+		document.write('</tr>');
+	
+		// Upstream Bandwidth Usage(%)
+		document.write('<tr>'); 
+		document.write('<th>');
+		document.write('<div style="padding-top:3px">Upstream Bandwidth</div><div style="padding-top:3px;padding-bottom:3px;">Usage(%)</div>');
+		document.write('</td>');
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+		document.write('<td class="EvenRow" style="text-align:right">&nbsp;'); 
+		document.write('---');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;'); 
+			if (i == 1)
+				document.write('---');
+			else if (i==2)
+				document.write('<!--#nk_get DevTrafReport="TxRateDivBand:ixp1"-->');
+			else if (i==3)
+				document.write('<!--#nk_get DevTrafReport="TxRateDivBand:ixp2"-->');
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+		document.write('</tr>'); 
+		document.write('<tr>');
+		document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+		document.write('<td colspan="12" style="height:1px"></td>');
+		document.write('</tr>');	
+		// Downstream Bandwidth Usage(%)
+		document.write('<!--#nk_get DevTrafReport="RxRateDivBand:ixp1234"-->');
+		document.write('<tr>'); 
+		document.write('<th>');
+		document.write('<div style="padding-top:3px">Downstream Bandwidth</div><div style="padding-top:3px;padding-bottom:3px;">Usage(%)</div>');
+		document.write('</td>');
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+		document.write('<td align="right">&nbsp;');
+		document.write('---');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+		for(i=1; i<=LoopLimit; i++)
+		{
+			document.write('<td align="right" colspan="3">&nbsp;'); 
+			if (i == 1)
+				document.write('---');
+			else if (i==2)
+				document.write('<!--#nk_get DevTrafReport="RxRateDivBand:ixp1"-->');
+			else if (i==3)
+				document.write('<!--#nk_get DevTrafReport="RxRateDivBand:ixp2"-->');
+			document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+			document.write('</td>');
+		}
+		document.write('</tr>');
+	}
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');		
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0"  >
+
+        <!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+
+	<script>
+         SetItemInit(foldersTree, 8, 2);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+                                                  
+    <form name="formlog_report" method="post" action="log_report.htm">
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name="dhcpEnabled" value='<!--#nk_get DhcpHiddenStatus=""-->'>
+	<input type="hidden" name="lanDNS1" value='<!--#nk_get LanDnsTextIpByDev="A1"-->.<!--#nk_get LanDnsTextIpByDev="A2"-->.<!--#nk_get LanDnsTextIpByDev="A3"-->.<!--#nk_get LanDnsTextIpByDev="A4"-->'>
+	<input type="hidden" name="lanDNS2" value='<!--#nk_get LanDnsTextIpByDev="B1"-->.<!--#nk_get LanDnsTextIpByDev="B2"-->.<!--#nk_get LanDnsTextIpByDev="B3"-->.<!--#nk_get LanDnsTextIpByDev="B4"-->'>
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+
+	<input type="hidden" name="DevStateReportname1" id="DevStateReportname1" value='<!--#nk_get DisplayOnly="ixp1Name"-->'>
+	<input type="hidden" name="DevStateReportname2" id="DevStateReportname2" value='<!--#nk_get DisplayOnly="ixp2Name"-->'>
+	<input type="hidden" name="DevStateReportstatus1" id="DevStateReportstatus1" value='<!--#nk_get DevStateReport="status:ixp1"-->'>
+	<input type="hidden" name="DevStateReportstatus2" id="DevStateReportstatus2" value='<!--#nk_get DevStateReport="status:ixp2"-->'>
+	<input type="hidden" name="DevStateReportstatus8" id="DevStateReportstatus8" value='<!--#nk_get DevStateReport="status:ixp8"-->'>
+	<input type="hidden" name="DevStateReportip1" id="DevStateReportip1" value='<!--#nk_get DisplayOnly="wan1IP"-->'>
+	<input type="hidden" name="DevStateReportip2" id="DevStateReportip2" value='<!--#nk_get DisplayOnly="wan2IP"-->'>
+	<input type="hidden" name="DevStateReportmac1" id="DevStateReportmac1" value='<!--#nk_get DisplayMAC="wanMac11"-->'>
+	<input type="hidden" name="DevStateReportmac2" id="DevStateReportmac2" value='<!--#nk_get DisplayMAC="wanMac12"-->'>
+	<input type="hidden" name="DevStateReportmac8" id="DevStateReportmac8" value='<!--#nk_get DisplayMAC="wanMac18"-->'>
+	<input type="hidden" name="DevStateReportmask1" id="DevStateReportmask1" value='<!--#nk_get DisplayOnly="isp1Mask"-->'>
+	<input type="hidden" name="DevStateReportmask2" id="DevStateReportmask2" value='<!--#nk_get DisplayOnly="isp2Mask"-->'>
+	<input type="hidden" name="DevStateReportgw1" id="DevStateReportgw1" value='<!--#nk_get DisplayOnly="ISPGateway1"-->'>
+	<input type="hidden" name="DevStateReportgw2" id="DevStateReportgw2" value='<!--#nk_get DisplayOnly="ISPGateway2"-->'>
+	<input type="hidden" name="DevStateReportdns1" id="DevStateReportdns1" value='<!--#nk_get DevStateReport="dns:ixp1"-->'>
+	<input type="hidden" name="DevStateReportdns2" id="DevStateReportdns2" value='<!--#nk_get DevStateReport="dns:ixp2"-->'>
+	<input type="hidden" name="DevTrafReportRxPks1" id="DevTrafReportRxPks1" value='<!--#nk_get DevTrafReport="RxPks:ixp1"-->'>
+	<input type="hidden" name="DevTrafReportRxPks2" id="DevTrafReportRxPks2" value='<!--#nk_get DevTrafReport="RxPks:ixp2"-->'>
+	<input type="hidden" name="DevTrafReportRxPks8" id="DevTrafReportRxPks8" value='<!--#nk_get DevTrafReport="RxPks:ixp8"-->'>
+	<input type="hidden" name="DevTrafReportTxPks1" id="DevTrafReportTxPks1" value='<!--#nk_get DevTrafReport="TxPks:ixp1"-->'>
+	<input type="hidden" name="DevTrafReportTxPks2" id="DevTrafReportTxPks2" value='<!--#nk_get DevTrafReport="TxPks:ixp2"-->'>
+	<input type="hidden" name="DevTrafReportTxPks8" id="DevTrafReportTxPks8" value='<!--#nk_get DevTrafReport="TxPks:ixp8"-->'>
+	<input type="hidden" name="DevTrafReportTotalPks1" id="DevTrafReportTotalPks1" value='<!--#nk_get DevTrafReport="TotalPks:ixp1"-->'>
+	<input type="hidden" name="DevTrafReportTotalPks2" id="DevTrafReportTotalPks2" value='<!--#nk_get DevTrafReport="TotalPks:ixp2"-->'>
+	<input type="hidden" name="DevTrafReportTotalPks8" id="DevTrafReportTotalPks8" value='<!--#nk_get DevTrafReport="TotalPks:ixp8"-->'>
+	<input type="hidden" name="DevTrafReportRxBytes1" id="DevTrafReportRxBytes1" value='<!--#nk_get DevTrafReport="RxBytes:ixp1"-->'>
+	<input type="hidden" name="DevTrafReportRxBytes2" id="DevTrafReportRxBytes2" value='<!--#nk_get DevTrafReport="RxBytes:ixp2"-->'>
+	<input type="hidden" name="DevTrafReportRxBytes8" id="DevTrafReportRxBytes8" value='<!--#nk_get DevTrafReport="RxBytes:ixp8"-->'>
+	<input type="hidden" name="DevTrafReportTxBytes1" id="DevTrafReportTxBytes1" value='<!--#nk_get DevTrafReport="TxBytes:ixp1"-->'>
+	<input type="hidden" name="DevTrafReportTxBytes2" id="DevTrafReportTxBytes2" value='<!--#nk_get DevTrafReport="TxBytes:ixp2"-->'>
+	<input type="hidden" name="DevTrafReportTxBytes8" id="DevTrafReportTxBytes8" value='<!--#nk_get DevTrafReport="TxBytes:ixp8"-->'>
+	<input type="hidden" name="DevTrafReportTotalBytes1" id="DevTrafReportTotalBytes1" value='<!--#nk_get DevTrafReport="TotalBytes:ixp1"-->'>
+	<input type="hidden" name="DevTrafReportTotalBytes2" id="DevTrafReportTotalBytes2" value='<!--#nk_get DevTrafReport="TotalBytes:ixp2"-->'>
+	<input type="hidden" name="DevTrafReportTotalBytes8" id="DevTrafReportTotalBytes8" value='<!--#nk_get DevTrafReport="TotalBytes:ixp8"-->'>
+	<input type="hidden" name="DevTrafReportRxPksErr1" id="DevTrafReportRxPksErr1" value='<!--#nk_get DevTrafReport="RxPksErr:ixp1"-->'>
+	<input type="hidden" name="DevTrafReportRxPksErr2" id="DevTrafReportRxPksErr2" value='<!--#nk_get DevTrafReport="RxPksErr:ixp2"-->'>
+	<input type="hidden" name="DevTrafReportRxPksErr8" id="DevTrafReportRxPksErr8" value='<!--#nk_get DevTrafReport="RxPksErr:ixp8"-->'>
+	<input type="hidden" name="DevTrafReportRxPksDrop1" id="DevTrafReportRxPksDrop1" value='<!--#nk_get DevTrafReport="RxPksDrop:ixp1"-->'>
+	<input type="hidden" name="DevTrafReportRxPksDrop2" id="DevTrafReportRxPksDrop2" value='<!--#nk_get DevTrafReport="RxPksDrop:ixp2"-->'>
+	<input type="hidden" name="DevTrafReportRxPksDrop8" id="DevTrafReportRxPksDrop8" value='<!--#nk_get DevTrafReport="RxPksDrop:ixp8"-->'>
+
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>
+	<script>PrintBottom();</script>
+</table>
+</body>
+</html>

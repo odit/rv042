@@ -1,0 +1,156 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<head>
+<meta http-equiv="content-type" content="text/html;charset=windows-1252">
+<title>IP Settings</title>
+
+<link rel="stylesheet" href="default_ns.css"><script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='default.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+p.whs1 { margin-bottom:0; }
+ol.whs2 { list-style:decimal; }
+p.whs3 { margin-bottom:0; font-style:italic; }
+p.whs4 { text-align:center; font-family:arial; font-size:12pt; color:red; }
+-->
+</style><script type="text/javascript" language="JavaScript">
+<!--
+if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4))
+{
+  var strNSS = "<style type='text/css'>";
+  strNSS += "p.whs1 {margin-bottom:1pt; }";
+  strNSS += "p.whs3 {margin-bottom:1pt; }";
+  strNSS +="</style>";
+  document.write(strNSS);
+}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }
+-->
+</style><script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+<body  ><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Network\nIP Settings");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("ConfigGuide.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<h4>&nbsp;IP Settings</h4>
+
+<p class="whs1">EasyAccess requires static IP configuration. 
+ To configure the EasyAccess IP settings, complete the following instructions: 
+ </p>
+
+<p class="whs1">&nbsp;</p>
+
+<ol type="1" class="whs2">
+	
+	<li class=kadov-p><p class="whs1">Enter a unique, valid 
+ IP address from your network address range in the <span style="font-weight: bold;"><B>IP 
+ Address</B></span> field. <br>
+	<br>
+	If this network interface is configured to terminate SSL VPN connections, 
+ then this will be the IP address of the EasyAccess web management interface 
+ and the SSL VPN portal.<br>&nbsp;</p></li>
+	
+	<li class=kadov-p><p class="whs1">Enter your network subnet 
+ mask in the <span style="font-weight: bold;"><B>Subnet Mask</B></span> field. 
+ <br>
+	<br>
+	The subnet mask identifies which IP addresses are directly accessible 
+ to the EasyAccess device and which addresses are reached through a router. 
+ An example of a valid subnet mask that supports up to 254 addresses is 
+ “255.255.255.0”.<br>&nbsp;</p></li>
+	
+	<li class=kadov-p><p class="whs1">Select whether you wish 
+ to enable or disable the interface in the <span style="font-weight: bold;"><B>Interface 
+ Status </B></span>menu. <br>
+	<br>
+	You may not disable the interface if the interface is configured to 
+ terminate SSL VPN connections.<br>&nbsp;</p></li>
+	
+	<li class=kadov-p><p class="whs1">Click <span style="font-weight: bold;"><B>Submit</B></span> 
+ to update the configuration. <br>
+	<br>
+	If the interface is configured to terminate SSL VPN connections, then 
+ restart the EasyAccess software for the change to take effect. </p></li>
+</ol>
+
+<p class="whs1">&nbsp;</p>
+
+<p class="whs3"><span style="font-weight: bold;"><B>NOTE: 
+ </B></span>The EasyAccess administrative session will end when the software 
+ is restarted. To login to the EasyAccess management interface, enter 
+ the new IP address of the EasyAccess device in the <span style="font-weight: bold;"><B>Address</B></span> 
+ or <span style="font-weight: bold;"><B>Location</B></span> field of your web 
+ browser. Be sure that the management station is in the same subnet as 
+ the new EasyAccess IP address. &nbsp;</p>
+
+<p class="whs1">&nbsp;</p>
+
+<p class="whs1">To complete the IP settings configuration, 
+ also configure EasyAccess DNS settings and network routes.</p>
+
+<p class="whs1">&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div>&nbsp;
+</div>
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+</html>

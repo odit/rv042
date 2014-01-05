@@ -1,0 +1,32 @@
+set fo=cqrt shm=at ww=<,>,h,l
+set comments=b:#,:%,fb:-,n:>,n:)
+"set smd
+"mapings
+map <C-Z> :shell
+" syntax coloring!! :-)
+syn on
+"set smartindent
+set noequalalways	" if splitting windows, don't resize all splits
+set guioptions=r	" r for right-hand scrollbar
+set ruler
+set history=50
+set incsearch
+"set expandtab
+set cinoptions={2,>4,n-2
+set guioptions=rTmt
+set fo=tcroq
+"set textwidth=100
+set comments=s1:/*,mb:*,ex:*/
+"set magic
+set nowrap
+"set showmatch
+set showmode
+set wildmenu
+"set ic
+set cindent
+set expandtab
+
+set mouse=a
+map <F12> :tnext 
+map <F5> Ji
+"set tags=/usr/local/src/EasyAccess/tags

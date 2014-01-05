@@ -1,0 +1,1 @@
+.././mpn/generic/sqr_diagonal.c

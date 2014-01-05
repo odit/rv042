@@ -1,0 +1,54 @@
+<table border=0 CELLSPACING=0 WIDTH=511 cellpadding=0>
+<TR>
+<TD align=right width=195 height=28 colspan=1><font class=toolbar>Source Address Type:&nbsp;&nbsp;</font></td>
+<td height=28 colspan=1 width=209 >
+<SELECT name="sourceaddress" class="select" style="width: 200px; height: 20px;" onChange="checkMenu(this.options[this.selectedIndex].value)">
+<option value='ipaddress' selected>IP Address</option>
+<option value='iprange'>IP Network</option>
+</SELECT>
+</td>
+<td width=109 ></td>
+</tr>
+<tr>
+<TD align=right colspan=2>
+<table id=display1 name=display1 border=0 margin=0 cellspacing=0 cellpadding=0 style="display:block;cell-padding:0px;margin:0px;cell-spacing:0px;">
+<TR>
+<TD align=right width=195 height=28 colspan=1>
+<font class=toolbar id="f1n">IP Address:&nbsp;&nbsp;</font><BR><img src="/images/shim.gif" height=3 width=1 border=0><br>
+</td>
+<td height=28  align=left" width=209><INPUT class="input" type="text" NAME="ipaddress" style="width: 200px;" MAXLENGTH=20 onchange="notnull(this, 'f1n', true);" id="f1"></td>
+</tr>
+</table>
+<table id=display2 name=display2 border=0 margin=0 cellspacing=0 cellpadding=0 style="display:none;cell-padding:0px;margin:0px;cell-spacing:0px;">
+<TR>
+<TD align=right width=195 height=28 colspan=1><font class=toolbar id="f1n">Network Address:&nbsp;&nbsp;</font></td>
+<td height=28 align="left" width=209> <INPUT class="input" type="text" NAME="ipaddressstart"	style="width: 200px;" MAXLENGTH=20 onchange="notnull(this, 'f1n', true);" id="f1"></td>
+</tr>
+<TR>
+<TD align=right width=195 height=24><font class=toolbar id="f1n">Mask Length (0-32):&nbsp;&nbsp;</font></td>
+<td height=24 align=left width=209><input class="input" type="text" NAME="ipaddressmasklen"  style="width: 200px;" MAXLENGTH=2 onchange="notnull(this, 'f1n', true);" id="f1"></td>
+</tr>
+</table>
+</td>
+<td valign=bottom align=left>
+<table cellpadding=0 cellspacing=0 border=0 margin=0>
+<TR>
+<td class=bleft></td>
+<td width=54 class=bcenter align=center onClick="javascript:validateOnSubmit();"><font class=buttons  onmouseover="this.className='bhover'" onmouseout="this.className='buttons'"><script type="text/JavaScript" language="JavaScript">button(bsubmit);</script></td>
+<td class=bright></td>
+</tr>
+</table>
+<img src=/images/shim.gif border=0 height=3><BR>
+</td>
+</tr>
+</table>
+<img src="/images/shim.gif" height=17 width=1><BR>
+</td>
+</tr>
+</table>
+</td>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr><td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td></tr>
+</table>
+<img src="/images/shim.gif" height=22 width=1><BR>

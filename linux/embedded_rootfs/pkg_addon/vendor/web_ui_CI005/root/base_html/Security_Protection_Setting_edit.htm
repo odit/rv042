@@ -1,0 +1,344 @@
+<!--#nk_get SP_APPR_Save=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!--#nk_get RedirectPage="Security_Protection_Setting.htm:1"-->
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	initeditvalue(document.formProtectionURL);
+	checklicense();
+	checkmessage();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function checkmessage()
+{
+	var F = document.formProtectionURL;
+	var Warn=<!--#nk_get SP_APPR_Status="Warn"-->;
+	switch(Warn)
+	{
+		case 1:
+			if(F.EditType.value=="98")
+				alert("Duplicate URL. The URL is already in the list.");
+			else
+				alert("Duplicate IP address.The IP address is already in the list.");
+		break;
+		case 2:
+			if(F.EditType.value=="98")
+				alert("ProtectLink supports a maximum of "+F.Max_url.value+" Approved URLs");
+			else if(F.EditType.value=="99")
+				alert("ProtectLink supports a maximum of "+F.Max_ip.value+" Approved Clients.");
+			F.action="Security_Protection_Setting.htm";
+			F.submit();
+		break;
+		default:
+		break;
+	}
+}
+function checklicense()
+{
+	var cf = document.formProtectionURL;
+	var license_status='<!--#nk_get SP_NewPurchase=""-->';
+	switch (parseInt(license_status))
+	{
+		case 1:  	        
+		break;
+		case 2:  	        
+		case 3:
+		break;
+		case 104:  	
+		case 999:
+		default :
+			cf.action="Security_Protection_new_purchase.htm";
+			cf.submit();
+		break
+	}
+}
+function initeditvalue(F)
+{
+	if(F.EditNo.value>0)
+	{
+		F.UrlsToIPRangUI.value=F.EditNoValue.value;
+	}
+}
+function Check_URL(word)
+{
+	var iChars = "~!@'#$%^&*()+{}|:\"<>?=[]\\;,";
+	var iChars2 = " ";
+	for (var i = 0; i < word.length; i++)
+	{
+		if (iChars.indexOf(word.charAt(i)) != -1 || iChars2.indexOf(word.charAt(i)) != -1)
+		{
+			alert(aCheckName);
+			return -1;
+		}
+	}
+	return 1;
+}
+function ReplaceAll(strSource, strFind, strRepl)
+{
+    var str5 = new String(strSource);
+    while (str5.indexOf(strFind) != -1)
+          str5=str5.replace(strFind, strRepl);
+   return str5;
+}
+var max_len=128;
+function chSubmit(F)
+{
+	var content="";
+	F.UrlsToIPRang.value=F.UrlsToIPRangUI.value;
+	var strlist=F.UrlsToIPRang.value.split(';');
+	var str="";
+	var i,j;
+	var mt="";
+	var iprange="";
+	var re=/^http:///;	
+	var re1=/^https:///;
+	
+	if (F.EditType.value=="99")
+	{
+		if(F.EditNo.value>0)
+		{
+			str=F.UrlsToIPRang.value
+			if(str.search(';')!=-1)
+			{
+				alert("Edit mode, Please input one rule.");
+				F.UrlsToIPRangUI.select();
+				return -1;
+			}
+		}
+		F.UrlsToIPRang.value="";
+		for(i=0;i<strlist.length;i++)
+		{
+			if(strlist[i]=="")
+				continue;
+			str=strlist[i];
+			while(str!=""&&(str.charAt(0)== '\r'||str.charAt(0)== '\n'||str.charAt(0)== ' '||str.charAt(0)== '\t'))
+				str=str.substring(1,str.length);
+			while(str!=""&&(str.charAt(str.length-1)== '\r'||str.charAt(str.length-1)== '\n'||str.charAt(str.length-1)== ' '||str.charAt(str.length-1)== '\t'))
+				str=str.substring(0,str.length-1);
+				
+			str=ReplaceAll(str,'\n','');
+			str=ReplaceAll(str,'\r','');
+			str=ReplaceAll(str,' ','');
+			str=ReplaceAll(str,'\t','');
+			
+			if(re.test(str) || re1.test(str))
+			{
+				if (re.test(str))
+					content=str.substring(7,str.length);
+				if (re1.test(F.UrlsToIPRang.value))
+					content=str.substring(8,str.length);
+				mt = content.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+				if(!mt || mt[1] > 255 || mt[2] > 255 || mt[3] > 255 || mt[4] > 255|
+					mt[0]=="0.0.0.0")
+				{
+					alert("IP address error");
+					F.UrlsToIPRangUI.select();
+					return -1;
+				}
+			}
+			else if(str.search('-')!=-1)
+			{
+				iprange=str.split('-');
+				if(iprange.length>2)
+				{
+					alert("IP address error");
+					F.UrlsToIPRangUI.select();
+					return -1;
+				}
+				for(j=0;j<iprange.length;j++)
+				{
+					mt = iprange[j];
+					mt = mt.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+					if(!mt || mt[1] > 255 || mt[2] > 255 || mt[3] > 255 || mt[4] > 255|
+						mt[0]=="0.0.0.0")
+					{
+						alert("IP address error");
+						F.UrlsToIPRangUI.select();
+						return -1;
+					}
+				}
+			}
+			else
+			{
+				mt = str.match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+				if(!mt || mt[1] > 255 || mt[2] > 255 || mt[3] > 255 || mt[4] > 255 ||
+					mt[0]=="0.0.0.0")
+				{
+					alert("IP address error");
+					F.UrlsToIPRangUI.select();
+					return -1;
+				}
+			}
+			F.UrlsToIPRang.value+=str+";";
+		}
+	}
+	else if (F.EditType.value=="98")
+	{
+		if(F.UrlsToIPRang.value.length>((max_len*parseInt(F.Max_url.value))+parseInt(F.Max_url.value)))
+		{
+			alert("The total max length is "+((max_len*parseInt(F.Max_url.value))+parseInt(F.Max_url.value))+" characters(Max tunnel "+F.Max_url.value+" * max length "+max_len+" ), is too long.");
+			F.UrlsToIPRangUI.select();
+					return -1;
+		}
+		if(F.EditNo.value>0)
+		{
+			str=F.UrlsToIPRang.value
+			if(str.search(';')!=-1)
+			{
+				alert("Edit mode, Please input one rule.");
+				F.UrlsToIPRangUI.select();
+				return -1;
+			}
+		}
+		F.UrlsToIPRang.value="";
+		if(F.EditNo.value>0)
+		{
+			str=F.UrlsToIPRang.value
+			if(str.search(';')!=-1)
+			{
+				alert("Edit mode, Please input one rule.");
+				F.UrlsToIPRangUI.select();
+				return -1;
+			}
+		}
+		for(i=0;i<strlist.length;i++)
+		{
+			if(strlist[i]=="")
+				continue;
+			str=strlist[i];			
+			/*
+			if(Check_URL(str) < 0)
+			{
+				return -1;
+			}
+			*/
+			while(str!=""&&(str.charAt(0)== '\r'||str.charAt(0)== '\n'||str.charAt(0)== ' '||str.charAt(0)== '\t'))
+				str=str.substring(1,str.length);
+			while(str!=""&&(str.charAt(str.length-1)== '\r'||str.charAt(str.length-1)== '\n'||str.charAt(str.length-1)== ' '||str.charAt(str.length-1)== '\t'))
+				str=str.substring(0,str.length-1);
+				
+			str=ReplaceAll(str,'\n','');
+			str=ReplaceAll(str,'\r','');
+			str=ReplaceAll(str,' ','');
+			str=ReplaceAll(str,'\t','');
+			
+			if(str.length>max_len)
+			{
+				alert("The max length is "+(max_len)+" characters, \""+str+"\" is too long.");
+				F.UrlsToIPRangUI.select();
+				return -1;
+			}
+			if(F.EditNo.value>0)
+				F.UrlsToIPRang.value+=str;
+			else
+				F.UrlsToIPRang.value+=str+";";
+		}
+	}
+	F.submitStatus.value=1;
+	F.submit();
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "BackOkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.formProtectionURL);";
+var Cancellink = ""; 
+var Backlink = "Security_Protection_Setting.htm";
+var helplink ='';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 700;
+var head_width = 180;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintApprovedURLs(0);
+	PrintEndContent();
+}
+function Print_table1_tr_cell(cell_type,no,name,status)
+{
+}
+function PrintApprovedURLs(hasUnderLine)
+{
+	if (document.formProtectionURL.EditType.value=="99")
+		PrintBeginBlock(1, "Approved Clients Configuration");
+	else
+		PrintBeginBlock(1, "Approved URL Configuration");
+	document.write('<table class="SetupTable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td align="left" width="'+head_width+'" valign="Top">');
+	if (document.formProtectionURL.EditType.value=="99")
+		document.write('Approved Client IP Addresses&nbsp;:&nbsp;');
+	else
+		document.write('Approved URL&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td align="left" width="85%">');
+	document.write('<textarea class="Select" wrap=hard class="input" name="UrlsToIPRangUI" value="" style="width:250pt; height:118px;" size="10" maxlength="128"></textarea>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td align="left" colspan="2">');	
+	var F = document.formProtectionURL;
+	if(F.EditType.value=="98")
+		document.write('Example: "xxx.com" matches "xxx.com" and all the URLs that begin with "xxx.com/" <br>(Separate multiple entries with semicolons)');
+	else
+		document.write('Example: IP: 10.1.1.1 or IP range: 10.1.1.0-10.1.1.10 (Separate multiple entries with semicolons)');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('</table>');	
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 11, 4);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formProtectionURL" method="post" action="Security_Protection_Setting_edit.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="submit_Counters" value="1">
+	<input type="hidden" name="submitstatus" value="1">
+	<input type="hidden" name="Max_url" value='<!--#nk_get SP_APPR_EditInfo="Max_url"-->'>
+	<input type="hidden" name="Max_ip" value='<!--#nk_get SP_APPR_EditInfo="Max_ip"-->'>
+	<input type="hidden" name="EditNo" value='<!--#nk_get SP_APPR_EditInfo="EditNo"-->'>
+	<input type="hidden" name="EditNoValue" value='<!--#nk_get SP_APPR_Edit=""-->'>
+	<input type="hidden" name="EditType" value='<!--#nk_get SP_APPR_EditInfo="EditType"-->'>
+	<input type="hidden" name="RemoveLine" value="">
+	<input type="hidden" name="message" value="">
+	<input type="hidden" name="UrlsToIPRang" value="">
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SP_Update=""-->

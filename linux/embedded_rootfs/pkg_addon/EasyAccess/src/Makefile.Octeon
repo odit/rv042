@@ -1,0 +1,67 @@
+include ./make-include-Octeon.mk
+
+all:
+	$(MAKE) -C lib -f Makefile.Octeon
+	$(MAKE) -C libgcgi -f Makefile.Octeon
+	$(MAKE) -C libsslcert -f Makefile.Octeon
+	$(MAKE) -C libauth -f Makefile.Octeon
+	$(MAKE) -C smm -f Makefile.Octeon
+	$(MAKE) -C firebase -f Makefile.Octeon
+ifneq "$(CONFIG_NK_CRAMFS)" "y"
+	$(MAKE) -C ftp -f Makefile.Octeon
+endif
+	$(MAKE) -C single_bin -f Makefile.Octeon
+	$(MAKE) -C httpd -f Makefile.Octeon
+ifneq "$(CONFIG_NK_CRAMFS)" "y"
+	$(MAKE) -C httprp -f Makefile.Octeon
+endif
+	$(MAKE) -C WWW -f Makefile.Octeon
+	$(MAKE) -C firewall -f Makefile.Octeon
+	$(MAKE) -C utils -f Makefile.Octeon
+
+clean:
+	$(MAKE) -C lib clean -f Makefile.Octeon
+	$(MAKE) -C libgcgi clean -f Makefile.Octeon
+	$(MAKE) -C libsslcert clean -f Makefile.Octeon
+	$(MAKE) -C libauth clean -f Makefile.Octeon
+	$(MAKE) -C smm clean -f Makefile.Octeon
+	$(MAKE) -C firebase clean -f Makefile.Octeon
+ifneq "$(CONFIG_NK_CRAMFS)" "y"
+	$(MAKE) -C ftp clean -f Makefile.Octeon
+endif
+	$(MAKE) -C single_bin clean -f Makefile.Octeon
+	$(MAKE) -C httpd clean -f Makefile.Octeon
+ifneq "$(CONFIG_NK_CRAMFS)" "y"
+	$(MAKE) -C httprp clean -f Makefile.Octeon
+endif
+	$(MAKE) -C WWW clean -f Makefile.Octeon
+	$(MAKE) -C firewall clean -f Makefile.Octeon
+	$(MAKE) -C utils clean -f Makefile.Octeon
+
+install:
+	$(MAKE) -C httpd install -f Makefile.Octeon
+	$(MAKE) -C smm install -f Makefile.Octeon
+	$(MAKE) -C firebase install -f Makefile.Octeon
+ifneq "$(CONFIG_NK_CRAMFS)" "y"
+	$(MAKE) -C ftp install -f Makefile.Octeon
+endif
+	$(MAKE) -C single_bin install -f Makefile.Octeon
+	$(MAKE) -C WWW install -f Makefile.Octeon
+ifneq "$(CONFIG_NK_CRAMFS)" "y"
+	$(MAKE) -C httprp install -f Makefile.Octeon
+endif
+	$(MAKE) -C firewall install -f Makefile.Octeon
+	$(MAKE) -C utils install -f Makefile.Octeon
+ifneq "$(CONFIG_NK_CRAMFS)" "y"
+	$(MAKE) -C AccessPointDial install 
+	$(MAKE) -C COMWebCacheCleaner install 
+	$(MAKE) -C VirtualTransport install 
+	$(MAKE) -C TSAC install 
+	$(MAKE) -C posixvpclient install 
+	$(MAKE) -C MacOS install 
+endif
+ifeq "$(CONFIG_EPS)" "y"
+	$(MAKE) -C EPS install 
+endif
+un-install:
+

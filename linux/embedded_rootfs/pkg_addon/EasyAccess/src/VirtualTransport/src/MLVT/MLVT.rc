@@ -1,0 +1,256 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""MLVT.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,6,1,1
+ PRODUCTVERSION 1,6,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "MLVT Module\0"
+            VALUE "FileVersion", "1, 6, 1, 1\0"
+            VALUE "InternalName", "MLVT\0"
+            VALUE "LegalCopyright", "Copyright 2005\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OLESelfRegister", "\0"
+            VALUE "OriginalFilename", "MLVT.dll\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "MLVT Module\0"
+            VALUE "ProductVersion", "1, 6, 1, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_VTINTERFACE         REGISTRY DISCARDABLE    "VTInterface.rgs"
+IDR_VTLAUNCH            REGISTRY DISCARDABLE    "VTLaunch.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_VIRTUALTRANSPORTDLG DIALOG DISCARDABLE  0, 0, 302, 279
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "General"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Session Information",IDC_STATIC_SESSION,19,8,84,10
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,17,18,259,106
+    LTEXT           "Software:",IDC_STATIC_SOFTWARE,19,22,98,9
+    EDITTEXT        IDC_EDT_SOFTWARE,145,22,120,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER
+    LTEXT           "Started:",IDC_STATIC_STARTED,19,40,98,9
+    EDITTEXT        IDC_EDT_STARTED,145,40,120,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER
+    LTEXT           "Active Connections:",IDC_STATIC_CONNECTIONS,19,57,98,9
+    EDITTEXT        IDC_EDT_CONNECTIONS,145,57,120,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER
+    LTEXT           "Sent:",IDC_STATIC_SENT,19,73,98,9
+    EDITTEXT        IDC_EDT_SENT,145,73,120,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER
+    LTEXT           "Received:",IDC_STATIC_RECEIVED,19,91,98,9
+    EDITTEXT        IDC_EDT_RECEIVED,145,91,120,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER
+    LTEXT           "Status:",IDC_STATIC_STATUS,19,107,98,9
+    EDITTEXT        IDC_EDT_STATUS,145,107,120,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER
+    LTEXT           "Pending Connections:",IDC_STATIC_PENDING,19,131,85,8
+    CONTROL         "&Enable Logging",IDC_LOGGING_CHKBOX,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,22,240,96,8
+    PUSHBUTTON      "&Deactivate",IDC_STATUS,110,256,80,14
+    PUSHBUTTON      "&Close",IDC_CLOSE_BTN,198,256,80,14
+    CONTROL         "List1",IDC_LOG_LST,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,21,146,254,75
+    PUSHBUTTON      "View &Log...",IDC_LOG_BTN,22,256,80,14
+    CONTROL         "&Uninstall",IDC_CHK_UNINSTALL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,231,240,44,8
+END
+
+IDD_ERROR_DLG DIALOG DISCARDABLE  0, 0, 302, 279
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Error"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_RICHEDIT_LOG,"RICHEDIT",ES_MULTILINE | WS_BORDER | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,10,8,280,245
+    PUSHBUTTON      "View &Log...",IDC_LOG_BTN,54,254,80,14
+    PUSHBUTTON      "&Close",IDC_CLOSE_BTN,166,254,80,14
+    CONTROL         "",IDC_RICHEDIT_ERROR,"RICHEDIT",ES_MULTILINE | 
+                    WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,10,8,
+                    280,245
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_VIRTUAL_TRANSPORT_ICON ICON    DISCARDABLE     "virtual_.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_VIRTUALTRANSPORTDLG, DIALOG
+    BEGIN
+        RIGHTMARGIN, 296
+        BOTTOMMARGIN, 277
+    END
+
+    IDD_ERROR_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 295
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 272
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROJNAME            "MLVT"
+    IDS_LOCAL_STRING        "Virtual Transport"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_OPEN_VIRTUAL_TRANSPORT "Open Virtual Transport"
+    IDS_UNINSTALL           "Exit"
+    IDS_LSP_NAME            "Menlologic TransportService"
+    IDS_DEACTIVATE_AND_EXIT "Deactivate"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NSP_NAME            "Menlologic Name Service"
+    IDS_DEACTIVATED_STATUS  "Deactivated"
+    IDS_ACTIVATED_STATUS    "Activated"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_SOFTWARE_VERSION    "Virtual Transport version 1.6.1"
+    IDS_TITLE               "Virtual Transport"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_UNINSTALL_WARNING 
+                            "This activeX control will be uninstalled while closing the webpage."
+    IDS_ERROR_LSP_ENUM_FAILED 
+                            "Unable to enumerate providers. Installation/Removal of Transport Engine is failed."
+    IDS_STATIC_PROGRESS1    "Starting Virtual Transport"
+    IDS_ERROR_PAGE          "Error"
+    IDS_LOG_PAGE            "Log"
+    IDS_VIEW_LOG_BTN        "View Log"
+    IDS_VIEW_ERROR_BTN      "View Error"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "MLVT.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

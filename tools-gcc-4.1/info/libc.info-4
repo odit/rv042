@@ -1,0 +1,1684 @@
+This is libc.info, produced by makeinfo version 4.3 from
+/usr/local/Cavium_Networks/toolchain/src/newlib/libc/libc.texinfo.
+
+START-INFO-DIR-ENTRY
+* libc::                        The ANSI C library.
+END-INFO-DIR-ENTRY
+
+   This file documents the ANSI C library.
+
+   Copyright (C) 1992, 1993, 1994-2004 Red Hat, Inc.
+
+   `libc' includes software developed by the University of California,
+Berkeley and its contributors.
+
+   libc includes software developed by Martin Jackson, Graham Haley and
+Steve Chamberlain of Tadpole Technology and released to Cygnus.
+
+   libc uses floating-point conversion software developed at AT&T, which
+includes this copyright information:
+
+   The author of this software is David M. Gay.
+
+   Copyright (c) 1991 by AT&T.
+
+   Permission to use, copy, modify, and distribute this software for any
+purpose without fee is hereby granted, provided that this entire notice
+is included in all copies of any software which is or includes a copy
+or modification of this software and in all copies of the supporting
+documentation for such software.
+
+   THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR
+IMPLIED  WARRANTY.  IN PARTICULAR, NEITHER THE AUTHOR NOR AT&T MAKES ANY
+REPRESENTATION OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY
+OF THIS SOFTWARE OR ITS FITNESS FOR ANY PARTICULAR PURPOSE.
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, subject to the
+terms of the GNU General Public License, which includes the provision
+that the entire resulting derived work is distributed under the terms
+of a permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions.
+
+
+File: libc.info,  Node: scanf,  Next: iprintf,  Prev: printf,  Up: Stdio
+
+`scanf', `fscanf', `sscanf'--scan and format input
+==================================================
+
+*Synopsis*
+     #include <stdio.h>
+     
+     int scanf(const char *FORMAT [, ARG, ...]);
+     int fscanf(FILE *FD, const char *FORMAT [, ARG, ...]);
+     int sscanf(const char *STR, const char *FORMAT
+         [, ARG, ...]);
+     
+     int _scanf_r(struct _reent *PTR, const char *FORMAT
+         [, ARG, ...]);
+     int _fscanf_r(struct _reent *PTR, FILE *FD, const char *FORMAT
+         [, ARG, ...]);
+     int _sscanf_r(struct _reent *PTR, const char *STR,
+         const char *FORMAT [, ARG, ...]);
+   *Description*
+`scanf' scans a series of input fields from standard input, one
+character at a time.  Each field is interpreted according to a format
+specifier passed to `scanf' in the format string at `*FORMAT'.  `scanf'
+stores the interpreted input from each field at the address passed to
+it as the corresponding argument following FORMAT.  You must supply the
+same number of format specifiers and address arguments as there are
+input fields.
+
+   There must be sufficient address arguments for the given format
+specifiers; if not the results are unpredictable and likely
+disasterous.  Excess address arguments are merely ignored.
+
+   `scanf' often produces unexpected results if the input diverges from
+an expected pattern. Since the combination of `gets' or `fgets'
+followed by `sscanf' is safe and easy, that is the preferred way to be
+certain that a program is synchronized with input at the end of a line.
+
+   `fscanf' and `sscanf' are identical to `scanf', other than the
+source of input: `fscanf' reads from a file, and `sscanf' from a string.
+
+   The routines `_scanf_r', `_fscanf_r', and `_sscanf_r' are reentrant
+versions of `scanf', `fscanf', and `sscanf' that take an additional
+first argument pointing to a reentrancy structure.
+
+   The string at `*FORMAT' is a character sequence composed of zero or
+more directives. Directives are composed of one or more whitespace
+characters, non-whitespace characters, and format specifications.
+
+   Whitespace characters are blank (` '), tab (`\t'), or newline (`\n').
+When `scanf' encounters a whitespace character in the format string it
+will read (but not store) all consecutive whitespace characters up to
+the next non-whitespace character in the input.
+
+   Non-whitespace characters are all other ASCII characters except the
+percent sign (`%').  When `scanf' encounters a non-whitespace character
+in the format string it will read, but not store a matching
+non-whitespace character.
+
+   Format specifications tell `scanf' to read and convert characters
+from the input field into specific types of values, and store then in
+the locations specified by the address arguments.
+
+   Trailing whitespace is left unread unless explicitly matched in the
+format string.
+
+   The format specifiers must begin with a percent sign (`%') and have
+the following form:
+
+            %[*][WIDTH][SIZE]TYPE
+
+   Each format specification begins with the percent character (`%').
+The other fields are:
+`*'
+     an optional marker; if present, it suppresses interpretation and
+     assignment of this input field.
+
+`WIDTH'
+     an optional maximum field width: a decimal integer, which controls
+     the maximum number of characters that will be read before
+     converting the current input field.  If the input field has fewer
+     than WIDTH characters, `scanf' reads all the characters in the
+     field, and then proceeds with the next field and its format
+     specification.
+
+     If a whitespace or a non-convertable character occurs before WIDTH
+     character are read, the characters up to that character are read,
+     converted, and stored.  Then `scanf' proceeds to the next format
+     specification.
+
+`size'
+     `h', `l', and `L' are optional size characters which override the
+     default way that `scanf' interprets the data type of the
+     corresponding argument.
+
+          Modifier   Type(s)
+             hh      d, i, o, u, x, n  convert input to char,
+                                       store in char object
+          
+             h       d, i, o, u, x, n  convert input to short,
+                                       store in short object
+          
+             h       D, I, O, U, X     no effect
+                     e, f, c, s, p
+          
+             l       d, i, o, u, x, n  convert input to long,
+                                       store in long object
+          
+             l       e, f, g           convert input to double
+                                       store in a double object
+          
+             l       D, I, O, U, X     no effect
+                     c, s, p
+          
+             ll      d, i, o, u, x, n  convert to long long,
+                                       store in long long
+          
+             L       d, i, o, u, x, n  convert to long long,
+                                       store in long long
+          
+             L       e, f, g, E, G     convert to long double,
+                                       store in long double
+          
+             L      all others         no effect
+
+`TYPE'
+     A character to specify what kind of conversion `scanf' performs.
+     Here is a table of the conversion characters:
+
+    `%'
+          No conversion is done; the percent character (`%') is stored.
+
+    `c'
+          Scans one character.  Corresponding ARG: `(char *arg)'.
+
+    `s'
+          Reads a character string into the array supplied.
+          Corresponding ARG: `(char arg[])'.
+
+    `[PATTERN]'
+          Reads a non-empty character string into memory starting at
+          ARG.  This area must be large enough to accept the sequence
+          and a terminating null character which will be added
+          automatically.  (PATTERN is discussed in the paragraph
+          following this table). Corresponding ARG: `(char *arg)'.
+
+    `d'
+          Reads a decimal integer into the corresponding ARG: `(int
+          *arg)'.
+
+    `D'
+          Reads a decimal integer into the corresponding ARG: `(long
+          *arg)'.
+
+    `o'
+          Reads an octal integer into the corresponding ARG: `(int
+          *arg)'.
+
+    `O'
+          Reads an octal integer into the corresponding ARG: `(long
+          *arg)'.
+
+    `u'
+          Reads an unsigned decimal integer into the corresponding ARG:
+          `(unsigned int *arg)'.
+
+    `U'
+          Reads an unsigned decimal integer into the corresponding ARG:
+          `(unsigned long *arg)'.
+
+    `x,X'
+          Read a hexadecimal integer into the corresponding ARG: `(int
+          *arg)'.
+
+    `e, f, g'
+          Read a floating-point number into the corresponding ARG:
+          `(float *arg)'.
+
+    `E, F, G'
+          Read a floating-point number into the corresponding ARG:
+          `(double *arg)'.
+
+    `i'
+          Reads a decimal, octal or hexadecimal integer into the
+          corresponding ARG: `(int *arg)'.
+
+    `I'
+          Reads a decimal, octal or hexadecimal integer into the
+          corresponding ARG: `(long *arg)'.
+
+    `n'
+          Stores the number of characters read in the corresponding
+          ARG: `(int *arg)'.
+
+    `p'
+          Stores a scanned pointer.  ANSI C leaves the details to each
+          implementation; this implementation treats `%p' exactly the
+          same as `%U'.  Corresponding ARG: `(void **arg)'.
+
+     A PATTERN of characters surrounded by square brackets can be used
+     instead of the `s' type character.  PATTERN is a set of characters
+     which define a search set of possible characters making up the
+     `scanf' input field.  If the first character in the brackets is a
+     caret (`^'), the search set is inverted to include all ASCII
+     characters except those between the brackets.  There is also a
+     range facility which you can use as a shortcut. `%[0-9] ' matches
+     all decimal digits.  The hyphen must not be the first or last
+     character in the set.  The character prior to the hyphen must be
+     lexically less than the character after it.
+
+     Here are some PATTERN examples:
+    `%[abcd]'
+          matches strings containing only `a', `b', `c', and `d'.
+
+    `%[^abcd]'
+          matches strings containing any characters except `a', `b',
+          `c', or `d'
+
+    `%[A-DW-Z]'
+          matches strings containing `A', `B', `C', `D', `W', `X', `Y',
+          `Z'
+
+    `%[z-a]'
+          matches the characters  `z', `-', and `a'
+
+     Floating point numbers (for field types `e', `f', `g', `E', `F',
+     `G') must correspond to the following general form:
+
+          		[+/-] ddddd[.]ddd [E|e[+|-]ddd]
+
+     where objects inclosed in square brackets are optional, and `ddd'
+     represents decimal, octal, or hexadecimal digits.
+
+*Returns*
+`scanf' returns the number of input fields successfully scanned,
+converted and stored; the return value does not include scanned fields
+which were not stored.
+
+   If `scanf' attempts to read at end-of-file, the return value is
+`EOF'.
+
+   If no fields were stored, the return value is `0'.
+
+   `scanf' might stop scanning a particular field before reaching the
+normal field end character, or may terminate entirely.
+
+   `scanf' stops scanning and storing the current field and moves to
+the next input field (if any) in any of the following situations:
+
+   * The assignment suppressing character (`*') appears after the `%'
+     in the format specification; the current input field is scanned
+     but not stored.
+
+   * WIDTH characters have been read (WIDTH is a width specification, a
+     positive decimal integer).
+
+   * The next character read cannot be converted under the the current
+     format (for example, if a `Z' is read when the format is decimal).
+
+   * The next character in the input field does not appear in the
+     search set (or does appear in the inverted search set).
+
+   When `scanf' stops scanning the current input field for one of these
+reasons, the next character is considered unread and used as the first
+character of the following input field, or the first character in a
+subsequent read operation on the input.
+
+   `scanf' will terminate under the following circumstances:
+
+   * The next character in the input field conflicts with a
+     corresponding non-whitespace character in the format string.
+
+   * The next character in the input field is `EOF'.
+
+   * The format string has been exhausted.
+
+   When the format string contains a character sequence that is not
+part of a format specification, the same character sequence must appear
+in the input; `scanf' will scan but not store the matched characters.
+If a conflict occurs, the first conflicting character remains in the
+input as if it had never been read.
+
+*Portability*
+`scanf' is ANSI C.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: iprintf,  Next: iscanf,  Prev: scanf,  Up: Stdio
+
+`iprintf', `fiprintf', `asiprintf', `siprintf', `sniprintf'--format output
+==========================================================================
+
+*Synopsis*
+     #include <stdio.h>
+     
+     int iprintf(const char *FORMAT [, ARG, ...]);
+     int fiprintf(FILE *FD, const char *FORMAT [, ARG, ...]);
+     int siprintf(char *STR, const char *FORMAT [, ARG, ...]);
+     int asiprintf(char **STRP, const char *FORMAT [, ARG, ...]);
+     int sniprintf(char *STR, size_t SIZE, const char *FORMAT
+         [, ARG, ...]);
+   *Description*
+`iprintf', `fiprintf', `siprintf', `sniprintf', `asiprintf', are the
+same as `printf', `fprintf', `sprintf', `snprintf', and `asprintf',
+respectively, only that they restrict usage to non-floating-point format
+specifiers.
+
+*Returns*
+`siprintf' and `asiprintf' return the number of bytes in the output
+string, save that the concluding `NULL' is not counted.  `iprintf' and
+`fiprintf' return the number of characters transmitted.  If an error
+occurs, `iprintf' and `fiprintf' return `EOF' and `asiprintf' returns
+-1.  No error returns occur for `siprintf'.
+
+*Portability*
+`iprintf', `fiprintf', `siprintf', `sniprintf', and `asprintf' are
+newlib extensions.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: iscanf,  Next: tmpfile,  Prev: iprintf,  Up: Stdio
+
+`iscanf', `fiscanf', `siscanf'--scan and format non-floating input
+==================================================================
+
+*Synopsis*
+     #include <stdio.h>
+     
+     int iscanf(const char *FORMAT [, ARG, ...]);
+     int fiscanf(FILE *FD, const char *FORMAT [, ARG, ...]);
+     int siscanf(const char *STR, const char *FORMAT
+         [, ARG, ...]);
+     
+     int _iscanf_r(struct _reent *PTR, const char *FORMAT
+         [, ARG, ...]);
+     int _fiscanf_r(struct _reent *PTR, FILE *FD, const char *FORMAT
+         [, ARG, ...]);
+     int _siscanf_r(struct _reent *PTR, const char *STR,
+         const char *FORMAT [, ARG, ...]);
+   *Description*
+`iscanf', `fiscanf', and `siscanf' are the same as `scanf', `fscanf',
+and `sscanf' respectively, only that they restrict the available
+formats to non-floating-point format specifiers.
+
+   The routines `_iscanf_r', `_fiscanf_r', and `_siscanf_r' are
+reentrant versions of `iscanf', `fiscanf', and `siscanf' that take an
+additional first argument pointing to a reentrancy structure.
+
+*Returns*
+`iscanf' returns the number of input fields successfully scanned,
+converted and stored; the return value does not include scanned fields
+which were not stored.
+
+   If `iscanf' attempts to read at end-of-file, the return value is
+`EOF'.
+
+   If no fields were stored, the return value is `0'.
+
+*Portability*
+`iscanf', `fiscanf', and `siscanf' are newlib extensions.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: tmpfile,  Next: tmpnam,  Prev: iscanf,  Up: Stdio
+
+`tmpfile'--create a temporary file
+==================================
+
+*Synopsis*
+     #include <stdio.h>
+     FILE *tmpfile(void);
+     
+     FILE *_tmpfile_r(struct _reent *REENT);
+   *Description*
+Create a temporary file (a file which will be deleted automatically),
+using a name generated by `tmpnam'.  The temporary file is opened with
+the mode `"wb+"', permitting you to read and write anywhere in it as a
+binary file (without any data transformations the host system may
+perform for text files).
+
+   The alternate function `_tmpfile_r' is a reentrant version.  The
+argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+`tmpfile' normally returns a pointer to the temporary file.  If no
+temporary file could be created, the result is NULL, and `errno'
+records the reason for failure.
+
+*Portability*
+Both ANSI C and the System V Interface Definition (Issue 2) require
+`tmpfile'.
+
+   Supporting OS subroutines required: `close', `fstat', `getpid',
+`isatty', `lseek', `open', `read', `sbrk', `write'.
+
+   `tmpfile' also requires the global pointer `environ'.
+
+
+File: libc.info,  Node: tmpnam,  Next: viprintf,  Prev: tmpfile,  Up: Stdio
+
+`tmpnam', `tempnam'--name for a temporary file
+==============================================
+
+*Synopsis*
+     #include <stdio.h>
+     char *tmpnam(char *S);
+     char *tempnam(char *DIR, char *PFX);
+     char *_tmpnam_r(struct _reent *REENT, char *S);
+     char *_tempnam_r(struct _reent *REENT, char *DIR, char *PFX);
+   *Description*
+Use either of these functions to generate a name for a temporary file.
+The generated name is guaranteed to avoid collision with other files
+(for up to `TMP_MAX' calls of either function).
+
+   `tmpnam' generates file names with the value of `P_tmpdir' (defined
+in ``stdio.h'') as the leading directory component of the path.
+
+   You can use the `tmpnam' argument S to specify a suitable area of
+memory for the generated filename; otherwise, you can call
+`tmpnam(NULL)' to use an internal static buffer.
+
+   `tempnam' allows you more control over the generated filename: you
+can use the argument DIR to specify the path to a directory for
+temporary files, and you can use the argument PFX to specify a prefix
+for the base filename.
+
+   If DIR is `NULL', `tempnam' will attempt to use the value of
+environment variable `TMPDIR' instead; if there is no such value,
+`tempnam' uses the value of `P_tmpdir' (defined in ``stdio.h'').
+
+   If you don't need any particular prefix to the basename of temporary
+files, you can pass `NULL' as the PFX argument to `tempnam'.
+
+   `_tmpnam_r' and `_tempnam_r' are reentrant versions of `tmpnam' and
+`tempnam' respectively.  The extra argument REENT is a pointer to a
+reentrancy structure.
+
+*Warnings*
+The generated filenames are suitable for temporary files, but do not in
+themselves make files temporary.  Files with these names must still be
+explicitly removed when you no longer want them.
+
+   If you supply your own data area S for `tmpnam', you must ensure
+that it has room for at least `L_tmpnam' elements of type `char'.
+
+*Returns*
+Both `tmpnam' and `tempnam' return a pointer to the newly generated
+filename.
+
+*Portability*
+ANSI C requires `tmpnam', but does not specify the use of `P_tmpdir'.
+The System V Interface Definition (Issue 2) requires both `tmpnam' and
+`tempnam'.
+
+   Supporting OS subroutines required: `close',  `fstat', `getpid',
+`isatty', `lseek', `open', `read', `sbrk', `write'.
+
+   The global pointer `environ' is also required.
+
+
+File: libc.info,  Node: vprintf,  Next: vscanf,  Prev: viscanf,  Up: Stdio
+
+`vprintf', `vfprintf', `vsprintf'--format argument list
+=======================================================
+
+*Synopsis*
+     #include <stdio.h>
+     #include <stdarg.h>
+     int vprintf(const char *FMT, va_list LIST);
+     int vfprintf(FILE *FP, const char *FMT, va_list LIST);
+     int vsprintf(char *STR, const char *FMT, va_list LIST);
+     int vasprintf(char **STRP, const char *FMT, va_list LIST);
+     int vsnprintf(char *STR, size_t SIZE, const char *FMT,
+         va_list LIST);
+     
+     int _vprintf_r(struct _reent *REENT, const char *FMT,
+         va_list LIST);
+     int _vfprintf_r(struct _reent *REENT, FILE *FP, const char *FMT,
+         va_list LIST);
+     int _vasprintf_r(struct _reent *REENT, char **STR,
+         const char *FMT, va_list LIST);
+     int _vsprintf_r(struct _reent *REENT, char *STR,
+         const char *FMT, va_list LIST);
+     int _vsnprintf_r(struct _reent *REENT, char *STR, size_t SIZE,
+         const char *FMT, va_list LIST);
+   *Description*
+`vprintf', `vfprintf', `vasprintf', `vsprintf' and `vsnprintf' are
+(respectively) variants of `printf', `fprintf', `asprintf', `sprintf',
+and `snprintf'.  They differ only in allowing their caller to pass the
+variable argument list as a `va_list' object (initialized by `va_start')
+rather than directly accepting a variable number of arguments.
+
+*Returns*
+The return values are consistent with the corresponding functions:
+`vasprintf'/`vsprintf' returns the number of bytes in the output string,
+save that the concluding `NULL' is not counted.  `vprintf' and
+`vfprintf' return the number of characters transmitted.  If an error
+occurs, `vprintf' and `vfprintf' return `EOF' and `vasprintf' returns
+-1.  No error returns occur for `vsprintf'.
+
+*Portability*
+ANSI C requires all three functions.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: vscanf,  Prev: vprintf,  Up: Stdio
+
+`vscanf', `vfscanf', `vsscanf'--format argument list
+====================================================
+
+*Synopsis*
+     #include <stdio.h>
+     #include <stdarg.h>
+     int vscanf(const char *FMT, va_list LIST);
+     int vfscanf(FILE *FP, const char *FMT, va_list LIST);
+     int vsscanf(const char *STR, const char *FMT, va_list LIST);
+     
+     int _vscanf_r(struct _reent *REENT, const char *FMT,
+         va_list LIST);
+     int _vfscanf_r(struct _reent *REENT, FILE *FP, const char *FMT,
+         va_list LIST);
+     int _vsscanf_r(struct _reent *REENT, const char *STR,
+         const char *FMT, va_list LIST);
+   *Description*
+`vscanf', `vfscanf', and `vsscanf' are (respectively) variants of
+`scanf', `fscanf', and `sscanf'.  They differ only in allowing their
+caller to pass the variable argument list as a `va_list' object
+(initialized by `va_start') rather than directly accepting a variable
+number of arguments.
+
+*Returns*
+The return values are consistent with the corresponding functions:
+`vscanf' returns the number of input fields successfully scanned,
+converted, and stored; the return value does not include scanned fields
+which were not stored.
+
+   If `vscanf' attempts to read at end-of-file, the return value is
+`EOF'.
+
+   If no fields were stored, the return value is `0'.
+
+   The routines `_vscanf_r', `_vfscanf_f', and `_vsscanf_r' are
+reentrant versions which take an additional first parameter which
+points to the reentrancy structure.
+
+*Portability*
+These are GNU extensions.
+
+   Supporting OS subroutines required:
+
+
+File: libc.info,  Node: viprintf,  Next: viscanf,  Prev: tmpnam,  Up: Stdio
+
+`viprintf', `vfiprintf', `vsiprintf'--format argument list
+==========================================================
+
+*Synopsis*
+     #include <stdio.h>
+     #include <stdarg.h>
+     int viprintf(const char *FMT, va_list LIST);
+     int vfiprintf(FILE *FP, const char *FMT, va_list LIST);
+     int vsiprintf(char *STR, const char *FMT, va_list LIST);
+     int vasiprintf(char **STRP, const char *FMT, va_list LIST);
+     int vsniprintf(char *STR, size_t SIZE, const char *FMT,
+         va_list LIST);
+     
+     int _viprintf_r(struct _reent *REENT, const char *FMT,
+         va_list LIST);
+     int _vfiprintf_r(struct _reent *REENT, FILE *FP,
+         const char *FMT, va_list LIST);
+     int _vasiprintf_r(struct _reent *REENT, char **STR,
+         const char *FMT, va_list LIST);
+     int _vsiprintf_r(struct _reent *REENT, char *STR,
+         const char *FMT, va_list LIST);
+     int _vsniprintf_r(struct _reent *REENT, char *STR, size_t SIZE,
+         const char *FMT, va_list LIST);
+   *Description*
+`viprintf', `vfiprintf', `vasiprintf', `vsiprintf' and `vsniprintf' are
+(respectively) variants of `iprintf', `fiprintf', `asiprintf',
+`siprintf', and `sniprintf'.  They differ only in restricting the
+caller to use non-floating-point format specifiers.
+
+*Returns*
+The return values are consistent with the corresponding functions:
+`vasiprintf'/`vsiprintf' returns the number of bytes in the output
+string, save that the concluding `NULL' is not counted.  `viprintf' and
+`vfiprintf' return the number of characters transmitted.  If an error
+occurs, `viprintf' and `vfiprintf' return `EOF' and `vasiprintf'
+returns -1.  No error returns occur for `vsiprintf'.
+
+*Portability*
+`viprintf', `vfiprintf', `vasiprintf', `vsiprintf' and `vsniprintf' are
+newlib extensions.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: viscanf,  Next: vprintf,  Prev: viprintf,  Up: Stdio
+
+`viscanf', `vfiscanf', `vsiscanf'--format argument list
+=======================================================
+
+*Synopsis*
+     #include <stdio.h>
+     #include <stdarg.h>
+     int viscanf(const char *FMT, va_list LIST);
+     int vfiscanf(FILE *FP, const char *FMT, va_list LIST);
+     int vsiscanf(const char *STR, const char *FMT, va_list LIST);
+     
+     int _viscanf_r(struct _reent *REENT, const char *FMT,
+         va_list LIST);
+     int _vfiscanf_r(struct _reent *REENT, FILE *FP, const char *FMT,
+         va_list LIST);
+     int _vsiscanf_r(struct _reent *REENT, const char *STR,
+         const char *FMT, va_list LIST);
+   *Description*
+`viscanf', `vfiscanf', and `vsiscanf' are (respectively) variants of
+`iscanf', `fiscanf', and `siscanf'.  They differ only in allowing their
+caller to pass the variable argument list as a `va_list' object
+(initialized by `va_start') rather than directly accepting a variable
+number of arguments.
+
+*Returns*
+The return values are consistent with the corresponding functions:
+`viscanf' returns the number of input fields successfully scanned,
+converted, and stored; the return value does not include scanned fields
+which were not stored.
+
+   If `viscanf' attempts to read at end-of-file, the return value is
+`EOF'.
+
+   If no fields were stored, the return value is `0'.
+
+   The routines `_viscanf_r', `_vfiscanf_f', and `_vsiscanf_r' are
+reentrant versions which take an additional first parameter which
+points to the reentrancy structure.
+
+*Portability*
+These are newlib extensions.
+
+   Supporting OS subroutines required:
+
+
+File: libc.info,  Node: Strings,  Next: Wchar strings,  Prev: Stdio,  Up: Top
+
+Strings and Memory (`string.h')
+*******************************
+
+This chapter describes string-handling functions and functions for
+managing areas of memory.  The corresponding declarations are in
+`string.h'.
+
+* Menu:
+
+* bcmp::        Compare two memory areas
+* bcopy::       Copy memory regions
+* bzero::       Initialize memory to zero
+* index::       Search for character in string
+* memccpy::     Copy memory regions up to end-token
+* memchr::      Find character in memory
+* memcmp::      Compare two memory areas
+* memcpy::      Copy memory regions
+* memmove::     Move possibly overlapping memory
+* mempcpy::	Copy memory regions and locate end
+* memset::      Set an area of memory
+* rindex::      Reverse search for character in string
+* strcasecmp::	Compare strings ignoring case
+* strcat::      Concatenate strings
+* strchr::      Search for character in string
+* strcmp::      Character string compare
+* strcoll::     Locale-specific character string compare
+* strcpy::      Copy string
+* strcspn::     Count chars not in string
+* strerror::    Convert error number to string
+* strerror_r::  Convert error number to string
+* strlen::      Character string length
+* strlwr::	Convert string to lowercase
+* strncasecmp::	Compare strings ignoring case
+* strncat::     Concatenate strings
+* strncmp::     Character string compare
+* strncpy::     Counted copy string
+* strnlen::     Character string length
+* strpbrk::     Find chars in string
+* strrchr::     Reverse search for character in string
+* strspn::      Find initial match
+* strstr::      Find string segment
+* strtok::      Get next token from a string
+* strupr::	Convert string to upper case
+* strxfrm::     Transform string
+* swab::        Swap adjacent bytes
+
+
+File: libc.info,  Node: bcmp,  Next: bcopy,  Up: Strings
+
+`bcmp'--compare two memory areas
+================================
+
+   *Synopsis*
+     #include <string.h>
+     int bcmp(const void *S1, const void *S2, size_t N);
+   *Description*
+This function compares not more than N bytes of the object pointed to
+by S1 with the object pointed to by S2.
+
+   This function is identical to `memcmp'.
+
+*Returns*
+The function returns an integer greater than, equal to or less than
+zero 	according to whether the object pointed to by S1 is greater than,
+equal to or less than the object pointed to by S2.
+
+*Portability*
+`bcmp' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: bcopy,  Next: bzero,  Prev: bcmp,  Up: Strings
+
+`bcopy'--copy memory regions
+============================
+
+*Synopsis*
+     #include <string.h>
+     void bcopy(const void *IN, void *OUT, size_t N);
+   *Description*
+This function copies N bytes from the memory region pointed to by IN to
+the memory region pointed to by OUT.
+
+   This function is implemented in term of `memmove'.
+
+*Portability*
+`bcopy' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: bzero,  Next: index,  Prev: bcopy,  Up: Strings
+
+`bzero'--initialize memory to zero
+==================================
+
+*Synopsis*
+     #include <string.h>
+     void bzero(void *B, size_t LENGTH);
+   *Description*
+`bzero' initializes LENGTH bytes of memory, starting at address B, to
+zero.
+
+*Returns*
+`bzero' does not return a result.
+
+*Portability*
+`bzero' is in the Berkeley Software Distribution.  Neither ANSI C nor
+the System V Interface Definition (Issue 2) require `bzero'.
+
+   `bzero' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: index,  Next: memccpy,  Prev: bzero,  Up: Strings
+
+`index'--search for character in string
+=======================================
+
+*Synopsis*
+     #include <string.h>
+     char * index(const char *STRING, int C);
+   *Description*
+This function finds the first occurence of C (converted to a char) in
+the string pointed to by STRING (including the terminating null
+character).
+
+   This function is identical to `strchr'.
+
+*Returns*
+Returns a pointer to the located character, or a null pointer if C does
+not occur in STRING.
+
+*Portability*
+`index' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: memccpy,  Next: memchr,  Prev: index,  Up: Strings
+
+`memccpy'--copy memory regions with end-token check
+===================================================
+
+*Synopsis*
+     #include <string.h>
+     void* memccpy(void *OUT, const void *IN,
+         int ENDCHAR, size_t N);
+   *Description*
+This function copies up to N bytes from the memory region pointed to by
+IN to the memory region pointed to by OUT.  If a byte matching the
+ENDCHAR is encountered, the byte is copied and copying stops.
+
+   If the regions overlap, the behavior is undefined.
+
+*Returns*
+`memccpy' returns a pointer to the first byte following the ENDCHAR in
+the OUT region.  If no byte matching ENDCHAR was copied, then `NULL' is
+returned.
+
+*Portability*
+`memccpy' is a GNU extension.
+
+   `memccpy' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: memchr,  Next: memcmp,  Prev: memccpy,  Up: Strings
+
+`memchr'--find character in memory
+==================================
+
+*Synopsis*
+     #include <string.h>
+     void *memchr(const void *SRC, int C, size_t LENGTH);
+   *Description*
+This function searches memory starting at `*SRC' for the character C.
+The search only ends with the first occurrence of C, or after LENGTH
+characters; in particular, `NULL' does not terminate the search.
+
+*Returns*
+If the character C is found within LENGTH characters of `*SRC', a
+pointer to the character is returned. If C is not found, then `NULL' is
+returned.
+
+*Portability*
+`memchr' is ANSI C.
+
+   `memchr' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: memcmp,  Next: memcpy,  Prev: memchr,  Up: Strings
+
+`memcmp'--compare two memory areas
+==================================
+
+*Synopsis*
+     #include <string.h>
+     int memcmp(const void *S1, const void *S2, size_t N);
+   *Description*
+This function compares not more than N characters of the object pointed
+to by S1 with the object pointed to by S2.
+
+*Returns*
+The function returns an integer greater than, equal to or less than
+zero 	according to whether the object pointed to by S1 is greater than,
+equal to or less than the object pointed to by S2.
+
+*Portability*
+`memcmp' is ANSI C.
+
+   `memcmp' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: memcpy,  Next: memmove,  Prev: memcmp,  Up: Strings
+
+`memcpy'--copy memory regions
+=============================
+
+*Synopsis*
+     #include <string.h>
+     void* memcpy(void *OUT, const void *IN, size_t N);
+   *Description*
+This function copies N bytes from the memory region pointed to by IN to
+the memory region pointed to by OUT.
+
+   If the regions overlap, the behavior is undefined.
+
+*Returns*
+`memcpy' returns a pointer to the first byte of the OUT region.
+
+*Portability*
+`memcpy' is ANSI C.
+
+   `memcpy' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: memmove,  Next: mempcpy,  Prev: memcpy,  Up: Strings
+
+`memmove'--move possibly overlapping memory
+===========================================
+
+*Synopsis*
+     #include <string.h>
+     void *memmove(void *DST, const void *SRC, size_t LENGTH);
+   *Description*
+This function moves LENGTH characters from the block of memory starting
+at `*SRC' to the memory starting at `*DST'. `memmove' reproduces the
+characters correctly at `*DST' even if the two areas overlap.
+
+*Returns*
+The function returns DST as passed.
+
+*Portability*
+`memmove' is ANSI C.
+
+   `memmove' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: mempcpy,  Next: memset,  Prev: memmove,  Up: Strings
+
+`mempcpy'--copy memory regions and return end pointer
+=====================================================
+
+*Synopsis*
+     #include <string.h>
+     void* mempcpy(void *OUT, const void *IN, size_t N);
+   *Description*
+This function copies N bytes from the memory region pointed to by IN to
+the memory region pointed to by OUT.
+
+   If the regions overlap, the behavior is undefined.
+
+*Returns*
+`mempcpy' returns a pointer to the byte following the last byte copied
+to the OUT region.
+
+*Portability*
+`mempcpy' is a GNU extension.
+
+   `mempcpy' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: memset,  Next: rindex,  Prev: mempcpy,  Up: Strings
+
+`memset'--set an area of memory
+===============================
+
+*Synopsis*
+     #include <string.h>
+     void *memset(const void *DST, int C, size_t LENGTH);
+   *Description*
+This function converts the argument C into an unsigned char and fills
+the first LENGTH characters of the array pointed to by DST to the value.
+
+*Returns*
+`memset' returns the value of M.
+
+*Portability*
+`memset' is ANSI C.
+
+   `memset' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: rindex,  Next: strcasecmp,  Prev: memset,  Up: Strings
+
+`rindex'--reverse search for character in string
+================================================
+
+*Synopsis*
+     #include <string.h>
+     char * rindex(const char *STRING, int C);
+   *Description*
+This function finds the last occurence of C (converted to a char) in
+the string pointed to by STRING (including the terminating null
+character).
+
+   This function is identical to `strrchr'.
+
+*Returns*
+Returns a pointer to the located character, or a null pointer if C does
+not occur in STRING.
+
+*Portability*
+`rindex' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strcasecmp,  Next: strcat,  Prev: rindex,  Up: Strings
+
+`strcasecmp'--case-insensitive character string compare
+=======================================================
+
+*Synopsis*
+     #include <string.h>
+     int strcasecmp(const char *A, const char *B);
+   *Description*
+`strcasecmp' compares the string at A to the string at B in a
+case-insensitive manner.
+
+*Returns*
+If `*A' sorts lexicographically after `*B' (after both are converted to
+uppercase), `strcasecmp' returns a number greater than zero.  If the
+two strings match, `strcasecmp' returns zero.  If `*A' sorts
+lexicographically before `*B', `strcasecmp' returns a number less than
+zero.
+
+*Portability*
+`strcasecmp' is in the Berkeley Software Distribution.
+
+   `strcasecmp' requires no supporting OS subroutines. It uses
+tolower() from elsewhere in this library.
+
+
+File: libc.info,  Node: strcat,  Next: strchr,  Prev: strcasecmp,  Up: Strings
+
+`strcat'--concatenate strings
+=============================
+
+*Synopsis*
+     #include <string.h>
+     char *strcat(char *DST, const char *SRC);
+   *Description*
+`strcat' appends a copy of the string pointed to by SRC (including the
+terminating null character) to the end of the string pointed to by DST.
+The initial character of SRC overwrites the null character at the end
+of DST.
+
+*Returns*
+This function returns the initial value of DST
+
+*Portability*
+`strcat' is ANSI C.
+
+   `strcat' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strchr,  Next: strcmp,  Prev: strcat,  Up: Strings
+
+`strchr'--search for character in string
+========================================
+
+*Synopsis*
+     #include <string.h>
+     char * strchr(const char *STRING, int C);
+   *Description*
+This function finds the first occurence of C (converted to a char) in
+the string pointed to by STRING (including the terminating null
+character).
+
+*Returns*
+Returns a pointer to the located character, or a null pointer if C does
+not occur in STRING.
+
+*Portability*
+`strchr' is ANSI C.
+
+   `strchr' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strcmp,  Next: strcoll,  Prev: strchr,  Up: Strings
+
+`strcmp'--character string compare
+==================================
+
+*Synopsis*
+     #include <string.h>
+     int strcmp(const char *A, const char *B);
+   *Description*
+`strcmp' compares the string at A to the string at B.
+
+*Returns*
+If `*A' sorts lexicographically after `*B', `strcmp' returns a number
+greater than zero.  If the two strings match, `strcmp' returns zero.
+If `*A' sorts lexicographically before `*B', `strcmp' returns a number
+less than zero.
+
+*Portability*
+`strcmp' is ANSI C.
+
+   `strcmp' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strcoll,  Next: strcpy,  Prev: strcmp,  Up: Strings
+
+`strcoll'--locale-specific character string compare
+===================================================
+
+*Synopsis*
+     #include <string.h>
+     int strcoll(const char *STRA, const char * STRB);
+   *Description*
+`strcoll' compares the string pointed to by STRA to the string pointed
+to by STRB, using an interpretation appropriate to the current
+`LC_COLLATE' state.
+
+*Returns*
+If the first string is greater than the second string, `strcoll'
+returns a number greater than zero.  If the two strings are equivalent,
+`strcoll' returns zero.  If the first string is less than the second
+string, `strcoll' returns a number less than zero.
+
+*Portability*
+`strcoll' is ANSI C.
+
+   `strcoll' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strcpy,  Next: strcspn,  Prev: strcoll,  Up: Strings
+
+`strcpy'--copy string
+=====================
+
+*Synopsis*
+     #include <string.h>
+     char *strcpy(char *DST, const char *SRC);
+   *Description*
+`strcpy' copies the string pointed to by SRC (including the terminating
+null character) to the array pointed to by DST.
+
+*Returns*
+This function returns the initial value of DST.
+
+*Portability*
+`strcpy' is ANSI C.
+
+   `strcpy' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strcspn,  Next: strerror,  Prev: strcpy,  Up: Strings
+
+`strcspn'--count characters not in string
+=========================================
+
+*Synopsis*
+     size_t strcspn(const char *S1, const char *S2);
+   *Description*
+This function computes the length of the initial part of the string
+pointed to by S1 which consists entirely of characters NOT from the
+string pointed to by S2 (excluding the terminating null character).
+
+*Returns*
+`strcspn' returns the length of the substring found.
+
+*Portability*
+`strcspn' is ANSI C.
+
+   `strcspn' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strerror,  Next: strerror_r,  Prev: strcspn,  Up: Strings
+
+`strerror'--convert error number to string
+==========================================
+
+*Synopsis*
+     #include <string.h>
+     char *strerror(int ERRNUM);
+   *Description*
+`strerror' converts the error number ERRNUM into a string.  The value
+of ERRNUM is usually a copy of `errno'.  If `errnum' is not a known
+error number, the result points to an empty string.
+
+   This implementation of `strerror' prints out the following strings
+for each of the values defined in ``errno.h'':
+
+`E2BIG'
+     Arg list too long
+
+`EACCES'
+     Permission denied
+
+`EADDRINUSE'
+     Address already in use
+
+`EADV'
+     Advertise error
+
+`EAFNOSUPPORT'
+     Address family not supported by protocol family
+
+`EAGAIN'
+     No more processes
+
+`EALREADY'
+     Socket already connected
+
+`EBADF'
+     Bad file number
+
+`EBADMSG'
+     Bad message
+
+`EBUSY'
+     Device or resource busy
+
+`ECHILD'
+     No children
+
+`ECOMM'
+     Communication error
+
+`ECONNABORTED'
+     Software caused connection abort
+
+`ECONNREFUSED'
+     Connection refused
+
+`EDEADLK'
+     Deadlock
+
+`EDESTADDRREQ'
+     Destination address required
+
+`EEXIST'
+     File exists
+
+`EDOM'
+     Math argument
+
+`EFAULT'
+     Bad address
+
+`EFBIG'
+     File too large
+
+`EHOSTDOWN'
+     Host is down
+
+`EHOSTUNREACH'
+     Host is unreachable
+
+`EIDRM'
+     Identifier removed
+
+`EINPROGRESS'
+     Connection already in progress
+
+`EINTR'
+     Interrupted system call
+
+`EINVAL'
+     Invalid argument
+
+`EIO'
+     I/O error
+
+`EISCONN'
+     Socket is already connected
+
+`EISDIR'
+     Is a directory
+
+`ELIBACC'
+     Cannot access a needed shared library
+
+`ELIBBAD'
+     Accessing a corrupted shared library
+
+`ELIBEXEC'
+     Cannot exec a shared library directly
+
+`ELIBMAX'
+     Attempting to link in more shared libraries than system limit
+
+`ELIBSCN'
+     `.lib' section in a.out corrupted
+
+`EMFILE'
+     Too many open files
+
+`EMLINK'
+     Too many links
+
+`EMSGSIZE'
+     Message too long
+
+`EMULTIHOP'
+     Multihop attempted
+
+`ENAMETOOLONG'
+     File or path name too long
+
+`ENETDOWN'
+     Network interface not configured
+
+`ENETUNREACH'
+     Network is unreachable
+
+`ENFILE'
+     Too many open files in system
+
+`ENODEV'
+     No such device
+
+`ENOENT'
+     No such file or directory
+
+`ENOEXEC'
+     Exec format error
+
+`ENOLCK'
+     No lock
+
+`ENOLINK'
+     Virtual circuit is gone
+
+`ENOMEM'
+     Not enough space
+
+`ENOMSG'
+     No message of desired type
+
+`ENONET'
+     Machine is not on the network
+
+`ENOPKG'
+     No package
+
+`ENOPROTOOPT'
+     Protocol not available
+
+`ENOSPC'
+     No space left on device
+
+`ENOSR'
+     No stream resources
+
+`ENOSTR'
+     Not a stream
+
+`ENOSYS'
+     Function not implemented
+
+`ENOTBLK'
+     Block device required
+
+`ENOTCONN'
+     Socket is not connected
+
+`ENOTDIR'
+     Not a directory
+
+`ENOTEMPTY'
+     Directory not empty
+
+`ENOTSOCK'
+     Socket operation on non-socket
+
+`ENOTSUP'
+     Not supported
+
+`ENOTTY'
+     Not a character device
+
+`ENXIO'
+     No such device or address
+
+`EPERM'
+     Not owner
+
+`EPIPE'
+     Broken pipe
+
+`EPROTO'
+     Protocol error
+
+`EPROTOTYPE'
+     Protocol wrong type for socket
+
+`EPROTONOSUPPORT'
+     Unknown protocol
+
+`ERANGE'
+     Result too large
+
+`EREMOTE'
+     Resource is remote
+
+`EROFS'
+     Read-only file system
+
+`ESHUTDOWN'
+     Can't send after socket shutdown
+
+`ESOCKTNOSUPPORT'
+     Socket type not supported
+
+`ESPIPE'
+     Illegal seek
+
+`ESRCH'
+     No such process
+
+`ESRMNT'
+     Srmount error
+
+`ETIME'
+     Stream ioctl timeout
+
+`ETIMEDOUT'
+     Connection timed out
+
+`ETXTBSY'
+     Text file busy
+
+`EXDEV'
+     Cross-device link
+
+*Returns*
+This function returns a pointer to a string.  Your application must not
+modify that string.
+
+*Portability*
+ANSI C requires `strerror', but does not specify the strings used for
+each error number.
+
+   Although this implementation of `strerror' is reentrant, ANSI C
+declares that subsequent calls to `strerror' may overwrite the result
+string; therefore portable code cannot depend on the reentrancy of this
+subroutine.
+
+   This implementation of `strerror' provides for user-defined
+extensibility.  `errno.h' defines __ELASTERROR, which can be used as a
+base for user-defined error values.  If the user supplies a routine
+named `_user_strerror', and ERRNUM passed to `strerror' does not match
+any of the supported values, `_user_strerror' is called with ERRNUM as
+its argument.
+
+   `_user_strerror' takes one argument of type INT, and returns a
+character pointer.  If ERRNUM is unknown to `_user_strerror',
+`_user_strerror' returns NULL.  The default `_user_strerror' returns
+NULL for all input values.
+
+   `strerror' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strerror_r,  Next: strlen,  Prev: strerror,  Up: Strings
+
+`strerror_r'--convert error number to string and copy to buffer
+===============================================================
+
+*Synopsis*
+     #include <string.h>
+     char *strerror_r(int ERRNUM, char *BUFFER, size_t N);
+   *Description*
+`strerror_r' converts the error number ERRNUM into a string and copies
+the result into the supplied BUFFER for a length up to N, including the
+NUL terminator. The value of ERRNUM is usually a copy of `errno'.  If
+`errnum' is not a known error number, the result is the empty string.
+
+   See `strerror' for how strings are mapped to `errnum'.
+
+*Returns*
+This function returns a pointer to a string.  Your application must not
+modify that string.
+
+*Portability*
+`strerror_r' is a GNU extension.
+
+   `strerror_r' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strlen,  Next: strlwr,  Prev: strerror_r,  Up: Strings
+
+`strlen'--character string length
+=================================
+
+*Synopsis*
+     #include <string.h>
+     size_t strlen(const char *STR);
+   *Description*
+The `strlen' function works out the length of the string starting at
+`*STR' by counting chararacters until it reaches a `NULL' character.
+
+*Returns*
+`strlen' returns the character count.
+
+*Portability*
+`strlen' is ANSI C.
+
+   `strlen' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strlwr,  Next: strncasecmp,  Prev: strlen,  Up: Strings
+
+`strlwr'--force string to lowercase
+===================================
+
+*Synopsis*
+     #include <string.h>
+     char *strlwr(char *A);
+   *Description*
+`strlwr' converts each character in the string at A to lowercase.
+
+*Returns*
+`strlwr' returns its argument, A.
+
+*Portability*
+`strlwr' is not widely portable.
+
+   `strlwr' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strncasecmp,  Next: strncat,  Prev: strlwr,  Up: Strings
+
+`strncasecmp'--case-insensitive character string compare
+========================================================
+
+*Synopsis*
+     #include <string.h>
+     int strncasecmp(const char *A, const char * B, size_t LENGTH);
+   *Description*
+`strncasecmp' compares up to LENGTH characters from the string at A to
+the string at B in a case-insensitive manner.
+
+*Returns*
+If `*A' sorts lexicographically after `*B' (after both are converted to
+uppercase), `strncasecmp' returns a number greater than zero.  If the
+two strings are equivalent, `strncasecmp' returns zero.  If `*A' sorts
+lexicographically before `*B', `strncasecmp' returns a number less than
+zero.
+
+*Portability*
+`strncasecmp' is in the Berkeley Software Distribution.
+
+   `strncasecmp' requires no supporting OS subroutines. It uses
+tolower() from elsewhere in this library.
+
+
+File: libc.info,  Node: strncat,  Next: strncmp,  Prev: strncasecmp,  Up: Strings
+
+`strncat'--concatenate strings
+==============================
+
+*Synopsis*
+     #include <string.h>
+     char *strncat(char *DST, const char *SRC, size_t LENGTH);
+   *Description*
+`strncat' appends not more than LENGTH characters from the string
+pointed to by SRC (including the	terminating null character) to the end
+of the string pointed to by DST.  The initial character of SRC
+overwrites the null character at the end of DST.  A terminating null
+character is always appended to the result
+
+*Warnings*
+Note that a null is always appended, so that if the copy is limited by
+the LENGTH argument, the number of characters appended to DST is `n +
+1'.
+
+*Returns*
+This function returns the initial value of DST
+
+*Portability*
+`strncat' is ANSI C.
+
+   `strncat' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strncmp,  Next: strncpy,  Prev: strncat,  Up: Strings
+
+`strncmp'--character string compare
+===================================
+
+*Synopsis*
+     #include <string.h>
+     int strncmp(const char *A, const char * B, size_t LENGTH);
+   *Description*
+`strncmp' compares up to LENGTH characters from the string at A to the
+string at B.
+
+*Returns*
+If `*A' sorts lexicographically after `*B', `strncmp' returns a number
+greater than zero.  If the two strings are equivalent, `strncmp'
+returns zero.  If `*A' sorts lexicographically before `*B', `strncmp'
+returns a number less than zero.
+
+*Portability*
+`strncmp' is ANSI C.
+
+   `strncmp' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strncpy,  Next: strnlen,  Prev: strncmp,  Up: Strings
+
+`strncpy'--counted copy string
+==============================
+
+*Synopsis*
+     #include <string.h>
+     char *strncpy(char *DST, const char *SRC, size_t LENGTH);
+   *Description*
+`strncpy' copies not more than LENGTH characters from the the string
+pointed to by SRC (including the terminating null character) to the
+array pointed to by DST.  If the string pointed to by SRC is shorter
+than LENGTH characters, null characters are appended to the destination
+array until a total of LENGTH characters have been written.
+
+*Returns*
+This function returns the initial value of DST.
+
+*Portability*
+`strncpy' is ANSI C.
+
+   `strncpy' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strnlen,  Next: strpbrk,  Prev: strncpy,  Up: Strings
+
+`strnlen'--character string length
+==================================
+
+*Synopsis*
+     #include <string.h>
+     size_t strnlen(const char *STR, size_t N);
+   *Description*
+The `strnlen' function works out the length of the string starting at
+`*STR' by counting chararacters until it reaches a NUL character or the
+maximum: N number of characters have been inspected.
+
+*Returns*
+`strnlen' returns the character count or N.
+
+*Portability*
+`strnlen' is a GNU extension.
+
+   `strnlen' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strpbrk,  Next: strrchr,  Prev: strnlen,  Up: Strings
+
+`strpbrk'--find characters in string
+====================================
+
+*Synopsis*
+     #include <string.h>
+     char *strpbrk(const char *S1, const char *S2);
+   *Description*
+This function locates the first occurence in the string pointed to by
+S1 of any character in string pointed to by S2 (excluding the
+terminating null character).
+
+*Returns*
+`strpbrk' returns a pointer to the character found in S1, or a null
+pointer if no character from S2 occurs in S1.
+
+*Portability*
+`strpbrk' requires no supporting OS subroutines.
+

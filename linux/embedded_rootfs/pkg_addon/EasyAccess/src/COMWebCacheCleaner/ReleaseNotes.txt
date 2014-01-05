@@ -1,0 +1,139 @@
+				Release Notes-WebCacheCleaner
+				=============================
+
+				Version 1.6.1 - May 31 2007
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No features.
+--------------------------------------------------------------------------------
+				Version 1.6.0 - Mar 14 2007
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No features.
+--------------------------------------------------------------------------------------------				
+
+				Version 1.5.1 - Jan 10 2007
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No features.
+--------------------------------------------------------------------------------------------		
+
+				Version 1.5.0 - oct 17 2006
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No features.
+--------------------------------------------------------------------------------------------
+				
+
+				Version 1.4.0 - Jan 09 2006
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No features.
+--------------------------------------------------------------------------------------------
+
+
+Bugs Fixed:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No Bugs.
+--------------------------------------------------------------------------------------------
+
+
+Known Issues:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No Issues.
+--------------------------------------------------------------------------------------------
+
+				Version 1.3.0 - July 27 2005
+				----------------------------
+Bug Fixes:
+
+The following bugs has been fixed in following platforms.
+
+In OCX			
+
+In  (Xp - sp2)		 product was getting crashed.
+
+			 In XP home History is not cleaned.
+
+After Changing OCX to COMDLL
+  	     		 
+In (XP-SP2)		 shows a script when we access web cache cleaner in IE( line 22 '>' should be removed at the end)
+      
+             		 The given sites in the html are not deleted in history and  also in the address bar.
+ 
+             		
+          
+             		 
+
+In  (2K, service pack2)  The given sites in the html are not deleted in history and  also in the address bar.
+
+
+
+In  (XPP, SP1a)      	 shows a script when we access web cache cleaner in IE( line 22 '>' should be removed at the end) 
+      
+                         The given sites in the html are not deleted in history and  also in the address bar.
+ 
+			 
+          
+                         
+
+In (2K , service pack 3) History of the all the given files are not deleted.
+                                   
+                         The same with the address bar.
+ 
+ 			 Few file folders are not deleted in the temporary internet files.
+ 
+ 			 cookies are not deleted.
+ 
+ 			 When path is given, the file is not deleted.
+
+In  (2k,sp4)  		 shows a script when we access web cache cleaner in IE( line 22 '>' should be removed at the end)
+ 
+                    	 sites are not deleted in history and address bar.
+
+In 2k platform (with out service pack) the URLName in the Address bar is not deleted.
+
+In 2k platform (with out service pack) the file Path is not deleted in the Normal User mode.
+
+In 2000 server Administrator mode File path is not deleted.
+
+In 2000 server Normal User mode File path is not deleted.
+              
+                     	 
+
+New Features:
+
+1.Deleting a file is added to this product.
+
+2.OCX file is transferred to COMDLL.
+
+
+EXISTING ISSUES:
+
+1. In 2000 server 'Activex source is not safe' message is popping up but cleaningup is done.
+
+
+
+
+
+
+

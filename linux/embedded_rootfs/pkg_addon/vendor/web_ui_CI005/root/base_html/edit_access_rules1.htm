@@ -1,0 +1,659 @@
+<!--#nk_get AccessAddRule_v6=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+
+function Entryfunction()
+{
+	if (document.formedit_access_rules.editRuleNo.value==0)
+	{
+		document.formedit_access_rules.rSour_v6.selectedIndex = 1;
+		document.formedit_access_rules.rDest_v6.selectedIndex = 1;
+	}
+	chIPRange(1);
+	chIPRange(2);
+	//schel_check();
+	//chSchedule();
+	chAfterSubmit();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function chAfterSubmit()
+{
+   if (parseInt(document.formedit_access_rules.totalRules.value,10)>=LimitAccessRules)
+   {
+	if(document.formedit_access_rules.afterSubmit.value>0)  // not edit status
+	{
+		window.location.replace("access_rules1.htm");
+		return;
+	}
+   }
+   if (document.formedit_access_rules.afterSubmit.value==1)
+   {
+       if (!confirm(cAccessRuleOk))
+	   window.location.replace("access_rules1.htm");
+   }
+   else if (document.formedit_access_rules.afterSubmit.value==2)
+   {
+       window.location.replace("access_rules1.htm");
+   }
+}
+
+function chIPRange(val)
+{
+	if (val==1)
+	switch (document.formedit_access_rules.rSour_v6.selectedIndex)
+	{
+	    case 0:
+			MM_showHideLayers('rS1','','hide','rS2','','hide');
+		break;
+		case 1:
+			MM_showHideLayers('rS1','','show','rS2','','show');
+			//document.formedit_access_rules.srcip.value=document.formedit_access_rules.srcip_hidden.value;
+			document.formedit_access_rules.srcip.disabled=false;
+			document.formedit_access_rules.srcipLen.value="128";
+			document.formedit_access_rules.srcipLen.disabled=true;
+		break;
+		case 2:
+			MM_showHideLayers('rS1','','show','rS2','','show');
+			//document.formedit_access_rules.srcip.value=document.formedit_access_rules.srcip_hidden.value;
+			document.formedit_access_rules.srcip.disabled=false;
+			document.formedit_access_rules.srcipLen.value=document.formedit_access_rules.srcipLen_hidden.value;
+			document.formedit_access_rules.srcipLen.disabled=false;
+		break;
+		default:
+		break;	
+	}
+	if (val==2)
+	switch (document.formedit_access_rules.rDest_v6.selectedIndex)
+	{
+	    case 0:
+			MM_showHideLayers('rD1','','hide','rD2','','hide');
+		break;
+		case 1:
+			MM_showHideLayers('rD1','','show','rD2','','show');
+			//document.formedit_access_rules.destip.value=document.formedit_access_rules.destip_hidden.value;
+			document.formedit_access_rules.destip.disabled=false;
+			document.formedit_access_rules.destLen.value="128";
+			document.formedit_access_rules.destLen.disabled=true;
+		break;
+		case 2:
+			MM_showHideLayers('rD1','','show','rD2','','show');
+			//document.formedit_access_rules.destip.value=document.formedit_access_rules.destip_hidden.value;
+			document.formedit_access_rules.destip.disabled=false;
+			document.formedit_access_rules.destLen.value=document.formedit_access_rules.destLen_hidden.value;
+			document.formedit_access_rules.destLen.disabled=false;
+		break;	
+		default:
+		break;
+	}
+
+}
+
+function chSubmit()
+{
+	switch (document.formedit_access_rules.rSour_v6.selectedIndex)
+	{
+	    	case 0:
+			break;
+		case 1:
+			if (document.formedit_access_rules.srcip.value.length==0 )
+			{
+				alert("Please input Source IP Address.");
+				return;
+			} 
+			if( !CheckIPv6(document.formedit_access_rules.srcip,'global') ) {document.formedit_access_rules.srcip.onfocus(); return };
+			break;
+		case 2:
+			if (document.formedit_access_rules.srcip.value.length==0)
+			{
+				alert("Please input Source IP Address.");
+				return;
+			} 
+			if (document.formedit_access_rules.srcipLen.value.length==0)
+			{
+				alert("Please input Source IP Prefix Length.");
+				return;
+			} 
+			if( !CheckIPv6(document.formedit_access_rules.srcip,'global')) {document.formedit_access_rules.srcip.onfocus(); return };
+			if( !CheckIPv6Prefix(document.formedit_access_rules.srcipLen) ) {document.formedit_access_rules.srcipLen.onfocus(); return };
+			break;
+		default:
+			break;	
+	}
+	switch (document.formedit_access_rules.rDest_v6.selectedIndex)
+	{
+		case 0:
+			break;
+		case 1:
+			if (document.formedit_access_rules.destip.value.length==0 )
+			{
+				alert("Please input Destination IP Address.");
+				return;
+			} 
+			if( !CheckIPv6(document.formedit_access_rules.destip,'global') ) {document.formedit_access_rules.destip.onfocus(); return };
+		break;
+		case 2:
+			if (document.formedit_access_rules.destip.value.length==0)
+			{
+				alert("Please input Destination IP Address.");
+				return;
+			} 
+			if (document.formedit_access_rules.destLen.value.length==0)
+			{
+				alert("Please input Destination IP Address.");
+				return;
+			} 
+			if(  !CheckIPv6(document.formedit_access_rules.destip,'global') ){document.formedit_access_rules.destip.onfocus(); return };
+			if(  !CheckIPv6Prefix(document.formedit_access_rules.destLen,'global') ) {document.formedit_access_rules.destLen.onfocus(); return };
+			break;
+		default:
+			break;
+	}
+
+	//for schedule
+	/*if (document.formedit_access_rules.addRule_timeConstraint_v6.selectedIndex==1) 
+	if(checkHourMinuteRange(document.formedit_access_rules.addRule_timeBeginHour, document.formedit_access_rules.addRule_timeEndHour)<0) return ;
+	if(document.formedit_access_rules.access_rule_days_v6[0].checked ==false && document.formedit_access_rules.access_rule_days_v6[1].checked ==false && document.formedit_access_rules.access_rule_days_v6[2].checked ==false && document.formedit_access_rules.access_rule_days_v6[3].checked ==false && document.formedit_access_rules.access_rule_days_v6[4].checked ==false && document.formedit_access_rules.access_rule_days_v6[5].checked ==false && document.formedit_access_rules.access_rule_days_v6[6].checked ==false && document.formedit_access_rules.access_rule_days_v6[7].checked ==false )
+	{
+		alert(ScheduleNotFinish);
+		return;
+	}*/
+	document.formedit_access_rules.submitStatus.value=1;
+	document.formedit_access_rules.log_ch.value=1;
+	window.status="Save settings...";
+	MM_showHideLayers('AutoNumber15','','hide');  
+	document.formedit_access_rules.submit();
+}
+
+function hours_minutes_Check(I,mod_1,mod_2)
+{
+  var d;
+  var single;
+  if(I.value.length == 0)
+   return ;
+  var q = I.value.indexOf(':');
+ 
+  if( q == -1 )
+  {
+  	alert("the time should be like:\'hh:mm\'");
+  	I.value="";
+  	I.select();
+  	return	
+  }
+  else
+  {
+  	var hours= I.value.substring(0,q);
+  	var minutes= I.value.substring(q+1,I.value.length);
+  	
+  	if(minutes.indexOf(':')!= -1 )
+  	{
+  		I.select();
+  		I.value="";
+  		return ;
+  	}
+  	 if (isNaN(hours) == true)
+  	{
+  		I.select();
+  		I.value="";
+  		return ;
+  	}
+  	 if (isNaN(minutes) == true)
+  	{
+  		I.select();
+  		I.value="";
+  		return ;
+  	}
+  
+ 
+  if(mod_1 == "h")
+  {
+  	 d=parseInt(hours,10);
+  	 if (!(d<24 && d>=0))
+    {
+      alert('The value (Hour) is out of range [0~23] !');
+    I.select();
+    I.value="";
+	  return; 
+    }
+		hours=d;
+    if (hours.toString().length==1) 
+    {
+      single=hours;
+      hours="0"+single;
+    }  	
+  }
+   if(mod_2 == "m")
+  {
+  	d=parseInt(minutes,10);
+ 
+  	if (!(d<60 && d>=0))
+    {
+      alert('The value (Minute) is out of range [0~59] !');
+    I.select();
+    I.value="";
+	  return;
+    }
+	  minutes = d;
+	 
+    if (minutes.toString().length==1) 
+    {
+      single=minutes;
+      minutes="0"+single;
+     
+    }  	
+  }
+   I.value = hours.toString()+":"+ minutes.toString() ; 
+   return ;
+  } 
+}
+
+var serviceWindow0=null;
+function openService()
+{
+  serviceWindow0=window.open('service0.htm','sW0','menubar=no,scrollbars=no,width=500,height=420');
+}
+
+function closeService()
+{
+  timer1=setTimeout("closeChild()",1000);
+  timer2=setTimeout("refreshMe()",3000);
+}
+
+function closeChild()
+{
+  if (serviceWindow0!=null)
+  {
+    serviceWindow0.close();
+	serviceWindow0=null;
+  }
+  return;
+}
+
+function refreshMe()
+{
+	document.formedit_access_rules.submitStatus.value=0;
+	document.formedit_access_rules.submit();
+}
+
+function chSchedule()
+{
+	if (document.formedit_access_rules.addRule_timeBeginHour.value=="")
+		document.formedit_access_rules.addRule_timeBeginHour.value = "00:00";
+
+	if (document.formedit_access_rules.addRule_timeEndHour.value=="")
+		document.formedit_access_rules.addRule_timeEndHour.value = "00:00";
+
+	if (document.formedit_access_rules.addRule_timeConstraint_v6.value == 0)
+	{
+		document.formedit_access_rules.access_rule_days_v6[0].checked=true;
+		document.formedit_access_rules.access_rule_days_v6[0].disabled=true;
+		document.formedit_access_rules.addRule_timeBeginHour.disabled = true;
+		document.formedit_access_rules.addRule_timeEndHour.disabled = true;
+	}
+	else	
+	{
+		document.formedit_access_rules.access_rule_days_v6[0].disabled=false;
+		document.formedit_access_rules.addRule_timeBeginHour.disabled = false;
+		document.formedit_access_rules.addRule_timeEndHour.disabled = false;
+	}
+		
+	if (document.formedit_access_rules.access_rule_days_v6[0].checked==false)
+	{
+		document.formedit_access_rules.access_rule_days_v6[1].disabled=false;
+		document.formedit_access_rules.access_rule_days_v6[2].disabled=false;
+		document.formedit_access_rules.access_rule_days_v6[3].disabled=false;
+		document.formedit_access_rules.access_rule_days_v6[4].disabled=false;
+		document.formedit_access_rules.access_rule_days_v6[5].disabled=false;
+		document.formedit_access_rules.access_rule_days_v6[6].disabled=false;
+		document.formedit_access_rules.access_rule_days_v6[7].disabled=false;		
+	}
+	else if(document.formedit_access_rules.access_rule_days_v6[0].checked==true)
+	{
+		document.formedit_access_rules.access_rule_days_v6[1].disabled=true;
+		document.formedit_access_rules.access_rule_days_v6[2].disabled=true;
+		document.formedit_access_rules.access_rule_days_v6[3].disabled=true;
+		document.formedit_access_rules.access_rule_days_v6[4].disabled=true;
+		document.formedit_access_rules.access_rule_days_v6[5].disabled=true;
+		document.formedit_access_rules.access_rule_days_v6[6].disabled=true;
+		document.formedit_access_rules.access_rule_days_v6[7].disabled=true;	
+	}
+}
+
+function schel_check()
+{
+	var check_array = new tmpWord(9);
+	var check_array_value='<!--#nk_get WeekScheduleByRule_v6="access_rule_days_v6"-->' ; // '0.1.1.0.1.0.1'
+	
+	for(i=0;i<=6 ;i++)
+	{
+		if(i==6)
+		{
+			check_array[6]=check_array_value;
+			break ;
+		}
+		
+		var p=check_array_value.indexOf('.');
+		if(p== -1) break ;
+		if(i==0)
+		  check_array[0]= check_array_value.substring(0,p);
+		else if(i==1)
+			check_array[1]= check_array_value.substring(0,p);
+		else if(i==2)
+			check_array[2]= check_array_value.substring(0,p);
+		else if(i==3)
+			check_array[3]= check_array_value.substring(0,p);
+		else if(i==4)
+			check_array[4]= check_array_value.substring(0,p);
+		else if(i==5)
+			check_array[5]= check_array_value.substring(0,p);
+		check_array_value = check_array_value.substring(p+1, check_array_value.length);
+	}
+	
+	if(check_array[0]== 1)
+		document.formedit_access_rules.access_rule_days_v6[1].checked = true;
+	else
+		document.formedit_access_rules.access_rule_days_v6[1].checked = false;
+	if(check_array[1]== 1)
+		document.formedit_access_rules.access_rule_days_v6[2].checked = true;
+	else
+		document.formedit_access_rules.access_rule_days_v6[2].checked = false; 
+	if(check_array[2]== 1)
+		document.formedit_access_rules.access_rule_days_v6[3].checked = true;
+	else
+		document.formedit_access_rules.access_rule_days_v6[3].checked = false; 
+	if(check_array[3]== 1)
+		document.formedit_access_rules.access_rule_days_v6[4].checked = true;
+	else
+		document.formedit_access_rules.access_rule_days_v6[4].checked = false; 
+	if(check_array[4]== 1)
+		document.formedit_access_rules.access_rule_days_v6[5].checked = true;
+	else
+		document.formedit_access_rules.access_rule_days_v6[5].checked = false; 
+	if(check_array[5]== 1)
+		document.formedit_access_rules.access_rule_days_v6[6].checked = true;
+	else
+		document.formedit_access_rules.access_rule_days_v6[6].checked = false; 
+	if(check_array[6]== 1)
+		document.formedit_access_rules.access_rule_days_v6[7].checked = true;
+	else
+		document.formedit_access_rules.access_rule_days_v6[7].checked = false;  	
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "BackOkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(this.form);";
+var Cancellink = ""; 
+var Backlink = "access_rules1.htm";
+var helplink ='help_edit_access_rules.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 830;
+var head_width = 180;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintService(1);
+	//PrintScheduling(0);
+	PrintEndContent();
+}
+
+function PrintService(hasUnderLine)
+{
+	PrintBeginBlock(1, "Services");
+	document.write('<table width="'+FixedTableWidth+'" class="Setuptable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td width='+head_width+' align="left">Action&nbsp;:&nbsp;</td>');
+	document.write('<td colspan="4">');
+	document.write('<select class="Select" name="ruleAction_v6" size="1">');
+	document.write('<option value=\"1\" <!--#nk_get SelectStatusByRule_v6="ruleAction_v6:1"-->>Allow</option>');
+	document.write('<option value=\"0\" <!--#nk_get SelectStatusByRule_v6="ruleAction_v6:0"-->>Deny</option>');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>Service&nbsp;:&nbsp;</td>');
+	document.write('<td colspan="4">');
+	document.write('<select class="Select" name="addRule_serviceID_v6">');
+	var i=0, j=-1;
+	var k=0, l, m, n, p;
+	var tmp, tmp2, tmp3;
+	var outputer;
+	tmp=document.formedit_access_rules.service_menu.value;
+	k=tmp.length;
+	index=tmp.indexOf("</option>");
+	tmp2=tmp.substring(0,index);
+	tmp=tmp.substring(index+8,k);
+	outputer+=tmp2;
+	outputer+="</option>";	  
+	do{
+	  k=tmp.length;
+	  index=tmp.indexOf("</option>");
+	  tmp2=tmp.substring(0,index);
+	  tmp=tmp.substring(index+8,k);
+	/*trace tmp2*/
+	  tmp3=tmp2;
+	  l=tmp3.indexOf("[");
+	  m=tmp3.indexOf("/",l+1);
+	  n=tmp3.indexOf("]",m+1);
+	  PT=tmp3.substring(l+1,m);
+	  PO=tmp3.substring(m+1,n);
+	/*trace tmp2*/
+	  if((PO!="0~0"))
+	  {
+	       outputer+=tmp2;
+	       outputer+="</option>";
+	  }
+	}while(index != "-1");
+	document.write(outputer);
+	document.write('</select>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td colspan="4">');
+	PrintSTButton("sM", "Service Management", "openService()");	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>Log&nbsp;:&nbsp;</td>');
+	document.write('<td colspan="4">');
+	document.write('<select class="Select" name="ruleLog_v6">');
+	document.write('<option value=1 <!--#nk_get SelectStatusByRule_v6="ruleLog_v6:1"-->>Log packets match this rule</option>');
+	document.write('<option value=0 <!--#nk_get SelectStatusByRule_v6="ruleLog_v6:0"-->>Not log</option>');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>Source Interface&nbsp;:&nbsp;</td>');
+	document.write('<td colspan="4">');
+	document.write('<select class="select" name="addRule_srcEnet_v6" size="1">');
+	document.write('<option value="1" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:1"-->>LAN<\/option>');
+	if(document.formedit_access_rules.wanNumbers.value > 0)
+	{
+		var i , wan_option;
+		for(i=1; i<=document.formedit_access_rules.wanNumbers.value; i++)
+		{
+			wan_option = i+1;
+			if((i==document.formedit_access_rules.wanNumbers.value) && (MaxWanPortNumber > 2 || document.formedit_access_rules.isDMZmode.value=="1"))
+				document.write('<option value="16" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:16"-->>DMZ<\/option>');
+			else
+			{
+				if(i==1)
+					document.write('<option value="2" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:2"-->>WAN 1<\/option>');
+				else if(i==2)
+					document.write('<option value="3" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:3"-->>WAN 2<\/option>');
+				else if(i==3)
+					document.write('<option value="4" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:4"-->>WAN 3<\/option>');
+				else if(i==4)
+					document.write('<option value="5" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:5"-->>WAN 4<\/option>');
+				else if(i==5)
+					document.write('<option value="6" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:6"-->>WAN 5<\/option>');
+				else if(i==6)
+					document.write('<option value="7" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:7"-->>WAN 6<\/option>');
+				else if(i==7)
+					document.write('<option value="8" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:8"-->>WAN 7<\/option>');			
+			}
+		}
+	}
+	document.write('<option value="17" <!--#nk_get SelectStatusByRule_v6="addRule_srcEnet_v6:17"-->>ANY<\/option>');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>Source IP&nbsp;/&nbsp;Prefix Length:&nbsp;</td>');
+	document.write('<td width="100">');
+	document.write('<select class="select" name="rSour_v6" onChange="chIPRange(1)" style="width:80px">');
+	document.write('<option value="1" <!--#nk_get SelectStatusByRule_v6="rSour_v6:1"-->>ANY<\/option>');
+	document.write('<option value="2" <!--#nk_get SelectStatusByRule_v6="rSour_v6:2"-->>Single<\/option>');
+	document.write('<option value="3" <!--#nk_get SelectStatusByRule_v6="rSour_v6:3"-->>Subnet<\/option>');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td width="108" id="rS1">');
+	document.write('<input type="hidden" name="srcip_hidden" value=\'<!--#nk_get IPHandleByRule_v6="srcipAddrb_v6:0"-->\'>');	
+	document.write('<input type="text" name="srcip" maxlength="39" onFocus="this.select();" onBlur="" size="50" value=\'<!--#nk_get IPHandleByRule_v6="srcipAddrb_v6:0"-->\'>');			
+	document.write('</td>');
+	document.write('<td id="rS2" align="left">');
+	document.write('/'); 
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="hidden" name="srcipLen_hidden" value=\'<!--#nk_get IPHandleByRule_v6="srcipAdde_v6:0"-->\'>');
+	document.write('<input type="text" name="srcipLen" maxlength="3" onFocus="this.select();" onBlur="" size="5" onKeypress="return Check_User_Input(event)"  value=\'<!--#nk_get IPHandleByRule_v6="srcipAdde_v6:0"-->\'>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>Destination IP&nbsp;/&nbsp;Prefix Length:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<select class="select" name="rDest_v6" onChange="chIPRange(2)" style="width:80px">');
+	document.write('<option value="1" <!--#nk_get SelectStatusByRule_v6="rDest_v6:1"-->>ANY<\/option>');
+	document.write('<option value="2" <!--#nk_get SelectStatusByRule_v6="rDest_v6:2"-->>Single<\/option>');
+	document.write('<option value="3" <!--#nk_get SelectStatusByRule_v6="rDest_v6:3"-->>Subnet<\/option>');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td id="rD1">');
+	document.write('<input type="hidden" name="destip_hidden" value=\'<!--#nk_get IPHandleByRule_v6="desipAddrb_v6:0"-->\'>');	
+	document.write('<input type="text" name="destip" maxlength="39" onFocus="this.select();" onBlur="" size="50" value=\'<!--#nk_get IPHandleByRule_v6="desipAddrb_v6:0"-->\'>');	
+	document.write('</td>');
+	document.write('<td id="rD2">');
+	document.write('/'); 
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="hidden" name="destLen_hidden" value=\'<!--#nk_get IPHandleByRule_v6="desipAdde_v6:0"-->\'>');
+	document.write('<input type="text" name="destLen" maxlength="3" onFocus="this.select();" onBlur="" size="5" onKeypress="return Check_User_Input(event)" value=\'<!--#nk_get IPHandleByRule_v6="desipAdde_v6:0"-->\'>');
+	document.write('</td>');
+	document.write('</tr>');	     
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+	//for schedule
+	//PrintEndBlock(hasUnderLine, 0, 1);
+}
+function PrintScheduling(hasUnderLine)
+{
+	PrintBeginBlock(1, "Scheduling");
+	document.write('<table width="'+FixedTableWidth+'" class="Setuptable" border="'+Tableborder+'">');
+	document.write('<tr>');	
+	document.write('<td>');
+	document.write('Time&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<select name="addRule_timeConstraint_v6" class="Select" onChange="chSchedule();">');
+	document.write('<option value="0" <!--#nk_get SelectStatusByRule_v6="addRule_timeConstraint_v6:0"-->>Always</option>');
+	document.write('<option value="1" <!--#nk_get SelectStatusByRule_v6="addRule_timeConstraint_v6:1"-->>Interval</option>');                    
+	document.write('</select>');	
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');	
+	document.write('<td>');
+	document.write('From&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<input type="text" name="addRule_timeBeginHour" size="12" maxlength="5" value=\'<!--#nk_get TimeScheduleByRule_v6="addRule_timeBegin_v6:HM"-->\' onFocus="this.select();" onBlur="sTrim(this);hours_minutes_Check(this,\'h\',\'m\');">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('(hh:mm)'); 
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('To&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<input type="text" name="addRule_timeEndHour" size="12" maxlength="5" value=\'<!--#nk_get TimeScheduleByRule_v6="addRule_timeEnd_v6:HM"-->\' onFocus="this.select();" onBlur="sTrim(this);hours_minutes_Check(this,\'h\',\'m\');">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('(hh:mm)');
+	document.write('</td>')
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Effective on&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<input type="checkbox" name="access_rule_days_v6" value="7" onClick="chSchedule()" <!--#nk_get EverydayCheckboxByRule_v6="access_rule_days_v6:1"-->>');
+	document.write(' Everyday '); 	
+	document.write('<input type="checkbox" name="access_rule_days_v6" value="0" >');
+	document.write(' Sun '); 
+	document.write('<input type="checkbox" name="access_rule_days_v6" value="1" >');
+	document.write(' Mon '); 	
+	document.write('<input type="checkbox" name="access_rule_days_v6" value="2" >');
+	document.write(' Tue '); 	
+	document.write('<input type="checkbox" name="access_rule_days_v6" value="3" >');	
+	document.write(' Wed '); 	
+	document.write('<input type="checkbox" name="access_rule_days_v6" value="4" >');	
+	document.write(' Thu '); 
+	document.write('<input type="checkbox" name="access_rule_days_v6" value="5" >');
+	document.write(' Fri '); 
+	document.write('<input type="checkbox" name="access_rule_days_v6" value="6" >');
+	document.write(' Sat '); 		
+	document.write('</td>')
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<form name="formdualwan" method="post" action="">
+		<input type="hidden" name="dualwanEnabled" value='<!--#nk_get DualWanEnabled=""-->'>
+	</form>
+ <form id="submitform" name="submitform" method="post">
+		<input type=hidden name="editRuleNo" value='<!--#nk_get EditRuleNo_v6=""-->'> 
+</form>  
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 6, 2);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formedit_access_rules" method="post" action="edit_access_rules1.htm">
+	<input type="hidden" name="submitStatus" value="0">
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="service_menu" value='<!--#nk_get ServiceStatusByRule_v6=""-->'>
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name="page" value="edit_access_rules1.htm">
+	<input type="hidden" name="afterSubmit" value='<!--#nk_get handle_tags="wzAfterSubmit"-->'>
+	<input type="hidden" name="log" value="0">
+	<input type="hidden" name="totalRules" value='<!--#nk_get AccessRule_v6="5"-->'>
+	<input type="hidden" name="editRuleNo" value='<!--#nk_get EditRuleNo_v6=""-->'>
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+	<input type="hidden" name="isTransBridgeRule" value='<!--#nk_get isTransBridgeRule=""-->'>
+	<!--#nk_get SetFWRuleZero_v6=""-->
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="edit_access_rules1.htm"-->

@@ -1,0 +1,16 @@
+Title Menlo Logic Virtual Passage for Mac OSX
+Version 1.0b
+Description Menlo Logic Virtual Passage is a full PPP over SSL client for full network access for users. 
+DefaultLocation /Library/Java/Extensions/
+DeleteWarning 
+
+### Package Flags
+
+NeedsAuthorization YES
+Required YES
+Relocatable NO
+RequiresReboot NO
+UseUserMask NO
+OverwritePermissions YES
+InstallFat NO
+RootVolumeOnly YES

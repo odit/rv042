@@ -1,0 +1,428 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	if ('<!--#nk_get RadioHandle="setIpMode:0"-->' == "checked" ){
+		document.formRouting.enableRIPng_show.disabled=true;
+		document.formRouting.dstIP.disabled=true;
+		document.formRouting.prefix.disabled=true;
+		document.formRouting.gwIP.disabled=true;
+		document.formRouting.Cost.disabled=true;
+		document.formRouting.iFace.disabled=true;
+		
+		SetButtonStatus('AddToListButton','disabled');
+		document.formRouting.staticRouteList.disabled=true;
+		SetButtonStatus('Save','disabled');
+		SetButtonStatus('Cancel','disabled');
+		SetButtonStatus('View','disabled');
+	}
+}
+
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chSubmit(F)
+{
+	if (F.enableRIPng_show.checked)
+		F.enableRIPng.value=1;
+	else
+		F.enableRIPng.value=0;
+
+	selAll(F.staticRouteList);
+	F.submitStatus.value=1;
+	F.log_ch.value=1;
+	F.submit();
+}
+
+function HOPCheck(I)
+{
+	return validatenum(I, 16, 1, aHopCountCheck);
+}
+
+function RouteaddSel(i1,s1,g1,hc,f,s) /* */
+{	
+	if(!CheckIPv6(i1,"global")){
+		i1.select();
+		return;
+	} 
+	
+	if(!CheckIPv6Prefix(s1)){
+		s1.select();
+		return;
+	} 
+	
+	if(!CheckIPv6(g1,"global")){
+		g1.select();
+		return;
+	} 
+	
+	if(parseInt(hc.value)>15 || parseInt(hc.value) <1){
+		alert(aHopCountCheck);
+		hc.select();
+		return;
+	} 
+
+	if(s.form.AddToListButton.value==sUpdateIP)
+	{
+		p=-1;
+		while(s.form.staticRouteList.options[++p].selected != true);
+		if(ckDestIPAlready(i1, s, p) < 0)//select p, update p service apper
+			return;
+	}
+	
+	for(var i=0; i < s.form.staticRouteList.length; i++)
+	{
+	  	s.form.staticRouteList.options[i].selected=false;
+	}
+  
+	  if(s.form.AddToListButton.value==sAddtoList)
+	  {
+		if (s.length>=LimitRouting)
+		{
+			alert(aLimitRouting+LimitRouting+aLimitEnd);
+			return;
+		}
+		if(ckDestIPAlready(i1, s, s.length) < 0)//before s.length service apper
+			return;
+		p=s.length;
+		s.length+=1;
+	}
+	s.options[p].value =i1.value;
+	s.options[p].value +="{";
+	s.options[p].value +=s1.value;
+ 	s.options[p].value +=";";
+	s.options[p].value +=g1.value;
+ 	s.options[p].value +=";";
+	s.options[p].value +=hc.value;
+	s.options[p].value +=";";
+	//s.options[p].value +=f.selectedIndex;
+	s.options[p].value +=f.options[f.selectedIndex].value;
+	s.options[p].value +="}";
+	s.options[p].text =i1.value;
+	clearContent(s.form);
+	//s.form.DeleteButton.disabled=true;
+	SetButtonStatus("DeleteButton", "disabled");
+  SetButtonStatus("newAddButton", "disabled");
+}
+
+function showStaticRouteList(s)
+{
+	if (s.selectedIndex==-1)
+  	return;
+  	
+	var p;
+	var q; 
+	var routeString=s.options[s.selectedIndex].value;
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(6);
+
+	rightString=routeString;
+	q=rightString.length;
+	p=rightString.indexOf("{");
+	ts[1]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q); 
+	/*--------------------------------------------*/
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[2]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[3]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[4]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+
+	q=rightString.length;
+	p=rightString.indexOf("}");
+	ts[5]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+    /*)*/
+    /*----------------------------------------------*/
+    s.form.dstIP.value=ts[1];
+    s.form.prefix.value=ts[2]; 
+    s.form.gwIP.value=ts[3];
+    s.form.Cost.value=ts[4];
+    
+	for (var i=0; i < s.form.iFace.length; i++)
+	{
+	    if (s.form.iFace.options[i].value==ts[5])
+	    {
+	    	s.form.iFace.selectedIndex=i;
+	    }
+	}
+//    s.form.iFace.selectedIndex=parseInt(ts[14],10);
+	
+  s.form.AddToListButton.value=sUpdateIP; 
+  //s.form.DeleteButton.disabled=false;
+  SetButtonStatus("DeleteButton", "");
+  //s.form.newAddButton.disabled=false;
+  SetButtonStatus("newAddButton", "");
+	//MM_showHideLayers('btnNew','','show');
+}
+
+function ckDestIPAlready(I, s, p)
+{
+	var rightString, dstIPIndex, dstIP;
+	
+  for (var i=0; i < s.length; i++)
+  {
+  	rightString=s.options[i].value;
+  	dstIPIndex=rightString.indexOf(";");
+  	dstIP=rightString.substring(0, dstIPIndex);
+	 if(dstIP==I.value)
+	{
+		if (p != i)
+		{
+			alert(aDestIPAlready);
+			return -1;
+		}
+	}
+  }
+  return 1;
+}
+
+function clearContent(F)
+{
+	F.dstIP.value="";
+	F.prefix.value="";
+	F.gwIP.value="";
+	F.Cost.value="";
+	F.iFace.options[0].selected=true; 
+	for (var i=0; i < F.staticRouteList.length; i++)
+	{
+		F.staticRouteList.options[i].selected=false;
+	}
+	var sAddtoList="Add to list";
+	F.AddToListButton.value=sAddtoList; 
+	//F.DeleteButton.disabled=true;
+	//F.newAddButton.visibility="hidden";
+	SetButtonStatus("DeleteButton", "disabled");
+	SetButtonStatus("newAddButton", "disabled");
+	//MM_showHideLayers('btnNew','','hidden');
+	//F.dstIP0.select();
+}
+
+function chChangeIPmode(val)
+{	
+	document.location.href="adv_routing.htm"
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "ShowTableOkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formRouting);";
+var Cancellink = ""; 
+var Backlink = "";
+var Tablelink ="openTable('Routing_table1.htm')";
+var helplink ='help_adv_routing6.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=194;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	document.write('<table width="100%" class="block" border="0" cellpadding="0" cellspacing="0">');
+	document.write('<tr><td>');
+	PrintIPTypeTab('IPv4','false','IPv6','true');
+	document.write('</td></tr>');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#CBD8E1" style="border-left:1px solid #666;border-right:1px solid #666;border-bottom:1px solid #666;"><tr><td>');
+	PrintDynamicRouting(1);
+	PrintRouting(0);
+	document.write('</td></tr></table>');
+	document.write('</td></tr>');
+	PrintEndContent();
+}
+
+function PrintDynamicRouting(hasUnderLine)
+{
+	document.write('<br>');
+	PrintBeginBlock(1, "Dynamic Routing");
+	document.write('<table class="Setuptable" width="'+SmallLayoutwidth+'"  border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td  width="1">');	
+	document.write('<input type="checkbox" name="enableRIPng_show" value="0" <!--#nk_get CheckboxStatus="enableRIPng"-->>');
+	document.write('</td>');
+	document.write('<td >');
+	document.write('Enable RIPng');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintRouting(hasUnderLine)
+{
+	var in_head_width = head_width - 5;
+	PrintBeginBlock(1, "Static Routing");
+	
+	document.write('<table class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Destination IP&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="dstIP" maxlength="39" size="50" onFocus="this.select();" >');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Prefix&nbsp;Length&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="prefix" maxlength="3" size="15" onFocus="this.select();" onKeypress="return Check_User_Input(event)" onBlur="CheckIPv6Prefix(this)">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Default Gateway&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="gwIP" maxlength="39" size="50" onFocus="this.select();" >');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Hop Count (Metric, max. is 15)&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="Cost" maxlength="2" size="2" onFocus="this.select();" onKeypress="return Check_User_Input(event)" >');//add
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left">Interface&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<select name="iFace" size="1" class="Select">');
+	document.write('<option value="0">LAN</option>'); //Lang_LAN[languagetype]
+	var RealWanNumber;
+	RealWanNumber = parseInt(document.formRouting.wanNumbers.value);
+	for(var WanNumberTemp=1; WanNumberTemp<=RealWanNumber; WanNumberTemp++ )
+	{
+		if((WanNumberTemp == RealWanNumber) && (document.formRouting.isDMZmode.value=="1"))
+		{
+			document.write('<option value="'+RealWanNumber+'">');
+			document.write('DMZ');
+			document.write("</option>");
+		}
+		else
+		{
+			document.write('<option value="'+WanNumberTemp+'">');
+			document.write('WAN'+WanNumberTemp);
+			document.write("</option>");
+		}
+	}
+	if (!ShareDMZPort)
+	{
+		document.write('<option value="8">');
+		document.write('DMZ');
+		document.write("</option>");
+	}
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("AddToListButton", "Add to list", "RouteaddSel(this.form.dstIP,this.form.prefix,this.form.gwIP,this.form.Cost,this.form.iFace,this.form.staticRouteList);");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th colspan="2">'); 
+	document.write('<select multiple class="Multiselect" name="staticRouteList" size="10" onChange="showStaticRouteList(this.form.staticRouteList);" style="width: 100%">');
+	document.write('<!--#nk_get StaticRouteList_v6=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("DeleteButton","Delete","delSel(this.form.staticRouteList, this);");
+	SetButtonStatus("DeleteButton", "disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	PrintSTButton("newAddButton","Add New","clearContent(this.form);");
+	SetButtonStatus("newAddButton", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('<br>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 10);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formRouting" method="post" action="adv_routing1.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>			
+	<input type="hidden" name="enableRIPng" value='<!--#nk_get CheckboxSave="enableRIPng"-->'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="adv_routing1.htm"-->
+<!--#nk_get RoutingUpdate=""-->

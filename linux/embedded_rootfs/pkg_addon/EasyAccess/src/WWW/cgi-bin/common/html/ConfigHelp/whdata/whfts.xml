@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<fts>
+<chunkinfo url="whfwdata0.xml" first="_" last="configurabl"/>
+<chunkinfo url="whfwdata1.xml" first="configuration" last="hid"/>
+<chunkinfo url="whfwdata2.xml" first="hidden" last="os"/>
+<chunkinfo url="whfwdata3.xml" first="out" last="strong"/>
+<chunkinfo url="whfwdata4.xml" first="structur" last="zon"/>
+
+<tchunkinfo first="0" last="56" url="whftdata0.xml" />
+
+</fts>

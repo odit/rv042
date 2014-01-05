@@ -1,0 +1,2451 @@
+<!--#nk_get WizardBasicDual=""-->
+<html>
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Basic Setup Wizard</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script language=JavaScript>
+
+function chSubmit()
+{
+    window.status="Save Settings...";
+    MM_showHideLayers('AutoNumber15','','hide'); 	
+    document.formBasic.submitStatus.value=1;
+    document.formBasic.submit();
+}
+
+function chLayer()
+{
+	if (MaxWanPortNumber > 2)
+	{
+		document.location.href = "wizard_basic_multi.htm";
+		return;
+	}	
+	
+	if (document.formBasic.afterSubmit.value==1) 
+	{
+		SetButtonStatus("Back1", "hidden");
+		MM_showHideLayers('sSave','','show'); 
+		if (confirm(cWizardBasicOk))
+			mainTo("wizard.htm");
+		else
+			mainTo("network.htm");
+	}
+	else
+	{
+		SetButtonStatus("Back1", "disabled");
+		MM_showHideLayers('sWhat','','show'); 
+	}	
+}
+
+function chWANSetting(Inf)
+{
+	if (Inf == 1)
+	{
+		switch (document.formBasic.WAN1ConnectionType.value)
+		{
+			case '1':
+				// Automatically Obtain IP 
+				document.formBasic.setWan1DNS[0].dsabled = true;
+				document.formBasic.setWan1DNS[1].dsabled = true;
+				document.formBasic.Wan1DnsA.disabled = true;
+				document.formBasic.Wan1DnsB.disabled = true;
+				// Static IP (select)
+				document.formBasic.Wan1AliasIp.dsabled = false;
+				document.formBasic.Wan1AliasMaskIp.dsabled = false;
+				document.formBasic.Wan1GWIp.dsabled = false;
+				// PPPoe
+				document.formBasic.Wan1UserName.disabled = true;
+				document.formBasic.Wan1PassWord.disabled = true;
+				document.formBasic.Wan1ConnectAlive[0].disabled = true;
+				document.formBasic.Wan1IdleTime.disabled = true;
+				document.formBasic.Wan1ConnectAlive[1].disabled = true;
+				document.formBasic.Wan1RedialTime.disabled = true;
+				break;
+			case '2':
+				// Automatically Obtain IP 
+				document.formBasic.setWan1DNS[0].dsabled = true;
+				document.formBasic.setWan1DNS[1].dsabled = true;
+				document.formBasic.Wan1DnsA.disabled = true;
+				document.formBasic.Wan1DnsB.disabled = true;
+				// Static IP
+				document.formBasic.Wan1AliasIp.dsabled = true;
+				document.formBasic.Wan1AliasMaskIp.dsabled = true;
+				document.formBasic.Wan1GWIp.dsabled = true;
+				// PPPoe (select)
+				document.formBasic.Wan1UserName.disabled = false;
+				document.formBasic.Wan1PassWord.disabled = false;
+				document.formBasic.Wan1ConnectAlive[0].disabled = false;
+				document.formBasic.Wan1ConnectAlive[1].disabled = false;
+				break;
+			default:
+				// Automatically Obtain IP (select)
+				document.formBasic.setWan1DNS[0].dsabled = false;
+				document.formBasic.setWan1DNS[1].dsabled = false;
+				// Static IP
+				document.formBasic.Wan1AliasIp.dsabled = true;
+				document.formBasic.Wan1AliasMaskIp.dsabled = true;
+				document.formBasic.Wan1GWIp.dsabled = true;
+				// PPPoe
+				document.formBasic.Wan1UserName.disabled = true;
+				document.formBasic.Wan1PassWord.disabled = true;
+				document.formBasic.Wan1ConnectAlive[0].disabled = true;
+				document.formBasic.Wan1IdleTime.disabled = true;
+				document.formBasic.Wan1ConnectAlive[1].disabled = true;
+				document.formBasic.Wan1RedialTime.disabled = true;
+				break;
+		}
+	}
+	else if (document.formBasic.dmzStatusChange.value == 1)		
+	{
+		document.formBasic.setWan2DNS[0].dsabled = false;
+		document.formBasic.setWan2DNS[1].dsabled = false;
+		document.formBasic.Wan2DnsA.disabled = true;
+		document.formBasic.Wan2DnsB.disabled = true;		
+		// Static IP
+		document.formBasic.Wan2AliasIp.dsabled = true;
+		document.formBasic.Wan2AliasMaskIp.dsabled = true;
+		document.formBasic.Wan2GWIp.dsabled = true;
+		// PPPoe
+		document.formBasic.Wan2UserName.disabled = true;
+		document.formBasic.Wan2PassWord.disabled = true;
+		document.formBasic.Wan2ConnectAlive[0].disabled = true;
+		document.formBasic.Wan2IdleTime.disabled = true;
+		document.formBasic.Wan2ConnectAlive[1].disabled = true;
+		document.formBasic.Wan2RedialTime.disabled = true;
+		document.getElementById("s_type2").value = "DMZ IP";
+	}
+	else	 
+	{
+		switch (document.formBasic.WAN2ConnectionType.value)
+		{
+			case '1':
+				// Automatically Obtain IP 
+				document.formBasic.setWan2DNS[0].dsabled = true;
+				document.formBasic.setWan2DNS[1].dsabled = true;
+				document.formBasic.Wan2DnsA.disabled = true;
+				document.formBasic.Wan2DnsB.disabled = true;
+				// Static IP (select)
+				document.formBasic.Wan2AliasIp.dsabled = false;
+				document.formBasic.Wan2AliasMaskIp.dsabled = false;
+				document.formBasic.Wan2GWIp.dsabled = false;
+				// PPPoe
+				document.formBasic.Wan2UserName.disabled = true;
+				document.formBasic.Wan2PassWord.disabled = true;
+				document.formBasic.Wan2ConnectAlive[0].disabled = true;
+				document.formBasic.Wan2IdleTime.disabled = true;
+				document.formBasic.Wan2ConnectAlive[1].disabled = true;
+				document.formBasic.Wan2RedialTime.disabled = true;
+				break;
+			case '2':
+				// Automatically Obtain IP 
+				document.formBasic.setWan2DNS[0].dsabled = true;
+				document.formBasic.setWan2DNS[1].dsabled = true;
+				document.formBasic.Wan2DnsA.disabled = true;
+				document.formBasic.Wan2DnsB.disabled = true;
+				// Static IP
+				document.formBasic.Wan2AliasIp.dsabled = true;
+				document.formBasic.Wan2AliasMaskIp.dsabled = true;
+				document.formBasic.Wan2GWIp.dsabled = true;
+				// PPPoe (select)
+				document.formBasic.Wan2UserName.disabled = false;
+				document.formBasic.Wan2PassWord.disabled = false;
+				document.formBasic.Wan2ConnectAlive[0].disabled = false;
+				document.formBasic.Wan2ConnectAlive[1].disabled = false;
+				break;
+			default:
+				// Automatically Obtain IP (select)
+				document.formBasic.setWan2DNS[0].dsabled = false;
+				document.formBasic.setWan2DNS[1].dsabled = false;
+				// Static IP
+				document.formBasic.Wan2AliasIp.dsabled = true;
+				document.formBasic.Wan2AliasMaskIp.dsabled = true;
+				document.formBasic.Wan2GWIp.dsabled = true;
+				// PPPoe
+				document.formBasic.Wan2UserName.disabled = true;
+				document.formBasic.Wan2PassWord.disabled = true;
+				document.formBasic.Wan2ConnectAlive[0].disabled = true;
+				document.formBasic.Wan2IdleTime.disabled = true;
+				document.formBasic.Wan2ConnectAlive[1].disabled = true;
+				document.formBasic.Wan2RedialTime.disabled = true;
+				break;
+		}	
+	}
+}
+
+function chDNS(Inf)
+{
+	if (Inf==1) 
+	{
+		if (document.formBasic.setWan1DNS[0].checked == true)
+		{
+			document.formBasic.Wan1DnsA.disabled = true;
+			document.formBasic.Wan1DnsB.disabled = true;
+		}
+		else	
+		{
+			document.formBasic.Wan1DnsA.disabled = false;
+			document.formBasic.Wan1DnsB.disabled = false;
+		}
+	}
+	else if (Inf==2)
+	{
+		if (document.formBasic.setWan2DNS[0].checked == true)
+		{
+			document.formBasic.Wan2DnsA.disabled = true;
+			document.formBasic.Wan2DnsB.disabled = true;
+		}
+		else	
+		{
+			document.formBasic.Wan2DnsA.disabled = false;
+			document.formBasic.Wan2DnsB.disabled = false;
+		}
+		
+	}
+}
+
+function chDialUP(Inf)
+{
+	if (Inf==1) 
+	{
+		if (document.formBasic.Wan1ConnectAlive[0].checked == true)
+		{	
+			document.formBasic.Wan1Alive.value = 1;
+			document.formBasic.Wan1IdleTime.disabled = false;
+			document.formBasic.Wan1RedialTime.disabled = true;
+		}
+		else	
+		{
+			document.formBasic.Wan1Alive.value = 2;
+			document.formBasic.Wan1IdleTime.disabled = true;
+			document.formBasic.Wan1RedialTime.disabled = false;
+		}
+	}
+	else if (Inf==2)
+	{
+		if (document.formBasic.Wan2ConnectAlive[0].checked == true)
+		{
+			document.formBasic.Wan2Alive.value = 1;
+			document.formBasic.Wan2IdleTime.disabled = false;
+			document.formBasic.Wan2RedialTime.disabled = true;
+		}
+		else	
+		{
+			document.formBasic.Wan2Alive.value = 2;
+			document.formBasic.Wan2IdleTime.disabled = true;
+			document.formBasic.Wan2RedialTime.disabled = false;
+		}
+	}
+}
+
+function minCheck(I)
+{
+	return validatenum(I, 100000, 1, aMinuteNums2Check);
+}
+function secCheck(I)
+{
+	return validatenum(I, 10000000, 1, aSecondNums3Check);
+}
+
+function showhide(p,j)
+{
+  var idx = 0;
+  switch (p)
+  {
+    case 'sWhat':
+	SetButtonStatus("Back1", "hidden");		
+	if (document.formBasic.dmz_enable[0].checked == true)
+		document.formBasic.dmzStatusChange.value = 0;
+	else	
+		document.formBasic.dmzStatusChange.value = 1;
+	MM_showHideLayers(p,'','hide','sHostDomain','','show');
+	break;  
+    case 'sHostDomain':
+	if (j==1)
+	{
+		var re=/[^a-zA-Z0-9-]/;//not english characters, numbers, and "-"
+		var re1=/^-/;//first word is "-"
+		var re2=/-$/;//end word is "-"
+		if(re.test(document.formBasic.hostname.value))
+		{
+			alert(aCheckHostName);
+			document.formBasic.hostname.select();
+			return;
+		}
+		else if(re1.test(document.formBasic.hostname.value) || re2.test(document.formBasic.hostname.value))
+		{
+			alert(aCheckHostNameFirstLast);
+			document.formBasic.hostname.select();
+			return;
+		}
+
+		document.getElementById("s_host").value = document.formBasic.hostname.value;	
+		document.getElementById("s_domain").value = document.formBasic.DomainName.value;	
+		MM_showHideLayers(p,'','hide','sWAN1Type','','show');	
+	}	
+	else
+	{
+		SetButtonStatus("Back1", "disabled");
+		MM_showHideLayers(p,'','hide','sWhat','','show');
+	}						
+	break;  
+    case 'sWAN1Type':
+	if (j==1)
+	{
+		if (document.formBasic.WAN1Type[1].checked == true)
+		{
+			document.formBasic.WAN1ConnectionType.value = 1;
+			document.getElementById("s_type1").value = "Static IP";	
+			MM_showHideLayers(p,'','hide','sWAN1Static','','show'); 
+		}	
+		else if (document.formBasic.WAN1Type[2].checked == true)
+		{
+			document.formBasic.WAN1ConnectionType.value = 2;
+			document.getElementById("s_type1").value = "PPPoE (Point-to-Point Protocol over Ethernet)";
+			chDialUP(1);
+			MM_showHideLayers(p,'','hide','sWAN1PPPoe','','show'); 
+		}	
+		else
+		{
+			document.formBasic.WAN1ConnectionType.value = 0;
+			document.getElementById("s_type1").value = "Obtain an IP automatically";
+			chDNS(1);
+			MM_showHideLayers(p,'','hide','sWAN1Auto','','show'); 
+		}	
+		chWANSetting(1);
+	}
+	else
+		MM_showHideLayers(p,'','hide','sHostDomain','','show');
+					
+	break; 
+    case 'sWAN1Auto':
+	if (j==1)
+	{
+		if (document.formBasic.setWan1DNS[1].checked == true)
+		{
+			if (document.formBasic.Wan1DnsA.value == "")
+			{
+				alert("Please input DNS Server")
+				document.formBasic.Wan1DnsA.select();
+				return;
+			}
+		
+			if (IPCheck(document.formBasic.Wan1DnsA, 1, 254, 0, 0, 0, "DNS Server1") < 0)
+			{
+				document.formBasic.Wan1DnsA.select();
+				return;
+			}	
+			
+			if (IPCheck(document.formBasic.Wan1DnsB, 1, 254, 0, 0, 0, "DNS Server2") < 0)
+			{
+				document.formBasic.Wan1DnsB.select();
+				return;
+			}
+			document.getElementById("s_info11").value = "Dns Server 1:";
+			document.getElementById("s_info12").value = document.formBasic.Wan1DnsA.value;
+			if (document.formBasic.Wan1DnsB.value != "")
+			{
+				document.getElementById("s_info13").value = "Dns Server 2:";
+				document.getElementById("s_info14").value = document.formBasic.Wan1DnsB.value;	
+			}
+			else
+			{
+				document.getElementById("s_info13").value = "";
+				document.getElementById("s_info14").value = "";
+			}
+		}	
+		else
+		{
+			document.getElementById("s_info11").value = "";
+			document.getElementById("s_info12").value = "Use DNS Server provided by ISP";
+			document.getElementById("s_info13").value = "";
+			document.getElementById("s_info14").value = "";
+		}
+		if (document.formBasic.dmzStatusChange.value == 1)
+			MM_showHideLayers(p,'','hide','sDMZ','','show');
+		else	
+			MM_showHideLayers(p,'','hide','sWAN2Type','','show');
+			
+	}	
+	else
+		MM_showHideLayers(p,'','hide','sWAN1Type','','show');
+					
+	break; 
+    case 'sWAN1Static':
+	if (j==1)
+	{			
+		if (document.formBasic.Wan1AliasIp.value == "")
+		{
+			alert("Please input IP Address.")
+			document.formBasic.Wan1AliasIp.select();
+			return;
+		}
+	
+		if (IPCheck(document.formBasic.Wan1AliasIp, 1, 254) < 0)
+		{
+			document.formBasic.Wan1AliasIp.select();
+			return;
+		}
+
+		if (document.formBasic.Wan1AliasMaskIp.value == "")
+		{
+			alert("Please input Subnet Mask.")
+			document.formBasic.Wan1AliasMaskIp.select();
+			return;
+		}
+	
+		if (IPCheck(document.formBasic.Wan1AliasMaskIp, 0, 255, 0, 0, 0, "Subnet Mask") < 0)
+		{
+			document.formBasic.Wan1AliasMaskIp.select();
+			return;
+		}	
+		
+		if (document.formBasic.Wan1GWIp.value == "")
+		{
+			alert("Please input Default Gateway.")
+			document.formBasic.Wan1GWIp.select();
+			return;
+		}
+	
+		if (IPCheck(document.formBasic.Wan1GWIp, 1, 254, 0, document.formBasic.Wan1AliasIp, 0, "Default Gateway") < 0)
+		{
+			document.formBasic.Wan1GWIp.select();
+			return;		
+		}
+		if (document.formBasic.dmzStatusChange.value == 1)
+			MM_showHideLayers(p,'','hide','sDMZ','','show');
+		else	
+		{
+			document.getElementById("s_info11").value = "IP / Subnet Mask:";
+			document.getElementById("s_info12").value = document.formBasic.Wan1AliasIp.value + " / " + document.formBasic.Wan1AliasMaskIp.value;
+			document.getElementById("s_info13").value = "Default Gateway:";
+			document.getElementById("s_info14").value = document.formBasic.Wan1GWIp.value;
+			MM_showHideLayers(p,'','hide','sWAN2Type','','show');
+		}		
+	}	
+	else
+		MM_showHideLayers(p,'','hide','sWAN1Type','','show');
+					
+	break; 
+	
+    case 'sWAN1PPPoe':
+	if (j==1)
+	{
+		if (document.formBasic.Wan1UserName.value == "")
+		{
+			alert("Please input Username.")
+			document.formBasic.Wan1UserName.select();
+			return;
+		}
+
+		if (document.formBasic.Wan1PassWord.value == "")
+		{
+			alert("Please input Password.")
+			document.formBasic.Wan1PassWord.select();
+			return;
+		}
+	
+		if (document.formBasic.Wan1ConnectAlive[0].checked == true)
+		{
+			if (minCheck(document.formBasic.Wan1IdleTime) < 0) 
+			{
+				alert(aIdleTime);
+				document.formBasic.Wan1IdleTime.select();
+				return;
+			}	
+		}	
+		else	
+		{
+			if (secCheck(document.formBasic.Wan1RedialTime) < 0) 
+			{
+				alert(aRedialPeriod);
+				document.formBasic.Wan1RedialTime.select();
+				return;
+			}
+		}	
+		document.getElementById("s_info11").value = "Username / Password:";
+		document.getElementById("s_info12").value = document.formBasic.Wan1UserName.value + " / ";
+		for (var i=0; i<document.formBasic.Wan1PassWord.value.length; i++)
+			document.getElementById("s_info12").value += "*";
+		
+		if (document.formBasic.Wan1ConnectAlive[0].checked == true)
+		{
+			document.getElementById("s_info13").value = "Connect on demand: ";
+			document.getElementById("s_info14").value = "Max idle time " + document.formBasic.Wan1IdleTime.value + " Min.";
+		}	
+		else
+		{
+			document.getElementById("s_info13").value = "Keep Alive: ";
+			document.getElementById("s_info14").value = "Redial period " + document.formBasic.Wan1RedialTime.value + " Sec.";
+		}	
+		if (document.formBasic.dmzStatusChange.value == 1)
+			MM_showHideLayers(p,'','hide','sDMZ','','show');
+		else	
+			MM_showHideLayers(p,'','hide','sWAN2Type','','show');
+
+	}	
+	else
+		MM_showHideLayers(p,'','hide','sWAN1Type','','show');
+					
+	break; 
+		
+    case 'sWAN2Type':
+	if (j==1)
+	{
+		if (document.formBasic.WAN2Type[1].checked == true)
+		{
+			document.formBasic.WAN2ConnectionType.value = 1;
+			document.getElementById("s_type2").value = "Static IP";
+			MM_showHideLayers(p,'','hide','sWAN2Static','','show'); 
+		}	
+		else if (document.formBasic.WAN2Type[2].checked == true)
+		{
+			document.formBasic.WAN2ConnectionType.value = 2;
+			document.getElementById("s_type2").value = "PPPoE (Point-to-Point Protocol over Ethernet)";
+			chDialUP(2);
+			MM_showHideLayers(p,'','hide','sWAN2PPPoe','','show'); 
+		}	
+		else
+		{
+			document.formBasic.WAN2ConnectionType.value = 0;
+			document.getElementById("s_type2").value = "Obtain an IP automatically";
+			chDNS(2);
+			MM_showHideLayers(p,'','hide','sWAN2Auto','','show'); 
+		}	
+		chWANSetting(2);
+	}
+	else
+	{
+		if (document.formBasic.WAN1Type[1].checked == true)
+			MM_showHideLayers(p,'','hide','sWAN1Static','','show'); 
+		else if (document.formBasic.WAN1Type[2].checked == true)
+			MM_showHideLayers(p,'','hide','sWAN1PPPoe','','show'); 
+		else
+			MM_showHideLayers(p,'','hide','sWAN1Auto','','show'); 			
+	}		
+	break; 
+    case 'sWAN2Auto':
+	if (j==1)
+	{
+		if (document.formBasic.setWan2DNS[1].checked == true)
+		{
+			if (document.formBasic.Wan2DnsA.value == "")
+			{
+				alert("Please input DNS Server")
+				document.formBasic.Wan2DnsA.select();
+				return;
+			}
+		
+			if (IPCheck(document.formBasic.Wan2DnsA, 1, 254, 0, 0, 0, "DNS Server1") < 0)
+			{
+				document.formBasic.Wan2DnsA.select();
+				return;
+			}	
+			
+			if (IPCheck(document.formBasic.Wan2DnsB, 1, 254, 0, 0, 0, "DNS Server2") < 0)
+			{
+				document.formBasic.Wan2DnsB.select();
+				return;
+			}
+			document.getElementById("s_info21").value = "Dns Server 1:";
+			document.getElementById("s_info22").value = document.formBasic.Wan2DnsA.value;
+			if (document.formBasic.Wan2DnsB.value != "")
+			{
+				document.getElementById("s_info23").value = "Dns Server 2:";
+				document.getElementById("s_info24").value = document.formBasic.Wan2DnsB.value;	
+			}
+			else
+			{
+				document.getElementById("s_info23").value = "";
+				document.getElementById("s_info24").value = "";
+			}
+		}	
+		else
+		{
+			document.getElementById("s_info21").value = "";
+			document.getElementById("s_info22").value = "Use DNS Server provided by ISP";
+			document.getElementById("s_info23").value = "";
+			document.getElementById("s_info24").value = "";
+		}
+		MM_showHideLayers(p,'','hide','sSummary','','show');
+			
+	}	
+	else
+		MM_showHideLayers(p,'','hide','sWAN2Type','','show');
+					
+	break; 
+    case 'sWAN2Static':
+	if (j==1)
+	{			
+		if (document.formBasic.Wan2AliasIp.value == "")
+		{
+			alert("Please input IP Address.")
+			document.formBasic.Wan2AliasIp.select();
+			return;
+		}
+		if(document.formBasic.WAN1ConnectionType.value == 1)
+		{
+			if (IPCheck(document.formBasic.Wan2AliasIp, 1, 254, 0, document.formBasic.Wan1AliasIp) < 0)
+			{
+				document.formBasic.Wan2AliasIp.select();
+				return;
+			}
+		}
+		else
+		{
+			if (IPCheck(document.formBasic.Wan2AliasIp, 1, 254) < 0)
+			{
+				document.formBasic.Wan2AliasIp.select();
+				return;
+			}
+		}
+		
+		if (document.formBasic.Wan2AliasMaskIp.value == "")
+		{
+			alert("Please input Subnet Mask.")
+			document.formBasic.Wan2AliasMaskIp.select();
+			return;
+		}
+	
+		if (IPCheck(document.formBasic.Wan2AliasMaskIp, 0, 255, 0, 0, 0, "Subnet Mask") < 0)
+		{
+			document.formBasic.Wan2AliasMaskIp.select();
+			return;
+		}	
+		
+		if (document.formBasic.Wan2GWIp.value == "")
+		{
+			alert("Please input Default Gateway.")
+			document.formBasic.Wan2GWIp.select();
+			return;
+		}
+	
+		if (IPCheck(document.formBasic.Wan2GWIp, 1, 254, 0, document.formBasic.Wan2AliasIp, 0, "Default Gateway") < 0)
+		{
+			document.formBasic.Wan2GWIp.select();
+			return;		
+		}
+		document.getElementById("s_info21").value = "IP / Subnet Mask:";
+		document.getElementById("s_info22").value = document.formBasic.Wan2AliasIp.value + " / " + document.formBasic.Wan2AliasMaskIp.value;
+		document.getElementById("s_info23").value = "Default Gateway:";
+		document.getElementById("s_info24").value = document.formBasic.Wan2GWIp.value;
+		MM_showHideLayers(p,'','hide','sSummary','','show');
+	}	
+	else
+		MM_showHideLayers(p,'','hide','sWAN2Type','','show');
+					
+	break; 	
+    case 'sWAN2PPPoe':
+	if (j==1)
+	{
+		if (document.formBasic.Wan2UserName.value == "")
+		{
+			alert("Please input Username.")
+			document.formBasic.Wan2UserName.select();
+			return;
+		}
+
+		if (document.formBasic.Wan2PassWord.value == "")
+		{
+			alert("Please input Password.")
+			document.formBasic.Wan2PassWord.select();
+			return;
+		}
+		
+		if (document.formBasic.Wan2ConnectAlive[0].checked == true)
+		{
+			if (minCheck(document.formBasic.Wan2IdleTime) < 0) 
+			{
+				alert(aIdleTime);
+				document.formBasic.Wan2IdleTime.select();
+				return;
+			}	
+		}	
+		else	
+		{
+			if (secCheck(document.formBasic.Wan2RedialTime) < 0) 
+			{
+				alert(aRedialPeriod);
+				document.formBasic.Wan2RedialTime.select();
+				return;
+			}
+		}	
+		document.getElementById("s_info21").value = "Username / Password:";
+		document.getElementById("s_info22").value = document.formBasic.Wan2UserName.value + " / ";
+		for (var i=0; i<document.formBasic.Wan2PassWord.value.length; i++)
+			document.getElementById("s_info22").value += "*";
+		
+		if (document.formBasic.Wan2ConnectAlive[0].checked == true)
+		{
+			document.getElementById("s_info23").value = "Connect on demand: ";
+			document.getElementById("s_info24").value = "Max idle time " + document.formBasic.Wan2IdleTime.value + " Min.";
+		}	
+		else
+		{
+			document.getElementById("s_info23").value = "Keep Alive: ";
+			document.getElementById("s_info24").value = "Redial period " + document.formBasic.Wan2RedialTime.value + " Sec.";
+		}	
+		MM_showHideLayers(p,'','hide','sSummary','','show');				
+	}	
+	else
+		MM_showHideLayers(p,'','hide','sWAN2Type','','show');
+	break;  
+    case 'sDMZ':
+	if (j==1)
+	{			
+		if (document.formBasic.DMZIP.value == "")
+		{
+			alert("Please input IP Address.")
+			document.formBasic.DMZIP.select();
+			return;
+		}
+		if(document.formBasic.WAN1ConnectionType.value == 1)
+		{
+			if (IPCheck(document.formBasic.DMZIP, 1, 254, 0, document.formBasic.Wan1AliasIp) < 0)
+			{
+				document.formBasic.DMZIP.select();
+				return;
+			}
+		}
+		else
+		{
+			if (IPCheck(document.formBasic.DMZIP, 1, 254) < 0)
+			{
+				document.formBasic.DMZIP.select();
+				return;
+			}
+		}
+		
+		if (document.formBasic.DMZMask.value == "")
+		{
+			alert("Please input Subnet Mask.")
+			document.formBasic.DMZMask.select();
+			return;
+		}
+	
+		if (IPCheck(document.formBasic.DMZMask, 0, 255, 0, 0, 0, "Subnet Mask") < 0)
+		{
+			document.formBasic.DMZMask.select();
+			return;
+		}	
+
+		document.getElementById("s_info21").value = "IP / Subnet Mask:";
+		document.getElementById("s_info22").value = document.formBasic.DMZIP.value + " / " + document.formBasic.DMZMask.value;
+		document.getElementById("s_info23").value = "";
+		document.getElementById("s_info24").value = "";
+		chWANSetting(2);
+		MM_showHideLayers(p,'','hide','sSummary','','show');
+	}	
+	else
+		MM_showHideLayers(p,'','hide','sWAN1Type','','show');
+	break; 
+    case 'sSummary':
+	if (document.formBasic.dmzStatusChange.value == 0)
+	{
+		if (document.formBasic.WAN2Type[1].checked == true)
+			MM_showHideLayers(p,'','hide','sWAN2Static','','show'); 
+		else if (document.formBasic.WAN2Type[2].checked == true)
+			MM_showHideLayers(p,'','hide','sWAN2PPPoe','','show'); 
+		else
+			MM_showHideLayers(p,'','hide','sWAN2Auto','','show'); 
+	}
+	else
+		MM_showHideLayers(p,'','hide','sDMZ','','show');
+	break;  	  	 	 	 		
+    default:
+	
+	break;   
+   }
+}  
+function mainTo(p)
+{
+  if (opener)
+  	opener.location.href=p;
+}
+//-->
+</script>
+</head>
+
+<body onLoad="chLayer()" bgcolor="#d9e3e9" style="overflow:hidden">
+<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+<form name="formBasic" action="wizard_basic_dual.htm" method="post">
+<input type="hidden" name="page" value="wizard_basic.htm">
+<input type="hidden" name="submitStatus" value="0">
+<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+<input type="hidden" name="afterSubmit" value='<!--#nk_get handle_tags="wzAfterSubmit"-->'>
+<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+
+<!-- Welcome -->
+<div id="sWhat" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:1; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td width="149" height="448" align="center" valign="bottom" rowspan="3" style="padding-bottom:10px" bgcolor="#8499A2"><div class="wLogo"></div></td>
+	    <td width="10" rowspan="3"></td>
+	    <td width="10" rowspan="3"></td>
+	    <td><img border="0" src="images/_blank.gif" width="1" height="4"></td>
+	    <td width="40" rowspan="3"></td>
+	</tr>
+	<tr>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Welcome to the Basic Setup Installation Wizard</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        This feature is the optional for users to make a decision if fixing the dedicated port as additional WAN port or DMZ port. If Dual WAN is selected, there will be two functions provided for users (Backup and Load Balance). If users select DMZ, this port will be the dedicated DMZ port. <font color="red"><b>Default will be Dual WAN</b></font>.
+		        </td>
+		  </tr>
+		  <tr>
+		        <td height="10"></td>
+		  </tr>		  
+		  <tr>
+		        <td class="Wizard_Content">
+		        <input type="hidden" name="dmzStatusChange" value="0" >
+		        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td><input type="radio" name="dmz_enable" checked></td>
+		        
+				<td width="98%" class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Dual WAN</b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="radio" name="dmz_enable"></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>DMZ</b></td>
+			  </tr>			  
+			 </table>
+ 			 </td>
+		  </tr>            
+		</table>
+        	
+	    </td>
+	</tr>
+	<tr>
+	    <td height="10"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table>
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back1", "Back", "", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next1", "Next", "showhide('sWhat','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel1", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+
+</script>	
+</div>
+<!-- HostDomain -->
+<div id="sHostDomain" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:2; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">WAN1</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">WAN2 / DMZ</td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Enter a host and domain name for the Router.</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        Some ISPs (Internet Service Providers) may require these names as identification, and these settings can be obtained from your ISP. <font color="red">In most cases, leaving these fields blank will work</font>.
+		        </td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td>
+				<table class="Setuptable" width="100%" border="0">
+				<tr>
+					<td class="Wizard_Content" width="90">Host Name: </td>
+					<td>
+					   <input type="hidden" name="Name1" value='<!--#nk_get 1to1_Handle="hostname"-->'>
+					   <input type="text" name="hostname" maxlength="31" size="30" onFocus="" value=''>
+					</td>
+				</tr>
+				<tr>
+					<td class="Wizard_Content">Domain Name: </td>
+					<td>
+					   <input type="hidden" name="Name2" value='<!--#nk_get 1to1_Handle="DomainName"-->'>
+					   <input type="text" name="DomainName" maxlength="31" size="30" onFocus="" value=''>
+					</td>
+				</tr>
+				</table>
+		  	 </td>
+		  </tr>	 
+		</table>
+        	
+	    </td>
+	    <td width="40"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back2", "Back", "showhide('sHostDomain','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next2", "Next", "showhide('sHostDomain','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel2", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+<!-- sWAN1Type -->
+<div id="sWAN1Type" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:3; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <input type="hidden" name="mtu_auto" value="1">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">WAN1</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">WAN2 / DMZ</td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Select WAN connection Type (For WAN1)</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		       <td>
+		       <input type="hidden" name="WAN1ConnectionType" value="0">
+			<table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td><input type="radio" value="0" name="WAN1Type" checked></td>
+		        
+				<td width="98%" class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Obtain an IP automatically : </b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" class="Wizard_Content">
+			  	<img border="0" src="images/_blank.gif" width="30" height="1">If your ISP is running a DHCP server, select Obtain an IP automatically option. Your ISP will assign these values (includes DNS Server) automatically. Or users can check the box of Use the Following DNS Server Addresses, and enter the specific DNS Server IP. Multiple DNS IP Settings are common. In most cases, the first available DNS entry is used. <font color="blue">(default)</font>
+			  	</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="radio" value="1" name="WAN1Type"></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Static IP : </b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" class="Wizard_Content">
+			  	<img border="0" src="images/_blank.gif" width="30" height="1">If you have a specify WAN IP Address, Subnet Mask, Default Gateway Address and DNS Server, select Static IP. You can get this information from your ISP.
+			  	</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="radio" value="2" name="WAN1Type"></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>PPPoE (Point-to-Point Protocol over Ethernet) : </b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" class="Wizard_Content">
+			  	<img border="0" src="images/_blank.gif" width="30" height="1">You have to check with your ISP to make sure whether PPPoE should be enabled or not. If they do use PPPoE.
+			  	</td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back3", "Back", "showhide('sWAN1Type','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next3", "Next", "showhide('sWAN1Type','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel3", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+<!-- WAN1Auto -->
+<div id="sWAN1Auto" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:4; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">WAN1</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">WAN2 / DMZ</td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Obtain an IP automatically (For WAN1)</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        <input type="hidden" name="Wan1DnsNeq" value="0">
+			 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td><input type="radio" value="0" name="setWan1DNS" onClick="chDNS(1)" checked></td>
+		        
+				<td width="98%" class="Wizard_Content" colspan="2"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Use DNS Server provided by ISP <font color="blue">(default)</font></b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="3" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="radio" value="1" name="setWan1DNS" onClick="chDNS(1)" ></td>		        
+				<td class="Wizard_Content" colspan="2"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Use the Following DNS Server Addresses</b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="3" height="15"></td>
+			  </tr>
+			   <tr>
+		        	<td></td>
+		        
+				<td class="Wizard_Content" width="162"><img border="0" src="images/_blank.gif" width="8" height="1"><b>DNS Server (Required) 1:</b><img border="0" src="images/_blank.gif" width="8" height="1"></td>
+				<td><input type="text" name="Wan1DnsA" maxlength="15" size="20"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="3" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td></td>
+		        
+				<td class="Wizard_Content" width="162"><img border="0" src="images/_blank.gif" width="8" height="1"><b><font color="white">DNS Server (Required) </font>2:</b><img border="0" src="images/_blank.gif" width="8" height="1"></td>
+				<td><input type="text" name="Wan1DnsB" maxlength="15" size="20"></td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back4", "Back", "showhide('sWAN1Auto','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next4", "Next", "showhide('sWAN1Auto','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel4", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+
+</div>
+<!-- WAN1Static -->
+<div id="sWAN1Static" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:4; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">WAN1</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">WAN2 / DMZ</td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Static IP (For WAN1)</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+			 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter WAN IP address provided by ISP.</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content" width="100"><b>IP Address: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan1AliasIp" maxlength="15" size="20"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+		          <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter subnet mask. <font color="blue">(255.255.255.0 is <b>default</b> value.)</font></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Subnet Mask: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan1AliasMaskIp" maxlength="15" size="20" value="255.255.255.0"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter default gateway IP address.</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Default Gateway: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan1GWIp" maxlength="15" size="20"></td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back5", "Back", "showhide('sWAN1Static','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next5", "Next", "showhide('sWAN1Static','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel5", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');	
+</script>
+
+</div>
+<!-- WAN1PPPoe-->
+<div id="sWAN1PPPoe" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:4; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">WAN1</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">WAN2 / DMZ</td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">PPPoE (For WAN1)</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+			 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter Usename and Password provided by ISP.</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content" width="60"><b>Username: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan1UserName" size="30" maxlength="60" onblur="sTrim(this)"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Password: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="password" name="Wan1PassWord" size="30" maxlength="60" onblur="sTrim(this)"></td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>		
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td>
+		        <input type="hidden" name="Wan1Alive" value="1">
+		        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+			   <tr>
+		        	<td><input type="radio" value="1" name="Wan1ConnectAlive" onClick="chDialUP(1)" checked></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Connect on demand : Max Idle Time<img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan1IdleTime" value='' size="5" maxlength="5"><img border="0" src="images/_blank.gif" width="8" height="1">Min.</b></td>
+ 			  </tr>	
+			  <tr>
+			  	<td colspan="3" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="radio" value="2" name="Wan1ConnectAlive" onClick="chDialUP(1)" ></td>
+		        
+				<td class="Wizard_Content" colspan="2"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Keep Alive : Redial Period<img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan1RedialTime" value='' size="7" maxlength="7"><img border="0" src="images/_blank.gif" width="8" height="1">Sec.</b></td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back6", "Back", "showhide('sWAN1PPPoe','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next6", "Next", "showhide('sWAN1PPPoe','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel6", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+
+</div>
+<!-- sWAN2Type -->
+<div id="sWAN2Type" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:3; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">WAN1
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+	  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">WAN2 / DMZ</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Select WAN connection Type (For WAN2)</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		       <td>
+		       <input type="hidden" name="WAN2ConnectionType" value="0">
+			<table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td><input type="radio" value="0" name="WAN2Type" checked></td>
+		        
+				<td width="98%" class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Obtain an IP automatically : </b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" class="Wizard_Content">
+			  	<img border="0" src="images/_blank.gif" width="30" height="1">If your ISP is running a DHCP server, select Obtain an IP automatically option. Your ISP will assign these values (includes DNS Server) automatically. Or users can check the box of Use the Following DNS Server Addresses, and enter the specific DNS Server IP. Multiple DNS IP Settings are common. In most cases, the first available DNS entry is used. <font color="blue">(default)</font>
+			  	</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="radio" value="1" name="WAN2Type"></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Static IP : </b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" class="Wizard_Content">
+			  	<img border="0" src="images/_blank.gif" width="30" height="1">If you have a specify WAN IP Address, Subnet Mask, Default Gateway Address and DNS Server, select Static IP. You can get this information from your ISP.
+			  	</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="radio" value="2" name="WAN2Type"></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>PPPoE (Point-to-Point Protocol over Ethernet) : </b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" class="Wizard_Content">
+			  	<img border="0" src="images/_blank.gif" width="30" height="1">You have to check with your ISP to make sure whether PPPoE should be enabled or not. If they do use PPPoE.
+			  	</td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back7", "Back", "showhide('sWAN2Type','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next7", "Next", "showhide('sWAN2Type','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel7", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+<!-- WAN2Auto -->
+<div id="sWAN2Auto" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:4; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">WAN1
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+	  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">WAN2 / DMZ</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Obtain an IP automatically (For WAN2)</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        <input type="hidden" name="Wan2DnsNeq" value="0">
+			 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td><input type="radio" value="0" name="setWan2DNS" onClick="chDNS(2)" checked></td>
+		        
+				<td width="98%" class="Wizard_Content" colspan="2"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Use DNS Server provided by ISP <font color="blue">(default)</font></b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="3" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="radio" value="1" name="setWan2DNS" onClick="chDNS(2)" ></td>
+		        
+				<td class="Wizard_Content" colspan="2"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Use the Following DNS Server Addresses</b></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="3" height="15"></td>
+			  </tr>
+			   <tr>
+		        	<td></td>
+		        
+				<td class="Wizard_Content" width="162"><img border="0" src="images/_blank.gif" width="8" height="1"><b>DNS Server (Required) 1:</b><img border="0" src="images/_blank.gif" width="8" height="1"></td>
+				<td><input type="text" name="Wan2DnsA" maxlength="15" size="20"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="3" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td></td>
+		        
+				<td class="Wizard_Content" width="162"><img border="0" src="images/_blank.gif" width="8" height="1"><b><font color="white">DNS Server (Required) </font>2:</b><img border="0" src="images/_blank.gif" width="8" height="1"></td>
+				<td><input type="text" name="Wan2DnsB" maxlength="15" size="20"></td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back8", "Back", "showhide('sWAN2Auto','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next8", "Next", "showhide('sWAN2Auto','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel8", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+
+</div>
+<!-- WAN2Static -->
+<div id="sWAN2Static" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:4; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">WAN1
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+	  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">WAN2 / DMZ</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Static IP (For WAN2)</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+			 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter WAN IP address provided by ISP.</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content" width="100"><b>IP Address: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan2AliasIp" maxlength="15" size="20"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+		          <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter subnet mask. <font color="blue">(255.255.255.0 is <b>default</b> value.)</font></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Subnet Mask: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan2AliasMaskIp" maxlength="15" size="20" value="255.255.255.0"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter default gateway IP address.</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Default Gateway: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan2GWIp" maxlength="15" size="20"></td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back9", "Back", "showhide('sWAN2Static','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next9", "Next", "showhide('sWAN2Static','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel9", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+
+</div>
+<!-- WAN2PPPoe-->
+<div id="sWAN2PPPoe" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:4; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">WAN1
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+	  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">WAN2 / DMZ</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">PPPoE (For WAN2)</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+			 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter Usename and Password provided by ISP.</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content" width="60"><b>Username: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan2UserName" size="30" maxlength="60" onblur="sTrim(this)"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Password: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="password" name="Wan2PassWord" size="30" maxlength="60" onblur="sTrim(this)"></td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>		
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td>
+		        <input type="hidden" name="Wan2Alive" value="1">
+		        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+			   <tr>
+		        	<td><input type="radio" value="1" name="Wan2ConnectAlive" onClick="chDialUP(2)" checked></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Connect on demand : Max Idle Time<img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan2IdleTime" value='' size="5" maxlength="5"><img border="0" src="images/_blank.gif" width="8" height="1">Min.</b></td>
+ 			  </tr>	
+			  <tr>
+			  	<td colspan="3" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="radio" value="2" name="Wan2ConnectAlive" onClick="chDialUP(2)" ></td>
+		        
+				<td class="Wizard_Content" colspan="2"><img border="0" src="images/_blank.gif" width="8" height="1"><b>Keep Alive : Redial Period<img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="Wan2RedialTime" value='' size="7" maxlength="7"><img border="0" src="images/_blank.gif" width="8" height="1">Sec.</b></td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back10", "Back", "showhide('sWAN2PPPoe','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next10", "Next", "showhide('sWAN2PPPoe','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel10", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+
+</div>
+<!-- DMZMode -->
+<div id="sDMZ" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:4; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">	    
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">WAN1
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+	  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">WAN2 / DMZ</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+	    <input type="hidden" name="DmzSubnetRange" value="0">	    
+	    <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">DMZ</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+			 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter the DMZ IP Address provided by ISP.</td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content" width="100"><b>IP Address: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="DMZIP" maxlength="15" size="20"></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="15"></td>
+			  </tr>
+		          <tr>
+		        	<td class="Wizard_Content" colspan="3">Please enter subnet mask. <font color="blue">(255.255.255.0 is <b>default</b> value.)</font></td>
+			  </tr>
+			  <tr>
+			  	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Subnet Mask: </b></td>
+		        
+				<td class="Wizard_Content"><img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="DMZMask" maxlength="15" size="20" value="255.255.255.0"></td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back11", "Back", "showhide('sDMZ','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next11", "Next", "showhide('sDMZ','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel11", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+
+</div>
+<!-- Summary -->
+<div id="sSummary" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:7; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">WAN1
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">WAN2 / DMZ
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+	  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td width="115" class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>  	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Summary</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+			<td>			
+			<table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td class="Wizard_Content" width="150"><b>Host Name: </b></td>
+				<td><input type="text" name="s_host" id="s_host" style="width:350px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Domain Name: </b></td>
+				<td><input type="text" name="s_domain" id="s_domain" style="width:350px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			   <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>WAN1: </b></td>
+				<td><input type="text" name="s_type1" id="s_type1" style="width:350px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="text" name="s_info11" id="s_info11" style="border-width:0px;bgcolor=#fff" readOnly></td>
+				<td><input type="text" name="s_info12" id="s_info12" style="width:350px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="text" name="s_info13" id="s_info13" style="border-width:0px;bgcolor=#fff" readOnly></td>
+				<td><input type="text" name="s_info14" id="s_info14" style="width:350px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="15"></td>
+			  </tr>
+			  <tr>
+			  	<td class="Wizard_Content"><b>WAN2 / DMZ:</b></td>
+				<td><input type="text" name="s_type2" id="s_type2" style="width:350px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="text" name="s_info21" id="s_info21" style="border-width:0px;bgcolor=#fff" readOnly></td>
+				<td><input type="text" name="s_info22" id="s_info22" style="width:350px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="5"></td>
+			  </tr>
+			  <tr>
+		        	<td><input type="text" name="s_info23" id="s_info23" style="border-width:0px;bgcolor=#fff" readOnly></td>
+				<td><input type="text" name="s_info24" id="s_info24" style="width:350px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			 </table>
+			</td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back12", "Back", "showhide('sSummary','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Install", "Install", "chSubmit()", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel12", "Cancel", "javascript: location.reload();", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+
+<!-- Finish -->
+<div id="sSave" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:9; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Host and Domain
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">WAN1
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">WAN2 / DMZ
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Summary
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  
+	  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">Finish</td>
+		  </tr>
+	    </table> 	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Install</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+			<td class="Wizard_Content">
+			<b>Basic Setup have been successfully configured.</b><br>
+			</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		</table>
+        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Finish", "Finish", "closeWindow()", "", "submit", 75);
+	document.write("</td>");
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+</form>
+</body>
+</html>
+<!--#nk_get NetworkUpdate=""-->

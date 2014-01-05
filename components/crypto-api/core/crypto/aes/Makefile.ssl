@@ -1,0 +1,89 @@
+# Copyright (c) 2003-2005, Cavium Networks. All rights reserved.
+#  
+# This Software is the property of Cavium Networks.  The Software and all 
+# accompanying documentation are copyrighted.  The Software made available 
+# here constitutes the proprietary information of Cavium Networks.  You 
+# agree to take reasonable steps to prevent the disclosure, unauthorized use 
+# or unauthorized distribution of the Software.  You shall use this Software 
+# solely with Cavium hardware.  
+#  
+# Except as expressly permitted in a separate Software License Agreement 
+# between You and Cavium Networks, you shall not modify, decompile, 
+# disassemble, extract, or otherwise reverse engineer this Software.  You 
+# shall not make any copy of the Software or its accompanying documentation, 
+# except for copying incident to the ordinary and intended use of the 
+# Software and the Underlying Program and except for the making of a single 
+# archival copy.  
+#  
+# This Software, including technical data, may be subject to U.S.  export 
+# control laws, including the U.S.  Export Administration Act and its 
+# associated regulations, and may be subject to export or import regulations 
+# in other countries.  You warrant that You will comply strictly in all 
+# respects with all such regulations and acknowledge that you have the 
+# responsibility to obtain licenses to export, re-export or import the 
+# Software.  
+#  
+# TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE SOFTWARE IS PROVIDED "AS IS" 
+# AND WITH ALL FAULTS AND CAVIUM MAKES NO PROMISES, REPRESENTATIONS OR 
+# WARRANTIES, EITHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, WITH RESPECT 
+# TO THE SOFTWARE, INCLUDING ITS CONDITION, ITS CONFORMITY TO ANY 
+# REPRESENTATION OR DESCRIPTION, OR THE EXISTENCE OF ANY LATENT OR PATENT 
+# DEFECTS, AND CAVIUM SPECIFICALLY DISCLAIMS ALL IMPLIED (IF ANY) WARRANTIES 
+# OF TITLE, MERCHANTABILITY, NONINFRINGEMENT, FITNESS FOR A PARTICULAR 
+# PURPOSE, LACK OF VIRUSES, ACCURACY OR COMPLETENESS, QUIET ENJOYMENT, QUIET 
+# POSSESSION OR CORRESPONDENCE TO DESCRIPTION.  THE ENTIRE RISK ARISING OUT 
+# OF USE OR PERFORMANCE OF THE SOFTWARE LIES WITH YOU.  
+
+DIR=   aes 
+TOP=    ../..
+ifndef OCTEON_ROOT
+OCTEON_ROOT = ../../../../
+endif
+
+INCLUDES=-I.. -I$(TOP) -I../../include
+CFLAG=
+
+CFLAGS += -W -Wall -Wno-unused-parameter -I$(INCLUDES) -I.. -I../.. -I$(OCTEON_ROOT)/target/include
+LDFLAGS = -lcrypto -lcvmx -L$(OCTEON_ROOT)/target/lib 
+
+#CFLAGS += -I$(OPENSSL_INCLUDE)
+
+LIB=$(TOP)/libcrypto.a
+LIBSRC=aes_core.c aes_misc.c aes_ecb.c aes_cbc.c aes_cfb.c aes_ofb.c aes_ctr.c cvm_aes.c aes_xcbc.c aes_prf.c aes_gcm.c aes_lrw.c aes_cbc_sha1.c aes_cbc_sha2.c aes_ctr_sha1.c aes_ctr_sha2.c
+LIBOBJ=aes_core.o aes_misc.o aes_ecb.o aes_cbc.o aes_cfb.o aes_ofb.o aes_ctr.o cvm_aes.o aes_xcbc.o aes_prf.o aes_gcm.o aes_lrw.o aes_cbc_sha1.o aes_cbc_sha2.o aes_ctr_sha1.o aes_ctr_sha2.o
+
+SRC= $(LIBSRC)
+
+all:	lib
+
+lib:	$(LIBOBJ)
+	$(AR) r $(LIB) $(LIBOBJ)
+	@touch lib
+
+clean:
+	@rm -f *.o *.obj lib
+
+aes_cbc.o: ../../include/openssl/aes.h ../../include/openssl/e_os2.h
+aes_cbc.o: ../../include/openssl/opensslconf.h aes_cbc.c aes_locl.h
+aes_cfb.o: ../../include/openssl/aes.h ../../include/openssl/e_os2.h
+aes_cfb.o: ../../include/openssl/opensslconf.h aes_cfb.c aes_locl.h
+aes_core.o: ../../include/openssl/aes.h ../../include/openssl/e_os2.h
+aes_core.o: ../../include/openssl/opensslconf.h aes_core.c aes_locl.h
+aes_ctr.o: ../../include/openssl/aes.h ../../include/openssl/e_os2.h
+aes_ctr.o: ../../include/openssl/opensslconf.h aes_ctr.c aes_locl.h
+aes_ecb.o: ../../include/openssl/aes.h ../../include/openssl/e_os2.h
+aes_ecb.o: ../../include/openssl/opensslconf.h aes_ecb.c aes_locl.h
+aes_misc.o: ../../include/openssl/aes.h ../../include/openssl/e_os2.h
+aes_misc.o: ../../include/openssl/opensslconf.h
+aes_misc.o: ../../include/openssl/opensslv.h aes_locl.h aes_misc.c
+aes_ofb.o: ../../include/openssl/aes.h ../../include/openssl/e_os2.h
+aes_ofb.o: ../../include/openssl/opensslconf.h aes_locl.h aes_ofb.c
+cvm_aes.o: ../../include/openssl/aes.h
+aes_xcbc.o: ../../include/openssl/aes.h
+aes_prf.o: ../../include/openssl/aes.h
+aes_gcm.o: ../../include/openssl/aes.h
+aes_lrw.o: ../../include/openssl/aes.h
+aes_cbc_sha1.o: ../../include/openssl/aes.h ../../include/openssl/hmac.h
+aes_cbc_sha2.o: ../../include/openssl/aes.h ../../include/openssl/hmac.h
+aes_ctr_sha1.o: ../../include/openssl/aes.h ../../include/openssl/hmac.h
+aes_ctr_sha2.o: ../../include/openssl/aes.h ../../include/openssl/hmac.h

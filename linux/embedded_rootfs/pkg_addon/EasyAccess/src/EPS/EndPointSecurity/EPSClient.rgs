@@ -1,0 +1,26 @@
+HKCR
+{
+	EPS.EPSClient.1 = s 'EPSClient Class'
+	{
+		CLSID = s '{F798D8AC-C44C-4E64-B731-6408965B6FE0}'
+	}
+	EPS.EPSClient = s 'EPSClient Class'
+	{
+		CLSID = s '{F798D8AC-C44C-4E64-B731-6408965B6FE0}'
+		CurVer = s 'EPS.EPSClient.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F798D8AC-C44C-4E64-B731-6408965B6FE0} = s 'EPSClient Class'
+		{
+			ProgID = s 'EPS.EPSClient.1'
+			VersionIndependentProgID = s 'EPS.EPSClient'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{30E8386A-CA99-4565-84FF-3C1C71D7DA3F}'
+		}
+	}
+}

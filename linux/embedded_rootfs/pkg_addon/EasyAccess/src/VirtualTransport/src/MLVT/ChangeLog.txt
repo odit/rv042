@@ -1,0 +1,94 @@
+version 1.6.1.1 (May 31 2007)
+-------------------------------
+1.Version changed for release.
+2. Component versions
+	a. MLVirtualTransport.exe	 - 1.6.1.1
+	b. MLVTLsp.dll			 - 1.6.1.1
+	c. MLVTNsp.dll			 - 1.6.1.1
+	d. VirtualTransportUninstall.exe - 1.6.1.1
+	e. MenloLSP.inf			 - 1.6.1.1
+	f. Product Version 		 - 1.6.1.0
+
+
+version 1.6.0.1 (March 14 2007)
+-------------------------------
+Bug No 295 - Deactivate mechanism for VT on browser exit.
+Bug No 442 - Vista Support
+
+version 1.5.1.1 (January 12 2007)
+---------------------------------
+1.version changed for release.
+2.component Versions
+	a. MLVirtualTransport.exe	 - 1.5.1.1
+	b. MLVTConfig.dll		 - 1.5.1.1
+	c. MLVTLsp.dll			 - 1.5.1.1
+	d. MLVTNsp.dll			 - 1.5.1.1
+	e. VirtualTransportUninstall.exe - 1.5.1.1
+	f. MenloLSP.inf			 - 1.5.1.1
+	g. Product Version 		 - 1.5.1.0
+version 1.5.0.1 (october 17 2006)
+---------------------------------
+1.version changed for release.
+2.component Versions
+	a. MLVirtualTransport.exe	 - 1.5.0.1
+	b. MLVTConfig.dll		 - 1.5.0.1
+	c. MLVTLsp.dll			 - 1.5.0.1
+	d. MLVTNsp.dll			 - 1.5.0.1
+	e. VirtualTransportUninstall.exe - 1.5.0.1
+	f. MenloLSP.inf			 - 1.5.0.1
+	g. Product Version 		 - 1.5.0.0
+3.Bug Fix 151 - VT throws decrypt error in Multi-threaded environment.
+
+version 1.4.1.1 (March 31 2006)
+-------------------------------
+1.version changed for release.
+2.component Versions
+	a. MLVirtualTransport.exe	 - 1.4.1.1
+	b. MLVTConfig.dll		 - 1.4.1.1
+	c. MLVTLsp.dll			 - 1.4.1.1
+	d. MLVTNsp.dll			 - 1.4.1.1
+	e. VirtualTransportUninstall.exe - 1.4.1.1
+	f. MenloLSP.inf			 - 1.4.1.1
+	g. Product Version 		 - 1.4.1.0
+
+
+Version 1.4.0.1 (Jan 09 2006)
+-----------------------------
+1.Version changed for release.
+2. Component Versions
+	a. MLVirtualTransport.exe	 - 1.4.0.1
+	b. MLVTConfig.dll		 - 1.4.0.1
+	c. MLVTLsp.dll			 - 1.4.0.1
+	d. MLVTNsp.dll			 - 1.4.0.1
+	e. VirtualTransportUninstall.exe - 1.4.0.1
+	f. MenloLSP.inf			 - 1.4.0.1
+	g. Product Version 		 - 1.4.0.0
+
+
+Version 1,3,0,1(July 27 2005)
+------------------------------
+1. Version update.
+2. Component Versions
+	a. MLVirtualTransport.ex	 - 1.3.0.1
+	b. MLVTConfig.dll		 - 1.3.0.1
+	c. MLVTLsp.dll			 - 1.3.0.1
+	d. MLVTNsp.dll			 - 1.3.0.1
+	e. VirtualTransportUninstall.exe - 1.3.0.1
+	f. MenloLSP.inf			 - 1.3.0.1
+	g. Product Version 		 - 1.3.0.0
+
+Version 1,2,9,16(July 7 2005)
+------------------------------
+1. Bug Fix 151 - Outlook crashes when working with VT.
+2. Bug Fix 236 - NSP doesn't seem to take effect in Firefox.
+3. Bug Fix 237 - Outlook2003 in XP Home SP2 hangs often when LSP is active.
+
+2. Component Versions
+	a. MLVirtualTransport.ex	 - 1.2.9.16
+	b. MLVTConfig.dll		 - 1.2.9.16
+	c. MLVTLsp.dll			 - 1.2.9.16
+	d. MLVTNsp.dll			 - 1.2.9.16
+	e. VirtualTransportUninstall.exe - 1.2.9.16
+	f. MenloLSP.inf			 - 1.2.9.16
+	g. Product Version 		 - 1.2.9.0
+

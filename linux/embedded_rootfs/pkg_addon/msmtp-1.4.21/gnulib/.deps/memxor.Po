@@ -1,0 +1,8 @@
+memxor.o memxor.o: memxor.c ../config.h memxor.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/stddef.h
+
+../config.h:
+
+memxor.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/stddef.h:

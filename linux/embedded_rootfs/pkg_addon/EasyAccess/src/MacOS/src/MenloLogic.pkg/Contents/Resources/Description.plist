@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IFPkgDescriptionDeleteWarning</key>
+	<string></string>
+	<key>IFPkgDescriptionDescription</key>
+	<string>Menlo Logic Virtual Passage is a full PPP over SSL client for full network access for users. </string>
+	<key>IFPkgDescriptionTitle</key>
+	<string>Menlo Logic Virtual Passage for Mac OSX</string>
+	<key>IFPkgDescriptionVersion</key>
+	<string>1.0b</string>
+</dict>
+</plist>

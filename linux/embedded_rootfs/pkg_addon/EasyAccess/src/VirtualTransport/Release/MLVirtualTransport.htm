@@ -1,0 +1,77 @@
+<HTML>
+    <SCRIPT LANGUAGE="VBScript">
+<!--
+Sub window_onLoad()
+	Set VTConfig1=VTLaunch1.GetVTInterfaceObject()
+	
+	Call VTConfig1.InstallVirtualTransport()
+	Call VTConfig1.SetIeFtpPassive()
+
+	Call VTCOnfig1.EnableLogging(1)
+	VTCOnfig1.LogLevel=1
+
+	VTConfig1.ServerAddress="192.168.1.52"
+	VTConfig1.userSession="EasyAccess::::admin"
+
+	Call VTConfig1.SetNameSpaceString("www.gopucavium.org", "192.168.2.3")
+	Call VTConfig1.SetNameSpaceString("www.gopucavium.edu", "10.0.0.2")
+	Call VTConfig1.SetNameSpaceString("www.gopucavium.com", "10.0.0.2")
+	Call VTConfig1.SetNameSpaceString("www.exchangetrial.com", "209.225.56.235")
+	Call VTConfig1.SetNameSpaceString("mail.exchangetrial.com", "209.225.56.235")
+	Call VTConfig1.SetNameSpaceString("www.caviumchennai.exchangeserver","10.0.0.2")
+
+	call VTConfig1.SetConnectionString("NONE", "192.168.1.1",80)
+	call VTConfig1.SetConnectionString("NONE", "192.168.1.50",5150)
+	call VTConfig1.SetConnectionString("NONE", "192.168.4.3",22)
+	call VTConfig1.SetConnectionString("NONE", "192.168.4.3",80)
+	call VTConfig1.SetConnectionString("NONE", "192.168.2.4",7)
+	call VTConfig1.SetConnectionString("NONE", "192.168.2.4",23)
+	call VTConfig1.SetConnectionString("NONE", "192.168.2.4",22)
+	call VTConfig1.SetConnectionString("NONE", "192.168.2.4",21)
+	call VTConfig1.SetConnectionString("NONE", "*gopu*",80)
+	call VTConfig1.SetConnectionString("NONE", "207.44.202.57",110)
+	call VTConfig1.SetConnectionString("NONE", "207.44.202.57",25)
+	call VTConfig1.SetConnectionString("NONE", "192.168.4.4",3389)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.2",3389)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.3",3389)
+	call VTConfig1.SetConnectionString("NONE", "192.168.2.3",80)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.3",21)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.3",23)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.3",22)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.3",80)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.3",7)
+	call VTConfig1.SetConnectionString("NONE", "209.113.159.135",443)
+	call VTConfig1.SetConnectionString("NONE", "192.168.4.4",21)
+	call VTConfig1.SetConnectionString("NONE", "209.225.56.235",80)
+	call VTConfig1.SetConnectionString("NONE", "209.225.56.235",443)
+	call VTConfig1.SetConnectionString("NONE", "207.207.28.215",80)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.2",137)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.2",138)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.2",25)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.2",110)
+	call VTConfig1.SetConnectionString("NONE", "10.0.0.2",80)
+
+	VTConfig1.IsUnInstall=1 
+
+	VTConfig1.EnableFTPAlg=1 
+	VTConfig1.FtpPort=21
+	VTConfig1.IsCertRootValidate=0
+
+	Call VTConfig1.StartVirtualTransport()
+
+	window.close()
+
+end sub
+-->
+
+</SCRIPT>
+
+<HEAD>
+<TITLE>New Page</TITLE>
+</HEAD>
+<BODY>
+    <OBJECT ID="VTLaunch1" 
+     CLASSID="CLSID:B4F7ED32-94FC-46B6-B8CD-B7EC255305E0"
+     CODEBASE=".\MenloLSP.cab#version=1,6,1,1">
+</BODY>
+</HTML>

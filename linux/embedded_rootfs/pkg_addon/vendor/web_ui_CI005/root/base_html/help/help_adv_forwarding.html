@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:11" />
+    <title>Setting Up Port Forwarding and Port Triggering </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=8;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998343"> </a><h1 class="pTitle">
+Setting Up Port Forwarding and Port Triggering
+
+</h1>
+<a name="wp998344"> </a><p class="pBody">
+Use the <span style="font-style: normal">Setup &gt; </span><span style="font-style: oblique">F</span><span style="font-style: oblique">orwarding</span> page if you need to allow public access to services 
+on computers that are connected to the LAN ports. Port Forwarding opens a 
+specified port or a port range for a service, such as FTP. Port Triggering opens a 
+port range for services such as Internet gaming that use alternate ports to 
+communicate between the server and LAN host. This page has the following 
+sections:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998348"> </a><li class="pSmartList1"><a href="#wp998357">Port Range Forwarding</a>
+</li>
+<a name="wp998352"> </a><li class="pSmartList1"><a href="#wp998377">Port Triggering</a>
+</li>
+</ul></div>
+<a name="wp998355"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp998357"> </a><h2 class="pHeading2">
+Port Range Forwarding
+</h2>
+<a name="wp998358"> </a><p class="pBody">
+Port forwarding can be used to set up public services on your network. When 
+users from the Internet make certain requests to your network, the router can 
+forward those requests to computers that are equipped to handle the requests. If, 
+for example, you set the port number 80 (HTTP) to be forwarded to IP address 
+192.168.1.2, then all HTTP requests from outside users will be forwarded to 
+192.168.1.2.
+
+</p>
+<a name="wp998359"> </a><p class="pBody">
+You may use this function to establish a web server or FTP server via an IP 
+gateway. Make sure that you enter a valid IP address. (You may need to establish a 
+static IP address in order to properly run an Internet server.) For added security, 
+Internet users will be able to communicate with the server, but they will not 
+actually be connected. The packets will simply be forwarded through the router.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998365"> </a><li class="pSmartList1"><b class="cBold">To add an entry to the list: </b>Enter the following information, and then click 
+<b class="cBold">Add to list</b>.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998366"> </a><li class="pSmartList2"><b class="cBold">Service:</b> Select the service. If a service is not listed, you can add a service. For details, see <a href="#wp1002949">Adding a service</a>.</li>
+<a name="wp998370"> </a><li class="pSmartList2"><b class="cBold">IP Address:</b> Enter the LAN IP address of the server that you want the Internet users to access. </li>
+<a name="wp998371"> </a><li class="pSmartList2"><b class="cBold">Enable:</b> Check the box to enable this port range forwarding entry.</li>
+</ul></div>
+<a name="wp998372"> </a><li class="pSmartList1"><b class="cBold">To add another new entry: </b>Enter the information, and then click <b class="cBold">Add to list</b>.
+</li>
+<a name="wp998373"> </a><li class="pSmartList1"><b class="cBold">To modify an entry in the list:</b> Click the entry that you want to modify. The 
+information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the entry and clear the text fields.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1008028"> </a><li class="pSmartList2"><b class="cBold">To delete an entry from the list:</b> Click the entry that you want to delete, and then click <b class="cBold">Delete</b>. To select a block of entries, click the first entry, hold down the Shift key, and then click the final entry in the block. To select individual entries, press the Ctrl key while clicking each entry. To de-select an entry, press the Ctrl key while clicking the entry.</li>
+</ul></div>
+<a name="wp998375"> </a><li class="pSmartList1"><b class="cBold">T</b><b class="cBold">o view the port range table: </b>Click <b class="cBold">View</b>, near the bottom of the page. 
+Choose <b class="cBold">Port Range Forwarding</b> or <b class="cBold">Port Triggering</b>. To update the display, 
+click <span style="font-weight: bold">Refresh</span>. To return to the <em class="cEmphasis">Forwarding</em>&#160;page, click <b class="cBold">Close</b>.
+</li>
+</ul></div>
+<a name="wp1002949"> </a><h3 class="pHeading3">
+Adding a service
+</h3>
+<a name="wp1002950"> </a><p class="pBody">
+To add a new entry to the <em class="cEmphasis">Service</em> list, or to change an entry that you created 
+previously, click <b class="cBold">Service Management</b>. If the web browser displays a warning 
+about the pop-up window, allow the blocked content.
+
+</p>
+<a name="wp1006180"> </a><p class="pBody">
+In the <em class="cEmphasis">Service </em>Management window, add or update entries as needed. Before 
+closing this window, click <span style="font-weight: bold">OK</span> to save your settings, or click <b class="cBold">Cancel</b> to undo them. 
+Any unsaved changes are abandoned.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1002953"> </a><li class="pSmartList1"><b class="cBold">To add a service to the list:</b> Enter the following information, and then click 
+<b class="cBold">Add to List</b>. You can have up to 30 services in the list.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1002954"> </a><li class="pSmartList2"><b class="cBold">Service Name:</b> Enter a short description.</li>
+<a name="wp1002955"> </a><li class="pSmartList2"><b class="cBold">Protocol:</b> Choose the required protocol. Refer to the documentation for the service that you are hosting.</li>
+<a name="wp1002956"> </a><li class="pSmartList2"><b class="cBold">Port Range:</b> Enter the required port range. </li>
+</ul></div>
+<a name="wp1002957"> </a><li class="pSmartList1"><b class="cBold">To add another new service: </b>Enter the information, and then click <b class="cBold">Add to 
+list</b>.
+</li>
+<a name="wp1002958"> </a><li class="pSmartList1"><b class="cBold">To modify a service you created: </b>Click the service in the list. The 
+information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the service and clear the text fields.
+</li>
+<a name="wp1002959"> </a><li class="pSmartList1"><b class="cBold">To delete a service from the list:</b> Click the entry that you want to delete. To 
+select a block of entries, click the first entry, hold down the Shift key, and 
+click the final entry in the block. To select individual entries, hold down the 
+Ctrl key while clicking. Click <b class="cBold">Delete</b>.
+</li>
+</ul></div>
+<a name="wp998377"> </a><h2 class="pHeading2">
+Port Triggering
+</h2>
+<a name="wp998378"> </a><p class="pBody">
+Port triggering allows the router to watch outgoing data for specified port 
+numbers. The IP address of the computer that sends the matching data is 
+remembered by the router, so that when the requested data returns through the 
+router, the data is transmitted to the proper computer by using IP address and port 
+mapping rules. 
+
+</p>
+<a name="wp998379"> </a><p class="pBody">
+Some Internet applications or games use alternate ports to communicate between 
+the server and LAN host. When you want to use these applications, enter the 
+triggering (outgoing) port and alternate incoming port in the <em class="cEmphasis">Port Triggering</em> table. 
+Then the router will forward the incoming packets to the specified LAN host.
+
+</p>
+<a name="wp998380"> </a><p class="pBody">
+Add or edit entries as needed. Remember that the settings are not saved until you 
+click the Save button.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998381"> </a><li class="pSmartList1"><b class="cBold">To add an entry to the list:</b> Enter the following information, and then click 
+<b class="cBold">Add to List</b>. You can have up to 30 applications in the list.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998382"> </a><li class="pSmartList2"><b class="cBold">Application Name:</b> Enter the name of the application.</li>
+<a name="wp998383"> </a><li class="pSmartList2"><b class="cBold">Trigger Port Range:</b> Enter the starting and ending port numbers of the trigger port range. Refer to the documentation for the application.</li>
+<a name="wp998384"> </a><li class="pSmartList2"><b class="cBold">Incoming Port Range:</b> Enter the starting and ending port numbers of the incoming port range. Refer to the documentation for the application.</li>
+<a name="wp998385"> </a><li class="pSmartList2"><b class="cBold">Enable:</b> Check the box to enable port triggering for the application. Uncheck the box to disable the application.</li>
+</ul></div>
+<a name="wp998386"> </a><li class="pSmartList1"><b class="cBold">To add another new entry: </b>Enter the information, and then click <b class="cBold">Add to list</b>.
+</li>
+<a name="wp998387"> </a><li class="pSmartList1"><b class="cBold">To modify an entry in the list:</b> Click the entry that you want to modify. The 
+information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the entry and clear the text fields.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1008018"> </a><li class="pSmartList2"><b class="cBold">To delete an entry from the list:</b> Click the entry that you want to delete, and then click <b class="cBold">Delete</b>. To select a block of entries, click the first entry, hold down the Shift key, and then click the final entry in the block. To select individual entries, press the Ctrl key while clicking each entry. To de-select an entry, press the Ctrl key while clicking the entry.</li>
+</ul></div>
+<a name="wp998389"> </a><li class="pSmartList1"><b class="cBold">T</b><b class="cBold">o view the port range table: </b>Click <b class="cBold">View</b>, near the bottom of the page. 
+Choose <b class="cBold">Port Range Forwarding</b> or <b class="cBold">Port Triggering</b>. To update the display, 
+click <span style="font-weight: bold">Refresh</span>. To return to the <em class="cEmphasis">Forwarding</em>&#160;page, click <b class="cBold">Close</b>.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

@@ -1,0 +1,9 @@
+config CONFIG_cavium-ethernet
+	bool "cavium-ethernet"
+	default y
+	help
+		Install the Cavium ethernet driver into the filesystem. This
+		will be needed for network support in the kernel. It is not
+		needed if you are only planning on using simple executive
+		applications.
+

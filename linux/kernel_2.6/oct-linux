@@ -1,0 +1,8 @@
+#!/bin/bash
+
+memory=384
+uart=2020
+packet_port=2000
+
+oct-sim linux/vmlinux.64 -envfile=u-boot-env -memsize=${memory} -uart0=${uart} -serve=${packet_port} -ld0x40000000:../embedded_rootfs/rootfs.ext3 $*
+

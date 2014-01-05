@@ -1,0 +1,22 @@
+
+.cifsbodyback{background-image: url(/images/backallredblue.png);overflow-x:hidden;}
+.cifsmenuleft{BACKGROUND-COLOR:#fbfbe8;}
+.cifstop3{BACKGROUND-COLOR:#c20022;border-bottom:1px #cf0920 solid;border-top:1px #f9f5f0 solid;}
+.cifstop4{BACKGROUND-COLOR:#c20022;border-bottom:1px #cf0920 solid;border-top:1px #f9f5f0 solid;}
+.cifstop5{background-color:#3c5fa6;border-bottom:1px #000000 solid;border-top:1px #ddeeff solid;}
+.cifstop6{background-color:#3c5fa6;border-bottom:1px #000000 solid;border-top:1px #ddeeff solid;}
+.toolbarcifs{color:#ffffff;FONT-FAMILY: Tahoma, Verdana,Arial, Helvetica; FONT-SIZE:11px;FONT-WEIGHT: bold;}
+.navigator{color:#ffff96; cursor:hand; font-FAMILY: Tahoma, Verdana,sans-serif, Arial, Helvetica; FONT-SIZE:11px;FONT-WEIGHT: bold;}
+.mainbackcifs{COLOR:#000000; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+TR.mainbackcifs{COLOR:#000000; background-color:#ffffff;FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.onmainbackcifs{COLOR:#000000;backGROUND-COLOR:#fbfbe8;FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.other2{color:#3f4f5f;}
+A.mainbackcifs{COLOR:#000000; font-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.cifslefttable{BACKGROUND-COLOR:#c20022;border:1px #415571 solid;}
+.cifsleftcell{BACKGROUND-COLOR:#ffffff;border-top:1px #415571 solid;}
+.cifslefttitle{color:#ffffff;FONT-FAMILY: Tahoma, Verdana, "Lucida Sans", "Lucida Console", Arial, Helvetica; FONT-SIZE:11px;FONT-WEIGHT: bold;}
+.disableduplink{color:#77bbee;FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:11px;FONT-WEIGHT: bold;}
+.demo1{color:#ffffff;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:1px solid; margin:2px;border-top-color:#808790;border-left-color:#808790;border-right-color:#556066;border-bottom-color:#556066;background-color:#e6e2df; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}
+.onhovers{margin:2px;margin-color:#ccbb44;color:#dfbf4f;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:2px solid #dfbf4f;background-color:#e6e2df;cursor:hand; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}}
+
+.cifsback{background-color:#ffffff;}

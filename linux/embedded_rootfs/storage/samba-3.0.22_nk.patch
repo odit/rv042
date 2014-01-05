@@ -1,0 +1,11 @@
+--- Makefile.in	2010-07-19 21:44:19.000000000 +0800
++++ Makefile.nk	2009-07-01 14:51:22.000000000 +0800
+@@ -1411,7 +1411,7 @@
+ installbin: all installdirs
+ 	@$(SHELL) $(srcdir)/script/installbin.sh $(INSTALLPERMS) $(DESTDIR) $(DESTDIR)$(BASEDIR) $(DESTDIR)$(SBINDIR) $(DESTDIR)$(LIBDIR) $(DESTDIR)$(VARDIR) $(SBIN_PROGS)
+ 	@$(SHELL) $(srcdir)/script/installbin.sh $(INSTALLPERMS) $(DESTDIR) $(DESTDIR)$(BASEDIR) $(DESTDIR)$(BINDIR) $(DESTDIR)$(LIBDIR) $(DESTDIR)$(VARDIR) $(BIN_PROGS)
+-	cp bin/smbclient /tmp/root-rootfs/usr/bin
++	cp bin/smbclient $(ROOT)/usr/bin
+ 
+ 
+ # Some symlinks are required for the 'probing' of modules. 

@@ -1,0 +1,47 @@
+#!/bin/sh
+
+AP_TOP_DIR=/usr/src/EasyAccess
+IMAGE_PATH=$AP_TOP_DIR/var/images/install
+IMAGE_NAME=$IMAGE_PAHT/EasyAccess.img
+POST_INSTALL=$AP_TOP_DIR/bin/postInstall
+
+function clean_exit()
+{
+   rm -rf $IMAGE_NAME
+   rm -rf /tmp/sig.chk
+   rm -rf /tmp/build.chk
+   exit 
+}
+
+if [ -e $IMAGE_NAME ]
+then
+	echo "starting installation.."
+
+	tar -tvzf $IMAGE_NAME | grep build.chk  > /tmp/sig.chk
+
+        cd /tmp; tar -xvz build.chk -f $IMAGE_NAME
+
+        diff = diff build.chk  /tmp/sig.chk
+        if [! -z $diff ]
+        then
+              echo "Uploaded Image is corrupt"
+              echo $diff
+              clean_exit
+        fi
+
+        cd /
+        for i in `tar -tzf $IMAGE_NAME | grep -v "/$"`
+        do
+            rm -rf $i
+        done
+
+        tar -xvzf $IMAGE_NAME
+
+        $POST_INSTALL.sh
+
+	echo "Installation finished.."
+else
+        echo "No Image to install"
+fi
+
+clean_exit

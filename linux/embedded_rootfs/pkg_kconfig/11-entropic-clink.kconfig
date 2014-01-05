@@ -1,0 +1,8 @@
+config CONFIG_entropic-clink
+	bool "Entropic Clink driver"
+	requires TOOLCHAIN_ABI_64
+	default y
+	help
+		Driver for the Entropic Clink MoCa card. The userspace utilites
+		for this driver only support the N64 ABI.
+

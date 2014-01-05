@@ -1,0 +1,885 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function PortTriggeraddSel(aName,obPrt,oePrt,ibPrt,iePrt,s) /* */
+{
+  var p=-1;
+  var ss;
+  var obP=0;
+  var oeP=0; 
+  var ibP=0;
+  var ieP=0;
+  var addn,listn;  
+  var p1;
+  var q; 
+  var forwardString; 
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(6); 
+   
+  if (aName.value=="")
+  {
+    alert(aApName);
+    aName.select();
+    return;		
+  }
+  else if (obPrt.value=="" || oePrt.value=="")   
+  {
+    alert(aTriggerPortRange);
+    if (obPrt.value=="")
+    	obPrt.select();
+    else 
+    	oePrt.select();
+    return;
+  }
+  else if (ibPrt.value=="" || iePrt.value=="")
+  {
+    alert(aIncomePortRange);
+    if (ibPrt.value=="")
+    	ibPrt.select();
+    else
+    	iePrt.select();
+    return;		  
+  }
+  else
+  {
+    if (chValue2(aName,obPrt,oePrt,ibPrt,iePrt,s) < 0)
+    	return;
+	
+    if (parseInt(oePrt.value)<parseInt(obPrt.value))   
+    {
+      obP=obPrt.value;
+      oeP=oePrt.value;
+      obPrt.value=oeP;
+      oePrt.value=obP;
+    }   
+    if (parseInt(iePrt.value)<parseInt(ibPrt.value))   
+    {
+      ibP=ibPrt.value;
+      ieP=iePrt.value;
+      ibPrt.value=ieP;
+      iePrt.value=ibP;
+    }
+	
+    if (s.form.AddToListButton2.value==sUpdateEntry)
+    {
+      p=-1;
+      while (s.form.PortTriggerList.options[++p].selected != true);
+    }	
+
+    for (var i=0; i < s.length; i++)
+    {
+  /**/
+    forwardString=s.options[i].value; 
+    rightString=forwardString;
+    q=rightString.length;      
+    p1=rightString.indexOf(splitVarforSpecialWordField);  
+    ts[1]=rightString.substring(0,p1);
+    tmpString=rightString; 
+    rightString=tmpString.substring(p1+splitVarforSpecialWordField.length,q);         	
+  /*----------------------------------------------------*/  
+      q=rightString.length;
+      p1=rightString.indexOf(";");
+      ts[2]=rightString.substring(0,p1); 
+      tmpString=rightString;
+      rightString=tmpString.substring(p1+1,q); 
+  /*;*/	
+      q=rightString.length;
+      p1=rightString.indexOf("~");
+      ts[3]=rightString.substring(0,p1); 
+      tmpString=rightString;
+      rightString=tmpString.substring(p1+1,q); 
+  /*~*/
+      q=rightString.length;
+      p1=rightString.indexOf(";");
+      ts[4]=rightString.substring(0,p1); 
+      tmpString=rightString;
+      rightString=tmpString.substring(p1+1,q); 
+  /*;*/ 
+      q=rightString.length;
+      p1=rightString.indexOf("~");
+      ts[5]=rightString.substring(0,p1); 
+      tmpString=rightString;
+      rightString=tmpString.substring(p1+1,q); 
+  /*~*/   
+      q=rightString.length;
+      p1=rightString.indexOf("}");
+      ts[6]=rightString.substring(0,p1); 
+      tmpString=rightString;
+      rightString=tmpString.substring(p1+1,q); 
+
+ 		if (((parseInt(obPrt.value) >= parseInt(ts[3])) && (parseInt(obPrt.value) <= parseInt(ts[4]))) || ((parseInt(oePrt.value) >= parseInt(ts[3])) && (parseInt(oePrt.value) <= parseInt(ts[4]))))
+		{    
+			if (p != i)
+			{        			   
+				alert(aTriggerPortAlready);
+				return;
+			}
+		}
+		if (((parseInt(ts[3]) >= parseInt(obPrt.value)) && (parseInt(ts[3]) <= (parseInt(oePrt.value)))) || ((parseInt(ts[4]) >= parseInt(obPrt.value)) && (parseInt(ts[4]) <= (parseInt(oePrt.value)))))
+		{    
+			if (p != i)
+			{        			   
+				alert(aTriggerPortAlready);
+				return;
+			}
+		}
+		if (((parseInt(ibPrt.value) >= parseInt(ts[5])) && (parseInt(ibPrt.value) <= parseInt(ts[6]))) || ((parseInt(iePrt.value) >= parseInt(ts[5])) && (parseInt(iePrt.value) <= parseInt(ts[6]))))
+		{   
+			if (p != i)
+			{       			   
+				alert(aIncomePortAlready);
+				return;
+			}
+		}
+		if (((parseInt(ts[5]) >= parseInt(ibPrt.value)) && (parseInt(ts[5]) <= (parseInt(iePrt.value)))) || ((parseInt(ts[6]) >= parseInt(ibPrt.value)) && (parseInt(ts[6]) <= (parseInt(iePrt.value)))))
+		{   
+			if (p != i)
+			{       			   
+				alert(aIncomePortAlready);
+				return;
+			}
+		}
+		
+   } 
+
+    for (var i=0; i < s.form.PortTriggerList.length; i++)
+    {
+        s.form.PortTriggerList.options[i].selected=false;
+    }	
+	if (s.form.AddToListButton2.value==sAddtoList)
+	{
+		if (s.length>=LimitTriggering)
+		{
+			alert(aLimitTriggering+LimitTriggering+aLimitEnd);
+		  return;
+		}
+		sID=0; 
+		p=s.length;
+		s.length+=1;
+	}
+	 	//alert(p);
+	s.options[p].value=aName.value;
+	s.options[p].value+=splitVarforSpecialWordField;
+	s.options[p].value+=sID;
+	s.options[p].value+=";";
+	s.options[p].value+=obPrt.value;
+	s.options[p].value+="~";
+	s.options[p].value+=oePrt.value;
+	s.options[p].value+=";";
+	s.options[p].value+=ibPrt.value;
+	s.options[p].value+="~";
+	s.options[p].value+=iePrt.value;
+	s.options[p].value+="}";        
+	s.options[p].text=aName.value;
+	s.options[p].text+="[";
+	s.options[p].text+=obPrt.value;
+	s.options[p].text+="~";
+	s.options[p].text+=oePrt.value;
+	s.options[p].text+=";";
+	s.options[p].text+=ibPrt.value;
+	s.options[p].text+="~";
+	s.options[p].text+=iePrt.value;
+	s.options[p].text+="]";        	
+
+    clearContent(s.form, s.form.DeleteButton2);
+  }
+}
+
+function chValue2(aName,obPrt,oePrt,ibPrt,iePrt,s)
+{
+	if (PortCheck(obPrt) < 0)
+		return -1;
+	if (PortCheck(oePrt) < 0)
+		return -1;
+	if (PortCheck(ibPrt) < 0)
+		return -1;
+	if (PortCheck(iePrt) < 0)
+		return -1;
+
+	return 1;
+}
+
+function chSubmit(F)
+{
+	selAll(F.PortRangeList);
+	selAll(F.PortTriggerList);
+	F.submitStatus.value=1;
+	F.log_ch.value=1;
+	F.submit();
+}
+
+function MLanSubnetIPCheck(CheckIP, AllowScope, AllowNetMask)
+{
+	var i,j,p,q;
+  	var tmpString, rightString;
+	var ts=new tmpWord(4);
+	var ts2=new tmpWord(4);
+	var ts3=new tmpWord(4);
+
+	for(i=1;i<=3;i++)
+	{
+		if (i==1)
+			rightString=CheckIP.value;
+		else if (i==2)
+			rightString=AllowScope;
+		else if (i==3)
+			rightString=AllowNetMask;
+
+		q=rightString.length;
+		for(j=1;j<=4;j++)
+		{
+			p=rightString.indexOf(".");
+			if(j==4)
+			{
+				if (i==1)
+					ts[j]=rightString;
+				else if (i==2)
+					ts2[j]=rightString;
+				else if (i==3)
+					ts3[j]=rightString;
+			}
+			else
+			{
+				if (i==1)
+					ts[j]=rightString.substring(0,p);
+				else if (i==2)
+					ts2[j]=rightString.substring(0,p);
+				else if (i==3)
+					ts3[j]=rightString.substring(0,p);
+			}
+			tmpString=rightString;
+			rightString=tmpString.substring(p+1,q);
+		}
+	}
+
+	for(i=1;i<=4;i++)
+	{
+		if( (ts[i]&ts3[i]) != (ts2[i]&ts3[i]) )
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+
+function ForwardingaddSel(Pro, lastIP, wan, status, s) /* */
+{
+	var pos;
+	var p=-1;
+	var ss;
+	var sString,sName,sEnable;
+	  if (Pro.length==0) 
+	  {
+		alert(aPressService);
+		return;
+	  }
+
+	  if(Check_Special_Words(lastIP)<0)
+	  {
+	  	lastIP.select();
+	  	return;
+	  }
+
+	  if (lastIP.value=="")
+	  {
+		alert(aIPAddress);
+		lastIP.select();
+		return;  
+	  }
+
+	if(IPCheck(lastIP, 1, 254, s.form.LanIp, 0, 1)<0)
+	{
+		var p1,q1,p2,q2;
+		var rightString1, leftString1, tmpString1;
+		var rightString2, leftString2, tmpString2;
+		var IPCheck_pass = 0;
+
+		rightString1=s.form.MLanSubnetIP.value;
+		rightString2=s.form.MLanSubnetNETMASK.value;
+		for (var i=0; i < s.form.MLanSubnetNum.value; i++)
+		{
+			q1=rightString1.length;
+			p1=rightString1.indexOf(";");
+			leftString1=rightString1.substring(0,p1);
+			q2=rightString2.length;
+			p2=rightString2.indexOf(";");
+			leftString2=rightString2.substring(0,p2);
+
+			if(MLanSubnetIPCheck(lastIP, leftString1, leftString2))
+			{
+				IPCheck_pass = 1;
+				break;
+			}
+			tmpString1=rightString1;
+			rightString1=tmpString1.substring(p1+1,q1);
+			tmpString2=rightString2;
+			rightString2=tmpString2.substring(p2+1,q2);
+		}
+		if (!IPCheck_pass)
+		{
+			alert("This IP's value should be in LAN or Multiple Subnet IP range.");
+			return;
+		}
+	}
+
+		if (status.checked==true)
+		{
+			sEnable=" [Enabled]";
+	  		ss="1";
+		}
+		else
+		{
+			sEnable=" [Disabled]";
+	  		ss="0";
+		}
+	  
+	  if (s.form.AddToListButton.value==sUpdateEntry)
+	  {
+	  	p=-1;
+	  	while (s.form.PortRangeList.options[++p].selected != true);
+	  }	
+  
+	if (ckService(Pro,s,p) < 0)
+		return;
+	
+	for (var i=0; i < s.form.PortRangeList.length; i++)
+	{
+	  	s.form.PortRangeList.options[i].selected=false;
+	}
+	
+	if (s.form.AddToListButton.value==sAddtoList)
+	{
+
+		if (s.length>=LimitForwarding)
+		{
+			alert(aLimitForwarding+LimitForwarding+aLimitEnd);
+			return;
+		}	    
+		p=s.length;
+		s.length+=1;
+	}
+	
+	s.options[p].value=Pro.value;
+	s.options[p].value+="{";
+	s.options[p].value+=lastIP.value;
+	s.options[p].value+=";";
+	s.options[p].value+=wan.value;
+	s.options[p].value+=";";
+	s.options[p].value+=ss+"}";
+	sString=Pro.options[Pro.selectedIndex].text;
+	s.options[p].text=sString+"->"+lastIP.value;
+	s.options[p].text+=sEnable;
+	clearContent(s.form, s.form.DeleteButton);
+}
+
+function ckService(Pro,s,p)
+{
+  var sString, pos, ssID;
+  for (var i=0; i < s.length; i++)
+  {
+	sString=s.options[i].value;
+	pos=sString.lastIndexOf("{");
+	ssID=sString.substring(0,pos);
+	if (ssID==Pro.value)
+	{
+		if (p != i)
+		{
+			alert(aServiceAlready);
+			return -1;
+		}
+	}
+  }
+  return 1;
+}
+
+function clearContent(F,I)
+{
+  if (I==F.DeleteButton)
+  {
+	F.serviceSelect.options[0].selected=true;
+	F.InternalIPAddress.value="";
+	//F.InterfaceSelect.options[0].selected=true;
+	F.enableCheckBox.checked=false;  
+	for (var i=0; i < F.PortRangeList.length; i++)
+	{
+		F.PortRangeList.options[i].selected=false;
+	}	    
+	F.AddToListButton.value=sAddtoList; 
+	SetButtonStatus("DeleteButton", "disabled");
+	SetButtonStatus("newAddButton", "disabled"); 
+  }
+  else if (I==F.DeleteButton2)
+  {  
+	F.ApName.value="";  
+	F.oBegPrt.value="";
+	F.oEndPrt.value="";
+	F.iBegPrt.value="";  
+	F.iEndPrt.value="";   
+
+	for (var i=0; i < F.PortTriggerList.length; i++)
+	{
+	  F.PortTriggerList.options[i].selected=false;
+	}
+	F.AddToListButton2.value=sAddtoList; 
+	SetButtonStatus("DeleteButton2", "disabled");
+	SetButtonStatus("newAddButton2", "disabled");
+	F.ApName.select();
+    }  
+}
+
+
+function showPortRangeList(s)
+{
+  if (s.selectedIndex==-1)
+  	return;
+  var p;
+  var q; 
+  var forwardString=s.options[s.selectedIndex].value;
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(6); 
+
+	rightString=forwardString;
+	q=rightString.length;
+	p=rightString.indexOf("{"); 
+	ts[1]=rightString.substring(0,p);
+	tmpString=rightString; 
+	rightString=tmpString.substring(p+1,q);      
+
+	if (s.name=="PortRangeList")
+	{
+		q=rightString.length;
+		p=rightString.indexOf(";");
+		ts[2]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		
+		q=rightString.length;
+		p=rightString.indexOf(";");
+		ts[3]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+	
+		q=rightString.length;
+		p=rightString.indexOf("}");
+		ts[4]=rightString.substring(0,p);
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+	
+		for (var i=0; i < s.form.serviceSelect.length; i++)
+		{
+			if (s.form.serviceSelect.options[i].value==ts[1])
+			{
+				s.form.serviceSelect.options[i].selected=true;
+			}
+		}
+		s.form.InternalIPAddress.value=ts[2];
+		if (ts[4]=="1")
+		{
+			s.form.enableCheckBox.checked=true;
+		}
+		else
+		{
+			s.form.enableCheckBox.checked=false;  
+		}
+		
+		s.form.AddToListButton.value=sUpdateEntry;
+		SetButtonStatus("DeleteButton", "");
+		SetButtonStatus("newAddButton", "");
+	}
+}
+
+function showPortTriggerList(s)
+{
+	if (s.selectedIndex==-1)
+  	return;
+  var p;
+  var q; 
+  var forwardString=s.options[s.selectedIndex].value;
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(7); 
+
+	rightString=forwardString;
+	q=rightString.length;
+	p=rightString.indexOf(splitVarforSpecialWordField); 
+	ts[1]=rightString.substring(0,p);
+	tmpString=rightString; 
+	rightString=tmpString.substring(p+splitVarforSpecialWordField.length,q);      
+
+	if (s.name=="PortTriggerList")
+	{
+		/*----------------------------------------------------*/  
+		q=rightString.length;
+		p=rightString.indexOf(";");
+		ts[2]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		/*;*/	
+		q=rightString.length;
+		p=rightString.indexOf("~");
+		ts[3]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		/*~*/
+		q=rightString.length;
+		p=rightString.indexOf(";");
+		ts[4]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		/*;*/ 
+		q=rightString.length;
+		p=rightString.indexOf("~");
+		ts[5]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		/*~*/   
+		q=rightString.length;
+		p=rightString.indexOf("}");
+		ts[6]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q); 
+		/*}*/   
+		s.form.ApName.value=ts[1];
+		sID=ts[2];
+		s.form.oBegPrt.value=ts[3]; 
+		s.form.oEndPrt.value=ts[4];  
+		s.form.iBegPrt.value=ts[5]; 
+		s.form.iEndPrt.value=ts[6];
+
+		s.form.AddToListButton2.value=sUpdateEntry;
+		SetButtonStatus("DeleteButton2", "");
+		SetButtonStatus("newAddButton2", "");
+	}	
+}
+
+var sID=0;
+var serviceWindow0=null;
+var serviceWindow1=null;
+function openService(n)
+{
+	if(n==0)
+	{
+		if(serviceWindow0 != null)
+		{
+			serviceWindow0.close();
+			serviceWindow0=null;
+		}
+		serviceWindow0=window.open('service0.htm','sW0','menubar=no,scrollbars=no,width=500,height=420');
+	}
+	if(n==1)
+	{
+		if(serviceWindow1 != null)
+		{
+			serviceWindow1.close();
+			serviceWindow1=null;
+		}
+		serviceWindow1=window.open('service1.htm','sW1','menubar=no,scrollbars=no,width=500,height=450');
+	}
+}
+function closeService()
+{
+  timer1=setTimeout("closeChild()", 1000);
+  timer2=setTimeout("refreshMe()", 3000);
+}
+function closeChild()
+{
+  if (serviceWindow0!=null)
+  {
+  	serviceWindow0.close();
+  	serviceWindow0=null;
+  }
+  if (serviceWindow1!=null)
+  {
+    serviceWindow1.close();
+    serviceWindow1=null;
+  }  
+  return;
+}
+function refreshMe()
+{
+  document.formForwarding.submitStatus.value=0; 
+  chSubmit(document.formForwarding);
+}
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "ShowTableOkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formForwarding)";
+var Cancellink = ""; 
+var Backlink = "";
+var Tablelink = "openTable('PortRange_table.htm')";
+var helplink ='help_adv_forwarding.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=194;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintForwarding(1);
+	PrintApplicationTriggerIncoming(0);
+	PrintEndContent();
+}
+
+function PrintForwarding(hasUnderLine)
+{
+	var in_head_width=head_width-5;
+	PrintBeginBlock(1, "Port Range Forwarding");
+	document.write('<table class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Service&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<select name="serviceSelect" class="Select">');
+	PrintForwardingServiceData();
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td></td>');
+	document.write('<td>');		
+	PrintSTButton("serviceManagementButton","Service Management","openService(0)");	
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+    	document.write('<td width='+in_head_width+' align="left">IP Address&nbsp;:&nbsp;</td>');
+	document.write('<td align="left" >');
+	document.write('<input type="text" id="InternalIPAddress" name="InternalIPAddress" value="" size="20" maxlength="20" onFocus="this.select();" onKeypress="return Check_User_Input(event)">');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+    	document.write('<td width='+in_head_width+' align="left" >Enable&nbsp;:&nbsp;</td>');
+	document.write('<td align="left" >');
+	document.write('<input type="checkbox" id="enableCheckBox" name="enableCheckBox">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("AddToListButton","Add to list","ForwardingaddSel(this.form.serviceSelect, this.form.InternalIPAddress, this.form.InterfaceSelect, this.form.enableCheckBox, this.form.PortRangeList);");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple class="MultiSelect" name="PortRangeList" size="10" onChange="showPortRangeList(this.form.PortRangeList);" style="width: 100%">');
+	document.write('<!--#nk_get PortRangeForwardList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("DeleteButton","Delete","delSel(this.form.PortRangeList, this);");
+	SetButtonStatus("DeleteButton","disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	PrintSTButton("newAddButton","Add New","clearContent(this.form, this.form.DeleteButton);");
+	SetButtonStatus("newAddButton", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');		
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintForwardingServiceData()
+{
+	var i=0, j=-1,x;
+	var k=0, l, m;
+	var tmp, tmp2, tmp3, tmp4,selectno;
+	var outputer;
+	var portsetup="";
+	tmp=document.formForwarding.service_menu.value;
+	k=tmp.length;
+	index=tmp.indexOf("</option>");
+	tmp2=tmp.substring(0,index);
+	tmp=tmp.substring(index+8,k);
+	outputer+=tmp2;
+	outputer+="</option>";
+	i+=1;
+	do{
+		  i+=1;
+		  k=tmp.length;
+		  index=tmp.indexOf("</option>");
+		  tmp2=tmp.substring(0,index);
+		  tmp=tmp.substring(index+8,k);
+	/*trace tmp2*/
+		tmp3=tmp2;
+	
+		  l=tmp3.indexOf("[");
+		  m=tmp3.indexOf("/",l+1);
+		  PT=tmp3.substring(l+1,m);
+	/*trace tmp2*/
+		  if((PT=="TCP")||(PT=="UDP"))
+			{
+			   outputer+=tmp2;
+			   outputer+="</option>";
+			}
+		  tmp3=tmp2;
+		  l=tmp3.indexOf("/");
+		  m=tmp3.indexOf("~",l+1);
+		  portstart=tmp3.substring(l+1,m);
+		  tmp3=tmp2;
+		  l=tmp3.indexOf("~");
+		  m=tmp3.indexOf("]",l+1);
+		  portend=tmp3.substring(l+1,m);
+		  if((portstart=="443")||(portend=="443"))
+			{
+				portsetup+=i;
+				portsetup+=";";
+			}
+	   }while(index != "-1");
+	document.formForwarding.portsetup.value=portsetup;
+	document.write(outputer);
+}
+
+function PrintApplicationTriggerIncoming(hasUnderLine)
+{	
+	var in_head_width=head_width-5;
+	PrintBeginBlock(1, "Port Triggering");
+	document.write('<table class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+		
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Application Name&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type="text" id="ApName" name="ApName" value="" size="20" maxlength="20" onFocus="this.select();">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Trigger Port Range&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type="text" id="oBegPrt" name="oBegPrt" value="" size="5" maxlength="5" onFocus="this.select();" onKeypress="return Check_User_Input(event)" onBlur="PortCheck(this)" >');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('to');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');	
+	document.write('<input type="text" id="oEndPrt" name="oEndPrt" value="" size="5" maxlength="5" onFocus="this.select();" onKeypress="return Check_User_Input(event)" onBlur="PortCheck(this)" >');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Incoming Port Range&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type="text" id="iBegPrt" name="iBegPrt" value="" size="5" maxlength="5" onFocus="this.select();" onBlur="PortCheck(this)" >');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('to');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');	
+	document.write('<input type="text" id="iEndPrt" name="iEndPrt" value="" size="5" maxlength="5" onFocus="this.select();" onBlur="PortCheck(this)" >');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("AddToListButton2","Add to list","PortTriggeraddSel(this.form.ApName,this.form.oBegPrt,this.form.oEndPrt,this.form.iBegPrt,this.form.iEndPrt,this.form.PortTriggerList)");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple class="MultiSelect" name="PortTriggerList" size="10" onChange="showPortTriggerList(this.form.PortTriggerList);" style="width: 100%">');
+	document.write('<!--#nk_get PortTriggerList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("DeleteButton2","Delete","delSel(this.form.PortTriggerList, this);");
+	SetButtonStatus("DeleteButton2","disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	PrintSTButton("newAddButton2","Add New","clearContent(this.form, this.form.DeleteButton2);");
+	SetButtonStatus("newAddButton2", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');		
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 5);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formForwarding" method="post" action="adv_forwarding.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="LanIp" value='<!--#nk_get DisplayOnly="LanIp"-->'>	
+	<input type="hidden" name="MLanSubnetIP" value='<!--#nk_get MLanSubnetIP="IP"-->'>
+	<input type="hidden" name="MLanSubnetNETMASK" value='<!--#nk_get MLanSubnetIP="NETMASK"-->'>
+	<input type="hidden" name="MLanSubnetNum" value='<!--#nk_get MLanSubnetIP="NUM"-->'>
+	<input type="hidden" name="service_menu" value='<!--#nk_get serviceList="2"-->'>
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name="portsetup" value=''>
+	<input type="hidden" name="InterfaceSelect" value="0">
+
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>
+	<script>PrintBottom();</script>
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="adv_forwarding.htm"-->
+<!--#nk_get ForwardUpdate=""-->

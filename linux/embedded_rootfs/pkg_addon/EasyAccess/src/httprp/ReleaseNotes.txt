@@ -1,0 +1,162 @@
+Sat Jun 25 2005: 1.2.21
+  * New Features - None
+  * Bug Fixes - None
+  * Other
+    - Disabled HTTPRP_ENABLE_SESSION_CACHE in Makefile, and rewrote
+      appropriate prototypes and definitions.
+
+Thu Jun 23 2005: 1.2.20
+  * New Features - None
+  * Bug Fixes
+    - Fixed memory overrun problem while preparing the request to be sent to
+      the backend web server.
+    - Fixed memory leak of cev values returned by xml (escape and unescaped
+      strings)
+    - Fixed memory overrun probelm in cookie handling; After getting list of
+      cookies from httprp_get_cookies(), we would overrun authorization
+      header by one byte by adding a space.
+    - Fixed handling of invalid authreqd cookie set by client without any
+      content
+    - base64 and md5 auth encoding will now get unescaped strings, which
+      generate the correct hash for username:realm:password
+    - Rewrite of SSL connection, session caching, and termination.
+    - Included gdbm object lib for SSL session stores.
+
+Fri Jun 17 2005: 1.2.19
+  * New Features - None
+  * Bug Fixes
+    - Allowed hrefs inside scripts to be handled separately by hrefs rather
+      than combining with location with quotes.
+
+Thu Jun 16 2005: 1.2.18
+  * New Features - None
+  * Bug Fixes
+    - OWA Calendar Availability Status and Public Folders access fixed.
+      This fix also includes a new way of handling OWA - User Agent cookie
+      is now set to handle the user agent modification throughout the session.
+    - Included + symbol in DO-NOT-ESCAPE list while escaping URLs.
+
+Wed Jun 15 2005: 1.2.17
+  * New Features
+    - Added exception handling mechanism for regexp matches. Users can now add
+      a new exception to an existing match so that a match can be discarded
+      allowing to custom match expressions. This is mainly for regex matches
+      within a javascript segment.
+  * Bug Fixes
+    - If header is not received, then we assume that the status of the response
+      is OK, and the response is parsed as text/html.
+    - Fixed path append to urls with file or query strings. Prior to this even
+      a potential file would be appended to the base string in all URL
+      rewrites. Fixed in html rewrite, js full url and css full url.
+    - .domain rewrites implemented to solve JS security errors like
+      "Access is denied", "Invalid Arguments", etc.
+
+Sun Jun 12 2005: 1.2.16
+  * New Features
+    - Added regexps to handle hrefs within scripts.
+  * Bug Fixes
+    - Fixed bug where reverse proxy used to crash because, we were trying to
+      free WWW-Authenticate header's info.
+    - Content-length will not be set in the response to be sent to the
+      client if we are processing a status 100 response.
+      A status 100 response might contain an addition response from the backend
+      server which has to be processed too. This might arrive in the single
+      read() from the backend server.
+    - OWA Fix: no translation for URL's pointing to schemas on microsoft.com
+    - OWA Fix: USER_AGENT string of MSIE will now be changed to look like an
+      IE 4.0 string so that we enter a compatibility mode.
+    - We do not add implied html, head and body tags in to the document.
+      Sometimes libxml calls us with implied elements.
+    - URL rewrite will not exclude url values starting with fragments, as
+      they will point to a bookmark within the same page.
+
+Wed Jun 08 2005: 1.2.15
+  * New Features - None
+  * Bug Fixes
+    - Fixed HTTPS, iframe, src and IE bug : where IE thinks an iframe without
+      a src element or a src element with empty value is a page from an
+      insecure site.
+    - Fixed common_js_regexp:location or location.: where an if condition would
+      also be modified. For e.g. if (location.protocol == 'http') etc.
+    - Fixed common_js_regexp: open: where something like
+      window.open(somearray[somefunc()] would be replaced wrongly.
+
+Tue Jun 07 2005: 1.2.14
+  * New Features - None
+  * Bug Fixes
+    - Fixed bugs reported by Kasey Cross
+
+Fri May 30 2005: 1.2.13
+  * New Features
+    - Added support to translate <param name"movie" value="somefile" >.
+  * Bug Fixes
+    - Fixed chunklength in httprp_copy_content().
+    - URL sanitization in QUERY_STRING.
+    - Added URL santinizer functionality, by calling escapestring soon after we
+      read the cgi env for PATH_INFO and QUERY_STRING.
+    - REG_NEWLINE fix for regexp matching.
+
+Mon May 09 2005:
+	* httprp_html.c, Makefile
+	  Added REGEX support to replace PCRE usage.
+	* Fixed some compilation warnings which was discovered while using
+	  gcc 3.4 on FC3.
+	* httprp.c
+	  Fixed fpout check in httprp_debug_write_response().
+
+Jan 24, 2005:
+        * httrp_html.c
+          a) Fixed the bug of adding base url to relative url's starting with '/'
+             in function httprp_htmltag_rewrite_url. As a result the if condition
+             is expanded to check if the url starts with https, http and '/'.
+
+Sun Nov 15 00:24:00 2004:
+	* httprp_buf.h
+	  a) Increased the debug buffer len from 1000 to 2000, so that big
+	     cookies could be debugged in syslog
+	* httprp.c
+	  a) Fixed the bug of not reading the QUERY_STRING CEV in
+	     httprp_get_urlelements(). As a result, no links could be navigated
+	     in yahoo or msn. Also removed unncessary #if 0 code in the
+	     function.
+	  b) httprp_hdrparse_set_cookie() added domain support for set-cookie
+	     header. Since domain support was not there, cookies wer not being
+	     stored, and hence mail.yahoo.com was not visible.
+	* httprp_cgi.c
+	  a) httprp_get_cookies() : added support for retrieving domain level
+	     cookies.
+	* httprp.h
+	  a) Added HTTPRP_SCDOMAIN_STR
+	* httprp_html.c
+	  a) fullurl function is being written after the title endtag call.
+	  b) httprp_parse_embedded_javascript() : http://localhost substitution
+	     and the same for https:// - Added one more job for https
+	* httprp_nc.c
+	  a) Added session_cache compile time option. At this time, yahoo mail
+	     doesn't work with session_cache enabled
+	* makefile
+	  a) Added compile time defines
+	  
+Tue Oct 19 01:55:00 2004:
+	Release 0.4-3 
+	* Sorry, could not document all the changes since the last documented
+	  release.
+	* Fixed bugs seen on Friday, while trying to browse sun.com
+	* split the sprintf() of cev http req header in form_request()
+	  cev_modval and cev_val are now memcpy'd in to the request buffer,
+	  rather than a sprintf() since the string is not '\0' terminated.
+	* use of strncasecmp() instead of just strncmp() while matching
+	  headers received in http response, in httprp_parse_http_header()
+
+Tue Aug 23 02:42:00 2004:
+	Release 0.1-1 
+	* httprp_html.h, httprp_html.c: Modified <base> handling, and URL's
+	  which are based on <base>
+	* httprp.c: Added "Connection: close\r\n" header
+	  [Issue 1]
+	* httprp_cgi.c: Added httprp_req_referer_handler() in the CGI Var
+	  handling
+
+Tue Aug 22 21:06:35 2004:
+	Release 0.1
+	* First code drop.

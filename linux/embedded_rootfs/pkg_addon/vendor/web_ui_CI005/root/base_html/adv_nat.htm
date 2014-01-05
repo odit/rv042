@@ -1,0 +1,772 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	chDismatch();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chSubmit(F)
+{
+	if (F.Nat121RangeList) selAll(F.Nat121RangeList);
+		  
+	if(F.natEnable_check.checked==true)
+	{
+		F.natEnable.value=1;
+		F.ifdisable.value=0;
+	}
+	else
+	{
+		F.natEnable.value=0;
+		F.ifdisable.value=1;
+	}
+		  
+	F.submitStatus.value="1";	  
+	F.log_ch.value=1;
+	window.status=wSave;	
+	MM_showHideLayers('AutoNumber15','','hide');  	
+	F.submit(); 
+}
+
+function chDismatch()
+{
+	var nat_table=document.getElementById('nat_table');
+	
+	if (document.formNAT.natEnable_check.checked==false)
+	{
+		nat_table.style.display="none";
+	}
+	else 
+	{
+	  	nat_table.style.display="";	
+	}
+	
+}
+
+function edSubmit()
+{
+	var nat_table=document.getElementById('nat_table');
+	
+	if (document.formNAT.natEnable_check.checked==true)
+	{
+		document.formNAT.natEnable.value="1";
+		nat_table.style.display="";
+	}
+	else 
+	{
+		document.formNAT.natEnable.value="0"; 
+		nat_table.style.display="none";
+	}
+}
+
+
+function Ip2laddSel(pr_start,pu_start,tl,s) /*adv-nat.htm*/
+{
+  var d,pr,pu;
+  var p=-1;
+  var p1;
+  var q; 
+  var forwardString; 
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(11);   
+  
+  
+
+  var tb1=IpToArray(pu_start.value, 1);
+  var tb2=IpToArray(pu_start.value, 2);
+  var tb3=IpToArray(pu_start.value, 3);  
+  var tb4=IpToArray(pu_start.value, 4);
+  var ta4=IpToArray(pr_start.value, 4);
+  var ta3=IpToArray(pr_start.value, 3);
+  var ta2=IpToArray(pr_start.value, 2);
+  var ta1=IpToArray(pr_start.value, 1);
+   
+  if (pr_start.value=="")
+  {
+	alert(aIPAddressPri);
+  }
+  else if (pu_start.value=="")
+  {
+	alert(aIPAddressPub);
+  }
+  else if (tl.value=="")
+  {
+	alert(aRangeLength);
+  }  
+  else
+  {
+	if (chValue(pr_start,pu_start,tl,s) < 0) return;
+
+	d=parseInt(tl.value,10);
+	pr=parseInt(ta4,10)+d-1;
+	pu=parseInt(tb4,10)+d-1;	
+	if (pr>254 || pu>254)
+	{
+	  alert(aRangeLengthCheck);
+	  tl.value=tl.defaultValue;
+	  return;
+	}  
+	tl.value=d;
+
+	var pp,qq;
+	var iplan,iplan123,iplan4;
+	var ipwan1,wan1ip123,wan1ip4;
+	var ipwan2,wan2ip123,wan2ip4;
+	var ipwan3,wan3ip123,wan3ip4;
+	var ipwan4,wan4ip123,wan4ip4;
+	var ipwan5,wan5ip123,wan5ip4;
+	var ipwan6,wan6ip123,wan6ip4;
+	var ipwan7,wan7ip123,wan7ip4;
+	var ipwan8,wan8ip123,wan8ip4;
+	var priIp123,priIp4s,priIp4e;
+	var pubIp123,pubIp4s,pubIp4e;
+	iplan=document.formNAT.LanIp.value;
+	ipwan1=document.formNAT.wan1IP.value;
+	ipwan2=document.formNAT.wan2IP.value;
+	ipwan3=document.formNAT.wan3IP.value;
+	ipwan4=document.formNAT.wan4IP.value;
+	ipwan5=document.formNAT.wan5IP.value;
+	ipwan6=document.formNAT.wan6IP.value;
+	ipwan7=document.formNAT.wan7IP.value;
+
+	qq=iplan.length;
+	pp=iplan.lastIndexOf(".");
+	iplan123=iplan.substring(0,pp);
+	iplan4=iplan.substring(pp+1,qq);
+
+	qq=ipwan1.length;
+	pp=ipwan1.lastIndexOf(".");
+	wan1ip123=ipwan1.substring(0,pp);
+	wan1ip4=ipwan1.substring(pp+1,qq);
+	
+	qq=ipwan2.length;
+	pp=ipwan2.lastIndexOf(".");
+	wan2ip123=ipwan2.substring(0,pp);
+	wan2ip4=ipwan2.substring(pp+1,qq);
+
+	qq=ipwan3.length;
+	pp=ipwan3.lastIndexOf(".");
+	wan3ip123=ipwan3.substring(0,pp);
+	wan3ip4=ipwan3.substring(pp+1,qq);
+
+	qq=ipwan4.length;
+	pp=ipwan4.lastIndexOf(".");
+	wan4ip123=ipwan4.substring(0,pp);
+	wan4ip4=ipwan4.substring(pp+1,qq);
+	
+	qq=ipwan5.length;
+	pp=ipwan5.lastIndexOf(".");
+	wan5ip123=ipwan5.substring(0,pp);
+	wan5ip4=ipwan5.substring(pp+1,qq);
+	
+	qq=ipwan6.length;
+	pp=ipwan6.lastIndexOf(".");
+	wan6ip123=ipwan6.substring(0,pp);
+	wan6ip4=ipwan6.substring(pp+1,qq);
+	
+	qq=ipwan7.length;
+	pp=ipwan7.lastIndexOf(".");
+	wan7ip123=ipwan7.substring(0,pp);
+	wan7ip4=ipwan7.substring(pp+1,qq);
+		
+	priIp123=ta1+"."+ta2+"."+ta3;
+	priIp4s=eval(ta4);
+	priIp4e=eval(ta4)+eval(tl.value)-1;
+
+	var ipdmz=document.formNAT.dmzIP.value;	
+	var dmzIp123="",dmzIp4,tmp_dmz_length,tmp_dmz_string=ipdmz,tmp_num,tmp_num_total=0;
+	tmp_dmz_length=ipdmz.length;
+	for (var tmp_i=0; tmp_i < 3; tmp_i++)				
+	{
+		tmp_num=tmp_dmz_string.indexOf(".");
+		tmp_num_total=tmp_num_total+tmp_num+1;
+		tmp_dmz_string=tmp_dmz_string.substring(tmp_num+1,tmp_dmz_length); 				
+	}
+	tmp_num=tmp_dmz_string.indexOf(" ");	
+	if(tmp_num!=-1)
+		dmzIp4=tmp_dmz_string.substring(0,tmp_num)
+	else
+		dmzIp4=tmp_dmz_string;
+	dmzIp123=ipdmz.substring(0,tmp_num_total-1);				
+				    			
+	 if(priIp123==dmzIp123)
+	{
+		if((parseInt(dmzIp4)>=parseInt(priIp4s))&&(parseInt(dmzIp4)<=parseInt(priIp4e)))
+		{
+			alert(aDMZinPri);
+			return;
+		}
+	}					
+
+	
+	 if(priIp123==iplan123)
+	{
+		if((parseInt(iplan4)>=parseInt(priIp4s))&&(parseInt(iplan4)<=parseInt(priIp4e)))
+		{
+			alert(aLANinPri);
+			return;
+		}
+	} 
+	if(priIp123==wan1ip123)
+	{
+		if((parseInt(wan1ip4)>=parseInt(priIp4s))&&(parseInt(wan1ip4)<=parseInt(priIp4e)))
+		{
+			alert(aWAN1inPri);
+			return;
+		}
+	} 
+	if(priIp123==wan2ip123)
+	{
+		if((parseInt(wan1ip2)>=parseInt(priIp4s))&&(parseInt(wan1ip2)<=parseInt(priIp4e)))
+		{
+			alert(aWAN2inPri);
+			return;
+		}
+	}
+	 if(priIp123==wan3ip123)
+	{
+		if((parseInt(wan3ip4)>=parseInt(priIp4s))&&(parseInt(wan3ip4)<=parseInt(priIp4e)))
+		{
+			alert(aWAN3inPri);
+			return;
+		}
+	}
+	 if(priIp123==wan4ip123)
+	{
+		if((parseInt(wan4ip4)>=parseInt(priIp4s))&&(parseInt(wan4ip4)<=parseInt(priIp4e)))
+		{
+			alert(aWAN4inPri);
+			return;
+		}
+	}
+	 if(priIp123==wan5ip123)
+	{
+		if((parseInt(wan5ip4)>=parseInt(priIp4s))&&(parseInt(wan5ip4)<=parseInt(priIp4e)))
+		{
+			alert(aWAN5inPri);
+			return;
+		}
+	}
+	 if(priIp123==wan6ip123)
+	{
+		if((parseInt(wan6ip4)>=parseInt(priIp4s))&&(parseInt(wan6ip4)<=parseInt(priIp4e)))
+		{
+			alert(aWAN6inPri);
+			return;
+		}
+	}
+	 if(priIp123==wan7ip123)
+	{
+		if((parseInt(wan7ip4)>=parseInt(priIp4s))&&(parseInt(wan7ip4)<=parseInt(priIp4e)))
+		{
+			alert(aWAN7inPri);
+			return;
+		}
+	}
+	var q = pu_start.value.lastIndexOf('.');
+	pubIp123=pu_start.value.substring(0,q );;
+	pubIp4s=parseInt(tb4);
+	pubIp4e=parseInt(tb4)+parseInt(tl.value)-1;
+	
+	if(pubIp123==dmzIp123)
+	{
+		if((parseInt(dmzIp4)>=parseInt(pubIp4s))&&(parseInt(dmzIp4)<=parseInt(pubIp4e)))
+		{
+			alert(aDMZinPub);
+			return;
+		}
+	}
+	
+
+	if(pubIp123==iplan123)
+	{
+		if((parseInt(iplan4)>=parseInt(pubIp4s))&&(parseInt(iplan4)<=parseInt(pubIp4e)))
+		{
+			alert(aLANinPub);
+			return;
+		}
+	}
+	if(pubIp123==wan1ip123)
+	{
+		if((parseInt(wan1ip4)>=parseInt(pubIp4s))&&(parseInt(wan1ip4)<=parseInt(pubIp4e)))
+		{
+			alert(aWAN1inPub);
+			return;
+		}
+	}
+	if(pubIp123==wan2ip123)
+	{
+		if((parseInt(wan2ip4)>=parseInt(pubIp4s))&&(parseInt(wan2ip4)<=parseInt(pubIp4e)))
+		{
+			alert(aWAN2inPub);
+			return;
+		}
+	}
+	if(pubIp123==wan3ip123)
+	{
+		if((parseInt(wan3ip4)>=parseInt(pubIp4s))&&(parseInt(wan3ip4)<=parseInt(pubIp4e)))
+		{
+			alert(aWAN3inPub);
+			return;
+		}
+	}
+	if(pubIp123==wan4ip123)
+	{
+		if((parseInt(wan4ip4)>=parseInt(pubIp4s))&&(parseInt(wan4ip4)<=parseInt(pubIp4e)))
+		{
+			alert(aWAN4inPub);
+			return;
+		}
+	}
+	if(pubIp123==wan5ip123)
+	{
+		if((parseInt(wan5ip4)>=parseInt(pubIp4s))&&(parseInt(wan5ip4)<=parseInt(pubIp4e)))
+		{
+			alert(aWAN4inPub);
+			return;
+		}
+	}
+	if(pubIp123==wan6ip123)
+	{
+		if((parseInt(wan6ip4)>=parseInt(pubIp4s))&&(parseInt(wan6ip4)<=parseInt(pubIp4e)))
+		{
+			alert(aWAN4inPub);
+			return;
+		}
+	}
+	if(pubIp123==wan7ip123)
+	{
+		if((parseInt(wan7ip4)>=parseInt(pubIp4s))&&(parseInt(wan7ip4)<=parseInt(pubIp4e)))
+		{
+			alert(aWAN4inPub);
+			return;
+		}
+	}
+
+	
+    if (s.form.btnAddToList.value==sUpdateRange)
+    {
+      p=-1;
+      while (s.form.Nat121RangeList.options[++p].selected != true);
+    }
+
+	for (var i=0; i < s.length; i++)
+    {
+		forwardString=s.options[i].text;             
+		{
+			rightString=forwardString;
+   
+            q=rightString.length;
+    		p1=rightString.indexOf(".");
+    		ts[1]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+1,q); 
+
+    		q=rightString.length;
+    		p1=rightString.indexOf(".");
+    		ts[2]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+1,q); 
+
+    		q=rightString.length;
+    		p1=rightString.indexOf(".");
+    		ts[3]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+1,q); 
+
+    		q=rightString.length;
+    		p1=rightString.indexOf("~");
+    		ts[4]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+1,q); 
+
+    		q=rightString.length;
+    		p1=rightString.indexOf(" => ");
+    		ts[5]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+4,q); 
+
+    		q=rightString.length;
+    		p1=rightString.indexOf(".");
+    		ts[6]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+1,q); 
+
+    		q=rightString.length;
+    		p1=rightString.indexOf(".");
+    		ts[7]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+1,q); 
+
+    		q=rightString.length;
+    		p1=rightString.indexOf(".");
+    		ts[8]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+1,q); 
+
+    		q=rightString.length;
+    		p1=rightString.indexOf("~");
+    		ts[9]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+1,q); 
+
+    		q=rightString.length;
+    		ts[10]=rightString.substring(0,q); 
+
+		if ((tb1 == ts[6]) && (tb2 == ts[7]) && (tb3 == ts[8]))
+			{
+				if (((parseInt(tb4) >= parseInt(ts[9])) && (parseInt(tb4) <= parseInt(ts[10]))) || (((parseInt(tb4)+parseInt(tl.value)-1) >= parseInt(ts[9])) && ((parseInt(tb4)+parseInt(tl.value)-1) <= parseInt(ts[10]))))
+				{   
+					if (p != i)
+					{       			   
+                    	alert(aPublicIPAlready);
+	                	return;
+					}
+					}
+                	if (((parseInt(ts[9]) >= parseInt(tb4)) && (parseInt(ts[9]) <= (parseInt(tb4)+parseInt(tl.value)-1))) 
+					|| ((parseInt(ts[10]) >= parseInt(tb4)) && (parseInt(ts[10]) <= (parseInt(tb4)+parseInt(tl.value)-1))))
+					{   
+					    if (p != i)
+						{       			   
+                    		alert(aPublicIPAlready);
+	                		return;
+						}
+					}									    
+				}
+	        }
+    } 
+	 
+    for (var i=0; i < s.form.Nat121RangeList.length; i++)
+    {
+        s.form.Nat121RangeList.options[i].selected=false;
+    }
+		
+	if (s.form.btnAddToList.value==sAddtoList)
+	{
+    	if (s.length>=LimitNATNumber)
+    	{
+        	alert(aLimitNAT+LimitNATNumber+aLimitEnd);
+        	return;
+    	}        
+		 
+	    p=s.length;
+		s.length+=1;
+	}		
+	s.options[p].text=pr_start.value;
+	s.options[p].text+="~";
+	s.options[p].text+=parseInt(ta4)+parseInt(tl.value)-parseInt(1);
+	s.options[p].text+=" =>";		
+	s.options[p].text+=" "+pu_start.value;
+	s.options[p].text+="~";
+	s.options[p].text+=parseInt(tb4)+parseInt(tl.value)-parseInt(1);
+
+    clearContent(s.form);
+
+  }
+}
+
+function chValue(pri_s,pri_e,t1,s)
+{
+	document.formNAT.priv_ip.value=IpToArray(pri_s.value, 3);
+	
+	if(IPCheck(document.formNAT.prIPStart, 1, 254, s.form.LanIp, s.form.LanIp, 0, "Private IP")<0)
+	{
+		s.form.prIPStart.select();
+		return -1 ;
+	}	
+	if(IPCheck(document.formNAT.puIPStart, 0, 255)<0) return -1;
+	if (isNaN(t1.value) == true)
+	{
+		s.form.l.select();
+		return -1;
+	}
+	return 1;	
+}
+
+function blurList(F)
+{
+    for (var i=0; i < F.Nat121RangeList.length; i++)
+    {
+      F.Nat121RangeList.options[i].selected=false;
+    }
+
+    SetButtonStatus("delNat121", "disabled");
+}
+function clearContent(F)
+{
+    blurList(F);
+    F.prIPStart.value='<!--#nk_get IPHandle1="ipAddr:1"-->.<!--#nk_get IPHandle1="ipAddr:2"-->.<!--#nk_get IPHandle1="ipAddr:3"-->.';
+    F.puIPStart.value = "" ;
+    F.l.value="";
+    
+    F.btnAddToList.value=sAddtoList; 
+    SetButtonStatus("delNat121", "disabled");
+    SetButtonStatus("showNew", "disabled");	
+}
+function showSelete(F,s)
+{
+  var p;
+  var q; 
+  var forwardString=s.options[s.selectedIndex].text; 
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(11); 
+
+  if (s.selectedIndex==-1) return;
+  rightString=forwardString;
+   
+   
+    q=rightString.length;
+    p=rightString.indexOf("~");
+    var start=rightString.substring(0,p); 
+    tmpString=rightString;
+    rightString=tmpString.substring(p+1,q); 
+/*~*/
+    q=rightString.length;
+    p=rightString.indexOf(" => ");
+    ts[5]=rightString.substring(0,p); 
+    tmpString=rightString;
+    rightString=tmpString.substring(p+4,q); 
+/* => */
+     
+    q=rightString.length;
+    p=rightString.indexOf("~");
+    var end =rightString.substring(0,p); 
+    tmpString=rightString;
+    rightString=tmpString.substring(p+1,q); 
+  
+    q=rightString.length;
+    ts[10]=rightString.substring(0,q); 
+    
+    s.form.prIPStart.value= start;
+    s.form.puIPStart.value= end;  
+    var q= start.lastIndexOf('.');
+    ts[4] = start.substring(q+1, start.length);
+	  s.form.l.value=eval(ts[5])-eval(ts[4])+eval(1);        
+    s.form.btnAddToList.value=sUpdateRange; 
+    SetButtonStatus("delNat121", "");
+    SetButtonStatus("showNew", "");
+}
+
+function delSel(s)
+{
+	var z;  
+	var k;
+	
+	if (s.length > 0)
+	{
+		tmp=new tmpWord(s.length);
+		tmpChanged=new tmpWord(s.length); 
+		for (var i=0; i < s.length; i++)
+		{
+			tmp[i+1]=s.options[i].text;
+		}	
+				
+		for (var i=0; i < s.length; i++)
+		{
+			if (s.options[i].selected==true)
+			{ 
+				s.options[i].text="";
+				tmp[i+1]=" ";	
+				s.options[i].selected=false;
+			}
+		}
+
+		k=1;
+		z=0;
+		for (var j=1; j<=s.length; j++) 
+		{ 
+			if (tmp[j]!=" ") 
+			{
+				tmpChanged[k]=tmp[j];
+				k++;
+			}
+			else
+			{
+				z++;
+			}
+		}
+	 
+		for (var i=0; i < s.length-z; i++)
+		{
+			s.options[i].text=tmpChanged[i+1];  
+		}
+		s.length-=z;
+	}
+	  
+		clearContent(s.form); 
+}
+// strim ip space
+function IPStrim(thisIP)
+{
+	if(thisIP)
+	{
+		var s = thisIP.value;
+		var reg = /\s/g;
+		var ss = s.replace(reg, "");
+		thisIP.value = ss ;
+	}
+}
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.formNAT);";
+var Cancellink = ""; 
+var helplink ='help_adv_nat.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=150;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintOneToOneNATlist(0);
+	PrintEndContent();
+}
+
+function PrintOneToOneNATlist(hasUnderLine)
+{
+	var in_head_width=head_width-5;
+	PrintBeginBlock(0);
+	document.write('<table class="Setuptable"  width="'+SmallLayoutwidth+'" border='+Tableborder+' bordercolor="'+Tablebordercolor+'" cellpadding="'+Tablecellpadding+'" cellspacing="'+Tablecellspacing+'" style="'+Tablestyle+'">');
+	document.write('<tr height="40" >');
+	document.write('<td width="1" align="left" >');
+	document.write('<input type="hidden" name="natEnable" value=\'<!--#nk_get CheckboxSave="natEnable"-->\'>');
+	document.write('<input type="checkbox" name="natEnable_check" value="1" onClick="edSubmit()" <!--#nk_get CheckboxStatus="natEnable"-->>');
+	document.write('</td>')
+	document.write('<td>')
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Enable One-to-One NAT');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('</table>');	
+	document.write('<table name="nat_table" id="nat_table" class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+		
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">');
+	document.write('Private Range Begin&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td align="left">');
+	document.write('<input type="text" name="prIPStart" maxlength="15" onFocus="this.select();" onBlur="IPStrim(this.form.prIPStart)" size="15" onKeypress="return Check_User_Input(event)" value=\'<!--#nk_get IPHandle1="ipAddr:1"-->.<!--#nk_get IPHandle1="ipAddr:2"-->.<!--#nk_get IPHandle1="ipAddr:3"-->.\'>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');	
+ 	document.write('<td width='+in_head_width+' align="left">');
+	document.write('Public Range Begin&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td align="left" >');
+	document.write('<input type="text" name="puIPStart" maxlength="15" onFocus="this.select();" onBlur="IPStrim(this.form.puIPStart)" size="15" onKeypress="return Check_User_Input(event)" value=\'\'>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');	
+ 	document.write('<td width='+in_head_width+' align="left">');
+	document.write('Range Length&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td align="left" >');
+	document.write('<input type=text name="l" maxlength="3" size="3" onFocus="this.select();" onKeypress="return Check_User_Input(event)">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("btnAddToList","Add to list","Ip2laddSel(this.form.prIPStart,this.form.puIPStart,this.form.l,this.form.Nat121RangeList);");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple class="MultiSelect" name="Nat121RangeList" size="10" onChange="showSelete(this.form, this);" style="width: 100%">');
+	document.write('<!--#nk_get 121NATRangeList=""-->'); 
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" valign="top" colspan="2">');
+	PrintSTButton("delNat121","Delete","delSel(this.form.Nat121RangeList)");
+	SetButtonStatus("delNat121", "disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("showNew","Add New","clearContent(this.form)");
+	SetButtonStatus("showNew", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('</table>');	
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 7);		
+         initializeTree(foldersTree); 			
+	</script>
+		
+	<form name="formNAT" method="post" action="adv_nat.htm">
+	<input type="hidden" name="page" value="adv_nat.htm">
+	<input type="hidden" name="submitStatus" value="0">
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="LanIp" value='<!--#nk_get DisplayOnly="LanIp"-->'>			  
+	<input type="hidden" name="LanMask" value='<!--#nk_get LanNetMaskJp=""-->'> 						  
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name="wan1IP" value='<!--#nk_get DisplayOnly="wan1IP"-->'>
+	<input type="hidden" name="wan2IP" value='<!--#nk_get DisplayOnly="wan2IP"-->'> 
+	<input type="hidden" name="wan3IP" value='<!--#nk_get DisplayOnly="wan3IP"-->'>
+	<input type="hidden" name="wan4IP" value='<!--#nk_get DisplayOnly="wan4IP"-->'> 
+	<input type="hidden" name="wan5IP" value='<!--#nk_get DisplayOnly="wan5IP"-->'>
+	<input type="hidden" name="wan6IP" value='<!--#nk_get DisplayOnly="wan6IP"-->'> 
+	<input type="hidden" name="wan7IP" value='<!--#nk_get DisplayOnly="wan7IP"-->'>
+	<input type="hidden" name="dmzIP" value='<!--#nk_get DisplayDMZIp=""-->'>	  	
+	<input type="hidden" name="ifdisable" value='0'>	
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+	<input type="hidden" name="priv_ip" value=''>
+   
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="adv_nat.htm"-->
+<!--#nk_get NatUpdate=""-->

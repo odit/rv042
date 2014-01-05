@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	checklicense();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function checklicense()
+{
+	var cf = document.form_name;
+	var license_status='<!--#nk_get SP_NewPurchase=""-->';
+	switch (parseInt(license_status))
+	{
+		case 1:  	        		
+		case 2:  	        
+		case 3:
+		break;
+		case 104:  	
+		case 999:        
+		default :
+		break;
+	}
+}
+function openlink(index)
+{
+    if( index == 0)
+        window.open('http://www.cisco.com/cisco/web/solutions/small_business/products/security/protectlink/index.html ');
+    else
+    if( index == 1)
+        window.open('https://olr.trendmicro.com/registration/us/en-us/cisco_enter_rk.aspx');
+}
+function activate()
+{
+	var url_1='https://olr.trendmicro.com/registration/us/en-us/cisco_activation.aspx?udi=';
+	var cf = document.form_name;
+	url_1+=document.form_name.UDI.value;
+	document.form_name.submitStatus.value=11;
+	cf.submit();
+	window.open(url_1);
+}
+function chSubmit(F)
+{
+	F.submit();
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var helplink ='';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 600;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintProtectLinkInfo(0);
+	PrintEndContent();
+}
+
+function PrintProtectLinkInfo(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Infotable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width=100% style="text-align:justify">');
+	document.write('Cisco ProtectLink Web provides web security for an unlimited number of users. It prevents access to dangerous'); 
+	document.write('web sites and includes URL filtering with over 80 categories to control employee access to non-business'); 
+	document.write('related web sites.');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	
+	document.write('<table class="Setuptable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');
+	document.write('<tr><td width="10"><img src="images/link_trend.gif" width="24" height="24" ></td>');
+	document.write('<td><a href=JavaScript:openlink(0)>');
+	document.write('Learn more about and request Free Trial for Cisco ProtectLink</a>');
+	document.write('</td></tr>');
+	document.write('<tr><td><img src="images/link_trend.gif" width="24" height="24" ></td>');
+	document.write('<td><a href=JavaScript:openlink(1)>');
+	document.write('Register ProtectLink services and obtain an Activation Code(AC)</a>');
+	document.write('</td></tr>');
+	document.write('<tr><td><img src="images/link_trend.gif" width="24" height="24" ></td>');
+	document.write('<td><a href=JavaScript:activate()>');
+	document.write('Use the Activation Code(AC) to activate ProtectLink services</a>');
+	document.write('</td></tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 11, 0);		// Set Selected Node
+	var license_status='<!--#nk_get SP_NewPurchase=""-->';
+	switch (license_status)
+	{
+		case '1':  	        		
+		case '2':  	        
+		case '3':  	        
+		break;
+		case '104':  	
+		case '999': 
+		default :
+			SetItemlink(foldersTree, 11, 1, "");
+			SetItemlink(foldersTree, 11, 2, "");
+			SetItemlink(foldersTree, 11, 3, "");
+			SetItemlink(foldersTree, 11, 4, "");
+		break;
+	}
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="form_name" method="post" action="Security_Protection_new_purchase.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="UDI" value='<!--#nk_get SP_GetUDI=""-->'>
+	<input id="spstatus" name="getspstatus" type="hidden" value="0">
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

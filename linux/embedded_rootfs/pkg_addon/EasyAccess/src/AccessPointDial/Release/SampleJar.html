@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript">
+var jni_installer = 'jni_installer=connect';
+var connectWindow = null;
+
+function disconnect()                         
+{
+	if(connectWindow != null)
+		{
+			connectWindow.close();                
+			connectWindow = null;                 
+		}
+}// ~disconnect
+function connect()
+{
+	window.open("dialer.html",'dialer','_new');
+}
+</script>
+</head>
+<body>
+<a href="javascript:connect();">Windows VP Connect</a>
+</body>
+</html>

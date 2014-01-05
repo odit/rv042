@@ -1,0 +1,22 @@
+keywords.o keywords.o: keywords.c \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/string.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/features.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/cdefs.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wordsize.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gnu/stubs.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.1/include/stddef.h \
+  keywords.h
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/string.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/features.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/cdefs.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wordsize.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gnu/stubs.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.1/include/stddef.h:
+
+keywords.h:

@@ -1,0 +1,3 @@
+#!/bin/sh
+touch /tmp/code.running
+chmod ugo+rw /tmp/code.running

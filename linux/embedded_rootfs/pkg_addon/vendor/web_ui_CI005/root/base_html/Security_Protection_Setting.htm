@@ -1,0 +1,352 @@
+<!--#nk_get SP_APPR_Set=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	checklicense();
+	changeStatus(document.form_name);
+	SaveCheckedStatus(document.form_name);
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function checklicense()
+{
+	var cf = document.form_name;
+	var license_status='<!--#nk_get SP_NewPurchase=""-->';
+	switch (parseInt(license_status))
+	{
+		case 1:  	        
+		break;
+		case 2:  	        
+		case 3:
+		break;
+		case 104:  	
+		case 999:
+		default :
+			cf.action="Security_Protection_new_purchase.htm";
+			cf.submit();
+		break
+	}
+}
+function editLine(no,type)
+{
+	if(document.form_name.sAURLs.checked!=true && type==98)
+		return;
+	if(document.form_name.sAIPs.checked!=true && type==99)
+		return;
+
+	if(document.form_name.sAURLs.checked)
+	{
+		document.form_name.sAURLEnable.value=1;
+	}
+	else
+	{
+		document.form_name.sAURLEnable.value=0;
+	}
+	if(document.form_name.sAIPs.checked)
+	{
+		document.form_name.sAIPEnable.value=1;
+	}
+	else
+	{
+		document.form_name.sAIPEnable.value=0;
+	}
+	if(document.form_name.sAURLs_old.value != document.form_name.sAURLEnable.value || document.form_name.sAIPs_old.value != document.form_name.sAIPEnable.value)
+	{
+		if (confirm("Are You sure you want to leave without saving the configuration change?"))
+		{
+			chSubmit(document.form_name);
+		}
+		return;
+	}
+
+	var msg="";
+	{
+		document.form_name.EditNo.value=no;
+		document.form_name.EditType.value=type;
+		document.form_name.submitStatus.value=type;
+		document.form_name.action="Security_Protection_Setting_edit.htm";
+		document.form_name.submit();
+	}
+}
+function removeLine(no,type)
+{
+	if(document.form_name.sAURLs.checked!=true && type==98)
+		return;
+	if(document.form_name.sAIPs.checked!=true && type==99)
+		return;
+	{
+		document.form_name.RemoveLine.value=no;
+		document.form_name.RemoveType.value=type;
+		document.form_name.submitStatus.value=100;
+		document.form_name.RemoveStatus.value=11;
+		document.form_name.submit();
+	}
+}
+function changeStatus(F)
+{
+	if(F.sAURLs.checked==true)
+	{
+		SetButtonStatus("AddURL", "enabled");
+	}
+	else
+	{
+		SetButtonStatus("AddURL", "disabled");
+	}
+	if(F.sAIPs.checked==true)
+	{
+		SetButtonStatus("AddIP", "enabled");
+	}
+	else
+	{
+		SetButtonStatus("AddIP", "disabled");
+	}
+}
+function SaveCheckedStatus(F)
+{
+	if(F.sAURLs.checked==true)
+	{
+		F.sAURLs_old.value=1;
+	}
+	else
+	{
+		F.sAURLs_old.value=0;
+	}
+	if(F.sAIPs.checked==true)
+	{
+		F.sAIPs_old.value=1;
+	}
+	else
+	{
+		F.sAIPs_old.value=0;
+	}
+}
+function chSubmit(F)
+{
+	if(F.sAURLs.checked)
+		F.sAURLEnable.value=1;
+	else
+		F.sAURLEnable.value=0;
+		
+	if(F.sAIPs.checked)
+		F.sAIPEnable.value=1;
+	else
+		F.sAIPEnable.value=0;
+	F.log_ch.value=1;
+	F.submitStatus.value=1;
+	F.submit();
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.form_name);";
+var Cancellink = ""; 
+var helplink ='help_TM_setting.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 450;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintApprovedURLs(1);
+	PrintApprovedClients(0);
+	PrintEndContent();
+}
+function Print_table1_tr_cell(cell_type,no,status,name,type)
+{
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td width="15"><img border="0" src="images/_blank.gif" width="5" height="1">'+no+'</td>');
+	document.write('<td width="300">'+name+'</td>');
+	document.write('<td><a href="javascript: removeLine('+no+','+type+')"><img src=images/trash.gif width=20 height=16 border=0 title=Delete></a></td>');	
+	document.write('</tr>');
+}
+function URL_List(TunnelData,type)
+{
+	var items;
+	var obj=TunnelData.split(splitVarforSpecialWordField+'@');
+	for (var i=0;(i<obj.length-1);i++)
+	{
+		items=obj[i].split(splitVarforSpecialWordField+";");
+		if (i%2==0)
+			Print_table1_tr_cell("OddRow",items[0],items[1],items[2],type);
+		else
+			Print_table1_tr_cell("EvenRow",items[0],items[1],items[2],type);
+	}
+}
+function PrintApprovedURLs(hasUnderLine)
+{
+	PrintBeginBlock(1, "Approved URLs");
+
+	document.write('<table width="'+FixedTableWidth+'" class="Infotable" border='+Tableborder+'>');
+	document.write('<tr>');	
+	document.write('<td width="1" align="left">');
+	document.write('<input type="hidden" name="sAURLEnable" value=\'0\'>');
+	document.write('<input type="hidden" id="sAURLSave" name="sAURLSave" value=\'<!--#nk_get CheckboxSave="sAURLEnable"-->\'>');
+	document.write('<input type="checkbox" name="sAURLs" id="sAURLs" onClick="changeStatus(this.form);" <!--#nk_get CheckboxStatus="sAURLEnable"-->>');
+	document.write('</td>');
+	document.write('<td>Enable Approved URLs List</td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="30" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="313" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Approved URL');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Configuration');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');
+	URL_List(document.form_name.h_enable_approved_URL_List.value,98);	
+	document.write('</table>');		
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table class="ListButtom" height="29" width="100%" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write("<td>");	
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	PrintSTButton("AddURL", "Add", "editLine(0,98);");		
+	document.write('</td>') ;	
+	document.write('</tr>');
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+function PrintApprovedClients(hasUnderLine)
+{
+	PrintBeginBlock(1, "Approved Clients");
+	document.write('<table width="'+FixedTableWidth+'" class="Infotable" border='+Tableborder+'>');
+	document.write('<tr>');	
+	document.write('<td width="1" align="left">');
+	document.write('<input type="hidden" name="sAIPEnable" value=\'0\'>');
+	document.write('<input type="hidden" id="sAIPSave" name="sAURLSave" value=\'<!--#nk_get CheckboxSave="sAIPEnable"-->\'>');
+	document.write('<input type="checkbox" name="sAIPs" id="sAIPs" onClick="changeStatus(this.form);" <!--#nk_get CheckboxStatus="sAIPEnable"-->>');
+	document.write('</td>');
+	document.write('<td>Enable Approved Client List</td>');
+	document.write('</tr>');	
+	document.write('</table>');	
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="30" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="313" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Approved Client IP Addresses');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Configuration');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');
+	URL_List(document.form_name.h_enable_approved_address.value,99);	
+	document.write('</table>');		
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table class="ListButtom" height="29" width="100%" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write("<td>");	
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	PrintSTButton("AddIP", "Add", "editLine(0,99);");	
+	document.write('</td>') ;	
+	document.write('</tr>');
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');	
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 11, 4);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="form_name" method="post" action="Security_Protection_Setting.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="submitstatus" value="1">
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="Max_url_list" value='<!--#nk_get SP_Get_Web="Max_ip_list"-->'>
+	<input type="hidden" name="Max_ip_list" value='<!--#nk_get SP_Get_Web="Max_ip_list"-->'>
+	<input type="hidden" name="h_enable_approved_URL_List" value='<!--#nk_get SP_Get_Web="block_url"-->'>
+	<input type="hidden" name="h_enable_approved_address" value='<!--#nk_get SP_Get_Web="app_url"-->'>
+	<input type="hidden" name="EditNo" value="0">
+	<input type="hidden" name="EditType" value="">
+	<input type="hidden" name="RemoveLine" value="0">
+	<input type="hidden" name="RemoveType" value="0">
+	<input type="hidden" name="message" value="">
+	<input type="hidden" name="RemoveStatus" value="0">
+	<input type="hidden" name="sAURLs_old" value="0">
+	<input type="hidden" name="sAIPs_old" value="0">
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="Security_Protection_Setting.htm"-->
+<!--#nk_get SP_Update=""-->

@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# this script sets up dnsmasq according to 
+# the system configuration set in the sysconfig file
+#
+
+
+##########################################################################
+usage()
+{
+	echo "$0 <action>"
+	echo " "
+	echo "dnsmasq [start][stop]"
+	return;
+}
+
+
+dnsmasq_start()
+{
+	# start dnsmasq daemon
+	dnsmasq -i eth0 -r "/etc/resolv.conf"
+}
+
+
+dnsmasq_stop()
+{
+	# shutdown dnsmasq daemon
+	ps > /tmp/ps
+	PID=$(grep dnsmasq /tmp/ps)
+	if [ "$PID" != "" ]; then
+		killall -9 dnsmasq > /dev/null 2>&1
+	fi
+}
+
+
+##########################################################################
+# dnsmasq script command
+##########################################################################
+case "$1" in
+	'start')
+		# stop running dnsmasq daemon first
+		dnsmasq_stop
+
+		# start dnsmasq daemon
+		echo "godnsmasq start"
+		dnsmasq_start
+		;;
+
+	'stop')
+		echo "godnsmasq stop"
+		dnsmasq_stop
+		;;
+
+	*)
+		usage
+		;;
+esac
+

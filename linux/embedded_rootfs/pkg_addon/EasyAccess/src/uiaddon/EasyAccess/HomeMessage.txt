@@ -1,0 +1,65 @@
+<table cellspacing=0 cellpadding=0 border=0 valign=top>
+<tbody>
+<tr>
+<td width=307 valign=top>
+<font class=toolbar style="font-size:18px;"><B>SSL VPN Portal Home Page</b></font>
+<BR><img src=/images/shim.gif width=1 height=6 border=0><BR>
+<span style="line-height:115%;">
+<font class=toolbar2>
+The Cavium Networks SSL VPN Portal provides a secure extranet for remote users to log in and
+access private network resources.
+<BR><img src=/images/shim.gif width=1 height=10 border=0><BR>You can customize the content of
+ the SSL VPN Portal on the <b>Access &#187; Portal Layout</b> configuraton
+page in the EasyAccess web management interface.
+</span>
+</td>
+<td width=20>&nbsp;&nbsp;</td>
+<td width=185>
+<table	 cellspacing=0 cellpadding=0 border=0 valign=top>
+<tbody>
+<tr>
+<td colspan=3 class=darkback height=1><img src=/images/shim.gif width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1  class=darkback><img src=/images/shim.gif width=1 height=1 border=0></td>
+<td  align=center>
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=HeadingStyle>
+<tbody>
+<tr class=HeadingStyle>
+<td width=185 height=21 class=HeadingStyle valign=center align=left colspan=3>	<font class=HeadingStyle><b>&nbsp;Documentation
+</b></font></td>
+</tr>
+</tbody>
+</table>
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=centertable width=185>
+<tr>
+<td  height=1 colspan=3 class=darkback><img src=/images/shim.gif width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td  height=2 colspan=3><img src=/images/shim.gif width=1 height=4 border=0><br><img src=/images/logo5.gif border=0><BR><img src=/images/shim.gif width=1 height=3 border=0></td>
+</tr>
+<tr>
+<td valign=top width=180 colspan=3 height=80 align=center>
+<table border=0 cellpadding=0 cellspacing=0 valign=top width=180>
+<tbody>
+<tr>
+<tr><td><ul>
+<li><font class=toolbar2> <a href="https://support.caviumnetworks.com" target=new><font color=#0011ee>Installation Guide</font></li>
+<li><font class=toolbar2> <a href="https://support.caviumnetworks.com" target=new><font color=#0011ee>User Guide</font></li>
+<li><font class=toolbar2> <a href="https://support.caviumnetworks.com" target=new><font color=#0011ee>Configuration Guide</font></li>
+<li><font class=toolbar2> <a href="https://support.caviumnetworks.com" target=new><font color=#0011ee>Release Notes</font></li>
+</ul></td></tr>
+</tbody>
+</table>
+</td>
+</tr>
+</table>
+</td>
+<td  height=1 colspan=1 class=darkback><img src=/images/shim.gif width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1  class=darkback colspan=3><img src=/images/shim.gif width=1 height=1 border=0></td>
+</tr>
+</tbody>
+</table>
+</td></tr></table><img src=/images/shim.gif width=1 height=4 border=0><BR>

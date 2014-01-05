@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/26/10 15:44:02" />
+    <title>Setting Up Advanced Routing </title>
+    <!-- Copyright ? 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=13;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1000582"> </a><h1 class="pTitle">
+Setting Up Advanced Routing
+
+</h1>
+<a name="wp1000583"> </a><p class="pBody">
+Use the <em style="font-style: normal" class="cEmphasis">Setup &gt; </em><span style="font-style: oblique">Advanced Routing</span> page to configure the dynamic and static 
+routing settings. Refer to these sections:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998308"> </a><li class="pSmartList1"><a href="#wp998312">Configuring Dynamic Routing</a>
+</li>
+<a name="wp1000652"> </a><li class="pSmartList1"><a href="#wp998326">Configuring Static Routing</a>
+</li>
+</ul></div>
+<a name="wp1000506"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp998312"> </a><h2 class="pHeading2">
+Configuring Dynamic Routing
+</h2>
+<a name="wp998313"> </a><p class="pBody">
+Dynamic routing enables the router to adjust automatically to physical changes in 
+the network&#39;s layout. Using the dynamic RIPng protocol, the router calculates the 
+most efficient route for the network&#39;s data packets to travel between the source 
+and the destination. The RIPng protocol regularly broadcasts routing information to 
+other routers on the network. It determines the best route based on the fewest 
+number of hops between the source and the destination.
+
+</p>
+<a name="wp998315"> </a><p class="pBody">
+Enter the settings described below.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp999935"> </a><li class="pSmartList1"><b class="cBold">RIPng:</b> Routing Information Protocol (RIPng - Next Generation) allows a router to exchange its routing 
+information automatically with other routers, and to dynamically adjust its 
+routing tables as network changes occur. RIPng prevents routing loops by 
+using a hop limit. To enable this option, select <span style="font-weight: bold">Enabled</span>. Otherwise, keep the 
+default setting, <span style="font-weight: bold">Disabled</span>. If you enable this feature, also configure the 
+following settings:
+</li>
+</ul></div>
+<a name="wp998326"> </a><h2 class="pHeading2">
+Configuring Static Routing
+</h2>
+<a name="wp998327"> </a><p class="pBody">
+If the router is connected to more than one network or there are multiple routers 
+installed on your network, it may be necessary to set up static routes between 
+your routers. The static routing function determines the path that data follows over 
+your network before and after it passes through this router. You can use static 
+routing to allow different IP domain users to access the Internet through the router. 
+
+</p>
+<a name="wp998328"> </a><p class="pBody">
+Static routing is a powerful feature that should be used by advanced users only. In 
+many cases, it is better to use dynamic routing because it enables the router to 
+automatically adjust to physical changes in the network&#39;s layout. 
+
+</p>
+<a name="wp998329"> </a><p class="pWarning">
+<table border="0">
+<tr>
+<td>
+<strong>WARNING	&nbsp;&nbsp;&nbsp;</strong>
+</td>
+<td>
+<p><strong>Static routing is an advanced feature. Create these routes with care.
+</strong></p>
+</td>
+</tr>
+</table>
+
+</p>
+<a name="wp998330"> </a><p class="pBody">
+Add or edit entries as needed. Remember that the settings are not saved until you 
+click the Save button.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998331"> </a><li class="pSmartList1"><b class="cBold">To add a new static route: </b>Enter the following settings, and then click <span style="font-weight: bold">Add 
+to List</span>. You can enter up to 30 routes.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998332"> </a><li class="pSmartList2"><b class="cBold">Destination IP:</b> Enter the network address of the remote LAN segment.</li>
+<a name="wp998333"> </a><li class="pSmartList2"><b class="cBold">Prefix Length:</b> Enter the prefix length used on the destination IP domain.</li>
+<a name="wp998334"> </a><li class="pSmartList2"><b class="cBold">Default Gateway:</b> Enter the IP address of the router of the network, for which this static route is created. For example, if this network is connected to the local router&#39;s LAN port through another router, use the WAN IP address of that router.</li>
+<a name="wp998335"> </a><li class="pSmartList2"><b class="cBold">Hop Count:</b> Enter the appropriate value (maximum is 15). This indicates the number of nodes that a data packet passes through before reaching its destination. A node is any device on the network, such as a computer or router. </li>
+<a name="wp998336"> </a><li class="pSmartList2"><b class="cBold">Interface:</b> Select the interface to use for this route. Select a WAN interface if this router provides Internet connectivity for your network. Select <b class="cBold">LAN</b> if this router gets Internet connectivity from a gateway router on your LAN. </li>
+</ul></div>
+<a name="wp998337"> </a><li class="pSmartList1"><b class="cBold">To add another new static route: </b>Enter the information, and then click <b class="cBold">Add 
+to list</b>.
+</li>
+<a name="wp998338"> </a><li class="pSmartList1"><b class="cBold">To modify a static route in the list:</b> Click the entry that you want to modify. 
+The information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the entry and clear the text fields.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1000570"> </a><li class="pSmartList2"><b class="cBold">To delete an entry from the list:</b> Click the entry that you want to delete, and then click <b class="cBold">Delete</b>. To select a block of entries, click the first entry, hold down the Shift key, and then click the final entry in the block. To select individual entries, press the Ctrl key while clicking each entry. To de-select an entry, press the Ctrl key while clicking the entry.</li>
+</ul></div>
+<a name="wp998340"> </a><li class="pSmartList1"><b class="cBold">To view current data:</b> Click <b class="cBold">View</b> near the bottom of the page. The <em class="cEmphasis">Routing 
+Table Entry List</em> appears. You can click <b class="cBold">Refresh</b> to update the data, or click 
+<b class="cBold">Close</b> to close the pop-up window.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

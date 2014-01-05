@@ -1,0 +1,118 @@
+				Release Notes- Virtual Passage
+				==============================
+				version 1.6.1 - (May 31 2007)
+				---------------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+Bug Fix 551 - WHQL Support.
+Bug Fix 749 - Virtual Passage Standalone Executable.
+--------------------------------------------------------------------------------------------
+
+				version 1.6.0 - (March 12 2007)
+				---------------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+Bug Fix 540 - Virtual Passage PPP address is not releasing in SOHO - Fixed.
+Bug Fix 442 - Vista Support (Except for Java Invocation)
+--------------------------------------------------------------------------------------------
+
+				
+
+				version 1.5.1 - (January 12 2007)
+				---------------------------------				
+
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+Bug Fix 589 - User configurable subnet mask support.
+Bug Fix 590 - DNS suffix support.
+Bug Fix 594 - Full tunnel mode support.
+--------------------------------------------------------------------------------------------
+				version 1.5.0 - (october 17 2006)
+				---------------------------------				
+
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+Bug #430  - Virtual Passage for Mozilla browsers
+Bug #568  - Support for IPv6
+Bug #591 - Included version based update for jar files
+--------------------------------------------------------------------------------------------
+
+
+				Version 1.4.0 - Jan 09 2006
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+Bug #25  - PNP for Virtual Passage
+--------------------------------------------------------------------------------------------
+
+
+Bugs Fixed:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+1. Bug #166 - Unable to shutdown or logoff, when VP is installed.
+2. Bug #167 - Hibernate/Standby issues.
+3. Bug #247 - Uninstall/Install issues.
+4. Bug #292 - IE crashes when Virtual Passage window is closed.
+5. Bug #296 - System crashes when remote side closes the TCP connection abruptly.
+6. Bug #407 - Unable to access other links in portal/admin page.
+7. Bug #428 - If Install fails, VP is not cleaned Completely..
+
+--------------------------------------------------------------------------------------------
+
+
+Known Issues:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+9	Non-admin mode not supported
+253	Residual device if found in RAS capable Device List
+394	Network boundary addresses shouldn't be assigned to clients
+450	Virtual passage address range drops one IP address
+--------------------------------------------------------------------------------------------
+
+
+				Version 1.3.0 - July 27 2005
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+11.	Support for un-trusted root certificate
+17.	One click install. No separate connection disconnect window
+19.	Allow for direct connection when the user login to the portal and clicks vP
+181.	Add Plain TCP functionality without SSL for VP
+182.	Integrate Install, uninstalll and Xtunnel components into... 
+--------------------------------------------------------------------------------------------
+
+
+Bugs Fixed:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+4.	Virtual Passage crashes in Windows 2000 without SP4 
+170.	System crashes while connecting to some applications intermitently.
+179.	New connection wizard/connection properties show multiple ISDN adapters
+180.	When VP is installed the VP adapter installed shows # followed by a number.
+
+--------------------------------------------------------------------------------------------
+
+
+Known Issues:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+9	Non-admin mode not supported
+25	Plug and Play and Power management not implemented
+253	Residual device if found in RAS capable Device List
+--------------------------------------------------------------------------------------------

@@ -1,0 +1,240 @@
+<?xml version="1.0" ?>
+<!DOCTYPE polprojfile>
+<ppfml version="1.00" project="ConfigGuide">
+ <windowlist>
+ </windowlist>
+ <contextmap>
+ </contextmap>
+ <topiclist defaulttopic="Logging_into_the_SSL_VPN_Portal.htm">
+  <topic>view.htm
+  </topic>
+  <topic>rest.htm
+  </topic>
+  <topic>ipse.htm
+  </topic>
+  <topic>rout.htm
+  </topic>
+  <topic>SSL_Handshake.htm
+  </topic>
+  <topic>Web_Browser.htm
+  </topic>
+  <topic>Java_Requirements.htm
+  </topic>
+  <topic>Security.htm
+  </topic>
+  <topic>Logging_into_the_SSL_VPN_Portal.htm
+  </topic>
+  <topic>AccessPoint_Overview.htm
+  </topic>
+  <topic>Authenticating.htm
+  </topic>
+  <topic>Active_Directory.htm
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>kerberos.htm
+=======
+  <topic>Network_Resources.htm
+  </topic>
+  <topic>NT_Domain.htm
+  </topic>
+  <topic>kerberos.htm
+  </topic>
+  <topic>sslc.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+  <topic>newc.htm
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>NT_Domain.htm
+=======
+  <topic>sett.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>sslc.htm
+=======
+  <topic>dnss.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>newc.htm
+=======
+  <topic>etch.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>sett.htm
+=======
+  <topic>stat.htm
+  </topic>
+  <topic>Domain_Management.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+  <topic>doma.htm
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>etch.htm
+=======
+  <topic>LDAP.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>stat.htm
+=======
+  <topic>Global_Policies.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>Domain_Management.htm
+=======
+  <topic>Radius.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+  <topic>doma.htm
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>Radius.htm
+=======
+  <topic>even.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>Edit_Group_Settings.htm
+=======
+  <topic>ifac.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+  <topic>User_Bookmarks.htm
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>Network_Resources.htm
+  </topic>
+  <topic>even.htm
+=======
+  <topic>Group_Bookmarks.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>ifac.htm
+=======
+  <topic>grou.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>User_Bookmarks.htm
+  </topic>
+  <topic>Group_Bookmarks.htm
+=======
+  <topic>user.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+  <topic>grou.htm
+  </topic>
+  <topic>netw.htm
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>addd.htm
+=======
+  <topic>date.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>netw.htm
+=======
+  <topic>Logging.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>date.htm
+=======
+  <topic>Global_Bookmarks.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>Logging.htm
+=======
+  <topic>Edit_Group_Settings.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>Global_Bookmarks.htm
+=======
+  <topic>ImportRedirect.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>edit.htm
+=======
+  <topic>User_Password.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+  <topic>logc.htm
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>ImportRedirect.htm
+=======
+  <topic>clie.htm
+  </topic>
+  <topic>ldapattr.htm
+  </topic>
+  <topic>Client_Routes.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>User_Password.htm
+=======
+  <topic>User_Database_Authentication.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+  <topic>Home_Page.htm
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>Client_Routes.htm
+  </topic>
+  <topic>ldapattr.htm
+  </topic>
+  <topic>User_Database_Authentication.htm
+  </topic>
+  <topic>Home_Page.htm
+  </topic>
+  <topic>tran.htm
+=======
+  <topic>tran.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+  <topic>Configurationvt.htm
+  </topic>
+  <topic>port.htm
+  </topic>
+  <topic>acti.htm
+  </topic>
+  <topic>AccessPoint_SSL_VPN.htm
+  </topic>
+  <topic>EPS.htm
+  </topic>
+  <topic>Patch.htm
+  </topic>
+  <topic>Browser.htm
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>RegistryKeyPair.htm
+=======
+  <topic>Antivirus.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+<<<<<<< ConfigGuide.ppf
+  <topic>Antivirus.htm
+=======
+  <topic>RegistryKeyPair.htm
+>>>>>>> 1.1.1.2.4.1
+  </topic>
+  <topic>site.htm
+  </topic>
+  <topic>Firewall.htm
+  </topic>
+ </topiclist>
+ <projectincludes>
+ </projectincludes>
+ <filenamemap>
+ </filenamemap>
+</ppfml>

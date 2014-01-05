@@ -1,0 +1,29 @@
+include ../posixvpclient.mk
+
+JC = javac 
+JFLAGS = -source 1.3 -target 1.1
+PACKAGE = com/code
+
+JNI_HEADERS = ../$(VPDIALER)/Mgr.h \
+		      ../$(VPDIALER)/Dialer.h
+		      
+CLASSES =  $(PACKAGE)/Debug.class \
+		   $(PACKAGE)/Installer.class \
+		   $(PACKAGE)/UnInstaller.class \
+		   $(PACKAGE)/SSLApplet.class 
+
+.SUFFIXES: .java .class
+
+.java.class:
+	$(JC) $(JFLAGS) $*.java
+
+all: $(CLASSES:.java=.class) $(JNI_HEADERS)
+
+../$(VPDIALER)/Mgr.h:  $(PACKAGE)/Mgr.class 
+	javah -jni -o $@ $(PACKAGE)/Mgr
+	
+../$(VPDIALER)/Dialer.h: $(PACKAGE)/Dialer.class 
+	javah -jni -o $@ $(PACKAGE)/Dialer
+
+clean:
+	$(RM) $(PACKAGE)/*.class

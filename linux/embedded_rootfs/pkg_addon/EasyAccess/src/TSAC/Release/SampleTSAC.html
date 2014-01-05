@@ -1,0 +1,38 @@
+<HTML>
+<HEAD> 
+
+<SCRIPT LANGUAGE="VBScript">
+<!--
+Sub window_onLoad()
+TSACControl.AccessPointSrvIP = "192.168.3.13"		'IP Address of the AccessPoint Server
+TSACControl.TermSrvIP = "10.0.0.2"				'IP Address of the Terminal Services Server
+TSACControl.SessionId = "j2XCDFUBG44VF5p8JZLCWA==::::admin"		'The session ID of the current AccessPoint Session
+'TSACControl.TSACUserName = "administrator"			'The user name on the Terminal Services Server
+'TSACControl.TSACPasswd = "admin123"				'The password on the Terminal Services Server
+'TSACControl.IsFullScreen = 0						'=> no full screen
+TSACControl.IsFullScreen = 1						'=> full screen - Overrides Width and Height
+TSACControl.TSACClientHt = 480						'=>default value = 600
+TSACControl.TSACClientWd = 640						'=>default value = 800
+TSACControl.TSACColorDepth = 16						'=>default value = 24
+'TSACControl.TSACStartProgram = "C:\Program Files\Internet Explorer\IEXPLORE.exe"  'The application to be run in Terminal Services mode'
+'TSACControl.TSACCwd = "D:\Project"					'The Current Working Directory'
+TSACControl.isCertRootValidate = 1					'0 => Dont validate Cert; 1=> Validate Cert; Default = 1
+call TSACControl.LaunchTSACClient()
+end sub
+-->
+</SCRIPT>
+ 
+<TITLE> Menlo Logic TSAC Client Test Page </TITLE>
+</HEAD>
+<BODY>
+<OBJECT ID="TSACControl" WIDTH=10 HEIGHT=20
+ CLASSID="CLSID:44C1E3A2-B594-401C-B27A-D1B4476E4797"
+ CODEBASE="..\Release\XTSAC.cab#version=1,6,1,1">
+Object Tag Not Supported by Browser.
+<BR>
+</OBJECT>
+<BR>
+This is the Text After the Control
+</BODY>
+</HTML>
+

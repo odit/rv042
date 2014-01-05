@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function chSubmit(F)
+{
+	F.submit();
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var helplink ='help_TM_IMHS.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 600;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintEmailProtection(0);
+	PrintEndContent();
+}
+
+function PrintEmailProtection(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Infotable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td style="text-align:justify">');
+	document.write('Email Protection is the hosted messaging security solution provided by Cisco ProtectLink InterScan Messaging Hosted Security (IMHS). ');
+	document.write('The solution protects your business from spam, virus, phishing incidents, and inappropriate content before they reaching your network through email messages.');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>To access IMHS&nbsp;:&nbsp;');
+	document.write('<a href=\'https://us.imhs.trendmicro.com/\' onClick="window.open(this.href);return false;">');
+	document.write('https://us.imhs.trendmicro.com/</a>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 11, 2);		// Set Selected Node
+	var license_status='<!--#nk_get SP_NewPurchase=""-->';
+	switch (license_status)
+	{
+		case '1':  	        		
+		case '2':  	        
+		case '3':  	        
+		break;
+		case '104':  	
+		case '999': 
+		default :
+			SetItemlink(foldersTree, 11, 1, "");
+			SetItemlink(foldersTree, 11, 2, "");
+			SetItemlink(foldersTree, 11, 3, "");
+			SetItemlink(foldersTree, 11, 4, "");
+		break;
+	}
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="form_name" method="post" action="sample.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

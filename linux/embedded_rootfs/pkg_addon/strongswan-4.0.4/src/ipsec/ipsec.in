@@ -1,0 +1,292 @@
+#! /bin/sh
+# prefix command to run stuff from our programs directory
+# Copyright (C) 1998-2002  Henry Spencer.
+# Copyright (C) 2006 Andreas Steffen
+# Copyright (C) 2006 Martin Willi 
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation; either version 2 of the License, or (at your
+# option) any later version.  See <http://www.fsf.org/copyleft/gpl.txt>.
+# 
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+# for more details.
+#
+# RCSID $Id: ipsec.in,v 1.1 2007-06-25 11:15:18 encounter Exp $
+
+# name and version of the ipsec implementation
+IPSEC_NAME="@IPSEC_NAME@"
+IPSEC_VERSION="U@IPSEC_VERSION@/K`uname -r`"
+
+# where the private directory and the config files are
+IPSEC_DIR="@IPSEC_DIR@"
+IPSEC_SBINDIR="@IPSEC_SBINDIR@"
+IPSEC_CONFDIR="@IPSEC_CONFDIR@"
+IPSEC_PIDDIR="@IPSEC_PIDDIR@"
+
+IPSEC_STARTER_PID="${IPSEC_PIDDIR}/starter.pid"
+IPSEC_PLUTO_PID="${IPSEC_PIDDIR}/pluto.pid"
+IPSEC_CHARON_PID="${IPSEC_PIDDIR}/charon.pid"
+
+IPSEC_WHACK="${IPSEC_DIR}/whack"
+IPSEC_STROKE="${IPSEC_DIR}/stroke"
+IPSEC_STARTER="${IPSEC_DIR}/starter"
+
+export IPSEC_DIR IPSEC_SBINDIR IPSEC_CONFDIR IPSEC_PIDDIR IPSEC_VERSION IPSEC_NAME IPSEC_STARTER_PID IPSEC_PLUTO_PID IPSEC_CHARON_PID
+
+IPSEC_DISTRO="Distributed by the Institute of Internet Technologies and Applications
+              University of Applied Sciences Rapperswil, Switzerland (ITA-HSR)"
+
+case "$1" in
+'')
+	echo "Usage: ipsec command argument ..."
+	echo "Use --help for list of commands, or see ipsec(8) manual page"
+	echo "or the $IPSEC_NAME documentation for names of the common ones."
+	echo "Most have their own manual pages, e.g. ipsec_auto(8)."
+	echo "See <http://www.strongswan.org> for more general info."
+	exit 0
+	;;
+--help)
+	echo "Usage: ipsec command argument ..."
+	echo "where command is one of:"
+	echo "	start|restart  arguments..."
+	echo "	update|reload|stop"
+	echo "	up|down|route|unroute <connectionname>"
+	echo "	status|statusall [<connectionname>]"
+	echo "	ready"
+	echo "	listalgs|listpubkeys|listcerts [--utc]"
+	echo "	listcacerts|listaacerts|listocspcerts [--utc]"
+	echo "	listacerts|listgroups|listcainfos [--utc]"
+	echo "	listcrls|listocsp|listcards|listall [--utc]"
+	echo "	rereadsecrets|rereadgroups"
+	echo "	rereadcacerts|rereadaacerts|rereadocspcerts"
+	echo "	rereadacerts|rereadcrls|rereadall"
+	echo "	purgeocsp"
+	echo "	scencrypt|scdecrypt <value> [--inbase <base>] [--outbase <base>] [--keyid <id>]"
+        echo "	barf"
+	echo "	openac"
+	echo "	pluto"
+	echo "	scepclient"
+	echo "	secrets"
+	echo "	starter"
+	echo "	version"
+	echo "	whack"
+	echo "	stoke"
+	echo
+	echo "Some of these functions have their own manual pages, e.g. ipsec_scepclient(8)."
+	exit 0
+	;;
+--versioncode)
+	echo "$IPSEC_VERSION"
+	exit 0
+	;;
+--copyright)
+	set _copyright
+	# and fall through, invoking "ipsec _copyright"
+	;;
+--directory)
+	echo "$IPSEC_DIR"
+	exit 0
+	;;
+--confdir)
+	echo "$IPSEC_CONFDIR"
+	exit 0
+	;;
+down)
+	shift
+	if [ "$#" -ne 1 ]
+	then
+	    echo "Usage: ipsec down <connection name>"
+	    exit 1
+	fi
+	if test -e $IPSEC_PLUTO_PID
+	then
+		$IPSEC_WHACK --name "$1" --terminate
+	fi
+	if test -e $IPSEC_CHARON_PID
+	then
+		$IPSEC_STROKE down "$1"
+	fi
+	exit 0
+	;;
+listalgs|listpubkeys|listaacerts|\
+listocspcerts|listacerts|listgroups|\
+listcainfos|listocsp|listcards|\
+purgeocsp|rereadsecrets|rereadgroups|\
+rereadaacerts|rereadocspcerts|rereadacerts)
+	op="$1"
+	shift
+	if test -e $IPSEC_PLUTO_PID
+	then
+		$IPSEC_WHACK "$@" "--$op"
+	fi
+	;;
+listcerts|listcacerts|listcrls|listall|\
+rereadcacerts|rereadcrls|rereadall)
+	op="$1"
+	shift
+	if test -e $IPSEC_PLUTO_PID
+	then
+		$IPSEC_WHACK "$@" "--$op"
+	fi
+	if test -e $IPSEC_CHARON_PID
+	then
+		$IPSEC_STROKE "$op" "$@"
+	fi
+	exit 0
+	;;
+ready)
+	shift
+	if test -e $IPSEC_PLUTO_PID
+	then
+		$IPSEC_WHACK --listen
+	fi
+	exit 0
+	;;
+reload)
+	if test -e $IPSEC_STARTER_PID 
+	then
+	    echo "Reloading strongSwan IPsec configuration..." >&2
+	    kill -s USR1 `cat $IPSEC_STARTER_PID`
+	else
+	    echo "ipsec starter is not running" >&2
+	fi
+	exit 0
+	;;
+restart)
+	$IPSEC_SBINDIR/ipsec stop
+	sleep 2
+	shift
+	$IPSEC_SBINDIR/ipsec start "$@"
+	exit 0
+	;;
+route|unroute)
+	op="$1"
+	shift
+	if [ "$#" -ne 1 ]
+	then
+	    echo "Usage: ipsec $op <connection name>"
+	    exit 1
+	fi
+	if test -e $IPSEC_PLUTO_PID
+	then
+		$IPSEC_WHACK --name "$1" "--$op"
+	fi
+	if test -e $IPSEC_CHARON_PID
+	then
+		$IPSEC_STROKE "$op" "$1"
+	fi
+	exit 0
+	;;
+scencrypt|scdecrypt)
+	op="$1"
+	shift
+	if test -e $IPSEC_PLUTO_PID
+	then
+		$IPSEC_WHACK "--$op" "$@"
+	fi
+	exit 0
+	;;
+secrets)
+	if test -e $IPSEC_PLUTO_PID
+	then
+		$IPSEC_WHACK --rereadsecrets
+	fi
+	exit 0
+	;;
+start)
+	shift
+	exec $IPSEC_STARTER "$@"
+	;;
+status|statusall)
+	op="$1"
+	shift
+	if test $# -eq 0
+	then
+		if test -e $IPSEC_PLUTO_PID
+		then
+			$IPSEC_WHACK "--$op"
+		fi
+		if test -e $IPSEC_CHARON_PID
+		then
+			$IPSEC_STROKE "$op"
+		fi
+	else
+		if test -e $IPSEC_PLUTO_PID
+		then
+			$IPSEC_WHACK --name "$1" "--$op"
+		fi
+		if test -e $IPSEC_CHARON_PID
+		then
+			$IPSEC_STROKE "$op" "$1"
+		fi
+	fi
+	exit 0
+	;;
+stop)
+	if test -e $IPSEC_STARTER_PID 
+	then
+	    echo "Stopping strongSwan IPsec..." >&2
+	    kill `cat $IPSEC_STARTER_PID`
+	else
+	    echo "ipsec starter is not running" >&2
+	fi
+	exit 0
+	;;
+up)
+	shift
+	if [ "$#" -ne 1 ]
+	then
+	    echo "Usage: ipsec up <connection name>"
+	    exit 1
+	fi
+	if test -e $IPSEC_PLUTO_PID
+	then
+		$IPSEC_WHACK --name "$1" --initiate
+	fi
+	if test -e $IPSEC_CHARON_PID
+	then
+	    $IPSEC_STROKE up "$1"
+	fi
+	exit 0
+	;;
+update)
+	if test -e $IPSEC_STARTER_PID 
+	then
+		echo "Updating strongSwan IPsec configuration..." >&2
+		kill -s HUP `cat $IPSEC_STARTER_PID`
+	else
+		echo "ipsec starter is not running" >&2
+	fi
+	exit 0
+	;;
+version|--version)
+	echo "Linux $IPSEC_NAME $IPSEC_VERSION"
+	echo "See \`ipsec --copyright' for copyright information."
+	echo $IPSEC_DISTRO
+	exit 0
+	;;
+--*)
+	echo "$0: unknown option \`$1' (perhaps command name was omitted?)" >&2
+	exit 1
+	;;
+esac
+
+cmd="$1"
+shift
+
+path="$IPSEC_DIR/$cmd"
+
+if test ! -x "$path" 
+then
+    path="$IPSEC_DIR/$cmd"
+    if test ! -x "$path"
+    then
+	echo "$0: unknown IPsec command \`$cmd' (\`ipsec --help' for list)" >&2
+	exit 1
+    fi
+fi
+
+exec $path "$@"

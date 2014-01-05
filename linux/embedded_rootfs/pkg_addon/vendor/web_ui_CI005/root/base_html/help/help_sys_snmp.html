@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/26/10 15:44:04" />
+    <title>Setting Up SNMP </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=20;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998329"> </a><h1 class="pTitle">
+Setting Up SNMP
+
+</h1>
+<a name="wp1005655"> </a><p class="pBody">
+Use the <em class="cEmphasis">System Management &gt; SNMP</em> page to set up SNMP for this router. SNMP, 
+or Simple Network Management Protocol, is a network protocol that allows 
+network administrators to manage, monitor, and receive notifications of critical 
+events as they occur on the network. The router supports SNMP v1/v2c. The 
+router supports standard MIBs (Management Information Bases) such as MIBII, as 
+well as private MIBs. The router acts as an SNMP agent that replies to SNMP 
+commands from SNMP Network Management Systems. The commands it 
+supports are the standard SNMP commands get/next/set. It also generates trap 
+messages to notify the SNMP manager when alarm conditions occur. Examples 
+include reboots, power cycles, and WAN link events.
+
+</p>
+<a name="wp1007016"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1005657"> </a><li class="pSmartList1"><b class="cBold">Enabled SNMP:</b> Check this box to enable SNMP. Uncheck the box to 
+disable the this feature. This feature is enabled by default.
+</li>
+<a name="wp998337"> </a><li class="pSmartList1"><b class="cBold">System Name:</b> Set the hostname for the router. 
+</li>
+<a name="wp998338"> </a><li class="pSmartList1"><b class="cBold">System Contact:</b> Enter the name of the network administrator who can be 
+contacted with updates about the router. 
+</li>
+<a name="wp998339"> </a><li class="pSmartList1"><b class="cBold">System Location:</b> Enter the network administrator&#39;s contact information: an 
+e-mail address, telephone number, or pager number. 
+</li>
+<a name="wp998340"> </a><li class="pSmartList1"><b class="cBold">Get Community Name:</b> Enter a community string for authentication for 
+SNMP GET commands. You can enter a name including up to 64 
+alphanumeric characters. The default is <span style="font-weight: bold">public</span>. 
+</li>
+<a name="wp998341"> </a><li class="pSmartList1"><b class="cBold">Set Community Name:</b> Enter a community string for authentication for 
+SNMP SET commands. You can enter a name including up to 64 
+alphanumeric characters. The default is <span style="font-weight: bold">private</span>. 
+</li>
+<a name="wp998342"> </a><li class="pSmartList1"><b class="cBold">Trap Community Name:</b> Create the password that will be sent with each 
+trap to the SNMP manager. You can enter a name including up to 64 
+alphanumeric characters. The default is <b class="cBold">public</b>.
+</li>
+<a name="wp1009105"> </a><li class="pSmartList1"><b class="cBold">Send SNMP Trap to:</b> Enter the IP address or domain name for the server 
+where you are running your SNMP management software.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

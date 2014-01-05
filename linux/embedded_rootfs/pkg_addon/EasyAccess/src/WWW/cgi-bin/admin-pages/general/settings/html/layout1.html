@@ -1,0 +1,134 @@
+<script src="/js/mainframe.js"></script>
+<script>
+<!--
+function validateOnSubmit() {
+var elem;
+var errs=0;
+if (errs>1)  alert('Please correct two or more fields before submitting');
+if (errs==1) alert('Please correct a field before submitting');
+if (errs==0){window.document.editpath.submit();}
+}
+//-->
+</script>
+<script src="/js/banner.js"></script>
+</head>
+<body  class="mainback" margin=0 TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0 onload="JavaScript:parent.resizeme(400);"  style="overflow-x:hidden;overflow-y:hidden">
+<table  border=0 cellpadding=0 cellspacing=0  width=542 valign=top align=left>
+<TR>
+<td width=29 height=400 ><img src="/images/shim.gif" height=16 width=29></td>
+<td width=513 valign="top">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=titletable>
+<tr class=titlerow>
+<td width=513 height=22 class=titlerow valign=center>
+&nbsp;&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title("General&nbsp;&#187;&nbsp;Customization"); </script></td>
+</tr>
+</table><img src="/images/shim.gif" height=22 width=1 class=titleimage></br>
+<table width="" height="" cellspacing=0 cellpadding=0 border=0 valign="top">
+<tbody>
+<tr>
+<td width="" height=1 colspan=3 class="darkback" ><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1 height="" class="darkback" ><img src="/images/shim.gif" width=1 height=1 border=0></td>
+<td width="" align="center">
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="HeadingStyle">
+<tbody>
+<tr class="HeadingStyle">
+<td width=513 height=21 class="HeadingStyle"  valign="center" colspan=3>
+&nbsp;
+<font class="HeadingStyle"><b>Upload Company Logo</b></font></td>
+</tr>
+</table>
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="centertable" width=511>
+<tr>
+<td width="" height=1 colspan=3 class="darkback" ><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width="" height=2 colspan=3><img src="/images/shim.gif" width=1 height=17 border=0></td>
+</tr>
+<tr>
+<td valign="top" width=500 colspan=3>
+<table border=0 cellpadding=0 cellspacing=0 valign="top" width=508>
+<tbody>
+<tr>
+<td width=30></td>
+<td width=480><span style="line-height:120%">
+<font class=toolbar2> 
+</span>
+</td>
+</tr>
+</table>
+<table border=0 cellpadding=0 cellspacing=0 valign="top" width=500>
+<tbody>
+<tr>
+<td> </td>
+<td colspan=3>
+<font class=toolbar2>Logo 1: 173 x 32 pixels, Logo2: 170 x 22 pixels<BR><img src="/images/shim.gif" width=1 height=6 border=0><br>
+GIF format only. Transparent/light background recommended.<BR><img src="/images/shim.gif" border=0 height=16 width=1><BR>
+</td>
+</tr>
+<tr>
+<form name="newlogo"  action="#" method="get"> 
+<td width=32 align=right></td>
+<td width=108 align=right valign=center height=28><font class="toolbar" >Use:&nbsp;<BR><img src="/images/shim.gif" border=0 height=1 width=1><BR></font></td>
+<td  align=left valign=center height=28>
+<select name=logo class=select style="width:250px;height:22px;">
+<option value="menlo">Default SSL VPN Logo</option>
+<option value="company">Uploaded Company Logo</option>
+</select><BR><img src="/images/shim.gif" border=0 height=1 width=1><BR>
+</td>
+<td width=100 align=left valign=top height=28><img src="/images/shim.gif" width=1 height=3 border=0><BR>
+<table cellpadding=0 cellspacing=0 border=0 margin=0>
+<TR>
+<td class=bleft></td>
+<td class=bcenter width=40 align=center onClick="JavaScript:window.document.newlogo.submit()" onMouseOver="JavaScript:window.status='Upload'; return true;"   onMouseOut="JavaScript:window.status=''; return true;">
+<font class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(bsubmit); </script> </td>
+<td class=bright></td>
+</tr>
+</table>
+</td>
+</form>
+</tr> 
+<tr>
+<form name="uploadlogo" action="/cgi-bin/importlogo" method="post" enctype="multipart/form-data" >
+<td width=32>
+</td>
+<td width=108 align=right valign=top height=26><img src="/images/shim.gif" width=1 height=2 border=0><BR>
+<font class=toolbar>Logo 1:&nbsp;</font>
+</td>
+<td width=270 align=left valign=top height=26>
+<font class=toolbar><input type=file name="logo1" class=input style="width: 250px; height: 20px;">
+</td>
+<td width=100 align=left valign=top height=26>
+</td>
+</tr>
+<tr>
+<td width=32></td>
+<td width=108 align=right valign=top height=26><img src="/images/shim.gif" width=1 height=2 border=0><BR>
+<font class=toolbar>Logo 2:&nbsp;</font></td>
+<td width=270 align=left valign=top height=26>
+<font class=toolbar><input type=file name="logo2" class=input style="width: 250px; height: 20px;">
+</td><td width=100 align=left valign=top height=26>
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td class=bleft></td>
+<input type=hidden name=import value=true>
+<td class=bcenter width=40 align=center onClick="JavaScript:window.document.uploadlogo.submit()" onMouseOver="JavaScript:window.status='Upload'; return true;"   onMouseOut="JavaScript:window.status=''; return true;">
+<font class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(bupload); </script> </td>
+<td class=bright></td>
+</tr>
+</form>
+</table>
+<img src="/images/shim.gif" border=0 height=19 width=1><BR>
+</td>
+</tr>
+</table></td>
+</tr>
+</table></td>
+<td width="" height=1 colspan=1 class="darkback" ><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1 height="" class="darkback" colspan=3><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+</table><img src="/images/shim.gif" border=0 height=22 width=1><BR></body></html>

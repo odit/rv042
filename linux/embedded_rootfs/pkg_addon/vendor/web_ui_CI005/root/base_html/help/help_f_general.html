@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/21/10 17:34:40" />
+    <title>Configuring the General Firewall Settings </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=31;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1073495"> </a><h1 class="pTitle">
+Configuring the General Firewall Settings
+
+</h1>
+<a name="wp1049978"> </a><p class="pBody">
+The default firewall settings should be sufficient for most small businesses. 
+However, you can use the <em class="cEmphasis">Firewall &gt; General </em>page to disable the firewall or to 
+specify the types of attacks that you want to block. You also can restrict 
+potentially risky website features such as Java and cookies.
+
+</p>
+<a name="wp1074445"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> <b class="cBold">
+</b>
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1079512"> </a><li class="pSmartList1">If you want to disable the firewall (not recommended), you can do so only if 
+you have configured the administrator password. If you are still using the 
+default password, you must change it. For more information, see <a href="help_index.htm?url=help_password.html">Changing 
+the Administrator User Name and Password</a>.
+</li>
+<a name="wp1078979"> </a><li class="pSmartList1">Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or 
+click <b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+</li>
+</ul></div>
+<a name="wp1073534"> </a><p class="pBody">
+Enable or disable the firewall and related features: 
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1049982"> </a><li class="pSmartList1"><b class="cBold">Firewall:</b> Choose to enable or disable the firewall. This feature is enabled 
+by default and is strongly recommended to protect your network. Enabling 
+or disabling the firewall also affects several related features, as described 
+below. Disabling the firewall also disables Access Rules and Content Filters.
+</li>
+<a name="wp1074480"> </a><p class="pListBodyLevel1">
+If you choose <b class="cBold">Disable</b> and you are still using the default administrator 
+password, a message appears. To protect your router from unauthorized 
+access, you must change the password before you can disable the firewall. 
+Click <b class="cBold">OK</b> to continue to the <em class="cEmphasis">Password</em> page, or click <b class="cBold">Cancel</b> to remain on the 
+current page. After you change your password, you can return to this page 
+to resume this procedure.
+
+</p>
+<a name="wp1074621"> </a><li class="pSmartList1"><b class="cBold">SPI (Stateful Packet Inspection): </b>When enabled, this feature allows the 
+router to review the information that passes through the firewall. It inspects 
+all packets based on the established connection, prior to passing the 
+packets for processing through a higher protocol layer. This feature can be 
+enabled only when the firewall is enabled.
+</li>
+<a name="wp1074622"> </a><li class="pSmartList1"><b class="cBold">DoS (Denial of Service):</b> When enabled, this feature protects internal 
+networks from Internet attacks, such as SYN Flooding, Smurf, LAND, Ping of 
+Death, IP Spoofing, and reassembly attacks. This feature can be enabled 
+only when the firewall is enabled.
+</li>
+<a name="wp1049985"> </a><li class="pSmartList1"><b class="cBold">Block WAN Request:</b> When enabled, this feature allows the router to drop 
+both unaccepted TCP requests and ICMP packets from the WAN side. 
+Hackers will not find the router by pinging the WAN IP address. This feature 
+can be enabled only when the firewall is enabled.
+</li>
+<a name="wp1074638"> </a><li class="pSmartList1"><b class="cBold">Remote Management:</b> When enabled, this feature allows you to connect to 
+the router&#39;s web-based configuration utility through a WAN connection. This 
+feature is disabled by default. It can be enabled only when the firewall is 
+enabled. If you wish to enable remote management, you should first 
+configure a strong administrator password on the <span style="font-style: oblique">Setup &gt; Password </span>page. 
+This precaution prevents an unauthorized user from accessing the router 
+with the default password. If you enable this feature, you can keep the 
+default <b class="cBold">Port</b> setting, 80, or enter another port number (8080 is usually used 
+for this purpose). 
+</li>
+<a name="wp1062102"> </a><p class="pListBodyLevel1">
+<b class="cBold">NOTE:</b> When remote management is enabled, you can use a web browser 
+to access the configuration utility from anywhere on the Internet. In a web 
+browser, enter <span style="font-weight: bold">http://&lt;WAN IP address of the router&gt;:port</span>, or enter<b style="font-weight: normal" class="cBold"> https:</b><span style="font-weight: bold">//
+&lt;WAN IP address of the router&gt;:port </span>if you have enabled the HTTPS 
+feature.
+
+</p>
+<a name="wp1073737"> </a><li class="pSmartList1"><b class="cBold">HTTPS:</b> When enabled, this feature allows secured HTTP sessions. This 
+feature is enabled by default. 
+</li>
+<a name="wp1073738"> </a><p class="pListBodyLevel1">
+<b class="cBold">NOTE:</b> If you disable the HTTPS feature, then users cannot connect by 
+using QuickVPN.
+
+</p>
+<a name="wp1079699"> </a><li class="pSmartList1"><b class="cBold">Multicast Pass Through:</b> When enabled, this feature allows IP multicast 
+packets to be forwarded to the appropriate LAN devices. Multicast Pass 
+Through is used for Internet games, videoconferencing, and multimedia 
+applications. This option is disabled by default. 
+</li>
+<a name="wp1079700"> </a><p class="pListBodyLevel1">
+<b class="cBold">IMPORTANT: </b>This router does not support passing multicast traffic over an 
+IPSec tunnel. The multicast passthrough option determines whether the 
+router allows the multicast traffic originating from the Internet to pass 
+through the firewall to the LAN. 
+
+</p>
+</ul></div>
+<a name="wp1079701"> </a><h3 class="pHeading3">
+Restrict Web Features
+</h3>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1073827"> </a><li class="pSmartList1"><b class="cBold">Java:</b> Check the box if you want to block Java applets at the firewall. Java is 
+a common programming language for websites. If you deny Java applets, 
+you run the risk of losing access to Internet sites created with this 
+programming language. As a compromise, you can check this box to block 
+Java on untrusted or unknown sites, while allowing Java on trusted sites 
+(see <em class="cEmphasis">Don&#39;t block Java/Java/ActiveX/Cookies/Proxy to Trusted Domains</em> 
+below). By default, Java is not blocked.
+</li>
+<a name="wp1073846"> </a><li class="pSmartList1"><b class="cBold">Cookies:</b> Check this box if you want to block all cookies at the firewall. A 
+cookie is data that a web site stores on a user&#39;s PC. If you block cookies, a 
+web site may not function as expected. As a compromise, you can check 
+this box to block cookies on untrusted or unknown sites, while allowing 
+them on trusted sites (see <em class="cEmphasis">Don&#39;t block Java/Java/ActiveX/Cookies/Proxy 
+to Trusted Domains</em> below). By default, cookies are not blocked.
+</li>
+<a name="wp1073847"> </a><li class="pSmartList1"><b class="cBold">ActiveX:</b> Check the box if you want to block ActiveX controls at the firewall. 
+ActiveX is a programming language for websites. If you deny ActiveX, you 
+run the risk of losing access to Internet sites created using this 
+programming language. As a compromise, you can check this box to block 
+ActiveX on untrusted or unknown sites, while allowing ActiveX on trusted 
+sites (see <em class="cEmphasis">Don&#39;t block Java/Java/ActiveX/Cookies/Proxy to Trusted 
+Domains</em> below). By default, ActiveX is not blocked.
+</li>
+<a name="wp1079331"> </a><li class="pSmartList1"><b class="cBold">Access to HTTP Proxy Servers:</b> Check this box if you want to block access 
+to HTTP proxy servers. Use of WAN proxy servers may compromise the 
+router&#39;s security. If you enable this feature, you block access to proxy 
+servers using port 80 or 8080s. As a compromise, you can check this box to 
+block access to untrusted or unknown servers, while allowing access to 
+trusted servers (see <em class="cEmphasis">Don&#39;t block Java/Java/ActiveX/Cookies/Proxy to 
+Trusted Domains</em> below). By default, access to HTTP proxy servers is not 
+blocked.
+</li>
+<a name="wp1079328"> </a><li class="pSmartList1"><b class="cBold">Don&#39;t block Java/ActiveX/Cookies/Proxy to Trusted Domains: </b>If you 
+blocked any of the web features, you can check this box to allow these 
+features for the domains that you enter on the trusted list. (This area of the 
+page is available only if you checked one of the other boxes to disable a 
+web feature.) If you leave the box unchecked, then the selected web 
+features are blocked for all websites.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1050010"> </a><li class="pSmartList2"><b class="cBold">To add a domain to the trusted list:</b> Enter the domain that you want to add to the trusted list. Then click <b class="cBold">Add to list</b>.</li>
+<a name="wp1073989"> </a><li class="pSmartList2"><b class="cBold">To add another domain to the trusted list:</b> Enter the domain, and then click <b class="cBold">Add to list</b>.</li>
+<a name="wp1074003"> </a><li class="pSmartList2"><b class="cBold">To modify a domain in the trusted list:</b> Click the domain. The information appears in the text field. Make changes, and then click <b class="cBold">Update</b>.</li>
+<a name="wp1073964"> </a><li class="pSmartList2"><b class="cBold">To remove a domain from the trusted list:</b> Click the domain, and then click <span style="font-weight: bold">Delete</span>.</li>
+</ul></div>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

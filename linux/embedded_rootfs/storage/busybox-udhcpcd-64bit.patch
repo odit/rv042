@@ -1,0 +1,53 @@
+--- networking/udhcp/dhcpc.c.orig	2006-08-01 09:34:14.000000000 -0700
++++ networking/udhcp/dhcpc.c	2006-08-01 09:35:18.000000000 -0700
+@@ -31,9 +31,9 @@
+ #include "signalpipe.h"
+ 
+ static int state;
+-static unsigned long requested_ip; /* = 0 */
+-static unsigned long server_addr;
+-static unsigned long timeout;
++static uint32_t requested_ip; /* = 0 */
++static uint32_t server_addr;
++static uint32_t timeout;
+ static int packet_num; /* = 0 */
+ static int fd = -1;
+ 
+@@ -138,7 +138,8 @@
+ {
+ 	uint8_t *temp, *message;
+ 	unsigned long t1 = 0, t2 = 0, xid = 0;
+-	unsigned long start = 0, lease;
++	unsigned long start = 0;
++	uint32_t lease;
+ 	fd_set rfds;
+ 	int retval;
+ 	struct timeval tv;
+
+--- networking/udhcp/dhcpd.h.orig	2006-06-30 15:42:02.000000000 -0700
++++ networking/udhcp/dhcpd.h	2007-02-14 16:56:32.000000000 -0800
+@@ -113,17 +113,17 @@
+ 	char *interface;		/* The name of the interface to use */
+ 	int ifindex;			/* Index number of the interface to use */
+ 	uint8_t arp[6];			/* Our arp address */
+-	unsigned long lease;		/* lease time in seconds (host order) */
+-	unsigned long max_leases;	/* maximum number of leases (including reserved address) */
++	uint32_t lease;			/* lease time in seconds (host order) */
++	uint32_t max_leases;		/* maximum number of leases (including reserved address) */
+ 	char remaining;			/* should the lease file be interpreted as lease time remaining, or
+ 					 * as the time the lease expires */
+-	unsigned long auto_time;	/* how long should udhcpd wait before writing a config file.
++	uint32_t auto_time;		/* how long should udhcpd wait before writing a config file.
+ 					 * if this is zero, it will only write one on SIGUSR1 */
+-	unsigned long decline_time;	/* how long an address is reserved if a client returns a
++	uint32_t decline_time;		/* how long an address is reserved if a client returns a
+ 					 * decline message */
+-	unsigned long conflict_time;	/* how long an arp conflict offender is leased for */
+-	unsigned long offer_time;	/* how long an offered address is reserved */
+-	unsigned long min_lease;	/* minimum lease a client can request*/
++	uint32_t conflict_time;		/* how long an arp conflict offender is leased for */
++	uint32_t offer_time;		/* how long an offered address is reserved */
++	uint32_t min_lease;		/* minimum lease a client can request*/
+ 	char *lease_file;
+ 	char *pidfile;
+ 	char *notify_file;		/* What to run whenever leases are written */

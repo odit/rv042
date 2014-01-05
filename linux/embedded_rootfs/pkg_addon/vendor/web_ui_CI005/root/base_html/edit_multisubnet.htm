@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Multiple Subnet Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script language=JavaScript>
+
+function clearContent(F)
+{
+	F.addMLAN.disabled=false;  
+	F.ipAddr.value="";
+	F.lanMask.value="";
+
+	for (var i=0; i < F.mlanList.length; i++)
+	{
+		F.mlanList.options[i].selected=false;
+	}	    
+	F.addMLAN.value=sAddtoList; 
+	SetButtonStatus("deleteMLAN", "disabled");
+	SetButtonStatus("showNew", "disabled");
+}
+function MLANaddSel(sip, smask, s) 
+{
+	if (sip.value=="" || smask.value=="")
+	{
+		alert('Please input IP address with correct format!');
+		if(sip.value=="")
+			sip.select();
+		else if(smask.value=="")
+			smask.select();
+		return;
+	}
+	if (IPCheck(sip, 1, 254)<0) return;
+	if (IPCheck(smask, 0, 255)<0) return;
+	if (s.form.addMLAN.value==sUpdateEntry)
+	{
+		p=-1;
+		while (s.form.mlanList.options[++p].selected != true);
+	} 	
+	for (var i=0; i < s.form.mlanList.length; i++)
+	{
+		s.form.mlanList.options[i].selected=false;
+	}
+	if (s.form.addMLAN.value==sAddtoList) 
+	{
+		if (s.form.mlanList.length>=LimitMultiSubnet)
+		{
+			alert(aLimitMLan+LimitMultiSubnet+aLimitEnd);
+			return;
+		}
+		p=s.length;
+		s.length+=1;
+	} 
+	s.options[p].value=sip.value;
+	s.options[p].value+="{";
+	s.options[p].value+=smask.value;
+	s.options[p].value+=",";
+	s.options[p].value+="1";  
+	s.options[p].value+="}";   
+	s.options[p].text=sip.value+"/"+smask.value;
+	clearContent(s.form);	
+}
+function showList(s)
+{
+	if (s.selectedIndex==-1) return;
+	var forwardString=s.options[s.selectedIndex].value;
+	var sip="";
+	var smask="";
+	forwardString=forwardString.split('{');
+	sip=forwardString[0];
+	forwardString=forwardString[1];
+	forwardString=forwardString.split(',');
+	smask=forwardString[0];
+
+	s.form.ipAddr.value=sip;
+	s.form.lanMask.value=smask;
+	s.form.addMLAN.value=sUpdateEntry; 
+	SetButtonStatus("addMLAN", "");
+	SetButtonStatus("deleteMLAN", "");
+	SetButtonStatus("showNew", "");
+}
+function delSel(s,I)
+{
+	var z;  
+	var k;
+	if (s.length > 0)
+	{
+		tmp=new tmpWord(s.length);
+		tmpChanged=new tmpWord(s.length); 
+		opvtmp=new tmpWord(s.length);
+		opvtmpChanged=new tmpWord(s.length); 
+		for (var i=0; i < s.length; i++)
+		{
+			tmp[i+1]=s.options[i].text;
+			opvtmp[i+1]=s.options[i].value;
+		}	
+		for (var i=0; i < s.length; i++)
+		{
+			if (s.options[i].selected==true)
+			{ 
+				s.options[i].text="";
+				s.options[i].value="";
+				tmp[i+1]=" ";
+				opvtmp[i+1]=" ";		
+				s.options[i].selected=false;	
+			}  
+		}
+		k=1;
+		z=0;
+		for (var j=1; j<=s.length; j++) 
+		{ 
+			if (tmp[j]!=" ") 
+			{
+				tmpChanged[k]=tmp[j];
+				opvtmpChanged[k]=opvtmp[j];
+				k++;
+			}
+			else
+			{
+				z++;
+			}
+		}
+		for (var i=0; i < s.length-z; i++)
+		{
+			s.options[i].text=tmpChanged[i+1]; 
+			s.options[i].value=opvtmpChanged[i+1];  	 
+		}
+		s.length-=z;
+	}
+	clearContent(s.form); 
+}
+function chSubmit(F)
+{
+	selAll(F.mlanList);
+	opener.closeService();
+	F.submitStatus.value=1;
+	F.log_ch.value=1;
+	window.status=wSave; 
+	MM_showHideLayers('AutoNumber15','','hide');
+	F.submit();
+}
+var ButtonType = "OkCancelClose";
+var Savelink = "chSubmit(document.formNetwork);";
+var Cancellink = ""; 
+/************************************************************************/
+</script>
+</head>
+<body class="popwindow">
+<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+<form name="formNetwork" method="post" action="edit_multisubnet.htm">
+<input type="hidden" name="submitStatus" value="0">
+<input type="hidden" name="log_ch" value="0">
+<input type="hidden" name="upnpOpen" value="0">
+  <table class="pop_list" border="0" width="100%" align="center" cellspacing = "0" cellpadding ="0">	
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>      
+    <tr> 
+      <td width="10"></td>
+      <td valign="middle" width="152">LAN IP Address : </td>
+      <td>
+          <input type="text" name="ipAddr" maxlength="15" size="15" onKeypress="return Check_User_Input(event)" value="">
+          <input type="hidden" name="routeMode" value="1">
+      </td>
+      <td width="10"></td> 
+    </tr>   
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle" width="152">Subnet Mask : </td>
+      <td>
+        <input type="text" name="lanMask" maxlength="15" size="15" onKeypress="return Check_User_Input(event)" value="" >
+      </td>
+       <td></td> 
+    </tr>   
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr> 
+    <tr> 
+      <td></td>
+      <td align="center" valign="top" colspan="2" height="32">
+         <script>PrintSTButton("addMLAN", "Add to list", "MLANaddSel(document.formNetwork.ipAddr,document.formNetwork.lanMask,document.formNetwork.mlanList)");</script></td>         
+       <td></td>  
+    </tr> 
+    <tr> 
+      <td></td>
+      <td align="center" colspan="2">    
+        <select multiple name="mlanList" class="MultiSelect" size=10 onChange="showList(this.form.mlanList);" style="width: 100%;">
+        <!--#nk_get MultipleSubnetList=""-->
+        </select> 
+        </td>
+        <td></td>
+    </tr>    
+    <tr> 
+      <td></td>
+      <td align="center" colspan="2" height="40" style="padding-top:5px;padding-bottom:10px">
+       <script>
+           PrintSTButton("deleteMLAN", "Delete", "delSel(this.form.mlanList,this);");
+	    SetButtonStatus("deleteMLAN", "disabled");	
+       </script>         
+	<img border="0" src="images/_blank.gif" width="5" height="0">
+       <script>
+           PrintSTButton("showNew", "Add New", "clearContent(this.form,this.form.deleteMLAN);");
+	    SetButtonStatus("showNew", "disabled");
+       </script> 	   	
+      </td>
+       <td></td>
+    </tr>     
+  </table>
+  <script>PrintEndPopwindow();</script>
+</form>     
+</body>
+</html>
+<!--#nk_get SysLogChange="edit_multisubnet.htm"-->

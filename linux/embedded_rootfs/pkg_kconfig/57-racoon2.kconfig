@@ -1,0 +1,26 @@
+config CONFIG_racoon2
+   bool "racoon2"
+   select CONFIG_openssl
+   default y
+   help
+      From the racoon2 homepage:
+      Racoon2 is a system to exchange and install security 
+      parameters for IPsec. 
+      Supported key exchange protocols are IKEv2 and KINK. 
+
+      Contents:
+      libracoon.a
+         Library for racoon
+      spmd
+         spmd  manages  IPsec  Security  Policy  for racoon2 key 
+         management daemons.
+      iked
+         iked is a key management daemon, which supports the 
+         Internet Key Exchange protocol version 2 (RFC4306).
+      kinkd
+         kinkd is a key management daemon, which supports the 
+         Kerberized Internet Negotiation of Keys (KINK) protocol. 
+         [Cavium does not support this as of now].
+         
+
+

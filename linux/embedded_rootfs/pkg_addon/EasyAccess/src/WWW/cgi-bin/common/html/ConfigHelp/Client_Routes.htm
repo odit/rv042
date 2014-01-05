@@ -1,0 +1,221 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<!--(==============================================================)-->
+<!--(Document created with RoboEditor. )============================-->
+<!--(==============================================================)-->
+
+<head>
+
+<title>Client Routes</title>
+
+<!--(Meta)==========================================================-->
+
+<meta http-equiv=content-type content="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+<meta name=generator-major-version content=0.1>
+<meta name=generator-minor-version content=1>
+<meta name=filetype content=kadov>
+<meta name=filetype-version content=1>
+<meta name=page-count content=1>
+<meta name=layout-height content=827>
+<meta name=layout-width content=692>
+
+
+<!--(Links)=========================================================-->
+
+ <link rel='stylesheet' href='default_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='default.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+ul.whs1 {list-style: disc;}
+p.whs2 {margin-bottom: 5pt;}
+ol.whs3 {list-style: decimal;}
+p.whs4 {margin-bottom: 6pt;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<!--(Body)==========================================================-->
+
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Virtual Passage\nClient Routes");
+addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("confighelp.htm");
+addSearchFormHref("javascript:document.ehelpform.submit()");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	document.location.reload();
+//-->
+</script>
+<h4>Virtual Passage Client Routes</h4>
+
+<p>To configure SSL VPN client routes, click the <span style="font-weight: bold;"><B>Virtual 
+ Passage</B></span> option in the left navigation menu, then click <span style="font-weight: bold;"><B>Client 
+ Routes</B></span>. &nbsp;</p>
+
+<h6>Define Client Routes</h6>
+
+<p>The <span style="font-weight: bold;"><B>Client Routes</B></span> page enables 
+ you to define the addresses of devices on your local network. Client routes 
+ are only required if the client address range is in a different subnet 
+ then the corporate network or if your network has multiple subnets. Client 
+ routes inform the Virtual Passage client that other networks are located 
+ across the Virtual Passage tunnel. </p>
+
+<p>&nbsp;</p>
+
+<p>How does the Virtual Passage client determine which addresses are located 
+ across the Virtual Passage? Well, first Virtual Passage client assumes 
+ that addresses in the same subnet as the client IP address (PPP interface) 
+ are located across the Virtual Passage tunnel. </p>
+
+<p>&nbsp;</p>
+
+<p>What addresses are in the client subnet? It depends on the client address. 
+ The specific subnet is determined by the class of the IP address. Addresses 
+ between <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>1.0.0.0</U></span> 
+ and <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>126.255.255.255</U></span>, 
+ are <span style="font-weight: bold;"><B>Class A</B></span> addresses; the Virtual 
+ Passage client will assume that all addresses with the same first octet 
+ are located across the VPN tunnel. Addresses between <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>128.0.0.0</U></span> 
+ – <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>191.255.255.255</U></span> 
+ are <span style="font-weight: bold;"><B>Class B</B></span> addresses; the Virtual 
+ Passage client will assume that all addresses with the same first two 
+ octets are located across the VPN tunnel. Addresses between <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>192.0.0.0</U></span> 
+ – <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>223.255.255.255</U></span> 
+ are <span style="font-weight: bold;"><B>Class C</B></span> addresses; the Virtual 
+ Passage client will assume that all addresses with the same first three 
+ octets are located across the VPN tunnel.</p>
+
+<p>&nbsp;</p>
+
+<p>The subnet classes for the designated private IP address ranges are:</p>
+
+<p>&nbsp;</p>
+
+<ul type="disc" class="whs1">
+	
+	<li class=kadov-p><p class="whs2">10.0.0.0 – 10.255.255.255 
+ – Class A subnet</p></li>
+	
+	<li class=kadov-p><p class="whs2">172.16.0.0 – 172.16.31.255.255 
+ – Class B subnet</p></li>
+	
+	<li class=kadov-p><p>192.168.0.1 – 192.168.255.255 – Class C subnet</p></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>If Virtual Passage clients need to connect to addresses on the corporate 
+ network that are not in the same subnet as the client address range, then 
+ you will need to add client routes. </p>
+
+<p>&nbsp;</p>
+
+<p>To add a client route:</p>
+
+<p>&nbsp;</p>
+
+<ol type="1" class="whs3">
+	
+	<li class=kadov-p><p class="whs4">Enter the network 
+ address of your local subnet in the <span style="font-weight: bold;"><B>Destination 
+ Network</B></span> field. </p></li>
+	
+	<li class=kadov-p><p class="whs4">Enter the subnet mask 
+ for the local subnet in the <span style="font-weight: bold;"><B>Subnet Mask</B></span> 
+ field.</p></li>
+	
+	<li class=kadov-p><p>Click <span style="font-weight: bold;"><B>Submit</B></span> 
+ to update the configuration. </p></li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p><span style="font-style: italic; font-weight: bold;"><I><B>NOTE:</B></I></span><span 
+ style="font-style: italic;"><I> You will also need to add a static route 
+ on your corporate firewall or router that directs traffic destined for 
+ the Virtual Passage client address range to the SSL VPN gateway.</I></span> 
+ </p>
+
+<p>&nbsp;</p>
+
+<p>Restart the EasyAccess software if Virtual Passage clients are currently 
+ connected to the SSL VPN gateway. Restarting forces clients to reconnect 
+ and receive new addresses and routes. &nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>Now users will be able to connect to the SSL VPN gateway and receive 
+ a virtual IP address from the client address range.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+<form method="POST" action="http://www.helpcommunity.com/ehelpapi.asp?cmd=WebSave" name="ehelpform" target="_top" style="display:'none';">
+<input type="hidden" name="data" value="2A0C022B000000436C69656E7420526F757465730A5669727475616C205061737361676520436C69656E7420526F757465730D020D000000436C69656E7420526F7574657311020F0000005669727475616C205061737361676512020D000000436C69656E7420526F7574657313021E000000456173794163636573732041646D696E6973747261746976652048656C7015020E000000636F6E66696768656C702E68746D1703730100003C3F786D6C2076657273696F6E3D22312E30223E0D0A3C21444F43545950452053595354454D20226568656C706F70742E647464223E0D0A3C46494C452D4F5054494F4E532046494C452D56455253494F4E3D2232222046494C452D4B45593D2236636337656136315F383866665F343436655F623164625F376662643435313131656463223E0D0A3C2F46494C452D4F5054494F4E533E0D0A3C4548454C502D4F5054494F4E5320464F524D41542D56455253494F4E3D22312E30223E0D0A203C4F5054494F4E5320454E41424C45443D225945532220454D4245444445443D2259455322204D41494E2D57494E444F572D4F4E4C593D224E4F2220434F4D4D554E4954592D4E4F544946593D224E4F222046495253542D504147453D224E4F542D534554223E0D0A203C2F4F5054494F4E533E0D0A203C425554544F4E2D4C4142454C3E5765625365617263680D0A203C2F425554544F4E2D4C4142454C3E0D0A3C2F4548454C502D4F5054494F4E533E18010400000002000000702A">
+</form>
+</body>
+
+</html>

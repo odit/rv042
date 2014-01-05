@@ -1,0 +1,6 @@
+config CONFIG_atheros-wireless-driver
+        bool "atheros-wireless-driver"
+        default y
+        help
+                Add support for Atheros 802.11n multiband driver.
+

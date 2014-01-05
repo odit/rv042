@@ -1,0 +1,22 @@
+config CONFIG_final-cleanup
+	bool "final-cleanup"
+	default y
+	help
+		Performs final cleanup operations required to minimize the
+		filesystem size.
+		- Remove /usr/include
+		- Remove gconv libraries
+		- Remove "man" and "info" pages
+		- Remove static libraries
+		- Strip binaries and libraries
+		- Change file ownership
+
+config CFG_EXTRA_FILES_DIR
+	string "Directory to copy extra files from"
+	depends CONFIG_final-cleanup
+	default ""
+	help
+		This is an optional directory for extra files in the filesystem.
+		All files in this directory are copied into the filesystem with
+		"cp -R <directory>/* /"
+

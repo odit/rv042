@@ -1,0 +1,6 @@
+config CONFIG_pppd
+	bool "pppd"
+	default n
+	help
+		Include pppd
+

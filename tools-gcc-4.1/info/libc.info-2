@@ -1,0 +1,1575 @@
+This is libc.info, produced by makeinfo version 4.3 from
+/usr/local/Cavium_Networks/toolchain/src/newlib/libc/libc.texinfo.
+
+START-INFO-DIR-ENTRY
+* libc::                        The ANSI C library.
+END-INFO-DIR-ENTRY
+
+   This file documents the ANSI C library.
+
+   Copyright (C) 1992, 1993, 1994-2004 Red Hat, Inc.
+
+   `libc' includes software developed by the University of California,
+Berkeley and its contributors.
+
+   libc includes software developed by Martin Jackson, Graham Haley and
+Steve Chamberlain of Tadpole Technology and released to Cygnus.
+
+   libc uses floating-point conversion software developed at AT&T, which
+includes this copyright information:
+
+   The author of this software is David M. Gay.
+
+   Copyright (c) 1991 by AT&T.
+
+   Permission to use, copy, modify, and distribute this software for any
+purpose without fee is hereby granted, provided that this entire notice
+is included in all copies of any software which is or includes a copy
+or modification of this software and in all copies of the supporting
+documentation for such software.
+
+   THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR
+IMPLIED  WARRANTY.  IN PARTICULAR, NEITHER THE AUTHOR NOR AT&T MAKES ANY
+REPRESENTATION OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY
+OF THIS SOFTWARE OR ITS FITNESS FOR ANY PARTICULAR PURPOSE.
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, subject to the
+terms of the GNU General Public License, which includes the provision
+that the entire resulting derived work is distributed under the terms
+of a permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions.
+
+
+File: libc.info,  Node: strtoll,  Next: strtoul,  Prev: strtol,  Up: Stdlib
+
+`strtoll'--string to long long
+==============================
+
+*Synopsis*
+     #include <stdlib.h>
+     long long strtoll(const char *S, char **PTR,int BASE);
+     
+     long long _strtoll_r(void *REENT,
+         const char *S, char **PTR,int BASE);
+   *Description*
+The function `strtoll' converts the string `*S' to a `long long'.
+First, it breaks down the string into three parts: leading whitespace,
+which is ignored; a subject string consisting of characters resembling
+an integer in the radix specified by BASE; and a trailing portion
+consisting of zero or more unparseable characters, and always including
+the terminating null character. Then, it attempts to convert the
+subject string into a `long long' and returns the result.
+
+   If the value of BASE is 0, the subject string is expected to look
+like a normal C integer constant: an optional sign, a possible ``0x''
+indicating a hexadecimal base, and a number. If BASE is between 2 and
+36, the expected form of the subject is a sequence of letters and
+digits representing an integer in the radix specified by BASE, with an
+optional plus or minus sign. The letters `a'-`z' (or, equivalently,
+`A'-`Z') are used to signify values from 10 to 35; only letters whose
+ascribed values are less than BASE are permitted. If BASE is 16, a
+leading `0x' is permitted.
+
+   The subject sequence is the longest initial sequence of the input
+string that has the expected form, starting with the first
+non-whitespace character.  If the string is empty or consists entirely
+of whitespace, or if the first non-whitespace character is not a
+permissible letter or digit, the subject string is empty.
+
+   If the subject string is acceptable, and the value of BASE is zero,
+`strtoll' attempts to determine the radix from the input string. A
+string with a leading `0x' is treated as a hexadecimal value; a string
+with a leading 0 and no `x' is treated as octal; all other strings are
+treated as decimal. If BASE is between 2 and 36, it is used as the
+conversion radix, as described above. If the subject string begins with
+a minus sign, the value is negated. Finally, a pointer to the first
+character past the converted subject string is stored in PTR, if PTR is
+not `NULL'.
+
+   If the subject string is empty (or not in acceptable form), no
+conversion is performed and the value of S is stored in PTR (if PTR is
+not `NULL').
+
+   The alternate function `_strtoll_r' is a reentrant version.  The
+extra argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+`strtoll' returns the converted value, if any. If no conversion was
+made, 0 is returned.
+
+   `strtoll' returns `LONG_LONG_MAX' or `LONG_LONG_MIN' if the
+magnitude of the converted value is too large, and sets `errno' to
+`ERANGE'.
+
+*Portability*
+`strtoll' is nonstandard.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: strtoul,  Next: strtoull,  Prev: strtoll,  Up: Stdlib
+
+`strtoul'--string to unsigned long
+==================================
+
+*Synopsis*
+     #include <stdlib.h>
+     unsigned long strtoul(const char *S, char **PTR,
+         int BASE);
+     
+     unsigned long _strtoul_r(void *REENT, const char *S,
+         char **PTR, int BASE);
+   *Description*
+The function `strtoul' converts the string `*S' to an `unsigned long'.
+First, it breaks down the string into three parts: leading whitespace,
+which is ignored; a subject string consisting of the digits meaningful
+in the radix specified by BASE (for example, `0' through `7' if the
+value of BASE is 8); and a trailing portion consisting of one or more
+unparseable characters, which always includes the terminating null
+character. Then, it attempts to convert the subject string into an
+unsigned long integer, and returns the result.
+
+   If the value of BASE is zero, the subject string is expected to look
+like a normal C integer constant (save that no optional sign is
+permitted): a possible `0x' indicating hexadecimal radix, and a number.
+If BASE is between 2 and 36, the expected form of the subject is a
+sequence of digits (which may include letters, depending on the base)
+representing an integer in the radix specified by BASE.  The letters
+`a'-`z' (or `A'-`Z') are used as digits valued from 10 to 35. If BASE
+is 16, a leading `0x' is permitted.
+
+   The subject sequence is the longest initial sequence of the input
+string that has the expected form, starting with the first
+non-whitespace character.  If the string is empty or consists entirely
+of whitespace, or if the first non-whitespace character is not a
+permissible digit, the subject string is empty.
+
+   If the subject string is acceptable, and the value of BASE is zero,
+`strtoul' attempts to determine the radix from the input string. A
+string with a leading `0x' is treated as a hexadecimal value; a string
+with a leading `0' and no `x' is treated as octal; all other strings are
+treated as decimal. If BASE is between 2 and 36, it is used as the
+conversion radix, as described above. Finally, a pointer to the first
+character past the converted subject string is stored in PTR, if PTR is
+not `NULL'.
+
+   If the subject string is empty (that is, if `*'S does not start with
+a substring in acceptable form), no conversion is performed and the
+value of S is stored in PTR (if PTR is not `NULL').
+
+   The alternate function `_strtoul_r' is a reentrant version.  The
+extra argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+`strtoul' returns the converted value, if any. If no conversion was
+made, `0' is returned.
+
+   `strtoul' returns `ULONG_MAX' if the magnitude of the converted
+value is too large, and sets `errno' to `ERANGE'.
+
+*Portability*
+`strtoul' is ANSI.
+
+   `strtoul' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: strtoull,  Next: system,  Prev: strtoul,  Up: Stdlib
+
+`strtoull'--string to unsigned long long
+========================================
+
+*Synopsis*
+     #include <stdlib.h>
+     unsigned long long strtoull(const char *S, char **PTR,
+         int BASE);
+     
+     unsigned long long _strtoull_r(void *REENT, const char *S,
+         char **PTR, int BASE);
+   *Description*
+The function `strtoull' converts the string `*S' to an `unsigned long
+long'. First, it breaks down the string into three parts: leading
+whitespace, which is ignored; a subject string consisting of the digits
+meaningful in the radix specified by BASE (for example, `0' through `7'
+if the value of BASE is 8); and a trailing portion consisting of one or
+more unparseable characters, which always includes the terminating null
+character. Then, it attempts to convert the subject string into an
+unsigned long long integer, and returns the result.
+
+   If the value of BASE is zero, the subject string is expected to look
+like a normal C integer constant (save that no optional sign is
+permitted): a possible `0x' indicating hexadecimal radix, and a number.
+If BASE is between 2 and 36, the expected form of the subject is a
+sequence of digits (which may include letters, depending on the base)
+representing an integer in the radix specified by BASE.  The letters
+`a'-`z' (or `A'-`Z') are used as digits valued from 10 to 35. If BASE
+is 16, a leading `0x' is permitted.
+
+   The subject sequence is the longest initial sequence of the input
+string that has the expected form, starting with the first
+non-whitespace character.  If the string is empty or consists entirely
+of whitespace, or if the first non-whitespace character is not a
+permissible digit, the subject string is empty.
+
+   If the subject string is acceptable, and the value of BASE is zero,
+`strtoull' attempts to determine the radix from the input string. A
+string with a leading `0x' is treated as a hexadecimal value; a string
+with a leading `0' and no `x' is treated as octal; all other strings are
+treated as decimal. If BASE is between 2 and 36, it is used as the
+conversion radix, as described above. Finally, a pointer to the first
+character past the converted subject string is stored in PTR, if PTR is
+not `NULL'.
+
+   If the subject string is empty (that is, if `*'S does not start with
+a substring in acceptable form), no conversion is performed and the
+value of S is stored in PTR (if PTR is not `NULL').
+
+   The alternate function `_strtoull_r' is a reentrant version.  The
+extra argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+`strtoull' returns the converted value, if any. If no conversion was
+made, `0' is returned.
+
+   `strtoull' returns `ULONG_LONG_MAX' if the magnitude of the converted
+value is too large, and sets `errno' to `ERANGE'.
+
+*Portability*
+`strtoull' is nonstandard.
+
+   `strtoull' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: system,  Next: wcstombs,  Prev: strtoull,  Up: Stdlib
+
+`system'--execute command string
+================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int system(char *S);
+     
+     int _system_r(void *REENT, char *S);
+   *Description*
+Use `system' to pass a command string `*S' to `/bin/sh' on your system,
+and wait for it to finish executing.
+
+   Use "`system(NULL)'" to test whether your system has `/bin/sh'
+available.
+
+   The alternate function `_system_r' is a reentrant version.  The
+extra argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+`system(NULL)' returns a non-zero value if `/bin/sh' is available, and
+`0' if it is not.
+
+   With a command argument, the result of `system' is the exit status
+returned by `/bin/sh'.
+
+*Portability*
+ANSI C requires `system', but leaves the nature and effects of a
+command processor undefined.  ANSI C does, however, specify that
+`system(NULL)' return zero or nonzero to report on the existence of a
+command processor.
+
+   POSIX.2 requires `system', and requires that it invoke a `sh'.
+Where `sh' is found is left unspecified.
+
+   Supporting OS subroutines required: `_exit', `_execve', `_fork_r',
+`_wait_r'.
+
+
+File: libc.info,  Node: wcstombs,  Next: wctomb,  Prev: system,  Up: Stdlib
+
+`wcstombs'--minimal wide char string to multibyte string converter
+==================================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int wcstombs(const char *S, wchar_t *PWC, size_t N);
+   *Description*
+When _MB_CAPABLE is not defined, this is a minimal ANSI-conforming
+implementation of `wcstombs'.  In this case, all wide-characters are
+expected to represent single bytes and so are converted simply by
+casting to char.
+
+   When _MB_CAPABLE is defined, this routine calls `_wcstombs_r' to
+perform the conversion, passing a state variable to allow state
+dependent decoding.  The result is based on the locale setting which may
+be restricted to a defined set of locales.
+
+*Returns*
+This implementation of `wcstombs' returns `0' if S is `NULL' or is the
+empty string; it returns `-1' if _MB_CAPABLE and one of the wide-char
+characters does not represent a valid multi-byte character; otherwise
+it returns the minimum of: `n' or the number of bytes that are
+transferred to `s', not including the nul terminator.
+
+   If the return value is -1, the state of the `pwc' string is
+indeterminate.  If the input has a length of 0, the output string will
+be modified to contain a wchar_t nul terminator if `n' > 0.
+
+*Portability*
+`wcstombs' is required in the ANSI C standard.  However, the precise
+effects vary with the locale.
+
+   `wcstombs' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: wctomb,  Prev: wcstombs,  Up: Stdlib
+
+`wctomb'--minimal wide char to multibyte converter
+==================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int wctomb(char *S, wchar_t WCHAR);
+   *Description*
+When _MB_CAPABLE is not defined, this is a minimal ANSI-conforming
+implementation of `wctomb'.  The only "wide characters" recognized are
+single bytes, and they are "converted" to themselves.
+
+   When _MB_CAPABLE is defined, this routine calls `_wctomb_r' to
+perform the conversion, passing a state variable to allow state
+dependent decoding.  The result is based on the locale setting which may
+be restricted to a defined set of locales.
+
+   Each call to `wctomb' modifies `*S' unless S is a null pointer or
+_MB_CAPABLE is defined and WCHAR is invalid.
+
+*Returns*
+This implementation of `wctomb' returns `0' if S is `NULL'; it returns
+`-1' if _MB_CAPABLE is enabled and the wchar is not a valid multi-byte
+character, it returns `1' if _MB_CAPABLE is not defined or the wchar is
+in reality a single byte character, otherwise it returns the number of
+bytes in the multi-byte character.
+
+*Portability*
+`wctomb' is required in the ANSI C standard.  However, the precise
+effects vary with the locale.
+
+   `wctomb' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: Ctype,  Next: Stdio,  Prev: Stdlib,  Up: Top
+
+Character Type Macros and Functions (`ctype.h')
+***********************************************
+
+This chapter groups macros (which are also available as subroutines) to
+classify characters into several categories (alphabetic, numeric,
+control characters, whitespace, and so on), or to perform simple
+character mappings.
+
+   The header file `ctype.h' defines the macros.
+
+* Menu:
+
+* isalnum::   Alphanumeric character predicate
+* isalpha::   Alphabetic character predicate
+* isascii::   ASCII character predicate
+* iscntrl::   Control character predicate
+* isdigit::   Decimal digit predicate
+* islower::   Lowercase character predicate
+* isprint::   Printable character predicates (isprint, isgraph)
+* ispunct::   Punctuation character predicate
+* isspace::   Whitespace character predicate
+* isupper::   Uppercase character predicate
+* isxdigit::  Hexadecimal digit predicate
+* toascii::   Force integers to ASCII range
+* tolower::   Translate characters to lowercase
+* toupper::   Translate characters to uppercase
+* iswalnum::  Alphanumeric wide character predicate
+* iswalpha::  Alphabetic wide character predicate
+* iswblank::  Blank wide character predicate
+* iswcntrl::  Control wide character predicate
+* iswdigit::  Decimal digit wide character predicate
+* iswgraph::  Graphic wide character predicate
+* iswlower::  Lowercase wide character predicate
+* iswprint::  Printable wide character predicate
+* iswpunct::  Punctuation wide character predicate
+* iswspace::  Whitespace wide character predicate
+* iswupper::  Uppercase wide character predicate
+* iswxdigit:: Hexadecimal digit wide character predicate
+* iswctype::  Extensible wide-character test
+* wctype::    Compute wide-character test type
+* towlower::  Translate wide characters to lowercase
+* towupper::  Translate wide characters to uppercase
+* towctrans:: Extensible wide-character translation
+* wctrans::   Compute wide-character translation type
+
+
+File: libc.info,  Node: isalnum,  Next: isalpha,  Up: Ctype
+
+`isalnum'--alphanumeric character predicate
+===========================================
+
+   *Synopsis*
+     #include <ctype.h>
+     int isalnum(int C);
+   *Description*
+`isalnum' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for alphabetic or numeric
+ASCII characters, and `0' for other arguments.  It is defined for all
+integer values.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef isalnum''.
+
+*Returns*
+`isalnum' returns non-zero if C is a letter (`a'-`z' or `A'-`Z') or a
+digit (`0'-`9').
+
+*Portability*
+`isalnum' is ANSI C.
+
+   No OS subroutines are required.
+
+
+File: libc.info,  Node: isalpha,  Next: isascii,  Prev: isalnum,  Up: Ctype
+
+`isalpha'--alphabetic character predicate
+=========================================
+
+*Synopsis*
+     #include <ctype.h>
+     int isalpha(int C);
+   *Description*
+`isalpha' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero when C represents an
+alphabetic ASCII character, and 0 otherwise.  It is defined only when
+`isascii'(C) is true or C is EOF.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef isalpha''.
+
+*Returns*
+`isalpha' returns non-zero if C is a letter (`A'-`Z' or `a'-`z').
+
+*Portability*
+`isalpha' is ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: isascii,  Next: iscntrl,  Prev: isalpha,  Up: Ctype
+
+`isascii'--ASCII character predicate
+====================================
+
+*Synopsis*
+     #include <ctype.h>
+     int isascii(int C);
+   *Description*
+`isascii' is a macro which returns non-zero when C is an ASCII
+character, and 0 otherwise.  It is defined for all integer values.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef isascii''.
+
+*Returns*
+`isascii' returns non-zero if the low order byte of C is in the range 0
+to 127 (`0x00'-`0x7F').
+
+*Portability*
+`isascii' is ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iscntrl,  Next: isdigit,  Prev: isascii,  Up: Ctype
+
+`iscntrl'--control character predicate
+======================================
+
+*Synopsis*
+     #include <ctype.h>
+     int iscntrl(int C);
+   *Description*
+`iscntrl' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for control characters,
+and 0 for other characters.  It is defined only when `isascii'(C) is
+true or C is EOF.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef iscntrl''.
+
+*Returns*
+`iscntrl' returns non-zero if C is a delete character or ordinary
+control character (`0x7F' or `0x00'-`0x1F').
+
+*Portability*
+`iscntrl' is ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: isdigit,  Next: islower,  Prev: iscntrl,  Up: Ctype
+
+`isdigit'--decimal digit predicate
+==================================
+
+*Synopsis*
+     #include <ctype.h>
+     int isdigit(int C);
+   *Description*
+`isdigit' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for decimal digits, and 0
+for other characters.  It is defined only when `isascii'(C) is true or
+C is EOF.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef isdigit''.
+
+*Returns*
+`isdigit' returns non-zero if C is a decimal digit (`0'-`9').
+
+*Portability*
+`isdigit' is ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: islower,  Next: isprint,  Prev: isdigit,  Up: Ctype
+
+`islower'--lowercase character predicate
+========================================
+
+*Synopsis*
+     #include <ctype.h>
+     int islower(int C);
+   *Description*
+`islower' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for minuscules (lowercase
+alphabetic characters), and 0 for other characters.  It is defined only
+when `isascii'(C) is true or C is EOF.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef islower''.
+
+*Returns*
+`islower' returns non-zero if C is a lowercase letter (`a'-`z').
+
+*Portability*
+`islower' is ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: isprint,  Next: ispunct,  Prev: islower,  Up: Ctype
+
+`isprint', `isgraph'--printable character predicates
+====================================================
+
+*Synopsis*
+     #include <ctype.h>
+     int isprint(int C);
+     int isgraph(int C);
+   *Description*
+`isprint' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for printable characters,
+and 0 for other character arguments.  It is defined only when
+`isascii'(C) is true or C is EOF.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining either macro using ``#undef isprint'' or ``#undef isgraph''.
+
+*Returns*
+`isprint' returns non-zero if C is a printing character,
+(`0x20'-`0x7E').  `isgraph' behaves identically to `isprint', except
+that the space character (`0x20') is excluded.
+
+*Portability*
+`isprint' and `isgraph' are ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: ispunct,  Next: isspace,  Prev: isprint,  Up: Ctype
+
+`ispunct'--punctuation character predicate
+==========================================
+
+*Synopsis*
+     #include <ctype.h>
+     int ispunct(int C);
+   *Description*
+`ispunct' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for printable punctuation
+characters, and 0 for other characters.  It is defined only when
+`isascii'(C) is true or C is EOF.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef ispunct''.
+
+*Returns*
+`ispunct' returns non-zero if C is a printable punctuation character
+(`isgraph(C) && !isalnum(C)').
+
+*Portability*
+`ispunct' is ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: isspace,  Next: isupper,  Prev: ispunct,  Up: Ctype
+
+`isspace'--whitespace character predicate
+=========================================
+
+*Synopsis*
+     #include <ctype.h>
+     int isspace(int C);
+   *Description*
+`isspace' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for whitespace
+characters, and 0 for other characters.  It is defined only when
+`isascii'(C) is true or C is EOF.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef isspace''.
+
+*Returns*
+`isspace' returns non-zero if C is a space, tab, carriage return, new
+line, vertical tab, or formfeed (`0x09'-`0x0D', `0x20').
+
+*Portability*
+`isspace' is ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: isupper,  Next: isxdigit,  Prev: isspace,  Up: Ctype
+
+`isupper'--uppercase character predicate
+========================================
+
+*Synopsis*
+     #include <ctype.h>
+     int isupper(int C);
+   *Description*
+`isupper' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for uppercase letters
+(`A'-`Z'), and 0 for other characters.  It is defined only when
+`isascii'(C) is true or C is EOF.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef isupper''.
+
+*Returns*
+`isupper' returns non-zero if C is a uppercase letter (A-Z).
+
+*Portability*
+`isupper' is ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: isxdigit,  Next: toascii,  Prev: isupper,  Up: Ctype
+
+`isxdigit'--hexadecimal digit predicate
+=======================================
+
+*Synopsis*
+     #include <ctype.h>
+     int isxdigit(int C);
+   *Description*
+`isxdigit' is a macro which classifies ASCII integer values by table
+lookup.  It is a predicate returning non-zero for hexadecimal digits,
+and `0' for other characters.  It is defined only when `isascii'(C) is
+true or C is EOF.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining the macro using ``#undef isxdigit''.
+
+*Returns*
+`isxdigit' returns non-zero if C is a hexadecimal digit (`0'-`9',
+`a'-`f', or `A'-`F').
+
+*Portability*
+`isxdigit' is ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: toascii,  Next: tolower,  Prev: isxdigit,  Up: Ctype
+
+`toascii'--force integers to ASCII range
+========================================
+
+*Synopsis*
+     #include <ctype.h>
+     int toascii(int C);
+   *Description*
+`toascii' is a macro which coerces integers to the ASCII range (0-127)
+by zeroing any higher-order bits.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining this macro using ``#undef toascii''.
+
+*Returns*
+`toascii' returns integers between 0 and 127.
+
+*Portability*
+`toascii' is not ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: tolower,  Next: toupper,  Prev: toascii,  Up: Ctype
+
+`tolower'--translate characters to lowercase
+============================================
+
+*Synopsis*
+     #include <ctype.h>
+     int tolower(int C);
+     int _tolower(int C);
+   *Description*
+`tolower' is a macro which converts uppercase characters to lowercase,
+leaving all other characters unchanged.  It is only defined when C is
+an integer in the range `EOF' to `255'.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining this macro using ``#undef tolower''.
+
+   `_tolower' performs the same conversion as `tolower', but should
+only be used when C is known to be an uppercase character (`A'-`Z').
+
+*Returns*
+`tolower' returns the lowercase equivalent of C when it is a character
+between `A' and `Z', and C otherwise.
+
+   `_tolower' returns the lowercase equivalent of C when it is a
+character between `A' and `Z'.  If C is not one of these characters,
+the behaviour of `_tolower' is undefined.
+
+*Portability*
+`tolower' is ANSI C.  `_tolower' is not recommended for portable
+programs.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: toupper,  Next: iswalnum,  Prev: tolower,  Up: Ctype
+
+`toupper'--translate characters to uppercase
+============================================
+
+*Synopsis*
+     #include <ctype.h>
+     int toupper(int C);
+     int _toupper(int C);
+   *Description*
+`toupper' is a macro which converts lowercase characters to uppercase,
+leaving all other characters unchanged.  It is only defined when C is
+an integer in the range `EOF' to `255'.
+
+   You can use a compiled subroutine instead of the macro definition by
+undefining this macro using ``#undef toupper''.
+
+   `_toupper' performs the same conversion as `toupper', but should
+only be used when C is known to be a lowercase character (`a'-`z').
+
+*Returns*
+`toupper' returns the uppercase equivalent of C when it is a character
+between `a' and `z', and C otherwise.
+
+   `_toupper' returns the uppercase equivalent of C when it is a
+character between `a' and `z'.  If C is not one of these characters,
+the behaviour of `_toupper' is undefined.
+
+*Portability*
+`toupper' is ANSI C.  `_toupper' is not recommended for portable
+programs.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswalnum,  Next: iswalpha,  Prev: toupper,  Up: Ctype
+
+`iswalnum'--alphanumeric wide character test
+============================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswalnum(wint_t C);
+   *Description*
+`iswalnum' is a function which classifies wide-character values that
+are alphanumeric.
+
+*Returns*
+`iswalnum' returns non-zero if C is a alphanumeric wide character.
+
+*Portability*
+`iswalnum' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswalpha,  Next: iswblank,  Prev: iswalnum,  Up: Ctype
+
+`iswalpha'--alphabetic wide character test
+==========================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswalpha(wint_t C);
+   *Description*
+`iswalpha' is a function which classifies wide-character values that
+are alphabetic.
+
+*Returns*
+`iswalpha' returns non-zero if C is an alphabetic wide character.
+
+*Portability*
+`iswalpha' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswcntrl,  Next: iswdigit,  Prev: iswblank,  Up: Ctype
+
+`iswcntrl'--control wide character test
+=======================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswcntrl(wint_t C);
+   *Description*
+`iswcntrl' is a function which classifies wide-character values that
+are categorized as control characters.
+
+*Returns*
+`iswcntrl' returns non-zero if C is a control wide character.
+
+*Portability*
+`iswcntrl' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswblank,  Next: iswcntrl,  Prev: iswalpha,  Up: Ctype
+
+`iswblank'--blank wide character test
+=====================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswblank(wint_t C);
+   *Description*
+`iswblank' is a function which classifies wide-character values that
+are categorized as blank.
+
+*Returns*
+`iswblank' returns non-zero if C is a blank wide character.
+
+*Portability*
+`iswblank' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswdigit,  Next: iswgraph,  Prev: iswcntrl,  Up: Ctype
+
+`iswdigit'--decimal digit wide character test
+=============================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswdigit(wint_t C);
+   *Description*
+`iswdigit' is a function which classifies wide-character values that
+are decimal digits.
+
+*Returns*
+`iswdigit' returns non-zero if C is a decimal digit wide character.
+
+*Portability*
+`iswdigit' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswgraph,  Next: iswlower,  Prev: iswdigit,  Up: Ctype
+
+`iswgraph'--graphic wide character test
+=======================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswgraph(wint_t C);
+   *Description*
+`iswgraph' is a function which classifies wide-character values that
+are graphic.
+
+*Returns*
+`iswgraph' returns non-zero if C is a graphic wide character.
+
+*Portability*
+`iswgraph' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswlower,  Next: iswprint,  Prev: iswgraph,  Up: Ctype
+
+`iswlower'--lowercase wide character test
+=========================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswlower(wint_t C);
+   *Description*
+`iswlower' is a function which classifies wide-character values that
+have uppercase translations.
+
+*Returns*
+`iswlower' returns non-zero if C is a lowercase wide character.
+
+*Portability*
+`iswlower' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswprint,  Next: iswpunct,  Prev: iswlower,  Up: Ctype
+
+`iswprint'--printable wide character test
+=========================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswprint(wint_t C);
+   *Description*
+`iswprint' is a function which classifies wide-character values that
+are printable.
+
+*Returns*
+`iswprint' returns non-zero if C is a printable wide character.
+
+*Portability*
+`iswprint' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswpunct,  Next: iswspace,  Prev: iswprint,  Up: Ctype
+
+`iswpunct'--punctuation wide character test
+===========================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswpunct(wint_t C);
+   *Description*
+`iswpunct' is a function which classifies wide-character values that
+are punctuation.
+
+*Returns*
+`iswpunct' returns non-zero if C is a punctuation wide character.
+
+*Portability*
+`iswpunct' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswspace,  Next: iswupper,  Prev: iswpunct,  Up: Ctype
+
+`iswspace'--whitespace wide character test
+==========================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswspace(wint_t C);
+   *Description*
+`iswspace' is a function which classifies wide-character values that
+are categorized as whitespace.
+
+*Returns*
+`iswspace' returns non-zero if C is a whitespace wide character.
+
+*Portability*
+`iswspace' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswupper,  Next: iswxdigit,  Prev: iswspace,  Up: Ctype
+
+`iswupper'--uppercase wide character test
+=========================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswupper(wint_t C);
+   *Description*
+`iswupper' is a function which classifies wide-character values that
+have uppercase translations.
+
+*Returns*
+`iswupper' returns non-zero if C is a uppercase wide character.
+
+*Portability*
+`iswupper' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswxdigit,  Next: iswctype,  Prev: iswupper,  Up: Ctype
+
+`iswxdigit'--hexadecimal digit wide character test
+==================================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswxdigit(wint_t C);
+   *Description*
+`iswxdigit' is a function which classifies wide character values that
+are hexadecimal digits.
+
+*Returns*
+`iswxdigit' returns non-zero if C is a hexadecimal digit wide character.
+
+*Portability*
+`iswxdigit' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: iswctype,  Next: wctype,  Prev: iswxdigit,  Up: Ctype
+
+`iswctype'--extensible wide-character test
+==========================================
+
+*Synopsis*
+     #include <wctype.h>
+     int iswctype(wint_t C, wctype_t DESC);
+   *Description*
+`iswctype' is a function which classifies wide-character values using
+the wide-character test specified by DESC.
+
+*Returns*
+`iswctype' returns non-zero if and only if C matches the test specified
+by DESC.  If DESC is unknown, zero is returned.
+
+*Portability*
+`iswctype' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wctype,  Next: towlower,  Prev: iswctype,  Up: Ctype
+
+`wctype'--get wide-character classification type
+================================================
+
+*Synopsis*
+     #include <wctype.h>
+     wctype_t wctype(const char *C);
+   *Description*
+`wctype' is a function which takes a string C and gives back the
+appropriate wctype_t type value associated with the string, if one
+exists.  The following values are guaranteed to be recognized: "alnum",
+"alpha", "blank", "cntrl", "digit", "graph", "lower", "print", "punct",
+"space", "upper", and "xdigit".
+
+*Returns*
+`wctype' returns 0 and sets `errno' to `EINVAL' if the given name is
+invalid.  Otherwise, it returns a valid non-zero wctype_t value.
+
+*Portability*
+`wctype' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: towlower,  Next: towupper,  Prev: wctype,  Up: Ctype
+
+`towlower'--translate wide characters to lowercase
+==================================================
+
+*Synopsis*
+     #include <wctype.h>
+     wint_t towlower(wint_t C);
+   *Description*
+`towlower' is a function which converts uppercase wide characters to
+lowercase, leaving all other characters unchanged.
+
+*Returns*
+`towlower' returns the lowercase equivalent of C when it is a uppercase
+wide character; otherwise, it returns the input character.
+
+*Portability*
+`towlower' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: towupper,  Next: towctrans,  Prev: towlower,  Up: Ctype
+
+`towupper'--translate wide characters to uppercase
+==================================================
+
+*Synopsis*
+     #include <wctype.h>
+     wint_t towupper(wint_t C);
+   *Description*
+`towupper' is a function which converts lowercase wide characters to
+uppercase, leaving all other characters unchanged.
+
+*Returns*
+`towupper' returns the uppercase equivalent of C when it is a lowercase
+wide character, otherwise, it returns the input character.
+
+*Portability*
+`towupper' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: towctrans,  Next: wctrans,  Prev: towupper,  Up: Ctype
+
+`towctrans'--extensible wide-character translation
+==================================================
+
+*Synopsis*
+     #include <wctype.h>
+     wint_t towctrans(wint_t C, wctrans_t W);
+   *Description*
+`towctrans' is a function which converts wide characters based on a
+specified translation type W.  If the translation type is invalid or
+cannot be applied to the current character, no change to the character
+is made.
+
+*Returns*
+`towctrans' returns the translated equivalent of C when it is a valid
+for the given translation, otherwise, it returns the input character.
+When the translation type is invalid, `errno' is set `EINVAL'.
+
+*Portability*
+`towctrans' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: wctrans,  Prev: towctrans,  Up: Ctype
+
+`wctrans'--get wide-character translation type
+==============================================
+
+*Synopsis*
+     #include <wctype.h>
+     wctrans_t wctrans(const char *C);
+   *Description*
+`wctrans' is a function which takes a string C and gives back the
+appropriate wctrans_t type value associated with the string, if one
+exists.  The following values are guaranteed to be recognized:
+"tolower" and "toupper".
+
+*Returns*
+`wctrans' returns 0 and sets `errno' to `EINVAL' if the given name is
+invalid.  Otherwise, it returns a valid non-zero wctrans_t value.
+
+*Portability*
+`wctrans' is C99.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: Stdio,  Next: Strings,  Prev: Ctype,  Up: Top
+
+Input and Output (`stdio.h')
+****************************
+
+This chapter comprises functions to manage files or other input/output
+streams. Among these functions are subroutines to generate or scan
+strings according to specifications from a format string.
+
+   The underlying facilities for input and output depend on the host
+system, but these functions provide a uniform interface.
+
+   The corresponding declarations are in `stdio.h'.
+
+   The reentrant versions of these functions use macros
+
+     _stdin_r(REENT)
+     _stdout_r(REENT)
+     _stderr_r(REENT)
+
+instead of the globals `stdin', `stdout', and `stderr'.  The argument
+<[reent]> is a pointer to a reentrancy structure.
+
+* Menu:
+
+* clearerr::    Clear file or stream error indicator
+* dprintf::     Print to a file descriptor
+* fclose::      Close a file
+* fcloseall::   Close all files
+* feof::        Test for end of file
+* ferror::      Test whether read/write error has occurred
+* fflush::      Flush buffered file output
+* fgetc::       Get a character from a file or stream
+* fgetpos::     Record position in a stream or file
+* fgets::       Get character string from a file or stream
+* fileno::      Get file descriptor associated with stream
+* fopen::       Open a file
+* fdopen::	Turn an open file into a stream
+* fputc::       Write a character on a stream or file
+* fputs::       Write a character string in a file or stream
+* fread::       Read array elements from a file
+* freopen::     Open a file using an existing file descriptor
+* fseek::       Set file position
+* fsetpos::     Restore position of a stream or file
+* ftell::       Return position in a stream or file
+* fwrite::      Write array elements from memory to a file or stream
+* getc::        Get a character from a file or stream (macro)
+* getc_unlocked::	Get a character from a file or stream (macro)
+* getchar::     Get a character from standard input (macro)
+* getchar_unlocked::	Get a character from standard input (macro)
+* getdelim::    Get character string from a file or stream
+* getline::     Get character string from a file or stream
+* gets::        Get character string from standard input (obsolete)
+* getw::        Get a word (int) from a file or stream
+* mktemp::      Generate unused file name
+* perror::      Print an error message on standard error
+* putc::        Write a character on a stream or file (macro)
+* putc_unlocked::	Write a character on a stream or file (macro)
+* putchar::     Write a character on standard output (macro)
+* putchar_unlocked::	Write a character on standard output (macro)
+* puts::        Write a character string on standard output
+* putw::        Write a word (int) to a file or stream
+* remove::      Delete a file's name
+* rename::      Rename a file
+* rewind::      Reinitialize a file or stream
+* setbuf::      Specify full buffering for a file or stream
+* setbuffer::   Specify full buffering for a file or stream with size
+* setlinebuf::  Specify line buffering for a file or stream
+* setvbuf::     Specify buffering for a file or stream
+* printf::      Write formatted output
+* scanf::       Scan and format input
+* iprintf::     Write formatted output (integer only)
+* iscanf::      Scan and format input (integer only)
+* tmpfile::     Create a temporary file
+* tmpnam::      Generate name for a temporary file
+* viprintf::    Format variable argument list for non-floating-point output
+* viscanf::     Scan variable format list for non-floating-point input
+* vprintf::     Format variable argument list
+* vscanf::      Format variable argument list
+
+
+File: libc.info,  Node: clearerr,  Next: dprintf,  Up: Stdio
+
+`clearerr'--clear file or stream error indicator
+================================================
+
+   *Synopsis*
+     #include <stdio.h>
+     void clearerr(FILE *FP);
+   *Description*
+The `stdio' functions maintain an error indicator with each file
+pointer FP, to record whether any read or write errors have occurred on
+the associated file or stream.  Similarly, it maintains an end-of-file
+indicator to record whether there is no more data in the file.
+
+   Use `clearerr' to reset both of these indicators.
+
+   See `ferror' and `feof' to query the two indicators.
+
+*Returns*
+`clearerr' does not return a result.
+
+*Portability*
+ANSI C requires `clearerr'.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: dprintf,  Next: fclose,  Prev: clearerr,  Up: Stdio
+
+`dprintf', `vdprintf'--print to a file descriptor
+=================================================
+
+*Synopsis*
+     #include <stdio.h>
+     #include <stdarg.h>
+     int dprintf(int FD, const char *FORMAT, ...);
+     int vdprintf(int FD, const char *FORMAT, va_list AP);
+     int _dprintf_r(struct _reent *PTR, int FD,
+         const char *FORMAT, ...);
+     int _vdprintf_r(struct _reent *PTR, int FD,
+         const char *FORMAT, va_list AP);
+   *Description*
+`dprintf' and `vdprintf' allow printing a format, similarly to
+`printf', but write to a file descriptor instead of to a `FILE' stream.
+
+   The functions `_dprintf_r' and `_vdprintf_r' are simply reentrant
+versions of the functions above.
+
+*Returns*
+The return value and errors are exactly as for `write', except that
+`errno' may also be set to `ENOMEM' if the heap is exhausted.
+
+*Portability*
+This function is originally a GNU extension in glibc and is not
+portable.
+
+   Supporting OS subroutines required: `sbrk', `write'.
+
+
+File: libc.info,  Node: fclose,  Next: fcloseall,  Prev: dprintf,  Up: Stdio
+
+`fclose'--close a file
+======================
+
+*Synopsis*
+     #include <stdio.h>
+     int fclose(FILE *FP);
+     int _fclose_r(struct _reent *REENT, FILE *FP);
+   *Description*
+If the file or stream identified by FP is open, `fclose' closes it,
+after first ensuring that any pending data is written (by calling
+`fflush(FP)').
+
+   The alternate function `_fclose_r' is a reentrant version.  The
+extra argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+`fclose' returns `0' if successful (including when FP is `NULL' or not
+an open file); otherwise, it returns `EOF'.
+
+*Portability*
+`fclose' is required by ANSI C.
+
+   Required OS subroutines: `close', `fstat', `isatty', `lseek',
+`read', `sbrk', `write'.
+
+
+File: libc.info,  Node: fcloseall,  Next: feof,  Prev: fclose,  Up: Stdio
+
+`fcloseall'--close all files
+============================
+
+*Synopsis*
+     #include <stdio.h>
+     int fcloseall(void);
+     int _fcloseall_r (struct _reent *PTR);
+   *Description*
+`fcloseall' closes all files in the current reentrancy struct's domain.
+The function `_fcloseall_r' is the same function, except the reentrancy
+struct is passed in as the PTR argument.
+
+   This function is not recommended as it closes all streams, including
+the std streams.
+
+*Returns*
+`fclose' returns `0' if all closes are successful.  Otherwise, EOF is
+returned.
+
+*Portability*
+`fcloseall' is a glibc extension.
+
+   Required OS subroutines: `close', `fstat', `isatty', `lseek',
+`read', `sbrk', `write'.
+
+
+File: libc.info,  Node: feof,  Next: ferror,  Prev: fcloseall,  Up: Stdio
+
+`feof'--test for end of file
+============================
+
+*Synopsis*
+     #include <stdio.h>
+     int feof(FILE *FP);
+   *Description*
+`feof' tests whether or not the end of the file identified by FP has
+been reached.
+
+*Returns*
+`feof' returns `0' if the end of file has not yet been reached; if at
+end of file, the result is nonzero.
+
+*Portability*
+`feof' is required by ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: ferror,  Next: fflush,  Prev: feof,  Up: Stdio
+
+`ferror'--test whether read/write error has occurred
+====================================================
+
+*Synopsis*
+     #include <stdio.h>
+     int ferror(FILE *FP);
+   *Description*
+The `stdio' functions maintain an error indicator with each file
+pointer FP, to record whether any read or write errors have occurred on
+the associated file or stream.  Use `ferror' to query this indicator.
+
+   See `clearerr' to reset the error indicator.
+
+*Returns*
+`ferror' returns `0' if no errors have occurred; it returns a nonzero
+value otherwise.
+
+*Portability*
+ANSI C requires `ferror'.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: fflush,  Next: fgetc,  Prev: ferror,  Up: Stdio
+
+`fflush'--flush buffered file output
+====================================
+
+*Synopsis*
+     #include <stdio.h>
+     int fflush(FILE *FP);
+   *Description*
+The `stdio' output functions can buffer output before delivering it to
+the host system, in order to minimize the overhead of system calls.
+
+   Use `fflush' to deliver any such pending output (for the file or
+stream identified by FP) to the host system.
+
+   If FP is `NULL', `fflush' delivers pending output from all open
+files.
+
+*Returns*
+`fflush' returns `0' unless it encounters a write error; in that
+situation, it returns `EOF'.
+
+*Portability*
+ANSI C requires `fflush'.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: fgetc,  Next: fgetpos,  Prev: fflush,  Up: Stdio
+
+`fgetc'--get a character from a file or stream
+==============================================
+
+*Synopsis*
+     #include <stdio.h>
+     int fgetc(FILE *FP);
+   *Description*
+Use `fgetc' to get the next single character from the file or stream
+identified by FP.  As a side effect, `fgetc' advances the file's
+current position indicator.
+
+   For a macro version of this function, see `getc'.
+
+*Returns*
+The next character (read as an `unsigned char', and cast to `int'),
+unless there is no more data, or the host system reports a read error;
+in either of these situations, `fgetc' returns `EOF'.
+
+   You can distinguish the two situations that cause an `EOF' result by
+using the `ferror' and `feof' functions.
+
+*Portability*
+ANSI C requires `fgetc'.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: fgetpos,  Next: fgets,  Prev: fgetc,  Up: Stdio
+
+`fgetpos'--record position in a stream or file
+==============================================
+
+*Synopsis*
+     #include <stdio.h>
+     int fgetpos(FILE *FP, fpos_t *POS);
+     int _fgetpos_r(struct _reent *PTR, FILE *FP, fpos_t *POS);
+   *Description*
+Objects of type `FILE' can have a "position" that records how much of
+the file your program has already read.  Many of the `stdio' functions
+depend on this position, and many change it as a side effect.
+
+   You can use `fgetpos' to report on the current position for a file
+identified by FP; `fgetpos' will write a value representing that
+position at `*POS'.  Later, you can use this value with `fsetpos' to
+return the file to this position.
+
+   In the current implementation, `fgetpos' simply uses a character
+count to represent the file position; this is the same number that
+would be returned by `ftell'.
+
+*Returns*
+`fgetpos' returns `0' when successful.  If `fgetpos' fails, the result
+is `1'.  Failure occurs on streams that do not support positioning; the
+global `errno' indicates this condition with the value `ESPIPE'.
+
+*Portability*
+`fgetpos' is required by the ANSI C standard, but the meaning of the
+value it records is not specified beyond requiring that it be
+acceptable as an argument to `fsetpos'.  In particular, other
+conforming C implementations may return a different result from `ftell'
+than what `fgetpos' writes at `*POS'.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: fgets,  Next: fileno,  Prev: fgetpos,  Up: Stdio
+
+`fgets'--get character string from a file or stream
+===================================================
+
+*Synopsis*
+     #include <stdio.h>
+     char *fgets(char *BUF, int N, FILE *FP);
+   *Description*
+Reads at most N-1 characters from FP until a newline is found. The
+characters including to the newline are stored in BUF. The buffer is
+terminated with a 0.
+
+*Returns*
+`fgets' returns the buffer passed to it, with the data filled in. If
+end of file occurs with some data already accumulated, the data is
+returned with no other indication. If no data are read, NULL is
+returned instead.
+
+*Portability*
+`fgets' should replace all uses of `gets'. Note however that `fgets'
+returns all of the data, while `gets' removes the trailing newline
+(with no indication that it has done so.)
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: fileno,  Next: fopen,  Prev: fgets,  Up: Stdio
+
+`fileno'--return file descriptor associated with stream
+=======================================================
+
+*Synopsis*
+     #include <stdio.h>
+     int fileno(FILE *FP);
+   *Description*
+You can use `fileno' to return the file descriptor identified by FP.
+
+*Returns*
+`fileno' returns a non-negative integer when successful.  If FP is not
+an open stream, `fileno' returns -1.
+
+*Portability*
+`fileno' is not part of ANSI C.  POSIX requires `fileno'.
+
+   Supporting OS subroutines required: none.
+

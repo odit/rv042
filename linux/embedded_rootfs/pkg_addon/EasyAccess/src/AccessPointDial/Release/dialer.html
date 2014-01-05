@@ -1,0 +1,33 @@
+<html>
+<head>
+<script type="text/javascript">
+function writeApplet()
+{
+	var host = "192.168.1.52";
+	var session = "Easyaccess::::admin";
+	var client_lower_ip = "192.168.251.1";
+	var client_higher_ip = "192.168.251.254";
+      var dns_suffix = "chn.cavium.com"
+      var network_mask = "255.255.255.0"
+      var enable_full_tunnel = "0"
+	var jar_path = "./WindowsVPInstaller.jar";
+	
+	document.open();
+	document.write('<applet archive='+jar_path+' code=VPInstaller.class width=350 height=170 >');
+	document.write('<PARAM NAME=host VALUE='+host+'>');
+	document.write('<PARAM NAME=session VALUE='+session+'>');
+	document.write('<PARAM NAME=client_lower_ip VALUE='+client_lower_ip+'>');
+	document.write('<PARAM NAME=client_higher_ip VALUE='+client_higher_ip+'>');
+	document.write('<PARAM NAME=dns_suffix VALUE='+dns_suffix+'>');
+	document.write('<PARAM NAME=network_mask VALUE='+network_mask+'>');
+	document.write('<PARAM NAME=enable_full_tunnel VALUE='+enable_full_tunnel+'>');
+	document.write('<PARAM NAME=route_count VALUE="1">');
+	document.write('<PARAM NAME=route0 VALUE="10.10.0.0 255.255.0.0">');
+	document.write('</applet>');
+	document.close();
+}
+</script>
+</head>
+<body onLoad = "writeApplet();">
+</body>
+</html>

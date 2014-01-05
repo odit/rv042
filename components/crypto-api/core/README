@@ -1,0 +1,159 @@
+
+Installing and Compiling the Core Crypto API 
+============================================ 
+
+SECTIONS
+========
+  ---->    Prerequisites
+  ---->    Supported Operating Modes
+  ---->    Directory Structure
+  ---->    Description of compile time Flags
+  ---->    Installation Procedure
+  ---->    Core crypto library under linux
+  ---->    Core crypto library static memory support
+  ---->    Running Sample Test Application
+  ---->    API Documentation
+  ---->    Change History
+ 
+
+Prerequisites
+=============
+ You should have installed the SDK with version 1.3.1 or higher before you 
+ proceed. This document assumes that the SDK was installed at 
+ /usr/local/Cavium_Networks/CN3XXX-SDK.
+
+ You should have also installed the Octeon Core crypto library 
+ before you proceed.  Generally, the Core crypto RPM gets installed at 
+ /usr/local/Cavium_Networks/CN3XXX-SDK/components/crypto-api/core.
+
+ You should have installed the LINUX SDK with version 1.3.1 or higher before you 
+ proceed. This document assumes that the LINUX-SDK was installed at 
+ /usr/local/Cavium_Networks/CN3XXX-SDK/linux. 
+ LINUX SDK would be required only when you run crypto in linux on Octeon.
+
+NOTE: Before you can start compiling the sources, you should
+      setup environment variables for the make.
+      Please refer SDK README.txt located at 
+      /usr/local/Cavium_Networks/CN3XXX-SDK/ to setup the environment variables.
+      This step should be done every time you login to a new shell.
+
+
+Supported Operating Modes
+=========================
+   - Simple Executive(SE) 64
+   - Octeon Linux 64
+   - Octeon Linux N32
+
+
+Directory Structure
+===================
+
+   |
+   |--- crypto (source files for building the core crypto library)
+   |
+   |--- test-api (a sample test program)
+   |
+   |--- include (header files for crypto library
+   |
+   |--- cryptolinux (octeon linux driver for modexp ) 
+   |
+   |--- docs (the documentation for the various API's)
+
+
+Description of compile time Flags
+=================================
+The following are OCTEON specific flags to be configured in Makefile before
+installation.
+   1. OCTEON_OPENSSL : This is the basic flag which offloads the crypto library
+                         to OCTEON hardware. This must be always defined.
+
+   2. OCTEON_OPENSSL_NO_DYNAMIC_MEMORY : Please refer section  
+                       "Core crypto library static memory support".
+
+   3. OCTEON_OPENSSL_SW_FPA_POOL_STATS : This flag is valid only when flag     
+                       OCTEON_OPENSSL_NO_DYNAMIC_MEMORY is enabled. 
+                       This tracks and prints the statistics of static memory 
+                       usage in the crypto library. 
+                       This need to be enabled only while debugging static 
+                       memory under cvmx.
+                       
+
+Installation Procedure
+======================
+Goto the crypto directory and 
+     # make OCTEON_TARGET=cvmx_64;  for executive
+                or 
+     # make OCTEON_TARGET=linux_64;  for linux.
+                or
+     # make OCTEON_TARGET=linux_n32;  for linux N32.
+
+     Refer to linux SDK documentation for various OCTEON_TARGET.
+    
+    [NOTE: For N32 Applications to run on Octeon Linux, 
+           set CONFIG_CAVIUM_RESERVE32 to non-zero value.]
+
+This will build the Core crypto library "libcrypto.a" and install it in
+   $(OCTEON_ROOT)/target/lib
+
+Core crypto library under linux
+===============================
+1. Compile the crypto linux module.
+   # cd cryptolinux;
+   # make
+   This will build the modexp module "cavmodexp.ko" .
+   copy the cavmodexp.ko in to octeon linux  and insert the module.
+   # insmod cavmodexp.ko;
+
+2. Create crypto device for interface to the user application.
+   At command prompt execute the following.
+   # mknod /dev/octcrypto c 125 0;
+
+
+Core crypto library static memory support
+=========================================
+In Simple executive, to avoid dynamic memory allocation enable the following 
+flag in Makefile in crypto directory.
+
+CFLAGS += -DOCTEON_OPENSSL_NO_DYNAMIC_MEMORY
+
+Enabling the flag makes crypto library to reserve Octeon memory  for crypto 
+library also provides and manages the buffer when the crypto library requires.
+The application has to initialize memory for the same,refer test program 
+in test-api. 
+Change the default parameters defined in crypto/memconfig.h according to 
+the applications need.
+
+NOTE: The library state is undetermined if the static memory is not 
+initialized and the -DOCTEON_OPENSSL_NO_DYNAMIC_MEMORY flag is enabled.
+
+
+Running Sample Test Application
+===============================
+# cd test-api
+
+1. Edit Makefile for the following available options : 
+
+COREMASK_APP=<CoreMask Number> (To run on different cores)
+
+CFLAGS_LOCAL += -DTEST_GENERIC_APIS (To test generic APIs)
+            
+CFLAGS_LOCAL += -DTEST_IPSEC_APIS  (To test Crypto IPSec APIs)
+
+
+2. For Compiling the test application for different octeon components please 
+refer "Installation Procedure" given above. 
+
+3. Load the 'testcrypto' binary onto the octeon and run. 
+
+
+API Documentation
+=================
+The API documentation is available in the docs/html/index.html 
+
+
+Change History
+==============
+Release 0.7.0
+    * N32 Support Added
+    * IPSec APIs added
+    * HMAC SHA2 support added

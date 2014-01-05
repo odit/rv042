@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:14" />
+    <title>Configuring the Port Settings </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=28;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1073499"> </a><h1 class="pTitle">
+Configuring the Port Settings
+
+</h1>
+<a name="wp1073500"> </a><p class="pBody">
+The default port settings should be sufficient for most small businesses, but you 
+can use the Port Management &gt; <em class="cEmphasis">Port Setup</em> page to customize these settings if 
+needed. You can disable a port or customize its priority, speed, duplex mode, and 
+auto-negotiation settings. You also can enable port-based VLANs to control traffic 
+between devices on your network.
+
+</p>
+<a name="wp1076319"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp1076437"> </a><p class="pBody">
+For Cisco RV016 only, choose the number of WAN ports from the drop-down list, 
+or keep the default number, 2. If you change the number, save your settings. (You 
+can also change the number of WAN ports by using the <span style="font-style: oblique">Setup &gt; Network </span>page.) 
+
+</p>
+<a name="wp1073577"> </a><p class="pBody">
+The following read-only information is displayed for each port:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1074344"> </a><li class="pSmartList1"><b class="cBold">Port ID:</b> The port number or name, as it is labeled on the device
+</li>
+<a name="wp1074345"> </a><li class="pSmartList1"><b class="cBold">Interface:</b> The interface type: LAN, WAN, or DMZ
+</li>
+</ul></div>
+<a name="wp1074346"> </a><p class="pBody">
+Enter the following settings, as needed:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1073806"> </a><li class="pSmartList1"><b class="cBold">Disable:</b> Check this box to disable a port. By default, all ports are enabled.
+</li>
+<a name="wp1073807"> </a><li class="pSmartList1"><b class="cBold">Priority</b> (for LAN ports only)<b class="cBold">:</b> Use this setting to ensure Quality of Service by 
+prioritizing the traffic for devices on particular ports. For example, you might 
+assign High priority to a port that is used for gaming or videoconferencing. 
+For each port, select the appropriate priority level, <span style="font-weight: bold">High</span> or <span style="font-weight: bold">Normal</span>. The 
+default setting is Normal.
+</li>
+<a name="wp1049948"> </a><li class="pSmartList1"><b class="cBold">S</b><b class="cBold">peed:</b> If you want to adjust this setting, first uncheck the <b class="cBold">Enable</b> box in the 
+<em class="cEmphasis">Auto Neg</em> column to disable auto-negotiation. Then select the port speed: 
+<b style="font-weight: normal" class="cBold">1</b><span style="font-weight: bold">0M</span> or <span style="font-weight: bold">100M</span>.
+</li>
+<a name="wp1049949"> </a><li class="pSmartList1"><b class="cBold">Duplex:</b> If you want to set the duplex mode, first uncheck the <b class="cBold">Enable</b> box in 
+the <em class="cEmphasis">Auto Neg</em> column to disable auto-negotiation. Select the duplex mode, 
+<span style="font-weight: bold">Half</span> or <span style="font-weight: bold">Full</span>.
+</li>
+<a name="wp1049950"> </a><li class="pSmartList1"><b class="cBold">Auto Neg.: </b>Check the <span style="font-weight: bold">Enable</span> box to allow the router to auto-negotiate 
+connection speeds and duplex mode. This feature is enabled by default.
+</li>
+<a name="wp1049951"> </a><li class="pSmartList1"><b class="cBold">VLAN</b> (for LAN ports only)<b class="cBold">:</b> All LAN ports are on VLAN 1 by default. To place 
+a port on a separate VLAN, choose a VLAN from the drop-down list. 
+</li>
+<a name="wp1074477"> </a><p class="pListBodyLevel1">
+The number of available VLANs equals the number of LAN ports: 4 on Cisco 
+RV042, 8 on Cisco RV082, and up to 13 on Cisco RV016 (depending on the 
+usage of the dual-function ports). For example, on Port 4, you may have an 
+Ethernet switch that provides Internet connectivity to guest users in a 
+conference room. To prevent your guests from accessing the file servers 
+and printers on your LAN, you could put Port 4 on VLAN 2 and leave the 
+other ports on VLAN 1. There is no communication between devices on 
+separate VLANs.
+
+</p>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

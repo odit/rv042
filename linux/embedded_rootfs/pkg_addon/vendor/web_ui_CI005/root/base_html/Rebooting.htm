@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="refresh" content="60; url=index.htm">
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												   */	
+/*     Begin of content's JavaScript function      */
+/*												   */	
+/***************************************************/
+function Entryfunction()
+{
+	
+}
+function Leavefunction()
+{
+}
+
+function chSubmit(F)
+{
+  if (confirm(cFactoryDefault))
+  {
+  	F.restart.value="";  
+    window.status=wDefaultSetting; 
+    F.submit();
+  }  
+}
+function RebootchSubmit(F)
+{
+  if (confirm(cRestart))
+  {
+    F.factory.value="";
+    window.status=wRestart;
+    F.submit();
+  }  
+}
+
+//=============== End of Javascript ===============*/
+
+/***************************************************/
+/*												   */	
+/*      	  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Cancellink = ""; 
+var helplink ='help.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 800;
+var head_width=80;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintRebootpage(0);
+	PrintEndContent();
+}
+
+function PrintRebootpage(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+FixedTableWidth+'" border="'+Tableborder+'" style="'+Tablestyle+'">');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'"></td>');
+	document.write('<td width="'+(FixedTableWidth -(head_width * 3)) +'">');
+	document.write('<table width="100%" class="opacitytable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td height="10" colspan="4"></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td align="center" class="Grouptitle" colspan="4">');
+	document.write('Please wait, system is now rebooting...');
+	document.write('</td>');	
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td width="5%"></td>');
+	document.write('<td width="40">');		
+	document.write('<img border="0" src="images/info.gif">');	
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('</td>');	
+	document.write('<td>');
+	document.write('<div class="Warning">');	
+	document.write('If the page does not automatically refresh over 1 minute, <br>please press the Login link.');
+	document.write('</div>');		
+	document.write('</td>');
+	document.write('<td width="5%"></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<th height="5" colspan="4"></th>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td align="center" colspan="2"><b>');
+	document.write('<a href="index.htm">Login</a>');
+	document.write('</b></td>');
+	document.write('<td></td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize(FixedTableWidth);">
+<script>PrintBackground("",FixedTableWidth);</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <form name="formdualwan" method="post" action="">
+      <input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+    </form>
+    
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 10);		// Set Selected Node
+   	  if (document.formdualwan.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+
+	<form name="formRestart" action="" method="post">
+           <input type="hidden" name="page" value="sys_restart.htm">
+           <input type="hidden" name="restart" value="Restart Router">
+           <input type="hidden" name="factory" value="Return to Factory Default Setting">				
+           <input type="hidden" name="restartBackup" value='0'>		
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysSoftReboot=""-->

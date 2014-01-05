@@ -1,0 +1,23 @@
+all:
+	$(MAKE) -C single_cgi -f Makefile.Octeon
+	$(MAKE) -C cgi-bin/common -f Makefile.Octeon
+	$(MAKE) -C cgi-bin/user-pages/cifs -f Makefile.Octeon
+
+clean:
+	$(MAKE) -C single_cgi clean -f Makefile.Octeon
+	$(MAKE) -C cgi-bin/common clean -f Makefile.Octeon
+	$(MAKE) -C cgi-bin/user-pages/cifs clean -f Makefile.Octeon
+
+install:
+	$(MAKE) -C single_cgi install -f Makefile.Octeon
+	$(MAKE) -C cgi-bin/common install -f Makefile.Octeon
+ifneq "$(CONFIG_NK_CRAMFS)" "y"
+	$(MAKE) -C cgi-bin/user-pages/cifs install -f Makefile.Octeon
+	$(MAKE) -C Java copy
+endif
+	$(MAKE) -C cgi-bin content-install
+
+un-install:
+	$(MAKE) -C single_cgi un-install -f Makefile.Octeon
+	$(MAKE) -C cgi-bin/common un-install -f Makefile.Octeon
+	$(MAKE) -C cgi-bin/user-pages/cifs un-install -f Makefile.Octeon

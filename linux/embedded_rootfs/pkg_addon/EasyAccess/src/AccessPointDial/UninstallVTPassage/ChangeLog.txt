@@ -1,0 +1,54 @@
+version 1,6,1,1(May 31 2007)
+--------------------------------
+Version change for release.
+
+version 1,6,0,1(March 12 2007)
+--------------------------------
+Bug # 442 - Vista Support
+
+version 1,5,1,1(January 12 2007)
+--------------------------------
+Version change for release.
+
+version 1,5,0,1(october 17 2006)
+--------------------------------
+1. Changes added to delete files created by Java Installer (430)
+
+version 1,4,1,1(Mar 31 2006)
+----------------------------
+1.version changed for release.
+2.Component Versions moved to changelog.txt in parent (AccessPointDial) folder.
+
+Version 1,4,0,1(Jan 09, 2006)
+------------------------------
+1. Bug #247 - VP - Unable to install VP when uninstall and installation happened consecutively - Fixed
+2. Bug #428 - If Install fails, VP is not cleaned Completely - Fixed.
+
+Version 1,3,0,1(July 27, 2005)
+------------------------------
+1. Version Changed for release
+
+Version 1,0,0,6(July 22, 2005)
+------------------------------
+1. Debug Messages Changed
+
+Version 1,0,0,5(July 1, 2005)
+----------------------------
+1.CoInitialize called to ensure proper cleanup of the dll.
+
+Version 1,0,0,4(June 8, 2005)
+----------------------------
+1. Device Removal function changed
+
+Version 1,0,0,3(May 5, 2005)
+----------------------------
+1. DLL is uninstalled before the Driver
+
+Version 1,0,0,2(May 2, 2005)
+------------------------------
+1. order of Uninstall Operation changed
+
+
+Version 1,0,0,1(Apr 27, 2005)
+------------------------------
+1. Default version

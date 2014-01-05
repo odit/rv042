@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:13" />
+    <title>Managing the Bandwidth Settings </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=19;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1007557"> </a><h1 class="pTitle">
+Managing the Bandwidth Settings
+
+</h1>
+<a name="wp1007558"> </a><p class="pBody">
+Use the System Management &gt; B<em class="cEmphasis">andwidth Management</em> page to adjust the 
+bandwidth settings for upstream and downstream traffic and to configure Quality 
+of Service (QoS) settings for various types of traffic. For example, you can enter 
+bandwidth rules to ensure quality for voice services. 
+
+</p>
+<a name="wp1005097"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp998302"> </a><h2 class="pHeading2">
+Max Bandwidth Provided by ISP
+</h2>
+<a name="wp1004155"> </a><p class="pBody">
+Enter the maximum bandwidth settings as specified by your Internet Service 
+Provider. 
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998303"> </a><li class="pSmartList1"><b class="cBold">Upstream:</b> Enter the maximum upstream bandwidth provided by your ISP. 
+The default is <span style="font-weight: bold">512</span> kbit/sec.
+</li>
+<a name="wp998304"> </a><li class="pSmartList1"><b class="cBold">Downstream:</b> Enter the maximum downstream bandwidth provided by 
+your ISP. The default is <span style="font-weight: bold">12</span> kbit/sec.
+</li>
+</ul></div>
+<a name="wp998305"> </a><h2 class="pHeading2">
+Bandwidth Management Type
+</h2>
+<a name="wp1004230"> </a><p class="pBody">
+Choose one of the following management options:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998306"> </a><li class="pSmartList1"><b class="cBold">Rate Control:</b> Choose this option to specify minimum (guaranteed) 
+bandwidth and maximum (limited) bandwidth for each service or IP 
+address.
+</li>
+<a name="wp1004221"> </a><li class="pSmartList1"><b class="cBold">Priority:</b> Choose this option to manage the bandwidth by identifying high-
+priority and low-priority services.
+</li>
+</ul></div>
+<a name="wp1004222"> </a><p class="pBody">
+Select an <b class="cBold">Interface</b>. Add the services that are subject to bandwidth management.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1004527"> </a><li class="pSmartList1"><b class="cBold">To add a new service to the list: </b>Enter the settings as described below, 
+and then click <b class="cBold">Add to List</b>. You can add up to 100 services.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1004594"> </a><li class="pSmartList2"><b class="cBold">Service:</b> Select a service to manage. If a service is not listed, you can click <b class="cBold">Service Management</b> to add a service. For more information, see <a href="#wp1000185">Adding a service</a> at the end of this help topic.</li>
+<a name="wp1004666"> </a><li class="pSmartList2"><b class="cBold">IP (for Rate Control only):</b> Enter the IP address or range you need to control. To include all internal IP addresses, keep the default setting.</li>
+<a name="wp1004528"> </a><li class="pSmartList2"><b class="cBold">Direction: </b>Select <b class="cBold">Upstream</b> for outbound traffic, or select <b class="cBold">Downstream</b> for inbound traffic.</li>
+<a name="wp998317"> </a><li class="pSmartList2"><b class="cBold">Min. Rate (for Rate Control only): </b>Enter the minimum rate (Kbit/sec) for the guaranteed bandwidth.</li>
+<a name="wp998318"> </a><li class="pSmartList2"><b class="cBold">Max. Rate (for Rate Control only): </b>Enter the maximum rate (Kbit/sec) for the guaranteed bandwidth.</li>
+<a name="wp998319"> </a><li class="pSmartList2"><b class="cBold">Priority (for Priority management only):</b> Choose the priority for this service: <b class="cBold">High</b> or <b class="cBold">Low</b>.</li>
+<a name="wp998320"> </a><li class="pSmartList2"><b class="cBold">Enable: </b>Check the box to enable this feature, or uncheck the box to disable this feature.</li>
+</ul></div>
+<a name="wp998321"> </a><li class="pSmartList1"><b class="cBold">To add another service to the list: </b>Enter the information, and then click <b class="cBold">Add 
+to list</b>.
+</li>
+<a name="wp998322"> </a><li class="pSmartList1"><b class="cBold">To modify a service in the list:</b> Click the entry that you want to modify. The 
+information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the entry and clear the text fields.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1007543"> </a><li class="pSmartList2"><b class="cBold">To delete an entry from the list:</b> Click the entry that you want to delete, and then click <b class="cBold">Delete</b>. To select a block of entries, click the first entry, hold down the Shift key, and then click the final entry in the block. To select individual entries, press the Ctrl key while clicking each entry. To de-select an entry, press the Ctrl key while clicking the entry.</li>
+</ul></div>
+</ul></div>
+<a name="wp1000185"> </a><h3 class="pHeading3">
+Adding a service
+</h3>
+<a name="wp1000186"> </a><p class="pBody">
+To add a new entry to the <em class="cEmphasis">Service</em> list, or to change an entry that you created 
+previously, click <b class="cBold">Service Management</b>. If the web browser displays a warning 
+about the pop-up window, allow the blocked content.
+
+</p>
+<a name="wp1005022"> </a><p class="pBody">
+In the <em class="cEmphasis">Service </em>Management window, add or update entries as needed. Before 
+closing this window, click <span style="font-weight: bold">OK</span> to save your settings, or click <b class="cBold">Cancel</b> to undo them. 
+Any unsaved changes are abandoned.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1004858"> </a><li class="pSmartList1"><b class="cBold">To add a service to the list:</b> Enter the following information, and then click 
+<b class="cBold">Add to List</b>. You can have up to 30 services in the list.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1000190"> </a><li class="pSmartList2"><b class="cBold">Service Name:</b> Enter a short description.</li>
+<a name="wp1000191"> </a><li class="pSmartList2"><b class="cBold">Protocol:</b> Choose the required protocol. Refer to the documentation for the service that you are hosting.</li>
+<a name="wp1000192"> </a><li class="pSmartList2"><b class="cBold">Port Range:</b> Enter the required port range. </li>
+</ul></div>
+<a name="wp1000193"> </a><li class="pSmartList1"><b class="cBold">To add another new service: </b>Enter the information, and then click <b class="cBold">Add to 
+list</b>.
+</li>
+<a name="wp1000194"> </a><li class="pSmartList1"><b class="cBold">To modify a service you created: </b>Click the service in the list. The 
+information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the service and clear the text fields.
+</li>
+<a name="wp1000195"> </a><li class="pSmartList1"><b class="cBold">To delete a service from the list:</b> Click the entry that you want to delete. To 
+select a block of entries, click the first entry, hold down the Shift key, and 
+click the final entry in the block. To select individual entries, hold down the 
+Ctrl key while clicking. Click <b class="cBold">Delete</b>.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

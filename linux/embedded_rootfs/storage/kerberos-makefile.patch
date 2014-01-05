@@ -1,0 +1,11 @@
+--- lib/crypto/aes/Makefile.orig	2006-11-10 10:49:33.000000000 -0800
++++ lib/crypto/aes/Makefile	2006-11-10 10:55:20.000000000 -0800
+@@ -541,7 +541,7 @@
+ depend:: $(SRCS)
+ 
+ aes-gen: aes-gen.o $(GEN_OBJS)
+-	$(CC) -o aes-gen aes-gen.o $(GEN_OBJS)
++	$(CC_LINK) -o aes-gen aes-gen.o $(GEN_OBJS)
+ 
+ run-aes-gen: aes-gen
+ 	./aes-gen > kresults.out

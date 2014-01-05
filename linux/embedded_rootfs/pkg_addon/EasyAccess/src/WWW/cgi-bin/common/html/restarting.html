@@ -1,0 +1,54 @@
+<html>
+<head>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<title>Restarting</title>
+<link href="/themes/stylewhitebluegrey.css" rel="stylesheet" type="text/css">
+<script src="/js/portalframe.js"></script>
+<SCRIPT language="JavaScript" type=text/javascript>
+function setwindow(num){
+document.getElementById("newwin").src="/cgi-bin/welcome/";
+setTimeout('gotowindow(1)',3000);
+}
+function gotowindow(num){
+document.getElementById("newwin").src="/cgi-bin/welcome/";
+setTimeout('setwindow(1)',3000);
+}
+</script>
+</head>
+<body class="bodyback" leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 onload="setTimeout('setwindow(1)',6000);">
+<center><img src="/images/shim.gif" height=45 width=8><br>
+<table border=0	 cellpadding=0 cellspacing=0 class="centertable"  style="left:0px;">
+<tbody>
+<tr>
+<td class="bookmarktop" cellspacing=0 colspan=4 width=400 height=21>
+<img src="/images/shim.gif" border=0 height=20 width=398></td>
+</tr>
+<tr><td width=1 height=140 class="darkback"><img src="/images/shim.gif" width=1 height=150></td>
+<td valign="top" width=398 height=130>
+<table border=0 cellpadding=0 cellspacing=0 valign="top">
+<tbody><tr><td width=8><img src="/images/shim.gif" border=0 width=8 height=1></td>
+<td valign="top"><img src="/images/shim.gif" height=18><br><img src="/images/shim.gif" border=0 height=2><br><img src="/images/shim.gif" height=1><br>
+<table>
+<tbody><tr cellpadding=0 cellspacing=0>
+<td cellpadding=0 cellspacing=0 align="left" width=325 height=30 class="toolbar"><img src="/images/loginlogo.gif" border=0><br><img src="/images/shim.gif" height=21><br></font></td>
+<td width=50></td></tr></tbody></table>
+<table>
+<tbody>
+<tr cellpadding=0 cellspacing=0>
+<td cellpadding=0 cellspacing=0 align="center" width=375 height=30
+class="toolbar"> <font class="toolbar" style="font-size:15px"><B>Restarting...</b></font></td>
+</tr>
+</tbody></table> </td>
+<td width=14><img src="/images/shim.gif" border=0 width=14 height=1></td>
+</tr>
+</tbody></table></td>
+<td width=1 height=140 class="darkback"><img src="/images/shim.gif" width=1 height=152></td></tr>
+<tr>
+<td class="bookmarkbottom" colspan=4 width=400 height=17>
+<img src="/images/shim.gif" border=0 width=399 height=16></td>
+</tr>
+</tbody></table>
+</center><div height=75% align=bottom>
+<iframe border=0 scrolling=0 scroll=no scrollbars=no height=1 width=1 src='/cgi-bin/restart?time=now' name=newwin id='newwin'></iframe>
+</div>
+</body></html>

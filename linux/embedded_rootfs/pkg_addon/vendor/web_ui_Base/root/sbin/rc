@@ -1,0 +1,91 @@
+#!/bin/sh
+# For Cramfs
+echo $0 starting
+
+echo Mounting file systems
+mount -a
+
+cp -r /etc /tmp
+mount -t ramfs /dev/ram0 /etc
+cp -r /tmp/etc/* /etc
+rm -fr /tmp/etc
+
+mount -t ramfs /dev/ram1 /var
+mkdir /var/log
+mkdir /var/lib
+mkdir /var/lib/misc
+mkdir /var/run
+mkdir /var/lock
+
+cp -r /usr/local/EasyAccess/var /tmp
+mount -t ramfs /dev/ram2 /usr/local/EasyAccess/var
+cp -r /tmp/var/* /usr/local/EasyAccess/var
+rm -fr /tmp/var
+
+echo Mounting jffs2 file systems
+mkdir /etc/flash
+mkdir /tmp/splitDB
+mkdir /tmp/BlockRepost
+mount -t jffs2 /dev/mtdblock3 /etc/flash
+
+#purpose:0013264, author:selena, description:new log backup path
+if [ -f /etc/flash/log.tgz ]; then
+tar -zxf /etc/flash/log.tgz -C /var/log/
+rm -fr /etc/flash/log.tgz
+fi
+
+if [ ! -d /etc/flash/mirror ]; then
+    mkdir /etc/flash/mirror
+else		
+    rm -rf /etc/flash/mirror/*.conf /etc/flash/mirror/nk_sysconfig
+fi
+
+if [ -d /etc/flash/etc ]; then
+
+    if [ ! -f /etc/flash/etc/smm.conf ] || [ ! -f /etc/flash/etc/firebase.conf ] || [ ! -f /etc/flash/etc/nk_sysconfig ]; then
+
+        if [ -f /etc/flash/mirror/mirror_config.tgz ]; then
+            tar -zxf /etc/flash/mirror/mirror_config.tgz -C /etc/flash/mirror
+            mv /etc/flash/mirror/nk_sysconfig /etc/flash/etc/
+            mv /etc/flash/mirror/*.conf /etc/flash/etc/
+    	    cp -f /etc/flash/etc/nk_sysconfig /tmp/nk_sysconfig
+            cp -f /etc/flash/etc/*.conf /usr/local/EasyAccess/var/conf
+        else
+            cp -f /etc/nk_sysconfig /tmp/nk_sysconfig
+            cp -f /etc/smm.conf /usr/local/EasyAccess/var/conf/smm.conf
+            cp -f /etc/nk_sysconfig /etc/flash/etc/nk_sysconfig
+            cp -f /usr/local/EasyAccess/var/conf/* /etc/flash/etc
+        fi
+    else	
+	
+	    if [ -f /etc/flash/mirror/use_mirror_flag ]; then
+		    tar -zxf /etc/flash/mirror/mirror_config.tgz -C /etc/flash/mirror
+			cp -f /etc/flash/mirror/nk_sysconfig /tmp/nk_sysconfig
+			cp -f /etc/flash/mirror/*.conf /usr/local/EasyAccess/var/conf/
+			mv /etc/flash/mirror/nk_sysconfig /etc/flash/etc/nk_sysconfig
+			mv /etc/flash/mirror/*.conf /etc/flash/etc/
+			
+			rm -rf /etc/flash/mirror/use_mirror_flag
+		else
+            cp -f /etc/flash/etc/nk_sysconfig /tmp/nk_sysconfig
+            cp -f /etc/flash/etc/*.conf /usr/local/EasyAccess/var/conf
+		fi
+    fi
+
+else
+    
+    mkdir /etc/flash/etc        
+    cp -f /etc/nk_sysconfig /tmp/nk_sysconfig
+    cp -f /etc/smm.conf /usr/local/EasyAccess/var/conf/smm.conf
+    cp -f /etc/nk_sysconfig /etc/flash/etc/nk_sysconfig
+    cp -f /usr/local/EasyAccess/var/conf/* /etc/flash/etc
+fi
+
+echo Setting up loopback
+ifconfig lo 127.0.0.1
+
+/sbin/configd.sh &
+/sbin/log_flash.sh &
+rc.local
+echo $0 complete
+

@@ -1,0 +1,111 @@
+/*
+ * Copyright (c) 2003-2005 Cavium Networks. (support@caviumnetworks.com). All rights
+ * reserved.
+ *
+ * 1. This source code must strictly not be redistributed or copied or stored in
+ *    un-authorized location.
+ *
+ * 2. Access to the source code must be limited to the licensee and
+ *    members approved by Cavium Networks.
+ *
+ * 3. All derivatives or modifications must include this copyright notice.
+ *
+ * 4. Cavium Networks name may not be used to endorse or promote products
+ *    derived from this software without specific prior written permission.
+ *
+ * 5. Possessing or any other form of access to this source code without
+ *    valid development license and/or written permission from Cavium Networks is
+ *    prohibited.
+ *
+ * 6. Software is confidential and protected. Title to Software and all 
+ *    associated intellectual property rights is retained by Melo Logic,LLC. 
+ *    Unless enforcement is prohibited by applicable law, you may not adopt,
+ *    decompile, or reverse engineer this Software without written permission
+ *    from Cavium Networks. No right, title or interest in or to any trademark, 
+ *    service mark, logo or trade name of Cavium Networks is granted under 
+ *    this Agreement.
+ *
+ * This Software,including technical data,may be subject to U.S. export control
+ * laws, including the U.S. Export Administration Act and its associated
+ * regulations, and may be subject to export or import regulations in other
+ * countries.You warrant that You will comply strictly in all respects with all
+ * such regulations and acknowledge that you have the responsibility to obtain
+ * licenses to export, re-export or import the Software.
+ *
+ * LIMITATION OF LIABILITY.  TO THE EXTENT NOT PROHIBITED BY LAW,
+ * IN NO EVENT WILL CAVIUM BE LIABLE FOR ANY LOST REVENUE, PROFIT
+ * OR DATA, OR FOR SPECIAL, INDIRECT, CONSEQUENTIAL, INCIDENTAL OR
+ * PUNITIVE DAMAGES, HOWEVER CAUSED REGARDLESS OF THE THEORY OF LIABILITY,
+ * ARISING OUT OF OR RELATED TO THE USE OF OR INABILITY TO USE SOFTWARE,
+ * EVEN IF CAVIUM HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.  In no
+ * event will Cavium Network's liability to you, whether in contract, tort (including
+ * negligence), or otherwise, exceed the amount paid by you for Software
+ * under this Agreement. The foregoing limitations will apply even if the
+ * above stated warranty fails of its essential purpose. Some states do
+ * not allow the exclusion of incidental or consequential damages, so some
+ * of the terms above may not be applicable to you.
+ *
+ */
+
+	    ---------------------------------------------
+	    Certificate Management Library for EasyAccess
+	    ---------------------------------------------
+
+ OVERVIEW
+ --------
+ The libsslcert library provides C interface to manage SSL Certificates
+ for other applications in EasyAccess. The library uses the standard API's
+ provided by OpenSSL library.
+
+ The library is written for and tested against OpenSSL version 0.9.7c.
+
+ The code uses "lsc" as a short form to denote the module name instead of
+ libsslcert.
+
+ NOTES
+ -----
+ At present the library supports the following:
+
+ Symmetric Ciphers:  DES (CBC), DES3 (EDE CBC)
+ Asymetric Algorithms: RSA
+ Hash Algorithms: MD5
+ PEM format for keys.
+
+ Each API returns LSC_ERR_NONE if the call was successful, else a unique
+ postitive error number will be returned to help debug the call. Errors are
+ defined in libsslcert.h
+
+ For symmetric ciphers, Asymmetric Algorithms, and Hash algorithms, please
+ use the constants defined in libsslcert.h.
+
+ Applications can specify configuration files to load in to OpenSSL. If no
+ configuration file is specified, then lsc uses the default OpenSSL
+ configuration (typically /etc/ssl/openssl.cnf). You can change this to your
+ system default, by setting LSC_OPENSSL_CONFIG in libsslcert.h appropriately.
+
+ Logging is supported in the library, provided you compile the library with
+ LSC_DEBUG_LOG. Error strings are logged to LSC_LOG_TARGET which can be
+ modified in the Makefile.
+
+ CODE ORGANIZATION
+ -----------------
+
+ The entire library is divided in to three main .c files which provide the
+ main functionalities of generating and reading private RSA keys, certificate
+ request management, and X509 certificates (including extensions and OpenSSL
+ configuration loading).
+
+ libsslcert.h This is the only file which the applications have to include |
+              in their source files to get the API's. Please look at the
+              extensive error codes reported by the module before you use
+              the API.
+ lscinternal.h Internal structures and definitions for logging.
+ libsslcert.c: OpenSSL environment Startup and Shutdown functions.
+ lscrsa.c: RSA key management utilities.
+ lscx509.c : Certificate processing module.
+ lscCertReq.c: Certificate request processing module
+ lscrand.c, lscrand.h: Handles the RAND_ funcionality provided by OpenSSL,
+                       loading random state, and saving random state.
+ lsctest.c: Test file which calls the API's provided.
+ 
+

@@ -1,0 +1,44 @@
+HKCR
+{
+    NoRemove AppID
+    {
+        {9BB69E3F-E00F-4aab-9F86-E049CBED8830} = s 'MLVT'
+        {
+            val DllSurrogate = s ''
+        }
+        'MLVT.DLL'
+        {
+            val AppID = s {9BB69E3F-E00F-4aab-9F86-E049CBED8830}
+        }
+    }
+	MLVT.VTInterface.1 = s 'VTInterface Class'
+	{
+		CLSID = s '{400CC15A-9D7B-45C0-9794-C3CB7A19EB66}'
+	}
+	MLVT.VTInterface = s 'VTInterface Class'
+	{
+		CLSID = s '{400CC15A-9D7B-45C0-9794-C3CB7A19EB66}'
+		CurVer = s 'MLVT.VTInterface.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {400CC15A-9D7B-45C0-9794-C3CB7A19EB66} = s 'VTInterface Class'
+		{
+			ProgID = s 'MLVT.VTInterface.1'
+			VersionIndependentProgID = s 'MLVT.VTInterface'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '{9BB69E3F-E00F-4aab-9F86-E049CBED8830}'
+			'TypeLib' = s '{C3E89074-65F1-468C-B815-B5B82EE6FB43}'
+            Elevation
+            {
+                val Enabled = d 1
+            }
+            val LocalizedString = s '@%MODULE%,-101'
+		}
+	}
+
+}

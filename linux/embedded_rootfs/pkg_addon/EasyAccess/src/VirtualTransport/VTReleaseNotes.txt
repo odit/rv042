@@ -1,0 +1,85 @@
+				Version 1.6.1 - May 31 2007
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No Features
+--------------------------------------------------------------------------------------------
+				Version 1.6.0 - Mar 13 2007
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+Bug No 295 - Deactivate mechanism for VT on browser exit.
+Bug No 442 - Vista Support
+--------------------------------------------------------------------------------------------
+				Version 1.5.1 - Jan 12 2007
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No Features.
+--------------------------------------------------------------------------------------------	
+	
+				Version 1.5.0 - oct 17 2006
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+Bug No 151 - VT throws decrypt error in Multi-threaded environment.
+--------------------------------------------------------------------------------------------
+
+				Version 1.4.0 - Jan 09 2006
+				----------------------------
+Features Implemented:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No features.
+--------------------------------------------------------------------------------------------
+
+
+Bugs Fixed:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+No Bugs.
+--------------------------------------------------------------------------------------------
+
+
+Known Issues:
+--------------------------------------------------------------------------------------------
+Bug ID			Description
+--------------------------------------------------------------------------------------------
+Bug No 148 - Connection speed of OWA and exchangetrial.com is very slow when there are more than 1000 mails in exchange 	     server.
+Bug No 239 - Existing windows of Internet Explorer versions below 6.0 SP1 don't work after VT is launched.
+Bug No 295 - Deactivate mechanism from WebUI on logout.
+Bug No 298 - Existing windows of Firefox don't work after VT is launched.
+--------------------------------------------------------------------------------------------
+
+July 27, 2005, Virtual Transport Version 1.3.0 Build Number 1.
+
+New Features:
+----------------
+No Features.
+
+Bug Fixes:
+----------------
+No bug fixes.
+
+
+Known Issues:
+----------------
+Bug No 147 - CIFS is not working with VT.
+Bug No 148 - Connection speed of OWA and exchangetrial.com is very slow when there are more than 1000 mails in exchange 	     server.
+Bug No 149 - FTP - Not working properly in IE 5.0.
+Bug No 150 - FTP is not working in command prompt.
+Bug No 239 - Not able to work with EasyAccess/very slow  when VT is installed.
+Bug No 240 - Able to configure host name for virtual Transport clients with no IP address or domain name.
+Bug No 242 - OWA via VT in XPP is very slow.
+
+

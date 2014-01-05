@@ -1,0 +1,39 @@
+<script src="/js/portalframe.js"></script>
+<SCRIPT src="/js/formval.js" type=text/javascript></script>
+</head><body class="bodyback" leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+<SCRIPT TYPE="text/javascript">
+function validateOnSubmit(){
+var elem;
+var errs=0;
+var portvalidate=0;
+if(window.document.server.action.lastIndexOf("/cgi-bin/http") != -1 && !validateurl (window.document.server.ips, 'ip2', true)) errs += 1;
+if(window.document.server.action.lastIndexOf("/cgi-bin/https") != -1 && !validateurl (window.document.server.ips, 'ip2', true)) errs += 1;
+if(window.document.server.action.lastIndexOf("/cgi-bin/ftp") != -1 && !validatenameorip (window.document.server.ips, 'ip2', true)) errs += 1;
+if(window.document.server.action.lastIndexOf("/cgi-bin/rdp") != -1 && !validatenameorip (window.document.server.ips, 'ip2', true)) errs += 1;
+if(window.document.server.action.lastIndexOf("/cgi-bin/vnc") != -1 && !validatenameoripwithport (window.document.server.ips, 'ip2', true)) {errs += 1;portvalidate=1;}
+if(window.document.server.action.lastIndexOf("/cgi-bin/telnet") != -1 && !validatenameoripwithport (window.document.server.ips, 'ip2', true)) {errs += 1;portvalidate=1;}
+if(window.document.server.action.lastIndexOf("/cgi-bin/ssh") != -1 && !validatenameoripwithport  (window.document.server.ips, 'ip2', true)) {errs += 1;portvalidate=1;}
+if(errs>=1 && portvalidate == 0){
+if(window.confirm('A field appears incorrect. Do not add spaces or http: prefix. Do you wish to submit anyways?') == true)
+{window.document.server.submit();}}
+else if(errs>=1 && portvalidate ==1){
+if(window.confirm('A field appears incorrect. Usage: "Ipaddress or Ipaddress:Port or Hostname:Port". Do you wish to submit anyways?') == true)
+{window.document.server.submit();}}
+
+if (errs==0){window.document.server.submit();};};
+nextfield = "box1";
+netscape = "";
+ver = navigator.appVersion; len = ver.length;
+for(iln = 0; iln < len; iln++) if (ver.charAt(iln) == "(") break;
+netscape = (ver.charAt(iln+1).toUpperCase() != "C");
+function keyPress(DnEvents){
+k = (netscape) ? DnEvents.which : window.event.keyCode;
+if (k == 13){
+if (window.document.server.ips == '') return true;
+else{
+validateOnSubmit();
+return false;
+}}}
+document.onkeypress = keyPress;
+if (netscape) document.captureEvents(Event.KEYPRESS);
+</SCRIPT>

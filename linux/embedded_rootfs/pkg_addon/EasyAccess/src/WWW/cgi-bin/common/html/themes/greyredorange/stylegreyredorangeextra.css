@@ -1,0 +1,23 @@
+
+.cifsbodyback{background-image: url(/images/backallredorangegrey.png);overflow-x:hidden;}
+.cifsmenuleft{background-color:#f4f4f4;}
+.cifstop3{filter: progid:DXImageTransform.Microsoft.gradient (GradientType=0,endColorstr=#fffa9960, startColorstr=#fff06620);border-bottom:1px #ffffff solid;border-top:1px #ffffff solid;}
+.cifstop5{background-color:#bb0133;border-bottom:1px #000000 solid;border-top:1px #ffffff solid;border-left:1px #cf6f20 solid;}
+.cifstop6{background-color:#bb0133;border-bottom:1px #000000 solid;border-top:1px #ffffff solid;}
+.toolbarcifs{color:#ffffff;FONT-FAMILY: "lucida sans", verdana,sans-serif, Arial, Helvetica; FONT-SIZE:11px;font-weight:bold;}
+.other2{color:#3f4f6f;}
+.other{color:#000000;FONT-FAMILY: "lucida sans", verdana,sans-serif, Arial, Helvetica; FONT-SIZE:11px;font-weight:bold;}
+.mainbackcifs{COLOR:#000000;FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.onmainbackcifs{COLOR:#000000;background-color:#e4e4e4;FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+A.mainbackcifs{COLOR:#000000; font-FAMILY: "lucida sans", Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.navigator{color:#fcfc98; cursor:hand; font-FAMILY: "lucida sans", verdana,sans-serif, Arial, Helvetica; FONT-SIZE:11px;font-weight:bold;}
+.cifslefttable{filter: progid:DXImageTransform.Microsoft.gradient (GradientType=0,endColorstr=#ffffa970, startColorstr=#fff06620);BACKGROUND-COLOR:#bb0133;}
+.cifsleftcell{BACKGROUND-COLOR:#dddddd;filter: progid:DXImageTransform.Microsoft.gradient (GradientType=0,startColorstr=#fff2f2f2, endColorstr=#ffdddddd);}
+.cifslefttitle{color:#ffffff;FONT-FAMILY: "lucida sans", "Lucida Console", Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;FONT-WEIGHT: bold;}
+.disableduplink{color:#ffcf8f; FONT-size:11px;FONT-WEIGHT: bold;FONT-FAMILY:Lucida Sans, sans-serif, Arial, Garamond;}
+.demo1{color:#ffffff;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:1px solid; margin:2px;border-top-color:#808790;border-left-color:#808790;border-right-color:#556066;border-bottom-color:#556066;background-color:#e6e2df; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}
+.onhovers{margin:2px;margin-color:#ccbb44;color:#dfbf4f;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:2px solid #dfbf4f;background-color:#e6e2df;cursor:hand; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}}
+
+
+.cifsback{background-color:#fafafa;}
+ 

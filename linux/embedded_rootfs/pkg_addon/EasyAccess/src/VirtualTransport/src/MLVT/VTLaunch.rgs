@@ -1,0 +1,26 @@
+HKCR
+{
+	MLVT.VTLaunch.1 = s 'VTLaunch Class'
+	{
+		CLSID = s '{B4F7ED32-94FC-46B6-B8CD-B7EC255305E0}'
+	}
+	MLVT.VTLaunch = s 'VTLaunch Class'
+	{
+		CLSID = s '{B4F7ED32-94FC-46B6-B8CD-B7EC255305E0}'
+		CurVer = s 'MLVT.VTLaunch.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {B4F7ED32-94FC-46B6-B8CD-B7EC255305E0} = s 'VTLaunch Class'
+		{
+			ProgID = s 'MLVT.VTLaunch.1'
+			VersionIndependentProgID = s 'MLVT.VTLaunch'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{C3E89074-65F1-468C-B815-B5B82EE6FB43}'
+		}
+	}
+}

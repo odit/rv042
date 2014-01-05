@@ -1,0 +1,63 @@
+#!/bin/ash
+
+# Firewall settting during firebase initialization
+
+iptables_init() {
+	# Flush all rules
+	iptables -F
+	iptables -X
+
+	# Set up policies
+#	iptables -P INPUT DROP
+#	iptables -P FORWARD DROP
+#	iptables -P OUTPUT ACCEPT
+}
+
+
+case "$1" in
+  start)
+	iptables_init
+
+	# Limit Packets- helps reduce dos/syn attacks
+	iptables -A INPUT -p tcp -m tcp --tcp-flags SYN,RST,ACK SYN -m limit --limit 10/sec
+
+	# Fix for old ISPs
+#	iptables -A FORWARD -p tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+
+        # Policies per/user/group
+	iptables -N CONFIGFORWARD
+	iptables -A FORWARD -j CONFIGFORWARD
+
+	# Accept everything connected
+	iptables -A INPUT   -m state --state ESTABLISHED,RELATED -j ACCEPT
+	iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+	# Allow ICMP echo-request (ping), all other essential ICMP will be either
+	# ESTABLISHED or RELATED, and the rest caught by the default DENY policy
+	iptables -A INPUT -p icmp --icmp-type 8 -j ACCEPT
+
+        # Dont forward traffic between ethernet interfaces. We are not router.
+        iptables -A FORWARD -i eth+ -o eth+ -j DROP
+
+	# Block traffic between PPP interfaces.
+        if [ -f /etc/fbase/firewall/nop2p ]; then
+	        iptables -A FORWARD -i ppp+ -o ppp+ -j DROP
+        fi
+        ;;
+  stop)
+	iptables_init
+
+	# Accept everyting connected
+	iptables -A INPUT   -m state --state ESTABLISHED,RELATED -j ACCEPT
+	;;
+  restart)
+	$0 stop
+	$0 start
+	;;
+  *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+	;;
+esac
+
+exit 0

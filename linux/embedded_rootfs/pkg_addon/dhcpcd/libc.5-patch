@@ -1,0 +1,428 @@
+From: Bruno Patrizio <rusty@duse.net>
+Subject: dhcpcd patch
+
+Hello,
+I made dhcpcd compile on libc5 based systems (tested on Slackware 4.6),
+only few changes.
+
+------------------------------------------------------------------
+diff -B -a -u --recursive -b arp.c arp.c
+/* patched by
+-----------------------------------------------------------------
+Bruno Patrizio aka rusty
+e-mail:         rusty@duse.it
+home page:      http://clockwork.duse.net/ (under construction)
+curriculum:     http://cloclwork.duse.net/curriculum.txt
+
+UNIX and C addict
+------------------------------------------------------------------
+*/
+
+--- arp.c	Sat Oct  3 04:05:25 1998
++++ arp.c	Thu Apr 29 11:14:55 1999
+@@ -29,15 +29,15 @@
+ 
+ typedef struct arpMessage
+ {
+-  struct ether_header	ethhdr;
++  struct ethhdr	ethhdr;
+   u_short htype;	/* hardware type (must be ARPHRD_ETHER) */
+   u_short ptype;	/* protocol type (must be ETHERTYPE_IP) */
+   u_char  hlen;		/* hardware address length (must be 6) */
+   u_char  plen;		/* protocol address length (must be 4) */
+   u_short operation;	/* ARP opcode */
+-  u_char  sHaddr[ETHER_ADDR_LEN];	/* sender's hardware address */
++  u_char  sHaddr[ETH_ALEN];	/* sender's hardware address */
+   u_char  sInaddr[4];	/* sender's IP address */
+-  u_char  tHaddr[ETHER_ADDR_LEN];	/* target's hardware address */
++  u_char  tHaddr[ETH_ALEN];	/* target's hardware address */
+   u_char  tInaddr[4];	/* target's IP address */
+   u_char  pad[18];	/* pad for min. Ethernet payload (60 bytes) */
+ } arpMessage;
+@@ -47,7 +47,7 @@
+ extern	int		DebugFlag;
+ extern	int		dhcpSocket;
+ extern	dhcpInterface	DhcpIface;
+-extern	unsigned char	ClientHwAddr[ETHER_ADDR_LEN];
++extern	unsigned char	ClientHwAddr[ETH_ALEN];
+ /*****************************************************************************/
+ #ifdef ARPCHECK
+ int arpCheck()
+@@ -57,16 +57,16 @@
+   int j,i=0;
+ 
+   memset(&ArpMsgSend,0,sizeof(arpMessage));
+-  memcpy(ArpMsgSend.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETHER_ADDR_LEN);
+-  memcpy(ArpMsgSend.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  ArpMsgSend.ethhdr.ether_type = htons(ETHERTYPE_ARP);
++  memcpy(ArpMsgSend.ethhdr.h_dest,MAC_BCAST_ADDR,ETH_ALEN);
++  memcpy(ArpMsgSend.ethhdr.h_source,ClientHwAddr,ETH_ALEN);
++  ArpMsgSend.ethhdr.h_proto = htons(ETH_P_ARP);
+ 
+   ArpMsgSend.htype	= htons(ARPHRD_ETHER);
+-  ArpMsgSend.ptype	= htons(ETHERTYPE_IP);
+-  ArpMsgSend.hlen	= ETHER_ADDR_LEN;
++  ArpMsgSend.ptype	= htons(ETH_P_IP);
++  ArpMsgSend.hlen	= ETH_ALEN;
+   ArpMsgSend.plen	= 4;
+   ArpMsgSend.operation	= htons(ARPOP_REQUEST);
+-  memcpy(ArpMsgSend.sHaddr,ClientHwAddr,ETHER_ADDR_LEN);
++  memcpy(ArpMsgSend.sHaddr,ClientHwAddr,ETH_ALEN);
+   *(unsigned int *)ArpMsgSend.tInaddr=DhcpIface.client_iaddr;
+ 
+   if ( DebugFlag ) syslog(LOG_DEBUG,
+@@ -98,7 +98,7 @@
+       	      syslog(LOG_ERR,"arpCheck: recvfrom: %m\n");
+       	      return -1;
+     	    }
+-	  if ( ArpMsgRecv.ethhdr.ether_type != htons(ETHERTYPE_ARP) )
++	  if ( ArpMsgRecv.ethhdr.h_proto != htons(ETH_P_ARP) )
+ 	    continue;
+       	  if ( ArpMsgRecv.operation == htons(ARPOP_REPLY) )
+ 	    {
+@@ -111,7 +111,7 @@
+ 	    }
+       	  else
+ 	    continue;
+-      	  if ( memcmp(ArpMsgRecv.tHaddr,ClientHwAddr,ETHER_ADDR_LEN) )
++      	  if ( memcmp(ArpMsgRecv.tHaddr,ClientHwAddr,ETH_ALEN) )
+ 	    {
+ 	      if ( DebugFlag )
+ 	    	syslog(LOG_DEBUG,
+@@ -151,13 +151,13 @@
+ 
+ /* build Ethernet header */
+   memset(&ArpMsgSend,0,sizeof(arpMessage));
+-  memcpy(ArpMsgSend.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETHER_ADDR_LEN);
+-  memcpy(ArpMsgSend.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  ArpMsgSend.ethhdr.ether_type = htons(ETHERTYPE_ARP);
++  memcpy(ArpMsgSend.ethhdr.h_dest,MAC_BCAST_ADDR,ETH_ALEN);
++  memcpy(ArpMsgSend.ethhdr.h_source,ClientHwAddr,ETH_ALEN);
++  ArpMsgSend.ethhdr.h_proto = htons(ETH_P_ARP);
+ 
+ /* build UNARP message */
+-  ArpMsgSend.htype	= htons(ETHERTYPE_IP);
+-  ArpMsgSend.ptype	= htons(ETHERTYPE_IP);
++  ArpMsgSend.htype	= htons(ETH_P_IP);
++  ArpMsgSend.ptype	= htons(ETH_P_IP);
+   ArpMsgSend.plen	= 4;
+   ArpMsgSend.operation	= htons(ARPOP_REPLY);
+   *(unsigned int *)ArpMsgSend.sInaddr=DhcpIface.client_iaddr;
+@@ -180,17 +180,17 @@
+   struct sockaddr addr;
+ 
+   memset(&ArpMsgSend,0,sizeof(arpMessage));
+-  memcpy(ArpMsgSend.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETHER_ADDR_LEN);
+-  memcpy(ArpMsgSend.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  ArpMsgSend.ethhdr.ether_type = htons(ETHERTYPE_ARP);
++  memcpy(ArpMsgSend.ethhdr.h_dest,MAC_BCAST_ADDR,ETH_ALEN);
++  memcpy(ArpMsgSend.ethhdr.h_source,ClientHwAddr,ETH_ALEN);
++  ArpMsgSend.ethhdr.h_proto = htons(ETH_P_ARP);
+ 
+   ArpMsgSend.htype	= htons(ARPHRD_ETHER);
+-  ArpMsgSend.ptype	= htons(ETHERTYPE_IP);
+-  ArpMsgSend.hlen	= ETHER_ADDR_LEN;
++  ArpMsgSend.ptype	= htons(ETH_P_IP);
++  ArpMsgSend.hlen	= ETH_ALEN;
+   ArpMsgSend.plen	= 4;
+   ArpMsgSend.operation	= htons(ARPOP_REPLY);
+-  memcpy(ArpMsgSend.sHaddr,ClientHwAddr,ETHER_ADDR_LEN);
+-  memcpy(ArpMsgSend.tHaddr,DhcpIface.server_haddr,ETHER_ADDR_LEN);
++  memcpy(ArpMsgSend.sHaddr,ClientHwAddr,ETH_ALEN);
++  memcpy(ArpMsgSend.tHaddr,DhcpIface.server_haddr,ETH_ALEN);
+   *(unsigned int *)ArpMsgSend.sInaddr=DhcpIface.client_iaddr;
+   *(unsigned int *)ArpMsgSend.tInaddr=INADDR_BROADCAST;
+  
+diff -B -a -u --recursive -b buildmsg.c buildmsg.c
+--- buildmsg.c	Mon Nov 30 01:13:41 1998
++++ buildmsg.c	Thu Apr 29 11:10:52 1999
+@@ -45,20 +45,20 @@
+ 
+ /* build Ethernet header */
+   memset(&UdpIpMsg,0,sizeof(udpipMessage));
+-  memcpy(UdpIpMsg.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETHER_ADDR_LEN);
+-  memcpy(UdpIpMsg.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  UdpIpMsg.ethhdr.ether_type = htons(ETHERTYPE_IP);
++  memcpy(UdpIpMsg.ethhdr.h_dest,MAC_BCAST_ADDR,ETH_ALEN);
++  memcpy(UdpIpMsg.ethhdr.h_source,ClientHwAddr,ETH_ALEN);
++  UdpIpMsg.ethhdr.h_proto = htons(ETH_P_IP);
+ 
+   DhcpMsgSend->op	=	DHCP_BOOTREQUEST;
+   DhcpMsgSend->htype	=	ARPHRD_ETHER;
+-  DhcpMsgSend->hlen	=	ETHER_ADDR_LEN;
++  DhcpMsgSend->hlen	=	ETH_ALEN;
+ /*  DhcpMsgSend->hops	=	0; */
+   DhcpMsgSend->xid	=	xid;
+   DhcpMsgSend->secs	=       htons(5);
+ #ifdef NEED_BCAST_RESPONSE
+   DhcpMsgSend->flags	=	htons(BROADCAST_FLAG);
+ #endif
+-  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETHER_ADDR_LEN);
++  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETH_ALEN);
+   *((unsigned long *)DhcpMsgSend->options) = htonl(MAGIC_COOKIE);
+   *p++ = dhcpMessageType;
+   *p++ = 1;
+@@ -121,20 +121,20 @@
+  
+ /* build Ethernet header */
+   memset(&UdpIpMsg,0,sizeof(udpipMessage));
+-  memcpy(UdpIpMsg.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETHER_ADDR_LEN);
+-  memcpy(UdpIpMsg.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  UdpIpMsg.ethhdr.ether_type = htons(ETHERTYPE_IP);
++  memcpy(UdpIpMsg.ethhdr.h_dest,MAC_BCAST_ADDR,ETH_ALEN);
++  memcpy(UdpIpMsg.ethhdr.h_source,ClientHwAddr,ETH_ALEN);
++  UdpIpMsg.ethhdr.h_proto = htons(ETH_P_IP);
+ 
+   DhcpMsgSend->op	=	DHCP_BOOTREQUEST;
+   DhcpMsgSend->htype	=	ARPHRD_ETHER;
+-  DhcpMsgSend->hlen	=	ETHER_ADDR_LEN;
++  DhcpMsgSend->hlen	=	ETH_ALEN;
+ /*  DhcpMsgSend->hops	=	0; */
+   DhcpMsgSend->xid	=	xid;
+   DhcpMsgSend->secs	=	htons(5);
+ #ifdef NEED_BCAST_RESPONSE
+   DhcpMsgSend->flags	=	htons(BROADCAST_FLAG);
+ #endif
+-  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETHER_ADDR_LEN);
++  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETH_ALEN);
+   *((unsigned long *)DhcpMsgSend->options) = htonl(MAGIC_COOKIE);
+   *p++ = dhcpMessageType;
+   *p++ = 1;
+@@ -199,20 +199,20 @@
+ {
+   register unsigned char *p = DhcpMsgSend->options + 4;
+   memset(&UdpIpMsg,0,sizeof(udpipMessage));
+-  memcpy(UdpIpMsg.ethhdr.ether_dhost,DhcpIface.server_haddr,ETHER_ADDR_LEN);
+-  memcpy(UdpIpMsg.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  UdpIpMsg.ethhdr.ether_type = htons(ETHERTYPE_IP);
++  memcpy(UdpIpMsg.ethhdr.h_dest,DhcpIface.server_haddr,ETH_ALEN);
++  memcpy(UdpIpMsg.ethhdr.h_source,ClientHwAddr,ETH_ALEN);
++  UdpIpMsg.ethhdr.h_proto = htons(ETH_P_IP);
+ 
+   DhcpMsgSend->op	=	DHCP_BOOTREQUEST;
+   DhcpMsgSend->htype	=	ARPHRD_ETHER;
+-  DhcpMsgSend->hlen	=	ETHER_ADDR_LEN;
++  DhcpMsgSend->hlen	=	ETH_ALEN;
+ /*  DhcpMsgSend->hops	=	0; */
+   DhcpMsgSend->xid	=	xid;
+   DhcpMsgSend->secs	=	htons(5);
+ #ifdef NEED_BCAST_RESPONSE
+   DhcpMsgSend->flags	=	htons(BROADCAST_FLAG);
+ #endif
+-  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETHER_ADDR_LEN);
++  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETH_ALEN);
+   DhcpMsgSend->ciaddr = DhcpIface.client_iaddr;
+   *((unsigned long *)DhcpMsgSend->options) = htonl(MAGIC_COOKIE);
+   *p++ = dhcpMessageType;
+@@ -265,24 +265,24 @@
+ unsigned xid;
+ {
+   buildDhcpRenew();
+-  memcpy(UdpIpMsg.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETHER_ADDR_LEN);
++  memcpy(UdpIpMsg.ethhdr.h_dest,MAC_BCAST_ADDR,ETH_ALEN);
+ #if 0
+   register unsigned char *p = DhcpMsgSend->options + 4;
+   memset(&UdpIpMsg,0,sizeof(udpipMessage));
+-  memcpy(UdpIpMsg.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETHER_ADDR_LEN);
+-  memcpy(UdpIpMsg.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  UdpIpMsg.ethhdr.ether_type = htons(ETHERTYPE_IP);
++  memcpy(UdpIpMsg.ethhdr.h_dest,MAC_BCAST_ADDR,ETH_ALEN);
++  memcpy(UdpIpMsg.ethhdr.h_source,ClientHwAddr,ETH_ALEN);
++  UdpIpMsg.ethhdr.h_proto = htons(ETH_P_IP);
+ 
+   DhcpMsgSend->op	=	DHCP_BOOTREQUEST;
+   DhcpMsgSend->htype	=	ARPHRD_ETHER;
+-  DhcpMsgSend->hlen	=	ETHER_ADDR_LEN;
++  DhcpMsgSend->hlen	=	ETH_ALEN;
+ /*  DhcpMsgSend->hops	=	0; */
+   DhcpMsgSend->xid	=	xid;
+   DhcpMsgSend->secs	=	htons(5);
+ #ifdef NEED_BCAST_RESPONSE
+   DhcpMsgSend->flags	=	htons(BROADCAST_FLAG);
+ #endif
+-  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETHER_ADDR_LEN);
++  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETH_ALEN);
+   DhcpMsgSend->ciaddr = DhcpIface.client_iaddr;
+   *((unsigned long *)DhcpMsgSend->options) = htonl(MAGIC_COOKIE);
+   *p++ = dhcpMessageType;
+@@ -339,20 +339,20 @@
+  
+ /* build Ethernet header */
+   memset(&UdpIpMsg,0,sizeof(udpipMessage));
+-  memcpy(UdpIpMsg.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETHER_ADDR_LEN);
+-  memcpy(UdpIpMsg.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  UdpIpMsg.ethhdr.ether_type = htons(ETHERTYPE_IP);
++  memcpy(UdpIpMsg.ethhdr.h_dest,MAC_BCAST_ADDR,ETH_ALEN);
++  memcpy(UdpIpMsg.ethhdr.h_source,ClientHwAddr,ETH_ALEN);
++  UdpIpMsg.ethhdr.h_proto = htons(ETH_P_IP);
+ 
+   DhcpMsgSend->op	=	DHCP_BOOTREQUEST;
+   DhcpMsgSend->htype	=	ARPHRD_ETHER;
+-  DhcpMsgSend->hlen	=	ETHER_ADDR_LEN;
++  DhcpMsgSend->hlen	=	ETH_ALEN;
+ /*  DhcpMsgSend->hops	=	0; */
+   DhcpMsgSend->xid	=	xid;
+   DhcpMsgSend->secs	=	htons(5);
+ #ifdef NEED_BCAST_RESPONSE
+   DhcpMsgSend->flags	=	htons(BROADCAST_FLAG);
+ #endif
+-  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETHER_ADDR_LEN);
++  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETH_ALEN);
+   *((unsigned long *)DhcpMsgSend->options) = htonl(MAGIC_COOKIE);
+   *p++ = dhcpMessageType;
+   *p++ = 1;
+@@ -410,16 +410,16 @@
+ {
+   register u_char *p = DhcpMsgSend->options + 4;
+   memset(&UdpIpMsg,0,sizeof(udpipMessage));
+-  memcpy(UdpIpMsg.ethhdr.ether_dhost,DhcpIface.server_haddr,ETHER_ADDR_LEN);
+-  memcpy(UdpIpMsg.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  UdpIpMsg.ethhdr.ether_type = htons(ETHERTYPE_IP);
++  memcpy(UdpIpMsg.ethhdr.h_dest,DhcpIface.server_haddr,ETH_ALEN);
++  memcpy(UdpIpMsg.ethhdr.h_source,ClientHwAddr,ETH_ALEN);
++  UdpIpMsg.ethhdr.h_proto = htons(ETH_P_IP);
+ 
+   DhcpMsgSend->op	=	DHCP_BOOTREQUEST;
+   DhcpMsgSend->htype	=	ARPHRD_ETHER;
+-  DhcpMsgSend->hlen	=	ETHER_ADDR_LEN;
++  DhcpMsgSend->hlen	=	ETH_ALEN;
+   DhcpMsgSend->xid	=	xid;
+   DhcpMsgSend->ciaddr	=	DhcpIface.client_iaddr;
+-  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETHER_ADDR_LEN);
++  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETH_ALEN);
+   *((unsigned long *)DhcpMsgSend->options) = htonl(MAGIC_COOKIE);
+   *p++ = dhcpMessageType;
+   *p++ = 1;
+@@ -446,9 +446,9 @@
+   register unsigned char *p = DhcpMsgSend->options + 4;
+   DhcpMsgSend->op	=	DHCP_BOOTREQUEST;
+   DhcpMsgSend->htype	=	ARPHRD_ETHER;
+-  DhcpMsgSend->hlen	=	ETHER_ADDR_LEN;
++  DhcpMsgSend->hlen	=	ETH_ALEN;
+   DhcpMsgSend->xid	=	xid;
+-  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETHER_ADDR_LEN);
++  memcpy(DhcpMsgSend->chaddr,ClientHwAddr,ETH_ALEN);
+   *((unsigned long *)DhcpMsgSend->options) = htonl(MAGIC_COOKIE);
+   *p++ = dhcpMessageType;
+   *p++ = 1;
+diff -B -a -u --recursive -b client.c client.c
+--- client.c	Mon Mar 15 02:46:38 1999
++++ client.c	Thu Apr 29 11:19:46 1999
+@@ -74,7 +74,7 @@
+ udpipMessage	UdpIpMsg;
+ dhcpMessage	*DhcpMsgRecv;
+ jmp_buf		env;
+-unsigned char	ClientHwAddr[ETHER_ADDR_LEN];
++unsigned char	ClientHwAddr[ETH_ALEN];
+ 
+ const dhcpMessage *DhcpMsgSend = (dhcpMessage *)&UdpIpMsg.udpipmsg[sizeof(udpiphdr)];
+ /*****************************************************************************/
+@@ -312,10 +312,10 @@
+       DhcpIface.client_len = ClientID_len + 3;
+       return;
+     }
+-  *c++ = ETHER_ADDR_LEN + 1;	/* length: 6 (MAC Addr) + 1 (# field) */
++  *c++ = ETH_ALEN + 1;	/* length: 6 (MAC Addr) + 1 (# field) */
+   *c++ = ARPHRD_ETHER;		/* type: Ethernet address */
+-  memcpy(c,ClientHwAddr,ETHER_ADDR_LEN);
+-  DhcpIface.client_len = ETHER_ADDR_LEN + 3;
++  memcpy(c,ClientHwAddr,ETH_ALEN);
++  DhcpIface.client_len = ETH_ALEN + 3;
+ }
+ /*****************************************************************************/
+ void releaseDhcpOptions()
+@@ -343,7 +343,7 @@
+       	  memset(&addr,0,sizeof(struct sockaddr));
+       	  memcpy(addr.sa_data,IfName,IfName_len);
+ 	  buildUdpIpMsg(xid);
+-      	  if ( sendto(dhcpSocket,&UdpIpMsg,sizeof(struct ether_header)+
++      	  if ( sendto(dhcpSocket,&UdpIpMsg,sizeof(struct ethhdr)+
+ 		      sizeof(udpiphdr)+sizeof(dhcpMessage),0,
+ 		      &addr,sizeof(struct sockaddr)) == -1 )
+ 	    {
+@@ -364,10 +364,10 @@
+       	      syslog(LOG_ERR,"recvfrom: %m\n");
+       	      return -1;
+     	    }
+-	  if ( UdpIpMsg.ethhdr.ether_type != htons(ETHERTYPE_IP) )
++	  if ( UdpIpMsg.ethhdr.h_proto != htons(ETH_P_IP) )
+ 	    continue;
+ 	  if ( ip->ip_p != IPPROTO_UDP ) continue;
+-	  len-=sizeof(struct ether_header);
++	  len-=sizeof(struct ethhdr);
+ 	  i=(int )ntohs(ip->ip_len);
+ 	  if ( len < i )
+ 	    {
+@@ -694,7 +694,7 @@
+       syslog(LOG_ERR,"dhcpStart: ioctl SIOCSIFFLAGS: %m\n");
+       exit(1);
+     }
+-  memcpy(ClientHwAddr,ifr.ifr_hwaddr.sa_data,ETHER_ADDR_LEN);
++  memcpy(ClientHwAddr,ifr.ifr_hwaddr.sa_data,ETH_ALEN);
+   return &dhcpInit;
+ }
+ /*****************************************************************************/
+@@ -751,7 +751,7 @@
+       return 0;
+     }
+ /* DHCP_OFFER received */
+-  memcpy(DhcpIface.server_haddr,UdpIpMsg.ethhdr.ether_shost,ETHER_ADDR_LEN);
++  memcpy(DhcpIface.server_haddr,UdpIpMsg.ethhdr.h_source,ETH_ALEN);
+   DhcpIface.server_iaddr = *(unsigned int *)DhcpOptions.val[dhcpServerIdentifier];
+   prev_ip_addr = DhcpIface.client_iaddr;
+   DhcpIface.client_iaddr = DhcpMsgRecv->yiaddr;
+@@ -934,7 +934,7 @@
+ 	   ((unsigned char *)&DhcpIface.server_iaddr)[1],
+ 	   ((unsigned char *)&DhcpIface.server_iaddr)[2],
+ 	   ((unsigned char *)&DhcpIface.server_iaddr)[3]);
+-  if ( sendto(dhcpSocket,&UdpIpMsg,sizeof(struct ether_header)+
++  if ( sendto(dhcpSocket,&UdpIpMsg,sizeof(struct ethhdr)+
+ 	      sizeof(udpiphdr)+sizeof(dhcpMessage),0,
+ 	      &addr,sizeof(struct sockaddr)) == -1 )
+     syslog(LOG_ERR,"dhcpRelease: sendto: %m\n");
+@@ -976,9 +976,9 @@
+ {
+   struct sockaddr addr;
+   memset(&UdpIpMsg,0,sizeof(udpipMessage));
+-  memcpy(UdpIpMsg.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETHER_ADDR_LEN);
+-  memcpy(UdpIpMsg.ethhdr.ether_shost,ClientHwAddr,ETHER_ADDR_LEN);
+-  UdpIpMsg.ethhdr.ether_type = htons(ETHERTYPE_IP);
++  memcpy(UdpIpMsg.ethhdr.ether_dhost,MAC_BCAST_ADDR,ETH_ALEN);
++  memcpy(UdpIpMsg.ethhdr.ether_shost,ClientHwAddr,ETH_ALEN);
++  UdpIpMsg.ethhdr.ether_type = htons(ETH_P_IP);
+   buildDhcpDecline(random());
+   udpipgen((udpiphdr *)&UdpIpMsg.udpipmsg,0,INADDR_BROADCAST,
+   htons(DHCP_CLIENT_PORT),htons(DHCP_SERVER_PORT),sizeof(dhcpMessage));
+diff -B -a -u --recursive -b client.h client.h
+--- client.h	Mon Nov 30 01:11:53 1998
++++ client.h	Thu Apr 29 11:06:03 1999
+@@ -23,7 +23,7 @@
+ #ifndef CLIENT_H
+ #define CLIENT_H
+ 
+-#include <net/ethernet.h>
++#include <linux/if_ether.h>
+ 
+ #define IPPACKET_SIZE		1500
+ #define MAGIC_COOKIE		0x63825363
+@@ -129,7 +129,7 @@
+   int		class_len;
+   int		client_len;
+   unsigned int	xid;
+-  unsigned char	server_haddr[ETHER_ADDR_LEN];
++  unsigned char	server_haddr[ETH_ALEN];
+   unsigned char	class_id[CLASS_ID_MAX_LEN];
+   unsigned char	client_id[CLIENT_ID_MAX_LEN];
+ } dhcpInterface;
+@@ -155,7 +155,7 @@
+ 
+ typedef struct udpipMessage
+ {
+-  struct ether_header	ethhdr;
++  struct ethhdr ethhdr;
+   char	 udpipmsg[IPPACKET_SIZE];
+ } udpipMessage;
+ 
+
+--------------973FE733AF5437D0F9ACFFFE--
+

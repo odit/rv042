@@ -1,0 +1,6 @@
+config CONFIG_easyaccess
+        bool "easyaccess"
+        default y
+        help
+                Easy Access Software
+

@@ -1,0 +1,216 @@
+<!--#nk_get Time2Setup=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chSubmit(F)
+{		
+	if(checkDate(F.DateName) < 0)
+	{
+		F.DateName.select();
+		return;
+	}
+	
+	if(checkTime(F.TimeName) < 0)
+	{
+		F.TimeName.select();
+		return;
+	}
+	
+	var p;
+	var q;
+	var dateString=F.DateName.value;
+	var timeString=F.TimeName.value;
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(6);
+	
+	rightString=dateString;
+	q=rightString.length;
+	p=rightString.indexOf(".");
+	ts[1]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+	
+	q=rightString.length;
+	p=rightString.indexOf(".");
+	ts[2]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+	
+	ts[3]=rightString;
+	
+	F.settime_year.value = ts[1];
+	F.settime_month.value = ts[2];
+	F.settime_day.value = ts[3];
+	
+	rightString=timeString;
+	q=rightString.length;
+	p=rightString.indexOf(":");
+	ts[1]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+	
+	q=rightString.length;
+	p=rightString.indexOf(":");
+	ts[2]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+	
+	ts[3]=rightString;
+	
+	F.settime_hours.value = ts[1];
+	F.settime_minutes.value = ts[2];
+	F.settime_seconds.value = ts[3];
+
+	F.submitStatus.value=1;
+	F.log_ch.value=1;
+	F.submit(); 
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formTime)";
+var Cancellink = ""; 
+var Backlink = "";
+var helplink ='help_time.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=140;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintTimeMode(1);
+	PrintTime(0);
+	PrintEndContent();
+}
+
+function PrintTimeMode(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+NormallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="10">');
+	document.write('<input type="radio" name="setMode" value="1" onClick="document.location.href=\'time1.htm\'" >');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Set the local time using Network Time Protocol (NTP) automatically');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<input type="radio" name="setMode" value="2" checked>');
+	document.write('</td>');	
+	document.write('<td>');
+	document.write('Set the local time Manually');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+function PrintTime(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+NormallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>'); 
+	document.write('<td width="'+head_width+'">');
+	document.write('<input type="hidden" name="settime_hours" value=\'<!--#nk_get handle_tags="hour"-->\'>');
+	document.write('<input type="hidden" name="settime_minutes" value=\'<!--#nk_get handle_tags="minute"-->\'>');
+	document.write('<input type="hidden" name="settime_seconds" value=\'<!--#nk_get handle_tags="second"-->\'>');
+	document.write('<input type="hidden" name="settime_month" value=\'<!--#nk_get handle_tags="month"-->\'>');
+	document.write('<input type="hidden" name="settime_day" value=\'<!--#nk_get handle_tags="day"-->\'>');
+	document.write('<input type="hidden" name="settime_year" value=\'<!--#nk_get handle_tags="year"-->\'>');
+	document.write('Date&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');		
+	document.write('<input type="text" name="DateName" size="30" maxlength="10" value="" onFocus="this.select();" onKeypress="return Check_User_Input(event)">');
+	document.formTime.DateName.value =  "";
+	document.formTime.DateName.value += document.formTime.settime_year.value + ".";
+	if (document.formTime.settime_month.value < 10)
+		document.formTime.DateName.value += "0" + document.formTime.settime_month.value + ".";
+	else
+		document.formTime.DateName.value += document.formTime.settime_month.value + ".";
+	if (document.formTime.settime_day.value < 10)
+		document.formTime.DateName.value += "0" + document.formTime.settime_day.value;
+	else
+		document.formTime.DateName.value += document.formTime.settime_day.value;	
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');		
+	document.write('(yyyy.mm.dd)');
+	document.write('</td>');
+	document.write('</tr>'); 
+	document.write('<tr>'); 
+	document.write('<td>');
+	document.write('Time&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');		
+	document.write('<input type="text" name="TimeName" size="30" maxlength="8" value="" onFocus="this.select();" onKeypress="return Check_User_Input(event)">');
+	document.formTime.TimeName.value =  "";
+	if (document.formTime.settime_hours.value < 10)
+		document.formTime.TimeName.value += "0" + document.formTime.settime_hours.value + ":";
+	else	
+		document.formTime.TimeName.value += document.formTime.settime_hours.value + ":";
+	if (document.formTime.settime_minutes.value < 10)
+		document.formTime.TimeName.value += "0" + document.formTime.settime_minutes.value + ":";
+	else
+		document.formTime.TimeName.value += document.formTime.settime_minutes.value + ":";
+	if (document.formTime.settime_seconds.value < 10)
+		document.formTime.TimeName.value += "0" + document.formTime.settime_seconds.value;
+	else
+		document.formTime.TimeName.value += document.formTime.settime_seconds.value;
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');		
+	document.write('(hh:mm:ss)');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 3);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formTime" method="post" action="time2.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="time2.htm"-->
+<!--#nk_get TimeUpdate="2"-->

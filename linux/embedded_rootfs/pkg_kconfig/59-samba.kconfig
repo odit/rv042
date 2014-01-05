@@ -1,0 +1,6 @@
+config CONFIG_samba
+	bool "samba"
+	default n
+	help
+		Include samba
+

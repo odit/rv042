@@ -1,0 +1,196 @@
+<!--#nk_get IpMACSetup=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta name="Pragma" content="No-Cache">
+<!--<meta http-equiv="refresh" content="5">-->
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>IP & MAC binding List</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script language=JavaScript>
+function Entryfunction()
+{
+	window.status='';
+}
+	
+function Leavefunction()
+{
+	opener.wDhcp_table1=null;
+}
+	
+function chsubmit(F)
+{
+	alert(aWaitForSetting);
+	opener.closeService(); 
+	F.submitStatus.value="1";
+	F.submit();
+}
+
+function selectall(F)
+{
+	var SelectAll = 0;
+
+	if (F.AllSelect.checked)
+		SelectAll = 1;
+	
+	for (var i=1; i < list.length; i++) 
+	{
+		if (SelectAll == 1)
+		{
+		   	document.getElementById("bindable"+i).checked=true;
+			document.getElementById("ipmac"+i).className="SelectedRow";
+		}
+		else
+		{
+			if (i%2==0)
+				document.getElementById("ipmac"+i).className="popEvenRow";
+			else	
+				document.getElementById("ipmac"+i).className="popOddRow";
+			document.getElementById("bindable"+i).checked=false;	
+		}
+	}
+}
+
+function ip_mac_check(x,list_index)
+{
+   if(x.checked == true)
+       document.getElementById("ipmac"+list_index).className="SelectedRow"; 
+   else
+   {
+	if(list_index%2==0)
+		document.getElementById("ipmac"+list_index).className="popEvenRow";
+	else
+		document.getElementById("ipmac"+list_index).className="popOddRow";		
+   }  
+}
+
+function Print_table_tr_cell(cell_type,list_index,IP,MAC, index)
+{
+	MAC=MAC.toUpperCase();
+	document.write('<tr id="ipmac'+list_index+'" class="'+cell_type+'">');
+	document.write('<td width="120" >'+IP+'<input type=hidden name="IP'+index+'" value="'+IP+'"></td>');
+   	document.write('<td width="150" >'+MAC+'<input type=hidden name="MAC'+index+'" value="'+MAC+'"></td>');
+   	document.write('<td><input type="text" name="username'+index+'" maxlength="12" size="20" ></td>');
+   	document.write('<td width="150"><input type="checkbox" id="bindable'+index+'" name="bindable'+index+'" value="1" onClick="ip_mac_check(this,'+list_index+')"></td></tr>');
+}
+
+function getIPNumber(ipAddr)
+{
+	var result = 0;
+	var value = 0;
+	var ipParts = new Array();
+
+	ipParts = ipAddr.split(".");
+
+	for (var i=0; i < ipParts.length; i++) 
+	{
+	  var addr =  ipParts[i];
+
+	  if (i==0)
+	     value = addr * 256 * 256 * 256;
+	  else if (i == 1)
+	     value = addr * 256 * 256;
+	  else if (i == 2)
+	     value = addr * 256;
+	  else if (i == 3)
+	     value = addr * 1;
+
+	  result = result + value;
+	}
+	return result; 
+}
+
+function IP_S_to_B_Data(a,b)
+{
+    var aText = a;
+    var bText = b;
+	var items;
+	
+	if(!a) return -1;
+	if(!b) return 1;
+	
+	items=aText.split(splitVarforSpecialWordField+"#");
+	aText=getIPNumber(items[0]);
+	
+	items=bText.split(splitVarforSpecialWordField+"#");
+	bText=getIPNumber(items[0]);
+
+	if (aText < bText) return -1;
+    if (aText > bText) return 1;
+    return 0;
+}
+
+var list;
+function produce_table(data)
+{
+	var items;
+	
+    list=data.split(splitVarforSpecialWordField+"?");
+    list.sort(IP_S_to_B_Data);	
+	if(list.length < 2) return ;
+
+	document.write('<tr><td class="STtable"><table width="100%"  class="STtable"  border="0">');
+
+	for (var i=1; i < list.length; i++) 
+	{
+		items=list[i].split(splitVarforSpecialWordField+"#");
+		if(i%2==0)
+		    Print_table_tr_cell("popEvenRow",i,items[0],items[1],items[2]);//EvenRow
+		else
+		    Print_table_tr_cell("popOddRow",i,items[0],items[1],items[2]);//OddRow
+		list[i]=list[i]+splitVarforSpecialWordField+"#"+i;
+	}
+
+	document.write('</table></td></tr>');
+}
+
+</script>
+</head>
+<body class="poplist" onResize="ChangeWhiteTable()" style="overflow:hidden">
+<form name="dhcp_ip_mac_bind" action="Dhcp_table1.htm" method="post">
+    <input type=hidden name="page" value="Dhcp_table1.htm"> 
+    <input type=hidden name="submitStatus" value="0"> 
+    <!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+  <table class="pop_title_table" border="0" width="100%">     
+    <tr>       
+      <th>
+        <script language="JavaScript">
+		PrintSTButton('OK', 'OK', 'chsubmit(this.form)', "","submit",70);
+		document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+        	PrintSTButton('refresh', 'Refresh', "javascript: location.href='Dhcp_table1.htm'", "","",70);
+		document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+		PrintSTButton('close', 'Close', 'closeWindow();', "","", 70);
+        </script> 
+      </th>  
+    </tr>     
+  </table>  
+<script>PrintWhiteTableBegin();</script>
+  <table width="100%" class="STtable" border="1">
+  <tr>
+   <td>
+      <table width="100%" class="STtable" border="0">
+       <tr>
+	    <td width="134" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="8" height="1">IP Address</td>
+	    <td bgcolor="#FFFFFF" style="padding-left: 0px; padding-right: 0px; width:1px"></td>
+	    <td bgcolor="#A2B9C9" style="padding-left: 0px; padding-right: 0px; width:1px"></td>
+	    <td width="165" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">MAC Address</td>
+	    <td bgcolor="#FFFFFF" style="padding-left: 0px; padding-right: 0px; width:1px"></td>
+	    <td bgcolor="#A2B9C9" style="padding-left: 0px; padding-right: 0px; width:1px"></td>
+	    <td bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Name</td>	
+	    <td bgcolor="#FFFFFF" style="padding-left: 0px; padding-right: 0px; width:1px"></td>
+	    <td bgcolor="#A2B9C9" style="padding-left: 0px; padding-right: 0px; width:1px"></td>	
+	    <td width="165" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1"><input type="checkbox" id="AllSelect" name="AllSelect" value="1" onClick="selectall(document.dhcp_ip_mac_bind);"><img border="0" src="images/_blank.gif" width="8" height="1">Enable</td>	
+       </tr>
+      </table>
+   </td>
+  </tr>
+    <script language="JavaScript">
+  	<!--#nk_get IP_Mac_table=""-->	
+    </script> 
+  </table>
+<script>PrintWhiteTableEnd();</script>
+</form>     
+</body>
+</html>
+<!--#nk_get DhcpUpdate=""--> 

@@ -1,0 +1,6 @@
+config CONFIG_logrotate
+	bool "logrotate"
+	default n
+	help
+		Include logrotate
+

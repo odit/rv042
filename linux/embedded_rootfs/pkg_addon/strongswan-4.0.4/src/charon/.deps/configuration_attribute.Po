@@ -1,0 +1,76 @@
+configuration_attribute.o configuration_attribute.o:  \
+ encoding/payloads/configuration_attribute.c \
+  /usr/local/cavium/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.1/include/stddef.h \
+  encoding/payloads/configuration_attribute.h \
+  ../../src/libstrongswan/types.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gmp.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/types.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/features.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/cdefs.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wordsize.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gnu/stubs.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/types.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/typesizes.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/time.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/endian.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/endian.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/select.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/select.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sigset.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/time.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/sysmacros.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/pthreadtypes.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/stdlib.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/alloca.h \
+  ../../src/libstrongswan/definitions.h encoding/payloads/payload.h \
+  encoding/payloads/encodings.h
+
+/usr/local/cavium/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.1/include/stddef.h:
+
+encoding/payloads/configuration_attribute.h:
+
+../../src/libstrongswan/types.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gmp.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/types.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/features.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/cdefs.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wordsize.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gnu/stubs.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/types.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/typesizes.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/time.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/endian.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/endian.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/select.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/select.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sigset.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/time.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/sysmacros.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/pthreadtypes.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/stdlib.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/alloca.h:
+
+../../src/libstrongswan/definitions.h:
+
+encoding/payloads/payload.h:
+
+encoding/payloads/encodings.h:

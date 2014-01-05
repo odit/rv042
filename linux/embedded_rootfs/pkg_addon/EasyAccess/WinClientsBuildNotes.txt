@@ -1,0 +1,92 @@
+Common Build Requirments:
+=========================
+1. Microsoft Visual Studio 6.0 with Service Pack 6.
+
+2. Platform SDK February 2003.
+
+3. In the case of Virtual Passage, DDk should be present.
+
+4. Make sure Cabarc utility to create cabinet file is present in the system defined path.
+
+5. Make sure signcode executable to sign binaries is present in the system defined path.
+
+6. Certificates files (*.spc, *.pvk, *.p12) should be present in the path specified in the appropriate batch files.
+   (Note: \AccessPointDial\HowTo_GenerateCertStore.txt has more information on creating *.p12 files from *.spc and *.key files)
+
+7. In Visual Studio, execute 'Register PSDK Directories with Visual Studio' in 'Start Menu ->Microsoft platform SDK 2003->Visual Studio Registration'. This has to be done once after both visual studio and PSDK are installed.
+
+8. In Visual Studio 'options->include' ensure that Microsoft SDK\Include directory should be before other Visual Studio include directories. 
+
+9. In Visual Studio 'options->include' ensure that Microsoft SDK\Lib directory should be before other Visual Studio lib directories. 
+
+10. Java SDK (v1.5) should be present.
+
+11. javac, jar, jarsigner should be present in the system defined path.
+
+12. The environment variable %CLASSPATH% should have the complete paths of plugin.jar and rt.jar.
+
+
+
+The Build Procedure for Various Build Clients are follows
+*********************************************************
+
+Build Procedure For Virtual Transport:
+======================================
+1. Goto VirtualTransport directory and open VirtualTransport.dsw in MS Visual Studio 6.0.
+
+2. Set active project as MLVT and build configuration should be 'Win32 Release' and do the build.
+
+3. Set active project as MLVTLSP and build configuration should be 'Win32 Release' and do the build.4
+
+4. Set active project as MLVTNSP and build configuration should be 'Win32 Release' and do the build.
+
+5. Set active project as VirtualTransportUninstall and build configuration should be 'Win32 Release' and do the build.
+
+6. Please Ensure that the VirtualTransport\src\Bin\SpOrder.dll file is in writable mode.
+
+7. Execute \Virtual Transport\Makerelease.bat to create MenloLSP.cab
+
+
+Build Procedure For Virtual Passage:
+===================================
+
+1. Open \AccessPointDial\SSLDrv\
+
+2. Open the 'Windows 2000 Free Build Environment' from the 'Build Environment' startup menu of DDK
+
+3. Use 'build -cZ' command to generate the SSLDrv.sys file
+
+4. Add paths for newdev.h and newdev.lib in Tools->Options->Directories->Include files and 
+Tools->Options->Directories->Library files respectively in Visual Studio
+
+5. Open \AccessPointDial\XTunnel\XTunnel.dsw in the VC++ 6.0 IDE and build it for 'Win32 Release MinDependency' 
+(or 'Win32 IPv6 Release MinDependency' if IPv6 support is desired) to create XTunnel.dll
+	
+6. For 'Uninstalling Virtual Passage' Open \AccessPointDial\UninstallVTPassage  and build it for 'Win32 Release' to create UninstallVTPassage.exe.
+
+7. For 'VirtualPassageExe' Open \AccessPointDial\VirtualPassageExe  and build it for 'Win32 Release' 
+(or 'Win32 IPv6 Release' if IPv6 support is desired)to create VirtualPassageExe.exe.
+
+9. Execute \AccessPointDial\Makerelease.bat (or Makerelease6.bat if IPv6 support is desired)
+to create XTunnel.cab (or XTunnel6.cab).
+
+10. Execute \AccessPointDial\Makejar.bat (or Makejar6.bat if IPv6 support is desired)
+to create WindowsVPInstaller.jar and WindowsVPDialer.jar (or WindowsVPDialer6.jar).
+
+
+
+Build Procedure For XTSAC:
+=========================
+1. Open \TSAC\XTSAC\XTSAC.dsw in the VC++ 6.0 IDE and build it for 'Win32 Release' 
+to create XTunnel.dll to create XTSAC.ocx
+
+2. Execute \TSAC\MakeRelease.bat to create XTSAC.cab
+
+
+Build Procedure For Com WebCacheCleaner:
+=======================================
+
+1. Open \ComWebCacheCleaner\MLWebCacheCleaner\MLWebCacheCleaner.dsw in tthe VC++6.0 IDE and build it for 'WIn32 Release MinDependency' to create MLWebCacheCleaner.dll.
+
+2. Execute \ComWebCacheCleaner\MakeRelease.bat to create MLWebCacheCleaner.cab
+ 

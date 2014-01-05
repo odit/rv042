@@ -1,0 +1,26 @@
+include ../../../make-include-uClinux.mk
+
+AAA_LIB=-lAuth -lldap -llber -lcrypt -lsmbclient -lkrb5 \
+	-lk5crypto -lcom_err -lkrb5
+
+BIN=userLogin
+LDFLAGS +=-L$(AUTH_LIB) -L$(SYS_LIB) -L$(GCGI_LIB) -lgcgi  -L$(KRB_LIB_DIR) \
+	-L$(SAMBA_LIB_DIR) -L$(LDAP_LIB_DIR) -L$(LDAP_BER_LIB_DIR) $(AAA_LIB) -lSys \
+        $(SSL_LIBS) -lutil -Wl,--defsym,__stack_size__=1048576
+
+all: $(BIN)
+
+CFLAGS +=-I$(AUTH_LIB) -I$(SYS_LIB) -I$(GCGI_LIB) -UUSE_NO_EXTERNAL_AAA
+
+userLogin: userLogin.c
+	$(CC) ${CFLAGS} userLogin.c ${LDFLAGS} -o userLogin
+	$(STRIP) userLogin
+
+install:
+	if [ -n '$(BIN)' ]; then $(INSTALL) $(BIN) $(DEST_CGI_BIN); fi
+
+clean:
+	rm -rf $(BIN)
+
+un-install:
+	rm -rf $(DEST_CGI_BIN)/$(BIN)

@@ -1,0 +1,78 @@
+#!/bin/sh -x
+TOPDIR=`cd ../../..; pwd`
+
+STACK_SIZE=256
+AR="mips-ar cr"
+CC=mips-gcc
+RANLIB=mips-ranlib
+
+INSTALL="${CP}"
+INSTALL_PROGRAM="${INSTALL}"
+INSTALL_DATA="${INSTALL}"
+INSTALL_SCRIPT="${INSTALL}"
+if [ $CONFIG_IPV6 = "y" ];then
+CFLAGS="-Os -fno-schedule-insns2 -Wall -Wshadow -Wpointer-arith -Wcast-qual -Winline -Waggregate-return -DCONFIG_IPV6"
+else
+CFLAGS="-Os -fno-schedule-insns2 -Wall -Wshadow -Wpointer-arith -Wcast-qual -Winline -Waggregate-return"
+fi
+
+PERL=perl
+
+export AR
+export CC
+export CFLAGS
+export CPPFLAGS
+export LDFLAGS
+# export LIBS
+export RANLIB
+export INSTALL
+export INSTALL_PROGRAM
+export INSTALL_DATA
+export INSTALL_SCRIPT
+export PERL
+
+unlink Makefile
+ln -sf Makefile.uClinux Makefile
+
+unlink src/make-include-uClinux.mk
+unlink src/make-include.mk
+echo "UCLINUX_DIR="`cd ../.. && pwd` > src/make-include-uClinux.mk
+echo "INSTALL="$INSTALL >> src/make-include-uClinux.mk
+cat src/make-include-uClinux.in >> src/make-include-uClinux.mk
+cp src/make-include-uClinux.mk src/make-include.mk
+
+TARGET_DIR=/usr/local/src/EasyAccess
+
+unlink src/lib/Config.h
+echo "#ifndef __CONFIG_H
+#define __CONFIG_H
+#define AP_TOP_DIR \"$TARGET_DIR\"
+#define SITE_NAME  \"easyaccess.localdomain\"
+#define USE_HTTPD 1
+#define USE_MD5_SESSION 1
+#define USE_TZ_ENV 1
+#endif /* _CONFIG_H */" > src/lib/Config.h
+
+unlink src/httpd/Config.h
+echo "#ifndef __HTTPD_CONFIG_H" > src/httpd/Config.h
+echo "#define __HTTPD_CONFIG_H" >> src/httpd/Config.h
+echo "#define HTTPD_TOP_DIR \"$TARGET_DIR\"" >> src/httpd/Config.h
+echo "#define HTTPD_SERVER_ROOT \"$TARGET_DIR/www/conf\""  >> src/httpd/Config.h
+echo "#define HTTPD_DOCUMENT_ROOT \"$TARGET_DIR/www/htdocs\""  >> src/httpd/Config.h
+echo "#define HTTPD_CGI_PATH \"$TARGET_DIR/www/cgi-bin/\""  >> src/httpd/Config.h
+echo "#define HTTPD_CERTBIN_PATH \"$TARGET_DIR/www/cert-bin/\""  >> src/httpd/Config.h
+echo "#define HTTPD_SSL_CERT \"$TARGET_DIR/var/cert/server.crt\"" >> src/httpd/Config.h
+echo "#define HTTPD_SSL_KEY \"$TARGET_DIR/var/cert/server.key\"" >> src/httpd/Config.h
+echo "#define HTTPD_SSL_PASSWD_FILE \"$TARGET_DIR/var/cert/password.sh\"" >> src/httpd/Config.h
+echo "#endif /* __HTTPD_CONFIG_H */" >> src/httpd/Config.h
+
+# Creating CGI make include
+unlink src/WWW/cgi-bin/cgi-include.mk
+echo "include `pwd`/src/make-include-uClinux.mk" > `pwd`/src/WWW/cgi-bin/cgi-include.mk
+cat `pwd`/src/WWW/cgi-bin/cgi-include.in >> `pwd`/src/WWW/cgi-bin/cgi-include.mk
+
+# RUN libxml2
+if [ -e 3rdParty/libxml2/Makefile ]; then
+  exit 0
+fi
+cd 3rdParty/libxml2; ./RUN --host=linux-brecis-mips; cd -;

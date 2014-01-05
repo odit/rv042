@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+<sqwebskin version="1.0">
+	<summary>
+		<skinname>IE6 Fantasy</skinname>
+		<defaulttab>Contents</defaulttab>
+		<font>font-family:Arial font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal</font>
+		<color></color>
+	</summary>
+	<panesummary>
+		<![CDATA[
+<frameset rows="32,*" >
+<frame name="Custom Toolbar Pane" noresize="yes" scrolling="no" id="3" />
+<frameset cols="220,*" frameborder="1" borderspace="0" >
+<frameset rows="24,*" >
+<frame name="MiniBar Pane" marginwidth="-1" scrolling="no" id="6" />
+<frame name="Navigation Pane" id="2" />
+</frameset>
+<frame name="Topic Pane" frameborder="1" borderspace="1" bordercolor="Gray" marginwidth="-1" marginheight="-1" id="4" />
+</frameset>
+</frameset>
+]]>
+	</panesummary>
+	<frameset rows="32,*">
+		<frame name="Custom Toolbar Pane" noresize="yes" scrolling="no" id="3"/>
+		<frameset cols="220,*" frameborder="1" borderspace="0">
+			<frameset rows="24,*">
+				<frame name="MiniBar Pane" marginwidth="-1" scrolling="no" id="6"/>
+				<frame name="Navigation Pane" id="2"/>
+			</frameset>
+			<frame name="Topic Pane" frameborder="1" borderspace="1" bordercolor="Gray" marginwidth="-1" marginheight="-1" id="4"/>
+		</frameset>
+	</frameset>
+	<pane name="Custom Toolbar Pane">
+		<image>background:ie_back.gif?</image>
+		<color>background:#d4d0c8</color>
+		<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+		<btnselected>
+			<color>background:#e3e2df</color>
+			<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+		</btnselected>
+		<alignment>left</alignment>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-content" id="1">
+			<name>Contents</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image>onload:ie_con_out.gif?onmouseover:ie_con_on.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_con_on.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-index" id="2">
+			<name>Index</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image>onload:ie_ind_out.gif?onmouseover:ie_ind_on.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_ind_on.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-search" id="3">
+			<name>Search</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image>onload:ie_sea_out.gif?onmouseover:ie_sea_on.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_sea_on.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-glossary" id="4">
+			<name>Glossary</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image>onload:ie_glos_out.gif?onmouseover:ie_glos_on.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_glos_on.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-websearch" id="5">
+			<name>WebSearch</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image>onload:ie_web_out.gif?onmouseover:ie_web_on.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_web_on.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="Form Mode" type="built-in-form" id="6">
+			<name>Search Input</name>
+			<image></image>
+			<color></color>
+			<textbox width="20"/>
+			<title>
+				<text></text>
+			</title>
+			<button mode="graphic mode">
+				<image>onload:ie_go.gif</image>
+			</button>
+		</toolbaritem>
+		<toolbaritem mode="Logo Mode" type="built-in-logo" id="7">
+			<name>Logo</name>
+			<image></image>
+			<author></author>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="customized" id="8018">
+			<name>Print</name>
+			<href></href>
+			<actiondef>onmouseclick=PrintTopic();</actiondef>
+			<jsinfo>function PrintTopic()
+{
+       parent.frames[1].frames[1].focus();
+       parent.frames[1].frames[1].print();
+}</jsinfo>
+			<text></text>
+			<color></color>
+			<image>onload:ie_print_out.gif?onmouseover:ie_print.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_print.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>256</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="customized" id="1736">
+			<name>Home</name>
+			<href>http://www.ehelp.com</href>
+			<actiondef></actiondef>
+			<jsinfo></jsinfo>
+			<text></text>
+			<color></color>
+			<image>onload:ie_home_out.gif?onmouseover:ie_home_on.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_home_on.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>256</style>
+		</toolbaritem>
+	</pane>
+	<pane name="MiniBar Pane">
+		<image>background:ie_back.gif?</image>
+		<color>background:#d4d0c8</color>
+		<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+		<btnselected>
+			<color>background:#e3e2df</color>
+			<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+		</btnselected>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-previous" id="8">
+			<name>Previous</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image>onload:ie_back_on.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_back_out.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-next" id="9">
+			<name>Next</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image>onload:ie_forw_on.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_forw_out.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-synctoc" id="10">
+			<name>Sync TOC</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image>onload:ie_swap.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_swap.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-hide" id="11">
+			<name>Hide</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image>onload:ie_close.gif</image>
+			<icontype>customized</icontype>
+			<selected>
+				<color></color>
+				<image>onload:ie_close.gif</image>
+				<icontype>customized</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+	</pane>
+	<pane name="Navigation Pane">
+		<image></image>
+		<color></color>
+		<label>
+			<image></image>
+			<color></color>
+		</label>
+		<subpane name="Contents">
+			<image>page:ie_page.gif?remoteurl:ie_world.gif?openedbook:ie_folder_open.gif?closedbook:ie_folder_close.gif?</image>
+			<color>background:White alink:#d4d0c8 hover-color:Navy</color>
+			<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+		</subpane>
+		<subpane name="Index">
+			<image></image>
+			<color>background:White alink:#d4d0c8 hover-color:Navy</color>
+			<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+			<inputbox>
+				<image></image>
+				<color>background:#d4d0c8</color>
+				<textbox width="0"/>
+				<title>
+					<text>::??DefaultWebSkinText??::</text>
+					<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+				</title>
+				<button mode="none">
+				</button>
+			</inputbox>
+		</subpane>
+		<subpane name="Search">
+			<image></image>
+			<color>background:White alink:#d4d0c8 hover-color:Navy</color>
+			<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+			<inputbox>
+				<image></image>
+				<color>background:#d4d0c8</color>
+				<textbox width="0"/>
+				<title>
+					<text>::??DefaultWebSkinText??::</text>
+					<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+				</title>
+				<button mode="graphic mode">
+					<image>onload:ie_go.gif</image>
+				</button>
+			</inputbox>
+		</subpane>
+		<subpane name="Glossary">
+			<image></image>
+			<color>background:White alink:#d4d0c8 hover-color:Navy</color>
+			<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+			<definitiontext>
+				<text>::??DefaultWebSkinText??::</text>
+				<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+				<color>background:#d4d0c8</color>
+				<image></image>
+			</definitiontext>
+			<definition>
+				<text>::??DefaultWebSkinText??::</text>
+				<color></color>
+				<image></image>
+			</definition>
+			<termtext>
+				<text>::??DefaultWebSkinText??::</text>
+				<font>font-family:Verdana font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+				<color>background:#d4d0c8</color>
+				<image></image>
+			</termtext>
+			<term>
+				<text>::??DefaultWebSkinText??::</text>
+				<color></color>
+				<image></image>
+			</term>
+		</subpane>
+	</pane>
+	<pane name="Topic Pane">
+		<in-topic-navbar>
+			<alignment>none</alignment>
+		</in-topic-navbar>
+	</pane>
+</sqwebskin>

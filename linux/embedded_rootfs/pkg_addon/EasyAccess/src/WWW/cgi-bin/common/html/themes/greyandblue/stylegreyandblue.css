@@ -1,0 +1,87 @@
+TD.tabback{background-color:#0058ac;}
+
+
+
+
+
+
+.onmiddletab{background: url("/images/others/middletab.gif");background-color:#1c73c5;}
+.onmiddletabbottom{background: url("/images/others/middletab1.gif");BACKGROUND-COLOR:#55b9ff;}
+.toptabfont{Font-family:"lucida Sans",Tahoma, sans-serif;color:#ffffff;font-size:11px;}
+.bottomtabfont{Font-family:Tahoma, sans-serif;color:#ffffff;font-size:11px;}
+.backs2{filter: progid:DXImageTransform.Microsoft.gradient (GradientType=0,endColorstr=#ff44afff, startColorstr=#ff0f82bf);BACKGROUND-COLOR:#2c9cdc;}
+.centertable{background-color:#fafafa;overflow-x:hidden;overflow-y:hidden;}
+.centertablenb{background-color:#fafafa;overflow-x:hidden;overflow-y:hidden;}
+.middleback{BACKGROUND-COLOR:#999999;background:#888888;}
+.toolbar{COLOR:#393c3f; FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+A.toolbar{COLOR:#51616a; FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:12px; TEXT-DECORATION:none;}
+.toolBarsmall{COLOR:#000009; FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:11px;}
+.toolBarsmall2{COLOR:#304050; FONT-FAMILY: sans-serif, Helvetica; FONT-SIZE:12px;}
+A{COLOR:#393c3f; TEXT-DECORATION:none}
+.windowsfont{COLOR:#050505; FONT-FAMILY: Tahoma, sans-serif, Arial, Helvetica; FONT-SIZE:11px;}
+.button{COLOR:#ffffff; FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:12px; FONT-WEIGHT: bold}
+.toolbar2{COLOR:#304050; FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:11px; TEXT-DECORATION:none}
+A.toolbar2{COLOR:#51616a; FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:11px; TEXT-DECORATION:none}
+.headingstylenomargin{FONT-size:12px;FONT-FAMILY:Lucida Sans, sans-serif, Arial, Garamond; COLOR:#112233; font-weight: bold;}
+TR.headingstylenomargin{FONT-size:12px;FONT-FAMILY:Lucida Sans, sans-serif, Arial, Garamond; COLOR:#112233; font-weight: bold;}
+.HeadingStyle3{font:bold 13px #333333 Tahoma;FONT-SIZE:13px;COLOR:#51616a;FONT-FAMILY: "Lucida Sans",font-weight: bold;}
+.titlerow{BACKGROUND-COLOR:#283caa;}
+TD.titlerow{BACKGROUND-COLOR:#cccccc;filter: progid:DXImageTransform.Microsoft.gradient (GradientType=0,startColorstr=#ffeeeeee, endColorstr=#ffbbbbbb);border: 1px solid #aaaaaa;}
+.mainback{BACKGROUND-COLOR:#f4f4f4; COLOR:#393c3f; FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+TD.mainback{BACKGROUND-COLOR:#f4f4f4; COLOR:#393c3f; FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+.mainback2{COLOR:#393c3f; FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+.darkback{BACKGROUND-COLOR:#999999;background:#888888;}
+TD.darkback{BACKGROUND-COLOR:#999999;background:#888888;}
+.bodyback{FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:12px; 
+filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,endColorstr=#fffafafa, startColorstr=#ffdadada);background-color:#f0f0f0;}
+A:visited{TEXT-DECORATION:none;COLOR:#51616a;}
+.windowsfont{COLOR:#050505; FONT-FAMILY: Tahoma, sans-serif, Arial, Helvetica; FONT-SIZE:11px;} 
+.navmenuback{BACKGROUND-COLOR:#eeebe9;}
+a:hover.bbuttons{COLOR:#ffff88; FONT-WEIGHT: bold;}
+a:hover{COLOR:#f0da33;}
+.allow{font-size:11px; FONT-WEIGHT: bold;FONT-FAMILY:sans-serif, Arial, Garamond; color:#00b000;}
+.permit{font-size:11px; FONT-WEIGHT: bold;FONT-FAMILY:sans-serif, Arial, Garamond; color:#00b000;}
+.deny{font-size:11px; FONT-WEIGHT: bold; font-FAMILY:sans-serif, Arial, Garamond; color:#dc0005;}
+.badval{font-size:12px; FONT-WEIGHT: bold; font-FAMILY:sans-serif, Arial, Garamond; color:#dc0005;}
+.bcenter{border:1px solid;margin:2px;border-top-color:#aaaaaa;border-left-color:#aaaaaa;border-right-color:#888888;border-bottom-color:#888888;background-color:#e6e6e6;height:22px;vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#fff4f4f4, endColorstr=#ffd1d1d1);}
+.bleft{padding: 0px;width:0px;margin:0px;}
+.bright{padding: 0px;width:0px;margin:0px;}
+.buttons{font-family:Arial,'trebuchet ms',helvetica,sans-serif;font-size:12px;text-align:center;text-decoration:none;margin:0px;color:#303740;background-color:transparent;border-width:0px;padding:0px; cursor:hand;}
+.bhover{FOnt-size:12px;font-family:Arial,Tahoma,sans-serif; text-align:center;text-decoration:none;margin: 1 0 1 0;color:#e2d200;background-color:transparent;border-width:0px;padding:0px;}
+.bbcenter{border:1px solid;margin:2px;border-top-color:#aaaaaa;border-left-color:#aaaaaa;border-right-color:#888888;border-bottom-color:#888888;background-color:#e6e6e6;height:22px;vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#fff4f4f4, endColorstr=#ffd1d1d1);}
+.bbleft{padding: 0px;width:0px;margin:0px;}
+.bbright{padding: 0px;width:0px;margin:0px;}
+.bbcenteron{border:1px #44afff solid;margin:2px;background-color:#e6e6e6;height:22px;vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#fff4f4f4, endColorstr=#ffd1d1d1);cursor:hand;}
+.bbuttons{Font-size:12px;font-family:Lucida Sans,sans-serif,Arial;text-align:center;font-weight: bold;margin:1px;color:#202020;background-color:transparent;border-width:0px;padding:0px;cursor:hand;}
+.bbhover{FOnt-size:12px;font-family:Lucida Sans,sans-serif,Arial;text-align:center;font-weight:bold;margin:1px;background-color:transparent;border-width:0px;color:#ffee22;padding:0px;}
+.statuspagetable{background-color:#fcfcfc;}
+.TableStyle{font-family: sans-serif; FONT-SIZE:10pt;COLOR:#112233;}
+TD.HeadingStyle{FONT-size:12px;FONT-FAMILY:Lucida Sans, sans-serif, Arial, Garamond; COLOR:#112233;backGROUND-COLOR:#cfcfcf;filter: progid:DXImageTransform.Microsoft.gradient (GradientType=0,startColorstr=#ffeeeeee, endColorstr=#ffbbbbbb);font-weight: bold;}
+TR.HeadingStyle{FONT-size:12px;FONT-FAMILY:Lucida Sans, sans-serif, Arial, Garamond; COLOR:#112233;backGROUND-COLOR:#cfcfcf;filter: progid:DXImageTransform.Microsoft.gradient (GradientType=0,startColorstr=#ffeeeeee, endColorstr=#ffbbbbbb);font-weight: bold;}
+.HeadingStyle{FONT-size:12px;FONT-FAMILY:Lucida Sans, sans-serif, Arial, Garamond; COLOR:#112233; font-weight: bold;}
+.OddRowStyle{font-size:12px;FONT-FAMILY:sans-serif, Arial, Garamond;color:#102030}
+.EvenRowStyle{font-size:12px;FONT-FAMILY:sans-serif, Arial, Garamond;color:#102030}
+A.EvenRowStyle2{font-size:11px;FONT-FAMILY:sans-serif, Arial, Garamond;color:#0104f0}
+A.EvenRowStyle{font-size:12px;FONT-FAMILY:sans-serif, Arial, Garamond;color:#0104f0}
+A.OddRowStyle{font-size:12px;FONT-FAMILY:sans-serif, Arial, Garamond;color:#0104f0}
+A.OddRowStyle2{font-size:11px;FONT-FAMILY:sans-serif, Arial, Garamond;color:#0104f0}
+.OddRowStyle2{font-size:11px;FONT-FAMILY:sans-serif, Arial, Garamond;color:#304050}
+.OnRowStyle2{font-size:11px;FONT-FAMILY:sans-serif, Arial, Garamond;background-color:#bbbbbb;}
+.EvenRowStyle2{font-size:11px;FONT-FAMILY:sans-serif, Arial, Garamond;color:#304050}
+.accesspointRowOdd{Font-size:11px; padding-top:3px; padding-bottom:3px; border-top:1px #5A646E solid;background-color:#ffffff;}
+.accesspointRowEven{Font-size:11px; padding-top:3px; padding-bottom:3px; border-top:1px #5A646E solid;background-color:#eeeceb;}
+.accesspointRowOn{Font-size:11px; padding-top:3px; padding-bottom:3px;border-top:1px #5A646E solid;background-color:#afafaf;}
+.TotalRowStyle{;}
+.input{height:20px;font-size:12px;filter: progid:DXImageTransform.Microsoft.Shadow(color:#6688aa,direction=135, Strength='1'); BORDER: #66769f 1px solid;FONT-FAMILY: sans-serif, Tahoma, Arial, Helvetica;padding-top: 2px;color:#393c3f;valign=bottom;}
+.select{background-COLOR:#fdfeff;FONT-SIZE:12px;BORDER: #66769c 1px solid;FONT-FAMILY: sans-serif, Tahoma, Arial, Helvetica;color:#393c3f;}
+.hintsClass{width:100%;border:1px solid #000000;font-size:11px;font-family:Tahoma,sans-serif,Arial;layer-background-color:#fbfb9b;background-color:#fcfcdc;padding:4px;filter:progid:DXImageTransform.Microsoft.Shadow(color:#64646f,direction=135, strength=3);COLOR:#000000;} 
+.navigator{color:#fcfc98; cursor:hand; font-FAMILY: Lucida Sans, sans-serif, Arial, Helvetica; FONT-SIZE:11px;font-weight:bold;}
+A.linkblue{color:#2211f8;FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+A.linkblue2{color:#2211f8;FONT-FAMILY: sans-serif, Arial, Helvetica; FONT-SIZE:11px;}
+td.bookmarktop{background: url("/images/topbookmarkbluegreen.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#ffffff;}
+td.bookmarkbottom{background: url("/images/bottombookmarkbluegreen.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#ffffff;}
+td.bigbookmarktop{background: url("/images/topbookmarkbluegreen.png");margin:0px;padding:0px;background-color:#ffffff;}
+td.bigbookmarkbottom{background: url("/images/bottombookmarkbluegreen.png");margin:0px;padding:0px;background-color:#ffffff;}
+td.loginbottom{background: url("/images/loginbottombluegreen.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#ffffff;}
+td.logintop{background: url("/images/logintopbluegreen.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#ffffff;}
+ 

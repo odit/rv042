@@ -1,0 +1,268 @@
+# Vietnamese translation for Sys Stat.
+# Copyright © 2008 Free Software Foundation, Inc.
+# This file is distributed under the same license as the sysstat-8.1.3 package.
+# Clytie Siddall <clytie@riverland.net.au>, 2007-2008.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: sysstat 8.1.3\n"
+"Report-Msgid-Bugs-To: sysstat <at> orange.fr\n"
+"POT-Creation-Date: 2008-05-24 14:43+0200\n"
+"PO-Revision-Date: 2008-05-27 14:49+0930\n"
+"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: LocFactoryEditor 1.7b3\n"
+
+#: common.c:56
+#, c-format
+msgid "sysstat version %s\n"
+msgstr "sysstat phiên bản %s\n"
+
+#: ioconf.c:479 mpstat.c:325 rd_stats.c:70 rd_stats.c:1413 rd_stats.c:1520
+#: sa_common.c:1027 sadc.c:478 sadc.c:487 sadc.c:547
+#, c-format
+msgid "Cannot open %s: %s\n"
+msgstr "Không thể mở %s: %s\n"
+
+#: iostat.c:78 mpstat.c:71 pidstat.c:77 sar.c:88
+#, c-format
+msgid "Usage: %s [ options... ] [ <interval> [ <count> ] ]\n"
+msgstr "Sử dụng: %s [ tùy_chọn... ] [ <khoảng> [ <đếm> ] ]\n"
+
+#: iostat.c:81
+#, c-format
+msgid ""
+"Options are:\n"
+"[ -c ] [ -d ] [ -N ] [ -n ] [ -h ] [ -k | -m ] [ -t ] [ -V ] [ -x ]\n"
+"[ <device> [ ... ] | ALL ] [ -p [ <device> | ALL ] ]\n"
+msgstr ""
+"Tùy chọn:\n"
+"[ -c ] [ -d ] [ -N ] [ -n ] [ -h ] [ -k | -m ] [ -t ] [ -V ] [ -x ]\n"
+"[ <thiết_bị> [ ... ] | ALL ] [ -p [ <thiết_bị> | ALL ] ]\n"
+"\n"
+"ALL\ttất cả\n"
+
+#: iostat.c:1305
+#, c-format
+msgid "Time: %s\n"
+msgstr "Thời gian: %s\n"
+
+#: iostat.c:1663
+#, c-format
+msgid "-x and -p options are mutually exclusive\n"
+msgstr "Hai tùy chọn « -x » và « -p » loại từ lẫn nhau\n"
+
+#: mpstat.c:74
+#, c-format
+msgid ""
+"Options are:\n"
+"[ -P { <cpu> | ALL } ] [ -V ]\n"
+msgstr ""
+"Tùy chọn:\n"
+"[ -P { <cpu> | ALL } ] [ -V ]\n"
+
+#: mpstat.c:280 pidstat.c:1404 sar.c:285
+msgid "Average:"
+msgstr "Trung bình:"
+
+#: mpstat.c:638
+#, c-format
+msgid "Not that many processors!\n"
+msgstr "Quá nhiều bộ xử lý !\n"
+
+#: pidstat.c:80
+#, c-format
+msgid ""
+"Options are:\n"
+"[ -C <command> ] [ -d ] [ -I ] [ -r ] [ -t ] [ -u ] [ -V ] [ -w ]\n"
+"[ -p { <pid> | SELF | ALL } ] [ -T { TASK | CHILD | ALL } ]\n"
+msgstr ""
+"Tùy chọn:\n"
+"[ -C <lệnh> ] [ -d ] [ -I ] [ -r ] [ -t ] [ -u ] [ -V ] [ -w ]\n"
+"[ -p { <pid> | SELF | ALL } ] [ -T { TASK | CHILD | ALL } ]\n"
+"\n"
+"SELF\t\tmình\n"
+"ALL\t\ttất cả\n"
+"TASK\tcông việc\n"
+"CHILD\tcon\n"
+
+#: pidstat.c:181 sar.c:890
+#, c-format
+msgid "Requested activities not available\n"
+msgstr "Hoạt động đã yêu cầu vẫn không sẵn sàng\n"
+
+#: rd_stats.c:1566
+#, c-format
+msgid "Cannot handle so many processors!\n"
+msgstr "Không thể quản lý quá nhiều bộ xử lý !\n"
+
+#: sa_common.c:843
+#, c-format
+msgid "Error while reading system activity file: %s\n"
+msgstr "Gặp lỗi khi đọc tập tin hoạt động hệ thống: %s\n"
+
+#: sa_common.c:853
+#, c-format
+msgid "End of system activity file unexpected\n"
+msgstr "Gặp kết thúc bất thường trong tập tin hoạt động hệ thống\n"
+
+#: sa_common.c:871
+#, c-format
+msgid "File created using sar/sadc from sysstat version %d.%d.%d"
+msgstr "Tập tin được tạo dùng sar/sadc từ sysstat phiên bản %d.%d.%d"
+
+#: sa_common.c:901
+#, c-format
+msgid "Invalid system activity file: %s\n"
+msgstr "Tập tin hoạt động hệ thống không hợp lệ: %s\n"
+
+#: sa_common.c:908
+#, c-format
+msgid "Current sysstat version can no longer read the format of this file (%#x)\n"
+msgstr "Phiên bản sysstat hiện thời không còn có khả năng đọc lại định dạng của tập tin này (%#x)\n"
+
+#: sa_common.c:1101
+#, c-format
+msgid "Requested activities not available in file %s\n"
+msgstr "Hoạt động đã yêu cầu vẫn không sẵn sàng trong tập tin %s\n"
+
+#: sadc.c:78
+#, c-format
+msgid "Usage: %s [ options... ] [ <interval> [ <count> ] ] [ <outfile> ]\n"
+msgstr "Sử dụng: %s [ tùy_chọn... ] [ <khoảng> [ <đếm> ] ] [ <tập_tin_xuất> ]\n"
+
+#: sadc.c:81
+#, c-format
+msgid ""
+"Options are:\n"
+"[ -C <comment> ] [ -S { INT | DISK | ALL } ] [ -F ] [ -L ] [ -V ]\n"
+msgstr ""
+"Tùy chọn:\n"
+"[ -C <ghi_chú> ] [ -S { INT | DISK | ALL } ] [ -F ] [ -L ] [ -V ]\n"
+"\n"
+"INT\t\tsố nguyên ?\n"
+"DISK\t\tđĩa\n"
+"ALL\t\ttất cả\n"
+
+#: sadc.c:107
+#, c-format
+msgid "Cannot write data to system activity file: %s\n"
+msgstr "Không thể ghi dữ liệu vào tập tin hoạt động hệ thống: %s\n"
+
+#: sadc.c:364
+#, c-format
+msgid "Cannot write system activity file header: %s\n"
+msgstr "Không thể ghi phần đầu tập tin hoạt động hệ thống: %s\n"
+
+#: sadc.c:641
+#, c-format
+msgid "Cannot append data to that file (%s)\n"
+msgstr "Không thể phụ thêm dữ liệu vào tập tin đó (%s)\n"
+
+#: sadf.c:85
+#, c-format
+msgid "Usage: %s [ options... ] [ <interval> [ <count> ] ] [ <datafile> ]\n"
+msgstr "Sử dụng: %s [ tùy_chọn... ] [ <khoảng> [ <đếm> ] ] [ <tập_tin_dữ_liệu> ]\n"
+
+#: sadf.c:88
+#, c-format
+msgid ""
+"Options are:\n"
+"[ -d | -D | -H | -p | -x ] [ -h ] [ -t ] [ -V ]\n"
+"[ -P { <cpu> | ALL } ] [ -s [ <hh:mm:ss> ] ] [ -e [ <hh:mm:ss> ] ]\n"
+"[ -- <sar_options...> ]\n"
+msgstr ""
+"Tùy chọn:\n"
+"[ -d | -D | -H | -p | -x ] [ -h ] [ -t ] [ -V ]\n"
+"[ -P { <cpu> | ALL } ] [ -s [ <gi:ph:gy> ] ] [ -e [ <gi:ph:gy> ] ]\n"
+"[ -- <tùy_chọn_sar...> ]\n"
+"\n"
+"ALL\ttất cả\n"
+"gi:ph:gy\t\tgiờ:phút:giây (hai chữ số)\n"
+
+#: sadf.c:526
+#, c-format
+msgid "System activity data file: %s (%#x)\n"
+msgstr "Tập tin dữ liệu hoạt động hệ thống: %s (%#x)\n"
+
+#: sadf.c:535
+#, c-format
+msgid "Host: "
+msgstr "Máy:"
+
+#: sadf.c:540
+#, c-format
+msgid "Size of a long int: %d\n"
+msgstr "Kích cỡ của một số nguyên dài: %d\n"
+
+#: sadf.c:542
+#, c-format
+msgid "List of activities:\n"
+msgstr "Danh sách các hoạt động:\n"
+
+#: sar.c:91
+#, c-format
+msgid ""
+"Options are:\n"
+"[ -A ] [ -b ] [ -B ] [ -C ] [ -d ] [ -i <interval> ] [ -p ] [ -q ]\n"
+"[ -r ] [ -R ] [ -t ] [ -u ] [ -v ] [ -V ] [ -w ] [ -W ] [ -y ]\n"
+"[ -I { <int> | SUM | ALL | XALL } ] [ -P { <cpu> | ALL } ]\n"
+"[ -n { DEV | EDEV | NFS | NFSD | SOCK | ALL } ]\n"
+"[ -o [ <filename> ] | -f [ <filename> ] ]\n"
+"[ -s [ <hh:mm:ss> ] ] [ -e [ <hh:mm:ss> ] ]\n"
+msgstr ""
+"Tùy chọn:\n"
+"[ -A ] [ -b ] [ -B ] [ -C ] [ -d ] [ -i <khoảng> ] [ -p ] [ -q ]\n"
+"[ -r ] [ -R ] [ -t ] [ -u ] [ -v ] [ -V ] [ -w ] [ -W ] [ -y ]\n"
+"[ -I { <int> | SUM | ALL | XALL } ] [ -P { <cpu> | ALL } ]\n"
+"[ -n { DEV | EDEV | NFS | NFSD | SOCK | ALL } ]\n"
+"[ -o [ <tên_tập_tin> ] | -f [ <tên_tập_tin> ] ]\n"
+"[ -s [ <gi:ph:gy> ] ] [ -e [ <gi:ph:gy> ] ]\n"
+"\n"
+"SUM\t\ttổng\n"
+"ALL\t\ttất cả\n"
+"XALL\tkhông phải tất cả ?\n"
+"DEV\t\tthiết bị\n"
+"EDEV\tthiết bị Ethernet ?\n"
+"NFS\t\tmột kiểu hệ thống tập tin\n"
+"NFSD\tthiết bị của hệ thống tập tin NFS\n"
+"SOCK\tổ cắmgi:ph:gy\t\tgiờ:phút:giây (hai chữ số)\n"
+
+#: sar.c:142
+#, c-format
+msgid "End of data collecting unexpected\n"
+msgstr "Kết thúc thu thập dữ liệu một cách bất thường\n"
+
+#: sar.c:701
+#, c-format
+msgid "Invalid data format\n"
+msgstr "Định dạng dữ liệu không hợp lệ\n"
+
+#: sar.c:705
+#, c-format
+msgid "Using a wrong data collector from a different sysstat version\n"
+msgstr "Dùng một bộ thu thập không đúng từ một phiên bản sysstat khác\n"
+
+#: sar.c:725
+#, c-format
+msgid "Inconsistent data read\n"
+msgstr "Đọc dữ liệu một cách không thống nhất\n"
+
+#: sar.c:1122
+#, c-format
+msgid "-f and -o options are mutually exclusive\n"
+msgstr "Hai tùy chọn « -f » và « -o » loại từ lẫn nhau\n"
+
+#: sar.c:1128
+#, c-format
+msgid "Not reading from a system activity file (use -f option)\n"
+msgstr "Không phải đọc từ tập tin hoạt động hệ thống (dùng tùy chọn « -f »)\n"
+
+#: sar.c:1229
+#, c-format
+msgid "Cannot find the data collector (%s)\n"
+msgstr "Không tìm thấy bộ thu thập dữ liệu (%s)\n"

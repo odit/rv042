@@ -1,0 +1,15 @@
+Readme for Octeon shared memory malloc
+
+This malloc is based on ptmalloc2, which is the malloc
+implementation of glibc.  Source code and more information
+on this can be found at http://www.malloc.de/en/index.html.
+This code is licensed under the GNU Library General Public 
+License, which means that only source for this code must
+be release.  This code can be linked to other code without
+licensing issues.
+
+The main change to the code modifies the way the malloc
+gets memory from the system.  Under Linux/Unix, malloc
+uses the brk or memmap sytem calls to request more memory.
+In this implementation, memory regions must be explicitly
+given to malloc by the application.

@@ -1,0 +1,127 @@
+<!--#nk_get VPNPassSetup=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function chSubmit(F)
+{
+	F.log_ch.value=1;
+	window.status=wSave;
+	F.submit();
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formThrough);";
+var Cancellink = ""; 
+var helplink ='help_adv_through.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=135;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintVPNPassThrough(0);
+	PrintEndContent();
+}
+function PrintVPNPassThrough(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+SmallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('IPSec Passthrough&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="220">');	
+	document.write('<input type="radio" name="VPNpassIPSec"  value="1" <!--#nk_get vpnPass="1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Enable');	
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="VPNpassIPSec" value="0" <!--#nk_get vpnPass="2"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Disable');	
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('PPTP Passthrough&nbsp;:&nbsp;');	
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td>');		
+	document.write('<input type="radio" name="VPNpassPPTP" value="1" <!--#nk_get vpnPass="3"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Enable');	
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="VPNpassPPTP" value="0" <!--#nk_get vpnPass="4"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Disable');	
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('L2TP Passthrough&nbsp;:&nbsp;');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="VPNpassL2TP" value="1" <!--#nk_get vpnPass="5"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Enable');	
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="VPNpassL2TP" value="0" <!--#nk_get vpnPass="6"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Disable');	
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 7, 5);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formThrough" method="post" action="adv_through.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="adv_through.htm"-->

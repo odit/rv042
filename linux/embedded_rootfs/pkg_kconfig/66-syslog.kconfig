@@ -1,0 +1,6 @@
+config CONFIG_syslog
+	bool "syslog"
+	default n
+	help
+		Include syslog
+

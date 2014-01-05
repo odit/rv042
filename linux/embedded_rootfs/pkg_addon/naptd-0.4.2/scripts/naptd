@@ -1,0 +1,99 @@
+#!/bin/sh
+#
+# naptd		Start NAPT Daemon
+#
+# description:	Starts, stops and restarts Network Address Protocol Translation
+#
+# config: /etc/naptd.conf
+
+# Source function library.
+. /etc/init.d/functions
+
+NAPTD=/usr/sbin/naptd
+VAR_SUBSYS_NAPTD=/tmp/naptd.pid
+prog="naptd"
+
+if [ ! -x $NAPTD ]; then
+    echo -n $"$NAPTD does not exist."; warning; echo
+    exit 0
+fi
+
+force() {
+	echo -n $"Cleaning zombies: "
+	ALL_PIDS=`ps -N -U root | grep naptd`
+	kill $ALL_PIDS 2> /dev/null
+	sleep 2
+	rm $VAR_SUBSYS_NAPTD 2> /dev/null
+	success; echo
+	return 0
+}
+
+start() {
+	if [ -e $VAR_SUBSYS_NAPTD ]; then
+		force;
+	fi
+	echo -n $"Starting $prog: "
+
+    $NAPTD 1>&2> /dev/null
+    if [ $? -eq 0 ]; then
+	success; echo
+    else
+	failure; echo; return 1
+    fi
+   
+    return 0
+}
+
+stop() {
+	echo -n $"Stopping $prog: "
+	if [ ! -e $VAR_SUBSYS_NAPTD ]; then
+		failure; echo; return 1
+	fi
+
+	PID=`cat $VAR_SUBSYS_NAPTD 2> /dev/null`
+    kill $PID 2> /dev/null
+    sleep 2;
+    if [ ! -x $VAR_SUBSYS_NAPTD ]; then
+	success; echo
+    else
+	failure; echo; return 1
+    fi
+    return 0
+}
+
+status() {
+    if [ ! -f "$VAR_SUBSYS_NAPTD" ]; then
+	echo $"$prog is not running."
+	return 1
+    fi
+
+        echo $"$prog (pid `cat $VAR_SUBSYS_NAPTD`) is running..."
+
+    return 0
+}
+
+case "$1" in
+    forcestart)
+	force
+	start
+	;;
+    start)
+	start
+	;;
+    stop)
+	stop
+	;;
+    restart)
+	stop
+	start
+	;;
+    status)
+	status
+	;;
+    *)
+	echo $"Usage: $0 {forcestart|start|stop|restart|status}"
+	exit 1
+	;;
+esac
+
+exit $?

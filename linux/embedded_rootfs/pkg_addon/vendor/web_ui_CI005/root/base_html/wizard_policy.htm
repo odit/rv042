@@ -1,0 +1,1931 @@
+<!--#nk_get AccessAddRule=""-->
+<html>
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Access Rule Wizard</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script language=JavaScript>
+function chSchedule()
+{
+	if (document.formPolicy.addRule_timeConstraint.value == 0)
+	{
+		document.formPolicy.access_rule_days[0].checked=true;
+		document.formPolicy.access_rule_days[0].disabled=true;
+		document.formPolicy.addRule_timeBeginHour.disabled = true;
+		document.formPolicy.addRule_timeEndHour.disabled = true;
+	}
+	else	
+	{
+		document.formPolicy.access_rule_days[0].disabled=false;
+		document.formPolicy.addRule_timeBeginHour.disabled = false;
+		document.formPolicy.addRule_timeEndHour.disabled = false;
+	}
+		
+	if (document.formPolicy.access_rule_days[0].checked==false)
+	{
+		document.formPolicy.access_rule_days[1].disabled=false;
+		document.formPolicy.access_rule_days[2].disabled=false;
+		document.formPolicy.access_rule_days[3].disabled=false;
+		document.formPolicy.access_rule_days[4].disabled=false;
+		document.formPolicy.access_rule_days[5].disabled=false;
+		document.formPolicy.access_rule_days[6].disabled=false;
+		document.formPolicy.access_rule_days[7].disabled=false;		
+	}
+	else if(document.formPolicy.access_rule_days[0].checked==true)
+	{
+		document.formPolicy.access_rule_days[1].disabled=true;
+		document.formPolicy.access_rule_days[2].disabled=true;
+		document.formPolicy.access_rule_days[3].disabled=true;
+		document.formPolicy.access_rule_days[4].disabled=true;
+		document.formPolicy.access_rule_days[5].disabled=true;
+		document.formPolicy.access_rule_days[6].disabled=true;
+		document.formPolicy.access_rule_days[7].disabled=true;	
+	} 
+}
+
+function chSubmit()
+{
+    window.status="Save Settings...";
+    MM_showHideLayers('AutoNumber15','','hide'); 	
+    document.formPolicy.submitStatus.value=1;
+    document.formPolicy.submit();
+}
+
+function showhide(p,j)
+{
+  var idx = 0;
+  switch (p)
+  {
+    case 'sWhat':
+	MM_showHideLayers(p,'','hide','sAction','','show');
+	break;  
+    case 'sAction':
+	if (j==1)
+	{
+	    SetButtonStatus("Back1", "hidden");	
+	    if (document.formPolicy.ruleAction.value==1)
+		document.getElementById("s_action").value = "Allow";	
+	    else		
+		document.getElementById("s_action").value = "Deney";	
+	    MM_showHideLayers(p,'','hide','sService','','show');
+	}    
+	else
+	{
+	    SetButtonStatus("Back1", "disabled");	
+	    MM_showHideLayers(p,'','hide','sWhat','','show');					
+	}    
+	break;  
+    case 'sService':
+	if (j==1)
+	{
+		idx = document.formPolicy.addRule_serviceID.selectedIndex;
+		if (document.formPolicy.addRule_serviceID.options[idx])
+			document.getElementById("s_service").value =	document.formPolicy.addRule_serviceID.options[idx].text;
+		MM_showHideLayers(p,'','hide','sLog','','show'); 
+	}
+	else
+		MM_showHideLayers(p,'','hide','sAction','','show');					
+	break; 
+    case 'sLog':
+	if (j==1)
+	{
+		if (document.formPolicy.ruleLog.value==1)
+			document.getElementById("s_log").value = "Log packets match this rule";	
+	    	else		
+			document.getElementById("s_log").value = "Not log";			
+		MM_showHideLayers(p,'','hide','sInf','','show');
+	}	
+	else
+		MM_showHideLayers(p,'','hide','sService','','show');					
+	break; 
+    case 'sInf':
+	if (j==1)
+	{	
+		idx = document.formPolicy.addRule_srcEnet.selectedIndex;
+		if (document.formPolicy.addRule_srcEnet.options[idx])
+			document.getElementById("s_inf").value =	document.formPolicy.addRule_srcEnet.options[idx].text;
+		MM_showHideLayers(p,'','hide','sS','','show','sS_mu','','show');
+		ssIPRange();
+	}	
+	else
+		MM_showHideLayers(p,'','hide','sLog','','show');					
+	break; 	
+    case 'sS':
+	if (j==1)
+	{
+		if (document.formPolicy.rSour.selectedIndex==1)
+		{
+			if (document.formPolicy.srcipStart.value.length==0 )
+			{
+				alert("Please input Source IP Address.");
+				document.formPolicy.srcipStart.select(); 
+				return;
+			} 
+		
+			if( IPCheck(document.formPolicy.srcipStart, 0, 255) < 0) 
+			{
+				document.formPolicy.srcipStart.select(); 
+				return 
+			}
+			document.getElementById("s_sip").value = document.formPolicy.srcipStart.value;
+		}
+		else if (document.formPolicy.rSour.selectedIndex==2)
+		{
+			if (document.formPolicy.srcipStart.value.length==0 )
+			{
+				alert("Please input Source IP Address.");
+				document.formPolicy.srcipStart.select(); 
+				return;
+			} 			
+			else if (document.formPolicy.srcipStart.value.length==0)
+			{
+				alert("Please input Source IP Address.");
+				document.formPolicy.srcipEnd.select(); 
+				return;
+			} 
+			else if(IPRangeCheck(document.formPolicy.srcipStart, document.formPolicy.srcipEnd) < 0) 
+			{
+				document.formPolicy.srcipEnd.select(); 
+				return 
+			}
+			document.getElementById("s_sip").value = document.formPolicy.srcipStart.value + "  to  " + document.formPolicy.srcipEnd.value;
+		}
+		else
+			document.getElementById("s_sip").value = "Any";
+		MM_showHideLayers('rS1','','hide','rS2','','hide');
+		MM_showHideLayers(p,'','hide','sD','','show');
+		sdIPRange();
+	}
+	else
+	{
+		MM_showHideLayers('rS1','','hide','rS2','','hide');
+		MM_showHideLayers(p,'','hide', 'sInf','','show'); 
+	}					
+	break;  	 	
+    case 'sD':
+	if (j==1)
+	{
+		if (document.formPolicy.rDest.selectedIndex==1)
+		{
+			if (document.formPolicy.destipStart.value.length==0 )
+			{
+				alert("Please input Destination IP Address.");
+				document.formPolicy.destipStart.select(); 
+				return;
+			} 
+			if( IPCheck(document.formPolicy.destipStart, 0, 255) < 0) 
+			{
+				document.formPolicy.destipStart.select(); 
+				return 
+			}
+			document.getElementById("s_dip").value = document.formPolicy.destipStart.value;
+		}
+		else if (document.formPolicy.rDest.selectedIndex==2)
+		{
+			if (document.formPolicy.destipStart.value.length==0)
+			{
+				alert("Please input Destination IP Address.");
+				document.formPolicy.destipStart.select(); 
+				return;
+			}
+			else if( IPCheck(document.formPolicy.destipStart, 0, 255) < 0) 
+			{
+				document.formPolicy.destipStart.select(); 
+				return 
+			}
+			
+			if (document.formPolicy.destipEnd.value.length==0 )
+			{
+				alert("Please input Destination IP Address.");
+				document.formPolicy.destipEnd.select(); 
+				return;
+			}
+			else if( IPCheck(document.formPolicy.destipEnd, 0, 255) < 0) 
+			{
+				document.formPolicy.destipEnd.select(); 
+				return;
+			}
+			document.getElementById("s_dip").value = document.formPolicy.destipStart.value + "  to  " + document.formPolicy.destipEnd.value;
+		}
+		else
+			document.getElementById("s_dip").value = "Any";
+		MM_showHideLayers('rD1','','hide','rD2','','hide');		
+		MM_showHideLayers(p,'','hide','sWork','','show');			
+	}
+	else
+	{
+		MM_showHideLayers('rD1','','hide','rD2','','hide');
+		MM_showHideLayers(p,'','hide','sS','','show');
+		ssIPRange();
+	}				
+	break; 
+    case 'sWork':
+	if (j==1)
+	{
+	    if (document.formPolicy.addRule_timeConstraint[0].checked==true)
+	    {	 
+	        document.getElementById("s_sch").value = "Always";
+	        MM_showHideLayers(p,'','hide','sSummary','','show');
+	    }    
+	    else if (document.formPolicy.addRule_timeConstraint[1].checked==true)
+	    {
+	    	 chSchedule();
+	        MM_showHideLayers(p,'','hide','sTime','','show');				
+	    }			
+	}
+	else
+	{
+		MM_showHideLayers(p,'','hide','sD','','show');
+		sdIPRange();
+	}
+	break; 
+    case 'sTime':
+	if (j==1)
+	{
+		if (document.formPolicy.addRule_timeBeginHour.value.length==0)
+		{
+			alert(aTimeSchedule);
+			document.formPolicy.addRule_timeBeginHour.select();
+			return;		
+		}
+		else if (document.formPolicy.addRule_timeEndHour.value.length==0)
+		{
+			alert(aTimeSchedule);
+			document.formPolicy.addRule_timeEndHour.select();
+			return;		
+		}
+	
+		if(checkHourMinuteRange(document.formPolicy.addRule_timeBeginHour, document.formPolicy.addRule_timeEndHour)<0) 
+		{
+			document.formPolicy.addRule_timeEndHour.select();
+			return ;
+		}		
+
+		document.getElementById("s_sch").value = "From " + document.formPolicy.addRule_timeBeginHour.value + " to " + document.formPolicy.addRule_timeEndHour.value;
+		if(document.formPolicy.access_rule_days[0].checked==true)
+			document.getElementById("s_sch").value += " , Everyday";	
+		else	
+		{
+			if (document.formPolicy.access_rule_days[1].checked==true)
+				document.getElementById("s_sch").value += " , Sun";
+			if (document.formPolicy.access_rule_days[2].checked==true)
+				document.getElementById("s_sch").value += " , Mon";
+			if (document.formPolicy.access_rule_days[3].checked==true)
+				document.getElementById("s_sch").value += " , Tue";
+			if (document.formPolicy.access_rule_days[4].checked==true)
+				document.getElementById("s_sch").value += " , Wed";
+			if (document.formPolicy.access_rule_days[5].checked==true)
+				document.getElementById("s_sch").value += " , Thu";
+			if (document.formPolicy.access_rule_days[6].checked==true)
+				document.getElementById("s_sch").value += " , Fri";
+			if (document.formPolicy.access_rule_days[7].checked==true)
+				document.getElementById("s_sch").value += " , Sat";
+		}
+		MM_showHideLayers(p,'','hide','sSummary','','show');
+	}
+	else
+	    MM_showHideLayers(p,'','hide','sWork','','show');				
+	break;	
+    case 'sSummary':
+	if (document.formPolicy.addRule_timeConstraint[0].checked==true)
+	    MM_showHideLayers(p,'','hide','sWork','','show');
+	else if (document.formPolicy.addRule_timeConstraint[1].checked==true)
+	    MM_showHideLayers(p,'','hide','sTime','','show');
+	break;  	  	 	 	 		
+    default:	
+	break;   
+   }
+}  
+
+function ssIPRange()
+{
+	switch (document.formPolicy.rSour.selectedIndex)
+	{
+	    case 0:
+		    MM_showHideLayers('rS1','','hide','rS2','','hide');
+		break;
+		case 1:
+		    MM_showHideLayers('rS1','','show','rS2','','hide');
+		break;
+		case 2:
+		    MM_showHideLayers('rS1','','show','rS2','','show');
+		break;
+		default:		
+		break;	
+	}
+}
+function sdIPRange()
+{
+	switch (document.formPolicy.rDest.selectedIndex)
+	{
+	    case 0:
+		    MM_showHideLayers('rD1','','hide','rD2','','hide');
+		break;
+		case 1:
+		    MM_showHideLayers('rD1','','show','rD2','','hide');
+		break;
+		case 2:
+		    MM_showHideLayers('rD1','','show','rD2','','show');
+		break;	
+		default:		
+		break;
+	}
+}
+function chLayer()
+{
+	if (parseInt(document.formPolicy.totalRules.value,10)>=LimitAccessRules)
+	{
+		MM_showHideLayers('sWhat','','hide','sSave','','show'); 
+		alert(aLimitRules + LimitAccessRules + aLimitEnd);
+		return;   
+	}
+		
+	if (document.formPolicy.afterSubmit.value=="1") 
+	{
+		SetButtonStatus("Back1", "hidden");
+		MM_showHideLayers('sSave','','show'); 
+		if (confirm(cWizardRuleOk))
+		{
+			document.formPolicy.afterSubmit.value = 0;
+			MM_showHideLayers('sSave','','hide','sAction','','show'); 
+		}		
+		else
+			mainTo("access_rules.htm");	  
+	}
+	else
+	{
+		SetButtonStatus("Back1", "disabled");
+		MM_showHideLayers('sWhat','','show'); 
+	}	
+}
+function mainTo(p)
+{
+  if (opener)
+  	opener.location.href=p;
+}
+//-->
+</script>
+</head>
+
+<body onLoad="chLayer()" bgcolor="#d9e3e9" style="overflow:hidden">
+<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+<form name="formPolicy" action="wizard_policy.htm" method="post">
+<input type="hidden" name="page" value="wizard_policy.htm">
+<input type="hidden" name="submitStatus" value="0">
+<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+<input type="hidden" name="afterSubmit" value='<!--#nk_get handle_tags="wzAfterSubmit"-->'>
+<input type="hidden" name="editRuleNo" value='0'>
+<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+<input type="hidden" name="totalRules" value='<!--#nk_get AccessRule="5"-->'>
+<!-- Welcome -->
+<div id="sWhat" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:1; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td width="149" height="448" align="center" valign="bottom" rowspan="3" style="padding-bottom:10px" bgcolor="#8499A2"><div class="wLogo"></div></td>
+	    <td width="10" rowspan="3"></td>
+	    <td width="10" rowspan="3"></td>
+	    <td height="10"></td>
+	    <td width="50" rowspan="3"></td>
+	</tr>
+	<tr>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Welcome to the Access Rules Installation Wizard</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        <script>
+		        document.write('Network Access Rules evaluate network traffic\'s Source IP address, Destination IP address, and IP protocol type to decide if the IP traffic is allowed to pass through the firewall. Custom rules take precedence, and may override '+ModelName+'\'s default stateful packet inspection.');
+		        </script>
+		        </td>
+		  </tr>
+		  <tr>
+		        <td height="10"></td>
+		  </tr>		  
+		  <tr>
+		        <td class="Wizard_Content">The ability to define Network Access Rules is a very powerful tool. Using custom rules, it is possible to disable all firewall protection or block all access to the Internet. Use extreme caution when creating or deleting Network Access Rules.
+		          </td>
+		  </tr>
+		  <tr>
+		        <td height="10"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        <script>
+		        document.write(ModelName+' has the following default rules&nbsp;:&nbsp;');
+		        </script>		        
+		        </td>
+		  </tr>
+		  <tr>
+		        <td height="10"></td>
+		  </tr> 
+		  <tr>
+		       <td class="Wizard_Content">
+		       &nbsp;<b><font size="2">&#183;</font></b>&nbsp;All traffic from the LAN to the WAN is allowed.<br>
+		       &nbsp;<b><font size="2">&#183;</font></b>&nbsp;All traffic from the WAN to the LAN is denied.<br>
+		       &nbsp;<b><font size="2">&#183;</font></b>&nbsp;All traffic from the LAN to the DMZ is allowed.<br>
+		       &nbsp;<b><font size="2">&#183;</font></b>&nbsp;All traffic from the DMZ to the LAN is denied.<br>
+		       &nbsp;<b><font size="2">&#183;</font></b>&nbsp;All traffic from the WAN to the DMZ is allowed.<br>
+		       &nbsp;<b><font size="2">&#183;</font></b>&nbsp;All traffic from the DMZ to the WAN is allowed.
+		       </td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        <script>
+		        document.write('Custom rules can be created to override the '+ModelName+' default rules.');
+		        </script>		        
+		        </td>
+		  </tr>             
+		</table>        	
+	    </td>
+	</tr>
+	<tr>
+	    <td height="10"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table>
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back1", "Back", "", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next1", "Next", "showhide('sWhat','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel1", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>	
+</div>
+<!-- Action -->
+<div id="sAction" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:2; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">Action
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Serivce</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Log</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	 		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Source Interface</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Source IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Destination IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Schedule</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>	
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Select the Action.</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        Select <b>Allow</b> or <b>Deny</b> depending on the intent of the rule. For example, to configure the Router to allow all FTP traffic access from the LAN to the Internet. Thus select Allow. Or, to restrict all FTP traffic access from the LAN to the Internet. Thus select Deny.
+		        </td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        Action: <img border="0" src="images/_blank.gif" width="8" height="1">
+			<select class="Select" name="ruleAction" size="1">
+			<option value="1" selected>Allow</option>
+			<option value="0">Deny</option>
+			</select>
+		        </td>
+		  </tr>
+		</table>        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back2", "Back", "showhide('sAction','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next2", "Next", "showhide('sAction','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel2", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+<!-- Service -->
+<div id="sService" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:3; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Action
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">Serivce
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Log</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Source Interface</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Source IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Destination IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Schedule</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu" width="115">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Select the Service.</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        Select the service that will be allowed or denied from the Service menu.
+		        </td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        Service: <img border="0" src="images/_blank.gif" width="8" height="1">
+			<select class="Select" name="addRule_serviceID">
+			<!--#nk_get ServiceStatusByRule=""-->
+			</select>
+		        </td>
+		  </tr>
+		</table>        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back3", "Back", "showhide('sService','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next3", "Next", "showhide('sService','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel3", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+<!-- Log -->
+<div id="sLog" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:4; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Action
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Serivce
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2">
+		        <img border="0" src="images/_blank.gif" width="24" height="1">Log
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Source Interface</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Source IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Destination IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Schedule</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Select the Log.</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        You can select <b>Log packets match this rule</b> or <b>Not log</b>.
+		        </td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        Log: <img border="0" src="images/_blank.gif" width="8" height="1">
+			<select class="Select" name="ruleLog">
+			<option value=1>Log packets match this rule</option>
+			<option value=0>Not log</option>
+			</select>
+		        </td>
+		  </tr>
+		</table>        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back4", "Back", "showhide('sLog','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next4", "Next", "showhide('sLog','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel4", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+<!-- Interface -->
+<div id="sInf" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:4; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Action
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Serivce
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Log
+		        </td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="24" height="1">Source&nbsp;Interface</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Source IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Destination IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Schedule</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Select the Source Interface.</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+			<td class="Wizard_Content">
+			<script>
+			document.write('Select the source, either ');
+			if (MaxWanPortNumber > 2)
+				document.write("LAN, DMZ, WAN1, WAN2 , WAN3, WAN4, WAN5, WAN6, WAN7 or Any");
+			else	
+			{
+				if (document.formPolicy.isDMZmode.value=="1") 
+					document.write("WAN1, WAN2, LAN or Any");
+				else
+					document.write("WAN, LAN, DMZ or Any");
+			}	
+			document.write(' from the Source Interface menu. For example, allow all FTP traffic access from the LAN to the Internet. Thus select the LAN as source.'); 
+			</script>
+			</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content">
+		        Interface: <img border="0" src="images/_blank.gif" width="8" height="1">
+			<select name="addRule_srcEnet" class="Select">
+			<script>
+			document.write('<option value="1" >LAN</option>');
+			if(document.formPolicy.wanNumbers.value > 0)
+			{
+				var k;
+				var wan_option;
+				for(k=1; k<=document.formPolicy.wanNumbers.value; k++)
+				{
+					wan_option = k+1;
+					if((k==document.formPolicy.wanNumbers.value) && (MaxWanPortNumber > 2 || document.formPolicy.isDMZmode.value=="1"))
+						document.write('<option value="16" >DMZ</option>');
+					else
+					{
+						if(k==1)
+							document.write('<option value="2" >WAN 1</option>');
+						else if(k==2)
+							document.write('<option value="3" >WAN 2</option>');
+						else if(k==3)
+							document.write('<option value="4" >WAN 3</option>');
+						else if(k==4)
+							document.write('<option value="5" >WAN 4</option>');
+						else if(k==5)
+							document.write('<option value="6" >WAN 5</option>');
+						else if(k==6)
+							document.write('<option value="7" >WAN 6</option>');
+						else if(k==7)
+							document.write('<option value="8" >WAN 7</option>');
+					}
+				}
+			}
+			document.write('<option value="17" >ANY</option>');
+			</script>
+			</select>
+		        </td>
+		  </tr>
+		</table>        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back5", "Back", "showhide('sInf','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next5", "Next", "showhide('sInf','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel5", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+<!-- Source IP-->
+<div id="sS" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:5; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Action
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Serivce
+		        </td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Log
+		        </td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;Interface
+		        </td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="24" height="1">Source&nbsp;IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  	  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Destination IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Schedule</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Select the Source IP type and enter the IP address.</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+			<td class="Wizard_Content">
+			For example, allow all users on LAN side to access the Internet. Thus select Any. Allow certain user(s) on LAN side to access the Internet. Thus select Single or Range and enter the IP address.
+			</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td>
+		        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td width="80">
+				<select name="rSour" onChange="ssIPRange()" class="Select">
+	                       <option value="1">Any</option>
+	                       <option value="2">Single</option>
+	                       <option value="3">Range</option>
+				</select>
+				</td>		        
+				<td width="120">
+				<div id="rS1"> 
+				<input type="text" name="srcipStart" maxlength="15" onFocus="this.select();" onBlur="" size="15" value=''><img border="0" src="images/_blank.gif" width="8" height="1">
+				</div>				
+				</td>
+				<td align="left"> 
+				<div id="rS2">to<img border="0" src="images/_blank.gif" width="8" height="1">
+				<input type="text" name="srcipEnd" maxlength="15" onFocus="this.select();" onBlur="" size="15" value=''>
+				</div>
+				</td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back6", "Back", "showhide('sS','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next6", "Next", "showhide('sS','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel6", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+<!-- Destination IP -->
+<div id="sD" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:6; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Action</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Serivce</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Log</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;Interface</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;IP</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="24" height="1">Destination&nbsp;IP</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  	  	  
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu" width="115">Schedule</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Select the Destination IP type and enter the IP address.</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+			<td class="Wizard_Content">
+			Select the destination, either Any, Single or Range * from the Destination IP pull-down menu. For example, allows Internet can access the DMZ port, thus select Single or Range and enter the IP address of DMZ port.
+			</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td>
+		        <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td width="80">
+				<select name="rDest" onChange="sdIPRange()" class="Select">
+	                       <option value="1">Any</option>
+	                       <option value="2">Single</option>
+	                       <option value="3">Range</option>
+				</select>
+				</td>		        
+				<td width="120">
+				<div id="rD1"> 
+				<input type="text" name="destipStart" maxlength="15" onFocus="this.select();" onBlur="" size="15" value=''><img border="0" src="images/_blank.gif" width="8" height="1">
+				</div>				
+				</td>
+				<td align="left"> 
+				<div id="rD2">to<img border="0" src="images/_blank.gif" width="8" height="1">
+				<input type="text" name="destipEnd" maxlength="15" onFocus="this.select();" onBlur="" size="15" value=''>
+				</div>
+				</td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back7", "Back", "showhide('sD','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next7", "Next", "showhide('sD','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel7", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+<!-- Schedule -->
+<div id="sWork" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:7; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Action</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Serivce</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Log</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;Interface</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;IP</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+ 		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Destination&nbsp;IP</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="24" height="1">Schedule</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu" width="115">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">When it works</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+			<td class="Wizard_Content">
+			Select the scheduling for this rule to be enforced.
+			</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td>
+			 <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td width="28"><input type="radio" value="0" name="addRule_timeConstraint" checked></td>
+				<td class="Wizard_Content"><b>Always: </b></td>
+			  </tr>
+			  <tr>
+				<td></td>			
+				<td class="Wizard_Content">Select <b>Always</b> from the Apply this rule menu if the rule is always in effect.</td>
+			  </tr>
+			  <tr>
+				<td height="10" colspan="2"></td>
+			  </tr>
+			  <tr>
+		        	<td width="28"><input type="radio" value="1" name="addRule_timeConstraint"></td>
+				<td class="Wizard_Content"><b>Interval: </b></td>
+			  </tr>
+			  <tr>
+				<td></td>			
+				<td class="Wizard_Content">Select <b>Interval</b> to define the specific time and day of week range for this rule to be enforced.</td>
+			  </tr>
+			 </table>
+		        </td>
+		  </tr>
+		</table>        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back8", "Back", "showhide('sWork','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next8", "Next", "showhide('sWork','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel8", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+
+<div id="sTime" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:8; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Action</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Serivce</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Log</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;Interface</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;IP</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+ 		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Destination&nbsp;IP</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="24" height="1">Schedule</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu" width="115">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td width="550" valign="top" style="padding-top:0px">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Enter the Scheduling</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content"><b>Time Setting</b></td>
+		  </tr>
+		  <tr>
+		        <td height="10"></td>
+		  </tr>
+		  <tr>
+			<td class="Wizard_Content">
+			Enter the time of day (in 24-hour format) to begin and end enforcement.
+			</td>
+		  </tr>
+		  <tr>
+		        <td height="10"></td>
+		  </tr>
+		  <tr>
+			<td>
+			<table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td class="Wizard_Content">From: <img border="0" src="images/_blank.gif" width="8" height="1"><input type="text" name="addRule_timeBeginHour" size="12" maxlength="6" value='' onFocus="this.select();" onBlur="sTrim(this);hours_minutes_Check(this,'h','m');">
+		        	<img border="0" src="images/_blank.gif" width="8" height="1">(hh:mm)<img border="0" src="images/_blank.gif" width="40" height="1">To: <img border="0" src="images/_blank.gif" width="8" height="1">
+				<input type="text" name="addRule_timeEndHour" size="12" maxlength="6" value='' onFocus="this.select();" onBlur="sTrim(this);hours_minutes_Check(this,'h','m');"><img border="0" src="images/_blank.gif" width="8" height="1">(hh:mm)
+				</td>
+			  </tr>
+			 </table>			
+			</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td><hr class="line" align="center" size="1" width="100%"></td>
+		  </tr>		  
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_Content"><b>Date Setting</b></td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>		  
+		  <tr>
+			<td class="Wizard_Content">
+			Enter the day of week to begin and end enforcement.
+			</td>
+		  </tr>
+		  <tr>
+		        <td height="10"></td>
+		  </tr>
+		  <tr>
+			<td class="Wizard_Content">
+			<input type="checkbox" name="access_rule_days" value="7" onClick="chSchedule()" checked>
+			<img border="0" src="images/_blank.gif" width="8" height="1">Everyday<img border="0" src="images/_blank.gif" width="8" height="1">
+			<input type="checkbox" name="access_rule_days" value="0" ><img border="0" src="images/_blank.gif" width="8" height="1">Sun<img border="0" src="images/_blank.gif" width="8" height="1">
+			<input type="checkbox" name="access_rule_days" value="1" ><img border="0" src="images/_blank.gif" width="8" height="1">Mon<img border="0" src="images/_blank.gif" width="8" height="1">
+			<input type="checkbox" name="access_rule_days" value="2" ><img border="0" src="images/_blank.gif" width="8" height="1">Tue<img border="0" src="images/_blank.gif" width="8" height="1">
+			<input type="checkbox" name="access_rule_days" value="3" ><img border="0" src="images/_blank.gif" width="8" height="1">Wed<img border="0" src="images/_blank.gif" width="8" height="1">
+			<input type="checkbox" name="access_rule_days" value="4" ><img border="0" src="images/_blank.gif" width="8" height="1">Thu<img border="0" src="images/_blank.gif" width="8" height="1">
+			<input type="checkbox" name="access_rule_days" value="5" ><img border="0" src="images/_blank.gif" width="8" height="1">Fri<img border="0" src="images/_blank.gif" width="8" height="1">
+			<input type="checkbox" name="access_rule_days" value="6" ><img border="0" src="images/_blank.gif" width="8" height="1">Sat<img border="0" src="images/_blank.gif" width="8" height="1">
+			</td>
+		  </tr>		  
+		</table>        	
+	    </td>
+	    <td width="10"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back9", "Back", "showhide('sTime','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Next9", "Next", "showhide('sTime','1')", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel9", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+
+<!-- Summary -->
+<div id="sSummary" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:7; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Action</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Serivce</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Log</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;Interface</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;IP</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+ 		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Destination&nbsp;IP</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Schedule</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="24" height="1">Summary</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td width="24" height="22"></td>
+		        <td class="Wizard_UnselectMenu" width="115">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Summary</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+			<td>			
+			<table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		          <tr>
+		        	<td class="Wizard_Content" width="108"><b>Action: </b></td>
+				<td><input type="text" name="s_action" id="s_action" style="width:320px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Service: </b></td>
+				<td><input type="text" name="s_service" id="s_service" style="width:320px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			   <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Log: </b></td>
+				<td><input type="text" name="s_log" id="s_log" style="width:320px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Source Interface: </b></td>
+				<td><input type="text" name="s_inf" id="s_inf" style="width:320px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Source IP: </b></td>
+				<td><input type="text" name="s_sip" id="s_sip" style="width:320px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Destination IP: </b></td>
+				<td><input type="text" name="s_dip" id="s_dip" style="width:320px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			  <tr>
+		        	<td colspan="2" height="10"></td>
+			  </tr>
+			  <tr>
+		        	<td class="Wizard_Content"><b>Schedule: </b></td>
+				<td><input type="text" name="s_sch" id="s_sch" style="width:320px;border-width:0px;bgcolor=#fff" readOnly></td>
+			  </tr>
+			 </table>
+			</td>
+		  </tr>
+		</table>        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Back10", "Back", "showhide('sSummary','-1')", "", "", 75);
+	document.write("</td>");
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Install", "Install", "chSubmit()", "", "submit", 75);
+	document.write("</td>");			
+	document.write('<td width="5"></td>');
+	document.write("<td width=\"75\">");
+	PrintSTButton("Cancel10", "Cancel", "javascript: location.href='wizard_policy.htm'", "", "", 75);
+	document.write("</td>");		
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+
+<!-- Finish -->
+<div id="sSave" style="position:absolute; left:8px; top:8px; right:8px; bottom:8px;z-index:9; visibility: hidden">
+<table width="734" border="1" cellspacing="0" cellpadding="0" style="border-color:#8499a2;border-style:solid;background:#fff;border-collapse:collapse;">
+  <tr>
+    <td>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>
+	<tr>
+	    <td width="10"></td>
+	    <td width="139" height="428" valign="top">
+	    <table border="0" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Action</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Serivce</td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Log</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		   <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;Interface</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Source&nbsp;IP</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+ 		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Destination&nbsp;IP</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Schedule</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>
+		  <tr>
+		        <td class="Wizard_DoneMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="7" height="1"><img border="0" src="images/wizard_check.gif" width="10" height="10"><img border="0" src="images/_blank.gif" width="7" height="1">Summary</td>		  
+		  </tr>      
+		  <tr>
+		        <td class="Wizard_UnselectMenu" height="5" colspan="2"></td>
+		  </tr>		  		  
+		  <tr>
+		        <td class="Wizard_SelectMenu" height="22" colspan="2"><img border="0" src="images/_blank.gif" width="24" height="1">Finish</td>
+		  </tr>
+	    </table>	  
+	    </td>
+	    <td width="10"></td>
+	    <td width="10"></td>
+	    <td valign="top" style="padding-top:0px">
+		<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+		  <tr>
+		        <td class="Wizard_Title" height="24">Install</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		  <tr>
+			<td class="Wizard_Content">
+			<b>Access Rules have been successfully configured.</b><br>
+			</td>
+		  </tr>
+		  <tr>
+		        <td height="15"></td>
+		  </tr>
+		</table>        	
+	    </td>
+	    <td width="50"></td>
+	</tr>
+	<tr>
+	    <td height="10" colspan="6"></td>
+	</tr>      
+	</table>  
+   </td>
+ </tr>
+</table> 
+<script>
+	document.write('<table width="734" border="0" cellpadding="0" cellspacing="0" align="left" valign="bottom" id="AutoNumber15" height="21">');
+	document.write('<tr><td height="8" colspan="4"></td></tr>'); 
+	document.write('<tr>'); 
+	document.write('<td></td>');
+	document.write("<td align=\"right\" width=\"75\" height=\"28\">");
+	PrintSTButton("Finish", "Finish", "closeWindow()", "", "submit", 75);
+	document.write("</td>");
+	document.write('</tr>');
+	document.write('</table>');
+</script>
+</div>
+</form>
+</body>
+</html>

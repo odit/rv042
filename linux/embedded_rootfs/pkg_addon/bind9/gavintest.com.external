@@ -1,0 +1,13 @@
+$TTL 4320       ; 1 hour 12 minutes
+@       IN      SOA     ns.gavintest.com.  root.ns.gavintest.com.      (
+                                2007101701      ;
+                                3600            ;
+                                1800            ;
+                                36000           ;
+                                3600 )          ;
+        IN      NS      ns.gavintest.com.
+ns      IN      A       192.168.1.1
+www     IN      A       2.2.2.1
+www     IN      A       2.2.2.2
+www     IN      A       2.2.2.3
+www     IN      A       2.2.2.4

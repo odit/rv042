@@ -1,0 +1,32 @@
+HEADERS=Firebase.h
+
+SOURCES=Firebase.o\
+        FirebaseMain.o\
+        Utils.o\
+	Options.o
+
+BIN=libFirebase.a
+all: $(BIN)
+include ../make-include-Octeon.mk
+
+CFLAGS+=-I$(SYS_LIB)
+
+libFirebase.a: $(SOURCES) $(SYS_LIB)/libSys.a $(HEADERS)
+	$(AR) cr libFirebase.a $(SOURCES)
+
+cleanbin:
+	rm $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+clean:
+	rm -f *.o
+	rm -f $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+install:
+	$(INSTALL) firebase.default ${INSTALL_TOP_DIR}/var/conf/firebase.default
+	$(INSTALL) firebase.default ${INSTALL_TOP_DIR}/var/conf/firebase.conf
+	@chmod 777 ${INSTALL_TOP_DIR}/var/conf/firebase.conf
+	@chmod 777 ${INSTALL_TOP_DIR}/var/conf/firebase.default
+
+un-install:

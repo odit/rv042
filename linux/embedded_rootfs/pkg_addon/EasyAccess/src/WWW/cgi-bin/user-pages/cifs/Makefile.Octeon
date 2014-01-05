@@ -1,0 +1,25 @@
+include ../../../../make-include-Octeon.mk
+
+BIN=singlecifs
+
+all: $(BIN)
+
+CFLAGS +=-I$(SYS_LIB) -I$(GCGI_LIB) -I$(SAMBA_INC_DIR) -DSINGLE_CGI
+
+LDFLAGS +=-L$(SYS_LIB) -lSys -L$(GCGI_LIB) -L$(SAMBA_LIB_DIR) -lgcgi  \
+           -lsmbclient -Wl,--defsym,__stack_size__=1048576 -ldl
+
+singlecifs: cifs.c cifs-upload.c cifsSamba.c cifsHtml.c SmbLib.h cifs.h cifsMain.c
+	${CC} cifs.c cifs-upload.c cifsMain.c $(LDFLAGS) ${CFLAGS} -o $@
+	$(STRIP) $(BIN)
+
+install:
+	if [ -n '$(BIN)' ]; then $(INSTALL) $(BIN) $(DEST_CGI_BIN); fi
+	cd $(DEST_CGI_BIN);ln -sf singlecifs cifs
+	cd $(DEST_CGI_BIN);ln -sf singlecifs cifs-upload
+
+clean:
+	rm -rf $(BIN)
+
+un-install:
+	rm -rf $(DEST_CGI_BIN)/$(BIN)

@@ -1,0 +1,14 @@
+--- shtool.orig	2006-04-04 06:46:55.000000000 +0530
++++ shtool	2006-08-03 15:35:39.000000000 +0530
+@@ -979,9 +979,9 @@
+         fi
+         if [ ".$opt_s" = .yes ]; then
+             if [ ".$opt_t" = .yes ]; then
+-                echo "strip $dsttmp" 1>&2
++                echo "${STRIP} $dsttmp" 1>&2
+             fi
+-            strip $dsttmp || shtool_exit $?
++            ${STRIP} $dsttmp || shtool_exit $?
+         fi
+         if [ ".$opt_o" != . ]; then
+             if [ ".$opt_t" = .yes ]; then

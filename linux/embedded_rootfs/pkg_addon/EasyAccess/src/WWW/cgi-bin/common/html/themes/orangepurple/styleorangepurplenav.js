@@ -1,0 +1,12 @@
+var onselect1 = "#eae5f9";
+var overselect1 = "#f4f4f4";
+var unselect1 = "#f4f4f4";
+var select1 = "#ddd8dd";
+var BGCOSELECT = "#ddd8dd";
+var q4="/images/selected.gif";
+var q5="/images/folderOpen.gif";
+var q6="/images/folderClosed.gif";
+var q7="/images/shim.gif";
+var q8="/images/dark2.gif";
+var q9="/images/shim.gif";
+var navborder = "#60769f";

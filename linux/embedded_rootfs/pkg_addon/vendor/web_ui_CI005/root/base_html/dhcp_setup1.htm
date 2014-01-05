@@ -1,0 +1,822 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	if ('<!--#nk_get RadioHandle="setIpMode:0"-->' == "checked" ){
+		document.formDHCPSetup1.dhcpStatusIPv6.disabled=true;
+		document.formDHCPSetup1.v6clTime.disabled=true;
+		document.formDHCPSetup1.dhcpIPv6start.disabled=true;
+		document.formDHCPSetup1.dhcpIPv6end.disabled=true;
+		document.formDHCPSetup1.LanDnsA_v6.disabled=true;
+		document.formDHCPSetup1.LanDnsB_v6.disabled=true;
+		document.formDHCPSetup1.v6hostname .disabled=true;
+		document.formDHCPSetup1.v6dns_ss.disabled=true;
+		SetButtonStatus('v6btnAddToListDNS','disabled');
+		document.formDHCPSetup1.v6dns_localList1.disabled=true;
+		document.formDHCPSetup1.v6delDnsLocal.disabled=true;
+		document.formDHCPSetup1.v6showNew2.disabled=true;
+		SetButtonStatus('Save','disabled');
+		SetButtonStatus('Cancel','disabled');
+	}else{
+		if (document.formDHCPSetup1.dhcpStatusIPv6.checked == true)
+		dhcpcheck(0);
+	}
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function dhcpcheck(type)
+{	
+	if(document.formDHCPSetup1.dhcpStatusIPv6.checked == true)
+	{
+		document.getElementById("Dynamic IP").style.display="";
+		document.getElementById("DNS").style.display="";
+	}
+	else
+	{		
+		document.getElementById("Dynamic IP").style.display="none";
+		document.getElementById("DNS").style.display="none";
+	}
+}
+
+function refreshMe()
+{
+	document.location.href="dhcp_setup1.htm"; 
+}
+function closeService()
+{
+  timer1=setTimeout("closeTable(wsetting_window)",1000);
+  timer2=setTimeout("refreshMe()",3000);
+}
+
+function disableIt(obj)
+{
+    obj.disabled=true;
+}
+
+function enableIt(obj)
+{
+    obj.disabled=false;
+}
+
+function chSubmit(F)
+{	
+	//check ip value
+	if (F.dhcpStatusIPv6.checked==true ){
+		if (F.dhcpIPv6start.value=="")
+		{
+			alert(aIPAddressStart);
+			return;
+		}
+
+		if (F.dhcpIPv6end.value=="")
+		{
+			alert(aIPAddressEnd);
+			return;
+		}
+
+		if(!IPRangeCheck_v6(F.dhcpIPv6start, F.dhcpIPv6end, F.ipAddr_v6, F.ipAddr_v6pre, 'check_v6Lan_dhcp')){
+			return;
+		}
+
+	}
+
+	//check DNS value
+	if (F.LanDnsA_v6.value!='')
+	{   
+		if(!CheckIPv6(F.LanDnsA_v6,'global')){
+			F.LanDnsA_v6.select();
+			return;
+		}
+	}
+	if (F.LanDnsB_v6.value!='')
+	{	
+		if(!CheckIPv6(F.LanDnsB_v6,'global')){
+			F.LanDnsB_v6.select();
+			return;
+		}
+	}
+
+	if (F.v6dns_localList1) selAll(F.v6dns_localList1);	
+	
+	if (F.dhcpStatusIPv6.checked==true )
+		F.dhcpStatusChange_v6.value="1";
+	else
+		F.dhcpStatusChange_v6.value="0";		
+			
+	F.dhcpSubnetStatus1.value=1;
+	F.submitStatus.value=1;
+	F.log_ch.value=1;
+	window.status = wSave;
+	MM_showHideLayers('AutoNumber15','','hide');  	
+	F.submit();
+
+}
+
+function timeCheck(I)
+{
+  var d;
+  d=parseInt(I.value,10);
+  if (!(d<=43200 && d>=5))
+  {
+    alert(aMinuteSNumsCheck);
+    I.value=I.defaultValue;
+    return -1;
+  }
+  I.value=d;
+}
+
+function falseSubmit(F)
+{
+	if (F.dhcpStatusIPv6.checked==true)
+    {
+		F.dhcpStatusChange_v6.value="1";
+    }
+    else 
+    {
+        F.dhcpStatusChange_v6.value="0";
+    }    
+
+    F.submitStatus.value=0; 
+    F.submit();
+}
+
+function forceEnDhcp()
+{  
+	if (document.formDHCPSetup1.dhcpSubnet1)
+    if (document.formDHCPSetup1.dhcpStatusIPv4.checked==true && document.formDHCPSetup1.dhcpStatusE.value==0)
+    {
+	if(document.formDHCPSetup1.dhcpSubnet1.checked==false && document.formDHCPSetup1.dhcpSubnet2.checked==false &&
+	   document.formDHCPSetup1.dhcpSubnet3.checked==false && document.formDHCPSetup1.dhcpSubnet4.checked==false)
+        	document.formDHCPSetup1.dhcpSubnet1.checked=true;
+    }
+}
+
+function showdeleteButton_dns(F,s)
+{
+	var forwardString=s.options[s.selectedIndex].value; 
+    var rightString,macstring;
+	
+		if (s.selectedIndex==-1) return;
+		
+		rightString=forwardString.split(splitVarforSpecialWordField);		
+		F.v6hostname.value=rightString[0];	
+		F.v6dns_ss.value=rightString[1];
+		F.v6btnAddToListDNS.value=sUpdateEntry; 		
+		SetButtonStatus('v6showNew2','show');
+		SetButtonStatus('v6delDnsLocal','show');
+}
+
+function blurList2(F)
+{
+    for (var i=0; i < F.dhcp_staticList1.length; i++)
+    {
+      F.dhcp_staticList1.options[i].selected=false;
+    }
+    F.delStatic.disabled=true;
+}
+function clearContent(F,I)
+{
+	if(I == "DHCP_v6")
+		clearContent_dhcp(F,F.v6ss);
+	else if (I == "DNS_Local_v6")
+		clearContent_dns(F,F.v6hostname);
+}
+
+function clearContent_dns(F,fo)
+{
+	if (fo==F.v6hostname){
+		var index=F.v6dns_localList1.selectedIndex;
+		
+		if(index != -1)   
+			F.v6dns_localList1.options[index].selected=false;
+
+		F.v6dns_ss.value="";
+		F.v6hostname.value="";	
+		F.v6btnAddToListDNS.value=sAddtoList;
+		SetButtonStatus('v6delDnsLocal','disabled'); 	
+		SetButtonStatus('v6showNew2','disabled'); 
+		fo.select();
+	}
+}
+
+function changeIP(s,number)
+{
+	var i=0,j=0;
+	var p=-1;
+	var pp;
+	var qq; 
+	var rightString;
+	var tmpString;
+	var temp,temp2;
+	var ts=new tmpWord(3);  
+	temp=s.options[s.length-1].value;
+	temp2=s.options[s.length-1].text;
+	for(i=s.length-1;i>number;i--)
+	{
+		s.options[i].value=s.options[i-1].value;
+		s.options[i].text=s.options[i-1].text;
+	}
+	s.options[number].value=temp;
+	s.options[number].text=temp2;
+}
+
+function dnsLocaladdSel(IP,hostName,s) 
+{
+  var p=-1;
+  var pp;
+  var qq; 
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(3);  
+  var enable,enableText;
+	
+	if (!CheckIPv6(IP,'global'))
+	{
+		IP.select();
+		return;
+	}
+
+	if(hostName.value.length == 0)
+	{
+	    alert(aHostName);
+		hostName.select();
+		return;
+	}
+	else if(Check_Special_Words(hostName) == -1)
+	{
+		hostName.select();
+		return;
+	}
+	
+    if (s.form.v6btnAddToListDNS.value==sUpdateEntry)
+    {
+		p=-1;
+		while (s.options[++p].selected != true);
+    }
+	
+   for (var i=0; i < s.length; i++)
+   {
+		var rightString = s.options[i].value.split(" ");
+		var usrName=rightString[0];
+		if(hostName.value != "" )
+		{
+			if(hostName.value == usrName && s.options[i].selected == false )
+			{
+				alert(aName);
+				hostName.select() ;
+				return ;
+			}
+		}
+   }    
+	
+    for (var i=0; i < s.length; i++)
+    {
+        s.options[i].selected=false;
+    }	
+	if (s.form.v6btnAddToListDNS.value==sAddtoList)
+	{
+		if (s.length>=LimitDhcpLocalDB)
+		{
+			alert(aLimitRule+LimitDhcpLocalDB+aLimitEnd);
+			return;
+		}     
+		p=s.length;
+		s.length+=1;
+	}
+	
+	s.options[p].text =hostName.value+"=>"+IP.value;
+	s.options[p].value=hostName.value+splitVarforSpecialWordField+IP.value;
+	clearContent_dns(s.form,hostName);  
+}
+
+function delDhcpSelect(s,fo)
+{
+   var index=s.selectedIndex;
+   
+   if(index == -1) return;   
+   s.options[index]=null;
+   clearContent_dhcp(s.form,fo);		
+}
+
+function delDnsSelect(s,fo)
+{
+   var index=s.selectedIndex;
+   
+   if(index == -1) return;   
+   s.options[index]=null;
+   clearContent_dns(s.form,fo);		
+}
+
+function IpMACaddSel(IP,MAC,s,Enable,userName) 
+{
+	var p=-1;
+	var pp;
+	var qq; 
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(3);  
+	var enable,enableText;
+	
+	if (!CheckIPv6(IP,'global'))
+	{
+		return;
+	}
+
+	if(MAC.value.length == 0)
+	{
+	    alert(aMAC);
+		MAC.select();
+		return;
+	}
+	else if(MACCheck(MAC) <0)
+	{
+	    MAC.select();
+		return;
+	}
+	
+	if(userName.value.length != 0 )
+        if(Check_Special_Words(userName) == -1)
+	{
+		userName.select();
+		return;
+	}
+
+    if (s.form.v6btnAddToList.value==sUpdateEntry)
+    {
+		p=-1;
+		while (s.options[++p].selected != true);
+    }
+
+	
+   for (var i=0; i < s.length; i++)
+   {
+   	var rightString = s.options[i].value.split(" ");
+	var usrName=rightString[4];
+  
+	if(userName.value.length != 0 )
+	{
+		if(userName.value == usrName && s.options[i].selected == false )
+		{
+			alert(aName);
+			userName.select() ;
+			return ;
+		}
+	}
+	
+	if (i != p)
+	{
+		if (rightString[0]==IP.value)
+	    	{
+			alert(aIPAlready);
+			return;
+		}
+		if (rightString[1]==MAC.value)
+	    	{
+			alert(aMACAlready);
+			return;
+		}
+	}
+    }    
+	
+    for (var i=0; i < s.length; i++)
+    {
+        s.options[i].selected=false;
+    }	
+
+	if (s.form.v6btnAddToList.value==sAddtoList)
+	{
+		if (s.length>=LimitStaticIP)
+		{
+			alert(aLimitStaticIP+LimitStaticIP+aLimitEnd);
+			return;
+		}     
+	    p=s.length;
+		s.length+=1;
+	}
+
+	enable=0;
+	if(Enable)
+	if(Enable.checked==true)
+		enable=1;
+	enableText="Disabled";
+	if(Enable)
+	if(Enable.checked==true)
+		enableText="Enabled";
+
+
+	s.options[p].text=IP.value+"=>"+filterMAC(MAC.value)+"=>"+userName.value+"=>"+enableText;
+	s.options[p].value=IP.value+splitVarforSpecialWordField+"=>"+splitVarforSpecialWordField+filterMAC(MAC.value)+splitVarforSpecialWordField+enable+splitVarforSpecialWordField+userName.value;
+	  
+	clearContent_dhcp(s.form,IP);
+}
+
+function IP_S_to_B_Data(a,b)
+{
+	var aText = a;
+    var bText = b;
+	var result;
+	var items_a,items_b;
+
+	if(!a) return -1;
+	if(!b) return 1;
+
+	items_a=aText.split("{");
+	document.formDHCPSetup1.DNSLOCAL_a.value=items_a[0];
+
+	items_b=bText.split("{");
+	document.formDHCPSetup1.DNSLOCAL_b.value=items_b[0];
+
+	result=IPRangeCheck_v6(document.formDHCPSetup1.DNSLOCAL_a, document.formDHCPSetup1.DNSLOCAL_b, document.formDHCPSetup1.ipAddr_v6, document.formDHCPSetup1.ipAddr_v6pre, 'sort');
+
+	if (result==-1)
+		return -1;
+	else if (result ==1)
+		return 1;
+
+    return 0;
+}
+
+function String_S_to_B_Data(a,b)
+{
+    var aText = a;
+    var bText = b;
+	var items;
+	
+	if(!a) return -1;
+	if(!b) return 1;
+	
+	items=aText.split("#");
+	aText=items[0];
+	
+	items=bText.split("#");
+	bText=items[0];
+
+	if (aText < bText) return -1;
+    if (aText > bText) return 1;
+    return 0;
+}
+
+function Print_static_ip_table_tr_cell(IP,MAC, bindable,username,BufBindable)
+{
+	MAC=MAC.toUpperCase();
+	document.write('<option value="'+IP+splitVarforSpecialWordField+'=>'+splitVarforSpecialWordField+MAC+splitVarforSpecialWordField+bindable+splitVarforSpecialWordField+username+'">'+IP+'=>'+MAC+'=>'+username+'=>'+BufBindable+'</option>');
+}
+
+function Print_dns_local_table_tr_cell(hostname,IP)
+{
+	document.write('<option value="'+hostname+splitVarforSpecialWordField+IP+'">'+hostname+'=>'+IP+'</option>');
+}
+
+function produce_static_ip_table(data)
+{
+	var items;
+	var list;
+
+    list=data.split(splitVarforSpecialWordField+"?");
+    list.sort(IP_S_to_B_Data);	
+	for (var i=1; i < list.length; i++) 
+    {
+        items=list[i].split(splitVarforSpecialWordField+"#");
+		Print_static_ip_table_tr_cell(items[0],items[1],items[2],items[3],items[4]);
+    }
+}
+
+function produce_dns_local_table(data)
+{
+	var items;
+	var list;
+	
+    list=data.split(splitVarforSpecialWordField+"?");
+	
+    list.sort(IP_S_to_B_Data);	
+
+	for (var i=1; i < list.length ; i++) 
+    {	
+        items=list[i].split(splitVarforSpecialWordField+"#");
+		Print_dns_local_table_tr_cell(items[1],items[0]);		
+    }
+	
+}
+
+function PrintIPSetup()
+{
+	var obj;
+	var F = document.formDHCPSetup1;
+
+		if (F.dhcpStatusIPv6.checked==true)
+		{
+			document.getElementById("Dynamic IP").style.display="";
+			document.getElementById("DNS").style.display="";
+		}
+		else if (F.dhcpStatusIPv6.checked==false)
+		{
+			document.getElementById("Dynamic IP").style.display="none";
+			document.getElementById("DNS").style.display="none";
+		}
+
+}
+
+function chChangeIPmode(val)
+{	
+	document.location.href="dhcp_setup.htm"
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.formDHCPSetup1);";
+var Cancellink = ""; 
+var helplink ='help_dhcp_setup6.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=160;//fix support apple safari style by jason.huang 20100423 
+
+function PrintContent()
+{
+	PrintBeginContent();
+	document.write('<table width="100%" class="block" border="0" cellpadding="0" cellspacing="0">');
+	document.write('<tr><td>');
+	PrintIPTypeTab('IPv4','false','IPv6','true');
+	document.write('</td></tr>');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#CBD8E1" style="border-left:1px solid #666;border-right:1px solid #666;border-bottom:1px solid #666;"><tr><td>');
+	PrintDhcpSetupIPv6(1);
+	PrintDynamicIP(1);
+	//PrintStaticIP(1);
+	PrintDNS(1);
+	PrintDNSLocalDatabase(0);
+	document.write('</td></tr></table>');
+	document.write('</td></tr>');
+	PrintIPSetup();
+	PrintEndContent();
+}
+
+function PrintDhcpSetupIPv6(hasUnderLine)
+{	
+	PrintBeginBlock(0);
+	document.write('<table id="DhcpIPv6"  width="'+SmallLayoutwidth+'" class="Infotable" border='+Tableborder+'>');
+	document.write('<br>');	
+	document.write('<tr>');	
+	document.write('<td width="1" align="left">');
+	document.write('<input type="checkbox" name="dhcpStatusIPv6" onClick="dhcpcheck(1)" value="1" <!--#nk_get CheckboxStatus="dhcpStatusChange_v6"-->>');
+	document.write('</td>');
+	document.write('<td>Enable DHCP Server</td>');
+	document.write('</tr>');		
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 0, 1);	
+}
+
+function PrintDynamicIP(hasUnderLine)
+{
+	PrintBeginBlock(1, "Dynamic IP");	
+	//IPv6
+	document.write('<table id="dhcpserverIPv6" width="'+SmallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');	
+	document.write('<td width='+head_width+' align="left">Client Lease Time&nbsp;:&nbsp;</td>');	
+	document.write('<td width="300">');
+	document.write('<input type="text" name="v6clTime" size="5" maxlength="5" onFocus="this.select();" onBlur=" timeCheck(this);" onKeypress="return Check_User_Input(event)" value=\'<!--#nk_get CltimeHandle_v6=""-->\'> ');
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	document.write('Minutes</td>');	
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td align="left">');
+	document.write('Range Start&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="text" size="40" maxlength="39" name="dhcpIPv6start" onBlur="IPRangeCheck_v6(this, this.form.dhcpIPv6end, this.form.ipAddr_v6, this.form.ipAddr_v6pre, \'check_v6Lan_dhcp\')" onFocus="this.select()" value=\'<!--#nk_get 1to1_Handle="dhcpIPv6start"-->\' >');
+	document.write('</td>');	
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td align="left">');
+	document.write('Range End&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="text" size="40" maxlength="39" name="dhcpIPv6end" onBlur="IPRangeCheck_v6(this.form.dhcpIPv6start, this, this.form.ipAddr_v6, this.form.ipAddr_v6pre, \'check_v6Lan_dhcp\');" onFocus="this.select()" value=\'<!--#nk_get 1to1_Handle="dhcpIPv6end"-->\' >');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('</table>');
+
+	PrintEndBlock(hasUnderLine, 0, 1);	
+}
+
+function PrintStaticIP(hasUnderLine)
+{
+	var in_head_width=head_width-5;
+	var application =navigator.appVersion;
+	var appType ="";
+	var appName = "";
+	PrintBeginBlock(1, "Static IP");
+	//Ipv6
+	if (appName == "MSIE")
+		document.write('<table id=v6Static class="IEtable" width="'+SmallLayoutwidth+'" border="'+Tableborder+'">');
+	else
+	document.write('<table id=v6Static class="opacitytable" width="'+SmallLayoutwidth+'" border="'+Tableborder+'">');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Static IP Address&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="v6ss"  size="40" maxlength="39" onFocus="this.select();">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+    document.write('<td width='+in_head_width+' align="left" >MAC Address&nbsp;:&nbsp;</td>');
+	document.write('<td align="left" >');
+	document.write('<input type=text name="v6sMAC" size="40" maxlength="17" onBlur="MACCheck(this);"  onFocus="this.select();" >');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+    document.write('<td width='+in_head_width+' align="left" >Name&nbsp;:&nbsp;</td>');
+	document.write('<td align="left" >');
+	document.write('<input type=text name="v6userName" size="40" maxlength="12"  onFocus="this.select();">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+    document.write('<td width='+in_head_width+' align="left" >Enable&nbsp;:&nbsp;</td>');
+	document.write('<td align="left" >');
+	document.write('<input type="checkbox" name="v6dhcpEnable" value="0" >');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	if (appName == "MSIE")
+		document.write('<td align="center" colspan="2">');
+	else
+		document.write('<th align="center" colspan="2">');
+	PrintSTButton("v6btnAddToList","Add to list","IpMACaddSel(this.form.v6ss,this.form.v6sMAC,this.form.v6dhcp_staticList1,this.form.v6dhcpEnable,this.form.v6userName);");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple class="Multiselect" name="v6dhcp_staticList1" size="10" onChange="showdeleteButton2(this.form, this);" style="width: 100%">');
+	<!--#nk_get DhcpStaticList_v6=""-->
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" valign="top" colspan="2">');
+	PrintSTButton("v6delStatic","Delete","delSel(this.form.v6dhcp_staticList1, 'DHCP_v6')");
+	SetButtonStatus("v6delStatic", "disabled");	
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("v6btnNew","Add New","clearContent_dhcp(this.form,this.form.v6ss)");
+	SetButtonStatus("v6btnNew", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');		
+	document.write('</table>');
+
+	PrintEndBlock(hasUnderLine, 0,1);
+}
+
+function PrintDNS(hasUnderLine)
+{
+	PrintBeginBlock(1, "DNS");
+	document.write('<table id="DNS_v6" width="'+SmallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'" align="left">');
+	document.write('DNS Server (Required) 1&nbsp;:&nbsp;</td>');
+	document.write('<td width="300">');
+	document.write('<input type="text" name="LanDnsA_v6" maxlength="39" onFocus="this.select();" size="40" value=\'<!--#nk_get 1to1_Handle="LanDnsA_v6"-->\'>');
+	document.write('</td>');	
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td align="left">');
+	document.write('<img border="0" src="images/_blank.gif" width="128" height="1"> 2&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="LanDnsB_v6" maxlength="39" onFocus="this.select();" size="40"  value=\'<!--#nk_get 1to1_Handle="LanDnsB_v6"-->\'>');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 0, 1);
+}
+
+function PrintDNSLocalDatabase(hasUnderLine)
+{
+	var in_head_width=head_width-5;
+
+	PrintBeginBlock(1, "DNS Local Database");
+	//IPv6
+	document.write('<table id=v6DNS class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Host Name&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type=text name="v6hostname" maxlength="32" size="50" onFocus="this.select()">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+    document.write('<td width='+in_head_width+' align="left" >IP Address&nbsp;:&nbsp;</td>');
+	document.write('<td align="left" >');
+	document.write('<input type=text name="v6dns_ss" maxlength="39" size="50" onFocus="this.select()">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("v6btnAddToListDNS","Add to list","dnsLocaladdSel(this.form.v6dns_ss,this.form.v6hostname,this.form.v6dns_localList1);");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple class="Multiselect" name="v6dns_localList1" size="10" onChange="showdeleteButton_dns(this.form, this)" style="width: 100%">');
+	<!--#nk_get DnsRelayList_v6=""--> 
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("v6delDnsLocal","Delete","delSel(this.form.v6dns_localList1, 'DNS_Local_v6')");
+	SetButtonStatus("v6delDnsLocal", "disabled");		
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	PrintSTButton("v6showNew2","Add New","clearContent_dns(this.form,this.form.v6hostname)");
+	SetButtonStatus("v6showNew2", "disabled");
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');		
+	document.write('</table>');
+	document.write('<br>');	
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 3, 1);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formDHCPSetup1" method="post" action="dhcp_setup1.htm">
+	<input type="hidden" name="page" value="dhcp_setup1.htm">
+	<input type="hidden" name="dhcp_chsubmit" value=''>
+	<input type="hidden" name="submitStatus" value="1">
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="dhcpStatusChange_v6" value='<!--#nk_get CheckboxSave="dhcpStatusChange_v6"-->'>
+	<input type="hidden" name="dhcpStatusE" value='<!--#nk_get DhcpEnable=""-->'>
+	<input type="hidden" name="selectedEntry" value="0">
+	<input type="hidden" name="dhcpSubnetStatus1" value='<!--#nk_get DisplayOnly="dhcpSubnetStatus1"-->'>
+	<input type="hidden" name="ipAddr_v6" value='<!--#nk_get DisplayOnly="ipAddr_v6"-->'>
+	<input type="hidden" name="ipAddr_v6pre" value='<!--#nk_get DisplayOnly="ipAddr_v6pre"-->'>
+	<input type="hidden" name="DNSLOCAL_a" value="0">
+	<input type="hidden" name="DNSLOCAL_b" value="0">
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="dhcp_setup.htm"-->
+<!--#nk_get DhcpUpdate=""-->

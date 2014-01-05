@@ -1,0 +1,10 @@
+--- /home/QA/workspace/ADK/1.4.0-155-002/content/sdk-toolkit/CN3XXX-SDK/linux/embedded_rootfs/pkg_makefiles/init-scripts.mk	2007-02-02 14:34:47.000000000 -0800
++++ init-scripts.mk	2007-02-06 13:44:14.000000000 -0800
+@@ -12,4 +12,7 @@
+ 	cp ${ETC_FILES}/udhcpc.deconfig ${ROOT}/usr/share/udhcpc/
+ 	cp ${ETC_FILES}/udhcpc.bound    ${ROOT}/usr/share/udhcpc/
+ 	ln -s udhcpc.script		${ROOT}/usr/share/udhcpc/default.script
++	mkdir -p /var/run
++	cp ${ETC_FILES}/udhcpd.conf 	${ROOT}/etc/
++	mkdir -p /var/lib/misc; touch /var/lib/misc/udhcpd.leases
+ 

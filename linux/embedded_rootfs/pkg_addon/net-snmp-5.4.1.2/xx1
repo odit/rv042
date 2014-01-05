@@ -1,0 +1,41 @@
+making all in /home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/snmplib
+make[1]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/snmplib'
+make[1]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/snmplib'
+making all in /home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/agent
+make[1]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/agent'
+making all in /home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/agent/helpers
+make[2]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/agent/helpers'
+make[2]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/agent/helpers'
+making all in /home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/agent/mibgroup
+make[2]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/agent/mibgroup'
+make[2]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/agent/mibgroup'
+make[1]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/agent'
+making all in /home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/apps
+make[1]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/apps'
+making all in /home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/apps/snmpnetstat
+make[2]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/apps/snmpnetstat'
+make[2]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/apps/snmpnetstat'
+make[1]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/apps'
+making all in /home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/man
+make[1]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/man'
+make[1]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/man'
+making all in /home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/local
+make[1]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/local'
+make[1]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/local'
+making all in /home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/mibs
+make[1]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/mibs'
+make[1]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/mibs'
+make: Warning: File `net-snmp-config-x' has modification time 7.1e+04 s in the future
+make[1]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/perl'
+make[2]: Entering directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/perl/default_store'
+rm -f ../blib/arch/auto/NetSNMP/default_store/default_store.so
+gcc  -shared -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m32 -march=i386 -mtune=generic -fasynchronous-unwind-tables -L/usr/local/lib  default_store.o  -o ../blib/arch/auto/NetSNMP/default_store/default_store.so 	\
+	   -L/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/perl/default_store/../../snmplib/.libs -L/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/perl/default_store/../../snmplib -L/tmp/root-rootfs/lib -lnetsnmp  	\
+	  
+/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/perl/default_store/../../snmplib/.libs/libnetsnmp.so: file not recognized: File format not recognized
+collect2: ld returned 1 exit status
+make[2]: *** [../blib/arch/auto/NetSNMP/default_store/default_store.so] Error 1
+make[2]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/perl/default_store'
+make[1]: *** [subdirs] Error 2
+make[1]: Leaving directory `/home/gavin/CA2/linux/embedded_rootfs/pkg_addon/net-snmp-5.4.1.2/perl'
+make: *** [perlmodules] Error 1

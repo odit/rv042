@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	chDaylight();
+	transTime();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function transTime()
+{
+	var timeto='<!--#nk_get 1to1_Handle="TimeTo"-->', timefrom = '<!--#nk_get 1to1_Handle="TimeFrom"-->';
+	document.formTime.TimeFrom.value = timefrom.replace(":", ".");
+	document.formTime.TimeTo.value = timeto.replace(":", ".");
+	document.getElementById("StartDate").value = document.getElementById("TimeFrom").value;
+	document.getElementById("EndDate").value = document.getElementById("TimeTo").value;
+}
+
+function chDaylight()
+{
+	if (document.formTime.enableDaylight.checked)
+	{
+		document.formTime.StartDate.disabled=false;
+	  document.formTime.EndDate.disabled=false;
+	}
+	else
+	{ 
+		document.formTime.StartDate.disabled=true;
+	  document.formTime.EndDate.disabled=true;	
+	}
+}
+
+function chSubmit(F)
+{
+	if(F.enableDaylight.checked==true)
+		F.daylight.value=1;
+	else
+		F.daylight.value=0;
+	
+	if(F.daylight.value == 1)
+	{
+		var myDate =new Date();
+		var nYear =parseInt(myDate.getFullYear(), 10);
+		if(checkDateRange2(F.StartDate, F.EndDate, nYear) < 0)
+			return;
+		F.TimeFrom.value = F.StartDate.value.replace(".", ":");
+		F.TimeTo.value = F.EndDate.value.replace(".", ":");
+	}
+		
+	F.submitStatus.value="1";	
+	F.log_ch.value=1;
+	F.submit();
+}
+
+function falseSubmit(F)
+{
+	F.submitStatus.value="0";
+	chSubmit(F);
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formTime)";
+var Cancellink = ""; 
+var Backlink = "";
+var helplink ='help_time.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=140;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintTimeMode(1);
+	PrintTimeBegin(0);
+	//PrintEndContent();
+}
+
+function PrintTimeMode(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+NormallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="10">');
+	document.write('<input type="radio" name="setMode" value="1" checked <!--#nk_get RadioHandle2="setMode:1"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Set the local time using Network Time Protocol (NTP) automatically');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<input type="radio" name="setMode" value="2" onClick="document.location.href=\'time2.htm\'">');
+	document.write('</td>');	
+	document.write('<td>');
+	document.write('Set the local time Manually');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+function PrintTimeBegin()
+{
+	PrintBeginBlock(0);	
+	document.write('<table width="'+NormallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>'); 
+	document.write('<td width="'+head_width+'">');
+	document.write('Time Zone&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>'); 
+	document.write('<select class="Select" name="time_zone">');
+}
+
+function PrintTimeEnd()
+{
+	document.write('</select>'); 	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>'); 
+	document.write('<td>');
+	document.write('Daylight Savings Time&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="hidden" name="daylight" id="daylight" value=\'<!--#nk_get CheckboxSave="daylight"-->\' >'); 
+	document.write('<input type="checkbox" id="enableDaylight" name="enableDaylight" value="1" onClick="chDaylight()" >');
+	if(document.getElementById("daylight").value=="1")
+		document.getElementById("enableDaylight").checked = true;
+	else
+		document.getElementById("enableDaylight").checked = false;
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Enabled');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>'); 
+	document.write('<td>');	
+	document.write('Start Date&nbsp;:&nbsp;');
+	document.write('<input type="hidden" name="TimeFrom" id="TimeFrom" value="">');
+	document.write('<input type="hidden" name="TimeTo" id="TimeTo" value="">');
+	document.write('</td>');
+	document.write('<td>');		
+	document.write('<input type="text" id="StartDate" name="StartDate" size="30" maxlength="5" value="" onFocus="this.select();" onKeypress="return Check_User_Input(event)">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');		
+	document.write('(mm.dd)');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>'); 
+	document.write('<td>');	
+	document.write('End Date&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');		
+	document.write('<input type="text" id="EndDate" name="EndDate" size="30" maxlength="5" value="" onFocus="this.select();" onKeypress="return Check_User_Input(event)">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');		
+	document.write('(mm.dd)');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>'); 
+	document.write('<td>');
+	document.write('NTP Server&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>'); 
+	document.write('<input type="text" name="sNTP" size="30" maxlength="100" value=\'<!--#nk_get 1to1_Handle="sNTP"-->\' onFocus="this.select();" onBlur="sTrim(this);">');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(0);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 3);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+	
+	<form name="formTime" method="post" action="time1.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="currentYear" value=''>
+
+	<script>PrintContent();</script>
+	<!--#nk_get TimeZoneList=""-->
+	<script>
+		PrintTimeEnd();
+		PrintEndContent();
+	</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="time1.htm"-->
+<!--#nk_get TimeUpdate="1"-->

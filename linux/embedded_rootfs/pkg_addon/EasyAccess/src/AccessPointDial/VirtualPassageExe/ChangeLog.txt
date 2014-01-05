@@ -1,0 +1,19 @@
+version 1,6,1,1(May 31 2007)
+--------------------------------
+1. version changed for release.
+
+version 1,6,0,1(March 12 2007)
+--------------------------------
+1. Bug# 442 - Vista Support
+
+version 1,5,1,1(January 12 2007)
+--------------------------------
+1. Bug #589 - User configurable subnet mask in Virtual Passage .
+2. Bug #590 - Connection-specific DNS Suffix support in Virtual Passage
+3. Bug #594 - Full tunnel mode support in Virtual Passage.
+
+version 1,5,0,1(october 17 2006)
+--------------------------------
+1. Bug #430 - Default version to invoke VP from Java Installer
+2. Bug #568 - Changes to support IPv6
+3. Bug #591 - Included version based update for jar files

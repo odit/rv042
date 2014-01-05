@@ -1,0 +1,24 @@
+<script src="/js/mainframe.js"></script>
+<SCRIPT src="/js/formval.js" type=text/javascript></script>
+<SCRIPT TYPE="text/javascript"><!--
+function displayPolicyPort(param) {
+if ((param == "CIFS") || (param == "RDP5") || (param == "FTP")){
+window.document.addpolicy.policyportnumber.style.display="none";
+window.document.getElementById('f5n').style.display="block";
+}else
+{
+window.document.addpolicy.policyportnumber.style.display="block";
+window.document.getElementById('f5n').style.display="none";
+}}
+function validateOnSubmit() {
+var elem;
+var errs=0;
+if (!notnull  (window.document.addpolicy.f1, 'f1n', true)) errs += 1; 
+if (!validateipv6  (window.document.addpolicy.f2, 'f2n', true)) errs += 1; 
+if (errs>1)  {alert('Please correct two or more fields before submitting');return;}
+if (errs==1) {alert('Please correct a field before submitting');return;}
+if (!validateport(window.document.addpolicy.f3, 'f3n', false)) errs = 99; 
+if (errs==99) {alert('Port Range should be between 0 to 65535');return;}
+if (errs==0){window.document.addpolicy.submit();}
+}
+function checkMenu(param) {

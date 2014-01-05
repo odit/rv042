@@ -1,0 +1,240 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<!--(==============================================================)-->
+<!--(Document created with RoboEditor. )============================-->
+<!--(==============================================================)-->
+
+<head>
+
+<title>Certificates</title>
+
+<!--(Meta)==========================================================-->
+
+<meta http-equiv=content-type content="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+<meta name=generator-major-version content=0.1>
+<meta name=generator-minor-version content=1>
+<meta name=filetype content=kadov>
+<meta name=filetype-version content=1>
+<meta name=page-count content=1>
+<meta name=layout-height content=544>
+<meta name=layout-width content=735>
+
+
+<!--(Links)=========================================================-->
+
+<link rel="stylesheet" href="default_ns.css">
+
+
+
+<!--(Style Sheets)==================================================-->
+
+<style>
+<!--
+
+ol.whs1 {
+	list-style: decimal;
+}
+
+p.whs2 {
+	font-style: italic;
+}
+
+/*=(Generated Code)=================================================*/
+/*=(WARNING: DO NOT EDIT OR DELETE THIS SECTION!)===================*/
+/*begin!kadov{{=====================================================*/ 
+LI.kadov-p-Cwhs2 {
+	font-style: italic;
+}
+/*}}end!kadov=======================================================*/ 
+
+
+
+ul.whs3 {
+	list-style: disc;
+}
+
+div.whs4 {
+	color: #ffffff;
+	font-size: 2pt;
+	text-align: center;
+}
+
+-->
+</style>
+
+<style>
+<!--
+
+div.WebHelpPopupMenu {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 4;
+	visibility: hidden;
+}
+
+-->
+</style>
+
+<!--(Scripts)=======================================================-->
+
+<script type="text/javascript"
+		language=JavaScript
+		title=WebHelpSplitCss><!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='default.css'>");}
+//--></script>
+
+<script type="text/javascript"
+		language=JavaScript
+		title=WebHelpInlineScript><!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//--></script>
+
+<script type="text/javascript"
+		language=javascript1.2
+		src="whmsg.js"></script>
+
+<script type="text/javascript"
+		language=javascript
+		src="whver.js"></script>
+
+<script type="text/javascript"
+		language=javascript1.2
+		src="whproxy.js"></script>
+
+<script type="text/javascript"
+		language=javascript1.2
+		src="whutils.js"></script>
+
+<script type="text/javascript"
+		language=javascript1.2
+		src="whtopic.js"></script>
+
+</head>
+
+<!--(Body)==========================================================-->
+
+
+<body>
+
+<script type="text/javascript"
+		language=javascript1.2><!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("General\nCertificate Management\nCertificates");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("ConfigGuide.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//--></script>
+
+<h4>&nbsp;Certificates </h4>
+
+<p>Generate a Certificate Signing Request (CSR) file or Self-signed Certificate 
+ (CRT) and view current SSL certificate settings by clicking <span style="font-weight: bold;"><b>General</b></span> 
+ in the left navigation menu and then clicking <span style="font-weight: bold;"><b>Certificates</b></span>.</p>
+
+<p>&nbsp;</p>
+
+<p>From the Certificates window, you can view the currently loaded certificate, 
+ upload a digital certificate and generate a new Certificate Signing Request 
+ (CSR) or Self-singed Certificate (CRT). </p>
+
+<h6>Upload a new certificate:</h6>
+
+<ol class=whs1
+	style="list-style: decimal;"
+	type=1>
+	
+	<li class=kadov-p><p>In the <span style="font-weight: bold;"><b>Import 
+ Digital Certificate</b></span> table, select the <span style="font-weight: bold;"><b>Browse</b></span> 
+ button.<br>&nbsp;</p></li>
+	
+	<li class=kadov-p><p>Locate the zipped digital certificate file on 
+ your disk or network drive. Any file name will be accepted, but it must 
+ have the “.zip” extension. The zipped file should contain a certificate 
+ file named “server.crt” and a certificate key file named “server.key”. 
+ If the zipped file does not contain these two files, the zipped file will 
+ not be uploaded.</p></li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p>Once the certificate has been uploaded, the certificate will be displayed 
+ in the Current Certificates table. You may make the new uploaded certificate 
+ the certificate used by the EasyAccess software by selecting the <span 
+ style="font-weight: bold;"><b>Enable </b></span>radio button for the new 
+ certificate and clicking <span style="font-weight: bold;"><b>Submit</b></span>. 
+ When the EasyAccess software is restarted it will use the new certificate.</p>
+
+<p>&nbsp;</p>
+
+<p class=whs2><span><b style="font-weight: bold;">NOTE:</b></span> Most 
+ valid certificates created by a Certificate Authority (CA) require a password. 
+ Before you enable the certificate and restart the software, be sure to 
+ enter the correct certificate password on the <span style="font-weight: bold;"><b>View 
+ Certificate</b></span> window.</p>
+
+<p>&nbsp;</p>
+
+<p>In order to get a valid certificate from a widely accepted Certificate 
+ Authority such as Verisign or Thawte, you must generate a Certificate 
+ Signing Request for your SSL VPN device.</p>
+
+<p>&nbsp;</p>
+
+<p>See the following related topics: </p>
+
+<p>&nbsp;</p>
+
+<ul class=whs3
+	style="list-style: disc;"
+	type=disc>
+	
+	<li class=kadov-p><p><a href="newc.htm">Generating a New CSR</a></p></li>
+	
+	<li class=kadov-p><p><a href="view.htm">Viewing and Deleting Certificates</a></p></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<script type="text/javascript"
+		language=javascript1.2><!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//--></script>
+
+</body>
+
+</html>

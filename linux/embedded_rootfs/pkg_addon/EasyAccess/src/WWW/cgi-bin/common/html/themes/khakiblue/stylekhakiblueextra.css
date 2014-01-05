@@ -1,0 +1,17 @@
+
+.cifsbodyback{background-image: url(/images/backallkhakiblue.png);overflow-x:hidden;}
+.cifsmenuleft{background-image: url(/images/cifsleftback.png);}
+.cifstop3{background-color:#f8f9e0;border-top:1px #ffffff solid;border-bottom:1px #f8f9e0 solid;}
+.cifstop5{background-color:#f8f9e0;border-top:1px #ffffff solid;border-bottom:1px #444340 solid;border-left:1px #c8c9b5 solid;}
+.cifstop6{background-color:#f8f9e0;border-top:1px #ffffff solid;border-bottom:1px #444340 solid;}
+.toolbarcifs{COLOR:#51616a; FONT-FAMILY: Arial,Verdana, Arial, Helvetica; FONT-SIZE:11px; TEXT-DECORATION:none;}
+.navigator{color:#fcfc98; cursor:hand; font-FAMILY: Arial,sans-serif, Tahoma, Helvetica; FONT-SIZE:11px;}
+.mainbackcifs{COLOR:#050505; font-FAMILY: Arial,Tahoma, Verdana, Helvetica; FONT-SIZE:11px;}
+.onmainbackcifs{COLOR:#050505; background-color:#bfdcfd;FONT-FAMILY: Arial,Tahoma, Verdana, Helvetica; FONT-SIZE:11px;}
+A.mainbackcifs{COLOR:#050505; font-FAMILY: Arial,Tahoma, Verdana, Helvetica; FONT-SIZE:11px;}
+.cifslefttable{background-color:#3c5fa6;border:1px #3a5da3 solid;}
+.cifsleftcell{background-color:#bfdcfd;border-top:1px #3a5da3 solid;}
+.cifslefttitle{color:#ffffff;FONT-FAMILY: Arial, Verdana, Tahoma, Helvetica; FONT-SIZE:11px;FONT-WEIGHT: bold;}
+.disableduplink{color:#999999;FONT-FAMILY: Arial, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.demo1{color:#30363f;font-family:Arial,verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:1px solid; margin:2px;border-top-color:#808790;border-left-color:#808790;border-right-color:#556066;border-bottom-color:#556066;background-color:#e6e2df; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}
+.onhovers{margin:2px;margin-color:#ccbb44;color:#dfbf4f;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:2px solid #dfbf4f;background-color:#e6e2df;cursor:hand; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}}

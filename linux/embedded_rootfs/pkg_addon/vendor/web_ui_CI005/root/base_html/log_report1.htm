@@ -1,0 +1,688 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	<!--#nk_get DevTrafReport="RxPks:ixp1234"-->
+	<!--#nk_get DevTrafReport="RxRateDivBand:ixp1234"-->	
+}
+function Leavefunction()
+{
+	chLeave();
+}
+//=============== End of Javascript ===============*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "Refresh";
+var Reloadlink = "document.location='log_report1.htm'";
+var helplink ='help_log_report.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 700;
+var head_width=160;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintStatistic(0);
+	PrintEndContent();
+}
+
+function PrintNextPage()
+{
+	document.write('<td width="35%" align="right"><a href="log_report2.htm">');
+	document.write('Next Page &gt;&gt;');	
+	document.write('</a></td>');
+}
+
+function PrintPrePage()
+{
+	document.write('<td width="35%" align="left"><a href="log_report.htm">');
+	document.write("&lt;&lt;Previous Page");
+	document.write('</a></td>');
+	document.write('<td></td>');
+}
+
+function PrintPortStatus(StatusValue)
+{
+	if (StatusValue == 1)
+		document.write('<font color="'+Connectlinkcolor+'">Connected</font></a>');
+	else if (StatusValue == 2) 
+		document.write('<font color="'+Disablelinkcolor+'">Disabled</font></a>');
+	else
+		document.write('<font color="'+Enablelinkcolor+'">Enabled</font></a>');
+}
+
+function PrintStatistic(hasUnderLine)
+{
+	PrintBeginBlock(0);
+		
+	document.write('<table width="'+FixedTableWidth+'" class="Infotable" border="'+Tableborder+'">');
+	document.write('<tr>'); 
+	PrintPrePage();
+	if (document.formlog_report.wanNumbers.value == 8) 
+		PrintNextPage();			
+	document.write('</tr>');
+	document.write('</table>');
+
+	var LoopLimit;
+       var num_wan = parseInt(document.formlog_report.wanNumbers.value);
+	
+	if (!num_wan || num_wan < 3)
+		num_wan = 3;	
+        LoopLimit=num_wan - 1;
+
+	if (LoopLimit > 6)
+		LoopLimit = 6;
+	
+	document.write('<table width="'+FixedTableWidth+'"class="STtable" border="1">');	
+	document.write('<tr><td>');	
+	document.write('<table width="100%" class="Porttable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<th width="'+head_width+'">Interface</th>');
+       for(i=3; i<=LoopLimit; i++)
+	{
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+		document.write('<th align="center" width="115" height="24"><center>');
+		document.write('WAN'+i);
+		document.write('</center></th>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+		document.write('<th width="115" height="24"><center>');
+		document.write('&nbsp;');
+		document.write('</center></th>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" colspan="13" style="height:1px"></td>');
+	document.write('</tr>');	   
+	var DevStateReportname = new Array();
+	var DevStateReportstatus = new Array();
+	var DevStateReportip = new Array();
+	var DevStateReportmac = new Array();
+	var DevStateReportmask = new Array();
+	var DevStateReportgw = new Array();
+	var DevStateReportdns = new Array();
+	var DevTrafReportRxPks = new Array();
+	var DevTrafReportTxPks = new Array();
+	var DevTrafReportTotalPks = new Array();
+	var DevTrafReportRxBytes = new Array();
+	var DevTrafReportTxBytes = new Array();
+	var DevTrafReportTotalBytes = new Array();
+	var DevTrafReportRxPksErr = new Array();
+	var DevTrafReportRxPksDrop = new Array();
+	var DevTrafReportTxRateDivBand = new Array();
+	var DevTrafReportRxRateDivBand = new Array();
+
+	for(var i=3;i <= LoopLimit;i++)
+	{
+		DevStateReportname[i]=document.getElementById("DevStateReportname"+i).value;
+		DevStateReportstatus[i]=document.getElementById("DevStateReportstatus"+i).value;
+		DevStateReportip[i]=document.getElementById("DevStateReportip"+i).value;
+		DevStateReportmac[i]=document.getElementById("DevStateReportmac"+i).value;
+		DevStateReportmask[i]=document.getElementById("DevStateReportmask"+i).value;
+		DevStateReportgw[i]=document.getElementById("DevStateReportgw"+i).value;
+		DevStateReportdns[i]=document.getElementById("DevStateReportdns"+i).value;
+		DevTrafReportRxPks[i]=document.getElementById("DevTrafReportRxPks"+i).value;
+		DevTrafReportTxPks[i]=document.getElementById("DevTrafReportTxPks"+i).value;
+		DevTrafReportTotalPks[i]=document.getElementById("DevTrafReportTotalPks"+i).value;
+		DevTrafReportRxBytes[i]=document.getElementById("DevTrafReportRxBytes"+i).value;
+		DevTrafReportTxBytes[i]=document.getElementById("DevTrafReportTxBytes"+i).value;
+		DevTrafReportTotalBytes[i]=document.getElementById("DevTrafReportTotalBytes"+i).value;
+		DevTrafReportRxPksErr[i]=document.getElementById("DevTrafReportRxPksErr"+i).value;
+		DevTrafReportRxPksDrop[i]=document.getElementById("DevTrafReportRxPksDrop"+i).value;			
+		DevTrafReportTxRateDivBand[i]=document.getElementById("DevTrafReportTxRateDivBand"+i).value;
+		DevTrafReportRxRateDivBand[i]=document.getElementById("DevTrafReportRxRateDivBand"+i).value;
+	}
+	// Device Name
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Device Name');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	for(i=3; i<=LoopLimit; i++)
+	{	
+		if (i==3)
+			document.write('<td align="center">');
+		else	
+			document.write('<td align="center" colspan="3">'); 
+		document.write(DevStateReportname[i]);
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="center" colspan="3">'); 
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');		
+	// Link Status
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Status');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+        for(i=3; i<=LoopLimit; i++)
+	{
+		if (i==3)
+			document.write('<td class="EvenRow"><center>');
+		else	
+			document.write('<td colspan="3" class="EvenRow"><center>'); 		
+		PrintPortStatus(DevStateReportstatus[i]);
+		document.write('</center></td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{		
+		document.write('<td align="center" colspan="3" class="EvenRow">'); 
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');		
+	// IP Address
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('IP Address');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+        for(i=3; i<=LoopLimit; i++)
+	{
+		if (i==3)
+			document.write('<td align="center">');
+		else	
+			document.write('<td align="center" colspan="3">'); 
+		document.write(DevStateReportip[i]);
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="center" colspan="3">'); 
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// MAC Address
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('MAC Address');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+        for(i=3; i<=LoopLimit; i++)
+	{
+		if (i==3)
+			document.write('<td class="EvenRow"><center>');
+		else	
+			document.write('<td colspan="3" class="EvenRow"><center>'); 
+		document.write(filterMAC(DevStateReportmac[i]));
+		document.write('</center></td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="center" colspan="3" class="EvenRow">'); 
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Subnet Mask
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Subnet Mask');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+        for(i=3; i<=LoopLimit; i++)
+	{
+		if (i==3)
+			document.write('<td align="center">');
+		else	
+			document.write('<td align="center" colspan="3">'); 
+		document.write(DevStateReportmask[i]);
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="center" colspan="3">'); 
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Default Gateway
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Default Gateway');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+        for(i=3; i<=LoopLimit; i++)
+	{			
+		if (i==3)
+			document.write('<td class="EvenRow"><center>');
+		else	
+			document.write('<td colspan="3" class="EvenRow"><center>'); 
+		document.write(DevStateReportgw[i]);
+		document.write('</center></td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{		
+		document.write('<td align="center" colspan="3" class="EvenRow">'); 
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// DNS
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('DNS');
+	document.write('</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+        for(i=3; i<=LoopLimit; i++)
+	{
+		document.write('<td align="center" colspan="3">');
+		document.write(DevStateReportdns[i]);
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="center" colspan="3">');
+		document.write('&nbsp;');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>'); 
+	// Received Packets
+	document.write('</tr> '); 
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Received Packets');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+        for(i=3; i<=LoopLimit; i++)
+	{		
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+		document.write(DevTrafReportRxPks[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{		
+		document.write('<td colspan="3" class="EvenRow">'); 
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Sent Packets
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Sent Packets');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+        for(i=3; i<=LoopLimit; i++)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write(DevTrafReportTxPks[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write('&nbsp;');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Total Packets
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Total Packets');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+        for(i=3; i<=LoopLimit; i++)
+	{		
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+		document.write(DevTrafReportTotalPks[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{		
+		document.write('<td colspan="3" class="EvenRow">'); 
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Received Bytes
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Received Bytes');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+        for(i=3; i<=LoopLimit; i++)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write(DevTrafReportRxBytes[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write('&nbsp;');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Sent Bytes
+	document.write('<tr>');
+	document.write('<th height="24">');
+	document.write('Sent Bytes');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	for(i=3; i<=LoopLimit; i++)
+	{		
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+		document.write(DevTrafReportTxBytes[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{	
+		document.write('<td colspan="3" class="EvenRow">'); 
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Total Bytes
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Total Bytes');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	for(i=3; i<=LoopLimit; i++)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write(DevTrafReportTotalBytes[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write('&nbsp;');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Error Packets Received	
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Error Packets Received');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+        for(i=3; i<=LoopLimit; i++)
+	{
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+		document.write(DevTrafReportRxPksErr[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{		
+		document.write('<td colspan="3" class="EvenRow">'); 
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Dropped Packets Received
+	document.write('<tr>'); 
+	document.write('<th height="24">');
+	document.write('Dropped Packets Received');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	for(i=3; i<=LoopLimit; i++)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write(DevTrafReportRxPksDrop[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write('&nbsp;');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');
+	// Upstream Bandwidth Usage(%)
+	document.write('<tr>'); 
+	document.write('<th>');
+	document.write('<div style="padding-top:3px">Upstream Bandwidth</div><div style="padding-top:3px;padding-bottom:3px;">Usage(%)</div>');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+       for(i=3; i<=LoopLimit; i++)
+	{		
+		document.write('<td colspan="3" class="EvenRow" style="text-align:right">&nbsp;');
+		document.write(DevTrafReportTxRateDivBand[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{	
+		document.write('<td colspan="3" class="EvenRow">'); 
+		document.write('&nbsp;');
+		document.write('</td>');			
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" style="height:1px"></td>');
+	document.write('<td colspan="12" style="height:1px"></td>');
+	document.write('</tr>');	
+	// Downstream Bandwidth Usage(%)	
+	document.write('<tr>'); 
+	document.write('<th>');
+	document.write('<div style="padding-top:3px">Downstream Bandwidth</div><div style="padding-top:3px;padding-bottom:3px;">Usage(%)</div>');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	for(i=3; i<=LoopLimit; i++)
+	{
+		document.write('<td  align="right" colspan="3">&nbsp;'); 
+		document.write(DevTrafReportRxRateDivBand[i]);
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	for(i=LoopLimit; i<6; i++)
+	{
+		document.write('<td align="right" colspan="3">&nbsp;'); 
+		document.write('&nbsp;');
+		document.write('<img border="0" src="images/_blank.gif" width="16" height="1">');
+		document.write('</td>');
+	}
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');		
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0"  >
+
+        <!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+
+	<script>
+         SetItemInit(foldersTree, 8, 2);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+                                                  
+    <form name="formlog_report" method="post" action="log_report1.htm">
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name="DevStateReportname3" id="DevStateReportname3" value='<!--#nk_get DisplayOnly="ixp3Name"-->'>
+	<input type="hidden" name="DevStateReportname4" id="DevStateReportname4" value='<!--#nk_get DisplayOnly="ixp4Name"-->'>
+	<input type="hidden" name="DevStateReportname5" id="DevStateReportname5" value='<!--#nk_get DisplayOnly="ixp5Name"-->'>
+	<input type="hidden" name="DevStateReportname6" id="DevStateReportname6" value='<!--#nk_get DisplayOnly="ixp6Name"-->'>
+	<input type="hidden" name="DevStateReportstatus3" id="DevStateReportstatus3" value='<!--#nk_get DevStateReport="status:ixp3"-->'>
+	<input type="hidden" name="DevStateReportstatus4" id="DevStateReportstatus4" value='<!--#nk_get DevStateReport="status:ixp4"-->'>
+	<input type="hidden" name="DevStateReportstatus5" id="DevStateReportstatus5" value='<!--#nk_get DevStateReport="status:ixp5"-->'>
+	<input type="hidden" name="DevStateReportstatus6" id="DevStateReportstatus6" value='<!--#nk_get DevStateReport="status:ixp6"-->'>
+	<input type="hidden" name="DevStateReportip3" id="DevStateReportip3" value='<!--#nk_get DisplayOnly="wan3IP"-->'>
+	<input type="hidden" name="DevStateReportip4" id="DevStateReportip4" value='<!--#nk_get DisplayOnly="wan4IP"-->'>
+	<input type="hidden" name="DevStateReportip5" id="DevStateReportip5" value='<!--#nk_get DisplayOnly="wan5IP"-->'>
+	<input type="hidden" name="DevStateReportip6" id="DevStateReportip6" value='<!--#nk_get DisplayOnly="wan6IP"-->'>
+	<input type="hidden" name="DevStateReportmac3" id="DevStateReportmac3" value='<!--#nk_get DisplayMAC="wanMac13"-->'>
+	<input type="hidden" name="DevStateReportmac4" id="DevStateReportmac4" value='<!--#nk_get DisplayMAC="wanMac14"-->'>
+	<input type="hidden" name="DevStateReportmac5" id="DevStateReportmac5" value='<!--#nk_get DisplayMAC="wanMac15"-->'>
+	<input type="hidden" name="DevStateReportmac6" id="DevStateReportmac6" value='<!--#nk_get DisplayMAC="wanMac16"-->'>
+	<input type="hidden" name="DevStateReportmask3" id="DevStateReportmask3" value='<!--#nk_get DisplayOnly="isp3Mask"-->'>
+	<input type="hidden" name="DevStateReportmask4" id="DevStateReportmask4" value='<!--#nk_get DisplayOnly="isp4Mask"-->'>
+	<input type="hidden" name="DevStateReportmask5" id="DevStateReportmask5" value='<!--#nk_get DisplayOnly="isp5Mask"-->'>
+	<input type="hidden" name="DevStateReportmask6" id="DevStateReportmask6" value='<!--#nk_get DisplayOnly="isp6Mask"-->'>
+	<input type="hidden" name="DevStateReportgw3" id="DevStateReportgw3" value='<!--#nk_get DisplayOnly="ISPGateway3"-->'>
+	<input type="hidden" name="DevStateReportgw4" id="DevStateReportgw4" value='<!--#nk_get DisplayOnly="ISPGateway4"-->'>
+	<input type="hidden" name="DevStateReportgw5" id="DevStateReportgw5" value='<!--#nk_get DisplayOnly="ISPGateway5"-->'>
+	<input type="hidden" name="DevStateReportgw6" id="DevStateReportgw6" value='<!--#nk_get DisplayOnly="ISPGateway6"-->'>
+	<input type="hidden" name="DevStateReportdns3" id="DevStateReportdns3" value='<!--#nk_get DevStateReport="dns:ixp3"-->'>
+	<input type="hidden" name="DevStateReportdns4" id="DevStateReportdns4" value='<!--#nk_get DevStateReport="dns:ixp4"-->'>
+	<input type="hidden" name="DevStateReportdns5" id="DevStateReportdns5" value='<!--#nk_get DevStateReport="dns:ixp5"-->'>
+	<input type="hidden" name="DevStateReportdns6" id="DevStateReportdns6" value='<!--#nk_get DevStateReport="dns:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportRxPks3" id="DevTrafReportRxPks3" value='<!--#nk_get DevTrafReport="RxPks:ixp3"-->'>
+	<input type="hidden" name="DevTrafReportRxPks4" id="DevTrafReportRxPks4" value='<!--#nk_get DevTrafReport="RxPks:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportRxPks5" id="DevTrafReportRxPks5" value='<!--#nk_get DevTrafReport="RxPks:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportRxPks6" id="DevTrafReportRxPks6" value='<!--#nk_get DevTrafReport="RxPks:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportTxPks3" id="DevTrafReportTxPks3" value='<!--#nk_get DevTrafReport="TxPks:ixp3"-->'>
+	<input type="hidden" name="DevTrafReportTxPks4" id="DevTrafReportTxPks4" value='<!--#nk_get DevTrafReport="TxPks:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportTxPks5" id="DevTrafReportTxPks5" value='<!--#nk_get DevTrafReport="TxPks:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportTxPks6" id="DevTrafReportTxPks6" value='<!--#nk_get DevTrafReport="TxPks:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportTotalPks3" id="DevTrafReportTotalPks3" value='<!--#nk_get DevTrafReport="TotalPks:ixp3"-->'>
+	<input type="hidden" name="DevTrafReportTotalPks4" id="DevTrafReportTotalPks4" value='<!--#nk_get DevTrafReport="TotalPks:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportTotalPks5" id="DevTrafReportTotalPks5" value='<!--#nk_get DevTrafReport="TotalPks:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportTotalPks6" id="DevTrafReportTotalPks6" value='<!--#nk_get DevTrafReport="TotalPks:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportRxBytes3" id="DevTrafReportRxBytes3" value='<!--#nk_get DevTrafReport="RxBytes:ixp3"-->'>	
+	<input type="hidden" name="DevTrafReportRxBytes4" id="DevTrafReportRxBytes4" value='<!--#nk_get DevTrafReport="RxBytes:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportRxBytes5" id="DevTrafReportRxBytes5" value='<!--#nk_get DevTrafReport="RxBytes:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportRxBytes6" id="DevTrafReportRxBytes6" value='<!--#nk_get DevTrafReport="RxBytes:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportTxBytes3" id="DevTrafReportTxBytes3" value='<!--#nk_get DevTrafReport="TxBytes:ixp3"-->'>
+	<input type="hidden" name="DevTrafReportTxBytes4" id="DevTrafReportTxBytes4" value='<!--#nk_get DevTrafReport="TxBytes:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportTxBytes5" id="DevTrafReportTxBytes5" value='<!--#nk_get DevTrafReport="TxBytes:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportTxBytes6" id="DevTrafReportTxBytes6" value='<!--#nk_get DevTrafReport="TxBytes:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportTotalBytes3" id="DevTrafReportTotalBytes3" value='<!--#nk_get DevTrafReport="TotalBytes:ixp3"-->'>
+	<input type="hidden" name="DevTrafReportTotalBytes4" id="DevTrafReportTotalBytes4" value='<!--#nk_get DevTrafReport="TotalBytes:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportTotalBytes5" id="DevTrafReportTotalBytes5" value='<!--#nk_get DevTrafReport="TotalBytes:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportTotalBytes6" id="DevTrafReportTotalBytes6" value='<!--#nk_get DevTrafReport="TotalBytes:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportRxPksErr3" id="DevTrafReportRxPksErr3" value='<!--#nk_get DevTrafReport="RxPksErr:ixp3"-->'>
+	<input type="hidden" name="DevTrafReportRxPksErr4" id="DevTrafReportRxPksErr4" value='<!--#nk_get DevTrafReport="RxPksErr:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportRxPksErr5" id="DevTrafReportRxPksErr5" value='<!--#nk_get DevTrafReport="RxPksErr:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportRxPksErr6" id="DevTrafReportRxPksErr6" value='<!--#nk_get DevTrafReport="RxPksErr:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportRxPksDrop3" id="DevTrafReportRxPksDrop3" value='<!--#nk_get DevTrafReport="RxPksDrop:ixp3"-->'>
+	<input type="hidden" name="DevTrafReportRxPksDrop4" id="DevTrafReportRxPksDrop4" value='<!--#nk_get DevTrafReport="RxPksDrop:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportRxPksDrop5" id="DevTrafReportRxPksDrop5" value='<!--#nk_get DevTrafReport="RxPksDrop:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportRxPksDrop6" id="DevTrafReportRxPksDrop6" value='<!--#nk_get DevTrafReport="RxPksDrop:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportTxRateDivBand3" id="DevTrafReportTxRateDivBand3" value='<!--#nk_get DevTrafReport="TxRateDivBand:ixp3"-->'>
+	<input type="hidden" name="DevTrafReportTxRateDivBand4" id="DevTrafReportTxRateDivBand4" value='<!--#nk_get DevTrafReport="TxRateDivBand:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportTxRateDivBand5" id="DevTrafReportTxRateDivBand5" value='<!--#nk_get DevTrafReport="TxRateDivBand:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportTxRateDivBand6" id="DevTrafReportTxRateDivBand6" value='<!--#nk_get DevTrafReport="TxRateDivBand:ixp6"-->'>
+	<input type="hidden" name="DevTrafReportRxRateDivBand3" id="DevTrafReportRxRateDivBand3" value='<!--#nk_get DevTrafReport="RxRateDivBand:ixp3"-->'>
+	<input type="hidden" name="DevTrafReportRxRateDivBand4" id="DevTrafReportRxRateDivBand4" value='<!--#nk_get DevTrafReport="RxRateDivBand:ixp4"-->'>
+	<input type="hidden" name="DevTrafReportRxRateDivBand5" id="DevTrafReportRxRateDivBand5" value='<!--#nk_get DevTrafReport="RxRateDivBand:ixp5"-->'>
+	<input type="hidden" name="DevTrafReportRxRateDivBand6" id="DevTrafReportRxRateDivBand6" value='<!--#nk_get DevTrafReport="RxRateDivBand:ixp6"-->'>
+	
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>
+	<script>PrintBottom();</script>
+</table>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:16" />
+    <title>Managing VPN Users and Certificates </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=46;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1050538"> </a><h1 class="pTitle">
+Managing VPN Users and Certificates
+
+</h1>
+<a name="wp1104554"> </a><p class="pBody">
+Use the VPN &gt; <em class="cEmphasis">Client Access</em> page to configure VPN usernames and passwords 
+and to generate the VPN certificates that must be installed on the client machines. 
+You can add up to 50 users. First, export a certificate and use the exported client 
+certificate for the Cisco QuickVPN Client. Then enter the information at the top of 
+the screen and the users you&#39;ve entered will appear in the list at the bottom, 
+showing their status. The Router supports up to 50 Cisco QuickVPN Clients. 
+
+</p>
+<a name="wp1104555"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> 
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1104556"> </a><li class="pSmartList1">QVPN Client 1.4.0.5 or later supports Windows 7/XP/Vista. Firewall must be 
+enabled on Vista and Windows 7. QVPN users must have the administrator 
+rights to the PC. 
+</li>
+<a name="wp1102024"> </a><li class="pSmartList1">For third -party VPN clients such as TheGreenbow, configure a Client-to-
+Gateway tunnel.
+</li>
+</ul></div>
+<a name="wp1100381"> </a><p class="pBody">
+Add or update users as needed. For each new user, export a client certificate to 
+install on the user&#39;s PC. 
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1100389"> </a><li class="pSmartList1"><a href="#wp1100366">Users</a>
+</li>
+<a name="wp1100397"> </a><li class="pSmartList1"><a href="#wp1050556">Certificate Management</a>
+</li>
+</ul></div>
+<a name="wp1100502"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.<br />
+When you first save these settings, a message will appear, asking if you would like 
+the router to automatically change the LAN IP address to prevent conflicting IP 
+addresses. To change the LAN IP address, click <span style="font-weight: bold">Yes</span>. If an IP conflict occurs, the 
+QuickVPN client will not connect to the router.
+
+</p>
+<a name="wp1100366"> </a><h2 class="pHeading2">
+Users
+</h2>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1088978"> </a><li class="pSmartList1"><b class="cBold">To add a VPN user to the list: </b>Enter the following information, and then click 
+<b class="cBold">Add to list</b>.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1088983"> </a><li class="pSmartList2"><b class="cBold">Username: </b>Enter a name for this user.</li>
+<a name="wp1089041"> </a><li class="pSmartList2"><b class="cBold">New Password:</b> Enter a password.</li>
+<a name="wp1089043"> </a><li class="pSmartList2"><b class="cBold">Confirm New Password:</b> Re-enter the password to confirm.</li>
+<a name="wp1089045"> </a><li class="pSmartList2"><b class="cBold">Allow Password Change:</b> Check <b class="cBold">Yes</b> to allow the user to change the password, or click <b class="cBold">No</b> to require the assigned password.</li>
+<a name="wp1089047"> </a><li class="pSmartList2"><b class="cBold">Active:</b> Check the box to make the new user active.</li>
+</ul></div>
+<a name="wp1088985"> </a><li class="pSmartList1"><b class="cBold">To add another new user: </b>Enter the information, and then click <b class="cBold">Add to list</b>.
+</li>
+<a name="wp1088986"> </a><li class="pSmartList1"><b class="cBold">To modify a user in the list:</b> Click the entry that you want to modify. The 
+information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the entry and clear the text fields.
+</li>
+<a name="wp1088987"> </a><li class="pSmartList1"><b class="cBold">To delete a user from the list:</b> Click the entry that you want to delete. To 
+select a block of entries, click the first entry, hold down the Shift key, and 
+click the final entry in the block. To select individual entries, hold down the 
+Ctrl key while clicking. Click <b class="cBold">Delete</b>.
+</li>
+</ul></div>
+<a name="wp1050556"> </a><h2 class="pHeading2">
+Certificate Management
+</h2>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1102058"> </a><li class="pSmartList1"><b class="cBold">Generate New Certificate:</b> To generate a new certificate to replace the 
+existing certificate on the router, click <span style="font-weight: bold">Generate</span>. After clicking the button, a 
+confirmation page appears. Click <span style="font-weight: bold">OK</span> to continue.
+</li>
+<a name="wp1102071"> </a><p class="pListBodyLevel1">
+<b class="cBold">NOTE</b><b class="cBold">: </b>A unique router certificate stored at the QVPN Client side can 
+prevent the man-in-the-middle attack. Without storing router&#39;s certificate on 
+the Client side, QVPN Client will display a warning, but the user can still 
+proceed by accepting the risk of man-in-the-middle attack. If the 
+administrator generates a new certificate, which will overwrite the current 
+certificate, the new certificate needs to be exported and saved to the install 
+directory of QVPN Client. 
+
+</p>
+<a name="wp1102060"> </a><li class="pSmartList1"><b class="cBold">E</b><b class="cBold">xport Certificate for Administrator:</b> The administrator certificate on the 
+router contains the private key. You can export a copy of the certificate to 
+save as a backup file. For example, if you reset the router to the factory 
+default settings, you should first export the certificate. After you restart the 
+router, you can import this file to restore the certificate. To export the 
+administrator certificate, click <b class="cBold">Export for Admin</b>. When the <em class="cEmphasis">File Download</em> 
+window appears, click <b class="cBold">Save</b>. Choose a safe place to save the certificate, 
+enter a descriptive filename, and click <b class="cBold">Save</b>. When the <em class="cEmphasis">Download complete</em> 
+window appears, click <b class="cBold">Close</b>.
+</li>
+<a name="wp1089324"> </a><li class="pSmartList1"><b class="cBold">E</b><b class="cBold">xport Certificate for Client:</b> The client certificate enables the client to 
+connect to the VPN. To export the client certificate, click <b class="cBold">Export for Client</b>. 
+When the <em class="cEmphasis">File Download</em> window appears, click <b class="cBold">Save</b>. Locate the install 
+directory for the client software, enter a descriptive filename, and then click 
+<b class="cBold">Save</b>. When the <em class="cEmphasis">Download complete</em> window appears, click <b class="cBold">Close</b>.
+</li>
+<a name="wp1089378"> </a><li class="pSmartList1"><b class="cBold">Import Certificate:</b> To restore a previously saved administrator certificate, 
+click <span style="font-weight: bold">Browse</span>, locate the file, and click <b class="cBold">Open</b>. Then click<span style="font-weight: bold"> Import</span>. When the 
+confirmation message appears, click <b class="cBold">OK</b> to replace the existing certificate 
+with the specified file. Click <b class="cBold">Cancel</b> to close the message without importing 
+the certificate.
+</li>
+<a name="wp1089379"> </a><li class="pSmartList1"><b class="cBold">Existing Certificate:</b> The filename of the current certificate, which is stored 
+on the router.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<head>
+<meta http-equiv="content-type" content="text/html;charset=windows-1252">
+<title>Interfaces</title>
+
+<link rel="stylesheet" href="default_ns.css"><script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='default.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+p.whs1 { font-weight:bold; }
+ul.whs2 { list-style:disc; }
+p.whs3 { margin-bottom:0; }
+p.whs4 { margin-bottom:0; font-weight:bold; }
+ol.whs5 { list-style:decimal; }
+p.whs6 { color:white; font-size:2pt; text-align:center;  }
+-->
+</style><script type="text/javascript" language="JavaScript">
+<!--
+if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4))
+{
+  var strNSS = "<style type='text/css'>";
+  strNSS += "p.whs3 {margin-bottom:1pt; }";
+  strNSS += "p.whs4 {margin-bottom:1pt; }";
+  strNSS +="</style>";
+  document.write(strNSS);
+}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }
+-->
+</style><script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+<body ><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Network\nInterfaces");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("ConfigGuide.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<h4>&nbsp;Interfaces</h4>
+
+<p>The IP settings and interface settings of the EasyAccess appliance 
+ may be configured through the <span style="font-weight: bold;"><B>Network 
+ &gt;&gt; Interface </B></span>window. From the <span style="font-weight: bold;"><B>Interface 
+ </B></span>window, an EasyAccess administrator can select the interface to 
+ terminate SSL VPN connections and then configure IP settings per network 
+ interface.</p>
+
+<p>&nbsp;</p>
+
+<p class="whs1">Example Configuration for EasyAccess SSL 
+ VPN</p>
+
+<p>&nbsp;</p>
+
+<p>An example of a network configuration where the EasyAccess appliance 
+ is deployed as a standalone SSL VPN device. A separate access router or 
+ firewall performs perimeter security. </p>
+
+<p>&nbsp;</p>
+
+<ul type="disc" class="whs2">
+	
+	<li class=kadov-p><p><span style="font-weight: bold;"><B>LAN (internal) 
+ IP address:</B></span> <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>192.168.0.2</U></span></p></li>
+	
+	<li class=kadov-p><p><span style="font-weight: bold;"><B>LAN subnet:</B></span> 
+ <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>192.168.0.0/24</U></span> 
+ &nbsp;(subnet 
+ mask: 255.255.255.0)</p></li>
+	
+	<li class=kadov-p><p><span style="font-weight: bold;"><B>LAN gateway address 
+ (Firewall/Router address): </B></span><span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>192.168.0.1</U></span></p></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p class="whs3">In this configuration, the IP addresses of 
+ devices in the local network should be configured in the <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>192.168.0.0/24</U></span> 
+ subnet and the default gateway for these devices should be the internal 
+ IP address of the local firewall or router, <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>192.168.0.1</U></span>. 
+ </p>
+
+<p class="whs3">&nbsp;</p>
+
+<p class="whs3">All connections initiated from the Internet 
+ can be blocked by the firewall except HTTPS traffic (TCP port 443). HTTPS 
+ traffic should be forwarded to the EasyAccess appliance address, <span 
+ style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><U>192.168.0.2</U></span>. 
+ If TCP Tunneling will be enabled on the SSL VPN gateway, additional types 
+ of traffic initiated on the Internet should be permitted and forwarded 
+ to the EasyAccess appliance, for example encrypted mail traffic.</p>
+
+<p class="whs3">&nbsp;</p>
+
+<p class="whs4">Network Interface Configuration 
+ </p>
+
+<p class="whs3">&nbsp;</p>
+
+<p class="whs3"><span style="margin-bottom: 0;">From the </span><span 
+ style="margin-bottom: 0; font-weight: bold;"><B>Interface </B></span><span style="margin-bottom: 0;">window, 
+ an administrator may enable and disable network interfaces and configure 
+ IP settings.</span></p>
+
+<p class="whs3">&nbsp;</p>
+
+<p class="whs3">The <span style="font-weight: bold;"><B>Interface 
+ </B></span>window will display up to four detected Ethernet interface cards. 
+ The administrator may define which interface will terminate SSL VPN connections. 
+ This is the interface port that will be used to access the web management 
+ interface and the SSL VPN portal.</p>
+
+<p class="whs3">&nbsp;</p>
+
+<p class="whs3">To change the Ethernet interface that terminates 
+ SSL VPN connections:</p>
+
+<p class="whs3">&nbsp;</p>
+
+<ol type="1" class="whs5">
+	
+	<li class=kadov-p><p class="whs3">Select the <span style="font-weight: bold;"><B>SSL 
+ VPN Termination </B></span>radio button for the desired interface.</p></li>
+	
+	<li class=kadov-p><p class="whs3">Click <span style="font-weight: bold;"><B>Submit 
+ </B></span>to update the configuration. Then restart the EasyAccess software 
+ for the change to take effect.</p></li>
+</ol>
+
+<p class="whs3">&nbsp;</p>
+
+<p class="whs4">IP Address Configuration</p>
+
+<p class="whs3">&nbsp;</p>
+
+<p class="whs3">Configure interface IP settings by clicking 
+ the <span style="font-weight: bold;"><B>Edit</B></span> link for the desired 
+ network interface in the <span style="font-weight: bold;"><B>Interface</B></span> 
+ window.</p>
+
+<p class="whs3">&nbsp;</p>
+
+<p class="whs3">&nbsp;</p>
+
+<div>&nbsp;
+</div>
+<p>&nbsp;</p>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,1510 @@
+This is ../../../src/ddd/ddd/ddd.info, produced by makeinfo version 4.3
+from ../../../src/ddd/ddd/ddd.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD: (ddd).                     The Data Display Debugger.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 15 January, 2004, of `Debugging with DDD'
+for DDD Version 3.3.11.
+
+Copyright (C) 2004 Universität des Saarlandes
+Lehrstuhl Softwaretechnik
+Postfach 15 11 50
+66041 Saarbrücken
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd.info,  Node: Options,  Next: X Options,  Prev: Choosing an Inferior Debugger,  Up: Invoking
+
+DDD Options
+-----------
+
+   You can further control how DDD starts up using the following
+options.  All options may be abbreviated, as long as they are
+unambiguous; single dashes `-' instead of double dashes `--' may also
+be used.  Almost all options control a specific DDD resource or
+resource class (*note Customizing::).
+
+`--attach-windows'
+     Attach the source and data windows to the debugger console,
+     creating one single big DDD window.  This is the default setting.
+
+     Giving this option is equivalent to setting the DDD `Separate'
+     resource class to `off'.  *Note Window Layout::, for details.
+
+`--attach-source-window'
+     Attach only the source window to the debugger console.
+
+     Giving this option is equivalent to setting the DDD
+     `separateSourceWindow' resource to `off'.  *Note Window Layout::,
+     for details.
+
+`--attach-data-window'
+     Attach only the source window to the debugger console.
+
+     Giving this option is equivalent to setting the DDD
+     `separateDataWindow' resource to `off'.  *Note Window Layout::,
+     for details.
+
+`--automatic-debugger'
+     Determine the inferior debugger automatically from the given
+     arguments.
+
+     Giving this option is equivalent to setting the DDD `autoDebugger'
+     resource to `on'.  *Note Customizing Debugger Interaction::, for
+     details.
+
+`--button-tips'
+     Enable button tips.
+
+     Giving this option is equivalent to setting the DDD `buttonTips'
+     resource to `on'.  *Note Customizing Help::, for details.
+
+`--configuration'
+     Print the DDD configuration settings on standard output and exit.
+
+     Giving this option is equivalent to setting the DDD
+     `showConfiguration' resource to `on'.  *Note Diagnostics::, for
+     details.
+
+`--check-configuration'
+     Check the DDD environment (in particular, the X configuration),
+     report any possible problem causes and exit.
+
+     Giving this option is equivalent to setting the DDD
+     `checkConfiguration' resource to `on'.  *Note Diagnostics::, for
+     details.
+
+`--data-window'
+     Open the data window upon start-up.
+
+     Giving this option is equivalent to setting the DDD
+     `openDataWindow' resource to `on'.  *Note Toggling Windows::, for
+     details.
+
+`--dbx'
+     Run DBX as inferior debugger.
+
+     Giving this option is equivalent to setting the DDD `debugger'
+     resource to `dbx'.  *Note Customizing Debugger Interaction::, for
+     details.
+
+`--debugger NAME'
+     Invoke the inferior debugger NAME.  This is useful if you have
+     several debugger versions around, or if the inferior debugger
+     cannot be invoked under its usual name (i.e. `gdb', `wdb', `dbx',
+     `xdb', `jdb', `pydb', or `perl').
+
+     This option can also be used to pass options to the inferior
+     debugger that would otherwise conflict with DDD options.  For
+     instance, to pass the option `-d DIRECTORY' to XDB, use:
+
+          ddd --debugger "xdb -d DIRECTORY"
+
+     If you use the `--debugger' option, be sure that the type of
+     inferior debugger is specified as well.  That is, use one of the
+     options `--gdb', `--dbx', `--xdb', `--jdb', `--pydb', or `--perl'
+     (unless the default setting works fine).
+
+     Giving this option is equivalent to setting the DDD
+     `debuggerCommand' resource to NAME.  *Note Customizing Debugger
+     Interaction::, for details.
+
+`--debugger-console'
+     Open the debugger console upon start-up.
+
+     Giving this option is equivalent to setting the DDD
+     `openDebuggerConsole' resource to `on'.  *Note Toggling Windows::,
+     for details.
+
+`--disassemble'
+     Disassemble the source code.  See also the `--no-disassemble'
+     option, below.
+
+     Giving this option is equivalent to setting the DDD `disassemble'
+     resource to `on'.  *Note Customizing Source::, for details.
+
+`--exec-window'
+     Run the debugged program in a specially created execution window.
+     This is useful for programs that have special terminal
+     requirements not provided by the debugger window, as raw keyboard
+     processing or terminal control sequences.  *Note Using the
+     Execution Window::, for details.
+
+     Giving this option is equivalent to setting the DDD
+     `separateExecWindow' resource to `on'.  *Note Customizing the
+     Execution Window::, for details.
+
+`--font FONTNAME'
+`-fn FONTNAME'
+     Use FONTNAME as default font.
+
+     Giving this option is equivalent to setting the DDD `defaultFont'
+     resource to `fontname'.  *Note Customizing Fonts::, for details.
+
+`--fonts'
+     Show the font definitions used by DDD on standard output.
+
+     Giving this option is equivalent to setting the DDD `showFonts'
+     resource to `on'.  *Note Diagnostics::, for details.
+
+`--fontsize SIZE'
+     Set the default font size to SIZE (in 1/10 points).  To make DDD
+     use 12-point fonts, say `--fontsize 120'.
+
+     Giving this option is equivalent to setting the DDD `FontSize'
+     resource class to `size'.  *Note Customizing Fonts::, for details.
+
+`--fullname'
+`-f'
+     Enable the TTY interface, taking additional debugger commands from
+     standard input and forwarding debugger output on standard output.
+     Current positions are issued in GDB `-fullname' format suitable
+     for debugger front-ends.  By default, both the debugger console
+     and source window are disabled.  *Note TTY mode::, for a
+     discussion.
+
+     Giving this option is equivalent to setting the DDD `TTYMode'
+     resource class to `on'.  *Note TTY mode::, for details.
+
+`--gdb'
+     Run GDB as inferior debugger.
+
+     Giving this option is equivalent to setting the DDD `debugger'
+     resource to `gdb'.  *Note Customizing Debugger Interaction::, for
+     details.
+
+`--glyphs'
+     Display the current execution position and breakpoints as glyphs.
+     See also the `--no-glyphs' option, below.
+
+     Giving this option is equivalent to setting the DDD
+     `displayGlyphs' resource to `on'.  *Note Customizing Source::, for
+     details.
+
+`--help'
+`-h'
+`-?'
+     Give a list of frequently used options.  Show options of the
+     inferior debugger as well.
+
+     Giving this option is equivalent to setting the DDD
+     `showInvocation' resource to `on'.  *Note Diagnostics::, for
+     details.
+
+`--host HOSTNAME'
+`--host USERNAME@HOSTNAME'
+     Invoke the inferior debugger directly on the remote host HOSTNAME.
+     If USERNAME is given and the `--login' option is not used, use
+     USERNAME as remote user name.  *Note Remote Debugger::, for
+     details.
+
+     Giving this option is equivalent to setting the DDD `debuggerHost'
+     resource to HOSTNAME.  *Note Remote Debugger::, for details.
+
+`--jdb'
+     Run JDB as inferior debugger.
+
+     Giving this option is equivalent to setting the DDD `debugger'
+     resource to `gdb'.  *Note Customizing Debugger Interaction::, for
+     details.
+
+`--ladebug'
+     Run Ladebug as inferior debugger.
+
+     Giving this option is equivalent to setting the DDD `debugger'
+     resource to `ladebug'.  *Note Customizing Debugger Interaction::,
+     for details.
+
+`--lesstif-hacks'
+     Equivalent to `--lesstif-version 999'.  Deprecated.
+
+     Giving this option is equivalent to setting the DDD
+     `lessTifVersion' resource to `999'.  *Note LessTif::, for details.
+
+`--lesstif-version VERSION'
+     Enable some hacks to make DDD run properly with LessTif.  *Note
+     LessTif::, for a discussion.
+
+     Giving this option is equivalent to setting the DDD
+     `lessTifVersion' resource to VERSION.  *Note LessTif::, for
+     details.
+
+`--license'
+     Print the DDD license on standard output and exit.
+
+     Giving this option is equivalent to setting the DDD `showLicense'
+     resource to ON.  *Note Diagnostics::, for details.
+
+`--login USERNAME'
+`-l USERNAME'
+     Use USERNAME as remote user name.  *Note Remote Debugger::, for
+     details.
+
+     Giving this option is equivalent to setting the DDD
+     `debuggerHostLogin' resource to USERNAME.  *Note Remote
+     Debugger::, for details.
+
+`--maintenance'
+     Enable the top-level `Maintenance' menu with options for debugging
+     DDD.  *Note Maintenance Menu::, for details.
+
+     Giving this option is equivalent to setting the DDD `maintenance'
+     resource to ON.  *Note Maintenance Menu::, for details.
+
+`--manual'
+     Print the DDD manual on standard output and exit.
+
+     Giving this option is equivalent to setting the DDD `showManual'
+     resource to ON.  *Note Diagnostics::, for details.
+
+`--news'
+     Print the DDD news on standard output and exit.
+
+     Giving this option is equivalent to setting the DDD `showNews'
+     resource to ON.  *Note Diagnostics::, for details.
+
+`--no-button-tips'
+     Disable button tips.
+
+     Giving this option is equivalent to setting the DDD `buttonTips'
+     resource to `off'.  *Note Customizing Help::, for details.
+
+`--no-data-window'
+     Do not open the data window upon start-up.
+
+     Giving this option is equivalent to setting the DDD
+     `openDataWindow' resource to `off'.  *Note Toggling Windows::, for
+     details.
+
+`--no-debugger-console'
+     Do not open the debugger console upon start-up.
+
+     Giving this option is equivalent to setting the DDD
+     `openDebuggerConsole' resource to `off'.  *Note Toggling
+     Windows::, for details.
+
+`--no-disassemble'
+     Do not disassemble the source code.
+
+     Giving this option is equivalent to setting the DDD `disassemble'
+     resource to `off'.  *Note Customizing Source::, for details.
+
+`--no-exec-window'
+     Do not run the debugged program in a specially created execution
+     window; use the debugger console instead.  Useful for programs
+     that have little terminal input/output, or for remote debugging.
+     *Note Using the Execution Window::, for details.
+
+     Giving this option is equivalent to setting the DDD
+     `separateExecWindow' resource to `off'.  *Note Customizing the
+     Execution Window::, for details.
+
+`--no-glyphs'
+     Do not use glyphs; display the current execution position and
+     breakpoints as text characters.
+
+     Giving this option is equivalent to setting the DDD
+     `displayGlyphs' resource to `off'.  *Note Customizing Source::,
+     for details.
+
+`--no-lesstif-hacks'
+     Equivalent to `--lesstif-version 1000'.  Deprecated.
+
+     Giving this option is equivalent to setting the DDD
+     `lessTifVersion' resource to `1000'.  *Note LessTif::, for details.
+
+`--no-maintenance'
+     Do not enable the top-level `Maintenance' menu with options for
+     debugging DDD.  This is the default.  *Note Maintenance Menu::,
+     for details.
+
+     Giving this option is equivalent to setting the DDD `maintenance'
+     resource to OFF.  *Note Maintenance Menu::, for details.
+
+`--no-source-window'
+     Do not open the source window upon start-up.
+
+     Giving this option is equivalent to setting the DDD
+     `openSourceWindow' resource to `off'.  *Note Toggling Windows::,
+     for details.
+
+`--no-value-tips'
+     Disable value tips.
+
+     Giving this option is equivalent to setting the DDD `valueTips'
+     resource to `off'.  *Note Value Tips::, for details.
+
+`--nw'
+     Do not use the X window interface.  Start the inferior debugger on
+     the local host.
+
+`--perl'
+     Run Perl as inferior debugger.
+
+     Giving this option is equivalent to setting the DDD `debugger'
+     resource to `perl'.  *Note Customizing Debugger Interaction::, for
+     details.
+
+`--pydb'
+     Run PYDB as inferior debugger.
+
+     Giving this option is equivalent to setting the DDD `debugger'
+     resource to `pydb'.  *Note Customizing Debugger Interaction::, for
+     details.
+
+`--panned-graph-editor'
+     Use an Athena panner to scroll the data window.  Most people prefer
+     panners on scroll bars, since panners allow two-dimensional
+     scrolling.  However, the panner is off by default, since some
+     M*tif implementations do not work well with Athena widgets.  *Note
+     Display Resources::, for details; see also
+     `--scrolled-graph-editor', below.
+
+     Giving this option is equivalent to setting the DDD
+     `pannedGraphEditor' resource to `on'.  *Note Display Resources::,
+     for details.
+
+`--play-log LOG-FILE'
+     Recapitulate a previous DDD session.
+
+          ddd --play-log LOG-FILE
+
+     invokes DDD as inferior debugger, simulating the inferior debugger
+     given in LOG-FILE (see below).  This is useful for debugging DDD.
+
+     Giving this option is equivalent to setting the DDD `playLog'
+     resource to `on'.  *Note Customizing Debugger Interaction::, for
+     details.
+
+`--PLAY LOG-FILE'
+     Simulate an inferior debugger.  LOG-FILE is a `~/.ddd/log' file as
+     generated by some previous DDD session (*note Logging::).  When a
+     command is entered, scan LOG-FILE for this command and re-issue
+     the logged reply; if the command is not found, do nothing.  This
+     is used by the `--play' option.
+
+`--rhost HOSTNAME'
+`--rhost USERNAME@HOSTNAME'
+     Run the inferior debugger interactively on the remote host
+     HOSTNAME.  If USERNAME is given and the `--login' option is not
+     used, use USERNAME as remote user name.  *Note Remote Debugger::,
+     for details.
+
+     Giving this option is equivalent to setting the DDD
+     `debuggerRHost' resource to HOSTNAME.  *Note Remote Debugger::,
+     for details.
+
+`--scrolled-graph-editor'
+     Use M*tif scroll bars to scroll the data window.  This is the
+     default in most DDD configurations.  *Note Display Resources::,
+     for details; see also `--panned-graph-editor', above.
+
+     Giving this option is equivalent to setting the DDD
+     `pannedGraphEditor' resource to `off'.  *Note Display Resources::,
+     for details.
+
+`--separate-windows'
+`--separate'
+     Separate the console, source and data windows.  See also the
+     `--attach' options, above.
+
+     Giving this option is equivalent to setting the DDD `Separate'
+     resource class to `off'.  *Note Window Layout::, for details.
+
+`--session SESSION'
+     Load SESSION upon start-up.  *Note Resuming Sessions::, for
+     details.
+
+     Giving this option is equivalent to setting the DDD `session'
+     resource to SESSION.  *Note Resuming Sessions::, for details.
+
+`--source-window'
+     Open the source window upon start-up.
+
+     Giving this option is equivalent to setting the DDD
+     `openSourceWindow' resource to `on'.  *Note Toggling Windows::,
+     for details.
+
+`--status-at-bottom'
+     Place the status line at the bottom of the source window.
+
+     Giving this option is equivalent to setting the DDD
+     `statusAtBottom' resource to `on'.  *Note Window Layout::, for
+     details.
+
+`--status-at-top'
+     Place the status line at the top of the source window.
+
+     Giving this option is equivalent to setting the DDD
+     `statusAtBottom' resource to `off'.  *Note Window Layout::, for
+     details.
+
+`--sync-debugger'
+     Do not process X events while the debugger is busy.  This may
+     result in slightly better performance on single-processor systems.
+
+     Giving this option is equivalent to setting the DDD
+     `synchronousDebugger' resource to `on'.  *Note Customizing
+     Debugger Interaction::, for details.
+
+`--toolbars-at-bottom'
+     Place the toolbars at the bottom of the respective window.
+
+     Giving this option is equivalent to setting the DDD
+     `toolbarsAtBottom' resource to `on'.  *Note Window Layout::, for
+     details.
+
+`--toolbars-at-top'
+     Place the toolbars at the top of the respective window.
+
+     Giving this option is equivalent to setting the DDD
+     `toolbarsAtBottom' resource to `off'.  *Note Window Layout::, for
+     details.
+
+`--trace'
+     Show the interaction between DDD and the inferior debugger on
+     standard error.  This is useful for debugging DDD.  If `--trace'
+     is not specified, this information is written into `~/.ddd/log'
+     (`~' stands for your home directory), such that you can also do a
+     post-mortem debugging.  *Note Logging::, for details about logging.
+
+     Giving this option is equivalent to setting the DDD `trace'
+     resource to ON.  *Note Diagnostics::, for details.
+
+`--tty'
+`-t'
+     Enable TTY interface, taking additional debugger commands from
+     standard input and forwarding debugger output on standard output.
+     Current positions are issued in a format readable for humans.  By
+     default, the debugger console is disabled.
+
+     Giving this option is equivalent to setting the DDD `ttyMode'
+     resource to `on'.  *Note TTY mode::, for details.
+
+`--value-tips'
+     Enable value tips.
+
+     Giving this option is equivalent to setting the DDD `valueTips'
+     resource to `on'.  *Note Value Tips::, for details.
+
+`--version'
+`-v'
+     Print the DDD version on standard output and exit.
+
+     Giving this option is equivalent to setting the DDD `showVersion'
+     resource to `on'.  *Note Diagnostics::, for details.
+
+`--vsl-library LIBRARY'
+     Load the VSL library LIBRARY instead of using the DDD built-in
+     library.  This is useful for customizing display shapes and fonts.
+
+     Giving this option is equivalent to setting the DDD `vslLibrary'
+     resource to LIBRARY.  *Note VSL Resources::, for details.
+
+`--vsl-path PATH'
+     Search VSL libraries in PATH (a colon-separated directory list).
+
+     Giving this option is equivalent to setting the DDD `vslPath'
+     resource to PATH.  *Note VSL Resources::, for details.
+
+`--vsl-help'
+     Show a list of further options controlling the VSL interpreter.
+     These options are intended for debugging purposes and are subject
+     to change without further notice.
+
+`--wdb'
+     Run WDB as inferior debugger.
+
+     Giving this option is equivalent to setting the DDD `debugger'
+     resource to `wdb'.  *Note Customizing Debugger Interaction::, for
+     details.
+
+`--xdb'
+     Run XDB as inferior debugger.
+
+     Giving this option is equivalent to setting the DDD `debugger'
+     resource to `xdb'.  *Note Customizing Debugger Interaction::, for
+     details.
+
+
+File: ddd.info,  Node: X Options,  Next: Inferior Debugger Options,  Prev: Options,  Up: Invoking
+
+X Options
+---------
+
+   DDD also understands the following X options.  Note that these
+options only take a single dash `-'.
+
+`-display DISPLAY'
+     Use the X server DISPLAY.  By default, DISPLAY is taken from the
+     `DISPLAY' environment variable.
+
+`-geometry GEOMETRY'
+     Specify the initial size and location of the debugger console.
+
+`-iconic'
+     Start DDD iconified.
+
+`-name NAME'
+     Give DDD the name NAME.
+
+`-selectionTimeout TIMEOUT'
+     Specify the timeout in milliseconds within which two communicating
+     applications must respond to one another for a selection request.
+
+`-title NAME'
+     Give the DDD window the title NAME.
+
+`-xrm RESOURCESTRING'
+     Specify a resource name and value to override any defaults.
+
+
+File: ddd.info,  Node: Inferior Debugger Options,  Next: Multiple Instances,  Prev: X Options,  Up: Invoking
+
+Inferior Debugger Options
+-------------------------
+
+   All options that DDD does not recognize are passed to the inferior
+debugger.  This section lists the most useful options of the different
+inferior debuggers supported by DDD.  In case these options do not work
+as expected, please lookup the appropriate reference.
+
+* Menu:
+
+* GDB Options::
+* DBX and Ladebug Options::
+* XDB Options::
+* JDB Options::
+* PYDB Options::
+* Perl Options::
+* Bash Options::
+
+
+File: ddd.info,  Node: GDB Options,  Next: DBX and Ladebug Options,  Up: Inferior Debugger Options
+
+GDB Options
+...........
+
+   These GDB options are useful when using DDD with GDB as inferior
+debugger.  Single dashes `-' instead of double dashes `--' may also be
+used.
+
+`-b BAUDRATE'
+     Set serial port baud rate used for remote debugging.
+
+`--cd DIR'
+     Change current directory to DIR.
+
+`--command FILE'
+     Execute GDB commands from FILE.
+
+`--core COREFILE'
+     Analyze the core dump COREFILE.
+
+`--directory DIR'
+`-d DIR'
+     Add DIRECTORY to the path to search for source files.
+
+`--exec EXECFILE'
+     Use EXECFILE as the executable.
+
+`--mapped'
+     Use mapped symbol files if supported on this system.
+
+`--nx'
+
+`-n'
+     Do not read `.gdbinit' file.
+
+`--readnow'
+     Fully read symbol files on first access.
+
+`--se FILE'
+     Use FILE as symbol file and executable file.
+
+`--symbols SYMFILE'
+     Read symbols from SYMFILE.
+
+   *Note Invoking GDB: (gdb)Invoking GDB, for further options that can
+be used with GDB.
+
+
+File: ddd.info,  Node: DBX and Ladebug Options,  Next: XDB Options,  Prev: GDB Options,  Up: Inferior Debugger Options
+
+DBX and Ladebug Options
+.......................
+
+   DBX variants differ widely in their options, so we cannot give a list
+here.  Check out the `dbx(1)' and `ladebug(1)' manual pages.
+
+
+File: ddd.info,  Node: XDB Options,  Next: JDB Options,  Prev: DBX and Ladebug Options,  Up: Inferior Debugger Options
+
+XDB Options
+...........
+
+   These XDB options are useful when using DDD with XDB as inferior
+debugger.
+
+`-d DIR'
+     Specify DIR as an alternate directory where source files are
+     located.
+
+`-P PROCESS-ID'
+     Specify the process ID of an existing process the user wants to
+     debug.
+
+`-l LIBRARY'
+     Pre-load information about the shared library LIBRARY.  `-l ALL'
+     means always pre-load shared library information.
+
+`-S NUM'
+     Set the size of the string cache to NUM bytes (default is 1024,
+     which is also the minimum).
+
+`-s'
+     Enable debugging of shared libraries.
+
+   Further options can be found in the `xdb(1)' manual page.
+
+
+File: ddd.info,  Node: JDB Options,  Next: PYDB Options,  Prev: XDB Options,  Up: Inferior Debugger Options
+
+JDB Options
+...........
+
+JDB as of JDK 1.2
+.................
+
+   The following JDB options are useful when using DDD with JDB (from
+JDK 1.2) as inferior debugger.
+
+`-attach ADDRESS'
+     attach to a running virtual machine (VM) at ADDRESS using standard
+     connector
+
+`-listen ADDRESS'
+     wait for a running VM to connect at ADDRESS using standard
+     connector
+
+`-listenany'
+     wait for a running VM to connect at any available address using
+     standard connector
+
+`-launch'
+     launch VM immediately instead of waiting for `run' command
+
+   These JDB options are forwarded to the debuggee:
+
+`-verbose[:class|gc|jni]'
+`-v'
+     Turn on verbose mode.
+
+`-DNAME=VALUE'
+     Set the system property NAME to VALUE.
+
+`-classpath PATH'
+     List directories in which to look for classes.  PATH is a list of
+     directories separated by colons.
+
+`-X OPTION'
+     Non-standard target VM option
+
+JDB as of JDK 1.1
+.................
+
+   The following JDB options are useful when using DDD with JDB (from
+JDK 1.1) as inferior debugger.
+
+`-host HOSTNAME'
+     host machine of interpreter to attach to
+
+`-password PSSWD'
+     password of interpreter to attach to (from `-debug')
+
+   These JDB options are forwarded to the debuggee:
+
+`-verbose'
+`-v'
+     Turn on verbose mode.
+
+`-debug'
+     Enable remote Java debugging,
+
+`-noasyncgc'
+     Don't allow asynchronous garbage collection.
+
+`-verbosegc'
+     Print a message when garbage collection occurs.
+
+`-noclassgc'
+     Disable class garbage collection.
+
+`-checksource'
+`-cs'
+     Check if source is newer when loading classes.
+
+`-ss NUMBER'
+     Set the maximum native stack size for any thread.
+
+`-oss NUMBER'
+     Set the maximum Java stack size for any thread.
+
+`-ms NUMBER'
+     Set the initial Java heap size.
+
+`-mx NUMBER'
+     Set the maximum Java heap size.
+
+`-DNAME=VALUE'
+     Set the system property NAME to VALUE.
+
+`-classpath PATH'
+     List directories in which to look for classes.  PATH is a list of
+     directories separated by colons.
+
+`-prof'
+`-prof:FILE'
+     Output profiling data to `./java.prof'.  If FILE is given, write
+     the data to `./FILE'.
+
+`-verify'
+     Verify all classes when read in.
+
+`-verifyremote'
+     Verify classes read in over the network (default).
+
+`-noverify'
+     Do not verify any class.
+
+`-dbgtrace'
+     Print info for debugging JDB.
+
+   Further options can be found in the JDB documentation.
+
+
+File: ddd.info,  Node: PYDB Options,  Next: Perl Options,  Prev: JDB Options,  Up: Inferior Debugger Options
+
+PYDB Options
+............
+
+   For a list of useful PYDB options, check out the PYDB documentation.
+
+
+File: ddd.info,  Node: Perl Options,  Next: Bash Options,  Prev: PYDB Options,  Up: Inferior Debugger Options
+
+Perl Options
+............
+
+   The most important Perl option to use with DDD is `-w'; it enables
+several important warnings.  For further options, see the `perlrun(1)'
+manual page.
+
+
+File: ddd.info,  Node: Bash Options,  Prev: Perl Options,  Up: Inferior Debugger Options
+
+Bash Options
+............
+
+   If you have the proper bash installed, the option needed to specify
+debugging support is `--debugger'. (If your bash doesn't understand
+this option you need to pick up a version of bash that does from
+`http://bashdb.sourceforge.net'.)
+
+
+File: ddd.info,  Node: Multiple Instances,  Next: X Warnings,  Prev: Inferior Debugger Options,  Up: Invoking
+
+Multiple DDD Instances
+----------------------
+
+   If you have multiple DDD instances running, they share common
+preferences and history files.  This means that changes applied to one
+instance may get lost when being overwritten by the other instance.
+DDD has two means to protect you against unwanted losses.  The first
+means is an automatic reloading of changed options, controlled by the
+following resource (*note Customizing::):
+
+ - Resource: checkOptions (class CheckOptions)
+     Every N seconds, where N is the value of this resource, DDD checks
+     whether the options file has changed.  Default is `30', which
+     means that every 30 seconds, DDD checks for the options file.
+     Setting this resource to `0' disables checking for changed option
+     files.
+
+   Normally, automatic reloading of options should already suffice.  If
+you need stronger protection, DDD also provides a warning against
+multiple instances.  This warning is disabled by default, If you want to
+be warned about multiple DDD invocations sharing the same preferences
+and history files, enable `Edit => Preferences => Warn if Multiple DDD
+Instances are Running'.
+
+   This setting is tied to the following resource (*note Customizing::):
+
+ - Resource: warnIfLocked (class WarnIfLocked)
+     Whether to warn if multiple DDD instances are running (`on') or
+     not (`off', default).
+
+
+File: ddd.info,  Node: X Warnings,  Prev: Multiple Instances,  Up: Invoking
+
+X warnings
+----------
+
+   If you are bothered by X warnings, you can suppress them by setting
+`Edit => Preferences => General => Suppress X warnings'.
+
+   This setting is tied to the following resource (*note Customizing::):
+
+ - Resource: suppressWarnings (class SuppressWarnings)
+     If `on', X warnings are suppressed.  This is sometimes useful for
+     executables that were built on a machine with a different X or
+     M*tif configuration.  By default, this is `off'.
+
+
+File: ddd.info,  Node: Quitting,  Next: Sessions,  Prev: Invoking,  Up: Invocation
+
+Quitting DDD
+============
+
+   To exit DDD, select `File => Exit'.  You may also type the `quit'
+command at the debugger prompt or press <Ctrl+Q>.  GDB and XDB also
+accept the `q' command or an end-of-file character (usually <Ctrl+D>).
+Closing the last DDD window will also exit DDD.
+
+   An interrupt (<ESC> or `Interrupt') does not exit from DDD, but
+rather terminates the action of any debugger command that is in
+progress and returns to the debugger command level.  It is safe to type
+the interrupt character at any time because the debugger does not allow
+it to take effect until a time when it is safe.
+
+   In case an ordinary interrupt does not succeed, you can also use an
+abort (<Ctrl+\> or `Abort'), which sends a `SIGABRT' signal to the
+inferior debugger.  Use this in emergencies only; the inferior debugger
+may be left inconsistent or even exit after a `SIGABRT' signal.
+
+   As a last resort (if DDD hangs, for example), you may also interrupt
+DDD itself using an interrupt signal (`SIGINT').  This can be done by
+typing the interrupt character (usually <Ctrl+C>) in the shell DDD was
+started from, or by using the UNIX `kill' command.  An interrupt signal
+interrupts any DDD action; the inferior debugger is interrupted as
+well.  Since this interrupt signal can result in internal
+inconsistencies, use this as a last resort in emergencies only; save
+your work as soon as possible and restart DDD.
+
+
+File: ddd.info,  Node: Sessions,  Next: Remote Debugging,  Prev: Quitting,  Up: Invocation
+
+Persistent Sessions
+===================
+
+   If you want to interrupt your current DDD session, you can save the
+entire the entire DDD state as "session" on disk and resume later.
+
+* Menu:
+
+* Saving Sessions::
+* Resuming Sessions::
+* Deleting Sessions::
+* Customizing Sessions::
+
+
+File: ddd.info,  Node: Saving Sessions,  Next: Resuming Sessions,  Up: Sessions
+
+Saving Sessions
+---------------
+
+   To save a session, select `File => Save Session As'.  You will be
+asked for a symbolic session name SESSION.
+
+   If your program is running (*note Running::), or if you have opened a
+core file (*note Opening Core Dumps::), DDD can also include a core
+file in the session such that the debuggee data will be restored when
+re-opening it.  To get a core file, DDD typically must "kill" the
+debuggee.  This means that you cannot resume program execution after
+saving a session.  Depending on your architecture, other options for
+getting a core file may also be available.
+
+   Including a core dump is necessary for restoring memory contents and
+the current execution position.  To include a core dump, enable
+`Include Core Dump'.
+
+   After clicking on `Save', the session is saved in
+`~/.ddd/sessions/SESSION'.
+
+   Here's a list of the items whose state is saved in a session:
+   * The state of the debugged program, as a core file.(1)
+
+   * All breakpoints and watchpoints (*note Stopping::).
+
+   * All signal settings (*note Signals::).
+
+   * All displays (*note Displaying Values::).(2)
+
+   * All DDD options (*note Saving Options::).
+
+   * All debugger settings (*note Debugger Settings::).
+
+   * All user-defined buttons (*note Defining Buttons::).
+
+   * All user-defined commands (*note Defining Commands::).
+
+   * The positions and sizes of DDD windows.
+
+   * The command history (*note Command History::).
+
+   After saving the current state as a session, the session becomes
+"active".  This means that DDD state will be saved as session defaults:
+
+   * User options will be saved in `~/.ddd/sessions/SESSION/init'
+     instead of `~/.ddd/init'.  *Note Saving Options::, for details.
+
+   * The DDD command history will be saved in
+     `~/.ddd/sessions/SESSION/history' instead of `~/.ddd/history'.
+     *Note Command History::, for details.
+
+   To make the current session inactive, open the _default session_
+named `[None]'.  *Note Resuming Sessions::, for details on opening
+sessions.
+
+   ---------- Footnotes ----------
+
+   (1) Only if a core file is included.
+
+   (2) If a core file is _not_ to be included in the session, DDD data
+displays are saved as _deferred_; that is, they will be restored as
+soon as program execution reaches the scope in which they were created.
+*Note Creating Single Displays::, for details.
+
+
+File: ddd.info,  Node: Resuming Sessions,  Next: Deleting Sessions,  Prev: Saving Sessions,  Up: Sessions
+
+Resuming Sessions
+-----------------
+
+   To resume a previously saved session, select `File => Open Session'
+and choose a session name from the list.  After clicking on `Open', the
+entire DDD state will be restored from the given session.
+
+   The session named `[None]' is the "default session" which is active
+when starting DDD.  To save options for default sessions, choose the
+default session before exiting DDD.  *Note Saving Options::, for
+details.
+
+   If a the restored session includes a core dump, the program being
+debugged will be in the same state at the time the session was saved; in
+particular, you can examine the program data.  However, you will not be
+able to resume program execution since the process and its environment
+(open files, resources, etc.) no longer exist.  However, you can restart
+the program, re-using the restored breakpoints and data displays.
+
+   Opening sessions also restores command definitions, buttons, display
+shortcuts and the source tab width.  This way, you can maintain a
+different set of definitions for each session.
+
+   You can also specify a session to open when starting DDD.  To invoke
+DDD with a session SESSION, use
+
+     ddd --session SESSION
+
+   There is also a shortcut that opens the session SESSION and invokes
+the inferior debugger on an executable named SESSION (in case SESSION
+cannot be opened):
+
+     ddd =SESSION
+
+   There is no need to give further command-line options when
+restarting a session, as they will be overridden by the options saved
+in the session.
+
+   You can also use an X session manager such as `xsm' to save and
+restore DDD sessions.(1) When being shut down by a session manager, DDD
+saves its state under the name specified by the session manager;
+resuming the X session makes DDD reload its saved state.
+
+   ---------- Footnotes ----------
+
+   (1) Requires X11R6 or later.
+
+
+File: ddd.info,  Node: Deleting Sessions,  Next: Customizing Sessions,  Prev: Resuming Sessions,  Up: Sessions
+
+Deleting Sessions
+-----------------
+
+   To delete sessions that are no longer needed, select `File => Open
+Session' or `File => Save Session'.  Select the sessions you want to
+delete and click on `Delete'.
+
+   The default session `[None]' cannot be deleted.
+
+
+File: ddd.info,  Node: Customizing Sessions,  Prev: Deleting Sessions,  Up: Sessions
+
+Customizing Sessions
+--------------------
+
+   You can change the place where DDD saves its sessions by setting the
+environment variable `DDD_SESSIONS' to the name of a directory.
+Default is `~/.ddd/sessions/'.
+
+   Where applicable, DDD supports a `gcore' command to obtain core
+files of the running program.  You can enter its path via `Edit =>
+Preferences => Helpers => Get Core File'.  Leave the value empty if you
+have no `gcore' or similar command.
+
+   This setting is tied to the following resource (*note Customizing::):
+
+ - Resource: getCoreCommand (class GetCoreCommand)
+     A command to get a core dump of a running process (typically,
+     `gcore') `@FILE@' is replaced by the base name of the file to
+     create; `@PID@' is replaced by the process id.  The output must be
+     written to `@FILE@.@PID@'.
+
+     Leave the value empty if you have no `gcore' or similar command.
+
+
+File: ddd.info,  Node: Remote Debugging,  Next: Customizing Debugger Interaction,  Prev: Sessions,  Up: Invocation
+
+Remote Debugging
+================
+
+   You can have each of DDD, the inferior debugger, and the debugged
+program run on different machines.
+
+* Menu:
+
+* Remote Host::                 Running DDD on a Remote Host
+* Remote Debugger::             Using a Remote Inferior Debugger
+* Remote Program::              Debugging a Remote Program
+
+
+File: ddd.info,  Node: Remote Host,  Next: Remote Debugger,  Up: Remote Debugging
+
+Running DDD on a Remote Host
+----------------------------
+
+   You can run DDD on a remote host, using your current host as X
+display.  On the remote host, invoke DDD as
+
+     ddd -display DISPLAY
+
+where DISPLAY is the name of the X server to connect to (for instance,
+`HOSTNAME:0.0', where HOSTNAME is your host).
+
+   Instead of specifying `-display DISPLAY', you can also set the
+`DISPLAY' environment variable to DISPLAY.
+
+
+File: ddd.info,  Node: Remote Debugger,  Next: Remote Program,  Prev: Remote Host,  Up: Remote Debugging
+
+Using DDD with a Remote Inferior Debugger
+-----------------------------------------
+
+   In order to run the inferior debugger on a remote host, you need
+`remsh' (called `rsh' on BSD systems) access on the remote host.
+
+   To run the debugger on a remote host HOSTNAME, invoke DDD as
+     ddd --host HOSTNAME REMOTE-PROGRAM
+
+   If your remote USERNAME differs from the local username, use
+
+     ddd --host HOSTNAME --login USERNAME REMOTE-PROGRAM
+
+or
+
+     ddd --host USERNAME@HOSTNAME REMOTE-PROGRAM
+
+instead.
+
+   There are a few _caveats_ in remote mode:
+
+   * The remote debugger is started in your remote home directory.
+     Hence, you must specify an absolute path name for REMOTE-PROGRAM
+     (or a path name relative to your remote home directory).  Same
+     applies to remote core files.  Also, be sure to specify a remote
+     process id when debugging a running program.
+
+   * The remote debugger is started non-interactively.  Some DBX
+     versions have trouble with this.  If you do not get a prompt from
+     the remote debugger, use the `--rhost' option instead of `--host'.
+     This will invoke the remote debugger via an interactive shell on
+     the remote host, which may lead to better results.
+
+     Note: using `--rhost', DDD invokes the inferior debugger as soon
+     as a shell prompt appears.  The first output on the remote host
+     ending in a space character or `>' and not followed by a newline is
+     assumed to be a shell prompt.  If necessary, adjust your shell
+     prompt on the remote host.
+
+   * To run the remote program, DDD invokes an `xterm' terminal
+     emulator on the remote host, giving your current `DISPLAY'
+     environment variable as address.  If the remote host cannot invoke
+     `xterm', or does not have access to your X display, start DDD with
+     the `--no-exec-window' option.  The program input/output will then
+     go through the DDD debugger console.
+
+   * In remote mode, all sources are loaded from the remote host; file
+     dialogs scan remote directories.  This may result in somewhat
+     slower operation than normal.
+
+   * To help you find problems due to remote execution, run DDD with
+     the `--trace' option.  This prints the shell commands issued by
+     DDD on standard error.
+
+   *Note Customizing Remote Debugging::, for customizing remote mode.
+
+* Menu:
+
+* Customizing Remote Debugging::
+
+
+File: ddd.info,  Node: Customizing Remote Debugging,  Up: Remote Debugger
+
+Customizing Remote Debugging
+............................
+
+   When having the inferior debugger run on a remote host (*note Remote
+Debugging::), all commands to access the inferior debugger as well as
+its files must be run remotely.  This is controlled by the following
+resources (*note Customizing::):
+
+ - Resource: rshCommand (class RshCommand)
+     The remote shell command to invoke TTY-based commands on remote
+     hosts.  Usually, `remsh', `rsh', `ssh', or `on'.
+
+ - Resource: listCoreCommand (class listCoreCommand)
+     The command to list all core files on the remote host.  The string
+     `@MASK@' is replaced by a file filter.  The default setting is:
+
+          Ddd*listCoreCommand: \
+          file @MASK@ | grep '.*:.*core.*' | cut -d: -f1
+
+ - Resource: listDirCommand (class listDirCommand)
+     The command to list all directories on the remote host.  The string
+     `@MASK@' is replaced by a file filter.  The default setting is:
+
+          Ddd*listDirCommand: \
+          file @MASK@ | grep '.*:.*directory.*' | cut -d: -f1
+
+ - Resource: listExecCommand (class listExecCommand)
+     The command to list all executable files on the remote host.  The
+     string `@MASK@' is replaced by a file filter.  The default setting
+     is:
+
+          Ddd*listExecCommand: \
+          file @MASK@ | grep '.*:.*exec.*' \
+            | grep -v  '.*:.*script.*' \
+            | cut -d: -f1 | grep -v '.*\.o$'
+
+ - Resource: listSourceCommand (class listSourceCommand)
+     The command to list all source files on the remote host.  The
+     string `@MASK@' is replaced by a file filter.  The default setting
+     is:
+
+          Ddd*listSourceCommand: \
+          file @MASK@ | grep '.*:.*text.*' | cut -d: -f1
+
+
+File: ddd.info,  Node: Remote Program,  Prev: Remote Debugger,  Up: Remote Debugging
+
+Debugging a Remote Program
+--------------------------
+
+   The GDB debugger allows you to run the _debugged program_ on a
+remote machine (called _remote target_), while GDB runs on the local
+machine.
+
+   *Note Remote Debugging: (gdb)Remote, for details.  Basically, the
+following steps are required:
+
+   * Transfer the executable to the remote target.
+
+   * Start `gdbserver' on the remote target.
+
+   * Start DDD using GDB on the local machine, and load the same
+     executable using the GDB `file' command.
+
+   * Attach to the remote `gdbserver' using the GDB `target remote'
+     command.
+
+   The local `.gdbinit' file is useful for setting up directory search
+paths, etc.
+
+   Of course, you can also combine DDD remote mode and GDB remote mode,
+running DDD, GDB, and the debugged program each on a different machine.
+
+
+File: ddd.info,  Node: Customizing Debugger Interaction,  Prev: Remote Debugging,  Up: Invocation
+
+Customizing Interaction with the Inferior Debugger
+==================================================
+
+   These settings control the interaction of DDD with its inferior
+debugger.
+
+* Menu:
+
+* Debugger Invocation::
+* Debugger Initialization::
+* Debugger Communication::
+
+
+File: ddd.info,  Node: Debugger Invocation,  Next: Debugger Initialization,  Up: Customizing Debugger Interaction
+
+Invoking an Inferior Debugger
+-----------------------------
+
+   To choose the default inferior debugger, select `Edit => Preferences
+=> Startup => Debugger Type'.  You can
+
+   * have DDD determine the appropriate inferior debugger automatically
+     from its command-line arguments.  Set `Determine Automatically
+     from Arguments' to enable.
+
+   * have DDD start the debugger of your choice, as specified in
+     `Debugger Type'.
+
+   The following DDD resources control the invocation of the inferior
+debugger (*note Customizing::).
+
+ - Resource: autoDebugger (class AutoDebugger)
+     If this is `on' (default), DDD will attempt to determine the
+     debugger type from its arguments, possibly overriding the
+     `debugger' resource (see below).  If this is `off', DDD will
+     invoke the debugger specified by the `debugger' resource
+     regardless of DDD arguments.
+
+ - Resource: debugger (class Debugger)
+     The type of the inferior debugger to invoke (`gdb', `dbx',
+     `ladebug', `xdb', `jdb', `pydb', `perl', or `bash').
+
+     This resource is usually set through the `--gdb', `--dbx',
+     `--ladebug', `--xdb', `--jdb', `--pydb', `--perl', and `--bash'
+     options; *Note Options::, for details.
+
+ - Resource: debuggerCommand (class DebuggerCommand)
+     The name under which the inferior debugger is to be invoked.  If
+     this string is empty (default), the debugger type (`debugger'
+     resource) is used.
+
+     This resource is usually set through the `--debugger' option;
+     *Note Options::, for details.
+
+
+File: ddd.info,  Node: Debugger Initialization,  Next: Debugger Communication,  Prev: Debugger Invocation,  Up: Customizing Debugger Interaction
+
+Initializing the Inferior Debugger
+----------------------------------
+
+   DDD uses a number of resources to initialize the inferior debugger
+(*note Customizing::).
+
+* Menu:
+
+* GDB Initialization::
+* DBX Initialization::
+* XDB Initialization::
+* JDB Initialization::
+* PYDB Initialization::
+* Perl Initialization::
+* Bash Initialization::
+* Finding a Place to Start::
+* Opening the Selection::
+
+
+File: ddd.info,  Node: GDB Initialization,  Next: DBX Initialization,  Up: Debugger Initialization
+
+GDB Initialization
+..................
+
+ - Resource: gdbInitCommands (class InitCommands)
+     This string contains a list of newline-separated commands that are
+     initially sent to GDB.  As a side-effect, all settings specified
+     in this resource are considered fixed and cannot be changed
+     through the GDB settings panel, unless preceded by white space.
+     By default, the `gdbInitCommands' resource contains some settings
+     vital to DDD:
+
+            Ddd*gdbInitCommands: \
+            set height 0\n\
+            set width 0\n\
+             set verbose off\n\
+            set prompt (gdb) \n
+
+     While the `set height', `set width', and `set prompt' settings are
+     fixed, the `set verbose' settings can be changed through the GDB
+     settings panel (although being reset upon each new DDD invocation).
+
+     Do not use this resource to customize GDB; instead, use a personal
+     `~/.gdbinit' file.  See your GDB documentation for details.
+
+ - Resource: gdbSettings (class Settings)
+     This string contains a list of newline-separated commands that are
+     also initially sent to GDB.  Its default value is
+
+            Ddd*gdbSettings: \
+            set print asm-demangle on\n
+
+     This resource is used to save and restore the debugger settings.
+
+ - Resource: sourceInitCommands (class SourceInitCommands)
+     If `on' (default), DDD writes all GDB initialization commands into
+     a temporary file and makes GDB read this file, rather than sending
+     each initialization command separately.  This results in faster
+     startup (especially if you have several user-defined commands).  If
+     `off', DDD makes GDB process each command separately.
+
+
+File: ddd.info,  Node: DBX Initialization,  Next: XDB Initialization,  Prev: GDB Initialization,  Up: Debugger Initialization
+
+DBX Initialization
+..................
+
+ - Resource: dbxInitCommands (class InitCommands)
+     This string contains a list of newline-separated commands that are
+     initially sent to DBX.  By default, it is empty.
+
+     Do not use this resource to customize DBX; instead, use a personal
+     `~/.dbxinit' or `~/.dbxrc' file.  See your DBX documentation for
+     details.
+
+ - Resource: dbxSettings (class Settings)
+     This string contains a list of newline-separated commands that are
+     also initially sent to DBX.  By default, it is empty.
+
+
+File: ddd.info,  Node: XDB Initialization,  Next: JDB Initialization,  Prev: DBX Initialization,  Up: Debugger Initialization
+
+XDB Initialization
+..................
+
+ - Resource: xdbInitCommands (class InitCommands)
+     This string contains a list of newline-separated commands that are
+     initially sent to XDB.  By default, it is empty.
+
+     Do not use this resource to customize DBX; instead, use a personal
+     `~/.xdbrc' file.  See your XDB documentation for details.
+
+ - Resource: xdbSettings (class Settings)
+     This string contains a list of newline-separated commands that are
+     also initially sent to XDB.  By default, it is empty.
+
+
+File: ddd.info,  Node: JDB Initialization,  Next: PYDB Initialization,  Prev: XDB Initialization,  Up: Debugger Initialization
+
+JDB Initialization
+..................
+
+ - Resource: jdbInitCommands (class InitCommands)
+     This string contains a list of newline-separated commands that are
+     initially sent to JDB.  This resource may be used to customize
+     JDB.  By default, it is empty.
+
+ - Resource: jdbSettings (class Settings)
+     This string contains a list of newline-separated commands that are
+     also initially sent to JDB.  By default, it is empty.
+
+     This resource is used by DDD to save and restore JDB settings.
+
+
+File: ddd.info,  Node: PYDB Initialization,  Next: Perl Initialization,  Prev: JDB Initialization,  Up: Debugger Initialization
+
+PYDB Initialization
+...................
+
+ - Resource: pydbInitCommands (class InitCommands)
+     This string contains a list of newline-separated commands that are
+     initially sent to PYDB.  By default, it is empty.
+
+     This resource may be used to customize PYDB.
+
+ - Resource: pydbSettings (class Settings)
+     This string contains a list of newline-separated commands that are
+     also initially sent to PYDB.  By default, it is empty.
+
+     This resource is used by DDD to save and restore PYDB settings.
+
+
+File: ddd.info,  Node: Perl Initialization,  Next: Bash Initialization,  Prev: PYDB Initialization,  Up: Debugger Initialization
+
+Perl Initialization
+...................
+
+ - Resource: perlInitCommands (class InitCommands)
+     This string contains a list of newline-separated commands that are
+     initially sent to the Perl debugger.  By default, it is empty.
+
+     This resource may be used to customize the Perl debugger.
+
+ - Resource: perlSettings (class Settings)
+     This string contains a list of newline-separated commands that are
+     also initially sent to the Perl debugger.  By default, it is empty.
+
+     This resource is used by DDD to save and restore Perl debugger
+     settings.
+
+
+File: ddd.info,  Node: Bash Initialization,  Next: Finding a Place to Start,  Prev: Perl Initialization,  Up: Debugger Initialization
+
+Bash Initialization
+...................
+
+ - Resource: bashInitCommands (class InitCommands)
+     This string contains a list of newline-separated commands that are
+     initially sent to the Bash debugger.  By default, it is empty.
+
+     This resource may be used to customize the Bash debugger.
+
+ - Resource: bash (class Settings)
+     This string contains a list of newline-separated commands that are
+     also initially sent to the Perl debugger.  By default, it is empty.
+
+     This resource is used by DDD to save and restore Bash debugger
+     settings.
+
+
+File: ddd.info,  Node: Finding a Place to Start,  Next: Opening the Selection,  Prev: Bash Initialization,  Up: Debugger Initialization
+
+Finding a Place to Start
+........................
+
+ - Resource: initSymbols (class InitSymbols)
+     When loading an executable, DDD queries the inferior debugger for
+     the initial source location--typically the `main' function.  If
+     this location is not found, DDD tries other symbols from this
+     newline-separated list.  The default value makes DDD look for a
+     variety of main functions (especially FORTRAN main functions):
+          main\n\
+          MAIN\n\
+          main_\n\
+          MAIN_\n\
+          main__\n\
+          MAIN__\n\
+          _main\n\
+          _MAIN\n\
+          __main\n\
+          __MAIN
+

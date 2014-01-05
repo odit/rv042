@@ -1,0 +1,48 @@
+BIN=nph-httprp
+HTML = eablank.html
+XML_DIR = ../../3rdParty/libxml2
+
+HTTPRP_HEADERS= httprp_buf.h\
+	httprp_cgi.h\
+	httprp_enc.h\
+	httprp.h\
+	httprp_html.h\
+	httprp_nc.h
+
+HTTPRP_SOURCES= httprp_buf.o\
+	httprp.o\
+	httprp_cgi.o\
+	httprp_enc.o\
+	httprp_html.o\
+	httprp_nc.o
+
+all: $(BIN)
+
+include ../make-include-uClinux.mk
+
+CFLAGS+=-I$(SYS_LIB)  -I.  -I$(XML_DIR) -I$(XML_DIR)/include -I$(ZLIB_INC_DIR)
+
+LDFLAGS += -Wl,--defsym,__stack_size__=131072 $(XML_DIR)/.libs/libxml2.a -L$(SYS_LIB) -lSys $(SSL_LIBS) -L$(ZLIB_LIB_DIR) -lz
+
+$(XML_DIR)/.libs/libxml2.a:
+	$(MAKE) -C $(XML_DIR) libxml2.la
+
+$(BIN):$(XML_DIR)/.libs/libxml2.a $(HTTPRP_SOURCES) $(HTTPRP_HEADERS) 
+	$(CC) ${CFLAGS} $(HTTPRP_SOURCES) ${LDFLAGS} -o $(BIN)
+	$(STRIP) $(BIN)
+
+cleanbin:
+	rm $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+clean:
+	rm -f *.o
+	rm -f $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+install:
+	if [ -n '$(BIN)' ]; then cp $(BIN) $(DEST_CGI_BIN); fi
+	if [ -n '$(HTML)' ]; then cp $(HTML) $(DEST_HTDOCS); fi
+
+un-install:
+	if [ -n '$(BIN)' ]; then cd $(DEST_CGI_BIN); rm -rf $(BIN); fi

@@ -1,0 +1,17 @@
+options {
+
+        directory "/var/named";
+
+        query-source address * port 53;
+
+        allow-transfer{none;};
+
+        allow-recursion{ 192.168.0.0/24;};
+
+        forwarders { 168.95.1.1; 168.95.1.2; 168.95.192.1; };
+};
+
+zone "localhost" in {
+        type master;
+        file "localhost.zone";
+};

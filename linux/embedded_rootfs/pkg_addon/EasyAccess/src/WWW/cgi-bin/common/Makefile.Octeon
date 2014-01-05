@@ -1,0 +1,43 @@
+include ../../../make-include-Octeon.mk
+
+AAA_LIB=-lAuth -lldap -llber -lcrypt -lsmbclient -lkrb5 \
+	-lk5crypto -lcom_err -lkrb5
+
+BIN=userLogin.cgi welcome.cgi userLogout.cgi
+LDFLAGS +=-L$(AUTH_LIB) -L$(SYS_LIB) -L$(GCGI_LIB) -lgcgi  -L$(KRB_LIB_DIR) \
+	-L$(SAMBA_LIB_DIR) -L$(LDAP_LIB_DIR) -L$(LDAP_BER_LIB_DIR) $(AAA_LIB) -lSys \
+        $(SSL_LIBS) -lutil -Wl,--defsym,__stack_size__=1048576
+
+LDFLAGS1 +=-L$(SYS_LIB) -lSys -L$(GCGI_LIB) -lgcgi -L$(SSLCERT_LIB) -lsslcert -lm $(SSL_LIBS) -lutil -Wl,--defsym,__stack_size__=32788
+
+all: $(BIN)
+
+CFLAGS +=-I$(AUTH_LIB) -I$(SYS_LIB) -I$(GCGI_LIB) -UUSE_NO_EXTERNAL_AAA
+
+CFLAGS1 += -I$(SYS_LIB) -I$(GCGI_LIB) -I$(SSLCERT_LIB) -DUSE_NO_EXTERNAL_AAA
+CFLAGS1 += -I$(AUTH_LIB) -DPROCESSOR_ID="\"Cavium NITROX SOHO\""
+
+userLogin: userLogin.c
+	$(CC) ${CFLAGS} userLogin.c ${LDFLAGS} -o userLogin
+	$(STRIP) userLogin
+
+userLogin.cgi: nkLogin.c
+	$(CC) ${CFLAGS} nkLogin.c ${LDFLAGS} -lnku -o userLogin.cgi
+	$(STRIP) userLogin.cgi
+
+userLogout.cgi: nkLogout.c
+	$(CC) ${CFLAGS1} nkLogout.c ${LDFLAGS1} -lnku -o userLogout.cgi
+	$(STRIP) userLogout.cgi
+
+welcome.cgi: nkwelcome.c
+	$(CC) ${CFLAGS} nkwelcome.c ${LDFLAGS} -lnku -o welcome.cgi
+	$(STRIP) welcome.cgi
+
+install:
+	if [ -n '$(BIN)' ]; then $(INSTALL) $(BIN) $(DEST_CGI_BIN); fi
+
+clean:
+	rm -rf $(BIN)
+
+un-install:
+	rm -rf $(DEST_CGI_BIN)/$(BIN)

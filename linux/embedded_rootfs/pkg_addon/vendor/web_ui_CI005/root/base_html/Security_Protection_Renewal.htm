@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Renewal</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script language=JavaScript>
+var ButtonType = "";
+/*
+
+	Write down other Javascript check function in this Area
+
+*/
+function closew()
+{
+	var x=window.confirm("Are you close>");
+	if(x)
+		window.close();
+}
+
+function openlink(index)
+{
+    if( index == 0)
+    {
+	window.open("https://olr.trendmicro.com/redirect/cisco_renew.aspx");
+    }
+    else
+    if( index == 1)
+    {
+	var UDI = '';
+	var Url = '';
+
+	UDI=document.formservice.UDI.value;
+	Url='https://olr.trendmicro.com/registration/us/en-us/cisco_activation.aspx?udi=';
+	Url+=UDI;
+	window.open(Url);
+    }
+}
+</script>
+</head>
+<body class="popwindow">
+<form name="formservice" method="post" action="Security_Protection_Renewal.htm">
+<input type="hidden" name="UDI" value='<!--#nk_get SP_GetUDI=""-->'>
+  <table class="pop_info" width="100%" align="center" border="0">
+	<tr>
+	  <td width="10"></td>
+	  <td height="10"></td>
+	  <td width="10"></td>
+	</tr> 
+	<tr>
+	  <td></td>
+	  <th style="font-size:18px;">Renewal</th>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td><hr class="line" align="center" size="1" width="100%"></td>
+	  <td></td>
+	</tr>	
+	<tr>
+	  <td></td>
+	  <td><b>Step 1.</b></td>
+	  <td></td>
+	</tr>	
+	<tr>
+	  <td></td>
+	  <td style="text-align:justify">Contact your Cisco reseller to purchase a registration key (RK) to renew your ProtectLink license.</td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td height="6" colspan="3"></td>
+	</tr>		
+	<tr>
+	  <td></td>
+	  <td><b>Step 2.</b></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td style="text-align:justify">Register your registration key (RK) at <a href=JavaScript:openlink(0)>https://olr.trendmicro.com/redirect/cisco_renew.aspx</a><br> by logging in with your existing ID and password and obtain an activation code (AC).</td>
+	  <td></td>	
+	</tr>
+	<tr>
+	  <td height="6" colspan="3"></td>
+	</tr>		
+	<tr>
+	  <td></td>
+	  <td><b>Step 3.</b></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td style="text-align:justify">Use your activation code (AC) to enable ProtectLink at: <a href=JavaScript:openlink(1)>https://olr.trendmicro.com/registration/us/en-us/cisco_activation.aspx</a></td>
+	  <td></td>	
+	</tr>
+	<tr>
+	  <td height="4" colspan="3"></td>
+	</tr>
+  </table>
+  <script>PrintEndPopwindow();</script>
+</form>     
+</body>
+</html>

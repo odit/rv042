@@ -1,0 +1,248 @@
+<!--#nk_get CopyConfigureFile=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	if (window.ActiveXObject)
+		document.formsys_setting1.importFile.style.width = "280px";
+
+    SetButtonStatus("import", "");
+    SetButtonStatus("export_1", "");
+    SetButtonStatus("export_2", "");	
+    SetButtonStatus("export_3", "");
+    SetButtonStatus("export_4", "");		
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function CheckImportExport()
+{
+	F=document.formdualwan;
+	F1=document.formsys_setting1;
+	switch (F.importwarn.value)
+	{
+		case "1": 
+			if(confirm("Import config Add?"))
+			{
+				F1.importstatus.value=2;
+				F1.submit();
+			}
+			break 
+		case "2": 
+			if(confirm("Import config Over?"))
+			{
+				F1.importstatus.value=2;
+				F1.submit();
+			}
+			break
+		default :
+			break
+	}	
+}
+
+function call_close(win)
+{
+    win.close();
+}
+
+function call_back(password,win)
+{
+    document.formsys_setting1.md5_password.value="md5_passwd_input="+password;
+    document.formsys_setting1.submit();
+    win.close();
+
+}
+function chSumitStartup()
+{
+	document.formsys_setting2.submit();
+}
+
+function chSumitMirror()
+{
+	document.formsys_setting3.submit();
+}
+
+function chImport(F)
+{
+  if (F.importFile.value.length==0)
+  {
+	  alert(aSelectFile);
+	  return; 
+  }
+
+  var temp;
+  temp=F.importFile.value.split(".");
+  if(temp.length != 2 || temp[1] != "config")
+  {
+      alert("Invalid File Format.");
+      return; 
+  }  
+  
+  if (confirm(cConfigImport))
+  {
+    window.status=wConfigImport;
+    SetButtonStatus("import", "disabled");
+    SetButtonStatus("export_1", "disabled");
+    SetButtonStatus("export_2", "disabled");	
+    SetButtonStatus("export_3", "disabled");
+    SetButtonStatus("export_4", "disabled");		
+    F.submit();
+  }  
+  
+}
+function copy_file(arg)
+{    	
+    SetButtonStatus("import", "disabled");
+    SetButtonStatus("export_1", "disabled");
+    SetButtonStatus("export_2", "disabled");	
+    SetButtonStatus("export_3", "disabled");
+    SetButtonStatus("export_4", "disabled");	
+    document.formsys_setting_copy.submitStatus.value = arg;
+    document.formsys_setting_copy.submit();
+}
+//=============== End of Javascript ===============*/
+
+/***************************************************/
+/*												   */	
+/*      	  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Cancellink = ""; 
+var helplink ='help_sys_setting.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 700;
+var head_width=80;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintImportConfigurationFile(1);
+	PrintExportConfigurationFile(1);
+	PrintCopyConfigurationFile(0);
+	PrintEndContent();
+}
+
+function PrintImportConfigurationFile(hasUnderLine)
+{
+	PrintBeginBlock(1, "Restore Startup Configuration");
+	document.write('<table width="'+FixedTableWidth+'" border="'+Tableborder+'" style="'+Tablestyle+'">');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'"></td>');
+	document.write('<td width="'+(FixedTableWidth -(head_width * 2)) +'">');
+	document.write('<table width="100%" class="opacitytable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td height="10"></td>');
+	document.write('</tr>');
+	document.write('<form name="formsys_setting1" method="post" action="/cgi-bin/import_config.cgi" enctype="multipart/form-data">');
+	document.write('<tr>');
+	document.write('<td align="center">');		
+	document.write('<input type="FILE" name="importFile" style="font-family:Arial;font-size: 12px; height:22px;">');
+	
+    document.write('<input type="hidden" name="md5_password" value="">');
+
+	document.write('</td></tr>');
+	document.write('<tr >');
+	document.write('<td align="center">');
+	PrintSTButton("import","Restore","chImport(this.form)");
+	document.write('</td></tr>');
+	document.write('</form>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('<td>&nbsp;</td>');
+	document.write('</tr>');
+	document.write('</table>'); 
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintExportConfigurationFile(hasUnderLine)
+{
+	PrintBeginBlock(1, "Backup Configuration File");	
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');	
+	document.write('<form name="formsys_setting2" method="post" action="/cgi-bin/config.exp">');	
+	document.write('<input type="hidden" name="submitstatus" value="1">');
+	document.write('</form>');		
+	document.write('<td width="'+head_width+'"></td>');	
+	document.write('<td>');
+	PrintSTButton("export_1","Backup Startup Configuration", "chSumitStartup()");
+	document.write("</td>");
+	document.write('</tr>');	
+	document.write('<tr>');	
+	document.write('<form name="formsys_setting3" method="post" action="/cgi-bin/config_mirror.exp">');	
+	document.write('<input type="hidden" name="submitstatus" value="1">');
+	document.write('</form>');		
+	document.write('<td width="'+head_width+'"></td>');		
+	document.write('<td>');
+	PrintSTButton("export_2","Backup Mirror Configuration", "chSumitMirror()");
+	document.write("</td>");
+	document.write('</tr>');
+	document.write('</table>');	
+	PrintEndBlock(hasUnderLine);
+}
+function PrintCopyConfigurationFile(hasUnderLine)
+{
+	PrintBeginBlock(1, "Copy Configuration File");	
+	document.write('<form name="formsys_setting_copy" method="post" action="sys_setting.htm">');
+	document.write('<input type="hidden" name="submitStatus" value="0">');		
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'"></td>');
+	document.write('<td>');
+	PrintSTButton("export_3","Copy Startup to Mirror", "copy_file(1)");
+	document.write("</td>");
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'"></td>');
+	document.write('<td>');
+	PrintSTButton("export_4","Copy Mirror to Startup", "copy_file(2)");
+	document.write("</td>");
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('</form>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <form name="formdualwan" method="post" action="">
+      <input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+    </form>
+    
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 8);		// Set Selected Node
+         if (document.formdualwan.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+	<form name="formdualwan" method="post" action="">
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" id="importwarn" name="importwarn" value='<!--#nk_get SysSetting=""-->'>
+	</form>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

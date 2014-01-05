@@ -1,0 +1,23 @@
+body{FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+.bodyback{BACKGROUND-COLOR:#e9e9e5;}
+.mainback{BACKGROUND-COLOR:#f4f4f4;}
+TD.mainback{BACKGROUND-COLOR:#f9f9f9;}
+TR.mainback{BACKGROUND-COLOR:#f9f9f9;}
+A{TEXT-DECORATION:none;COLOR:#304054;}
+A:visited{TEXT-DECORATION:none;COLOR:#304054;}
+a:hover{COLOR:#0568af; TEXT-DECORATION:none; cursor:pointer; cursor:hand;}
+.darkback{BACKGROUND-COLOR:#8899c0;}
+TD.darkback{BACKGROUND-COLOR:#8899c0;}
+DIV.clk7{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#fffccf; border-right:1px solid #8899c0;} 
+DIV.clk7k{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#fdf5af; border-right:1px solid #8899c0;}
+DIV.clk7Sub1{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#fffccf; border-right:1px solid #8899c0;} 
+DIV.menubottomrow{background-color:#fffccf;border-bottom:1px solid #8899c0; border-right:1px solid #8899c0;}
+DIV.clk7Sub1k{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#fdf5af; border-right:1px solid #8899c0;} 
+#divk7Cont{position:relative; left:0px; top:0px; height:322px; width:175px; visibility:hidden}
+A.clk7Links{font-family:Verdana, Arial, Helvetica; font-size:11px; text-decoration:none; COLOR:#304054; width:175px; height:25px; line-height:180%}
+A.clk71Links{font-family:Verdana, Arial, Helvetica; font-size:11px; text-decoration:none; COLOR:#304054; width:175px; height:25px; line-height:180%}
+td.mainbottom{background: url("/images/bottomorangeblue.png");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop1{background: url("/images/toprightorangeblue.png");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop0{background: url("/images/mainlogo.gif");background-repeat: no-repeat;}
+td.maintop2{background: url("/images/toporangeblue2.png");background-repeat: no-repeat;background-color:#f9f9f9;margin:0px;padding:0px;}
+.menubackground{background-color:#fffccf;border-right:1px solid #8899c0;}

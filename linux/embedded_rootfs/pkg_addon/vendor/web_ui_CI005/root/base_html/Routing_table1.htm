@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Routing Table Entry List</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script language="JavaScript">
+function Entryfunction()
+{
+	window.status='';
+}
+function Leavefunction()
+{
+}
+function Print_table_tr_cell(cell_type, IP, prefixLength, DefaultGateway, Hop, Interface)
+{
+	if (cell_type == "OddRow")
+		cell_type = "popOddRow";
+	else
+		cell_type = "popEvenRow";
+	document.write('<tr class='+cell_type+' >');	
+	
+	for (var i=0;i<5 ;i++ )
+	{
+		if (IP[i]!='0')
+		{
+			break;
+		}	
+	}
+	IP=IP.slice(i,IP.length);
+	
+	document.write('<td width="35%">' + IP + '</td>');
+	document.write('<td width="10%">'+prefixLength+'</td>');
+	
+	var index=0,i;
+	for (var i=0;i<5 ;i++ )
+	{
+		if (DefaultGateway[i]!='0')
+		{
+			break;
+		}	
+	}
+	DefaultGateway=DefaultGateway.slice(i,DefaultGateway.length);
+
+	document.write('<td width="35%">'+DefaultGateway+'</td>');
+	document.write('<td width="10%">'+Hop+'</td>');
+	document.write('<td width="10%">'+Interface+'</td>');	
+	document.write('</tr>');
+}
+
+function chChangeIPmode(val)
+{	
+	document.location.href="Routing_table.htm"
+}
+
+</script>
+</head>
+<body class="poplist" onResize="ChangeWhiteTable()" style="overflow:hidden">
+<form action="Routing_table1.htm" method="post">
+<input type="hidden" name="page" value="Routing_table1.htm"> 
+<input type="hidden" name="pointbufList" value="0"> 
+<table class="pop_title_table" border="0" width="100%">
+<tr>
+    <th> 
+       <script language="JavaScript">
+        	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+        	PrintSTButton('refresh', 'Refresh', "javascript: location.href='Routing_table1.htm'", "","",70);
+		document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+		PrintSTButton('close', 'Close', 'closeWindow();', "","", 70);
+        </script> 
+    </th>
+</tr>
+</table>
+  <script>PrintWhiteTableBegin();</script>
+
+	<table width="100%" class="block" border="0" cellpadding="0" cellspacing="0">
+	<tr><td>
+	<script>PrintIPTypeTab('IPv4','false','IPv6','true');</script>
+	</td></tr>
+	<tr><td>
+	
+	<table width="100%" cellpadding="5" cellspacing="5" bgcolor="#CBD8E1" style="border-left:1px solid #666;border-right:1px solid #666;border-bottom:1px solid #666;"><tr><td>
+    <table width="100%" class="STtable" border="1">
+      <tr>
+	<td>
+        <table width="100%" class="STtable" border="0">
+          <tr>
+	<td bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="8" height="1">Destination IP</td>
+	<td bgcolor="#FFFFFF" style="width:1px"></td>
+	<td bgcolor="#A2B9C9" style="width:1px"></td>
+	<td width="11%" bgcolor="#D9E3E9">	<img border="0" src="images/_blank.gif" width="6" height="1">Prefix Length</td>
+	<td bgcolor="#FFFFFF" style="width:1px"></td>
+	<td bgcolor="#A2B9C9" style="width:1px"></td>
+	<td width="35%" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="8" height="1">Default Gateway </td>
+	<td bgcolor="#FFFFFF" style="width:1px"></td>
+	<td bgcolor="#A2B9C9" style="width:1px"></td>
+	<td width="10%" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="6" height="1">Hop Count </td>
+	<td bgcolor="#FFFFFF" style="width:1px"></td>
+	<td bgcolor="#A2B9C9" style="width:1px"></td>
+	<td width="10%" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="6" height="1">Interface</td>
+          </tr>
+        </table>
+	</td>
+  </tr>
+  <!--#nk_get RoutingTable_v6=""-->  
+</table>
+	</td></tr></table>
+	</td></tr>
+<script>PrintWhiteTableEnd();</script>
+</form>
+</body>
+</html>

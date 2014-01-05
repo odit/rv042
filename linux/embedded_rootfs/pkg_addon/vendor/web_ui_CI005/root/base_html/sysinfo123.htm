@@ -1,0 +1,34 @@
+<html>
+<head></head>
+<body>
+<pre>
+SN=<!--#nk_get SerialNo=""-->
+CPU=<!--#nk_get CPU=""-->
+DRAM=<!--#nk_get DRAM=""-->
+FLASH=<!--#nk_get Flash=""-->
+MAC_BR0=<!--#nk_get DisplayMAC="lanmac"-->
+MAC_IXP1=<!--#nk_get DisplayMAC="wanMac11"-->
+MAC_IXP2=<!--#nk_get DisplayMAC="wanMac12"-->
+<script>
+var wanNumber=<!--#nk_get GetSystemNum="wan_port_num"-->;
+var i;
+for(i=3; i<=wanNumber; i++)
+{
+	if (i==3) document.write('MAC_IXP3=<!--#nk_get DisplayMAC="wanMac13"-->');
+	else if (i==4) document.write('MAC_IXP4=<!--#nk_get DisplayMAC="wanMac14"-->');
+	else if (i==5) document.write('MAC_IXP5=<!--#nk_get DisplayMAC="wanMac15"-->');
+	else if (i==6) document.write('MAC_IXP6=<!--#nk_get DisplayMAC="wanMac16"-->');
+	else if (i==7) document.write('MAC_IXP7=<!--#nk_get DisplayMAC="wanMac17"-->');
+
+	if(i!=wanNumber)
+		document.write('\n');		
+}
+</script>
+MAC_DMZ=<!--#nk_get DisplayMAC="dmzMacclone"-->
+FW_Version=<!--#nk_get FwVersion=""-->
+Model_Name=<!--#nk_get DisplayOnly="serial_MODEL"-->
+Mfg_Status=<!--#nk_get MfgCmd=""-->
+</pre>
+</body>
+</html>
+<!--#nk_get renewWAN=""-->

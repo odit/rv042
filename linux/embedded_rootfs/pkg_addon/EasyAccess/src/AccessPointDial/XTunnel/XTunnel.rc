@@ -1,0 +1,270 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""XTunnel.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,6,1,1
+ PRODUCTVERSION 1,6,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "XTunnel Module\0"
+            VALUE "FileVersion", "1, 6, 1, 1\0"
+            VALUE "InternalName", "XTunnel\0"
+            VALUE "LegalCopyright", "Copyright 2005\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OLESelfRegister", "\0"
+            VALUE "OriginalFilename", "XTunnel.DLL\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "XTunnel Module\0"
+            VALUE "ProductVersion", "1, 6, 1, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_XTUNNELCTRL         REGISTRY DISCARDABLE    "XTunnelCtrl.rgs"
+IDR_VPLAUNCH            REGISTRY DISCARDABLE    "VPLaunch.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_MLINFO              ICON    DISCARDABLE     "MLINFO.ico"
+IDI_MLICON              ICON    DISCARDABLE     "multiicon.ico"
+IDI_CONN                ICON    DISCARDABLE     "Connect.Ico"
+IDI_MLERROR             ICON    DISCARDABLE     "MLERROR.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_STS_DIALOG DIALOG DISCARDABLE  0, 0, 243, 220
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Virtual Passage Connection Status"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Close",IDC_BUT_CLOSE,167,203,69,14
+    PUSHBUTTON      "&Disconnect",IDC_BUT_DISC,7,203,69,14
+    CONTROL         "&Uninstall On Browser Exit",IDC_CHECK_UNINSTALL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,141,9,93,14
+    GROUPBOX        "Connection",IDC_STATIC,7,26,229,41
+    LTEXT           "Status",IDC_STATIC,16,36,53,8
+    LTEXT           "Duration",IDC_STATIC,16,48,53,8
+    EDITTEXT        IDC_EDIT_STS,177,36,53,12,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_EDIT_Duration,177,49,53,12,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    GROUPBOX        "Interfaces",IDC_STATIC,7,70,229,41
+    LTEXT           "IP Address",IDC_STATIC,16,81,37,8
+    LTEXT           "Server IP",IDC_STATIC,16,93,37,8
+    EDITTEXT        IDC_EDIT_IP,63,81,167,12,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_EDIT_SrvrIP,63,93,167,12,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    GROUPBOX        "Activity",IDC_STATIC,7,114,229,41
+    LTEXT           "Bytes Sent",IDC_STATIC,16,127,53,8
+    LTEXT           "Bytes Received",IDC_STATIC,16,141,64,8
+    EDITTEXT        IDC_EDIT_SENT,128,127,102,12,ES_RIGHT | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_EDIT_RECEIVED,128,141,102,12,ES_RIGHT | 
+                    ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER | NOT 
+                    WS_TABSTOP
+    GROUPBOX        "Status Message",IDC_STATIC,7,160,229,39
+    ICON            IDI_MLERROR,IDC_STS_ERR_ICON,11,174,20,20
+    ICON            IDI_MLINFO,IDC_STS_INFO_ICON,11,174,20,20
+    EDITTEXT        IDC_Sts_Err_Edit,36,174,194,17,ES_CENTER | ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT 
+                    WS_TABSTOP
+    ICON            IDI_CONN,IDC_STATIC,21,5,20,20
+END
+
+IDD_SETUP_DIALOG DIALOG DISCARDABLE  0, 0, 256, 77
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Virtual Passage Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "&Close",IDC_BUT_CLOSE,102,60,50,14
+    CONTROL         "Progress1",IDC_SETUP_PROGRESS,"msctls_progress32",
+                    WS_BORDER,10,38,239,18
+    EDITTEXT        IDC_SETUP_EDIT,36,5,213,30,ES_CENTER | ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT 
+                    WS_TABSTOP
+    ICON            IDI_MLERROR,IDC_ERR_ICON,12,5,21,20
+    ICON            IDI_MLINFO,IDC_INFO_ICON,12,5,21,20
+END
+
+IDD_MANAGE_DIALOG DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+END
+
+IDD_PROXY_AUTH_DLG DIALOG DISCARDABLE  0, 0, 179, 90
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Proxy Authentication"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_USERNAME,65,27,106,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSWD,65,47,106,12,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,25,68,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,104,68,50,14
+    LTEXT           "User Name",IDC_STATIC,13,29,52,11
+    LTEXT           "Password",IDC_STATIC,13,50,52,11
+    LTEXT           "Proxy Server : ",IDC_STATIC,13,9,45,11
+    LTEXT           "HTTP - 10.0.0.234",IDC_PROXYTYPE,65,9,107,13
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_STS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 236
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 213
+    END
+
+    IDD_SETUP_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 249
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 70
+    END
+
+    IDD_MANAGE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_PROXY_AUTH_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 172
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 83
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROJNAME            "XTunnel"
+    IDS_LOCAL_STRING        "Virtual Passage"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "XTunnel.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,12 @@
+Version Specific Notes:
+
+1.2.6, Feb 26, 2005:
+-------------------
+        Virtual Passage had quite a few changes, This required additional
+        platform modifications,
+                * HDLC frame encoding is added to maintain packet integrity. n_hdlc
+                  must be included in the kernel. If n_hdlc is compiled as module
+                  update modules.conf.
+                * Virtual Passage driver and dialer name has been changed to avoid
+                  using Menlo Logic name. This will require manual un-installation of
+                  the driver from the system.

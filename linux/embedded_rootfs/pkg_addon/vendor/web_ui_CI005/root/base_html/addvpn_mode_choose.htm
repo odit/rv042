@@ -1,0 +1,114 @@
+<!--#nk_get VpnG2Gtunnel="clearEditNo"-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title></title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "NULL";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var helplink ='help_addvpn_mode_choose.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintG2G(1);
+	PrintC2G(0);
+	PrintEndContent();
+}
+
+function PrintG2G(hasUnderLine)
+{
+	PrintBeginBlock(1, "Gateway to Gateway");
+	document.write('<table width="'+NormallLayoutwidth+'" class="Infotable" border='+Tableborder+' >');	
+	document.write('<tr>');
+	document.write('<td align="center">');
+	document.write("<a href=\"gateway_to_gateway.htm\">");
+	if (TotalPortNumber == 16)
+		document.write("<img border=\"0\" src=\"016/g_to_g.jpg\" height=\"160\"");
+	else if (TotalPortNumber == 6)
+		document.write("<img border=\"0\" src=\"042/g_to_g.jpg\" height=\"160\"");
+	else
+		document.write("<img border=\"0\" src=\"082/g_to_g.jpg\" height=\"160\"");		
+	document.write("title=\"Add New Gateway to Gateway Tunnel\" onClick=\"window.location.replace('gateway_to_gateway.htm')\"></a>");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td align="center">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	PrintSTButton("B3", "Add", "window.location.replace('gateway_to_gateway.htm')");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+function PrintC2G(hasUnderLine)
+{
+	PrintBeginBlock(1, "Client to Gateway");
+	document.write('<table width="'+NormallLayoutwidth+'" class="Infotable" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td align="center">');
+	document.write("<a href=\"client_to_gateway_t.htm\">");
+	if (TotalPortNumber == 16)
+		document.write("<img border=\"0\" src=\"016/c_to_g.jpg\" height=\"160\"");
+	else if (TotalPortNumber == 6)
+		document.write("<img border=\"0\" src=\"042/c_to_g.jpg\" height=\"160\"");
+	else
+		document.write("<img border=\"0\" src=\"082/c_to_g.jpg\" height=\"160\"");
+	document.write("title=\"Add New Client to Gateway Tunnel\" onClick=\"window.location.replace('client_to_gateway_t.htm')\"></a>");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td align="center">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	PrintSTButton("B32", "Add", "window.location.replace('client_to_gateway_t.htm')");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 7, 1);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="form_name" method="post" action="sample.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

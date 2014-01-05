@@ -1,0 +1,295 @@
+<html>
+<!-- Sitemap 1.0 -->
+<object type="text/site properties">
+  <param name="SiteType" value="toc">
+  <param name="Font" value="Tahoma,8,0">
+  <param name="Image Width" value="16">
+  <param name="Window Styles" value="0x800402">
+  <param name="ExWindow Styles" value="0x100">
+</object>
+<ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Overview">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="AccessPoint SSL VPN Overview">
+      <param name="Local" value="AccessPoint_SSL_VPN.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Browser Requirements">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Web Browser">
+      <param name="Local" value="Web_Browser.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Java Requirements">
+      <param name="Local" value="Java_Requirements.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Authentication">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="AccessPoint Authentication">
+      <param name="Local" value="AccessPoint_Overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Logging into the Portal">
+      <param name="Local" value="Authenticating.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Status and Logs">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Status">
+      <param name="Local" value="stat.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Event Log">
+      <param name="Local" value="even.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Active Users">
+      <param name="Local" value="acti.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Log Settings">
+      <param name="Local" value="logc.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="General">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="File Settings">
+      <param name="Local" value="sett.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Restart">
+      <param name="Local" value="rest.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Date">
+      <param name="Local" value="date.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Certificate Management">
+    </object>
+    <ul>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Certificates">
+        <param name="Local" value="sslc.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Generate New CSR">
+        <param name="Local" value="newc.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="View Certificates">
+        <param name="Local" value="view.htm">
+      </object>
+      </ul>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Network">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Interfaces">
+      <param name="Local" value="netw.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="IP Settings">
+      <param name="Local" value="ipse.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Routes">
+      <param name="Local" value="rout.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="DNS Settings">
+      <param name="Local" value="dnss.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Host Resolution">
+      <param name="Local" value="etch.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Access">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Users">
+    </object>
+    <ul>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Overview">
+        <param name="Local" value="user.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="User Policies">
+        <param name="Local" value="edit.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="User Bookmarks">
+        <param name="Local" value="User_Bookmarks.htm">
+      </object>
+      </ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Groups">
+    </object>
+    <ul>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Overview">
+        <param name="Local" value="grou.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Group Policies">
+        <param name="Local" value="Edit_Group_Settings.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="LDAP Attributes">
+        <param name="Local" value="ldapattr.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Group Bookmarks">
+        <param name="Local" value="Group_Bookmarks.htm">
+      </object>
+      </ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Global">
+    </object>
+    <ul>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Global Policies">
+        <param name="Local" value="Global_Policies.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Global Bookmarks">
+        <param name="Local" value="Global_Bookmarks.htm">
+      </object>
+      </ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Network Resources">
+    </object>
+    <ul>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Network Resources">
+        <param name="Local" value="Network_Resources.htm">
+      </object>
+      </ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Domains">
+    </object>
+    <ul>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Domains">
+        <param name="Local" value="doma.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Internal User Database">
+        <param name="Local" value="User_Database_Authentication.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Radius">
+        <param name="Local" value="Radius.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Active Directory">
+        <param name="Local" value="Active_Directory.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="LDAP">
+        <param name="Local" value="LDAP.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="NT Domain">
+        <param name="Local" value="NT_Domain.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Domain Management">
+        <param name="Local" value="Domain_Management.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="kerberos">
+        <param name="Local" value="kerberos.htm">
+      </object>
+      </ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Portal Layouts">
+    </object>
+    <ul>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Portal Layouts Scheme">
+        <param name="Local" value="port.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Defining the Layout">
+        <param name="Local" value="site.htm">
+      </object>
+      <li><object type="text/sitemap">
+        <param name="Name" value="Home Page">
+        <param name="Local" value="Home_Page.htm">
+      </object>
+      </ul>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Virtual Passage">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Client Addresses">
+      <param name="Local" value="clie.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Client Routes">
+      <param name="Local" value="Client_Routes.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Virtual Transport">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Overview">
+      <param name="Local" value="tran.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Configuration">
+      <param name="Local" value="Configurationvt.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="EPS">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="EPS Policy">
+      <param name="Local" value="EPS_Policy.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Security">
+    <param name="Comment" value="Security and SSL">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Security">
+      <param name="Local" value="Security.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="SSL Handshake Process">
+      <param name="Local" value="SSL_Handshake.htm">
+    </object>
+    </ul>
+</ul>
+</html>

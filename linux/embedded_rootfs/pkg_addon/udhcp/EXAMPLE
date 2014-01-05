@@ -1,0 +1,87 @@
+For udhcpc (client)...
+1) cd uClinux/romdisk/etc	# mkdir this directory if necessary
+
+2) For brecis rc.local, add: # cp ../root/etc/rc.local rc.local -- if needed
+	echo "Make /var/dhcpc for /etc/resolv.conf symbolic link"
+	/bin/mkdir /var/dhcpc
+	/bin/chmod 777 /var/dhcpc
+	/bin/cp /etc/resolv.conf.save /var/dhcpc/resolv.conf
+
+	echo "Configure via udhcpc"
+	/sbin/udhcpc -i eth0 -s /etc/dhcp-brecis.script &
+3) ln -s /var/dhcpc/resolv.conf resolv.conf
+4) ln -s /etc/dhcp-brecis.bound dhcp-brecis.renew
+
+5) Put the shell scripts at the end of this file in /etc.
+#-----------------------------------------------------------------------------
+For the udhcpd (server)...
+1) For brecis rc.local, add:
+	echo "Create /var/udhcpd.leases"
+	/bin/touch /var/udhcpd.leases
+	/bin/chmod 777 /var/udhcpd.leases
+	/sbin/udhcpd &
+2) in /etc/udhcpd.conf put (not indented):
+	start           192.168.2.20
+	end             192.168.2.254
+	interface       eth1
+	lease_file      /var/udhcpd.leases
+	opt     dns     192.168.1.1 192.168.1.100
+	option  subnet  255.255.255.0
+	opt     router  192.168.2.2
+	opt     wins    192.168.2.10
+	option  domain  local
+	option  lease   864000
+Or whatever the appropriate configuration should be.
+
+Following are shell scripts for the client to work.
+#-----------------------------------------------------------------------------
+# This is a shell archive.  Save it in a file, remove anything before
+# this line, and then unpack it by entering "sh file".  Note, it may
+# create directories; files and directories will be owned by you and
+# have default permissions.
+#
+# This archive contains:
+#
+#	dhcp-brecis.bound
+#	dhcp-brecis.deconfig
+#	dhcp-brecis.script
+#
+echo x - dhcp-brecis.bound
+sed 's/^X//' >dhcp-brecis.bound << 'END-of-dhcp-brecis.bound'
+X# Sample udhcpc renew script
+XRESOLV_CONF="/var/dhcpc/resolv.conf"
+X[ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
+X[ -n "$subnet" ] && NETMASK="netmask $subnet"
+X/sbin/ifconfig $interface $ip $BROADCAST $NETMASK
+Xif [ -n "$router" ]
+Xthen
+X	echo "deleting routers"
+X	while /sbin/route del default gw 0.0.0.0 dev $interface
+X	do :
+X	done
+X	for i in $router
+X	do
+X		/sbin/route add default gw $i dev $interface
+X	done
+Xfi
+Xrm -f $RESOLV_CONF
+Xtouch $RESOLV_CONF
+X[ -n "$domain" ] && echo domain $domain >> $RESOLV_CONF
+Xfor i in $dns
+Xdo
+X	echo adding dns $i
+X	echo nameserver $i >> $RESOLV_CONF
+Xdone
+END-of-dhcp-brecis.bound
+echo x - dhcp-brecis.deconfig
+sed 's/^X//' >dhcp-brecis.deconfig << 'END-of-dhcp-brecis.deconfig'
+X# Sample udhcpc deconfig script
+X/sbin/ifconfig $interface 0.0.0.0
+END-of-dhcp-brecis.deconfig
+echo x - dhcp-brecis.script
+sed 's/^X//' >dhcp-brecis.script << 'END-of-dhcp-brecis.script'
+X# Sample udhcpc dispatch script
+X/bin/sh /etc/dhcp-brecis.$1
+END-of-dhcp-brecis.script
+exit
+

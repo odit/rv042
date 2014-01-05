@@ -1,0 +1,2930 @@
+This is libc.info, produced by makeinfo version 4.3 from libc.texinfo.
+
+INFO-DIR-SECTION GNU libraries
+START-INFO-DIR-ENTRY
+* Libc: (libc).                 C library.
+END-INFO-DIR-ENTRY
+
+INFO-DIR-SECTION GNU C library functions and macros
+START-INFO-DIR-ENTRY
+* ALTWERASE: (libc)Local Modes.
+* ARGP_ERR_UNKNOWN: (libc)Argp Parser Functions.
+* ARG_MAX: (libc)General Limits.
+* BC_BASE_MAX: (libc)Utility Limits.
+* BC_DIM_MAX: (libc)Utility Limits.
+* BC_SCALE_MAX: (libc)Utility Limits.
+* BC_STRING_MAX: (libc)Utility Limits.
+* BRKINT: (libc)Input Modes.
+* BUFSIZ: (libc)Controlling Buffering.
+* CCTS_OFLOW: (libc)Control Modes.
+* CHILD_MAX: (libc)General Limits.
+* CIGNORE: (libc)Control Modes.
+* CLK_TCK: (libc)CPU Time.
+* CLOCAL: (libc)Control Modes.
+* CLOCKS_PER_SEC: (libc)CPU Time.
+* COLL_WEIGHTS_MAX: (libc)Utility Limits.
+* CPU_CLR: (libc)CPU Affinity.
+* CPU_ISSET: (libc)CPU Affinity.
+* CPU_SET: (libc)CPU Affinity.
+* CPU_SETSIZE: (libc)CPU Affinity.
+* CPU_ZERO: (libc)CPU Affinity.
+* CREAD: (libc)Control Modes.
+* CRTS_IFLOW: (libc)Control Modes.
+* CS5: (libc)Control Modes.
+* CS6: (libc)Control Modes.
+* CS7: (libc)Control Modes.
+* CS8: (libc)Control Modes.
+* CSIZE: (libc)Control Modes.
+* CSTOPB: (libc)Control Modes.
+* DES_FAILED: (libc)DES Encryption.
+* DTTOIF: (libc)Directory Entries.
+* E2BIG: (libc)Error Codes.
+* EACCES: (libc)Error Codes.
+* EADDRINUSE: (libc)Error Codes.
+* EADDRNOTAVAIL: (libc)Error Codes.
+* EADV: (libc)Error Codes.
+* EAFNOSUPPORT: (libc)Error Codes.
+* EAGAIN: (libc)Error Codes.
+* EALREADY: (libc)Error Codes.
+* EAUTH: (libc)Error Codes.
+* EBACKGROUND: (libc)Error Codes.
+* EBADE: (libc)Error Codes.
+* EBADF: (libc)Error Codes.
+* EBADFD: (libc)Error Codes.
+* EBADMSG: (libc)Error Codes.
+* EBADR: (libc)Error Codes.
+* EBADRPC: (libc)Error Codes.
+* EBADRQC: (libc)Error Codes.
+* EBADSLT: (libc)Error Codes.
+* EBFONT: (libc)Error Codes.
+* EBUSY: (libc)Error Codes.
+* ECANCELED: (libc)Error Codes.
+* ECHILD: (libc)Error Codes.
+* ECHO: (libc)Local Modes.
+* ECHOCTL: (libc)Local Modes.
+* ECHOE: (libc)Local Modes.
+* ECHOK: (libc)Local Modes.
+* ECHOKE: (libc)Local Modes.
+* ECHONL: (libc)Local Modes.
+* ECHOPRT: (libc)Local Modes.
+* ECHRNG: (libc)Error Codes.
+* ECOMM: (libc)Error Codes.
+* ECONNABORTED: (libc)Error Codes.
+* ECONNREFUSED: (libc)Error Codes.
+* ECONNRESET: (libc)Error Codes.
+* ED: (libc)Error Codes.
+* EDEADLK: (libc)Error Codes.
+* EDEADLOCK: (libc)Error Codes.
+* EDESTADDRREQ: (libc)Error Codes.
+* EDIED: (libc)Error Codes.
+* EDOM: (libc)Error Codes.
+* EDOTDOT: (libc)Error Codes.
+* EDQUOT: (libc)Error Codes.
+* EEXIST: (libc)Error Codes.
+* EFAULT: (libc)Error Codes.
+* EFBIG: (libc)Error Codes.
+* EFTYPE: (libc)Error Codes.
+* EGRATUITOUS: (libc)Error Codes.
+* EGREGIOUS: (libc)Error Codes.
+* EHOSTDOWN: (libc)Error Codes.
+* EHOSTUNREACH: (libc)Error Codes.
+* EIDRM: (libc)Error Codes.
+* EIEIO: (libc)Error Codes.
+* EILSEQ: (libc)Error Codes.
+* EINPROGRESS: (libc)Error Codes.
+* EINTR: (libc)Error Codes.
+* EINVAL: (libc)Error Codes.
+* EIO: (libc)Error Codes.
+* EISCONN: (libc)Error Codes.
+* EISDIR: (libc)Error Codes.
+* EISNAM: (libc)Error Codes.
+* EKEYEXPIRED: (libc)Error Codes.
+* EKEYREJECTED: (libc)Error Codes.
+* EKEYREVOKED: (libc)Error Codes.
+* EL2HLT: (libc)Error Codes.
+* EL2NSYNC: (libc)Error Codes.
+* EL3HLT: (libc)Error Codes.
+* EL3RST: (libc)Error Codes.
+* ELIBACC: (libc)Error Codes.
+* ELIBBAD: (libc)Error Codes.
+* ELIBEXEC: (libc)Error Codes.
+* ELIBMAX: (libc)Error Codes.
+* ELIBSCN: (libc)Error Codes.
+* ELNRNG: (libc)Error Codes.
+* ELOOP: (libc)Error Codes.
+* EMEDIUMTYPE: (libc)Error Codes.
+* EMFILE: (libc)Error Codes.
+* EMLINK: (libc)Error Codes.
+* EMSGSIZE: (libc)Error Codes.
+* EMULTIHOP: (libc)Error Codes.
+* ENAMETOOLONG: (libc)Error Codes.
+* ENAVAIL: (libc)Error Codes.
+* ENEEDAUTH: (libc)Error Codes.
+* ENETDOWN: (libc)Error Codes.
+* ENETRESET: (libc)Error Codes.
+* ENETUNREACH: (libc)Error Codes.
+* ENFILE: (libc)Error Codes.
+* ENOANO: (libc)Error Codes.
+* ENOBUFS: (libc)Error Codes.
+* ENOCSI: (libc)Error Codes.
+* ENODATA: (libc)Error Codes.
+* ENODEV: (libc)Error Codes.
+* ENOENT: (libc)Error Codes.
+* ENOEXEC: (libc)Error Codes.
+* ENOKEY: (libc)Error Codes.
+* ENOLCK: (libc)Error Codes.
+* ENOLINK: (libc)Error Codes.
+* ENOMEDIUM: (libc)Error Codes.
+* ENOMEM: (libc)Error Codes.
+* ENOMSG: (libc)Error Codes.
+* ENONET: (libc)Error Codes.
+* ENOPKG: (libc)Error Codes.
+* ENOPROTOOPT: (libc)Error Codes.
+* ENOSPC: (libc)Error Codes.
+* ENOSR: (libc)Error Codes.
+* ENOSTR: (libc)Error Codes.
+* ENOSYS: (libc)Error Codes.
+* ENOTBLK: (libc)Error Codes.
+* ENOTCONN: (libc)Error Codes.
+* ENOTDIR: (libc)Error Codes.
+* ENOTEMPTY: (libc)Error Codes.
+* ENOTNAM: (libc)Error Codes.
+* ENOTRECOVERABLE: (libc)Error Codes.
+* ENOTSOCK: (libc)Error Codes.
+* ENOTSUP: (libc)Error Codes.
+* ENOTTY: (libc)Error Codes.
+* ENOTUNIQ: (libc)Error Codes.
+* ENXIO: (libc)Error Codes.
+* EOF: (libc)EOF and Errors.
+* EOPNOTSUPP: (libc)Error Codes.
+* EOVERFLOW: (libc)Error Codes.
+* EOWNERDEAD: (libc)Error Codes.
+* EPERM: (libc)Error Codes.
+* EPFNOSUPPORT: (libc)Error Codes.
+* EPIPE: (libc)Error Codes.
+* EPROCLIM: (libc)Error Codes.
+* EPROCUNAVAIL: (libc)Error Codes.
+* EPROGMISMATCH: (libc)Error Codes.
+* EPROGUNAVAIL: (libc)Error Codes.
+* EPROTO: (libc)Error Codes.
+* EPROTONOSUPPORT: (libc)Error Codes.
+* EPROTOTYPE: (libc)Error Codes.
+* EQUIV_CLASS_MAX: (libc)Utility Limits.
+* ERANGE: (libc)Error Codes.
+* EREMCHG: (libc)Error Codes.
+* EREMOTE: (libc)Error Codes.
+* EREMOTEIO: (libc)Error Codes.
+* ERESTART: (libc)Error Codes.
+* EROFS: (libc)Error Codes.
+* ERPCMISMATCH: (libc)Error Codes.
+* ESHUTDOWN: (libc)Error Codes.
+* ESOCKTNOSUPPORT: (libc)Error Codes.
+* ESPIPE: (libc)Error Codes.
+* ESRCH: (libc)Error Codes.
+* ESRMNT: (libc)Error Codes.
+* ESTALE: (libc)Error Codes.
+* ESTRPIPE: (libc)Error Codes.
+* ETIME: (libc)Error Codes.
+* ETIMEDOUT: (libc)Error Codes.
+* ETOOMANYREFS: (libc)Error Codes.
+* ETXTBSY: (libc)Error Codes.
+* EUCLEAN: (libc)Error Codes.
+* EUNATCH: (libc)Error Codes.
+* EUSERS: (libc)Error Codes.
+* EWOULDBLOCK: (libc)Error Codes.
+* EXDEV: (libc)Error Codes.
+* EXFULL: (libc)Error Codes.
+* EXIT_FAILURE: (libc)Exit Status.
+* EXIT_SUCCESS: (libc)Exit Status.
+* EXPR_NEST_MAX: (libc)Utility Limits.
+* FD_CLOEXEC: (libc)Descriptor Flags.
+* FD_CLR: (libc)Waiting for I/O.
+* FD_ISSET: (libc)Waiting for I/O.
+* FD_SET: (libc)Waiting for I/O.
+* FD_SETSIZE: (libc)Waiting for I/O.
+* FD_ZERO: (libc)Waiting for I/O.
+* FILENAME_MAX: (libc)Limits for Files.
+* FLUSHO: (libc)Local Modes.
+* FOPEN_MAX: (libc)Opening Streams.
+* FP_ILOGB0: (libc)Exponents and Logarithms.
+* FP_ILOGBNAN: (libc)Exponents and Logarithms.
+* F_DUPFD: (libc)Duplicating Descriptors.
+* F_GETFD: (libc)Descriptor Flags.
+* F_GETFL: (libc)Getting File Status Flags.
+* F_GETLK: (libc)File Locks.
+* F_GETOWN: (libc)Interrupt Input.
+* F_OK: (libc)Testing File Access.
+* F_SETFD: (libc)Descriptor Flags.
+* F_SETFL: (libc)Getting File Status Flags.
+* F_SETLK: (libc)File Locks.
+* F_SETLKW: (libc)File Locks.
+* F_SETOWN: (libc)Interrupt Input.
+* HUGE_VAL: (libc)Math Error Reporting.
+* HUGE_VALF: (libc)Math Error Reporting.
+* HUGE_VALL: (libc)Math Error Reporting.
+* HUPCL: (libc)Control Modes.
+* I: (libc)Complex Numbers.
+* ICANON: (libc)Local Modes.
+* ICRNL: (libc)Input Modes.
+* IEXTEN: (libc)Local Modes.
+* IFNAMSIZ: (libc)Interface Naming.
+* IFTODT: (libc)Directory Entries.
+* IGNBRK: (libc)Input Modes.
+* IGNCR: (libc)Input Modes.
+* IGNPAR: (libc)Input Modes.
+* IMAXBEL: (libc)Input Modes.
+* INADDR_ANY: (libc)Host Address Data Type.
+* INADDR_BROADCAST: (libc)Host Address Data Type.
+* INADDR_LOOPBACK: (libc)Host Address Data Type.
+* INADDR_NONE: (libc)Host Address Data Type.
+* INFINITY: (libc)Infinity and NaN.
+* INLCR: (libc)Input Modes.
+* INPCK: (libc)Input Modes.
+* IPPORT_RESERVED: (libc)Ports.
+* IPPORT_USERRESERVED: (libc)Ports.
+* ISIG: (libc)Local Modes.
+* ISTRIP: (libc)Input Modes.
+* IXANY: (libc)Input Modes.
+* IXOFF: (libc)Input Modes.
+* IXON: (libc)Input Modes.
+* LINE_MAX: (libc)Utility Limits.
+* LINK_MAX: (libc)Limits for Files.
+* L_ctermid: (libc)Identifying the Terminal.
+* L_cuserid: (libc)Who Logged In.
+* L_tmpnam: (libc)Temporary Files.
+* MAXNAMLEN: (libc)Limits for Files.
+* MAXSYMLINKS: (libc)Symbolic Links.
+* MAX_CANON: (libc)Limits for Files.
+* MAX_INPUT: (libc)Limits for Files.
+* MB_CUR_MAX: (libc)Selecting the Conversion.
+* MB_LEN_MAX: (libc)Selecting the Conversion.
+* MDMBUF: (libc)Control Modes.
+* MSG_DONTROUTE: (libc)Socket Data Options.
+* MSG_OOB: (libc)Socket Data Options.
+* MSG_PEEK: (libc)Socket Data Options.
+* NAME_MAX: (libc)Limits for Files.
+* NAN: (libc)Infinity and NaN.
+* NCCS: (libc)Mode Data Types.
+* NGROUPS_MAX: (libc)General Limits.
+* NOFLSH: (libc)Local Modes.
+* NOKERNINFO: (libc)Local Modes.
+* NSIG: (libc)Standard Signals.
+* NULL: (libc)Null Pointer Constant.
+* ONLCR: (libc)Output Modes.
+* ONOEOT: (libc)Output Modes.
+* OPEN_MAX: (libc)General Limits.
+* OPOST: (libc)Output Modes.
+* OXTABS: (libc)Output Modes.
+* O_ACCMODE: (libc)Access Modes.
+* O_APPEND: (libc)Operating Modes.
+* O_ASYNC: (libc)Operating Modes.
+* O_CREAT: (libc)Open-time Flags.
+* O_EXCL: (libc)Open-time Flags.
+* O_EXEC: (libc)Access Modes.
+* O_EXLOCK: (libc)Open-time Flags.
+* O_FSYNC: (libc)Operating Modes.
+* O_IGNORE_CTTY: (libc)Open-time Flags.
+* O_NDELAY: (libc)Operating Modes.
+* O_NOATIME: (libc)Operating Modes.
+* O_NOCTTY: (libc)Open-time Flags.
+* O_NOLINK: (libc)Open-time Flags.
+* O_NONBLOCK: (libc)Open-time Flags.
+* O_NONBLOCK: (libc)Operating Modes.
+* O_NOTRANS: (libc)Open-time Flags.
+* O_RDONLY: (libc)Access Modes.
+* O_RDWR: (libc)Access Modes.
+* O_READ: (libc)Access Modes.
+* O_SHLOCK: (libc)Open-time Flags.
+* O_SYNC: (libc)Operating Modes.
+* O_TRUNC: (libc)Open-time Flags.
+* O_WRITE: (libc)Access Modes.
+* O_WRONLY: (libc)Access Modes.
+* PARENB: (libc)Control Modes.
+* PARMRK: (libc)Input Modes.
+* PARODD: (libc)Control Modes.
+* PATH_MAX: (libc)Limits for Files.
+* PA_FLAG_MASK: (libc)Parsing a Template String.
+* PENDIN: (libc)Local Modes.
+* PF_FILE: (libc)Local Namespace Details.
+* PF_INET6: (libc)Internet Namespace.
+* PF_INET: (libc)Internet Namespace.
+* PF_LOCAL: (libc)Local Namespace Details.
+* PF_UNIX: (libc)Local Namespace Details.
+* PIPE_BUF: (libc)Limits for Files.
+* P_tmpdir: (libc)Temporary Files.
+* RAND_MAX: (libc)ISO Random.
+* RE_DUP_MAX: (libc)General Limits.
+* RLIM_INFINITY: (libc)Limits on Resources.
+* R_OK: (libc)Testing File Access.
+* SA_NOCLDSTOP: (libc)Flags for Sigaction.
+* SA_ONSTACK: (libc)Flags for Sigaction.
+* SA_RESTART: (libc)Flags for Sigaction.
+* SEEK_CUR: (libc)File Positioning.
+* SEEK_END: (libc)File Positioning.
+* SEEK_SET: (libc)File Positioning.
+* SIGABRT: (libc)Program Error Signals.
+* SIGALRM: (libc)Alarm Signals.
+* SIGBUS: (libc)Program Error Signals.
+* SIGCHLD: (libc)Job Control Signals.
+* SIGCLD: (libc)Job Control Signals.
+* SIGCONT: (libc)Job Control Signals.
+* SIGEMT: (libc)Program Error Signals.
+* SIGFPE: (libc)Program Error Signals.
+* SIGHUP: (libc)Termination Signals.
+* SIGILL: (libc)Program Error Signals.
+* SIGINFO: (libc)Miscellaneous Signals.
+* SIGINT: (libc)Termination Signals.
+* SIGIO: (libc)Asynchronous I/O Signals.
+* SIGIOT: (libc)Program Error Signals.
+* SIGKILL: (libc)Termination Signals.
+* SIGLOST: (libc)Operation Error Signals.
+* SIGPIPE: (libc)Operation Error Signals.
+* SIGPOLL: (libc)Asynchronous I/O Signals.
+* SIGPROF: (libc)Alarm Signals.
+* SIGQUIT: (libc)Termination Signals.
+* SIGSEGV: (libc)Program Error Signals.
+* SIGSTOP: (libc)Job Control Signals.
+* SIGSYS: (libc)Program Error Signals.
+* SIGTERM: (libc)Termination Signals.
+* SIGTRAP: (libc)Program Error Signals.
+* SIGTSTP: (libc)Job Control Signals.
+* SIGTTIN: (libc)Job Control Signals.
+* SIGTTOU: (libc)Job Control Signals.
+* SIGURG: (libc)Asynchronous I/O Signals.
+* SIGUSR1: (libc)Miscellaneous Signals.
+* SIGUSR2: (libc)Miscellaneous Signals.
+* SIGVTALRM: (libc)Alarm Signals.
+* SIGWINCH: (libc)Miscellaneous Signals.
+* SIGXCPU: (libc)Operation Error Signals.
+* SIGXFSZ: (libc)Operation Error Signals.
+* SIG_ERR: (libc)Basic Signal Handling.
+* SOCK_DGRAM: (libc)Communication Styles.
+* SOCK_RAW: (libc)Communication Styles.
+* SOCK_RDM: (libc)Communication Styles.
+* SOCK_SEQPACKET: (libc)Communication Styles.
+* SOCK_STREAM: (libc)Communication Styles.
+* SOL_SOCKET: (libc)Socket-Level Options.
+* SSIZE_MAX: (libc)General Limits.
+* STREAM_MAX: (libc)General Limits.
+* SUN_LEN: (libc)Local Namespace Details.
+* SV_INTERRUPT: (libc)BSD Handler.
+* SV_ONSTACK: (libc)BSD Handler.
+* SV_RESETHAND: (libc)BSD Handler.
+* S_IFMT: (libc)Testing File Type.
+* S_ISBLK: (libc)Testing File Type.
+* S_ISCHR: (libc)Testing File Type.
+* S_ISDIR: (libc)Testing File Type.
+* S_ISFIFO: (libc)Testing File Type.
+* S_ISLNK: (libc)Testing File Type.
+* S_ISREG: (libc)Testing File Type.
+* S_ISSOCK: (libc)Testing File Type.
+* S_TYPEISMQ: (libc)Testing File Type.
+* S_TYPEISSEM: (libc)Testing File Type.
+* S_TYPEISSHM: (libc)Testing File Type.
+* TMP_MAX: (libc)Temporary Files.
+* TOSTOP: (libc)Local Modes.
+* TZNAME_MAX: (libc)General Limits.
+* VDISCARD: (libc)Other Special.
+* VDSUSP: (libc)Signal Characters.
+* VEOF: (libc)Editing Characters.
+* VEOL2: (libc)Editing Characters.
+* VEOL: (libc)Editing Characters.
+* VERASE: (libc)Editing Characters.
+* VINTR: (libc)Signal Characters.
+* VKILL: (libc)Editing Characters.
+* VLNEXT: (libc)Other Special.
+* VMIN: (libc)Noncanonical Input.
+* VQUIT: (libc)Signal Characters.
+* VREPRINT: (libc)Editing Characters.
+* VSTART: (libc)Start/Stop Characters.
+* VSTATUS: (libc)Other Special.
+* VSTOP: (libc)Start/Stop Characters.
+* VSUSP: (libc)Signal Characters.
+* VTIME: (libc)Noncanonical Input.
+* VWERASE: (libc)Editing Characters.
+* WCHAR_MAX: (libc)Extended Char Intro.
+* WCHAR_MIN: (libc)Extended Char Intro.
+* WCOREDUMP: (libc)Process Completion Status.
+* WEOF: (libc)EOF and Errors.
+* WEOF: (libc)Extended Char Intro.
+* WEXITSTATUS: (libc)Process Completion Status.
+* WIFEXITED: (libc)Process Completion Status.
+* WIFSIGNALED: (libc)Process Completion Status.
+* WIFSTOPPED: (libc)Process Completion Status.
+* WSTOPSIG: (libc)Process Completion Status.
+* WTERMSIG: (libc)Process Completion Status.
+* W_OK: (libc)Testing File Access.
+* X_OK: (libc)Testing File Access.
+* _Complex_I: (libc)Complex Numbers.
+* _Exit: (libc)Termination Internals.
+* _IOFBF: (libc)Controlling Buffering.
+* _IOLBF: (libc)Controlling Buffering.
+* _IONBF: (libc)Controlling Buffering.
+* _Imaginary_I: (libc)Complex Numbers.
+* _PATH_UTMP: (libc)Manipulating the Database.
+* _PATH_WTMP: (libc)Manipulating the Database.
+* _POSIX2_C_DEV: (libc)System Options.
+* _POSIX2_C_VERSION: (libc)Version Supported.
+* _POSIX2_FORT_DEV: (libc)System Options.
+* _POSIX2_FORT_RUN: (libc)System Options.
+* _POSIX2_LOCALEDEF: (libc)System Options.
+* _POSIX2_SW_DEV: (libc)System Options.
+* _POSIX_CHOWN_RESTRICTED: (libc)Options for Files.
+* _POSIX_JOB_CONTROL: (libc)System Options.
+* _POSIX_NO_TRUNC: (libc)Options for Files.
+* _POSIX_SAVED_IDS: (libc)System Options.
+* _POSIX_VDISABLE: (libc)Options for Files.
+* _POSIX_VERSION: (libc)Version Supported.
+* __fbufsize: (libc)Controlling Buffering.
+* __flbf: (libc)Controlling Buffering.
+* __fpending: (libc)Controlling Buffering.
+* __fpurge: (libc)Flushing Buffers.
+* __freadable: (libc)Opening Streams.
+* __freading: (libc)Opening Streams.
+* __fsetlocking: (libc)Streams and Threads.
+* __fwritable: (libc)Opening Streams.
+* __fwriting: (libc)Opening Streams.
+* __gconv_end_fct: (libc)glibc iconv Implementation.
+* __gconv_fct: (libc)glibc iconv Implementation.
+* __gconv_init_fct: (libc)glibc iconv Implementation.
+* __va_copy: (libc)Argument Macros.
+* _exit: (libc)Termination Internals.
+* _flushlbf: (libc)Flushing Buffers.
+* _tolower: (libc)Case Conversion.
+* _toupper: (libc)Case Conversion.
+* a64l: (libc)Encode Binary Data.
+* abort: (libc)Aborting a Program.
+* abs: (libc)Absolute Value.
+* accept: (libc)Accepting Connections.
+* access: (libc)Testing File Access.
+* acos: (libc)Inverse Trig Functions.
+* acosf: (libc)Inverse Trig Functions.
+* acosh: (libc)Hyperbolic Functions.
+* acoshf: (libc)Hyperbolic Functions.
+* acoshl: (libc)Hyperbolic Functions.
+* acosl: (libc)Inverse Trig Functions.
+* addmntent: (libc)mtab.
+* addseverity: (libc)Adding Severity Classes.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
+* aio_cancel64: (libc)Cancel AIO Operations.
+* aio_cancel: (libc)Cancel AIO Operations.
+* aio_error64: (libc)Status of AIO Operations.
+* aio_error: (libc)Status of AIO Operations.
+* aio_fsync64: (libc)Synchronizing AIO Operations.
+* aio_fsync: (libc)Synchronizing AIO Operations.
+* aio_init: (libc)Configuration of AIO.
+* aio_read64: (libc)Asynchronous Reads/Writes.
+* aio_read: (libc)Asynchronous Reads/Writes.
+* aio_return64: (libc)Status of AIO Operations.
+* aio_return: (libc)Status of AIO Operations.
+* aio_suspend64: (libc)Synchronizing AIO Operations.
+* aio_suspend: (libc)Synchronizing AIO Operations.
+* aio_write64: (libc)Asynchronous Reads/Writes.
+* aio_write: (libc)Asynchronous Reads/Writes.
+* alarm: (libc)Setting an Alarm.
+* alloca: (libc)Variable Size Automatic.
+* alphasort64: (libc)Scanning Directory Content.
+* alphasort: (libc)Scanning Directory Content.
+* argp_error: (libc)Argp Helper Functions.
+* argp_failure: (libc)Argp Helper Functions.
+* argp_help: (libc)Argp Help.
+* argp_parse: (libc)Argp.
+* argp_state_help: (libc)Argp Helper Functions.
+* argp_usage: (libc)Argp Helper Functions.
+* argz_add: (libc)Argz Functions.
+* argz_add_sep: (libc)Argz Functions.
+* argz_append: (libc)Argz Functions.
+* argz_count: (libc)Argz Functions.
+* argz_create: (libc)Argz Functions.
+* argz_create_sep: (libc)Argz Functions.
+* argz_delete: (libc)Argz Functions.
+* argz_extract: (libc)Argz Functions.
+* argz_insert: (libc)Argz Functions.
+* argz_next: (libc)Argz Functions.
+* argz_replace: (libc)Argz Functions.
+* argz_stringify: (libc)Argz Functions.
+* asctime: (libc)Formatting Calendar Time.
+* asctime_r: (libc)Formatting Calendar Time.
+* asin: (libc)Inverse Trig Functions.
+* asinf: (libc)Inverse Trig Functions.
+* asinh: (libc)Hyperbolic Functions.
+* asinhf: (libc)Hyperbolic Functions.
+* asinhl: (libc)Hyperbolic Functions.
+* asinl: (libc)Inverse Trig Functions.
+* asprintf: (libc)Dynamic Output.
+* assert: (libc)Consistency Checking.
+* assert_perror: (libc)Consistency Checking.
+* atan2: (libc)Inverse Trig Functions.
+* atan2f: (libc)Inverse Trig Functions.
+* atan2l: (libc)Inverse Trig Functions.
+* atan: (libc)Inverse Trig Functions.
+* atanf: (libc)Inverse Trig Functions.
+* atanh: (libc)Hyperbolic Functions.
+* atanhf: (libc)Hyperbolic Functions.
+* atanhl: (libc)Hyperbolic Functions.
+* atanl: (libc)Inverse Trig Functions.
+* atexit: (libc)Cleanups on Exit.
+* atof: (libc)Parsing of Floats.
+* atoi: (libc)Parsing of Integers.
+* atol: (libc)Parsing of Integers.
+* atoll: (libc)Parsing of Integers.
+* backtrace: (libc)Backtraces.
+* backtrace_symbols: (libc)Backtraces.
+* backtrace_symbols_fd: (libc)Backtraces.
+* basename: (libc)Finding Tokens in a String.
+* basename: (libc)Finding Tokens in a String.
+* bcmp: (libc)String/Array Comparison.
+* bcopy: (libc)Copying and Concatenation.
+* bind: (libc)Setting Address.
+* bind_textdomain_codeset: (libc)Charset conversion in gettext.
+* bindtextdomain: (libc)Locating gettext catalog.
+* brk: (libc)Resizing the Data Segment.
+* bsearch: (libc)Array Search Function.
+* btowc: (libc)Converting a Character.
+* bzero: (libc)Copying and Concatenation.
+* cabs: (libc)Absolute Value.
+* cabsf: (libc)Absolute Value.
+* cabsl: (libc)Absolute Value.
+* cacos: (libc)Inverse Trig Functions.
+* cacosf: (libc)Inverse Trig Functions.
+* cacosh: (libc)Hyperbolic Functions.
+* cacoshf: (libc)Hyperbolic Functions.
+* cacoshl: (libc)Hyperbolic Functions.
+* cacosl: (libc)Inverse Trig Functions.
+* calloc: (libc)Allocating Cleared Space.
+* canonicalize_file_name: (libc)Symbolic Links.
+* carg: (libc)Operations on Complex.
+* cargf: (libc)Operations on Complex.
+* cargl: (libc)Operations on Complex.
+* casin: (libc)Inverse Trig Functions.
+* casinf: (libc)Inverse Trig Functions.
+* casinh: (libc)Hyperbolic Functions.
+* casinhf: (libc)Hyperbolic Functions.
+* casinhl: (libc)Hyperbolic Functions.
+* casinl: (libc)Inverse Trig Functions.
+* catan: (libc)Inverse Trig Functions.
+* catanf: (libc)Inverse Trig Functions.
+* catanh: (libc)Hyperbolic Functions.
+* catanhf: (libc)Hyperbolic Functions.
+* catanhl: (libc)Hyperbolic Functions.
+* catanl: (libc)Inverse Trig Functions.
+* catclose: (libc)The catgets Functions.
+* catgets: (libc)The catgets Functions.
+* catopen: (libc)The catgets Functions.
+* cbc_crypt: (libc)DES Encryption.
+* cbrt: (libc)Exponents and Logarithms.
+* cbrtf: (libc)Exponents and Logarithms.
+* cbrtl: (libc)Exponents and Logarithms.
+* ccos: (libc)Trig Functions.
+* ccosf: (libc)Trig Functions.
+* ccosh: (libc)Hyperbolic Functions.
+* ccoshf: (libc)Hyperbolic Functions.
+* ccoshl: (libc)Hyperbolic Functions.
+* ccosl: (libc)Trig Functions.
+* ceil: (libc)Rounding Functions.
+* ceilf: (libc)Rounding Functions.
+* ceill: (libc)Rounding Functions.
+* cexp: (libc)Exponents and Logarithms.
+* cexpf: (libc)Exponents and Logarithms.
+* cexpl: (libc)Exponents and Logarithms.
+* cfgetispeed: (libc)Line Speed.
+* cfgetospeed: (libc)Line Speed.
+* cfmakeraw: (libc)Noncanonical Input.
+* cfree: (libc)Freeing after Malloc.
+* cfsetispeed: (libc)Line Speed.
+* cfsetospeed: (libc)Line Speed.
+* cfsetspeed: (libc)Line Speed.
+* chdir: (libc)Working Directory.
+* chmod: (libc)Setting Permissions.
+* chown: (libc)File Owner.
+* cimag: (libc)Operations on Complex.
+* cimagf: (libc)Operations on Complex.
+* cimagl: (libc)Operations on Complex.
+* clearenv: (libc)Environment Access.
+* clearerr: (libc)Error Recovery.
+* clearerr_unlocked: (libc)Error Recovery.
+* clock: (libc)CPU Time.
+* clog10: (libc)Exponents and Logarithms.
+* clog10f: (libc)Exponents and Logarithms.
+* clog10l: (libc)Exponents and Logarithms.
+* clog: (libc)Exponents and Logarithms.
+* clogf: (libc)Exponents and Logarithms.
+* clogl: (libc)Exponents and Logarithms.
+* close: (libc)Opening and Closing Files.
+* closedir: (libc)Reading/Closing Directory.
+* closelog: (libc)closelog.
+* confstr: (libc)String Parameters.
+* conj: (libc)Operations on Complex.
+* conjf: (libc)Operations on Complex.
+* conjl: (libc)Operations on Complex.
+* connect: (libc)Connecting.
+* copysign: (libc)FP Bit Twiddling.
+* copysignf: (libc)FP Bit Twiddling.
+* copysignl: (libc)FP Bit Twiddling.
+* cos: (libc)Trig Functions.
+* cosf: (libc)Trig Functions.
+* cosh: (libc)Hyperbolic Functions.
+* coshf: (libc)Hyperbolic Functions.
+* coshl: (libc)Hyperbolic Functions.
+* cosl: (libc)Trig Functions.
+* cpow: (libc)Exponents and Logarithms.
+* cpowf: (libc)Exponents and Logarithms.
+* cpowl: (libc)Exponents and Logarithms.
+* cproj: (libc)Operations on Complex.
+* cprojf: (libc)Operations on Complex.
+* cprojl: (libc)Operations on Complex.
+* creal: (libc)Operations on Complex.
+* crealf: (libc)Operations on Complex.
+* creall: (libc)Operations on Complex.
+* creat64: (libc)Opening and Closing Files.
+* creat: (libc)Opening and Closing Files.
+* crypt: (libc)crypt.
+* crypt_r: (libc)crypt.
+* csin: (libc)Trig Functions.
+* csinf: (libc)Trig Functions.
+* csinh: (libc)Hyperbolic Functions.
+* csinhf: (libc)Hyperbolic Functions.
+* csinhl: (libc)Hyperbolic Functions.
+* csinl: (libc)Trig Functions.
+* csqrt: (libc)Exponents and Logarithms.
+* csqrtf: (libc)Exponents and Logarithms.
+* csqrtl: (libc)Exponents and Logarithms.
+* ctan: (libc)Trig Functions.
+* ctanf: (libc)Trig Functions.
+* ctanh: (libc)Hyperbolic Functions.
+* ctanhf: (libc)Hyperbolic Functions.
+* ctanhl: (libc)Hyperbolic Functions.
+* ctanl: (libc)Trig Functions.
+* ctermid: (libc)Identifying the Terminal.
+* ctime: (libc)Formatting Calendar Time.
+* ctime_r: (libc)Formatting Calendar Time.
+* cuserid: (libc)Who Logged In.
+* dcgettext: (libc)Translation with gettext.
+* dcngettext: (libc)Advanced gettext functions.
+* des_setparity: (libc)DES Encryption.
+* dgettext: (libc)Translation with gettext.
+* difftime: (libc)Elapsed Time.
+* dirfd: (libc)Opening a Directory.
+* dirname: (libc)Finding Tokens in a String.
+* div: (libc)Integer Division.
+* dngettext: (libc)Advanced gettext functions.
+* drand48: (libc)SVID Random.
+* drand48_r: (libc)SVID Random.
+* drem: (libc)Remainder Functions.
+* dremf: (libc)Remainder Functions.
+* dreml: (libc)Remainder Functions.
+* dup2: (libc)Duplicating Descriptors.
+* dup: (libc)Duplicating Descriptors.
+* ecb_crypt: (libc)DES Encryption.
+* ecvt: (libc)System V Number Conversion.
+* ecvt_r: (libc)System V Number Conversion.
+* encrypt: (libc)DES Encryption.
+* encrypt_r: (libc)DES Encryption.
+* endfsent: (libc)fstab.
+* endgrent: (libc)Scanning All Groups.
+* endhostent: (libc)Host Names.
+* endmntent: (libc)mtab.
+* endnetent: (libc)Networks Database.
+* endnetgrent: (libc)Lookup Netgroup.
+* endprotoent: (libc)Protocols Database.
+* endpwent: (libc)Scanning All Users.
+* endservent: (libc)Services Database.
+* endutent: (libc)Manipulating the Database.
+* endutxent: (libc)XPG Functions.
+* envz_add: (libc)Envz Functions.
+* envz_entry: (libc)Envz Functions.
+* envz_get: (libc)Envz Functions.
+* envz_merge: (libc)Envz Functions.
+* envz_strip: (libc)Envz Functions.
+* erand48: (libc)SVID Random.
+* erand48_r: (libc)SVID Random.
+* erf: (libc)Special Functions.
+* erfc: (libc)Special Functions.
+* erfcf: (libc)Special Functions.
+* erfcl: (libc)Special Functions.
+* erff: (libc)Special Functions.
+* erfl: (libc)Special Functions.
+* err: (libc)Error Messages.
+* errno: (libc)Checking for Errors.
+* error: (libc)Error Messages.
+* error_at_line: (libc)Error Messages.
+* errx: (libc)Error Messages.
+* execl: (libc)Executing a File.
+* execle: (libc)Executing a File.
+* execlp: (libc)Executing a File.
+* execv: (libc)Executing a File.
+* execve: (libc)Executing a File.
+* execvp: (libc)Executing a File.
+* exit: (libc)Normal Termination.
+* exp10: (libc)Exponents and Logarithms.
+* exp10f: (libc)Exponents and Logarithms.
+* exp10l: (libc)Exponents and Logarithms.
+* exp2: (libc)Exponents and Logarithms.
+* exp2f: (libc)Exponents and Logarithms.
+* exp2l: (libc)Exponents and Logarithms.
+* exp: (libc)Exponents and Logarithms.
+* expf: (libc)Exponents and Logarithms.
+* expl: (libc)Exponents and Logarithms.
+* expm1: (libc)Exponents and Logarithms.
+* expm1f: (libc)Exponents and Logarithms.
+* expm1l: (libc)Exponents and Logarithms.
+* fabs: (libc)Absolute Value.
+* fabsf: (libc)Absolute Value.
+* fabsl: (libc)Absolute Value.
+* fchdir: (libc)Working Directory.
+* fchmod: (libc)Setting Permissions.
+* fchown: (libc)File Owner.
+* fclean: (libc)Cleaning Streams.
+* fclose: (libc)Closing Streams.
+* fcloseall: (libc)Closing Streams.
+* fcntl: (libc)Control Operations.
+* fcvt: (libc)System V Number Conversion.
+* fcvt_r: (libc)System V Number Conversion.
+* fdatasync: (libc)Synchronizing I/O.
+* fdim: (libc)Misc FP Arithmetic.
+* fdimf: (libc)Misc FP Arithmetic.
+* fdiml: (libc)Misc FP Arithmetic.
+* fdopen: (libc)Descriptors and Streams.
+* fdopendir: (libc)Opening a Directory.
+* feclearexcept: (libc)Status bit operations.
+* fedisableexcept: (libc)Control Functions.
+* feenableexcept: (libc)Control Functions.
+* fegetenv: (libc)Control Functions.
+* fegetexcept: (libc)Control Functions.
+* fegetexceptflag: (libc)Status bit operations.
+* fegetround: (libc)Rounding.
+* feholdexcept: (libc)Control Functions.
+* feof: (libc)EOF and Errors.
+* feof_unlocked: (libc)EOF and Errors.
+* feraiseexcept: (libc)Status bit operations.
+* ferror: (libc)EOF and Errors.
+* ferror_unlocked: (libc)EOF and Errors.
+* fesetenv: (libc)Control Functions.
+* fesetexceptflag: (libc)Status bit operations.
+* fesetround: (libc)Rounding.
+* fetestexcept: (libc)Status bit operations.
+* feupdateenv: (libc)Control Functions.
+* fflush: (libc)Flushing Buffers.
+* fflush_unlocked: (libc)Flushing Buffers.
+* fgetc: (libc)Character Input.
+* fgetc_unlocked: (libc)Character Input.
+* fgetgrent: (libc)Scanning All Groups.
+* fgetgrent_r: (libc)Scanning All Groups.
+* fgetpos64: (libc)Portable Positioning.
+* fgetpos: (libc)Portable Positioning.
+* fgetpwent: (libc)Scanning All Users.
+* fgetpwent_r: (libc)Scanning All Users.
+* fgets: (libc)Line Input.
+* fgets_unlocked: (libc)Line Input.
+* fgetwc: (libc)Character Input.
+* fgetwc_unlocked: (libc)Character Input.
+* fgetws: (libc)Line Input.
+* fgetws_unlocked: (libc)Line Input.
+* fileno: (libc)Descriptors and Streams.
+* fileno_unlocked: (libc)Descriptors and Streams.
+* finite: (libc)Floating Point Classes.
+* finitef: (libc)Floating Point Classes.
+* finitel: (libc)Floating Point Classes.
+* flockfile: (libc)Streams and Threads.
+* floor: (libc)Rounding Functions.
+* floorf: (libc)Rounding Functions.
+* floorl: (libc)Rounding Functions.
+* fma: (libc)Misc FP Arithmetic.
+* fmaf: (libc)Misc FP Arithmetic.
+* fmal: (libc)Misc FP Arithmetic.
+* fmax: (libc)Misc FP Arithmetic.
+* fmaxf: (libc)Misc FP Arithmetic.
+* fmaxl: (libc)Misc FP Arithmetic.
+* fmemopen: (libc)String Streams.
+* fmin: (libc)Misc FP Arithmetic.
+* fminf: (libc)Misc FP Arithmetic.
+* fminl: (libc)Misc FP Arithmetic.
+* fmod: (libc)Remainder Functions.
+* fmodf: (libc)Remainder Functions.
+* fmodl: (libc)Remainder Functions.
+* fmtmsg: (libc)Printing Formatted Messages.
+* fnmatch: (libc)Wildcard Matching.
+* fopen64: (libc)Opening Streams.
+* fopen: (libc)Opening Streams.
+* fopencookie: (libc)Streams and Cookies.
+* fork: (libc)Creating a Process.
+* forkpty: (libc)Pseudo-Terminal Pairs.
+* fpathconf: (libc)Pathconf.
+* fpclassify: (libc)Floating Point Classes.
+* fprintf: (libc)Formatted Output Functions.
+* fputc: (libc)Simple Output.
+* fputc_unlocked: (libc)Simple Output.
+* fputs: (libc)Simple Output.
+* fputs_unlocked: (libc)Simple Output.
+* fputwc: (libc)Simple Output.
+* fputwc_unlocked: (libc)Simple Output.
+* fputws: (libc)Simple Output.
+* fputws_unlocked: (libc)Simple Output.
+* fread: (libc)Block Input/Output.
+* fread_unlocked: (libc)Block Input/Output.
+* free: (libc)Freeing after Malloc.
+* freopen64: (libc)Opening Streams.
+* freopen: (libc)Opening Streams.
+* frexp: (libc)Normalization Functions.
+* frexpf: (libc)Normalization Functions.
+* frexpl: (libc)Normalization Functions.
+* fscanf: (libc)Formatted Input Functions.
+* fseek: (libc)File Positioning.
+* fseeko64: (libc)File Positioning.
+* fseeko: (libc)File Positioning.
+* fsetpos64: (libc)Portable Positioning.
+* fsetpos: (libc)Portable Positioning.
+* fstat64: (libc)Reading Attributes.
+* fstat: (libc)Reading Attributes.
+* fsync: (libc)Synchronizing I/O.
+* ftell: (libc)File Positioning.
+* ftello64: (libc)File Positioning.
+* ftello: (libc)File Positioning.
+* ftruncate64: (libc)File Size.
+* ftruncate: (libc)File Size.
+* ftrylockfile: (libc)Streams and Threads.
+* ftw64: (libc)Working with Directory Trees.
+* ftw: (libc)Working with Directory Trees.
+* funlockfile: (libc)Streams and Threads.
+* futimes: (libc)File Times.
+* fwide: (libc)Streams and I18N.
+* fwprintf: (libc)Formatted Output Functions.
+* fwrite: (libc)Block Input/Output.
+* fwrite_unlocked: (libc)Block Input/Output.
+* fwscanf: (libc)Formatted Input Functions.
+* gamma: (libc)Special Functions.
+* gammaf: (libc)Special Functions.
+* gammal: (libc)Special Functions.
+* gcvt: (libc)System V Number Conversion.
+* get_avphys_pages: (libc)Query Memory Parameters.
+* get_current_dir_name: (libc)Working Directory.
+* get_nprocs: (libc)Processor Resources.
+* get_nprocs_conf: (libc)Processor Resources.
+* get_phys_pages: (libc)Query Memory Parameters.
+* getc: (libc)Character Input.
+* getc_unlocked: (libc)Character Input.
+* getchar: (libc)Character Input.
+* getchar_unlocked: (libc)Character Input.
+* getcontext: (libc)System V contexts.
+* getcwd: (libc)Working Directory.
+* getdate: (libc)General Time String Parsing.
+* getdate_r: (libc)General Time String Parsing.
+* getdelim: (libc)Line Input.
+* getdomainnname: (libc)Host Identification.
+* getegid: (libc)Reading Persona.
+* getenv: (libc)Environment Access.
+* geteuid: (libc)Reading Persona.
+* getfsent: (libc)fstab.
+* getfsfile: (libc)fstab.
+* getfsspec: (libc)fstab.
+* getgid: (libc)Reading Persona.
+* getgrent: (libc)Scanning All Groups.
+* getgrent_r: (libc)Scanning All Groups.
+* getgrgid: (libc)Lookup Group.
+* getgrgid_r: (libc)Lookup Group.
+* getgrnam: (libc)Lookup Group.
+* getgrnam_r: (libc)Lookup Group.
+* getgrouplist: (libc)Setting Groups.
+* getgroups: (libc)Reading Persona.
+* gethostbyaddr: (libc)Host Names.
+* gethostbyaddr_r: (libc)Host Names.
+* gethostbyname2: (libc)Host Names.
+* gethostbyname2_r: (libc)Host Names.
+* gethostbyname: (libc)Host Names.
+* gethostbyname_r: (libc)Host Names.
+* gethostent: (libc)Host Names.
+* gethostid: (libc)Host Identification.
+* gethostname: (libc)Host Identification.
+* getitimer: (libc)Setting an Alarm.
+* getline: (libc)Line Input.
+* getloadavg: (libc)Processor Resources.
+* getlogin: (libc)Who Logged In.
+* getmntent: (libc)mtab.
+* getmntent_r: (libc)mtab.
+* getnetbyaddr: (libc)Networks Database.
+* getnetbyname: (libc)Networks Database.
+* getnetent: (libc)Networks Database.
+* getnetgrent: (libc)Lookup Netgroup.
+* getnetgrent_r: (libc)Lookup Netgroup.
+* getopt: (libc)Using Getopt.
+* getopt_long: (libc)Getopt Long Options.
+* getopt_long_only: (libc)Getopt Long Options.
+* getpagesize: (libc)Query Memory Parameters.
+* getpass: (libc)getpass.
+* getpeername: (libc)Who is Connected.
+* getpgid: (libc)Process Group Functions.
+* getpgrp: (libc)Process Group Functions.
+* getpgrp: (libc)Process Group Functions.
+* getpid: (libc)Process Identification.
+* getppid: (libc)Process Identification.
+* getpriority: (libc)Traditional Scheduling Functions.
+* getprotobyname: (libc)Protocols Database.
+* getprotobynumber: (libc)Protocols Database.
+* getprotoent: (libc)Protocols Database.
+* getpt: (libc)Allocation.
+* getpwent: (libc)Scanning All Users.
+* getpwent_r: (libc)Scanning All Users.
+* getpwnam: (libc)Lookup User.
+* getpwnam_r: (libc)Lookup User.
+* getpwuid: (libc)Lookup User.
+* getpwuid_r: (libc)Lookup User.
+* getrlimit64: (libc)Limits on Resources.
+* getrlimit: (libc)Limits on Resources.
+* getrusage: (libc)Resource Usage.
+* gets: (libc)Line Input.
+* getservbyname: (libc)Services Database.
+* getservbyport: (libc)Services Database.
+* getservent: (libc)Services Database.
+* getsid: (libc)Process Group Functions.
+* getsockname: (libc)Reading Address.
+* getsockopt: (libc)Socket Option Functions.
+* getsubopt: (libc)Suboptions.
+* gettext: (libc)Translation with gettext.
+* gettimeofday: (libc)High-Resolution Calendar.
+* getuid: (libc)Reading Persona.
+* getumask: (libc)Setting Permissions.
+* getutent: (libc)Manipulating the Database.
+* getutent_r: (libc)Manipulating the Database.
+* getutid: (libc)Manipulating the Database.
+* getutid_r: (libc)Manipulating the Database.
+* getutline: (libc)Manipulating the Database.
+* getutline_r: (libc)Manipulating the Database.
+* getutmp: (libc)XPG Functions.
+* getutmpx: (libc)XPG Functions.
+* getutxent: (libc)XPG Functions.
+* getutxid: (libc)XPG Functions.
+* getutxline: (libc)XPG Functions.
+* getw: (libc)Character Input.
+* getwc: (libc)Character Input.
+* getwc_unlocked: (libc)Character Input.
+* getwchar: (libc)Character Input.
+* getwchar_unlocked: (libc)Character Input.
+* getwd: (libc)Working Directory.
+* glob64: (libc)Calling Glob.
+* glob: (libc)Calling Glob.
+* globfree64: (libc)More Flags for Globbing.
+* globfree: (libc)More Flags for Globbing.
+* gmtime: (libc)Broken-down Time.
+* gmtime_r: (libc)Broken-down Time.
+* grantpt: (libc)Allocation.
+* gsignal: (libc)Signaling Yourself.
+* gtty: (libc)BSD Terminal Modes.
+* hasmntopt: (libc)mtab.
+* hcreate: (libc)Hash Search Function.
+* hcreate_r: (libc)Hash Search Function.
+* hdestroy: (libc)Hash Search Function.
+* hdestroy_r: (libc)Hash Search Function.
+* hsearch: (libc)Hash Search Function.
+* hsearch_r: (libc)Hash Search Function.
+* htonl: (libc)Byte Order.
+* htons: (libc)Byte Order.
+* hypot: (libc)Exponents and Logarithms.
+* hypotf: (libc)Exponents and Logarithms.
+* hypotl: (libc)Exponents and Logarithms.
+* iconv: (libc)Generic Conversion Interface.
+* iconv_close: (libc)Generic Conversion Interface.
+* iconv_open: (libc)Generic Conversion Interface.
+* if_freenameindex: (libc)Interface Naming.
+* if_indextoname: (libc)Interface Naming.
+* if_nameindex: (libc)Interface Naming.
+* if_nametoindex: (libc)Interface Naming.
+* ilogb: (libc)Exponents and Logarithms.
+* ilogbf: (libc)Exponents and Logarithms.
+* ilogbl: (libc)Exponents and Logarithms.
+* imaxabs: (libc)Absolute Value.
+* imaxdiv: (libc)Integer Division.
+* in6addr_any: (libc)Host Address Data Type.
+* in6addr_loopback: (libc)Host Address Data Type.
+* index: (libc)Search Functions.
+* inet_addr: (libc)Host Address Functions.
+* inet_aton: (libc)Host Address Functions.
+* inet_lnaof: (libc)Host Address Functions.
+* inet_makeaddr: (libc)Host Address Functions.
+* inet_netof: (libc)Host Address Functions.
+* inet_network: (libc)Host Address Functions.
+* inet_ntoa: (libc)Host Address Functions.
+* inet_ntop: (libc)Host Address Functions.
+* inet_pton: (libc)Host Address Functions.
+* initgroups: (libc)Setting Groups.
+* initstate: (libc)BSD Random.
+* initstate_r: (libc)BSD Random.
+* innetgr: (libc)Netgroup Membership.
+* int: (libc)Random Access Directory.
+* ioctl: (libc)IOCTLs.
+* isalnum: (libc)Classification of Characters.
+* isalpha: (libc)Classification of Characters.
+* isascii: (libc)Classification of Characters.
+* isatty: (libc)Is It a Terminal.
+* isblank: (libc)Classification of Characters.
+* iscntrl: (libc)Classification of Characters.
+* isdigit: (libc)Classification of Characters.
+* isfinite: (libc)Floating Point Classes.
+* isgraph: (libc)Classification of Characters.
+* isgreater: (libc)FP Comparison Functions.
+* isgreaterequal: (libc)FP Comparison Functions.
+* isinf: (libc)Floating Point Classes.
+* isinff: (libc)Floating Point Classes.
+* isinfl: (libc)Floating Point Classes.
+* isless: (libc)FP Comparison Functions.
+* islessequal: (libc)FP Comparison Functions.
+* islessgreater: (libc)FP Comparison Functions.
+* islower: (libc)Classification of Characters.
+* isnan: (libc)Floating Point Classes.
+* isnan: (libc)Floating Point Classes.
+* isnanf: (libc)Floating Point Classes.
+* isnanl: (libc)Floating Point Classes.
+* isnormal: (libc)Floating Point Classes.
+* isprint: (libc)Classification of Characters.
+* ispunct: (libc)Classification of Characters.
+* isspace: (libc)Classification of Characters.
+* isunordered: (libc)FP Comparison Functions.
+* isupper: (libc)Classification of Characters.
+* iswalnum: (libc)Classification of Wide Characters.
+* iswalpha: (libc)Classification of Wide Characters.
+* iswblank: (libc)Classification of Wide Characters.
+* iswcntrl: (libc)Classification of Wide Characters.
+* iswctype: (libc)Classification of Wide Characters.
+* iswdigit: (libc)Classification of Wide Characters.
+* iswgraph: (libc)Classification of Wide Characters.
+* iswlower: (libc)Classification of Wide Characters.
+* iswprint: (libc)Classification of Wide Characters.
+* iswpunct: (libc)Classification of Wide Characters.
+* iswspace: (libc)Classification of Wide Characters.
+* iswupper: (libc)Classification of Wide Characters.
+* iswxdigit: (libc)Classification of Wide Characters.
+* isxdigit: (libc)Classification of Characters.
+* j0: (libc)Special Functions.
+* j0f: (libc)Special Functions.
+* j0l: (libc)Special Functions.
+* j1: (libc)Special Functions.
+* j1f: (libc)Special Functions.
+* j1l: (libc)Special Functions.
+* jn: (libc)Special Functions.
+* jnf: (libc)Special Functions.
+* jnl: (libc)Special Functions.
+* jrand48: (libc)SVID Random.
+* jrand48_r: (libc)SVID Random.
+* kill: (libc)Signaling Another Process.
+* killpg: (libc)Signaling Another Process.
+* l64a: (libc)Encode Binary Data.
+* labs: (libc)Absolute Value.
+* lcong48: (libc)SVID Random.
+* lcong48_r: (libc)SVID Random.
+* ldexp: (libc)Normalization Functions.
+* ldexpf: (libc)Normalization Functions.
+* ldexpl: (libc)Normalization Functions.
+* ldiv: (libc)Integer Division.
+* lfind: (libc)Array Search Function.
+* lgamma: (libc)Special Functions.
+* lgamma_r: (libc)Special Functions.
+* lgammaf: (libc)Special Functions.
+* lgammaf_r: (libc)Special Functions.
+* lgammal: (libc)Special Functions.
+* lgammal_r: (libc)Special Functions.
+* link: (libc)Hard Links.
+* lio_listio64: (libc)Asynchronous Reads/Writes.
+* lio_listio: (libc)Asynchronous Reads/Writes.
+* listen: (libc)Listening.
+* llabs: (libc)Absolute Value.
+* lldiv: (libc)Integer Division.
+* llrint: (libc)Rounding Functions.
+* llrintf: (libc)Rounding Functions.
+* llrintl: (libc)Rounding Functions.
+* llround: (libc)Rounding Functions.
+* llroundf: (libc)Rounding Functions.
+* llroundl: (libc)Rounding Functions.
+* localeconv: (libc)The Lame Way to Locale Data.
+* localtime: (libc)Broken-down Time.
+* localtime_r: (libc)Broken-down Time.
+* log10: (libc)Exponents and Logarithms.
+* log10f: (libc)Exponents and Logarithms.
+* log10l: (libc)Exponents and Logarithms.
+* log1p: (libc)Exponents and Logarithms.
+* log1pf: (libc)Exponents and Logarithms.
+* log1pl: (libc)Exponents and Logarithms.
+* log2: (libc)Exponents and Logarithms.
+* log2f: (libc)Exponents and Logarithms.
+* log2l: (libc)Exponents and Logarithms.
+* log: (libc)Exponents and Logarithms.
+* logb: (libc)Exponents and Logarithms.
+* logbf: (libc)Exponents and Logarithms.
+* logbl: (libc)Exponents and Logarithms.
+* logf: (libc)Exponents and Logarithms.
+* login: (libc)Logging In and Out.
+* login_tty: (libc)Logging In and Out.
+* logl: (libc)Exponents and Logarithms.
+* logout: (libc)Logging In and Out.
+* logwtmp: (libc)Logging In and Out.
+* longjmp: (libc)Non-Local Details.
+* lrand48: (libc)SVID Random.
+* lrand48_r: (libc)SVID Random.
+* lrint: (libc)Rounding Functions.
+* lrintf: (libc)Rounding Functions.
+* lrintl: (libc)Rounding Functions.
+* lround: (libc)Rounding Functions.
+* lroundf: (libc)Rounding Functions.
+* lroundl: (libc)Rounding Functions.
+* lsearch: (libc)Array Search Function.
+* lseek64: (libc)File Position Primitive.
+* lseek: (libc)File Position Primitive.
+* lstat64: (libc)Reading Attributes.
+* lstat: (libc)Reading Attributes.
+* lutimes: (libc)File Times.
+* madvise: (libc)Memory-mapped I/O.
+* makecontext: (libc)System V contexts.
+* mallinfo: (libc)Statistics of Malloc.
+* malloc: (libc)Basic Allocation.
+* mallopt: (libc)Malloc Tunable Parameters.
+* mblen: (libc)Non-reentrant Character Conversion.
+* mbrlen: (libc)Converting a Character.
+* mbrtowc: (libc)Converting a Character.
+* mbsinit: (libc)Keeping the state.
+* mbsnrtowcs: (libc)Converting Strings.
+* mbsrtowcs: (libc)Converting Strings.
+* mbstowcs: (libc)Non-reentrant String Conversion.
+* mbtowc: (libc)Non-reentrant Character Conversion.
+* mcheck: (libc)Heap Consistency Checking.
+* memalign: (libc)Aligned Memory Blocks.
+* memccpy: (libc)Copying and Concatenation.
+* memchr: (libc)Search Functions.
+* memcmp: (libc)String/Array Comparison.
+* memcpy: (libc)Copying and Concatenation.
+* memfrob: (libc)Trivial Encryption.
+* memmem: (libc)Search Functions.
+* memmove: (libc)Copying and Concatenation.
+* mempcpy: (libc)Copying and Concatenation.
+* memrchr: (libc)Search Functions.
+* memset: (libc)Copying and Concatenation.
+* mkdir: (libc)Creating Directories.
+* mkdtemp: (libc)Temporary Files.
+* mkfifo: (libc)FIFO Special Files.
+* mknod: (libc)Making Special Files.
+* mkstemp: (libc)Temporary Files.
+* mktemp: (libc)Temporary Files.
+* mktime: (libc)Broken-down Time.
+* mlock: (libc)Page Lock Functions.
+* mlockall: (libc)Page Lock Functions.
+* mmap64: (libc)Memory-mapped I/O.
+* mmap: (libc)Memory-mapped I/O.
+* modf: (libc)Rounding Functions.
+* modff: (libc)Rounding Functions.
+* modfl: (libc)Rounding Functions.
+* mount: (libc)Mount-Unmount-Remount.
+* mprobe: (libc)Heap Consistency Checking.
+* mrand48: (libc)SVID Random.
+* mrand48_r: (libc)SVID Random.
+* mremap: (libc)Memory-mapped I/O.
+* msync: (libc)Memory-mapped I/O.
+* mtrace: (libc)Tracing malloc.
+* munlock: (libc)Page Lock Functions.
+* munlockall: (libc)Page Lock Functions.
+* munmap: (libc)Memory-mapped I/O.
+* muntrace: (libc)Tracing malloc.
+* nan: (libc)FP Bit Twiddling.
+* nanf: (libc)FP Bit Twiddling.
+* nanl: (libc)FP Bit Twiddling.
+* nanosleep: (libc)Sleeping.
+* nearbyint: (libc)Rounding Functions.
+* nearbyintf: (libc)Rounding Functions.
+* nearbyintl: (libc)Rounding Functions.
+* nextafter: (libc)FP Bit Twiddling.
+* nextafterf: (libc)FP Bit Twiddling.
+* nextafterl: (libc)FP Bit Twiddling.
+* nexttoward: (libc)FP Bit Twiddling.
+* nexttowardf: (libc)FP Bit Twiddling.
+* nexttowardl: (libc)FP Bit Twiddling.
+* nftw64: (libc)Working with Directory Trees.
+* nftw: (libc)Working with Directory Trees.
+* ngettext: (libc)Advanced gettext functions.
+* nice: (libc)Traditional Scheduling Functions.
+* nl_langinfo: (libc)The Elegant and Fast Way.
+* nrand48: (libc)SVID Random.
+* nrand48_r: (libc)SVID Random.
+* ntohl: (libc)Byte Order.
+* ntohs: (libc)Byte Order.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
+* obstack_1grow: (libc)Growing Objects.
+* obstack_1grow_fast: (libc)Extra Fast Growing.
+* obstack_alignment_mask: (libc)Obstacks Data Alignment.
+* obstack_alloc: (libc)Allocation in an Obstack.
+* obstack_base: (libc)Status of an Obstack.
+* obstack_blank: (libc)Growing Objects.
+* obstack_blank_fast: (libc)Extra Fast Growing.
+* obstack_chunk_size: (libc)Obstack Chunks.
+* obstack_copy0: (libc)Allocation in an Obstack.
+* obstack_copy: (libc)Allocation in an Obstack.
+* obstack_finish: (libc)Growing Objects.
+* obstack_free: (libc)Freeing Obstack Objects.
+* obstack_grow0: (libc)Growing Objects.
+* obstack_grow: (libc)Growing Objects.
+* obstack_init: (libc)Preparing for Obstacks.
+* obstack_int_grow: (libc)Growing Objects.
+* obstack_int_grow_fast: (libc)Extra Fast Growing.
+* obstack_next_free: (libc)Status of an Obstack.
+* obstack_object_size: (libc)Growing Objects.
+* obstack_object_size: (libc)Status of an Obstack.
+* obstack_printf: (libc)Dynamic Output.
+* obstack_ptr_grow: (libc)Growing Objects.
+* obstack_ptr_grow_fast: (libc)Extra Fast Growing.
+* obstack_room: (libc)Extra Fast Growing.
+* obstack_vprintf: (libc)Variable Arguments Output.
+* offsetof: (libc)Structure Measurement.
+* on_exit: (libc)Cleanups on Exit.
+* open64: (libc)Opening and Closing Files.
+* open: (libc)Opening and Closing Files.
+* open_memstream: (libc)String Streams.
+* open_obstack_stream: (libc)Obstack Streams.
+* opendir: (libc)Opening a Directory.
+* openlog: (libc)openlog.
+* openpty: (libc)Pseudo-Terminal Pairs.
+* parse_printf_format: (libc)Parsing a Template String.
+* pathconf: (libc)Pathconf.
+* pause: (libc)Using Pause.
+* pclose: (libc)Pipe to a Subprocess.
+* perror: (libc)Error Messages.
+* pipe: (libc)Creating a Pipe.
+* popen: (libc)Pipe to a Subprocess.
+* posix_memalign: (libc)Aligned Memory Blocks.
+* pow10: (libc)Exponents and Logarithms.
+* pow10f: (libc)Exponents and Logarithms.
+* pow10l: (libc)Exponents and Logarithms.
+* pow: (libc)Exponents and Logarithms.
+* powf: (libc)Exponents and Logarithms.
+* powl: (libc)Exponents and Logarithms.
+* pread64: (libc)I/O Primitives.
+* pread: (libc)I/O Primitives.
+* printf: (libc)Formatted Output Functions.
+* printf_size: (libc)Predefined Printf Handlers.
+* printf_size_info: (libc)Predefined Printf Handlers.
+* psignal: (libc)Signal Messages.
+* ptsname: (libc)Allocation.
+* ptsname_r: (libc)Allocation.
+* putc: (libc)Simple Output.
+* putc_unlocked: (libc)Simple Output.
+* putchar: (libc)Simple Output.
+* putchar_unlocked: (libc)Simple Output.
+* putenv: (libc)Environment Access.
+* putpwent: (libc)Writing a User Entry.
+* puts: (libc)Simple Output.
+* pututline: (libc)Manipulating the Database.
+* pututxline: (libc)XPG Functions.
+* putw: (libc)Simple Output.
+* putwc: (libc)Simple Output.
+* putwc_unlocked: (libc)Simple Output.
+* putwchar: (libc)Simple Output.
+* putwchar_unlocked: (libc)Simple Output.
+* pwrite64: (libc)I/O Primitives.
+* pwrite: (libc)I/O Primitives.
+* qecvt: (libc)System V Number Conversion.
+* qecvt_r: (libc)System V Number Conversion.
+* qfcvt: (libc)System V Number Conversion.
+* qfcvt_r: (libc)System V Number Conversion.
+* qgcvt: (libc)System V Number Conversion.
+* qsort: (libc)Array Sort Function.
+* raise: (libc)Signaling Yourself.
+* rand: (libc)ISO Random.
+* rand_r: (libc)ISO Random.
+* random: (libc)BSD Random.
+* random_r: (libc)BSD Random.
+* rawmemchr: (libc)Search Functions.
+* read: (libc)I/O Primitives.
+* readdir64: (libc)Reading/Closing Directory.
+* readdir64_r: (libc)Reading/Closing Directory.
+* readdir: (libc)Reading/Closing Directory.
+* readdir_r: (libc)Reading/Closing Directory.
+* readlink: (libc)Symbolic Links.
+* readv: (libc)Scatter-Gather.
+* realloc: (libc)Changing Block Size.
+* realpath: (libc)Symbolic Links.
+* recv: (libc)Receiving Data.
+* recvfrom: (libc)Receiving Datagrams.
+* recvmsg: (libc)Receiving Datagrams.
+* regcomp: (libc)POSIX Regexp Compilation.
+* regerror: (libc)Regexp Cleanup.
+* regexec: (libc)Matching POSIX Regexps.
+* regfree: (libc)Regexp Cleanup.
+* register_printf_function: (libc)Registering New Conversions.
+* remainder: (libc)Remainder Functions.
+* remainderf: (libc)Remainder Functions.
+* remainderl: (libc)Remainder Functions.
+* remove: (libc)Deleting Files.
+* rename: (libc)Renaming Files.
+* rewind: (libc)File Positioning.
+* rewinddir: (libc)Random Access Directory.
+* rindex: (libc)Search Functions.
+* rint: (libc)Rounding Functions.
+* rintf: (libc)Rounding Functions.
+* rintl: (libc)Rounding Functions.
+* rmdir: (libc)Deleting Files.
+* round: (libc)Rounding Functions.
+* roundf: (libc)Rounding Functions.
+* roundl: (libc)Rounding Functions.
+* rpmatch: (libc)Yes-or-No Questions.
+* sbrk: (libc)Resizing the Data Segment.
+* scalb: (libc)Normalization Functions.
+* scalbf: (libc)Normalization Functions.
+* scalbl: (libc)Normalization Functions.
+* scalbln: (libc)Normalization Functions.
+* scalblnf: (libc)Normalization Functions.
+* scalblnl: (libc)Normalization Functions.
+* scalbn: (libc)Normalization Functions.
+* scalbnf: (libc)Normalization Functions.
+* scalbnl: (libc)Normalization Functions.
+* scandir64: (libc)Scanning Directory Content.
+* scandir: (libc)Scanning Directory Content.
+* scanf: (libc)Formatted Input Functions.
+* sched_get_priority_max: (libc)Basic Scheduling Functions.
+* sched_get_priority_min: (libc)Basic Scheduling Functions.
+* sched_getaffinity: (libc)CPU Affinity.
+* sched_getparam: (libc)Basic Scheduling Functions.
+* sched_getscheduler: (libc)Basic Scheduling Functions.
+* sched_rr_get_interval: (libc)Basic Scheduling Functions.
+* sched_setaffinity: (libc)CPU Affinity.
+* sched_setparam: (libc)Basic Scheduling Functions.
+* sched_setscheduler: (libc)Basic Scheduling Functions.
+* sched_yield: (libc)Basic Scheduling Functions.
+* seed48: (libc)SVID Random.
+* seed48_r: (libc)SVID Random.
+* seekdir: (libc)Random Access Directory.
+* select: (libc)Waiting for I/O.
+* send: (libc)Sending Data.
+* sendmsg: (libc)Receiving Datagrams.
+* sendto: (libc)Sending Datagrams.
+* setbuf: (libc)Controlling Buffering.
+* setbuffer: (libc)Controlling Buffering.
+* setcontext: (libc)System V contexts.
+* setdomainname: (libc)Host Identification.
+* setegid: (libc)Setting Groups.
+* setenv: (libc)Environment Access.
+* seteuid: (libc)Setting User ID.
+* setfsent: (libc)fstab.
+* setgid: (libc)Setting Groups.
+* setgrent: (libc)Scanning All Groups.
+* setgroups: (libc)Setting Groups.
+* sethostent: (libc)Host Names.
+* sethostid: (libc)Host Identification.
+* sethostname: (libc)Host Identification.
+* setitimer: (libc)Setting an Alarm.
+* setjmp: (libc)Non-Local Details.
+* setkey: (libc)DES Encryption.
+* setkey_r: (libc)DES Encryption.
+* setlinebuf: (libc)Controlling Buffering.
+* setlocale: (libc)Setting the Locale.
+* setlogmask: (libc)setlogmask.
+* setmntent: (libc)mtab.
+* setnetent: (libc)Networks Database.
+* setnetgrent: (libc)Lookup Netgroup.
+* setpgid: (libc)Process Group Functions.
+* setpgrp: (libc)Process Group Functions.
+* setpriority: (libc)Traditional Scheduling Functions.
+* setprotoent: (libc)Protocols Database.
+* setpwent: (libc)Scanning All Users.
+* setregid: (libc)Setting Groups.
+* setreuid: (libc)Setting User ID.
+* setrlimit64: (libc)Limits on Resources.
+* setrlimit: (libc)Limits on Resources.
+* setservent: (libc)Services Database.
+* setsid: (libc)Process Group Functions.
+* setsockopt: (libc)Socket Option Functions.
+* setstate: (libc)BSD Random.
+* setstate_r: (libc)BSD Random.
+* settimeofday: (libc)High-Resolution Calendar.
+* setuid: (libc)Setting User ID.
+* setutent: (libc)Manipulating the Database.
+* setutxent: (libc)XPG Functions.
+* setvbuf: (libc)Controlling Buffering.
+* shutdown: (libc)Closing a Socket.
+* sigaction: (libc)Advanced Signal Handling.
+* sigaddset: (libc)Signal Sets.
+* sigaltstack: (libc)Signal Stack.
+* sigblock: (libc)Blocking in BSD.
+* sigdelset: (libc)Signal Sets.
+* sigemptyset: (libc)Signal Sets.
+* sigfillset: (libc)Signal Sets.
+* siginterrupt: (libc)BSD Handler.
+* sigismember: (libc)Signal Sets.
+* siglongjmp: (libc)Non-Local Exits and Signals.
+* sigmask: (libc)Blocking in BSD.
+* signal: (libc)Basic Signal Handling.
+* signbit: (libc)FP Bit Twiddling.
+* significand: (libc)Normalization Functions.
+* significandf: (libc)Normalization Functions.
+* significandl: (libc)Normalization Functions.
+* sigpause: (libc)Blocking in BSD.
+* sigpending: (libc)Checking for Pending Signals.
+* sigprocmask: (libc)Process Signal Mask.
+* sigsetjmp: (libc)Non-Local Exits and Signals.
+* sigsetmask: (libc)Blocking in BSD.
+* sigstack: (libc)Signal Stack.
+* sigsuspend: (libc)Sigsuspend.
+* sigvec: (libc)BSD Handler.
+* sin: (libc)Trig Functions.
+* sincos: (libc)Trig Functions.
+* sincosf: (libc)Trig Functions.
+* sincosl: (libc)Trig Functions.
+* sinf: (libc)Trig Functions.
+* sinh: (libc)Hyperbolic Functions.
+* sinhf: (libc)Hyperbolic Functions.
+* sinhl: (libc)Hyperbolic Functions.
+* sinl: (libc)Trig Functions.
+* sleep: (libc)Sleeping.
+* snprintf: (libc)Formatted Output Functions.
+* socket: (libc)Creating a Socket.
+* socketpair: (libc)Socket Pairs.
+* sprintf: (libc)Formatted Output Functions.
+* sqrt: (libc)Exponents and Logarithms.
+* sqrtf: (libc)Exponents and Logarithms.
+* sqrtl: (libc)Exponents and Logarithms.
+* srand48: (libc)SVID Random.
+* srand48_r: (libc)SVID Random.
+* srand: (libc)ISO Random.
+* srandom: (libc)BSD Random.
+* srandom_r: (libc)BSD Random.
+* sscanf: (libc)Formatted Input Functions.
+* ssignal: (libc)Basic Signal Handling.
+* stat64: (libc)Reading Attributes.
+* stat: (libc)Reading Attributes.
+* stime: (libc)Simple Calendar Time.
+* stpcpy: (libc)Copying and Concatenation.
+* stpncpy: (libc)Copying and Concatenation.
+* strcasecmp: (libc)String/Array Comparison.
+* strcasestr: (libc)Search Functions.
+* strcat: (libc)Copying and Concatenation.
+* strchr: (libc)Search Functions.
+* strchrnul: (libc)Search Functions.
+* strcmp: (libc)String/Array Comparison.
+* strcoll: (libc)Collation Functions.
+* strcpy: (libc)Copying and Concatenation.
+* strcspn: (libc)Search Functions.
+* strdup: (libc)Copying and Concatenation.
+* strdupa: (libc)Copying and Concatenation.
+* strerror: (libc)Error Messages.
+* strerror_r: (libc)Error Messages.
+* strfmon: (libc)Formatting Numbers.
+* strfry: (libc)strfry.
+* strftime: (libc)Formatting Calendar Time.
+* strlen: (libc)String Length.
+* strncasecmp: (libc)String/Array Comparison.
+* strncat: (libc)Copying and Concatenation.
+* strncmp: (libc)String/Array Comparison.
+* strncpy: (libc)Copying and Concatenation.
+* strndup: (libc)Copying and Concatenation.
+* strndupa: (libc)Copying and Concatenation.
+* strnlen: (libc)String Length.
+* strpbrk: (libc)Search Functions.
+* strptime: (libc)Low-Level Time String Parsing.
+* strrchr: (libc)Search Functions.
+* strsep: (libc)Finding Tokens in a String.
+* strsignal: (libc)Signal Messages.
+* strspn: (libc)Search Functions.
+* strstr: (libc)Search Functions.
+* strtod: (libc)Parsing of Floats.
+* strtof: (libc)Parsing of Floats.
+* strtoimax: (libc)Parsing of Integers.
+* strtok: (libc)Finding Tokens in a String.
+* strtok_r: (libc)Finding Tokens in a String.
+* strtol: (libc)Parsing of Integers.
+* strtold: (libc)Parsing of Floats.
+* strtoll: (libc)Parsing of Integers.
+* strtoq: (libc)Parsing of Integers.
+* strtoul: (libc)Parsing of Integers.
+* strtoull: (libc)Parsing of Integers.
+* strtoumax: (libc)Parsing of Integers.
+* strtouq: (libc)Parsing of Integers.
+* strverscmp: (libc)String/Array Comparison.
+* strxfrm: (libc)Collation Functions.
+* stty: (libc)BSD Terminal Modes.
+* swapcontext: (libc)System V contexts.
+* swprintf: (libc)Formatted Output Functions.
+* swscanf: (libc)Formatted Input Functions.
+* symlink: (libc)Symbolic Links.
+* sync: (libc)Synchronizing I/O.
+* syscall: (libc)System Calls.
+* sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
+* syslog: (libc)syslog; vsyslog.
+* system: (libc)Running a Command.
+* sysv_signal: (libc)Basic Signal Handling.
+* tan: (libc)Trig Functions.
+* tanf: (libc)Trig Functions.
+* tanh: (libc)Hyperbolic Functions.
+* tanhf: (libc)Hyperbolic Functions.
+* tanhl: (libc)Hyperbolic Functions.
+* tanl: (libc)Trig Functions.
+* tcdrain: (libc)Line Control.
+* tcflow: (libc)Line Control.
+* tcflush: (libc)Line Control.
+* tcgetattr: (libc)Mode Functions.
+* tcgetpgrp: (libc)Terminal Access Functions.
+* tcgetsid: (libc)Terminal Access Functions.
+* tcsendbreak: (libc)Line Control.
+* tcsetattr: (libc)Mode Functions.
+* tcsetpgrp: (libc)Terminal Access Functions.
+* tdelete: (libc)Tree Search Function.
+* tdestroy: (libc)Tree Search Function.
+* tempnam: (libc)Temporary Files.
+* textdomain: (libc)Locating gettext catalog.
+* tfind: (libc)Tree Search Function.
+* tgamma: (libc)Special Functions.
+* tgammaf: (libc)Special Functions.
+* tgammal: (libc)Special Functions.
+* time: (libc)Simple Calendar Time.
+* timegm: (libc)Broken-down Time.
+* timelocal: (libc)Broken-down Time.
+* times: (libc)Processor Time.
+* tmpfile64: (libc)Temporary Files.
+* tmpfile: (libc)Temporary Files.
+* tmpnam: (libc)Temporary Files.
+* tmpnam_r: (libc)Temporary Files.
+* toascii: (libc)Case Conversion.
+* tolower: (libc)Case Conversion.
+* toupper: (libc)Case Conversion.
+* towctrans: (libc)Wide Character Case Conversion.
+* towlower: (libc)Wide Character Case Conversion.
+* towupper: (libc)Wide Character Case Conversion.
+* trunc: (libc)Rounding Functions.
+* truncate64: (libc)File Size.
+* truncate: (libc)File Size.
+* truncf: (libc)Rounding Functions.
+* truncl: (libc)Rounding Functions.
+* tsearch: (libc)Tree Search Function.
+* ttyname: (libc)Is It a Terminal.
+* ttyname_r: (libc)Is It a Terminal.
+* twalk: (libc)Tree Search Function.
+* tzset: (libc)Time Zone Functions.
+* ulimit: (libc)Limits on Resources.
+* umask: (libc)Setting Permissions.
+* umount2: (libc)Mount-Unmount-Remount.
+* umount: (libc)Mount-Unmount-Remount.
+* uname: (libc)Platform Type.
+* ungetc: (libc)How Unread.
+* ungetwc: (libc)How Unread.
+* unlink: (libc)Deleting Files.
+* unlockpt: (libc)Allocation.
+* unsetenv: (libc)Environment Access.
+* updwtmp: (libc)Manipulating the Database.
+* utime: (libc)File Times.
+* utimes: (libc)File Times.
+* utmpname: (libc)Manipulating the Database.
+* utmpxname: (libc)XPG Functions.
+* va_arg: (libc)Argument Macros.
+* va_end: (libc)Argument Macros.
+* va_start: (libc)Argument Macros.
+* va_start: (libc)Old Varargs.
+* valloc: (libc)Aligned Memory Blocks.
+* vasprintf: (libc)Variable Arguments Output.
+* verr: (libc)Error Messages.
+* verrx: (libc)Error Messages.
+* versionsort64: (libc)Scanning Directory Content.
+* versionsort: (libc)Scanning Directory Content.
+* vfork: (libc)Creating a Process.
+* vfprintf: (libc)Variable Arguments Output.
+* vfscanf: (libc)Variable Arguments Input.
+* vfwprintf: (libc)Variable Arguments Output.
+* vfwscanf: (libc)Variable Arguments Input.
+* vlimit: (libc)Limits on Resources.
+* vprintf: (libc)Variable Arguments Output.
+* vscanf: (libc)Variable Arguments Input.
+* vsnprintf: (libc)Variable Arguments Output.
+* vsprintf: (libc)Variable Arguments Output.
+* vsscanf: (libc)Variable Arguments Input.
+* vswprintf: (libc)Variable Arguments Output.
+* vswscanf: (libc)Variable Arguments Input.
+* vsyslog: (libc)syslog; vsyslog.
+* vtimes: (libc)Resource Usage.
+* vwarn: (libc)Error Messages.
+* vwarnx: (libc)Error Messages.
+* vwprintf: (libc)Variable Arguments Output.
+* vwscanf: (libc)Variable Arguments Input.
+* wait3: (libc)BSD Wait Functions.
+* wait4: (libc)Process Completion.
+* wait: (libc)Process Completion.
+* waitpid: (libc)Process Completion.
+* warn: (libc)Error Messages.
+* warnx: (libc)Error Messages.
+* wcpcpy: (libc)Copying and Concatenation.
+* wcpncpy: (libc)Copying and Concatenation.
+* wcrtomb: (libc)Converting a Character.
+* wcscasecmp: (libc)String/Array Comparison.
+* wcscat: (libc)Copying and Concatenation.
+* wcschr: (libc)Search Functions.
+* wcschrnul: (libc)Search Functions.
+* wcscmp: (libc)String/Array Comparison.
+* wcscoll: (libc)Collation Functions.
+* wcscpy: (libc)Copying and Concatenation.
+* wcscspn: (libc)Search Functions.
+* wcsdup: (libc)Copying and Concatenation.
+* wcsftime: (libc)Formatting Calendar Time.
+* wcslen: (libc)String Length.
+* wcsncasecmp: (libc)String/Array Comparison.
+* wcsncat: (libc)Copying and Concatenation.
+* wcsncmp: (libc)String/Array Comparison.
+* wcsncpy: (libc)Copying and Concatenation.
+* wcsnlen: (libc)String Length.
+* wcsnrtombs: (libc)Converting Strings.
+* wcspbrk: (libc)Search Functions.
+* wcsrchr: (libc)Search Functions.
+* wcsrtombs: (libc)Converting Strings.
+* wcsspn: (libc)Search Functions.
+* wcsstr: (libc)Search Functions.
+* wcstod: (libc)Parsing of Floats.
+* wcstof: (libc)Parsing of Floats.
+* wcstoimax: (libc)Parsing of Integers.
+* wcstok: (libc)Finding Tokens in a String.
+* wcstol: (libc)Parsing of Integers.
+* wcstold: (libc)Parsing of Floats.
+* wcstoll: (libc)Parsing of Integers.
+* wcstombs: (libc)Non-reentrant String Conversion.
+* wcstoq: (libc)Parsing of Integers.
+* wcstoul: (libc)Parsing of Integers.
+* wcstoull: (libc)Parsing of Integers.
+* wcstoumax: (libc)Parsing of Integers.
+* wcstouq: (libc)Parsing of Integers.
+* wcswcs: (libc)Search Functions.
+* wcsxfrm: (libc)Collation Functions.
+* wctob: (libc)Converting a Character.
+* wctomb: (libc)Non-reentrant Character Conversion.
+* wctrans: (libc)Wide Character Case Conversion.
+* wctype: (libc)Classification of Wide Characters.
+* wmemchr: (libc)Search Functions.
+* wmemcmp: (libc)String/Array Comparison.
+* wmemcpy: (libc)Copying and Concatenation.
+* wmemmove: (libc)Copying and Concatenation.
+* wmempcpy: (libc)Copying and Concatenation.
+* wmemset: (libc)Copying and Concatenation.
+* wordexp: (libc)Calling Wordexp.
+* wordfree: (libc)Calling Wordexp.
+* wprintf: (libc)Formatted Output Functions.
+* write: (libc)I/O Primitives.
+* writev: (libc)Scatter-Gather.
+* wscanf: (libc)Formatted Input Functions.
+* y0: (libc)Special Functions.
+* y0f: (libc)Special Functions.
+* y0l: (libc)Special Functions.
+* y1: (libc)Special Functions.
+* y1f: (libc)Special Functions.
+* y1l: (libc)Special Functions.
+* yn: (libc)Special Functions.
+* ynf: (libc)Special Functions.
+* ynl: (libc)Special Functions.
+END-INFO-DIR-ENTRY
+
+   This file documents the GNU C library.
+
+   This is Edition 0.10, last updated 2001-07-06, of `The GNU C Library
+Reference Manual', for Version 2.3.x.
+
+   Copyright (C) 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2001, 2002,
+2003 Free Software Foundation, Inc.
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being "Free Software Needs Free Documentation" and
+"GNU Lesser General Public License", the Front-Cover texts being (a)
+(see below), and with the Back-Cover Texts being (b) (see below).  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   (a) The FSF's Front-Cover Text is:
+
+   A GNU Manual
+
+   (b) The FSF's Back-Cover Text is:
+
+   You have freedom to copy and modify this GNU Manual, like GNU
+software.  Copies published by the Free Software Foundation raise
+funds for GNU development.
+
+
+File: libc.info,  Node: Formatting Calendar Time,  Next: Parsing Date and Time,  Prev: High Accuracy Clock,  Up: Calendar Time
+
+Formatting Calendar Time
+------------------------
+
+   The functions described in this section format calendar time values
+as strings.  These functions are declared in the header file `time.h'.
+
+ - Function: char * asctime (const struct tm *BROKENTIME)
+     The `asctime' function converts the broken-down time value that
+     BROKENTIME points to into a string in a standard format:
+
+          "Tue May 21 13:46:22 1991\n"
+
+     The abbreviations for the days of week are: `Sun', `Mon', `Tue',
+     `Wed', `Thu', `Fri', and `Sat'.
+
+     The abbreviations for the months are: `Jan', `Feb', `Mar', `Apr',
+     `May', `Jun', `Jul', `Aug', `Sep', `Oct', `Nov', and `Dec'.
+
+     The return value points to a statically allocated string, which
+     might be overwritten by subsequent calls to `asctime' or `ctime'.
+     (But no other library function overwrites the contents of this
+     string.)
+
+ - Function: char * asctime_r (const struct tm *BROKENTIME, char
+          *BUFFER)
+     This function is similar to `asctime' but instead of placing the
+     result in a static buffer it writes the string in the buffer
+     pointed to by the parameter BUFFER.  This buffer should have room
+     for at least 26 bytes, including the terminating null.
+
+     If no error occurred the function returns a pointer to the string
+     the result was written into, i.e., it returns BUFFER.  Otherwise
+     return `NULL'.
+
+ - Function: char * ctime (const time_t *TIME)
+     The `ctime' function is similar to `asctime', except that you
+     specify the calendar time argument as a `time_t' simple time value
+     rather than in broken-down local time format.  It is equivalent to
+
+          asctime (localtime (TIME))
+
+     `ctime' sets the variable `tzname', because `localtime' does so.
+     *Note Time Zone Functions::.
+
+ - Function: char * ctime_r (const time_t *TIME, char *BUFFER)
+     This function is similar to `ctime', but places the result in the
+     string pointed to by BUFFER.  It is equivalent to (written using
+     gcc extensions, *note Statement Exprs: (gcc)Statement Exprs.):
+
+          ({ struct tm tm; asctime_r (localtime_r (time, &tm), buf); })
+
+     If no error occurred the function returns a pointer to the string
+     the result was written into, i.e., it returns BUFFER.  Otherwise
+     return `NULL'.
+
+ - Function: size_t strftime (char *S, size_t SIZE, const char
+          *TEMPLATE, const struct tm *BROKENTIME)
+     This function is similar to the `sprintf' function (*note
+     Formatted Input::), but the conversion specifications that can
+     appear in the format template TEMPLATE are specialized for
+     printing components of the date and time BROKENTIME according to
+     the locale currently specified for time conversion (*note
+     Locales::).
+
+     Ordinary characters appearing in the TEMPLATE are copied to the
+     output string S; this can include multibyte character sequences.
+     Conversion specifiers are introduced by a `%' character, followed
+     by an optional flag which can be one of the following.  These flags
+     are all GNU extensions. The first three affect only the output of
+     numbers:
+
+    `_'
+          The number is padded with spaces.
+
+    `-'
+          The number is not padded at all.
+
+    `0'
+          The number is padded with zeros even if the format specifies
+          padding with spaces.
+
+    `^'
+          The output uses uppercase characters, but only if this is
+          possible (*note Case Conversion::).
+
+     The default action is to pad the number with zeros to keep it a
+     constant width.  Numbers that do not have a range indicated below
+     are never padded, since there is no natural width for them.
+
+     Following the flag an optional specification of the width is
+     possible.  This is specified in decimal notation.  If the natural
+     size of the output is of the field has less than the specified
+     number of characters, the result is written right adjusted and
+     space padded to the given size.
+
+     An optional modifier can follow the optional flag and width
+     specification.  The modifiers, which were first standardized by
+     POSIX.2-1992 and by ISO C99, are:
+
+    `E'
+          Use the locale's alternate representation for date and time.
+          This modifier applies to the `%c', `%C', `%x', `%X', `%y' and
+          `%Y' format specifiers.  In a Japanese locale, for example,
+          `%Ex' might yield a date format based on the Japanese
+          Emperors' reigns.
+
+    `O'
+          Use the locale's alternate numeric symbols for numbers.  This
+          modifier applies only to numeric format specifiers.
+
+     If the format supports the modifier but no alternate representation
+     is available, it is ignored.
+
+     The conversion specifier ends with a format specifier taken from
+     the following list.  The whole `%' sequence is replaced in the
+     output string as follows:
+
+    `%a'
+          The abbreviated weekday name according to the current locale.
+
+    `%A'
+          The full weekday name according to the current locale.
+
+    `%b'
+          The abbreviated month name according to the current locale.
+
+    `%B'
+          The full month name according to the current locale.
+
+          Using `%B' together with `%d' produces grammatically
+          incorrect results for some locales.
+
+    `%c'
+          The preferred calendar time representation for the current
+          locale.
+
+    `%C'
+          The century of the year.  This is equivalent to the greatest
+          integer not greater than the year divided by 100.
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.
+
+    `%d'
+          The day of the month as a decimal number (range `01' through
+          `31').
+
+    `%D'
+          The date using the format `%m/%d/%y'.
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.
+
+    `%e'
+          The day of the month like with `%d', but padded with blank
+          (range ` 1' through `31').
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.
+
+    `%F'
+          The date using the format `%Y-%m-%d'.  This is the form
+          specified in the ISO 8601 standard and is the preferred form
+          for all uses.
+
+          This format was first standardized by ISO C99 and by
+          POSIX.1-2001.
+
+    `%g'
+          The year corresponding to the ISO week number, but without
+          the century (range `00' through `99').  This has the same
+          format and value as `%y', except that if the ISO week number
+          (see `%V') belongs to the previous or next year, that year is
+          used instead.
+
+          This format was first standardized by ISO C99 and by
+          POSIX.1-2001.
+
+    `%G'
+          The year corresponding to the ISO week number.  This has the
+          same format and value as `%Y', except that if the ISO week
+          number (see `%V') belongs to the previous or next year, that
+          year is used instead.
+
+          This format was first standardized by ISO C99 and by
+          POSIX.1-2001 but was previously available as a GNU extension.
+
+    `%h'
+          The abbreviated month name according to the current locale.
+          The action is the same as for `%b'.
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.
+
+    `%H'
+          The hour as a decimal number, using a 24-hour clock (range
+          `00' through `23').
+
+    `%I'
+          The hour as a decimal number, using a 12-hour clock (range
+          `01' through `12').
+
+    `%j'
+          The day of the year as a decimal number (range `001' through
+          `366').
+
+    `%k'
+          The hour as a decimal number, using a 24-hour clock like
+          `%H', but padded with blank (range ` 0' through `23').
+
+          This format is a GNU extension.
+
+    `%l'
+          The hour as a decimal number, using a 12-hour clock like
+          `%I', but padded with blank (range ` 1' through `12').
+
+          This format is a GNU extension.
+
+    `%m'
+          The month as a decimal number (range `01' through `12').
+
+    `%M'
+          The minute as a decimal number (range `00' through `59').
+
+    `%n'
+          A single `\n' (newline) character.
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.
+
+    `%p'
+          Either `AM' or `PM', according to the given time value; or the
+          corresponding strings for the current locale.  Noon is
+          treated as `PM' and midnight as `AM'.  In most locales
+          `AM'/`PM' format is not supported, in such cases `"%p"'
+          yields an empty string.
+
+    `%P'
+          Either `am' or `pm', according to the given time value; or the
+          corresponding strings for the current locale, printed in
+          lowercase characters.  Noon is treated as `pm' and midnight
+          as `am'.  In most locales `AM'/`PM' format is not supported,
+          in such cases `"%P"' yields an empty string.
+
+          This format is a GNU extension.
+
+    `%r'
+          The complete calendar time using the AM/PM format of the
+          current locale.
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.  In the POSIX locale, this format is equivalent to
+          `%I:%M:%S %p'.
+
+    `%R'
+          The hour and minute in decimal numbers using the format
+          `%H:%M'.
+
+          This format was first standardized by ISO C99 and by
+          POSIX.1-2001 but was previously available as a GNU extension.
+
+    `%s'
+          The number of seconds since the epoch, i.e., since 1970-01-01
+          00:00:00 UTC.  Leap seconds are not counted unless leap
+          second support is available.
+
+          This format is a GNU extension.
+
+    `%S'
+          The seconds as a decimal number (range `00' through `60').
+
+    `%t'
+          A single `\t' (tabulator) character.
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.
+
+    `%T'
+          The time of day using decimal numbers using the format
+          `%H:%M:%S'.
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.
+
+    `%u'
+          The day of the week as a decimal number (range `1' through
+          `7'), Monday being `1'.
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.
+
+    `%U'
+          The week number of the current year as a decimal number
+          (range `00' through `53'), starting with the first Sunday as
+          the first day of the first week.  Days preceding the first
+          Sunday in the year are considered to be in week `00'.
+
+    `%V'
+          The ISO 8601:1988 week number as a decimal number (range `01'
+          through `53').  ISO weeks start with Monday and end with
+          Sunday.  Week `01' of a year is the first week which has the
+          majority of its days in that year; this is equivalent to the
+          week containing the year's first Thursday, and it is also
+          equivalent to the week containing January 4.  Week `01' of a
+          year can contain days from the previous year.  The week
+          before week `01' of a year is the last week (`52' or `53') of
+          the previous year even if it contains days from the new year.
+
+          This format was first standardized by POSIX.2-1992 and by
+          ISO C99.
+
+    `%w'
+          The day of the week as a decimal number (range `0' through
+          `6'), Sunday being `0'.
+
+    `%W'
+          The week number of the current year as a decimal number
+          (range `00' through `53'), starting with the first Monday as
+          the first day of the first week.  All days preceding the
+          first Monday in the year are considered to be in week `00'.
+
+    `%x'
+          The preferred date representation for the current locale.
+
+    `%X'
+          The preferred time of day representation for the current
+          locale.
+
+    `%y'
+          The year without a century as a decimal number (range `00'
+          through `99').  This is equivalent to the year modulo 100.
+
+    `%Y'
+          The year as a decimal number, using the Gregorian calendar.
+          Years before the year `1' are numbered `0', `-1', and so on.
+
+    `%z'
+          RFC 822/ISO 8601:1988 style numeric time zone (e.g., `-0600'
+          or `+0100'), or nothing if no time zone is determinable.
+
+          This format was first standardized by ISO C99 and by
+          POSIX.1-2001 but was previously available as a GNU extension.
+
+          In the POSIX locale, a full RFC 822 timestamp is generated by
+          the format `"%a, %d %b %Y %H:%M:%S %z"' (or the equivalent
+          `"%a, %d %b %Y %T %z"').
+
+    `%Z'
+          The time zone abbreviation (empty if the time zone can't be
+          determined).
+
+    `%%'
+          A literal `%' character.
+
+     The SIZE parameter can be used to specify the maximum number of
+     characters to be stored in the array S, including the terminating
+     null character.  If the formatted time requires more than SIZE
+     characters, `strftime' returns zero and the contents of the array
+     S are undefined.  Otherwise the return value indicates the number
+     of characters placed in the array S, not including the terminating
+     null character.
+
+     _Warning:_ This convention for the return value which is prescribed
+     in ISO C can lead to problems in some situations.  For certain
+     format strings and certain locales the output really can be the
+     empty string and this cannot be discovered by testing the return
+     value only.  E.g., in most locales the AM/PM time format is not
+     supported (most of the world uses the 24 hour time
+     representation).  In such locales `"%p"' will return the empty
+     string, i.e., the return value is zero.  To detect situations like
+     this something similar to the following code should be used:
+
+          buf[0] = '\1';
+          len = strftime (buf, bufsize, format, tp);
+          if (len == 0 && buf[0] != '\0')
+            {
+              /* Something went wrong in the strftime call.  */
+              ...
+            }
+
+     If S is a null pointer, `strftime' does not actually write
+     anything, but instead returns the number of characters it would
+     have written.
+
+     According to POSIX.1 every call to `strftime' implies a call to
+     `tzset'.  So the contents of the environment variable `TZ' is
+     examined before any output is produced.
+
+     For an example of `strftime', see *Note Time Functions Example::.
+
+ - Function: size_t wcsftime (wchar_t *S, size_t SIZE, const wchar_t
+          *TEMPLATE, const struct tm *BROKENTIME)
+     The `wcsftime' function is equivalent to the `strftime' function
+     with the difference that it operates on wide character strings.
+     The buffer where the result is stored, pointed to by S, must be an
+     array of wide characters.  The parameter SIZE which specifies the
+     size of the output buffer gives the number of wide character, not
+     the number of bytes.
+
+     Also the format string TEMPLATE is a wide character string.  Since
+     all characters needed to specify the format string are in the basic
+     character set it is portably possible to write format strings in
+     the C source code using the `L"..."' notation.  The parameter
+     BROKENTIME has the same meaning as in the `strftime' call.
+
+     The `wcsftime' function supports the same flags, modifiers, and
+     format specifiers as the `strftime' function.
+
+     The return value of `wcsftime' is the number of wide characters
+     stored in `s'.  When more characters would have to be written than
+     can be placed in the buffer S the return value is zero, with the
+     same problems indicated in the `strftime' documentation.
+
+
+File: libc.info,  Node: Parsing Date and Time,  Next: TZ Variable,  Prev: Formatting Calendar Time,  Up: Calendar Time
+
+Convert textual time and date information back
+----------------------------------------------
+
+   The ISO C standard does not specify any functions which can convert
+the output of the `strftime' function back into a binary format.  This
+led to a variety of more-or-less successful implementations with
+different interfaces over the years.  Then the Unix standard was
+extended by the addition of two functions: `strptime' and `getdate'.
+Both have strange interfaces but at least they are widely available.
+
+* Menu:
+
+* Low-Level Time String Parsing::  Interpret string according to given format.
+* General Time String Parsing::    User-friendly function to parse data and
+                                    time strings.
+
+
+File: libc.info,  Node: Low-Level Time String Parsing,  Next: General Time String Parsing,  Up: Parsing Date and Time
+
+Interpret string according to given format
+..........................................
+
+   he first function is rather low-level.  It is nevertheless frequently
+used in software since it is better known.  Its interface and
+implementation are heavily influenced by the `getdate' function, which
+is defined and implemented in terms of calls to `strptime'.
+
+ - Function: char * strptime (const char *S, const char *FMT, struct tm
+          *TP)
+     The `strptime' function parses the input string S according to the
+     format string FMT and stores its results in the structure TP.
+
+     The input string could be generated by a `strftime' call or
+     obtained any other way.  It does not need to be in a
+     human-recognizable format; e.g. a date passed as `"02:1999:9"' is
+     acceptable, even though it is ambiguous without context.  As long
+     as the format string FMT matches the input string the function
+     will succeed.
+
+     The user has to make sure, though, that the input can be parsed in
+     a unambiguous way.  The string `"1999112"' can be parsed using the
+     format `"%Y%m%d"' as 1999-1-12, 1999-11-2, or even 19991-1-2.  It
+     is necessary to add appropriate separators to reliably get results.
+
+     The format string consists of the same components as the format
+     string of the `strftime' function.  The only difference is that
+     the flags `_', `-', `0', and `^' are not allowed.  Several of the
+     distinct formats of `strftime' do the same work in `strptime'
+     since differences like case of the input do not matter.  For
+     reasons of symmetry all formats are supported, though.
+
+     The modifiers `E' and `O' are also allowed everywhere the
+     `strftime' function allows them.
+
+     The formats are:
+
+    `%a'
+    `%A'
+          The weekday name according to the current locale, in
+          abbreviated form or the full name.
+
+    `%b'
+    `%B'
+    `%h'
+          The month name according to the current locale, in
+          abbreviated form or the full name.
+
+    `%c'
+          The date and time representation for the current locale.
+
+    `%Ec'
+          Like `%c' but the locale's alternative date and time format
+          is used.
+
+    `%C'
+          The century of the year.
+
+          It makes sense to use this format only if the format string
+          also contains the `%y' format.
+
+    `%EC'
+          The locale's representation of the period.
+
+          Unlike `%C' it sometimes makes sense to use this format since
+          some cultures represent years relative to the beginning of
+          eras instead of using the Gregorian years.
+
+    `%d'
+
+    `%e'
+          The day of the month as a decimal number (range `1' through
+          `31').  Leading zeroes are permitted but not required.
+
+    `%Od'
+    `%Oe'
+          Same as `%d' but using the locale's alternative numeric
+          symbols.
+
+          Leading zeroes are permitted but not required.
+
+    `%D'
+          Equivalent to `%m/%d/%y'.
+
+    `%F'
+          Equivalent to `%Y-%m-%d', which is the ISO 8601 date format.
+
+          This is a GNU extension following an ISO C99 extension to
+          `strftime'.
+
+    `%g'
+          The year corresponding to the ISO week number, but without
+          the century (range `00' through `99').
+
+          _Note:_ Currently, this is not fully implemented.  The format
+          is recognized, input is consumed but no field in TM is set.
+
+          This format is a GNU extension following a GNU extension of
+          `strftime'.
+
+    `%G'
+          The year corresponding to the ISO week number.
+
+          _Note:_ Currently, this is not fully implemented.  The format
+          is recognized, input is consumed but no field in TM is set.
+
+          This format is a GNU extension following a GNU extension of
+          `strftime'.
+
+    `%H'
+    `%k'
+          The hour as a decimal number, using a 24-hour clock (range
+          `00' through `23').
+
+          `%k' is a GNU extension following a GNU extension of
+          `strftime'.
+
+    `%OH'
+          Same as `%H' but using the locale's alternative numeric
+          symbols.
+
+    `%I'
+    `%l'
+          The hour as a decimal number, using a 12-hour clock (range
+          `01' through `12').
+
+          `%l' is a GNU extension following a GNU extension of
+          `strftime'.
+
+    `%OI'
+          Same as `%I' but using the locale's alternative numeric
+          symbols.
+
+    `%j'
+          The day of the year as a decimal number (range `1' through
+          `366').
+
+          Leading zeroes are permitted but not required.
+
+    `%m'
+          The month as a decimal number (range `1' through `12').
+
+          Leading zeroes are permitted but not required.
+
+    `%Om'
+          Same as `%m' but using the locale's alternative numeric
+          symbols.
+
+    `%M'
+          The minute as a decimal number (range `0' through `59').
+
+          Leading zeroes are permitted but not required.
+
+    `%OM'
+          Same as `%M' but using the locale's alternative numeric
+          symbols.
+
+    `%n'
+    `%t'
+          Matches any white space.
+
+    `%p'
+
+    `%P'
+          The locale-dependent equivalent to `AM' or `PM'.
+
+          This format is not useful unless `%I' or `%l' is also used.
+          Another complication is that the locale might not define
+          these values at all and therefore the conversion fails.
+
+          `%P' is a GNU extension following a GNU extension to
+          `strftime'.
+
+    `%r'
+          The complete time using the AM/PM format of the current
+          locale.
+
+          A complication is that the locale might not define this
+          format at all and therefore the conversion fails.
+
+    `%R'
+          The hour and minute in decimal numbers using the format
+          `%H:%M'.
+
+          `%R' is a GNU extension following a GNU extension to
+          `strftime'.
+
+    `%s'
+          The number of seconds since the epoch, i.e., since 1970-01-01
+          00:00:00 UTC.  Leap seconds are not counted unless leap
+          second support is available.
+
+          `%s' is a GNU extension following a GNU extension to
+          `strftime'.
+
+    `%S'
+          The seconds as a decimal number (range `0' through `60').
+
+          Leading zeroes are permitted but not required.
+
+          *Note:* The Unix specification says the upper bound on this
+          value is `61', a result of a decision to allow double leap
+          seconds.  You will not see the value `61' because no minute
+          has more than one leap second, but the myth persists.
+
+    `%OS'
+          Same as `%S' but using the locale's alternative numeric
+          symbols.
+
+    `%T'
+          Equivalent to the use of `%H:%M:%S' in this place.
+
+    `%u'
+          The day of the week as a decimal number (range `1' through
+          `7'), Monday being `1'.
+
+          Leading zeroes are permitted but not required.
+
+          _Note:_ Currently, this is not fully implemented.  The format
+          is recognized, input is consumed but no field in TM is set.
+
+    `%U'
+          The week number of the current year as a decimal number
+          (range `0' through `53').
+
+          Leading zeroes are permitted but not required.
+
+    `%OU'
+          Same as `%U' but using the locale's alternative numeric
+          symbols.
+
+    `%V'
+          The ISO 8601:1988 week number as a decimal number (range `1'
+          through `53').
+
+          Leading zeroes are permitted but not required.
+
+          _Note:_ Currently, this is not fully implemented.  The format
+          is recognized, input is consumed but no field in TM is set.
+
+    `%w'
+          The day of the week as a decimal number (range `0' through
+          `6'), Sunday being `0'.
+
+          Leading zeroes are permitted but not required.
+
+          _Note:_ Currently, this is not fully implemented.  The format
+          is recognized, input is consumed but no field in TM is set.
+
+    `%Ow'
+          Same as `%w' but using the locale's alternative numeric
+          symbols.
+
+    `%W'
+          The week number of the current year as a decimal number
+          (range `0' through `53').
+
+          Leading zeroes are permitted but not required.
+
+          _Note:_ Currently, this is not fully implemented.  The format
+          is recognized, input is consumed but no field in TM is set.
+
+    `%OW'
+          Same as `%W' but using the locale's alternative numeric
+          symbols.
+
+    `%x'
+          The date using the locale's date format.
+
+    `%Ex'
+          Like `%x' but the locale's alternative data representation is
+          used.
+
+    `%X'
+          The time using the locale's time format.
+
+    `%EX'
+          Like `%X' but the locale's alternative time representation is
+          used.
+
+    `%y'
+          The year without a century as a decimal number (range `0'
+          through `99').
+
+          Leading zeroes are permitted but not required.
+
+          Note that it is questionable to use this format without the
+          `%C' format.  The `strptime' function does regard input
+          values in the range 68 to 99 as the years 1969 to 1999 and
+          the values 0 to 68 as the years 2000 to 2068.  But maybe this
+          heuristic fails for some input data.
+
+          Therefore it is best to avoid `%y' completely and use `%Y'
+          instead.
+
+    `%Ey'
+          The offset from `%EC' in the locale's alternative
+          representation.
+
+    `%Oy'
+          The offset of the year (from `%C') using the locale's
+          alternative numeric symbols.
+
+    `%Y'
+          The year as a decimal number, using the Gregorian calendar.
+
+    `%EY'
+          The full alternative year representation.
+
+    `%z'
+          The offset from GMT in ISO 8601/RFC822 format.
+
+    `%Z'
+          The timezone name.
+
+          _Note:_ Currently, this is not fully implemented.  The format
+          is recognized, input is consumed but no field in TM is set.
+
+    `%%'
+          A literal `%' character.
+
+     All other characters in the format string must have a matching
+     character in the input string.  Exceptions are white spaces in the
+     input string which can match zero or more whitespace characters in
+     the format string.
+
+     *Portability Note:* The XPG standard advises applications to use
+     at least one whitespace character (as specified by `isspace') or
+     other non-alphanumeric characters between any two conversion
+     specifications.  The GNU C Library does not have this limitation
+     but other libraries might have trouble parsing formats like
+     `"%d%m%Y%H%M%S"'.
+
+     The `strptime' function processes the input string from right to
+     left.  Each of the three possible input elements (white space,
+     literal, or format) are handled one after the other.  If the input
+     cannot be matched to the format string the function stops.  The
+     remainder of the format and input strings are not processed.
+
+     The function returns a pointer to the first character it was
+     unable to process.  If the input string contains more characters
+     than required by the format string the return value points right
+     after the last consumed input character.  If the whole input
+     string is consumed the return value points to the `NULL' byte at
+     the end of the string.  If an error occurs, i.e. `strptime' fails
+     to match all of the format string, the function returns `NULL'.
+
+   The specification of the function in the XPG standard is rather
+vague, leaving out a few important pieces of information.  Most
+importantly, it does not specify what happens to those elements of TM
+which are not directly initialized by the different formats.  The
+implementations on different Unix systems vary here.
+
+   The GNU libc implementation does not touch those fields which are not
+directly initialized.  Exceptions are the `tm_wday' and `tm_yday'
+elements, which are recomputed if any of the year, month, or date
+elements changed.  This has two implications:
+
+   * Before calling the `strptime' function for a new input string, you
+     should prepare the TM structure you pass.  Normally this will mean
+     initializing all values are to zero.  Alternatively, you can set
+     all fields to values like `INT_MAX', allowing you to determine
+     which elements were set by the function call.  Zero does not work
+     here since it is a valid value for many of the fields.
+
+     Careful initialization is necessary if you want to find out
+     whether a certain field in TM was initialized by the function call.
+
+   * You can construct a `struct tm' value with several consecutive
+     `strptime' calls.  A useful application of this is e.g. the parsing
+     of two separate strings, one containing date information and the
+     other time information.  By parsing one after the other without
+     clearing the structure in-between, you can construct a complete
+     broken-down time.
+
+   The following example shows a function which parses a string which is
+contains the date information in either US style or ISO 8601 form:
+
+     const char *
+     parse_date (const char *input, struct tm *tm)
+     {
+       const char *cp;
+     
+       /* First clear the result structure.  */
+       memset (tm, '\0', sizeof (*tm));
+     
+       /* Try the ISO format first.  */
+       cp = strptime (input, "%F", tm);
+       if (cp == NULL)
+         {
+           /* Does not match.  Try the US form.  */
+           cp = strptime (input, "%D", tm);
+         }
+     
+       return cp;
+     }
+
+
+File: libc.info,  Node: General Time String Parsing,  Prev: Low-Level Time String Parsing,  Up: Parsing Date and Time
+
+A More User-friendly Way to Parse Times and Dates
+.................................................
+
+   The Unix standard defines another function for parsing date strings.
+The interface is weird, but if the function happens to suit your
+application it is just fine.  It is problematic to use this function in
+multi-threaded programs or libraries, since it returns a pointer to a
+static variable, and uses a global variable and global state (an
+environment variable).
+
+ - Variable: getdate_err
+     This variable of type `int' contains the error code of the last
+     unsuccessful call to `getdate'.  Defined values are:
+
+    1
+          The environment variable `DATEMSK' is not defined or null.
+
+    2
+          The template file denoted by the `DATEMSK' environment
+          variable cannot be opened.
+
+    3
+          Information about the template file cannot retrieved.
+
+    4
+          The template file is not a regular file.
+
+    5
+          An I/O error occurred while reading the template file.
+
+    6
+          Not enough memory available to execute the function.
+
+    7
+          The template file contains no matching template.
+
+    8
+          The input date is invalid, but would match a template
+          otherwise.  This includes dates like February 31st, and dates
+          which cannot be represented in a `time_t' variable.
+
+ - Function: struct tm * getdate (const char *STRING)
+     The interface to `getdate' is the simplest possible for a function
+     to parse a string and return the value.  STRING is the input
+     string and the result is returned in a statically-allocated
+     variable.
+
+     The details about how the string is processed are hidden from the
+     user.  In fact, they can be outside the control of the program.
+     Which formats are recognized is controlled by the file named by
+     the environment variable `DATEMSK'.  This file should contain
+     lines of valid format strings which could be passed to `strptime'.
+
+     The `getdate' function reads these format strings one after the
+     other and tries to match the input string.  The first line which
+     completely matches the input string is used.
+
+     Elements not initialized through the format string retain the
+     values present at the time of the `getdate' function call.
+
+     The formats recognized by `getdate' are the same as for
+     `strptime'.  See above for an explanation.  There are only a few
+     extensions to the `strptime' behavior:
+
+        * If the `%Z' format is given the broken-down time is based on
+          the current time of the timezone matched, not of the current
+          timezone of the runtime environment.
+
+          _Note_: This is not implemented (currently).  The problem is
+          that timezone names are not unique.  If a fixed timezone is
+          assumed for a given string (say `EST' meaning US East Coast
+          time), then uses for countries other than the USA will fail.
+          So far we have found no good solution to this.
+
+        * If only the weekday is specified the selected day depends on
+          the current date.  If the current weekday is greater or equal
+          to the `tm_wday' value the current week's day is chosen,
+          otherwise the day next week is chosen.
+
+        * A similar heuristic is used when only the month is given and
+          not the year.  If the month is greater than or equal to the
+          current month, then the current year is used.  Otherwise it
+          wraps to next year.  The first day of the month is assumed if
+          one is not explicitly specified.
+
+        * The current hour, minute, and second are used if the
+          appropriate value is not set through the format.
+
+        * If no date is given tomorrow's date is used if the time is
+          smaller than the current time.  Otherwise today's date is
+          taken.
+
+     It should be noted that the format in the template file need not
+     only contain format elements.  The following is a list of possible
+     format strings (taken from the Unix standard):
+
+          %m
+          %A %B %d, %Y %H:%M:%S
+          %A
+          %B
+          %m/%d/%y %I %p
+          %d,%m,%Y %H:%M
+          at %A the %dst of %B in %Y
+          run job at %I %p,%B %dnd
+          %A den %d. %B %Y %H.%M Uhr
+
+     As you can see, the template list can contain very specific
+     strings like `run job at %I %p,%B %dnd'.  Using the above list of
+     templates and assuming the current time is Mon Sep 22 12:19:47 EDT
+     1986 we can obtain the following results for the given input.
+
+     Input          Match        Result
+     Mon            %a           Mon Sep 22 12:19:47 EDT 1986
+     Sun            %a           Sun Sep 28 12:19:47 EDT 1986
+     Fri            %a           Fri Sep 26 12:19:47 EDT 1986
+     September      %B           Mon Sep 1 12:19:47 EDT 1986
+     January        %B           Thu Jan 1 12:19:47 EST 1987
+     December       %B           Mon Dec 1 12:19:47 EST 1986
+     Sep Mon        %b %a        Mon Sep 1 12:19:47 EDT 1986
+     Jan Fri        %b %a        Fri Jan 2 12:19:47 EST 1987
+     Dec Mon        %b %a        Mon Dec 1 12:19:47 EST 1986
+     Jan Wed 1989   %b %a %Y     Wed Jan 4 12:19:47 EST 1989
+     Fri 9          %a %H        Fri Sep 26 09:00:00 EDT 1986
+     Feb 10:30      %b %H:%S     Sun Feb 1 10:00:30 EST 1987
+     10:30          %H:%M        Tue Sep 23 10:30:00 EDT 1986
+     13:30          %H:%M        Mon Sep 22 13:30:00 EDT 1986
+
+     The return value of the function is a pointer to a static variable
+     of type `struct tm', or a null pointer if an error occurred.  The
+     result is only valid until the next `getdate' call, making this
+     function unusable in multi-threaded applications.
+
+     The `errno' variable is _not_ changed.  Error conditions are
+     stored in the global variable `getdate_err'.  See the description
+     above for a list of the possible error values.
+
+     _Warning:_ The `getdate' function should _never_ be used in
+     SUID-programs.  The reason is obvious: using the `DATEMSK'
+     environment variable you can get the function to open any
+     arbitrary file and chances are high that with some bogus input
+     (such as a binary file) the program will crash.
+
+ - Function: int getdate_r (const char *STRING, struct tm *TP)
+     The `getdate_r' function is the reentrant counterpart of
+     `getdate'.  It does not use the global variable `getdate_err' to
+     signal an error, but instead returns an error code.  The same error
+     codes as described in the `getdate_err' documentation above are
+     used, with 0 meaning success.
+
+     Moreover, `getdate_r' stores the broken-down time in the variable
+     of type `struct tm' pointed to by the second argument, rather than
+     in a static variable.
+
+     This function is not defined in the Unix standard.  Nevertheless
+     it is available on some other Unix systems as well.
+
+     The warning against using `getdate' in SUID-programs applies to
+     `getdate_r' as well.
+
+
+File: libc.info,  Node: TZ Variable,  Next: Time Zone Functions,  Prev: Parsing Date and Time,  Up: Calendar Time
+
+Specifying the Time Zone with `TZ'
+----------------------------------
+
+   In POSIX systems, a user can specify the time zone by means of the
+`TZ' environment variable.  For information about how to set
+environment variables, see *Note Environment Variables::.  The functions
+for accessing the time zone are declared in `time.h'.
+
+   You should not normally need to set `TZ'.  If the system is
+configured properly, the default time zone will be correct.  You might
+set `TZ' if you are using a computer over a network from a different
+time zone, and would like times reported to you in the time zone local
+to you, rather than what is local to the computer.
+
+   In POSIX.1 systems the value of the `TZ' variable can be in one of
+three formats.  With the GNU C library, the most common format is the
+last one, which can specify a selection from a large database of time
+zone information for many regions of the world.  The first two formats
+are used to describe the time zone information directly, which is both
+more cumbersome and less precise.  But the POSIX.1 standard only
+specifies the details of the first two formats, so it is good to be
+familiar with them in case you come across a POSIX.1 system that doesn't
+support a time zone information database.
+
+   The first format is used when there is no Daylight Saving Time (or
+summer time) in the local time zone:
+
+     STD OFFSET
+
+   The STD string specifies the name of the time zone.  It must be
+three or more characters long and must not contain a leading colon,
+embedded digits, commas, nor plus and minus signs.  There is no space
+character separating the time zone name from the OFFSET, so these
+restrictions are necessary to parse the specification correctly.
+
+   The OFFSET specifies the time value you must add to the local time
+to get a Coordinated Universal Time value.  It has syntax like
+[`+'|`-']HH[`:'MM[`:'SS]].  This is positive if the local time zone is
+west of the Prime Meridian and negative if it is east.  The hour must
+be between `0' and `23', and the minute and seconds between `0' and
+`59'.
+
+   For example, here is how we would specify Eastern Standard Time, but
+without any Daylight Saving Time alternative:
+
+     EST+5
+
+   The second format is used when there is Daylight Saving Time:
+
+     STD OFFSET DST [OFFSET]`,'START[`/'TIME]`,'END[`/'TIME]
+
+   The initial STD and OFFSET specify the standard time zone, as
+described above.  The DST string and OFFSET specify the name and offset
+for the corresponding Daylight Saving Time zone; if the OFFSET is
+omitted, it defaults to one hour ahead of standard time.
+
+   The remainder of the specification describes when Daylight Saving
+Time is in effect.  The START field is when Daylight Saving Time goes
+into effect and the END field is when the change is made back to
+standard time.  The following formats are recognized for these fields:
+
+`JN'
+     This specifies the Julian day, with N between `1' and `365'.
+     February 29 is never counted, even in leap years.
+
+`N'
+     This specifies the Julian day, with N between `0' and `365'.
+     February 29 is counted in leap years.
+
+`MM.W.D'
+     This specifies day D of week W of month M.  The day D must be
+     between `0' (Sunday) and `6'.  The week W must be between `1' and
+     `5'; week `1' is the first week in which day D occurs, and week
+     `5' specifies the _last_ D day in the month.  The month M should be
+     between `1' and `12'.
+
+   The TIME fields specify when, in the local time currently in effect,
+the change to the other time occurs.  If omitted, the default is
+`02:00:00'.
+
+   For example, here is how you would specify the Eastern time zone in
+the United States, including the appropriate Daylight Saving Time and
+its dates of applicability.  The normal offset from UTC is 5 hours;
+since this is west of the prime meridian, the sign is positive.  Summer
+time begins on the first Sunday in April at 2:00am, and ends on the
+last Sunday in October at 2:00am.
+
+     EST+5EDT,M4.1.0/2,M10.5.0/2
+
+   The schedule of Daylight Saving Time in any particular jurisdiction
+has changed over the years.  To be strictly correct, the conversion of
+dates and times in the past should be based on the schedule that was in
+effect then.  However, this format has no facilities to let you specify
+how the schedule has changed from year to year.  The most you can do is
+specify one particular schedule--usually the present day schedule--and
+this is used to convert any date, no matter when.  For precise time zone
+specifications, it is best to use the time zone information database
+(see below).
+
+   The third format looks like this:
+
+     :CHARACTERS
+
+   Each operating system interprets this format differently; in the GNU
+C library, CHARACTERS is the name of a file which describes the time
+zone.
+
+   If the `TZ' environment variable does not have a value, the
+operation chooses a time zone by default.  In the GNU C library, the
+default time zone is like the specification `TZ=:/etc/localtime' (or
+`TZ=:/usr/local/etc/localtime', depending on how GNU C library was
+configured; *note Installation::).  Other C libraries use their own
+rule for choosing the default time zone, so there is little we can say
+about them.
+
+   If CHARACTERS begins with a slash, it is an absolute file name;
+otherwise the library looks for the file
+`/share/lib/zoneinfo/CHARACTERS'.  The `zoneinfo' directory contains
+data files describing local time zones in many different parts of the
+world.  The names represent major cities, with subdirectories for
+geographical areas; for example, `America/New_York', `Europe/London',
+`Asia/Hong_Kong'.  These data files are installed by the system
+administrator, who also sets `/etc/localtime' to point to the data file
+for the local time zone.  The GNU C library comes with a large database
+of time zone information for most regions of the world, which is
+maintained by a community of volunteers and put in the public domain.
+
+
+File: libc.info,  Node: Time Zone Functions,  Next: Time Functions Example,  Prev: TZ Variable,  Up: Calendar Time
+
+Functions and Variables for Time Zones
+--------------------------------------
+
+ - Variable: char * tzname [2]
+     The array `tzname' contains two strings, which are the standard
+     names of the pair of time zones (standard and Daylight Saving)
+     that the user has selected.  `tzname[0]' is the name of the
+     standard time zone (for example, `"EST"'), and `tzname[1]' is the
+     name for the time zone when Daylight Saving Time is in use (for
+     example, `"EDT"').  These correspond to the STD and DST strings
+     (respectively) from the `TZ' environment variable.  If Daylight
+     Saving Time is never used, `tzname[1]' is the empty string.
+
+     The `tzname' array is initialized from the `TZ' environment
+     variable whenever `tzset', `ctime', `strftime', `mktime', or
+     `localtime' is called.  If multiple abbreviations have been used
+     (e.g. `"EWT"' and `"EDT"' for U.S. Eastern War Time and Eastern
+     Daylight Time), the array contains the most recent abbreviation.
+
+     The `tzname' array is required for POSIX.1 compatibility, but in
+     GNU programs it is better to use the `tm_zone' member of the
+     broken-down time structure, since `tm_zone' reports the correct
+     abbreviation even when it is not the latest one.
+
+     Though the strings are declared as `char *' the user must refrain
+     from modifying these strings.  Modifying the strings will almost
+     certainly lead to trouble.
+
+
+ - Function: void tzset (void)
+     The `tzset' function initializes the `tzname' variable from the
+     value of the `TZ' environment variable.  It is not usually
+     necessary for your program to call this function, because it is
+     called automatically when you use the other time conversion
+     functions that depend on the time zone.
+
+   The following variables are defined for compatibility with System V
+Unix.  Like `tzname', these variables are set by calling `tzset' or the
+other time conversion functions.
+
+ - Variable: long int timezone
+     This contains the difference between UTC and the latest local
+     standard time, in seconds west of UTC.  For example, in the U.S.
+     Eastern time zone, the value is `5*60*60'.  Unlike the `tm_gmtoff'
+     member of the broken-down time structure, this value is not
+     adjusted for daylight saving, and its sign is reversed.  In GNU
+     programs it is better to use `tm_gmtoff', since it contains the
+     correct offset even when it is not the latest one.
+
+ - Variable: int daylight
+     This variable has a nonzero value if Daylight Saving Time rules
+     apply.  A nonzero value does not necessarily mean that Daylight
+     Saving Time is now in effect; it means only that Daylight Saving
+     Time is sometimes in effect.
+
+
+File: libc.info,  Node: Time Functions Example,  Prev: Time Zone Functions,  Up: Calendar Time
+
+Time Functions Example
+----------------------
+
+   Here is an example program showing the use of some of the calendar
+time functions.
+
+     #include <time.h>
+     #include <stdio.h>
+     
+     #define SIZE 256
+     
+     int
+     main (void)
+     {
+       char buffer[SIZE];
+       time_t curtime;
+       struct tm *loctime;
+     
+       /* Get the current time. */
+       curtime = time (NULL);
+     
+       /* Convert it to local time representation. */
+       loctime = localtime (&curtime);
+     
+       /* Print out the date and time in the standard format. */
+       fputs (asctime (loctime), stdout);
+     
+       /* Print it out in a nice format. */
+       strftime (buffer, SIZE, "Today is %A, %B %d.\n", loctime);
+       fputs (buffer, stdout);
+       strftime (buffer, SIZE, "The time is %I:%M %p.\n", loctime);
+       fputs (buffer, stdout);
+     
+       return 0;
+     }
+
+   It produces output like this:
+
+     Wed Jul 31 13:02:36 1991
+     Today is Wednesday, July 31.
+     The time is 01:02 PM.
+

@@ -1,0 +1,297 @@
+<html><head><title>Cavium Networks EasyAccess SSL VPN</title><meta http-equiv='pragma' content='no-cache'><meta http-equiv='cache-control' content='no-cache'><meta http-equiv='cache-control' content='must-revalidate'><link href='/themes/stylewhitebluegrey.css' rel=stylesheet type='text/css'><script src="/js/mainframe.js"></script>
+<SCRIPT src="/js/formval.js" type=text/javascript></script>
+
+</head>
+<body style="" onload="resizer()" marginheight=0 marginwidth=0 leftmargin=0 topmargin=0 margin=0 class="mainback">
+<table border=0 cellpadding=0 cellspacing=0 class="mainback2" width=542 valign=top>
+<TR>
+<td width=29><img src="/images/shim.gif" height=4 width=29></td>
+<td width=513 valign="top">
+<!--Form Start-->
+<form  method="post" action="/cgi-bin/transportapps" name="appform">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=titletable>
+<tr class="titlerow">
+
+<td width=513 height=22 class="titlerow" valign=center>
+&nbsp;&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title('Virtual Transport &#187; Tunneled TCP Applications'); </script><BR><img border=0 height=1 width=1 src="/images/shim.gif"><BR></td>
+</tr>
+</table><img src="/images/shim.gif" height=21 width=1 class=titleimage><BR>
+<table valign="top" border=0 cellpadding=0 cellspacing=0 height="" width="">
+<tbody>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td class="darkback" height="" width=1><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+<td align="center" width="">
+<table class="headingstyle" valign="top" cellspacing=0 cellpadding=0 border=0>
+<tbody>
+<tr class="HeadingStyle">
+<td valign="center" class="HeadingStyle" height=21 width=513>&nbsp; <font class="HeadingStyle"><b>Configured Applications for Virtual Transport</b></font></td>
+
+</tr>
+</table>
+<table class="centertable" valign="top" cellspacing=0 cellpadding=0 border=0 width=513>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td colspan=3 height=2 width=""><img border=0 height=14 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td>
+<table width="99%" cellspacing=0 border=0>
+<tbody>
+<tr>
+<td width=35></td>
+<td class="toolbar" width=200><b>Local&nbsp;Server&nbsp;IP&nbsp;Address</b></td>
+
+<td class="toolbar" width=230><b>TCP Port Number</b></td>
+<td width=45 align="left"></td>
+</tr>
+<tr><td width=35>&nbsp;</td>
+<td align=left width=200 class=toolbar>192.168.99.102</td>
+<td align=left width=230 class=toolbar>25</td>
+<td width=45 align=left><a href=/cgi-bin/appform?delete=true&addr=192.168.99.102><img border=0 src=/images/trash3.gif></a></td>
+</tr></tbody>
+</table><img height=15 src="/images/shim.gif"><br>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td class="darkback" height="" width=1><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+
+</tr>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+</tbody>
+</table><img height=22 border=0 src="/images/shim.gif"><br>
+<table valign="top" border=0 cellpadding=0 cellspacing=0 height="" width="">
+<tbody>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td class="darkback" height="" width=1><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+<td align="center" width="">
+<table class="headingstyle" valign="top" cellspacing=0 cellpadding=0 border=0>
+<tbody>
+<tr class="HeadingStyle">
+
+<td colspan=3 valign="center" class="HeadingStyle" height=21 width=513>&nbsp; <font class="HeadingStyle"><b>Add an Application to be Tunneled by Virtual Transport</b></font></td>
+</tr>
+</table>
+<table class="centertable" valign="top" cellspacing=0 cellpadding=0 border=0 width=513>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td colspan=3 height=2 width=""><img border=0 height=15 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr width=513>
+<td width=513>
+<table width="100%"  valign="top" cellspacing=0 cellpadding=0 border=0>
+<tbody>
+<tr width=513>
+
+<td height=27 width=125 align="right">
+<div class="toolbar">
+<font class="toolbar" id="field1">IP&nbsp;Address:</font>&nbsp;&nbsp;
+</div>
+</td>
+<td width=125 height=27><input maxlength=15 style="width: 125px;" name="address" type="text" class="input" onchange="validateip(this, 'field1', true);" id="field1input" ></td>
+<td height=27 width=90  align="right">
+<div class="toolbar">
+<font class="toolbar" id="field2">&nbsp;TCP&nbsp;Port:</font>&nbsp;&nbsp;
+</div>
+</td>
+<td width=75 height=27><input style="width: 50px;" name="tcpport" maxlength=5 type="text" class="input" onchange="asciicharacters(this, 'field2', true);" id="field2input" ></td>
+<td width=170 height=27>
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td class=bleft></td>
+
+<td width=75 class=bcenter align=center><A href="JavaScript:window.document.appform.submit()" class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button('Add&nbsp;Application'); </script> 
+</a></td>
+<td class=bright><img src="/images/shim.gif" width=3 height=1></td></tr></table>
+
+</td>
+</tr>
+
+<tr width=513>
+<td colspan=3 align=center>
+<img height=15 src="/images/shim.gif"><br>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td class="darkback" height="" width=1><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+
+</tr>
+</form>
+</table><img height=27 src="/images/shim.gif"><br>
+
+
+
+
+
+
+
+
+
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=titletable>
+<tr class="titlerow">
+<form  method="post" action="/cgi-bin/transportapps" name="addhost">
+<td width=513 height=22 class="titlerow" valign=center>
+&nbsp;&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title('Virtual Transport &#187; Host Name Resolution'); </script><BR><img border=0 height=1 width=1 src="/images/shim.gif"><BR></td>
+</tr>
+</table><img src="/images/shim.gif" height=21 width=1 class=titleimage><BR>
+<table valign="top" border=0 cellpadding=0 cellspacing=0 height="" width="">
+<tbody>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td class="darkback" height="" width=1><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+<td align="center" width="">
+<table class="headingstyle" valign="top" cellspacing=0 cellpadding=0 border=0>
+<tbody>
+<tr class="HeadingStyle">
+<td valign="center" class="HeadingStyle" height=21 width=513>&nbsp; <font class="HeadingStyle"><b>Configured Host Names for Virtual Transport Clients</b></font></td>
+
+</tr>
+</table>
+<table class="centertable" valign="top" cellspacing=0 cellpadding=0 border=0 width=513>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td colspan=3 height=2 width=""><img border=0 height=14 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td>
+<table width="99%" cellspacing=0 border=0>
+<tbody>
+<tr>
+<td width=35></td>
+<td class="toolbar" width=200><b>Local&nbsp;Server&nbsp;IP&nbsp;Address</b></td>
+
+<td class="toolbar" width=230><b>Fully&nbsp;Qualified&nbsp;Domain&nbsp;Name</b></td>
+<td width=45 align="left"></td>
+</tr>
+<tr><td width=35>&nbsp;</td>
+<td align=left width=200 class=toolbar>192.168.99.102</td>
+<td align=left width=230 class=toolbar>mail.company.com</td>
+<td width=45 align=left><a href=/cgi-bin/transportapps?delete=true&addr=192.168.99.102><img border=0 src=/images/trash3.gif></a></td>
+</tr></tbody>
+</table><img height=15 src="/images/shim.gif"><br>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td class="darkback" height="" width=1><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+
+</tr>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+</tbody>
+</table><img height=22 border=0 src="/images/shim.gif"><br>
+<table valign="top" border=0 cellpadding=0 cellspacing=0 height="" width="">
+<tbody>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td class="darkback" height="" width=1><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+<td align="center" width="">
+<table class="headingstyle" valign="top" cellspacing=0 cellpadding=0 border=0>
+<tbody>
+<tr class="HeadingStyle">
+
+<td colspan=3 valign="center" class="HeadingStyle" height=21 width=513>&nbsp; <font class="HeadingStyle"><b>Add a Host Name for Client Name Resolution</b></font></td>
+</tr>
+</table>
+<table class="centertable" valign="top" cellspacing=0 cellpadding=0 border=0 width=513>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td colspan=3 height=2 width=""><img border=0 height=15 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr width=513>
+<td width=513>
+<table width="99%"  valign="top" cellspacing=0 cellpadding=0 border=0>
+<tbody>
+<tr width=513>
+
+<td height=27 width=221 align="right">
+<div class="toolbar">
+<font class="toolbar" id="field1">Local&nbsp;Server&nbsp;IP&nbsp;Address:</font>&nbsp;&nbsp;
+</div>
+</td>
+<td width=155 height=27><input maxlength=15 style="width: 139px;" name="address" type="text" class="input" onchange="validateip(this, 'field1', true);" id="field1input" ></td>
+<td width=135 height=27></td>
+
+</tr>
+<tr width=513>
+<td height=27 width=221 align="right">
+<div class="toolbar">
+<font class="toolbar" id="field2">Fully&nbsp;Qualified&nbsp;Domain&nbsp;Name:</font>&nbsp;&nbsp;
+</div>
+</td>
+<td width=155 height=27><input maxlength=50 style="width: 139px;" name="name" type="text" class="input" onchange="asciicharacters(this, 'field2', true);" id="field2input" ></td>
+<td width=135 height=27>
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td class=bleft></td>
+
+<td width=75 class=bcenter align=center><A href="JavaScript:window.document.addhost.submit()" class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button('Add Host'); </script> 
+</a></td>
+<td class=bright><img src="/images/shim.gif" width=3 height=1></td></tr></table>
+</td>
+</tr>
+<tr width=513 >
+<td width=505 align=center colspan=3>
+<img height=15 src="/images/shim.gif"><br>
+<font class=toolbar2>Host name resolution allows Virtual Transport clients    to  access   servers by <BR> name. 
+Addresses should correspond with TCP application(s) configured above.
+</font><BR>
+<img height=18 src="/images/shim.gif"><br>
+
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td class="darkback" height="" width=1><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+</tr>
+<tr>
+<td class="darkback" colspan=3 height=1 width=""><img border=0 height=1 width=1 src="/images/shim.gif"></td>
+
+</tr>
+</tbody>
+</table><img height=23 src="/images/shim.gif"><br>
+
+
+
+
+
+
+<a name="status">
+</a><br><img src=/images/shim.gif height=8 width=1 border=0><br></td></tr><form></tbody></table></body></html>

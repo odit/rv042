@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function editInterface(n)
+{
+  document.formDDNS.editInterface.value=n;
+  document.formDDNS.submitStatus.value=100; 
+  document.formDDNS.action="edit_adv_ddns.htm";
+  window.status=wEditInterface;  
+  document.formDDNS.submit();
+}
+//=============== End of Javascript ===============*/
+
+/***************************************************/
+/*												   */	
+/*      			Begin of content    		   */
+/*												   */	
+/***************************************************/
+var ButtonType = "NULL";
+var Savelink = "";
+var Cancellink="";
+
+var helplink ='help_adv_ddns.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 600;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintMultiWANDDNS(0);
+	PrintEndContent();
+}
+
+function Print_table_tr_cell(cell_type,inf,status,hostname,j)
+{
+	document.write('<tr class='+cell_type+'>');		
+	document.write('<td width="120">'+inf+'<img border="0" src="images/_blank.gif" width="8" height="16"></td>');
+	document.write('<td>'+status+'</td>');
+	document.write('<td width="150">'+hostname+'</td>');
+	document.write('<td width="100"><a href="javascript: editInterface('+j+')">');
+	document.write('<img src=images/edit.gif width=20 height=16 border=0 title=Edit></a>');
+	document.write('</td>');
+	document.write('</tr>');
+
+}
+
+function PrintMultiWANDDNS(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="135" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Interface');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Status');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+
+	document.write('<td width="164" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Host Name');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+
+	document.write('<td width="116" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Configuration');
+	document.write('</td>');
+
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table width="100%"  class="STtable"  border="0">');	
+
+	var wanddns_interface;
+	var wanddns_status;
+	var wanddns_host_name;
+
+	for (j=1; j<=parseInt(document.formDDNS.wanNumbers.value)-parseInt(document.formDDNS.isDMZmode.value); j++)
+	{	
+			wanddns_interface = "WAN"+j;
+			wanddns_status = document.getElementById("wan"+j+"DdnsService");
+			wanddns_host_name = document.getElementById("wan"+j+"DdnsHostName");
+			if(j%2 == 1)
+				Print_table_tr_cell("OddRow",wanddns_interface,wanddns_status.value,wanddns_host_name.value,j);
+			else
+				Print_table_tr_cell("EvenRow",wanddns_interface,wanddns_status.value,wanddns_host_name.value,j);
+	}
+	document.write('</table>');		
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+		 
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of Javascript ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+		SetItemInit(foldersTree, 2, 9);  
+      		initializeTree(foldersTree); 
+	</script>
+	<form name="formDDNS" method="post" action="adv_ddns.htm">
+         <input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+	<input type="hidden" name="page" value="adv_ddns.htm">
+	<input type="hidden" name="submitStatus" value="1">
+	<input type="hidden" name="editInterface" value="0">
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+	<input type="hidden" name="wan1DdnsService" id="wan1DdnsService" value='<!--#nk_get DdnsService="1"-->'>
+	<input type="hidden" name="wan2DdnsService" id="wan2DdnsService" value='<!--#nk_get DdnsService="2"-->'>
+	<input type="hidden" name="wan3DdnsService" id="wan3DdnsService" value='<!--#nk_get DdnsService="3"-->'>
+	<input type="hidden" name="wan4DdnsService" id="wan4DdnsService" value='<!--#nk_get DdnsService="4"-->'>
+	<input type="hidden" name="wan5DdnsService" id="wan5DdnsService" value='<!--#nk_get DdnsService="5"-->'>
+	<input type="hidden" name="wan6DdnsService" id="wan6DdnsService" value='<!--#nk_get DdnsService="6"-->'>
+	<input type="hidden" name="wan7DdnsService" id="wan7DdnsService" value='<!--#nk_get DdnsService="7"-->'>
+	<input type="hidden" name="wan1DdnsHostName" id="wan1DdnsHostName" value='<!--#nk_get DdnsHostName="1"-->'>
+	<input type="hidden" name="wan2DdnsHostName" id="wan2DdnsHostName" value='<!--#nk_get DdnsHostName="2"-->'>
+	<input type="hidden" name="wan3DdnsHostName" id="wan3DdnsHostName" value='<!--#nk_get DdnsHostName="3"-->'>
+	<input type="hidden" name="wan4DdnsHostName" id="wan4DdnsHostName" value='<!--#nk_get DdnsHostName="4"-->'>
+	<input type="hidden" name="wan5DdnsHostName" id="wan5DdnsHostName" value='<!--#nk_get DdnsHostName="5"-->'>
+	<input type="hidden" name="wan6DdnsHostName" id="wan6DdnsHostName" value='<!--#nk_get DdnsHostName="6"-->'>
+	<input type="hidden" name="wan7DdnsHostName" id="wan7DdnsHostName" value='<!--#nk_get DdnsHostName="7"-->'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

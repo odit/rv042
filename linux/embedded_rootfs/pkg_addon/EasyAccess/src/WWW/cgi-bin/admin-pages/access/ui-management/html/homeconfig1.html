@@ -1,0 +1,44 @@
+<script src='/js/mainframe.js' type='text/javascript'>
+</script>
+<script type='text/javascript'>
+<!--
+function validateOnSubmit(){
+var elem;var errs=0;
+if (errs>1)  alert("Please correct two or more fields before submitting");
+if (errs==1) alert("Please correct a field before submitting");
+if (errs==0){window.document.homeconfig.submit();}
+}
+function checkMenu(param){
+var imagelocation = eval("'/images/' + param + '.gif'")
+window.document.span1.src = imagelocation;
+}
+function checkMenu2(param) {
+var imagelocation = eval("'/images/' + param + '.gif'")
+window.document.span2.src = imagelocation;
+}
+//-->
+</script>
+</head>
+<body class='mainback' margin='0' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' onload='JavaScript:parent.resizeme(460);' style='overflow-x:hidden;overflow-y:hidden'>
+<table border='0' cellpadding='0' cellspacing='0' width='542' valign='top' align='left'>
+<form name="homeconfig" action="/cgi-bin/homeconfig" method="post" enctype="multipart/form-data" >
+<tr>
+<td width='29' height='400'><img src='/images/shim.gif' height='396' width='29'></td>
+<td width='513' valign='top'>
+<table border='0' cellpadding='0' cellspacing='0' valign='top'><tr><td>
+<table border='0' cellpadding='0' cellspacing='0' valign='top' class=titletable>
+<tr class='titlerow'>
+<td width='513' height='22' class='titlerow' valign='center'>
+&nbsp; <script type='text/JavaScript' language='JavaScript'>
+title('Access&nbsp;&#187;&nbsp;Home&nbsp;Page&nbsp;Configuration'); 
+</script>
+</td>
+</tr>
+</table><img src='/images/shim.gif' height='21' width='1' class=titleimage><br>
+<table border='0' cellpadding='0' cellspacing='0' width='513' >
+<tr><td width='' height='1' colspan='3' class='darkback'><img src='/images/shim.gif' width='1' height='1' border='0'></td></tr>
+<tr><td width='1' height='' class='darkback'><img src='/images/shim.gif' width='1' height='1' border='0'></td>
+<td width='' align='center'>
+<table border='0' cellpadding='0' cellspacing='0' valign='top' class='Headingstyle'>
+<tbody><tr class='HeadingStyle'><td width='513' height='21' class='HeadingStyle' valign='center' colspan='2'>&nbsp; <font class='Headingstyle'><b>Home Page Layout</b></font></td></tr></tbody>
+</table>

@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:10" />
+    <title>Editing a WAN Connection</title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=0;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998294"> </a><h2 class="pHeading2">
+Editing a WAN Connection
+</h2>
+<a name="wp999835"> </a><p class="pBody">
+The <em class="cEmphasis">Edit WAN Connection</em> page appears after you click an <b class="cBold">Edit</b> icon in the <em class="cEmphasis">WAN 
+Settings</em> section of the <em class="cEmphasis">Network</em> page. Enter the information provided by your ISP. 
+
+</p>
+<a name="wp999866"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998300"> </a><li class="pSmartList1"><b class="cBold">Interface: </b>The selected WAN port appears. This ID cannot be changed.
+</li>
+<a name="wp998301"> </a><li class="pSmartList1"><b class="cBold">WAN Connection Type: </b>Choose a connection type, as described below.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998302"> </a><li class="pSmartList2"><b class="cBold">Obtain an IP Automatically: </b>Choose this option if your ISP dynamically assigns an IP address. Most cable modem subscribers use this connection type. Your ISP will assign the settings, including the DNS server IP address. If you want to specify a DNS server, check the <b class="cBold">Use the Following DNS Server Addresses </b>box. Then enter an IP address in the <b class="cBold">DNS Server (Required) 1</b> box. Optionally, you can enter a second DNS server. The first available DNS entry is used. </li>
+<a name="wp998303"> </a><li class="pSmartList2"><b class="cBold">Static IP: </b>Choose this option if your ISP assigned a permanent IP address to your account. Then enter the settings provided by your ISP:</li>
+<a name="wp998304"> </a><p class="pBodyRelative">
+<b class="cBold">Specify WAN IP Address:</b> The external IP address that your ISP assigned to your account.
+</p>
+<a name="wp998305"> </a><p class="pBodyRelative">
+<b class="cBold">Subnet Mask:</b> The subnet mask specified by your ISP.
+</p>
+<a name="wp998306"> </a><p class="pBodyRelative">
+<b class="cBold">Default Gateway Address:</b> The IP address of the default gateway.
+</p>
+<a name="wp998307"> </a><p class="pBodyRelative">
+<b class="cBold">DNS Server (Required) 1: </b>The IP address of the specified DNS server. Optionally, enter a second DNS server. The first available DNS entry is used.
+</p>
+<a name="wp998308"> </a><li class="pSmartList2"><b class="cBold">PPPoE (Point-to-Point Protocol over Ethernet): </b>Choose this option if your ISP uses PPPoE (Point-to-Point Protocol over Ethernet) to establish Internet connections (typical for DSL lines). Then enter the settings provided by your ISP:</li>
+<a name="wp998309"> </a><p class="pBodyRelative">
+<b class="cBold">User Name</b> and <b class="cBold">Password:</b> Enter the User Name and Password for your ISP account. The maximum number of characters is 60.
+</p>
+<a name="wp1000043"> </a><p class="pBodyRelative">
+<b class="cBold">Connect on Demand:</b> This feature may be helpful if you are billed based on the time that you are connected to the Internet. When this feature is enabled, the connection will be disconnected after a specified period of inactivity (Max Idle Time). As soon as you attempt to access the Internet again, the router automatically re-establishes your connection. If you enable this feature, also enter the <b class="cBold">Max Idle Time</b>, which is number of minutes that the connection can be inactive; when this limit is reached, the connection is terminated. The default Max Idle Time is 5 minutes.
+</p>
+<a name="wp998311"> </a><p class="pBodyRelative">
+<b class="cBold">Keep Alive:</b> This feature ensures that your router is always connected to the Internet. When this feature is enabled, the router keeps the connection alive by sending out a few data packets periodically. This option keeps your connection active indefinitely, even when it sits idle. If you enable this feature, also enter the <b class="cBold">Redial Period</b> to specify how often the router verifies your Internet connection. The default period is 30<span style="font-weight: bold"> </span>seconds.
+</p>
+<a name="wp998312"> </a><li class="pSmartList2"><b class="cBold">PPTP (Point-to-Point Tunneling Protocol): </b>Choose this option if required by your ISP. PPTP is a service used in Europe, Israel, and other countries. </li>
+<a name="wp998313"> </a><p class="pBodyRelative">
+<b class="cBold">Specify WAN IP Address:</b> The external IP address that your ISP assigned to your account.
+</p>
+<a name="wp998314"> </a><p class="pBodyRelative">
+<b class="cBold">Subnet Mask:</b> The subnet mask specified by your ISP.
+</p>
+<a name="wp998315"> </a><p class="pBodyRelative">
+<b class="cBold">Default Gateway Address:</b> The IP address of the default gateway.
+</p>
+<a name="wp998316"> </a><p class="pBodyRelative">
+<b class="cBold">User Name </b>and<b class="cBold"> Password:</b> Enter the user name and password for your ISP account. The maximum number of characters is 60.
+</p>
+<a name="wp1000060"> </a><p class="pBodyRelative">
+<b class="cBold">Connect on Demand:</b> This feature may be helpful if you are billed based on the time that you are connected to the Internet. When this feature is enabled, the connection will be disconnected after a specified period of inactivity (Max Idle Time). As soon as you attempt to access the Internet again, the router automatically re-establishes your connection. If you enable this feature, also enter the <b class="cBold">Max Idle Time</b>, which is number of minutes that the connection can be inactive; when this limit is reached, the connection is terminated. The default Max Idle Time is 5 minutes.
+</p>
+<a name="wp1000061"> </a><p class="pBodyRelative">
+<b class="cBold">Keep Alive:</b> This feature ensures that your router is always connected to the Internet. When this feature is enabled, the router keeps the connection alive by sending out a few data packets periodically. This option keeps your connection active indefinitely, even when it sits idle. If you enable this feature, also enter the <b class="cBold">Redial Period</b><span style="font-weight: normal"> to specify how often the router verifies your Internet connection. The default period is 30</span><span style="font-weight: bold"> </span>seconds.
+</p>
+<a name="wp998319"> </a><li class="pSmartList2"><b class="cBold">T</b><b class="cBold">ransparent Bridge:</b> Choose this option if you are using this router to connect two network segments. Only one WAN interface can be set as transparent bridge.</li>
+<a name="wp998320"> </a><p class="pBodyRelative">
+<b class="cBold">Specify WAN IP Address:</b> The external IP address that your ISP assigned to your account.
+</p>
+<a name="wp998321"> </a><p class="pBodyRelative">
+<b class="cBold">Subnet Mask:</b> The subnet mask specified by your ISP.
+</p>
+<a name="wp998322"> </a><p class="pBodyRelative">
+<b class="cBold">Default Gateway Address:</b> The IP address of the default gateway.
+</p>
+<a name="wp998323"> </a><p class="pBodyRelative">
+<b class="cBold">DNS Server (Required) 1: </b>The IP address of the specified DNS server. Optionally, enter a second DNS server. The first available DNS entry is used.
+</p>
+<a name="wp998324"> </a><p class="pBodyRelative">
+<b class="cBold">Internal LAN IP Range:</b> The internal LAN IP range that will be bridged. The WAN and LAN of transparent bridge will be at the same subnet. 
+</p>
+</ul></div>
+<a name="wp998326"> </a><li class="pSmartList1"><b class="cBold">M</b><b class="cBold">TU:</b> The Maximum Transmission Unit (MTU) setting specifies the largest 
+packet size permitted for network transmission. In most cases, keep the 
+default, <span style="font-weight: bold">Auto</span>. To specify the MTU, select <span style="font-weight: bold">Manual</span>, and then enter the 
+maximum MTU size.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

@@ -1,0 +1,70 @@
+--- lib/krb5/asn.1/asn1_k_decode.h.orig	2006-12-16 23:30:14.000000000 -0800
++++ lib/krb5/asn.1/asn1_k_decode.h	2006-12-16 23:29:51.000000000 -0800
+@@ -141,7 +141,7 @@
+ 	(asn1buf *buf, krb5_pa_data *val);
+ asn1_error_code asn1_decode_passwdsequence
+ 	(asn1buf *buf, passwd_phrase_element *val);
+-asn1_error_code asn1_decode_etype_info_entry
++static asn1_error_code asn1_decode_etype_info_entry
+ 	(asn1buf *buf, krb5_etype_info_entry *val);
+ asn1_error_code asn1_decode_sam_challenge
+ 	(asn1buf *buf, krb5_sam_challenge *val);
+--- appl/gssftp/ftpd/ftpd.c.orig	2006-12-17 09:36:32.000000000 -0800
++++ appl/gssftp/ftpd/ftpd.c	2006-12-17 09:37:24.000000000 -0800
+@@ -1271,7 +1271,7 @@
+ 	FILE *fout, *din;
+ 	struct stat st;
+ 	int (*closefunc)();
+-	static char *gunique();
++	char *gunique();
+ 
+ 	if (logging > 1) syslog(LOG_NOTICE, "put %s", path_expand(name));
+ 
+@@ -2206,7 +2206,7 @@
+  * The file named "local" is already known to exist.
+  * Generates failure reply on error.
+  */
+-static char *
++char *
+ gunique(local)
+ 	char *local;
+ {
+--- lib/krb5/ccache/cc_file.c.orig	2007-03-06 21:26:24.000000000 +0530
++++ lib/krb5/ccache/cc_file.c	2007-03-06 21:22:19.000000000 +0530
+@@ -957,8 +957,15 @@
+      krb5_error_code ret;
+ 
+      ret = krb5_fcc_store_ui_4(context, id, data->length);
+-     CHECK(ret);
+-     return krb5_fcc_write(context, id, data->data, data->length);
++     if (ret != KRB5_OK) 
++	return ret;
++
++     if(data->data)
++     {
++     ret = krb5_fcc_write(context, id, data->data, data->length);
++     }
++
++     return ret;
+ }
+ 
+ static krb5_error_code
+@@ -2295,6 +2302,7 @@
+      TCHECK(ret);
+      ret = krb5_fcc_store_data(context, id, &creds->ticket);
+      TCHECK(ret);
++
+      ret = krb5_fcc_store_data(context, id, &creds->second_ticket);
+      TCHECK(ret);
+
+--- lib/crypto/aes/Makefile.in.orig	2007-03-30 10:45:52.000000000 +0530
++++ lib/crypto/aes/Makefile.in	2007-03-30 10:46:20.000000000 +0530
+@@ -46,7 +46,7 @@
+ depend:: $(SRCS)
+ 
+ aes-gen: aes-gen.o $(GEN_OBJS)
+-	$(CC) -o aes-gen aes-gen.o $(GEN_OBJS)
++	$(CC_LINK) -o aes-gen aes-gen.o $(GEN_OBJS)
+ 
+ run-aes-gen: aes-gen
+ 	./aes-gen > kresults.out

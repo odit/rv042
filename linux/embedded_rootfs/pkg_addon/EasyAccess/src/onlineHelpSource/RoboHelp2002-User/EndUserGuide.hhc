@@ -1,0 +1,207 @@
+<html>
+<!-- Sitemap 1.0 -->
+<object type="text/site properties">
+  <param name="SiteType" value="toc">
+  <param name="Font" value="Tahoma,8,0">
+  <param name="Image Width" value="16">
+  <param name="Window Styles" value="0x800402">
+  <param name="ExWindow Styles" value="0x100">
+</object>
+<ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Overview">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="SSL VPN Overview">
+      <param name="Local" value="Logging_into_the_SSL_VPN_Portal.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Browser Requirements">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Web Browser">
+      <param name="Local" value="Web_Browser.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Java Requirements">
+      <param name="Local" value="Java_Requirements.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Making the SSL VPN Portal a Trusted Site">
+      <param name="Local" value="Making_the_SSL_VPN_Portal_a_Trusted_Site.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Authentication">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="The SSL VPN Portal">
+      <param name="Local" value="EasyAccess_Overview.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Logging into the Portal">
+      <param name="Local" value="Authenticating.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Home Page">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Home Page Overview">
+      <param name="Local" value="home.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Services">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Services Overview">
+      <param name="Local" value="serv.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Web Proxy">
+      <param name="Local" value="web_proxy.html">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="HTTPS Proxy">
+      <param name="Local" value="HTTPS_Proxy.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Telnet Client">
+      <param name="Local" value="Telnet_Client.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="SSH Client">
+      <param name="Local" value="SSH_Client.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="FTP Client">
+      <param name="Local" value="FTP_Client.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Service Bookmarks">
+      <param name="Local" value="Application_Bookmarks.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Applications">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Terminal Services Applications ">
+      <param name="Local" value="tsca.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Accessing an Application">
+      <param name="Local" value="Accessing_an_Application.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="My Desktop ">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Desktop Overview">
+      <param name="Local" value="desk.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Terminal Services Desktop Access">
+      <param name="Local" value="Using_Desktop_Remote_Access.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="VNC Access">
+      <param name="Local" value="VNC_Desktop_Access.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Desktop Bookmarks">
+      <param name="Local" value="Desktop_Bookmarks.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="My Network Places">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Overview">
+      <param name="Local" value="netw.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Using My Network Places">
+      <param name="Local" value="Using_My_Network_Places.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Virtual Passage">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Requirements for Windows">
+      <param name="Local" value="sslv.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Installation for Windows">
+      <param name="Local" value="Virtual_Passage_Installation.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Requirements for MacOS X">
+      <param name="Local" value="clie.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="MacOS X Installation">
+      <param name="Local" value="MacOS_X_Installation.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Virtual Transport">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Overview">
+      <param name="Local" value="virt.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Installation">
+      <param name="Local" value="vtransportinstallation.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Theme Settings">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Configure Portal Theme">
+      <param name="Local" value="them.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Change Password">
+    <param name="Local" value="Change_Password.htm">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Change Password">
+      <param name="Local" value="Change_Password.htm">
+    </object>
+    </ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Security">
+    <param name="Comment" value="Security and SSL">
+  </object>
+  <ul>
+    <li><object type="text/sitemap">
+      <param name="Name" value="Security">
+      <param name="Local" value="Security.htm">
+    </object>
+    <li><object type="text/sitemap">
+      <param name="Name" value="SSL Handshake Process">
+      <param name="Local" value="SSL_Handshake.htm">
+    </object>
+    </ul>
+</ul>
+</html>

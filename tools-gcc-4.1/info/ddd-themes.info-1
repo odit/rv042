@@ -1,0 +1,1577 @@
+This is ../../../src/ddd/ddd/ddd-themes.info, produced by makeinfo
+version 4.3 from ../../../src/ddd/ddd/ddd-themes.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD-Themes: (ddd-themes).       Writing DDD Themes.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 2001-02-01, of `Writing DDD themes' for DDD
+Version 3.3.11.
+
+Copyright (C) 2001 Universität Passau
+Lehrstuhl für Software-Systeme
+Innstraße 33
+D-94032 Passau
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd-themes.info,  Node: Top,  Next: Welcome,  Up: (dir)
+
+Writing DDD Themes
+******************
+
+   DDD is a graphical front-end for GDB and other command-line
+debuggers.  This manual describes how to write _themes,_ that is,
+modifiers that change the visual appearance of data.
+
+   This is the First Edition of `Writing DDD Themes', 2001-02-01, for
+DDD Version 3.3.11.
+
+   The first part of this master menu lists the major nodes in this Info
+document, including the label and command indices.  The rest of the menu
+lists all the lower level nodes in the document.
+
+* Menu:
+
+* Welcome::                     What this manual is about.
+* Creating Displays::           How DDD visualizes data.
+* Writing Themes::              How you can customize the visualization.
+
+* DDD VSL Functions::           All the VSL functions used by DDD.
+* VSL Library::                 The standard VSL functions.
+* VSL Reference::               Syntax and semantics of VSL.
+
+* Documentation License::       The license of this document.
+* Index::                       All VSL functions.
+
+
+File: ddd-themes.info,  Node: Welcome,  Next: Creating Displays,  Prev: Top,  Up: Top
+
+Welcome
+*******
+
+   Welcome to _Writing DDD Themes_!  In this manual, we will sketch how
+data visualization in DDD works.  (DDD, the Data Display Debugger, is a
+debugger front-end with data visualization.  For details, *note Summary
+of DDD: (ddd)Summary..)
+
+
+File: ddd-themes.info,  Node: Creating Displays,  Next: Writing Themes,  Prev: Welcome,  Up: Top
+
+Creating Displays
+*****************
+
+   We begin with a short discussion of how DDD actually creates displays
+from data.
+
+* Menu:
+
+* Handling Boxes::              How boxes group into displays.
+* Building Boxes from Data::    How DDD computes boxes.
+
+
+File: ddd-themes.info,  Node: Handling Boxes,  Next: Building Boxes from Data,  Up: Creating Displays
+
+Handling Boxes
+==============
+
+   All data displayed in the DDD data window is maintained by the
+inferior debugger.  GDB, for instance, provides a _display list_,
+holding symbolic expressions to be evaluated and printed on standard
+output at each program stop.  The GDB command `display tree' adds
+`tree' to the display list and makes GDB print the value of `tree' as,
+say, `tree = (Tree *)0x20e98', at each program stop.  This GDB output
+is processed by DDD and displayed in the data window.
+
+   Each element of the display list, as transmitted by the inferior
+debugger, is read by DDD and translated into a _box_.  Boxes are
+rectangular entities with a specific content that can be displayed in
+the data window.  We distinguish _atomic_ boxes and _composite_ boxes.
+An atomic box holds white or black space, a line, or a string.
+Composite boxes are horizontal or vertical alignments of other boxes.
+Each box has a size and an extent that determines how it fits into a
+larger surrounding space.
+
+   Through construction of larger and larger boxes, DDD constructs a
+graph node from the GDB data structure in a similar way a typesetting
+system like TeX builds words from letters and pages from paragraphs.
+
+   Such constructions are easily expressed by means of functions mapping
+boxes onto boxes.  These _display functions_ can be specified by the
+user and interpreted by DDD, using an applicative language called VSL
+for _visual structure language_.  VSL functions can be specified by the
+DDD user, leaving much room for extensions and customization.  A VSL
+display function putting a frame around its argument looks like this:
+
+     // Put a frame around TEXT
+     frame(text) = hrule()
+       | vrule() & text & vrule()
+       | hrule();
+
+   Here, `hrule()' and `vrule()' are primitive functions returning
+horizontal and vertical lines, respectively.  The `&' and `|' operators
+construct horizontal and vertical alignments from their arguments.
+
+   VSL provides basic facilities like pattern matching and variable
+numbers of function arguments.  The `halign()' function, for instance,
+builds a horizontal alignment from an arbitrary number of arguments,
+matched by three dots (`...'):
+
+     // Horizontal alignment
+     halign(x) = x;
+     halign(x, ...) = x & halign(...);
+
+   Frequently needed functions like `halign()' are grouped into a
+standard VSL library.
+
+
+File: ddd-themes.info,  Node: Building Boxes from Data,  Prev: Handling Boxes,  Up: Creating Displays
+
+Building Boxes from Data
+========================
+
+   To visualize data structures, each atomic type and each type
+constructor from the programming language is assigned a VSL display
+function.  Atomic values like numbers, characters, enumerations, or
+character strings are displayed using string boxes holding their value;
+the VSL function to display them leaves them unchanged:
+
+     // Atomic Values
+     simple_value(value) = value;
+
+   Composite values require more attention.  An array, for instance, may
+be displayed using a horizontal alignment:
+
+     // Array
+     array(...) = frame(halign(...));
+
+   When GDB sends DDD the value of an array, the VSL function `array()'
+is invoked with array elements as values.  A GDB array expression `{1,
+2, 3}' is thus evaluated in VSL as
+
+     array(simple_value("1"), simple_value("2"), simple_value("3"))
+
+which equals
+
+     "1" & "2" & "3"
+
+a composite box holding a horizontal alignment of three string boxes.
+The actual VSL function used in DDD also puts delimiters between the
+elements and comes in a vertical variant as well.
+
+   Nested structures like multi-dimensional arrays are displayed by
+applying the `array()' function in a bottom-up fashion.  First,
+`array()' is applied to the innermost structures; the resulting boxes
+are then passed as arguments to another `array()' invocation.  The GDB
+output
+
+     {{"A", "B", "C"}, {"D", "E", "F"}}
+
+representing a 2 * 3 array of character strings, is evaluated in VSL as
+
+     array(array("A", "B", "C"), array("A", "B", "C"))
+
+resulting in a horizontal alignment of two more alignments representing
+the inner arrays.
+
+   Record structures are built in a similar manner, using a display
+function `struct\_member' rendering the record members.  Names and
+values are separated by an equality sign:
+
+     // Member of a record structure
+     struct_member (name, value) =
+       name & " = " & value;
+
+   The display function `struct' renders the record itself, using the
+`valign()' function.(1)
+
+     // Record structure
+     struct(...) = frame(valign(...));
+
+   This is a simple example; the actual VSL function used in DDD takes
+additional effort to align the equality signs; also, it ensures that
+language-specific delimiters are used, that collapsed structs are
+rendered properly, and so on.
+
+   ---------- Footnotes ----------
+
+   (1) `valign()' is similar to `halign()', but builds a vertical
+alignment.
+
+
+File: ddd-themes.info,  Node: Writing Themes,  Next: DDD VSL Functions,  Prev: Creating Displays,  Up: Top
+
+Writing Themes
+**************
+
+   The basic idea of a _theme_ is to customize one or more aspects of
+the visual appearance of data.  This is done by _modifying_ specific
+VSL definitions.
+
+* Menu:
+
+* Display Title Color::         A simple theme example.
+* General Scheme::              How to write themes in general.
+* Overriding vs. Replacing::    Referring to existing definitions.
+* A Complex Example::           Displaying null values in red.
+* Future Work::                 The road goes on...
+
+
+File: ddd-themes.info,  Node: Display Title Color,  Next: General Scheme,  Up: Writing Themes
+
+Example: Changing the Display Title Color
+=========================================
+
+   As a simple example, consider the following task: You want to display
+display titles in blue instead of black.  The VSL function which
+handles the colors of display titles is called `title_color' (*note
+Displaying Colors::).  It is defined as
+
+     title_color(box) = color(box, "black");
+
+   All you'd have to do to change the color is to provide a new
+definition:
+
+     title_color(box) = color(box, "blue");
+
+   How do you do this?  You create a _data theme_ which modifies the
+definition.
+
+   Using your favourite text editor, you create a file named, say,
+`blue-title.vsl' in the directory `~/.ddd/themes/'.
+
+   The file `blue-title.vsl' has the following content:
+
+     #pragma replace title_color
+     title_color(box) = color(box, "blue");
+
+   In DDD, select `Data => Themes'.  You will find `blue-title.vsl' in
+a line on its own.  Set the checkbox next to `blue-title.vsl' in order
+to activate it.  Whoa!  All display titles will now appear in blue.
+
+
+File: ddd-themes.info,  Node: General Scheme,  Next: Overriding vs. Replacing,  Prev: Display Title Color,  Up: Writing Themes
+
+The General Scheme
+==================
+
+   The general scheme for writing a theme is:
+
+   * _Find the appropriate VSL function._
+
+     Find out which VSL function FUNCTION is responsible for a specific
+     task.  *Note DDD VSL Functions::, for details on the VSL functions
+     used by DDD.
+
+   * _Replace it by your own definition._
+
+     Write a theme (a text file) with the following content:
+
+          #pragma replace FUNCTION
+          FUNCTION(ARGS) = DEFINITION;
+
+     This will replace the existing definition of FUNCTION by your new
+     definition DEFINITION.  It is composed of two parts:
+
+        - The `#pragma replace' declaration removes the original
+          definition of FUNCTION.  *Note VSL Redefining Functions::,
+          for details.
+
+        - The following line provides a new DEFINITION for FUNCTION.
+
+     Please note: If the function FUNCTION is marked as `Global VSL
+     Function', it must be (re-)defined using `->' instead of `=';
+     *Note VSL Function Definitions::, for details.  You may also want
+     to consider `#pragma override' instead; *Note Overriding vs.
+     Replacing::, for details.
+
+   * _Install the theme in a place where DDD can find it._
+
+     For your personal use, this is normally the directory
+     `~/.ddd/themes/'.
+
+     Besides your personal directory, DDD also searches for themes in
+     its theme directory, typically
+     `/usr/local/share/ddd-3.3.11/themes/'.
+
+     The DDD `vslPath' resource controls the actual path where DDD
+     looks for themes.  *Note VSL Resources: (ddd)VSL Resources, for
+     details.
+
+   * _In DDD, invoke `Data => Themes' to apply the theme._
+
+     You're done!
+
+
+File: ddd-themes.info,  Node: Overriding vs. Replacing,  Next: A Complex Example,  Prev: General Scheme,  Up: Writing Themes
+
+Overriding vs. Replacing
+========================
+
+   In certain cases, you may not want to replace the original
+definition by your own, but rather _extend_ the original definition.
+
+   As an example, consider the `value_box' function (*note Displaying
+Data Displays::).  It is applied to every single value displayed.  By
+default, it does nothing.  So we could write a theme that leaves a
+little white space around values:
+
+     #pragma replace value_box
+     value_box(box) -> whiteframe(box);
+
+   or another theme that changes the color to black on yellow:
+
+     #pragma replace value_box
+     value_box(box) -> color(box, "black", "yellow");
+
+   However, we cannot apply both themes at once (say, to create a
+green-on-yellow scheme).  This is because each of the two themes
+replaces the previous definition--the theme that comes last wins.
+
+   The solution to this problem is to set up the theme in such a way
+that it _extends_ the original definition rather than to replace it.  To
+do so, VSL provides an alternative to `#pragma replace', namely
+`#pragma override' (*note VSL Overriding Functions::).
+
+   Like `#pragma replace', the `#pragma override' declaration allows
+for a new definition of a function.  In contrast to `#pragma replace',
+though, uses of the function prior to `#pragma override' are not
+affected--they still refer to the old definition.
+
+   Here's a better theme that changes the color to black on yellow.
+First, it makes the old definition of `value_box' accessible as
+`old_value_box'.  Then, it provides a new definition for `value_box'
+which refers to the old definition, saved in `old_value_box'.
+
+     #pragma override old_value_box
+     old_value_box(...) = value_box(...);
+     
+     #pragma override value_box
+     value_box(value) -> color(old_value_box(value),
+                               "black", "yellow");
+
+   Why do we need a `#pragma override' for `old_value_box', too?
+Simple: to avoid name clashes between multiple themes.  VSL has no
+scopes or name spaces for definitions, so we must resort to this crude,
+but effective scheme.
+
+
+File: ddd-themes.info,  Node: A Complex Example,  Next: Future Work,  Prev: Overriding vs. Replacing,  Up: Writing Themes
+
+A Complex Example
+=================
+
+   As a more complex example, we define a theme that highlights all null
+pointers.  First, we need a predicate `is_null' that tells us whether a
+pointer value is null:
+
+     // True if S1 ends in S2
+     ends_in(s1, s2) =
+         let s1c = chars(s1),
+             s2c = chars(s2) in suffix(s2c, s1c);
+     
+     // True if null value
+     is_null(value) =
+         (ends_in(value, "0x0") or ends_in(value, "nil"));
+
+   The `null_pointer' function tells us how we actually want to render
+null values:
+
+     // Rendering of null values
+     null_pointer(value) -> color(value, "red");
+
+   Now we go and redefine the `pointer_value' function such that
+`null_pointer' is applied only to null values:
+
+     #pragma override old_pointer_value
+     old_pointer_value(...) -> pointer_value(...);
+     
+     #pragma override pointer_value
+     
+     // Ordinary pointers
+     pointer_value (value) ->
+         old_pointer_value(v)
+         where v = (if (is_null(value)) then
+                        null_pointer(value)
+                    else
+                        value
+                    fi);
+
+   All we need now is the same definition for dereferenced pointers
+(that is, overriding the `dereferenced_pointer_value' function), and
+here we go!
+
+
+File: ddd-themes.info,  Node: Future Work,  Prev: A Complex Example,  Up: Writing Themes
+
+Future Work
+===========
+
+   With the information in this manual, you should be able to set up
+your own themes.  If you miss anything, please let us know: simply
+write to <ddd@gnu.org>.
+
+   If there is sufficient interest, DDD's data themes will be further
+extended.  Among the most wanted features is the ability to access and
+parse debuggee data from within VSL functions; this would allow
+user-defined processing of debuggee data.  Let us know if you're
+interested--and keep in touch!
+
+
+File: ddd-themes.info,  Node: DDD VSL Functions,  Next: VSL Library,  Prev: Writing Themes,  Up: Top
+
+DDD VSL Functions
+*****************
+
+   This appendix describes how DDD invokes VSL functions to create data
+displays.
+
+   The functions in this section are predefined in the library
+`ddd.vsl'.  They can be used and replaced by DDD themes.
+
+   Please note: Functions marked as `Global VSL Function' must be
+(re-)defined using `->' instead of `='.  *Note VSL Function
+Definitions::, for details.
+
+* Menu:
+
+* Displaying Fonts::
+* Displaying Colors::
+* Displaying Shadows::
+* Displaying Data Displays::
+* Displaying Simple Values::
+* Displaying Pointers::
+* Displaying References::
+* Displaying Arrays::
+* Displaying Structs::
+* Displaying Lists::
+* Displaying Sequences::
+* Displaying Multi-Line Texts::
+* Displaying Extra Properties::
+
+
+File: ddd-themes.info,  Node: Displaying Fonts,  Next: Displaying Colors,  Up: DDD VSL Functions
+
+Displaying Fonts
+================
+
+   These are the function DDD uses for rendering boxes in different
+fonts:
+
+ - VSL Function: small_rm (box)
+ - VSL Function: small_bf (box)
+ - VSL Function: small_it (box)
+ - VSL Function: small_bi (box)
+     Returns BOX in small roman / bold face / italic / bold italic font.
+
+ - VSL Function: small_size ()
+     Default size for small fonts.(1)
+
+ - VSL Function: tiny_rm (box)
+ - VSL Function: tiny_bf (box)
+ - VSL Function: tiny_it (box)
+ - VSL Function: tiny_bi (box)
+     Returns BOX in tiny roman / bold face / italic / bold italic font.
+
+ - VSL Function: tiny_size ()
+     Default size for tiny fonts.(2)
+
+ - VSL Function: title_rm (box)
+ - VSL Function: title_bf (box)
+ - VSL Function: title_it (box)
+ - VSL Function: title_bi (box)
+     Returns BOX (a display title) in roman / bold face / italic / bold
+     italic font.
+
+ - VSL Function: value_rm (box)
+ - VSL Function: value_bf (box)
+ - VSL Function: value_it (box)
+ - VSL Function: value_bi (box)
+     Returns BOX (a display value) in roman / bold face / italic / bold
+     italic font.
+
+   ---------- Footnotes ----------
+
+   (1) DDD replaces this as set in the DDD font preferences.  Use `ddd
+--fonts' to see the actual definitions.
+
+   (2) DDD replaces this as set in the DDD font preferences.  Use `ddd
+--fonts' to see the actual definitions.
+
+
+File: ddd-themes.info,  Node: Displaying Colors,  Next: Displaying Shadows,  Prev: Displaying Fonts,  Up: DDD VSL Functions
+
+Displaying Colors
+=================
+
+ - VSL Function: display_color (box)
+     Returns BOX in the color used for displays.  Default definition is
+          display_color(box) = color(box, "black", "white");
+
+ - VSL Function: title_color (box)
+     Returns BOX in the color used for display titles.  Default
+     definition is
+          title_color(box) = color(box, "black");
+
+ - VSL Function: disabled_color (box)
+     Returns BOX in the color used for disabled displays.  Default
+     definition is
+          disabled_color(box) = color(box, "white", "grey50");
+
+ - VSL Function: simple_color (box)
+     Returns BOX in the color used for simple values.  Default
+     definition is
+          simple_color(box) = color(box, "black");
+
+ - VSL Function: text_color (box)
+     Returns BOX in the color used for multi-line texts.  Default
+     definition is
+          text_color(box) = color(box, "black");
+
+ - VSL Function: pointer_color (box)
+     Returns BOX in the color used for pointers.  Default definition is
+          pointer_color(box) = color(box, "blue4");
+
+ - VSL Function: struct_color (box)
+     Returns BOX in the color used for structs.  Default definition is
+          struct_color(box) = color(box, "black");
+
+ - VSL Function: list_color (box)
+     Returns BOX in the color used for lists.  Default definition is
+          list_color(box) = color(box, "black");
+
+ - VSL Function: array_color (box)
+     Returns BOX in the color used for arrays.  Default definition is
+          array_color(box) = color(box, "blue4");
+
+ - VSL Function: reference_color (box)
+     Returns BOX in the color used for references.  Default definition
+     is
+          reference_color(box) = color(box, "blue4");
+
+ - VSL Function: changed_color (box)
+     Returns BOX in the color used for changed values.  Default
+     definition is
+          changed_color(box) = color(box, "black", "#ffffcc");
+
+ - VSL Function: shadow_color (box)
+     Returns BOX in the color used for display shadows.  Default
+     definition is
+          shadow_color(box) = color(box, "grey");
+
+
+File: ddd-themes.info,  Node: Displaying Shadows,  Next: Displaying Data Displays,  Prev: Displaying Colors,  Up: DDD VSL Functions
+
+Displaying Shadows
+==================
+
+ - VSL Function: shadow (box)
+     Return BOX with a shadow around it.
+
+
+File: ddd-themes.info,  Node: Displaying Data Displays,  Next: Displaying Simple Values,  Prev: Displaying Shadows,  Up: DDD VSL Functions
+
+Displaying Data Displays
+========================
+
+   DDD uses these functions to create data displays.
+
+ - Global VSL Function: title (display_number, name)
+ - Global VSL Function: title (name)
+     Returns a box for the display title.  If DISPLAY_NUMBER (a string)
+     is given, this is prepended to the title.
+
+ - Global VSL Function: annotation (name)
+     Returns a box for an edge annotation.  This typically uses a tiny
+     font.
+
+ - Global VSL Function: disabled ()
+     Returns a box to be used as value for disabled displays.
+
+ - Global VSL Function: none ()
+     Returns a box for "no value" (i.e. undefined values).  Default: an
+     empty string.
+
+ - Global VSL Function: value_box (value)
+     Returns VALUE in a display box.  Default: leave unchanged.
+
+ - Global VSL Function: display_box (title, value)
+ - Global VSL Function: display_box (value)
+     Returns the entire display box.  TITLE comes from `title()', VALUE
+     from `value_box()'.
+
+
+File: ddd-themes.info,  Node: Displaying Simple Values,  Next: Displaying Pointers,  Prev: Displaying Data Displays,  Up: DDD VSL Functions
+
+Displaying Simple Values
+========================
+
+   DDD uses these functions to display simple values.
+
+ - Global VSL Function: simple_value (value)
+     Returns a box for a simple non-numeric value (characters, strings,
+     constants, ...).  This is typically aligned to the left.
+
+ - Global VSL Function: numeric_value (value)
+     Returns a box for a simple numeric value.  This is typically
+     aligned to the right.
+
+ - Global VSL Function: collapsed_simple_value ()
+     Returns a box for a collapsed simple value.
+
+
+File: ddd-themes.info,  Node: Displaying Pointers,  Next: Displaying References,  Prev: Displaying Simple Values,  Up: DDD VSL Functions
+
+Displaying Pointers
+===================
+
+   DDD uses these functions to display pointers.
+
+ - Global VSL Function: pointer_value (value)
+     Returns a box for a pointer value.
+
+ - Global VSL Function: dereferenced_pointer_value (value)
+     Returns a box for a dereferenced pointer value.
+
+ - Global VSL Function: collapsed_pointer_value ()
+     Returns a box for a collapsed pointer.
+
+
+File: ddd-themes.info,  Node: Displaying References,  Next: Displaying Arrays,  Prev: Displaying Pointers,  Up: DDD VSL Functions
+
+Displaying References
+=====================
+
+   DDD uses these functions to display references.
+
+ - Global VSL Function: reference_value (value)
+     Returns a box for a reference value.
+
+ - Global VSL Function: collapsed_reference_value ()
+     Returns a box for a collapsed reference.
+
+
+File: ddd-themes.info,  Node: Displaying Arrays,  Next: Displaying Structs,  Prev: Displaying References,  Up: DDD VSL Functions
+
+Displaying Arrays
+=================
+
+   DDD uses these functions to display arrays.
+
+ - Global VSL Function: horizontal_array (values...)
+     Returns a box for a horizontal array containing VALUES.
+
+ - Global VSL Function: vertical_array (values...)
+     Returns a box for a vertical array containing VALUES.
+
+ - Global VSL Function: empty_array ()
+     Returns a box for an empty array.
+
+ - Global VSL Function: collapsed_array ()
+     Returns a box for a collapsed array.
+
+ - Global VSL Function: twodim_array (rows...)
+     Returns a box for a two-dimensional array.  Argument is a list of
+     rows, suitable for use with `tab()' or `dtab()'.
+
+ - Global VSL Function: twodim_array_elem (value)
+     Returns a box for an element in a two-dimensional array.
+
+
+File: ddd-themes.info,  Node: Displaying Structs,  Next: Displaying Lists,  Prev: Displaying Arrays,  Up: DDD VSL Functions
+
+Displaying Structs
+==================
+
+   A struct is a set of (NAME, VALUE) pairs, and is also called
+"record" or "object".  DDD uses these functions to display structs.
+
+ - Global VSL Function: struct_value (members...)
+     Returns a box for a struct containing MEMBERS.
+
+ - Global VSL Function: collapsed_struct_value ()
+     Returns a box for a collapsed struct.
+
+ - Global VSL Function: empty_struct_value ()
+     Returns a box for an empty struct.
+
+ - Global VSL Function: struct_member_name (name)
+     Returns a box for a member name.
+
+ - Global VSL Function: struct_member (name, sep, value, name_width)
+     Returns a box for a struct member.  NAME is the member name,
+     typeset with `struct_member_name()', SEP is the separator (as
+     determined by the current programming language), VALUE is the
+     typeset member value, and NAME_WIDTH is the maximum width of all
+     member names.
+
+ - Global VSL Function: horizontal_unnamed_struct ()
+ - Global VSL Function: vertical_unnamed_struct ()
+     Returns a box for a horizontal / vertical unnamed struct, where
+     member names are suppressed.
+
+ - Global VSL Function: struct_member (value)
+     Returns a box for a struct member in a struct where member names
+     are suppressed.
+
+
+File: ddd-themes.info,  Node: Displaying Lists,  Next: Displaying Sequences,  Prev: Displaying Structs,  Up: DDD VSL Functions
+
+Displaying Lists
+================
+
+   A list is a set of (NAME, VALUE) pairs not defined by the specific
+programming language.  DDD uses this format to display variable lists.
+
+ - Global VSL Function: list_value (members...)
+     Returns a box for a list containing MEMBERS.
+
+ - Global VSL Function: collapsed_list_value ()
+     Returns a box for a collapsed list.
+
+ - Global VSL Function: empty_list_value ()
+     Returns a box for an empty list.
+
+ - Global VSL Function: list_member_name (name)
+     Returns a box for a member name.
+
+ - Global VSL Function: list_member (name, sep, value, name_width)
+     Returns a box for a list member.  NAME is the member name, typeset
+     with `list_member_name()', SEP is the separator (as determined by
+     the current programming language), VALUE is the typeset member
+     value, and NAME_WIDTH is the maximum width of all member names.
+
+ - Global VSL Function: horizontal_unnamed_list ()
+ - Global VSL Function: vertical_unnamed_list ()
+     Returns a box for a horizontal / vertical unnamed list, where
+     member names are suppressed.
+
+ - Global VSL Function: list_member (value)
+     Returns a box for a list member in a list where member names are
+     suppressed.
+
+
+File: ddd-themes.info,  Node: Displaying Sequences,  Next: Displaying Multi-Line Texts,  Prev: Displaying Lists,  Up: DDD VSL Functions
+
+Displaying Sequences
+====================
+
+   Sequences are lists of arbitrary, unstructured values.
+
+ - Global VSL Function: sequence_value (values...)
+     Returns a box for a list of values.
+
+ - Global VSL Function: collapsed_sequence_value ()
+     Returns a box for a collapsed sequence.
+
+
+File: ddd-themes.info,  Node: Displaying Multi-Line Texts,  Next: Displaying Extra Properties,  Prev: Displaying Sequences,  Up: DDD VSL Functions
+
+Displaying Multi-Line Texts
+===========================
+
+   DDD uses these functions to display multi-line texts, such as status
+displays.
+
+ - Global VSL Function: text_value (lines...)
+     Returns a box for a list of lines (typically in a vertical
+     alignment).
+
+ - Global VSL Function: collapsed_text_value ()
+     Returns a box for a collapsed text.
+
+
+File: ddd-themes.info,  Node: Displaying Extra Properties,  Prev: Displaying Multi-Line Texts,  Up: DDD VSL Functions
+
+Displaying Extra Properties
+===========================
+
+   DDD uses these functions to display additional properties.
+
+ - Global VSL Function: repeated_value (value, n)
+     Returns a box for a VALUE that is repeated N times.  Note: N is a
+     number, not a string.
+
+ - Global VSL Function: changed_value (value)
+     Returns a box for a VALUE that has changed since the last display.
+     Typically, this invokes `changed_color(VALUE)'.
+
+
+File: ddd-themes.info,  Node: VSL Library,  Next: VSL Reference,  Prev: DDD VSL Functions,  Up: Top
+
+VSL Library
+***********
+
+   This appendix describes the VSL functions available in the standard
+VSL library.
+
+   Unless otherwise stated, all following functions are defined in
+`std.vsl'.
+
+   For DDD themes, `std.vsl' need not be included explicitly.
+
+* Menu:
+
+* Library Conventions::
+* Space Functions::
+* Composition Functions::
+* Arithmetic Functions::
+* Comparison Functions::
+* Negation Functions::
+* Frame Functions::
+* Alignment Functions::
+* Emphasis Functions::
+* Indentation Functions::
+* String Functions::
+* List Functions::
+* Table Functions::
+* Font Functions::
+* Color Functions::
+* Arc Functions::
+* Slope Functions::
+
+
+File: ddd-themes.info,  Node: Library Conventions,  Next: Space Functions,  Up: VSL Library
+
+Conventions
+===========
+
+   Throughout this document, we write A = (A1, A2) to refer to
+individual box sizes.  A1 stands for the horizontal size of A, and A2
+stands for the vertical size of A.
+
+
+File: ddd-themes.info,  Node: Space Functions,  Next: Composition Functions,  Prev: Library Conventions,  Up: VSL Library
+
+Space Functions
+===============
+
+* Menu:
+
+* Empty Space::
+* Black Lines::
+* White Space::
+* Controlling Stretch::
+* Box Dimensions::
+
+
+File: ddd-themes.info,  Node: Empty Space,  Next: Black Lines,  Up: Space Functions
+
+Empty Space
+-----------
+
+ - VSL Function: fill ()
+     Returns an empty box of width 0 and height 0 which stretches in
+     both horizontal and vertical directions.
+
+ - VSL Function: hfill ()
+     Returns a box of height 0 which stretches horizontally.
+
+ - VSL Function: vfill ()
+     Returns a box of width 0 which stretches vertically.
+
+
+File: ddd-themes.info,  Node: Black Lines,  Next: White Space,  Prev: Empty Space,  Up: Space Functions
+
+Black Lines
+-----------
+
+ - VSL Function: rule ()
+     Returns a black box of width 0 and height 0 which stretches in both
+     horizontal and vertical directions.
+
+ - VSL Function: hrule ([thickness])
+     Returns a black box of width 0 and height THICKNESS which
+     stretches horizontally.  THICKNESS defaults to `rulethickness()'
+     (typically 1 pixel).
+
+ - VSL Function: vrule ([thickness])
+     Returns a black box of width THICKNESS and height 0 which
+     stretches vertically.  THICKNESS defaults to `rulethickness()'
+     (typically 1 pixel).
+
+ - VSL Function: rulethickness ()
+     Returns the default thickness for black rules (default: 1).
+
+
+File: ddd-themes.info,  Node: White Space,  Next: Controlling Stretch,  Prev: Black Lines,  Up: Space Functions
+
+White Space
+-----------
+
+ - VSL Function: hwhite ([thickness])
+     Returns a black box of width 0 and height THICKNESS which
+     stretches horizontally.  THICKNESS defaults to `whitethickness()'
+     (typically 2 pixels).
+
+ - VSL Function: vwhite ([thickness])
+     Returns a black box of width THICKNESS and height 0 which
+     stretches vertically.  THICKNESS defaults to `whitethickness()'
+     (typically 2 pixels).
+
+ - VSL Function: whitethickness ()
+     Returns the default thickness for white rules (default: 2).
+
+
+File: ddd-themes.info,  Node: Controlling Stretch,  Next: Box Dimensions,  Prev: White Space,  Up: Space Functions
+
+Controlling Stretch
+-------------------
+
+ - VSL Function: hfix (A)
+     Returns a box containing A, but not stretchable horizontally.
+
+ - VSL Function: vfix (A)
+     Returns a box containing A, but not stretchable vertically.
+
+ - VSL Function: fix (A)
+     Returns a box containing A, but not stretchable in either
+     direction.
+
+
+File: ddd-themes.info,  Node: Box Dimensions,  Prev: Controlling Stretch,  Up: Space Functions
+
+Box Dimensions
+--------------
+
+ - VSL Function: hspace (A)
+     If A = (A1, A2), create a square empty box with a size of (A1, A1).
+
+ - VSL Function: vspace (A)
+     If A = (A1, A2), create a square empty box with a size of (A2, A2).
+
+ - VSL Function: square (A)
+     If A = (A1, A2), create a square empty box with a size of max(A1,
+     A2).
+
+ - VSL Function: box (N, M)
+     Returns a box of size (N, M).
+
+
+File: ddd-themes.info,  Node: Composition Functions,  Next: Arithmetic Functions,  Prev: Space Functions,  Up: VSL Library
+
+Composition Functions
+=====================
+
+* Menu:
+
+* Horizontal Composition::
+* Vertical Composition::
+* Textual Composition::
+* Overlays::
+
+
+File: ddd-themes.info,  Node: Horizontal Composition,  Next: Vertical Composition,  Up: Composition Functions
+
+Horizontal Composition
+----------------------
+
+ - VSL Function: (&) (a, b)
+ - VSL Function: (&) (boxes...)
+ - VSL Function: halign (boxes...)
+     Returns a horizontal alignment of A and B; A is placed left of B.
+     Typically written in inline form `A & B'.
+
+     The alternative forms (available in function-call form only)
+     return a horizontal left-to-right alignment of their arguments.
+
+ - VSL Function: hralign (boxes...)
+     Returns a right-to-left alignment of its arguments.
+
+
+File: ddd-themes.info,  Node: Vertical Composition,  Next: Textual Composition,  Prev: Horizontal Composition,  Up: Composition Functions
+
+Vertical Composition
+--------------------
+
+ - VSL Function: (|) (a, b)
+ - VSL Function: (|) (boxes...)
+ - VSL Function: valign (boxes...)
+     Returns a vertical alignment of A and B; A is placed above B.
+     Typically written in inline form `A | B'.
+
+     The alternative forms (available in function-call form only)
+     return a vertical top-to-bottom alignment of their arguments.
+
+ - VSL Function: vralign (boxes...)
+     Returns a bottom-to-top alignment of its arguments.
+
+ - VSL Function: vlist (sep, boxes...)
+     Returns a top-to-bottom alignment of BOXES, where any two boxes
+     are separated by SEP.
+
+
+File: ddd-themes.info,  Node: Textual Composition,  Next: Overlays,  Prev: Vertical Composition,  Up: Composition Functions
+
+Textual Composition
+-------------------
+
+ - VSL Function: (~) (a, b)
+ - VSL Function: (~) (boxes...)
+ - VSL Function: talign (boxes...)
+     Returns a textual concatenation of A and B.  B is placed in the
+     lower right unused corner of A.  Typically written in inline form
+     `A ~ B'.
+
+     The alternative forms (available in function-call form only)
+     return a textual concatenation of their arguments.
+
+ - VSL Function: tralign (boxes...)
+     Returns a textual right-to-left concatenation of its arguments.
+
+ - VSL Function: tlist (sep, boxes...)
+     Returns a textual left-to-right alignment of BOXES, where any two
+     boxes are separated by SEP.
+
+ - VSL Function: commalist (boxes...)
+     Shorthand for `tlist(", ", BOXES...)'.
+
+ - VSL Function: semicolonlist (boxes...)
+     Shorthand for `tlist("; ", BOXES...)'.
+
+
+File: ddd-themes.info,  Node: Overlays,  Prev: Textual Composition,  Up: Composition Functions
+
+Overlays
+--------
+
+ - VSL Function: (^) (a, b)
+ - VSL Function: (^) (boxes...)
+     Returns an overlay of A and B.  A and B are placed in the same
+     rectangular area, which is the maximum size of A and B; first, A
+     is drawn, then B.  Typically written in inline form `A ^ B'.
+
+     The second form (available in function-call form only) returns an
+     overlay of its arguments.
+
+
+File: ddd-themes.info,  Node: Arithmetic Functions,  Next: Comparison Functions,  Prev: Composition Functions,  Up: VSL Library
+
+Arithmetic Functions
+====================
+
+ - VSL Function: (+) (a, b)
+ - VSL Function: (+) (boxes...)
+     Returns the sum of A and B.  If A = (A1, A2) and B = (B1, B2),
+     then A + B = (A1 + A2, B1 + B2).  Typically written in inline form
+     `A + B'.
+
+     The second form (available in function-call form only) returns the
+     sum of its arguments.
+
+     The special form `+A' is equivalent to `A'.
+
+ - VSL Function: (-) (a, b)
+     Returns the difference of A and B.  If A = (A1, A2) and B = (B1,
+     B2), then A - B = (A1 - A2, B1 - B2).  Typically written in inline
+     form `A - B'.
+
+     The special form `-A' is equivalent to `0-A'.
+
+ - VSL Function: (*) (a, b)
+ - VSL Function: (*) (boxes...)
+     Returns the product of A and B.  If A = (A1, A2) and B = (B1, B2),
+     then A * B = (A1 * A2, B1 * B2).  Typically written in inline form
+     `A * B'.
+
+     The second form (available in function-call form only) returns the
+     product of its arguments.
+
+ - VSL Function: (/) (a, b)
+     Returns the quotient of A and B.  If A = (A1, A2) and B = (B1,
+     B2), then A / B = (A1 / A2, B1 / B2).  Typically written in inline
+     form `A / B'.
+
+ - VSL Function: (%) (a, b)
+     Returns the remainder of A and B.  If A = (A1, A2) and B = (B1,
+     B2), then A % B = (A1 % A2, B1 % B2).  Typically written in inline
+     form `A % B'.
+
+
+File: ddd-themes.info,  Node: Comparison Functions,  Next: Negation Functions,  Prev: Arithmetic Functions,  Up: VSL Library
+
+Comparison Functions
+====================
+
+ - VSL Function: (=) (a, b)
+     Returns true (`1') if A = B, and false (`0'), otherwise.  A = B
+     holds if A and B have the same size, the same structure, and the
+     same content.  Typically written in inline form `A / B'.
+
+ - VSL Function: (<>) (a, b)
+     Returns false (`0') if A = B, and true (`1'), otherwise.  A = B
+     holds if A and B have the same size, the same structure, and the
+     same content.  Typically written in inline form `A / B'.
+
+ - VSL Function: (<) (a, b)
+     If A = (A1, A2) and B = (B1, B2), then this function returns true
+     (`1') if A1 < B1 or A2 < B2 holds; false (`0'), otherwise.
+     Typically written in inline form `A < B'.
+
+ - VSL Function: (<=) (a, b)
+     If A = (A1, A2) and B = (B1, B2), then this function returns true
+     (`1') if A1 <= B1 or A2 <= B2 holds; false (`0'), otherwise.
+     Typically written in inline form `A <= B'.
+
+ - VSL Function: (>) (a, b)
+     If A = (A1, A2) and B = (B1, B2), then this function returns true
+     (`1') if A1 > B1 or A2 > B2 holds; false (`0'), otherwise.
+     Typically written in inline form `A > B'.
+
+ - VSL Function: (>=) (a, b)
+     If A = (A1, A2) and B = (B1, B2), then this function returns true
+     (`1') if A1 >= B1 or A2 >= B2 holds; false (`0'), otherwise.
+     Typically written in inline form `A >= B'.
+
+* Menu:
+
+* Maximum and Minimum Functions::
+
+
+File: ddd-themes.info,  Node: Maximum and Minimum Functions,  Up: Comparison Functions
+
+Maximum and Minimum Functions
+-----------------------------
+
+ - VSL Function: max (b1, b2, ...)
+     Returns the maximum of its arguments; that is, the one box B in
+     its arguments for which B > B1, B > B2, ...  holds.
+
+ - VSL Function: min (b1, b2, ...)
+     Returns the maximum of its arguments; that is, the one box B in
+     its arguments for which B < B1, B < B2, ...  holds.
+
+
+File: ddd-themes.info,  Node: Negation Functions,  Next: Frame Functions,  Prev: Comparison Functions,  Up: VSL Library
+
+Negation Functions
+==================
+
+ - VSL Function: (not) (a)
+     Returns true (`1') if A is false, and false (`0'), otherwise.
+     Typically written in inline form `not A'.
+
+   *Note VSL Boolean Operators::, for `and' and `or'.
+
+
+File: ddd-themes.info,  Node: Frame Functions,  Next: Alignment Functions,  Prev: Negation Functions,  Up: VSL Library
+
+Frame Functions
+===============
+
+ - VSL Function: ruleframe (a[, thickness])
+     Returns A within a black rectangular frame of thickness THICKNESS.
+     THICKNESS defaults to `rulethickness()' (typically 1 pixel).
+
+ - VSL Function: whiteframe (a[, thickness])
+     Returns A within a white rectangular frame of thickness THICKNESS.
+     THICKNESS defaults to `whitethickness()' (typically 2 pixels).
+
+ - VSL Function: frame (a)
+     Returns A within a rectangular frame.  Equivalent to
+     `ruleframe(whiteframe(A)'.
+
+ - VSL Function: doubleframe (a)
+     Shortcut for `frame(frame(A))'.
+
+ - VSL Function: thickframe (a)
+     Shortcut for `ruleframe(frame(A))'.
+
+
+File: ddd-themes.info,  Node: Alignment Functions,  Next: Emphasis Functions,  Prev: Frame Functions,  Up: VSL Library
+
+Alignment Functions
+===================
+
+* Menu:
+
+* Centering Functions::
+* Flushing Functions::
+
+
+File: ddd-themes.info,  Node: Centering Functions,  Next: Flushing Functions,  Up: Alignment Functions
+
+Centering Functions
+-------------------
+
+ - VSL Function: hcenter (a)
+     Returns box A centered horizontally within a (vertical) alignment.
+
+     Example: In `A | hcenter(B) | C', B is centered relatively to A
+     and C.
+
+ - VSL Function: vcenter (a)
+     Returns box A centered vertically within a (horizontal) alignment.
+
+     Example: In `A & vcenter(B) & C', B is centered relatively to A
+     and C.
+
+ - VSL Function: center (a)
+     Returns box A centered vertically and horizontally within an
+     alignment.
+
+     Example: In `100 ^ center(B)', B is centered within a square of
+     size 100.
+
+
+File: ddd-themes.info,  Node: Flushing Functions,  Prev: Centering Functions,  Up: Alignment Functions
+
+Flushing Functions
+------------------
+
+ - VSL Function: n_flush (box)
+ - VSL Function: s_flush (box)
+ - VSL Function: w_flush (box)
+ - VSL Function: e_flush (box)
+     Within an alignment, Flushes box to the center of a side.
+
+     Example: In `100 ^ s_flush(B)', B is centered on the bottom side
+     of a square of size 100.
+
+ - VSL Function: nw_flush (box)
+ - VSL Function: sw_flush (box)
+ - VSL Function: ne_flush (box)
+ - VSL Function: se_flush (box)
+     Within an alignment, Flushes box to a corner.
+
+     Example: In `100 ^ se_flush(B)', B is placed in the lower right
+     corner of a square of size 100.
+
+
+File: ddd-themes.info,  Node: Emphasis Functions,  Next: Indentation Functions,  Prev: Alignment Functions,  Up: VSL Library
+
+Emphasis Functions
+==================
+
+ - VSL Function: underline (a)
+     Returns A with a line underneath.
+
+ - VSL Function: overline (a)
+     Returns A with a line above it.
+
+ - VSL Function: crossline (a)
+     Returns A with a horizontal line across it.
+
+ - VSL Function: doublestrike (a)
+     Returns A in "poor man's bold": it is drawn two times, displaced
+     horizontally by one pixel.
+
+
+File: ddd-themes.info,  Node: Indentation Functions,  Next: String Functions,  Prev: Emphasis Functions,  Up: VSL Library
+
+Indentation Functions
+=====================
+
+ - VSL Function: indent (box)
+     Return a box where white space of width `indentamount()' is placed
+     left of BOX.
+
+ - VSL Function: indentamount ()
+     Indent amount to be used in `indent()'; defaults to `" "' (two
+     spaces).
+
+
+File: ddd-themes.info,  Node: String Functions,  Next: List Functions,  Prev: Indentation Functions,  Up: VSL Library
+
+String Functions
+================
+
+   To retrieve the string from a composite box, use `string()':
+
+ - VSL Function: string (BOX)
+     Return the string (in left-to-right, top-to-bottom order) within
+     BOX.
+
+   To convert numbers to strings, use `num()':
+
+ - VSL Function: num (a [, \varbase])
+     For a square box A = (A1, A1), returns a string containing a
+     textual representation of A1.  BASE must be between 2 and 16; it
+     defaults to `10'.  Example: `num(25) => "25")'
+
+ - VSL Function: dec (a)
+ - VSL Function: oct (a)
+ - VSL Function: bin (a)
+ - VSL Function: hex (a)
+     Shortcut for `num(A, 10)', `num(A, 8)', `num(A, 2)', `num(A, 16)',
+     respectively.
+
+
+File: ddd-themes.info,  Node: List Functions,  Next: Table Functions,  Prev: String Functions,  Up: VSL Library
+
+List Functions
+==============
+
+   The functions in this section require inclusion of the library
+`list.vsl'.
+
+   For themes, `list.vsl' need not be included explicitly.
+
+* Menu:
+
+* Creating Lists::
+* List Properties::
+* Accessing List Elements::
+* Manipulating Lists::
+* Lists and Strings::
+
+
+File: ddd-themes.info,  Node: Creating Lists,  Next: List Properties,  Up: List Functions
+
+Creating Lists
+--------------
+
+ - VSL Function: (::) (list1, list2, ...)
+     Return the concatenation of the given lists.  Typically written in
+     inline form: `[1] :: [2] :: [3] => [1, 2, 3]'.
+
+ - VSL Function: append (list, elem)
+     Returns LIST with ELEM appended at the end: `append([1, 2, 3], 4)
+     => [1, 2, 3, 4]'
+
+
+File: ddd-themes.info,  Node: List Properties,  Next: Accessing List Elements,  Prev: Creating Lists,  Up: List Functions
+
+List Properties
+---------------
+
+ - VSL Function: isatom (x)
+     Returns True (1) if X is an atom; False (0) if X is a list.
+
+ - VSL Function: islist (x)
+     Returns True (1) if X is a list; False (0) if X is an atom.
+
+ - VSL Function: member (x, list)
+     Returns True (1) if X is an element of LIST; False (0) if not:
+     `member(1, [1, 2, 3]) => true'
+
+ - VSL Function: prefix (sublist, list)
+ - VSL Function: suffix (sublist, list)
+ - VSL Function: sublist (sublist, list)
+     Returns True (1) if SUBLIST is a prefix / suffix / sublist of
+     LIST; False (0) if not: `prefix([1], [1, 2]) => true',
+     `suffix([3], [1, 2]) => false', `sublist([2, 2], [1, 2, 2, 3]) =>
+     true',
+
+ - VSL Functions: length (list)
+     Returns the number of elements in LIST: `length([1, 2, 3]) => 3'
+
+
+File: ddd-themes.info,  Node: Accessing List Elements,  Next: Manipulating Lists,  Prev: List Properties,  Up: List Functions
+
+Accessing List Elements
+-----------------------
+
+ - VSL Function: car (list)
+ - VSL Function: head (list)
+     Returns the first element of LIST:  `car([1, 2, 3]) => 1'
+
+ - VSL Function: cdr (list)
+ - VSL Function: tail (list)
+     Returns LIST without its first element:  `cdr([1, 2, 3]) => [2, 3]'
+
+ - VSL Function: elem (list, n)
+     Returns the N-th element (starting with 0) of LIST: `elem([4, 5,
+     6], 0) => 4'
+
+ - VSL Function: pos (elem, list)
+     Returns the position of ELEM in LIST (starting with 0): `pos(4,
+     [1, 2, 4]) => 2'
+
+ - VSL Function: last (list)
+     Returns the last element of LIST: `last([4, 5, 6]) => 6'
+
+
+File: ddd-themes.info,  Node: Manipulating Lists,  Next: Lists and Strings,  Prev: Accessing List Elements,  Up: List Functions
+
+Manipulating Lists
+------------------
+
+ - VSL Function: reverse (list)
+     Returns a reversed LIST: `reverse([3, 4, 5]) => [5, 4, 3]'
+
+ - VSL Function: delete (list, elem)
+     Returns LIST, with all elements ELEM removed: `delete([4, 5, 5,
+     6], 5) => [4, 6]'
+
+ - VSL Function: select (list, elem)
+     Returns LIST, with the first element ELEM removed: `select([4, 5,
+     5, 6], 5) => [4, 5, 6]'
+
+ - VSL Function: flat (list)
+     Returns flattened LIST: `flat([[3, 4], [[5], [6]]]) => [3, 4, 5,
+     6]'
+
+ - VSL Function: sort (list)
+     Returns sortened LIST (according to box size): `sort([7, 4, 9]) =>
+     [4, 7, 9]'
+
+
+File: ddd-themes.info,  Node: Lists and Strings,  Prev: Manipulating Lists,  Up: List Functions
+
+Lists and Strings
+-----------------
+
+ - VSL Function: chars (s)
+     Returns a list of all characters in the box S: `chars("abc") =>
+     ["a", "b", "c"]'
+
+ - VSL Function: list (list)
+     Returns a string, pretty-printing the LIST: `list([4, 5, 6]) =>
+     "[4, 5, 6]"'
+
+
+File: ddd-themes.info,  Node: Table Functions,  Next: Font Functions,  Prev: List Functions,  Up: VSL Library
+
+Table Functions
+===============
+
+   The functions in this section require inclusion of the library
+`tab.vsl'.
+
+   For themes, `tab.vsl' need not be included explicitly.
+
+ - VSL Function: tab (table)
+     Return TABLE (a list of lists) aligned in a table: `tab([[1, 2,
+     3], [4, 5, 6], [7, 8]]) =>'
+          1 2 3
+          4 5 6
+          7 8
+
+ - VSL Function: dtab (table)
+     Like `tab', but place delimiters (horizontal and vertical rules)
+     around table elements.
+
+ - VSL Function: tab_elem (X)
+     Returns padded table element X.  Its default definition is:
+          tab_elem([]) = tab_elem(0);     // empty table
+          tab_elem(x)  = whiteframe(x);   // padding
+
+
+File: ddd-themes.info,  Node: Font Functions,  Next: Color Functions,  Prev: Table Functions,  Up: VSL Library
+
+Font Functions
+==============
+
+   The functions in this section require inclusion of the library
+`fonts.vsl'.
+
+   For themes, `fonts.vsl' need not be included explicitly.
+
+* Menu:
+
+* Font Basics::
+* Font Name Selection::
+* Font Defaults::
+* Font Selection::
+
+
+File: ddd-themes.info,  Node: Font Basics,  Next: Font Name Selection,  Up: Font Functions
+
+Font Basics
+-----------
+
+ - VSL Function: font (BOX, FONT)
+     Returns BOX, with all strings set in FONT (a valid X11 font
+     description)
+
+
+File: ddd-themes.info,  Node: Font Name Selection,  Next: Font Defaults,  Prev: Font Basics,  Up: Font Functions
+
+Font Name Selection
+-------------------
+
+ - VSL Function: weight_bold ()
+ - VSL Function: weight_medium ()
+     Font weight specifier in `fontname()' (see below).
+
+ - VSL Function: slant_unslanted ()
+ - VSL Function: slant_italic ()
+     Font slant Specifier in `fontname()' (see below).
+
+ - VSL Function: family_times ()
+ - VSL Function: family_courier ()
+ - VSL Function: family_helvetica ()
+ - VSL Function: family_new_century ()
+ - VSL Function: family_typewriter ()
+     Font family specifier in `fontname()' (see below).
+
+ - VSL Function: fontname ([weight, [slant, [family, [size]]]])
+     Returns a fontname, suitable for use with `font()'.
+        * WEIGHT defaults to `stdfontweight()' (see below).
+
+        * SLANT defaults to `stdfontslant()' (see below).
+
+        * FAMILY defaults to `stdfontfamily()' (see below).
+
+        * SIZE is a pair (PIXELS, POINTS) where PIXELS being zero means
+          to use POINTS instead and vice versa.  defaults to
+          `stdfontsize()' (see below).
+
+
+File: ddd-themes.info,  Node: Font Defaults,  Next: Font Selection,  Prev: Font Name Selection,  Up: Font Functions
+
+Font Defaults
+-------------
+
+ - VSL Function: stdfontweight ()
+     Default font weight: `weight_medium()'.
+
+ - VSL Function: stdfontslant ()
+     Default font slant: `slant_unslanted()'.
+
+ - VSL Function: stdfontfamily ()
+     Default font family: `family_times()'.
+
+     DDD replaces this as set in the DDD font preferences.  Use `ddd
+     --fonts' to see the actual definitions.
+
+ - VSL Function: stdfontsize ()
+     Default font size: `(stdfontpixels(), stdfontpoints())'.
+
+     DDD replaces this as set in the DDD font preferences.  Use `ddd
+     --fonts' to see the actual definitions.
+
+ - VSL Function: stdfontpixels ()
+     Default font size (in pixels): 0, meaning to use `stdfontpoints()'
+     instead.
+
+ - VSL Function: stdfontpoints ()
+     Default font size (in 1/10 points): 120.
+
+
+File: ddd-themes.info,  Node: Font Selection,  Prev: Font Defaults,  Up: Font Functions
+
+Font Selection
+--------------
+
+ - VSL Function: rm (box [, family [, size]])
+ - VSL Function: bf (box [, family [, size]])
+ - VSL Function: it (box [, family [, size]])
+ - VSL Function: bi (box [, family [, size]])
+     Returns BOX in roman / bold face / italic / bold italic.  FAMILY
+     specifies one of the font families; it defaults to
+     `stdfontfamily()' (see above).  SIZE specifies a font size; it
+     defaults to `stdfontsize()' (see above).
+

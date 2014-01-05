@@ -1,0 +1,546 @@
+<!--#nk_get PPTPSave=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function chSubmit(F)
+{
+	var ds='<!--#nk_get IPHandle2="ds-4:4"-->';
+	var de='<!--#nk_get IPHandle2="de-4:8"-->';
+	var ori_ps = '<!--#nk_get IPHandle1="dsPPTP:4"-->';
+	var ori_pe = '<!--#nk_get IPHandle1="dePPTP:4"-->';
+	var ps,pe;
+	var items,String;
+
+	if(F.PPTPEnabled_check.checked==true)
+	{
+		if(F.OSetting.value=="YES")
+			F.UIchange.value=0;
+		else
+			F.UIchange.value=1;
+		F.PPTPEnabled.value=1;
+	}
+	else
+	{
+		if(F.OSetting.value=="YES")
+			F.UIchange.value=1;
+		else
+			F.UIchange.value=0;
+		F.PPTPEnabled.value=0;
+	}
+	
+	if(F.PPTPEnabled.value==1)
+	{
+		if (IPRangeCheck(F.pptp_s, F.pptp_e, F.LanIP, F.LanIP) < 0) return;
+		String=F.pptp_s.value
+		items=String.split(".");
+		ps=items[3];
+		String=F.pptp_e.value
+	        items=String.split(".");
+		pe=items[3];
+		if((TotalPortNumber==16)&&(pe-ps>9))
+		{
+			alert(aLimitPPTPRange);
+			return;
+		}
+		else if((TotalPortNumber<16)&&(pe-ps>4))
+		{
+			alert(aLimitPPTPRange2);
+			return;
+		}
+
+		if (F.DHCPEnabled.value =="checked")
+		{
+			if ((parseInt(ps,10) >= parseInt(ds,10) && parseInt(ps,10) <= parseInt(de,10))
+			     || (parseInt(pe,10) >= parseInt(ds,10) && parseInt(pe,10) <= parseInt(de,10)))
+			{
+				alert(aDhcpRangeConflict);
+				return;
+			}
+		}
+
+		if (ps != ori_ps || pe != ori_pe)
+			F.UIchange.value=2;
+	}
+
+	if(F.UsersList)        
+		selAll(F.UsersList);
+	F.submitStatus.value=1;
+	F.log_ch.value=F.UIchange.value;
+	window.status=wSave;
+	F.submit();
+}
+function falseSubmit(F)
+{
+	if(F.PPTPEnabled_check.checked==true)
+		F.PPTPEnabled.value=1;
+	else	
+		F.PPTPEnabled.value=0;
+	F.submitStatus.value=0;    
+	F.submit();
+}
+function confirmPass(cP,nP)
+{    
+	if (cP.value!=nP.value)
+	{
+		alert(aNewPasswordNoMatch);
+		cP.select();
+		return -1;
+	}
+	return 1;
+}
+
+function showUser(s)
+{
+
+  var p;
+  var q; 
+  var userString=s.options[s.selectedIndex].value;
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(7);
+	var specialDefinedLength=splitVarforSpecialWordField.length;
+
+	rightString=userString;
+
+	q=rightString.length;
+	p=rightString.indexOf(splitVarforSpecialWordField);
+	ts[1]=rightString.substring(0,p);
+	tmpString=rightString;
+	rightString=tmpString.substring(p+specialDefinedLength,q);
+
+	q=rightString.length;
+	p=rightString.indexOf(splitVarforSpecialWordField);
+	ts[2]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+
+	q=rightString.length;
+	p=rightString.indexOf("}");
+	ts[3]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);
+
+	s.form.uName.value=ts[1]; 
+	s.form.nPasswd.value=ts[2]; 
+	s.form.cPasswd.value=ts[2]; 
+	s.form.userType.value=ts[3];
+
+	s.form.addPortRangeService.value=sUpdateUser; 
+	SetButtonStatus("deletePortRangeService", "enabled");
+	SetButtonStatus("showNew", "enabled");
+
+	s.form.uName.disabled=true;
+
+}
+function addtoList(user, cPasswd, uType, s)
+{
+	var p=-1;
+	var up=-1;
+	var type=1;
+
+	if (user.value=="")
+ 	{
+		alert(aUserName);	
+	}else if (user.form.nPasswd.value=="")
+ 	{
+		alert(aNewPassword);
+	}
+ 	else if (cPasswd.value=="")
+ 	{
+		alert(aConfirmNewPassword);
+	} 
+	else
+	{
+		if(Check_Special_Words(user) < 0) return;
+		if(Check_Special_Words(cPasswd) < 0) return;
+		if (confirmPass(cPasswd, cPasswd.form.nPasswd) < 0) return;
+		if (user.value=="admin")
+		{
+			alert(aAdminUserName);
+			return;
+		}
+	//	up=user.value.indexOf("§");
+	//	if (up >= 0)
+	//	{
+	//		alert(aInvaidUserName);	
+	//		return;	
+	//	}
+		//up=cPasswd.value.indexOf(";");
+		up=-1;
+		if( (up >= 0)||(cPasswd.value=="********"))
+		{
+			alert(aInvaidPasswd);	
+			return;	
+		}
+		
+		if (uType.value == "1") type=1; // add new user
+		else type=2; // uType.value == "0", then type=2; update this user.
+
+		if (s.form.addPortRangeService.value==sUpdateUser)
+		{
+			p=-1;  
+			while (s.form.UsersList.options[++p].selected != true);
+		}
+		for (var i=0; i < s.length; i++)
+		{
+			if (s.options[i].text==user.value)
+			{
+				if (p != i)
+				{
+					alert(aUserNameAlready);
+					return;
+			  	}
+	      		}
+    		}
+		for (var i=0; i < s.length; i++)
+		{
+			s.options[i].selected=false;
+		}
+		if (s.form.addPortRangeService.value==sAddtoList)
+		{
+			type=1;
+			if (TotalPortNumber == 16 && s.length>=10)
+			{
+				alert(aLimitUserNames+"10"+aLimitEnd);
+				return;
+			}   
+			else if (TotalPortNumber < 16 && s.length>=5)
+			{
+				alert(aLimitUserNames+"5"+aLimitEnd);
+				return;
+			}
+			p=s.length;
+			s.length+=1;
+		}
+		s.options[p].value=user.value+splitVarforSpecialWordField+cPasswd.value+splitVarforSpecialWordField;
+		s.options[p].value+=type;
+		s.options[p].value+="}";
+
+		s.options[p].text=user.value;  
+		clearContent(s.form);
+	}
+}
+function clearContent(F)
+{
+	F.uName.value="";  
+	F.nPasswd.value="";
+	F.cPasswd.value="";
+
+	for (var i=0; i < F.UsersList.length; i++)
+		F.UsersList.options[i].selected=false;
+
+	F.addPortRangeService.value=sAddtoList; 
+	SetButtonStatus("deletePortRangeService", "disabled");
+	SetButtonStatus("showNew", "disabled");
+	
+	F.uName.disabled=false;
+	F.uName.select();
+}    
+function delSel(s)
+{
+  var z;  
+  var k;
+
+  if (s.length > 0)
+  {
+	tmp=new tmpWord(s.length);
+	tmpChanged=new tmpWord(s.length); 
+	opvtmp=new tmpWord(s.length);
+	opvtmpChanged=new tmpWord(s.length); 
+
+	for (var i=0; i < s.length; i++)
+	{
+	  tmp[i+1]=s.options[i].text;
+	  opvtmp[i+1]=s.options[i].value;
+	}	
+		
+	for (var i=0; i < s.length; i++)
+	{
+	  if (s.options[i].selected==true)
+	  { 
+		s.options[i].text="";
+		s.options[i].value="";
+		tmp[i+1]=" ";
+		opvtmp[i+1]=" ";		
+		s.options[i].selected=false;
+	  }
+	}
+
+	k=1;
+	z=0;
+	for (var j=1; j<=s.length; j++) 
+	{ 
+		if (tmp[j]!=" ")     
+		{
+			tmpChanged[k]=tmp[j];
+			opvtmpChanged[k]=opvtmp[j];
+			k++;
+		}
+		else
+		{
+			z++;
+		}
+	}
+
+	for (var i=0; i < s.length-z; i++)
+	{
+	    s.options[i].text=tmpChanged[i+1];  
+	    s.options[i].value=opvtmpChanged[i+1];  	    
+	}
+	s.length-=z;
+  }
+
+  clearContent(s.form); 
+}	
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "ShowTableOkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.formPptp);";
+var Cancellink = ""; 
+var Tablelink= "";
+var helplink ='help_pptp.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 600;
+var head_width=160;
+
+function PPTPSummaryList(TunnelData)
+{
+	var items;
+	list=TunnelData.split(splitVarforSpecialWordField+"?");
+	if(document.formPptp.RCListdata.value=="" || list[0].substring(1, 4) == '!--')
+		return;
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');	
+	
+	for(var i=0;i<list.length;i++)
+	{
+		items=list[i].split(splitVarforSpecialWordField+"#");
+		if(i%2==0)
+			Print_table_tr_cell("OddRow",items[0],items[1],items[2]);
+		else
+			Print_table_tr_cell("EvenRow",items[0],items[1],items[2]);
+	}
+	document.write('</table>');		
+	document.write('</td>');
+	document.write('</tr>');
+}		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintPPTPServer(1);
+	if(document.formPptp.PPTPEnabled_check.checked==true)
+	{
+		PrintPPTPIPRangeSetting(1);
+		PrintPPTPUesrSetting(1);
+	}
+	else
+	{
+		document.write('<input type=hidden name="pptp_s" value=\'<!--#nk_get NewPPTPIpRange="Start"-->\'>');
+		document.write('<input type=hidden name="pptp_e" value=\'<!--#nk_get NewPPTPIpRange="End"-->\'>');
+	}
+	PrintPPTPRemoteClientlist(0);	
+	PrintEndContent();
+}
+function PrintPPTPServer(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Infotable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width="1">');
+	document.write('<input type="hidden" name="PPTPEnabled" value=\'<!--#nk_get CheckboxSave="PPTPEnabled"-->\'>');
+	document.write('<input type="checkbox" name="PPTPEnabled_check" onClick="falseSubmit(this.form)" value="0" <!--#nk_get CheckboxStatus="PPTPEnabled"-->>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('Enable PPTP Server');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine,1);
+}
+function PrintPPTPIPRangeSetting(hasUnderLine)
+{
+	PrintBeginBlock(1, "IP Address Range");
+	document.write('<table class="Setuptable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Range Start&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type=text name="pptp_s" value=\'<!--#nk_get NewPPTPIpRange="Start"-->\' maxlength="15" onBlur="IPRangeCheck(this,this.form.pptp_e, this.form.LanIP, this.form.LanIP)" onKeypress="return Check_User_Input(event)" size="20" onFocus="this.select();">');		 	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Range End&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type=text name="pptp_e" value=\'<!--#nk_get NewPPTPIpRange="End"-->\' maxlength="15" onBlur="IPRangeCheck(this.form.pptp_s,this, this.form.LanIP, this.form.LanIP)" onKeypress="return Check_User_Input(event)" size="20" onFocus="this.select();">');		 	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 0, 1);
+}
+function PrintPPTPUesrSetting(hasUnderLine)
+{
+	var in_head_width=head_width-5;
+	PrintBeginBlock(1, "PPTP Server");
+	document.write('<table class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width="'+in_head_width+'">Username&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type=text name="uName" maxlength="32" size="20" onFocus="this.select();">');		
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('New Password&nbsp;:&nbsp;');		
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="password" name="nPasswd" maxlength="20" size="20" onFocus="this.select();">');		
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('Confirm New Password&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="password" name="cPasswd" maxlength="20" size="20" onFocus="this.select();">');		
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<th colspan="4" align="center">');
+	document.write('<input type="hidden" name="userType" value="1">');
+	PrintSTButton("addPortRangeService", "Add to list", "addtoList(this.form.uName, this.form.cPasswd, this.form.userType, this.form.UsersList)");
+	
+	document.write('</th>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td width="10"></td>');
+	document.write('<th colspan="2" align="center">');
+	document.write('<select multiple class="MultiSelect" name="UsersList" size="10" onChange="showUser(this.form.UsersList);" style="width: 100%">');
+	document.write('<!--#nk_get PPTPUsersList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" valign="top" colspan="2">');
+	PrintSTButton("deletePortRangeService","Delete","delSel(document.formPptp.UsersList);");
+	SetButtonStatus("deletePortRangeService", "disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("showNew","Add New","clearContent(document.formPptp);");
+	SetButtonStatus("showNew", "disabled");
+	document.write('<br><img border="0" src="images/_blank.gif" width="1" height="3"></td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function Print_table_tr_cell(cell_type,host_name,IP,MAC, time)
+{
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td width="180" >'+host_name+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="170" >'+IP+'</td>');
+	document.write('<td>'+MAC+'</td>');
+	document.write('</tr>');
+}
+function PrintPPTPRemoteClientlist(hasUnderLine)
+{
+	PrintBeginBlock(1, "Connection List");
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');	
+	document.write('<tr><td>');	
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="194" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Username');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="184" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Remote Address');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('PPTP IP Address');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<input type="hidden" name="RCListdata" value=\'<!--#nk_get PPTPNewSummaryTable=""-->\'>');
+	PPTPSummaryList(document.formPptp.RCListdata.value);
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 7, 6);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formPptp" method="post" action="pptp.htm">
+	<input type="hidden" name="page" value="pptp.htm">                
+	<input type="hidden" name="submitStatus" value="0">                 
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="UIchange" value="0">
+	<input type="hidden" name="LanIP" value='<!--#nk_get DisplayOnly="ipAddr"-->'>
+	<input type="hidden" name="OSetting" value='<!--#nk_get DisplayOnly="PPTPEnabled"-->'> 			
+	<input type="hidden" name="DHCPEnabled" value='<!--#nk_get CheckboxStatus="dhcpStatusChange"-->'>
+	
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="pptp.htm"-->
+<!--#nk_get PPTPServerUpdate=""-->

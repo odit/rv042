@@ -1,0 +1,345 @@
+SNMP.CONF(5)                       Net-SNMP                       SNMP.CONF(5)
+
+
+
+NNAAMMEE
+       snmp.conf - configuration files for the Net-SNMP applications
+
+DDEESSCCRRIIPPTTIIOONN
+       Applications  built  using  the Net-SNMP libraries typically use one or
+       more configuration files to control various aspects of their operation.
+       These  files  (ssnnmmpp..ccoonnff  and ssnnmmpp..llooccaall..ccoonnff) can be located in one of
+       several locations, as described in the _s_n_m_p___c_o_n_f_i_g_(_5_) manual page.
+
+       In particular, /tmp/root-rootfs/etc/snmp/snmp.conf is  a  common  file,
+       containing   the   settings   shared   by  all  users  of  the  system.
+       ~/.snmp/snmp.conf is a personal file, with the settings specific  to  a
+       particular user.
+
+IIMMPPOORRTTAANNTT NNOOTTEE
+       Several  of these directives may contain sensitive information (such as
+       pass phrases).  Configuration files that include such  settings  should
+       only be readable by the user concerned.
+
+       As well as application-specific configuration tokens, there are several
+       directives that relate to standard library behaviour, relevant to  most
+       Net-SNMP  applications.   Many of these correspond to standard command-
+       line options, which are described in the _s_n_m_p_c_m_d_(_1_) manual page.
+
+       These directives can be divided into several distinct groups.
+
+CCLLIIEENNTT BBEEHHAAVVIIOOUURR
+       defDomain application domain
+              The transport domain that should be used for a certain  applica-
+              tion type unless something else is specified.
+
+       defTarget application domain target
+              The  target  that  should  be  used for connections to a certain
+              application if the connection should be in a specific domain.
+
+       defaultPort PORT
+              defines the default UDP port that client SNMP applications  will
+              attempt  to  connect  to.   This can be overridden by explicitly
+              including a port number in the  _A_G_E_N_T  specification.   See  the
+              _s_n_m_p_c_m_d_(_1_) manual page for more details.
+
+              If not specified, the default value for this token is 161.
+
+       defVersion (1|2c|3)
+              defines  the  default version of SNMP to use.  This can be over-
+              ridden using the --vv option.
+
+       defCommunity STRING
+              defines the default community to  use  for  SNMPv1  and  SNMPv2c
+              requests.  This can be overridden using the --cc option.
+
+       dumpPacket yes
+              defines  whether  to  display a hexadecimal dump of the raw SNMP
+              requests sent and received by the application.  This is  equiva-
+              lent to the --dd option.
+
+       doDebugging (1|0)
+              turns on debugging for all applications run if set to 1.
+
+       debugTokens TOKEN[,TOKEN...]
+              defines the debugging tokens that should be turned on when _d_o_D_e_-
+              _b_u_g_g_i_n_g is set.  This is equivalent to the --DD option.
+
+       16bitIDs yes
+              restricts requestIDs, etc to 16-bit values.
+
+              The SNMP specifications define these ID fields as 32-bit quanti-
+              ties,  and  the  Net-SNMP  library typically initialises them to
+              random values for security.   However  certain  (broken)  agents
+              cannot  handle  ID values greater than 2^16 - this option allows
+              interoperability with such agents.
+
+       clientaddr [<transport-specifier>:]<transport-address>
+              specifies the source address to be used by command-line applica-
+              tions when sending SNMP requests. See _s_n_m_p_c_m_d_(_1_) for more infor-
+              mation about the format of addresses.
+
+              This value is also used by ssnnmmppdd when generating  notifications.
+
+       clientRecvBuf INTEGER
+              specifies the desired size of the buffer to be used when receiv-
+              ing responses to SNMP requests.  If the OS hard limit  is  lower
+              than  the  _c_l_i_e_n_t_R_e_c_v_B_u_f  value, then this will be used instead.
+              Some platforms may decide to increase the  size  of  the  buffer
+              actually used for internal housekeeping.
+
+              This directive will be ignored if the platforms does not support
+              _s_e_t_s_o_c_k_o_p_t_(_).
+
+       clientSendBuf INTEGER
+              is similar to _c_l_i_e_n_t_R_e_c_v_B_u_f, but applies  to  the  size  of  the
+              buffer used when sending SNMP requests.
+
+       noRangeCheck yes
+              disables  the validation of varbind values against the MIB defi-
+              nition for the relevant OID.  This  is  equivalent  to  the  --IIrr
+              option.
+
+              This directive is primarily relevant to the ssnnmmppsseett command, but
+              will also apply to any  application  that  calls  _s_n_m_p___a_d_d___v_a_r_(_)
+              with a non-NULL value.
+
+       noTokenWarnings
+              disables warnings about unknown config file tokens.
+
+       reverseEncodeBER (1|yes|true|0|no|false)
+              controls how the encoding of SNMP requests is handled.
+
+              The default behaviour is to encode packets starting from the end
+              of the PDU and working backwards.  This directive can be used to
+              disable  this  behaviour,  and  build the encoded request in the
+              (more obvious) forward direction.
+
+              It should not normally be necessary to change this  setting,  as
+              the  encoding is basically the same in either case - but working
+              backwards typically produces a slightly more efficient encoding,
+              and hence a smaller network datagram.
+
+SSNNMMPPvv33 SSEETTTTIINNGGSS
+       defSecurityName STRING
+              defines  the  default  security name to use for SNMPv3 requests.
+              This can be overridden using the --uu option.
+
+       defSecurityLevel noAuthNoPriv|authNoPriv|authPriv
+              defines the default security level to use for  SNMPv3  requests.
+              This can be overridden using the --ll option.
+
+              If  not specified, the default value for this token is _n_o_A_u_t_h_N_o_-
+              _P_r_i_v.
+
+              Note:  _a_u_t_h_P_r_i_v is only available if the software has been  com-
+                     piled to use the OpenSSL libraries.
+
+       defPassphrase STRING
+
+       defAuthPassphrase STRING
+
+       defPrivPassphrase STRING
+              define  the  default  authentication and privacy pass phrases to
+              use for SNMPv3 requests.  These can be overridden using  the  --AA
+              and --XX options respectively.
+
+              The  ddeeffPPaasssspphhrraassee  value  will  be  used for the authentication
+              and/or privacy pass phrases if either of  the  other  directives
+              are not specified.
+
+       defAuthType MD5|SHA
+
+       defPrivType DES|AES
+              define  the  default authentication and privacy protocols to use
+              for SNMPv3 requests.  These can be overridden using the  --aa  and
+              --xx options respectively.
+
+              If  not specified, SNMPv3 requests will default to MD5 authenti-
+              cation and DES encryption.
+
+              Note:  If the software has not been compiled to use the  OpenSSL
+                     libraries,  then  only  MD5  authentication is supported.
+                     Neither SHA authentication nor  any  form  of  encryption
+                     will be available.
+
+       defContext STRING
+              defines  the  default  context to use for SNMPv3 requests.  This
+              can be overridden using the --nn option.
+
+              If not specified, the  default  value  for  this  token  is  the
+              default context (i.e. the empty string "").
+
+       defSecurityModel STRING
+              defines  the  security  model  to  use for SNMPv3 requests.  The
+              default value is "usm" which is the only  widely  used  security
+              model for SNMPv3.
+
+       defAuthMasterKey 0xHEXSTRING
+
+       defPrivMasterKey 0xHEXSTRING
+
+       defAuthLocalizedKey 0xHEXSTRING
+
+       defPrivLocalizedKey 0xHEXSTRING
+              define  the (hexadecimal) keys to be used for SNMPv3 secure com-
+              munications.   SNMPv3  keys  are  frequently  derived   from   a
+              passphrase,  as  discussed  in  the _d_e_f_P_a_s_s_p_h_r_a_s_e section above.
+              However for improved security a truely random key can be  gener-
+              ated  and  used instead (which would normally has better entropy
+              than a password unless it is amazingly  long).   The  directives
+              are  equivalent to the short-form command line options --33mm, --33MM,
+              --33kk, and --33KK.
+
+              Localized keys are master keys which have been  converted  to  a
+              unique  key which is only suitable for on particular SNMP engine
+              (agent).  The length of the key needs to be appropriate for  the
+              authentication  or encryption type being used (auth keys: MD5=16
+              bytes, SHA1=20 bytes; priv keys: DES=16 bytes (8 bytes of  which
+              is used as an IV and not a key), and AES=16 bytes).
+
+SSEERRVVEERR BBEEHHAAVVIIOOUURR
+       persistentDir DIRECTORY
+              defines the directory where ssnnmmppdd and ssnnmmppttrraappdd store persistent
+              configuration settings.
+
+              If not specified, the persistent directory defaults to /var/net-
+              snmp
+
+       noPersistentLoad yes
+
+       noPersistentSave yes
+              disable  the  loading  and  saving  of  persistent configuration
+              information.
+
+              Note:  This will break SNMPv3 operations  (and  other  behaviour
+                     that  relies  on  changes  persisting  across application
+                     restart).  Use With Care.
+
+       tempFilePattern PATTERN
+              defines a filename template for creating  temporary  files,  for
+              handling input to and output from external shell commands.  Used
+              by the _m_k_s_t_e_m_p_(_) and _m_k_t_e_m_p_(_) functions.
+
+              If not specified, the default pattern is /tmp/snmpdXXXXXX.
+
+       serverRecvBuf INTEGER
+              specifies the desired size of the buffer to be used when receiv-
+              ing  incoming SNMP requests.  If the OS hard limit is lower than
+              the _s_e_r_v_e_r_R_e_c_v_B_u_f value, then this will be used  instead.   Some
+              platforms may decide to increase the size of the buffer actually
+              used for internal housekeeping.
+
+              This directive will be ignored if the platforms does not support
+              _s_e_t_s_o_c_k_o_p_t_(_).
+
+       serverSendBuf INTEGER
+              is  similar  to  _s_e_r_v_e_r_R_e_c_v_B_u_f,  but  applies to the size of the
+              buffer used when sending SNMP responses.
+
+MMIIBB HHAANNDDLLIINNGG
+       mibdirs DIRLIST
+              specifies a list of directories to search for MIB  files.   This
+              operates  in  the same way as the --MM option - see _s_n_m_p_c_m_d_(_1_) for
+              details.  Note that this value can be overridden by the  MMIIBBDDIIRRSS
+              environment variable, and the --MM option.
+
+       mibs MIBLIST
+              specifies  a  list  of  MIB  modules  (not files) that should be
+              loaded.  This operates in the same way as the --mm  option  -  see
+              _s_n_m_p_c_m_d_(_1_)  for  details.  Note that this list can be overridden
+              by the MMIIBBSS environment variable, and the --mm option.
+
+       mibfile FILE
+              specifies a (single) MIB file to load, in addition to  the  list
+              read  from  the  _m_i_b_s token (or equivalent configuration).  Note
+              that this value can be overridden by  the  MMIIBBFFIILLEESS  environment
+              variable.
+
+       showMibErrors (1|yes|true|0|no|false)
+              whether to display MIB parsing errors.
+
+       strictCommentTerm (1|yes|true|0|no|false)
+              whether  MIB parsing should be strict about comment termination.
+              Many MIB writers assume that ASN.1 comments extend to the end of
+              the  text  line,  rather  than being terminated by the next "--"
+              token.  This token can be used to accept such  (strictly  incor-
+              rect) MIBs.
+              Note  that  this  directive  is  poorly  named, since a value of
+              "true" will turn _o_f_f the strict interpretation of MIB  comments.
+
+       mibAllowUnderline (1|yes|true|0|no|false)
+              whether  to  allow  underline characters in MIB object names and
+              enumeration values.  This token  can  be  used  to  accept  such
+              (strictly incorrect) MIBs.
+
+       mibWarningLevel INTEGER
+              the  minimum  warning  level  of the warnings printed by the MIB
+              parser.
+
+OOUUTTPPUUTT CCOONNFFIIGGUURRAATTIIOONN
+       logTimestamp (1|yes|true|0|no|false)
+              Whether the commands should log timestamps with their error/mes-
+              sage  logging  or not.  Note that output will not look as pretty
+              with timestamps if the source code that  is  doing  the  logging
+              does  incremental logging of messages that are not line buffered
+              before being passed to the logging  routines.   This  option  is
+              only used when file logging is active.
+
+       printNumericEnums (1|yes|true|0|no|false)
+              Equivalent to --OOee.
+
+       printNumericOids (1|yes|true|0|no|false)
+              Equivalent to --OOnn.
+
+       dontBreakdownOids (1|yes|true|0|no|false)
+              Equivalent to --OObb.
+
+       escapeQuotes (1|yes|true|0|no|false)
+              Equivalent to --OOEE.
+
+       quickPrinting (1|yes|true|0|no|false)
+              Equivalent to --OOqq.
+
+       printValueOnly (1|yes|true|0|no|false)
+              Equivalent to --OOvv.
+
+       dontPrintUnits (1|yes|true|0|no|false)
+              Equivalent to --OOUU.
+
+       numericTimeticks (1|yes|true|0|no|false)
+              Equivalent to --OOtt.
+
+       printHexText (1|yes|true|0|no|false)
+              Equivalent to --OOTT.
+
+       hexOutputLength integer
+              Specifies  where  to break up the output of hexadecimal strings.
+              Set to 0 to disable line breaks.  Defaults to 16.
+
+       suffixPrinting (0|1|2)
+              The value 1 is equivalent to --OOss and the value 2  is  equivalent
+              to --OOSS.
+
+       oidOutputFormat (1|2|3|4|5|6)
+              Maps  -O  options  as follow: -Os=1, -OS=2, -Of=3, -On=4, -Ou=5.
+              The value 6 has no matching -O option. It suppresses output.
+
+       extendedIndex (1|yes|true|0|no|false)
+              Equivalent to --OOXX.
+
+       noDisplayHint (1|yes|true|0|no|false)
+              Disables  the  use  of  DISPLAY-HINT  information  when  parsing
+              indices and values to set. Equivalent to --IIhh.
+
+FFIILLEESS
+       /tmp/root-rootfs/etc/snmp/snmp.conf,                         /tmp/root-
+       rootfs/etc/snmp/snmp.local.conf - common configuration settings
+       ~/.snmp/snmp.conf - user-specific configuration settings
+
+SSEEEE AALLSSOO
+       snmp_config(5), read_config(3), snmpcmd(1).
+
+
+
+4th Berkeley Distribution         29 Jun 2005                     SNMP.CONF(5)

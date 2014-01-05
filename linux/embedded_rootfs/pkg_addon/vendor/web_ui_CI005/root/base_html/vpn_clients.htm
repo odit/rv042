@@ -1,0 +1,785 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+var win = null;
+function rtrim(instr)
+{
+	return instr.replace(/[\s]*$/gi,"");
+}
+function may_need_CertPasswd()
+{
+	if(document.formvpn_clients.KeyPasswdFlag.value == "0")
+	{
+		var w = 355, h = 140;
+		var winl = (screen.width-w)/2;
+		var wint = (screen.height-h)/2;
+		if (winl < 0) winl = 0;
+		if (wint < 0) wint = 0;
+		win = window.open('vpn_passwd.htm','','height='+h+',width='+w+',top='+wint+',left='+winl+',toolbar=no, menubar=no, scrollbars=no, resizable=yes, location=no, status=no');
+		if(win != null)
+			win.window.focus();
+	}
+	else if(rtrim(document.formvpn_clients.KeyPasswdFlag.value) == "1")
+	{
+		alert("Import Success!");
+	}
+	else if(rtrim(document.formvpn_clients.KeyPasswdFlag.value) == "2")
+	{
+		alert("Import Fail!");
+	}
+}
+function refreshMe()
+{
+	document.location.href="vpn_clients.htm"; 
+}
+
+function getPasswd()
+{
+	setTimeout("getPasswd1()",500);
+}
+function getPasswd1()
+{
+	win.close();
+	setTimeout("refreshMe()",1500);
+}
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	if(win != null)
+		win.close();
+	chLeave();
+}
+function KeepItName(name)
+{
+	var c=-1;
+	var p;
+	var q; 
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(15);
+	
+	rightString=name;
+	
+	//account id{
+	q=rightString.length;
+	p=rightString.indexOf("{");
+	ts[1]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q); 
+
+	//pwd;
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[2]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);     
+	
+	//ip1.ip2.ip3.ip4;
+	for(j=3;j<7;j++)
+	{
+		q=rightString.length;
+		if(j==6)
+			p=rightString.indexOf(";");
+		else
+			p=rightString.indexOf(".");
+		
+		ts[j]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+	}
+	
+	//mask1.mask2.mask3.mask4;
+	for(j=7;j<11;j++)
+	{
+		q=rightString.length;
+		if(j==10)
+			p=rightString.indexOf(";");
+		else
+			p=rightString.indexOf(".");
+		
+		ts[j]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+1,q);
+	}
+	
+	//active
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[11]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);    
+
+	//type
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[12]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q);   
+
+	//vpn hub
+	q=rightString.length;
+	p=rightString.indexOf("}");
+	ts[13]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q); 
+
+	//No.
+	q=rightString.length;
+	p=rightString.indexOf(";");
+	ts[14]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+1,q); 
+	
+	if(ts[12]!="1")
+	{
+		c=document.formCMSserver.QvmDeleteList.length;
+		document.formCMSserver.QvmDeleteList.length+=1;
+		
+		document.formCMSserver.QvmDeleteList.options[c].value=ts[14];
+		document.formCMSserver.QvmDeleteList.options[c].text=ts[14];
+	}
+}
+function showUser(s)
+{
+	var p;
+	var q; 
+	var userString=s.options[s.selectedIndex].value;
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(7); 
+	var specialDefinedLength=splitVarforSpecialWordField.length;
+
+	rightString=userString;
+	q=rightString.length;
+	p=rightString.indexOf(splitVarforSpecialWordField);
+	ts[1]=rightString.substring(0,p); 
+	tmpString=rightString;
+	rightString=tmpString.substring(p+specialDefinedLength,q);        
+	
+	for (var j=2; j<=5; j++)
+	{
+		q=rightString.length;
+		if (j==5)
+			p=rightString.indexOf(splitVarforSpecialWordField);
+		else
+			p=rightString.indexOf(splitVarforSpecialWordField);
+		ts[j]=rightString.substring(0,p); 
+		tmpString=rightString;
+		rightString=tmpString.substring(p+specialDefinedLength,q); 
+	}
+
+	s.form.uName.value=ts[1]; 
+	s.form.nPasswd.value=ts[2]; 
+	s.form.cPasswd.value=ts[2]; 
+	
+	if (ts[3] == "1")
+	{ 
+	    s.form.passChanged[0].checked=true;
+		s.form.passChanged[1].checked=false;
+	}
+	else
+	{
+		s.form.passChanged[0].checked=false;
+	    s.form.passChanged[1].checked=true;
+	}
+	
+	if (ts[4] == "1")
+		s.form.userActive.checked=true;
+	else
+		s.form.userActive.checked=false;
+	
+	s.form.userType.value=ts[5];
+	
+	s.form.addUser.value=sUpdateUser; 
+	s.form.removeUser.disabled=false;
+	//MM_showHideLayers('btnNew','','show');
+	SetButtonStatus("showNew","show");
+	SetButtonStatus("removeUser","show");
+	s.form.uName.disabled=true; // Can't Change Username
+}
+
+function UsersaddSel(user, cPasswd, aYes, uActive, uType, s) /* */
+{
+
+  var p=-1;
+  var up=-1;
+  var pChanged=0, uAct=0;
+  var stringAct;
+  var type=1; // 1: add new 2: update
+  var inputActiveUser, inputInctiveUser; // 2004/07/13 Eric
+  
+  sTrim(user);
+  sTrim(user.form.nPasswd);
+  sTrim(cPasswd);
+
+  if (user.value=="")
+  {
+	alert(aUserName);	
+	return;
+  }
+  else if (user.form.nPasswd.value=="")
+  {
+	alert(aNewPassword);
+	return;
+  }
+  else if (cPasswd.value=="")
+  {
+	alert(aConfirmNewPassword);
+	return;
+  }  
+  else
+  {
+    if(Check_Special_Words(user) < 0) return;
+    if(Check_Special_Words(cPasswd) < 0) return;
+    if (confirmPass(cPasswd, cPasswd.form.nPasswd) < 0) return;
+    if (user.value=="admin")
+    {
+        alert(aAdminUserName);	
+		return;
+    }
+	/*up=user.value.indexOf("{");
+	if (up >= 0)
+	{
+	    alert(aInvaidUserName);	
+		return;	
+	}
+	up=cPasswd.value.indexOf(";");
+	if (up >= 0)
+	{
+	    alert(aInvaidPasswd);	
+		return;	
+	}*/
+	
+	if (uType.value == "1") type=1; // add new user
+	  else type=2; // uType.value == "0", then type=2; update this user.
+	
+	if (type == 1)
+	if (cPasswd.value=="********")
+	{
+	    alert(aInvaidPasswd);	
+		return;
+	}
+	 	
+	if (s.form.addUser.value==sUpdateUser)
+	{
+	  p=-1;
+	  while (s.form.UsersList.options[++p].selected != true);
+	}
+	
+
+	inputActiveUser=user.value+"=>Active";
+	inputInctiveUser=user.value+"=>Inactive";
+
+	for (var i=0; i < s.length; i++)
+	{	 
+		if ((s.options[i].text==inputActiveUser) || (s.options[i].text==inputInctiveUser))
+		{
+		  if (p != i)
+		  {
+		      alert(aUserNameAlready);
+		      return;
+		  }
+		}
+	}	
+	for (var i=0; i < s.length; i++)
+	{
+	    s.options[i].selected=false;
+	}
+	
+	if (s.form.addUser.value==sAddtoList)
+	{
+	    type=1;
+		
+    	if (s.length>=eval(document.formvpn_clients.VPN_number.value)) // 2004/08/03 Max Users are 5.
+    	{
+        	alert(aLimitClientUsersStart+document.formvpn_clients.VPN_number.value+aLimitClientUsersEnd); // 2004/08/03 Max Users are 5.
+        	return;
+    	} 
+				         	
+	    p=s.length;
+		
+		if (p==0) s.form.flagSetLanIp.value="1"; // 2004/07/28 Eric --> support Change LAN IP
+		
+		s.length+=1;
+	}   
+
+	if (aYes.checked == true) pChanged=1;
+	else pChanged=0;
+
+	if (uActive.checked == true)
+	{
+	    uAct=1;
+		stringAct="Active";
+	}
+	else
+	{
+	    uAct=0;
+		stringAct="Inactive";
+	}
+	
+	s.options[p].value=user.value+splitVarforSpecialWordField+cPasswd.value+splitVarforSpecialWordField; 
+	s.options[p].value+=pChanged;
+	s.options[p].value+=splitVarforSpecialWordField;  
+	s.options[p].value+=uAct;
+	s.options[p].value+=splitVarforSpecialWordField;  
+	s.options[p].value+=type;
+	s.options[p].value+="}";
+	s.options[p].text=user.value+"=>"+stringAct;  
+	clearContent(s.form);
+  }   
+}
+
+function tmpWord(n)
+{
+	this.length=n;
+	for (var i=1; i<=n; i++)
+	this[i]=0;
+	return this;
+}
+
+function confirmPass(cP,nP)
+{
+	if (nP.value.length==0)
+	{
+		alert(aNewPasswordFirst);
+		cP.value=cP.defaultValue;
+		return -1;
+	}
+
+	if (cP.value!=nP.value)
+	{
+		alert(aNewPasswordNoMatch);
+		cP.value=cP.defaultValue;
+		return -1;
+	}
+	return 1;
+}
+
+function clearContent(F)
+{
+	F.uName.value="";  
+	F.nPasswd.value="";
+	F.cPasswd.value="";
+	F.passChanged[0].checked=false;
+	F.passChanged[1].checked=true;
+	F.userActive.checked=false;
+	F.userType.value="1";
+
+	for (var i=0; i < F.UsersList.length; i++)
+	{
+	  F.UsersList.options[i].selected=false;
+	}	    
+	F.addUser.value=sAddtoList; 
+	//F.removeUser.disabled=true;
+	//MM_showHideLayers('btnNew','','hidden');
+	SetButtonStatus("showNew","disabled");
+	SetButtonStatus("removeUser","disabled");
+	F.uName.disabled=false; // Can add new Username
+	F.uName.select();
+}
+
+function delSel(s)
+{
+  var z;  
+  var k;
+
+  if (s.length > 0)
+  {
+    tmp=new tmpWord(s.length);
+    tmpChanged=new tmpWord(s.length); 
+    opvtmp=new tmpWord(s.length);
+    opvtmpChanged=new tmpWord(s.length); 
+
+    for (var i=0; i < s.length; i++)
+	{
+	  tmp[i+1]=s.options[i].text;
+	  opvtmp[i+1]=s.options[i].value;
+	}	
+
+    for (var i=0; i < s.length; i++)
+	{
+	  if (s.options[i].selected==true)
+	  { 
+		s.options[i].text="";
+		s.options[i].value="";
+  	        tmp[i+1]=" ";
+	        opvtmp[i+1]=" ";		
+		s.options[i].selected=false;
+	  }
+	}
+	k=1;
+	z=0;
+    for (var j=1; j<=s.length; j++) 
+    { 
+	     if (tmp[j]!=" ")     
+             {
+	          tmpChanged[k]=tmp[j];
+	          opvtmpChanged[k]=opvtmp[j];
+        	  k++;
+              }
+	      else
+	      {
+	          z++;
+	      }
+    }
+
+     for (var i=0; i < s.length-z; i++)
+	{
+ 	    s.options[i].text=tmpChanged[i+1];  
+ 	    s.options[i].value=opvtmpChanged[i+1];  	    
+	}
+    s.length-=z;
+  }
+  clearContent(s.form); 
+  //s.form.removeUser.disabled=true;	
+}
+
+function chLanIp()
+{
+    var ip2=0, ip3=0, lanip;
+    var p,q,tmpString;
+	var cChangeLanIp, cAuto, y;
+    cChangeLanIp="Would you let the system change the device LAN IP to";
+	cAuto="automatically?";
+	
+    if ( (document.formvpn_clients.ipAddr1.value=="192") && (document.formvpn_clients.ipAddr2.value=="168") && (document.formvpn_clients.ipAddr3.value=="1") )    
+    {
+		/* Change Lan Ip to 10.x.x.1 */
+		ip2=Math.round(253*Math.random());
+		ip3=Math.round(253*Math.random());
+		ip2++;
+		ip3++;
+		document.formvpn_clients.ipAddr1.value="10";
+		document.formvpn_clients.ipAddr2.value=ip2;
+		document.formvpn_clients.ipAddr3.value=ip3;
+		document.formvpn_clients.ipAddr4.value="1";
+		lanip="10"+"."+ip2+"."+ip3+"."+"1";
+		
+		/* Subnet Mask */
+		tmpString=document.formvpn_clients.logMask.value;	    
+		q=tmpString.length;
+		p=tmpString.lastIndexOf(".");    	
+		document.formvpn_clients.netMask.value=tmpString.substring(p+1,q); 
+		document.formvpn_clients.autoIp.value=lanip;
+		
+		if (confirm(cChangeLanIp+" "+lanip+" "+cAuto)) 
+		    document.formvpn_clients.flagSetLanIp.value="1";
+		else
+		    document.formvpn_clients.flagSetLanIp.value="0"; 
+	}
+	else
+	    document.formvpn_clients.flagSetLanIp.value="0";
+}
+
+function chSubmit()
+{
+	if (document.formvpn_clients.UsersList.length==0) document.formvpn_clients.flagSetLanIp.value="0";	
+	if (document.formvpn_clients.flagSetLanIp.value=="1") chLanIp(); 
+	if (document.formvpn_clients.UsersList)
+		selAll(document.formvpn_clients.UsersList);
+	document.formvpn_clients.submitStatus.value=1;
+	document.formvpn_clients.log_ch.value=1;
+	window.status=wSave;
+	MM_showHideLayers('AutoNumber15','','hide'); 
+	document.formvpn_clients.action = "vpn_clients.htm";
+	document.formvpn_clients.cerificateType.value=0;
+	document.formvpn_clients.submit();
+}
+
+function NewCertRequest(F)
+{
+	var QueryStr="";
+	var obj;
+
+	if (confirm(cGenerate))
+	{
+		F.submitStatus.value = 1;
+		F.CertStatus.value = 3;
+		F.log_ch.value=1;
+		F.action = "vpn_clients_cm_2.htm";
+  		F.submit();
+	}
+
+}
+
+function ExportCert_chSubmit(F, flag)
+{
+	if(flag == 1)
+    		F.action = "/cgi-bin/config.exp?export_cert_client";
+	else if(flag == 0)
+    		F.action = "/cgi-bin/config.exp?export_cert_admin";
+
+	F.submit();
+}
+
+function ImportCert_chSubmit(F)
+{
+	var importFileNameLength=0;
+
+	if (F.importFile.value.length==0)
+	  return; 
+
+  if (confirm("The new certification will replace the old one.\nDo you want to continue?"))
+  {
+	F.importFileName.value=F.importFile.value;
+	if(F.importFileName.value.lastIndexOf("/")!=-1)
+		importFileNameLength=F.importFileName.value.lastIndexOf("/");
+	else if(F.importFileName.value.lastIndexOf("\\")!=-1)
+		importFileNameLength=F.importFileName.value.lastIndexOf("\\");
+
+	if (importFileNameLength > 0)
+		importFileNameLength += 1;
+
+	F.importFileName.value=F.importFileName.value.substring(importFileNameLength);
+	if(F.importFileName.value.substring(F.importFileName.value.lastIndexOf(".")+1)=="pem")
+	{
+		F.submitStatus.value = 1;
+		F.CertStatus.value = 3;
+		F.log_ch.value=1;
+		F.action = "vpn_clients_cm.htm";
+  		F.submit();
+	}
+	else
+	{
+		alert("Please input correct file format! ");
+		return;
+	}
+  }
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formvpn_clients);";
+var Cancellink = ""; 
+var helplink ='help_vpn_client.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=208;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintVPNClientAccess(1);
+	PrintCertificate(0);
+	PrintEndContent();
+}
+function PrintVPNClientAccess(hasUnderLine)
+{
+	var in_head_width=head_width-5;
+	
+	PrintBeginBlock(0);
+	document.write('<table class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width="'+in_head_width+'">');
+	document.write('Username&nbsp;:&nbsp;');		
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type=text name="uName" maxlength="32" size="20" onFocus="this.select();">');		
+	document.write('</td>');
+	document.write('<td></td>');		
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('New Password&nbsp;:&nbsp;');		
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="password" name="nPasswd" maxlength="32" size="20" onFocus="this.select();">');		
+	document.write('</td>');
+	document.write('<td></td>');		
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('Confirm New Password&nbsp;:&nbsp;');		
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="password" name="cPasswd" maxlength="32" size="20" onFocus="this.select();">');		
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('Allow Password Change&nbsp;:&nbsp;');		
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="passChanged" value="1">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Yes');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');	
+	document.write('<input type="radio" name="passChanged" value="0" checked>');
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	document.write('No');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('Active&nbsp;:&nbsp;');		
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input name="userActive" value="1" type="checkbox">');
+	document.write('<input type="hidden" name="userType" value="1">'); 
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("addUser","Add to list","UsersaddSel(document.formvpn_clients.uName, document.formvpn_clients.cPasswd, document.formvpn_clients.passChanged[0], document.formvpn_clients.userActive, document.formvpn_clients.userType, document.formvpn_clients.UsersList);");
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple name="UsersList" size="10" onChange="showUser(document.formvpn_clients.UsersList);" style="width: 100%">');
+	document.write('<!--#nk_get QVPNUsersList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("removeUser","Delete","delSel(document.formvpn_clients.UsersList);");
+	SetButtonStatus("removeUser","disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("showNew","Add New","clearContent(document.formvpn_clients);");
+	SetButtonStatus("showNew","disabled");
+	document.write('<br><img border="0" src="images/_blank.gif" width="1" height="3"></td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+function PrintCertificate(hasUnderLine)
+{
+	PrintBeginBlock(1, "Certificate Management");
+	document.write('<table class="Setuptable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');	
+	document.write('Generate New Certificate&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td width="260">');	
+	PrintSTButton("showNew", "Generate", "NewCertRequest(document.formvpn_clients)");
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');	
+	document.write('Export Certificate for Administrator&nbsp;:&nbsp;<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('</td>');
+	document.write('<td>');	
+	PrintSTButton("showNew", "Export for Admin", "ExportCert_chSubmit(document.formvpn_clients, 0)");	
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');	
+	document.write('Export Certificate for Client&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td>');	
+	PrintSTButton("showNew", "Export for Client", "ExportCert_chSubmit(document.formvpn_clients, 1)");	
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');		
+	document.write('<tr>');
+	document.write('<td>');	
+	document.write('Import Certificate&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');	
+	document.write('<input type="FILE" name="importFile" style="height:24px">');	
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');		
+	document.write('<tr>');
+	document.write('<td></td>');		
+	document.write('<td>');	
+	PrintSTButton("showNew", "Import", "ImportCert_chSubmit(document.formvpn_clients)");	
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');	
+	document.write('Existing Certificate :');	
+	document.write('</td>');
+	document.write('<td>');	
+	document.write('<!--#nk_get RVCertNAME=""-->');	
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 7, 4);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formvpn_clients" method="post" action="vpn_clients.htm" enctype="multipart/form-data">
+	<input type="hidden" name="page" value="vpn_clients.htm"> 
+	<input type="hidden" name="submitStatus" value="1">
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="CertStatus" value="0">
+	<input type="hidden" name="flagSetLanIp" value="0">
+	<input type="hidden" name="hostname" value='<!--#nk_get DnsHostName=""-->'> 
+	<input type="hidden" name="DomainName" value='<!--#nk_get DnsDomainName=""-->'> 
+	<input type="hidden" name="ipAddr1" value='<!--#nk_get LanTextIp="1"-->'> 
+	<input type="hidden" name="ipAddr2" value='<!--#nk_get LanTextIp="2"-->'> 
+	<input type="hidden" name="ipAddr3" value='<!--#nk_get LanTextIp="3"-->'> 
+	<input type="hidden" name="ipAddr4" value='<!--#nk_get LanTextIp="4"-->'> 
+	<input type="hidden" name="logMask" value='<!--#nk_get DevStateReport="mask:br0"-->'> 
+	<input type="hidden" name="autoIp" value=''>
+	<input type="hidden" name="netMask" value=''>
+	<input type="hidden" name="VPN_number" value='50'>
+	<input type="hidden" name="cerificateType" value=''>
+	<input type="hidden" name="importFileName" value=''> 
+	<input type="hidden" name="LanMAC" value='<!--#nk_get LanMacShowOnly=""-->'>
+	<input type="hidden" name="KeyPasswdFlag" value='<!--#nk_get KeyPasswdFlag-->'> 
+
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>
+ 	<script>may_need_CertPasswd();</script>
+
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="vpn_clients.htm"-->
+<!--#nk_get DBUpdate=""-->

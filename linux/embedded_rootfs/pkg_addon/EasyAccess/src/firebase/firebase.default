@@ -1,0 +1,8 @@
+!
+wan-interface eth0
+!
+save-options true
+!
+hostname firebase
+!
+end

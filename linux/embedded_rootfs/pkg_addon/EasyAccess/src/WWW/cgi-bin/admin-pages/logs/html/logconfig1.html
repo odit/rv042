@@ -1,0 +1,66 @@
+<script src="/js/mainframe.js"></script>
+<script>
+function toggleTimeDay()
+{
+	selectedField = document.getElementById("rotateevent").value;
+	if('daily' == selectedField)
+	{
+		document.getElementById("day_tr").style.display = "none"; //hide
+		document.getElementById("time_tr").style.display = ""; //show
+	}
+	else if('weekly' == selectedField)
+	{
+		document.getElementById("day_tr").style.display = ""; //show
+		document.getElementById("time_tr").style.display = ""; //show
+	}
+	else if('size' == selectedField)
+	{
+		document.getElementById("day_tr").style.display = "none"; //hide
+		document.getElementById("time_tr").style.display = "none"; //hide
+	}
+}
+</script>
+</head>
+<body style="" onload="resizer();toggleTimeDay();" marginheight=0 marginwidth=0 leftmargin=0 topmargin=0 margin=0
+class="mainback">
+<table border=0 cellpadding=0 cellspacing=0 class="mainback2" width=542 valign=top>
+<TR>
+<td width=29><img src="/images/shim.gif" height=4 width=29></td>
+<td width=513 valign="top">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=titletable>
+<tr class="titlerow"><!--form-->
+<td width=513 height=22 class="titlerow" valign="center">
+&nbsp; 
+<script type="text/JavaScript" language="JavaScript">
+title(strlogconfig); 
+</script>
+<br>
+<img src="/images/shim.gif" height=1 width=1><br>
+</td>
+</tr>
+</table><img src="/images/shim.gif" height=21 width=1 class=titleimage><br>
+<table width="" height="" cellspacing=0 cellpadding=0 border=0 valign="top">
+<form name="logconfigForm" action="/cgi-bin/logconfig" method="get">
+<tr>
+<td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+<td width="" align="center">
+<!-- Dynamic - Syslog -->
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="headingstyle">
+<tr class="HeadingStyle">
+<td width=513 height=21 class="HeadingStyle" valign="center">&nbsp; <font class="HeadingStyle" ><b>&nbsp;Syslog Settings</b></font></td>
+</tr></table>
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="centertable" width=513>
+<tr>
+<td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width="" height=2 colspan=3><img src="/images/shim.gif" width=1 height=18 border=0></td>
+</tr>
+<tr>
+<td valign="top">
+<table border=0 cellpadding=0 cellspacing=0 valign="top">
+<tr>
+<td>

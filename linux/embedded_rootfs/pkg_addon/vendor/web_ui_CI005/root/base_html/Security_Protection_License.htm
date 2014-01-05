@@ -1,0 +1,365 @@
+<!--#nk_get SP_Check_rg=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	init();
+	DisableEnable(document.formSP_License.Update_Information.id);
+	checklicense();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+function checklicense()
+{
+	var cf = document.formSP_License;
+	var license_status='<!--#nk_get SP_NewPurchase=""-->';
+	switch (parseInt(license_status))
+	{
+		case 1:
+		case 2:  	        
+		case 3:  	        
+		break;
+		case 104:  	
+		case 999:
+		default :
+			cf.action="Security_Protection_new_purchase.htm";
+			cf.submit();
+		break
+	}
+}
+function init()
+{
+	var result= parseInt(document.formSP_License.result.value);
+	var cf = document.formSP_License;
+	switch (result)
+	{
+		case 1:  	        
+			cf.license_status.src="images/success.gif";
+		break;
+		case 2:  	        
+			cf.license_status.src="images/error.gif";
+		break;
+		case 3:  	        
+			cf.license_status.src="images/warning.gif";
+		break;
+		case 104:  	
+		case 999:        
+			cf.license_status.src="images/error.gif";
+			SetButtonStatus("Add_Seats", "disabled");
+		break;
+		default :
+			cf.license_status.src="images/error.gif";
+			SetButtonStatus("Add_Seats", "disabled");
+		break
+	}
+}
+var time=20000;
+function DisableEnable(objid)
+{
+	if(document.getElementById("gray").value==1)
+	{
+		if(time<=0)
+		{
+			document.getElementById(objid).disabled=false;
+		}
+		else
+		{
+			document.getElementById(objid).disabled = true;
+			setTimeout("DisableEnable('" + objid + "')",1000);
+		}
+		time-=1000;
+	}
+}
+function activate()
+{
+	var url_1='https://olr.trendmicro.com/redirect/linksys_viewlic.aspx?udi=';
+	var UDI=document.formSP_License.UDI.value;
+	url_1+=UDI;
+	window.open(url_1);
+}
+function goToURL_buy(F) 
+{
+	switch (result)
+	{
+		case "SP1":  	        
+			window.location = "http://www.linksys.com/servlet/Satellite?c=L_Content_C1&childpagename=US%2FLayout&cid=1114037290583&pagename=Linksys%2FCommon%2FVisitorWrapper&lid=9058345019H06";
+		break;
+		case "SP2":  	        
+			window.location = "https://olr.trendmicro.com/linksys_regtemp/us/en-us/linksys_enter_rk.aspx";
+		break;
+		case "SP3":  	        
+			window.location = "https://olr.trendmicro.com/linksys_regtemp/us/en-us/linksys_activation.aspx";
+		break;
+		case "SP_Renew":  	        
+			window.location = "https://olr.trendmicro.com/registration/us/en-us/login.aspx";
+		break;
+		case "SP_Add":  	        
+			window.location = "https://olr.trendmicro.com/registration/us/en-us/login.aspx";
+		break;
+		case "SP_UP":  	        
+			window.location = "https://olr.trendmicro.com/redirect/linksys_reg.aspx";
+		break;
+	}
+}
+function display_result()
+{
+	var result= parseInt(document.formSP_License.result.value);
+	var message;
+	
+	switch (result)
+	{
+		case 1:  	        
+			message="Cisco ProtectLink is active.";
+		break;
+		case 2:  	        
+			message="Cisco ProtectLink has expired.";
+		break;
+		case 3:  	        
+			var expire_day=document.formSP_License.expire_day.value;
+			message="Cisco ProtectLink will expire in "+expire_day;
+		break;
+		case 104:  	
+		case 999:        
+			message="Cisco ProtectLink has expired.";
+		break;
+		default :
+			message="Cisco ProtectLink has expired.";
+		break
+	}	
+	document.write(message);		
+}
+function display_status()
+{
+	var result= parseInt(document.formSP_License.result.value);
+	var message;
+	
+	switch (result)
+	{
+		case 1:  	        
+			message="Activated";
+		break;
+		case 2:  	        
+			message="Expired";
+		break;
+		case 3:  	        
+			message="Near to expired";
+		break;
+		case 104:  	
+		case 999:        
+			message="Expired";
+		break;
+		default :
+			message="Expired";
+		break
+	}	
+	document.write(message);		
+}
+function display_Platform()
+{
+	var platform= document.formSP_License.status_platform.value;
+	var message;
+	switch (platform)
+    {
+    	case "4":  	        
+    		message="Gateway Service";
+    		break;
+    	case "5":    	        
+    		message="Desktop Service";
+    		break; 
+		case "6":    	        
+    		message="Full Service";
+    		break;
+		default:
+			message="Waiting....";
+    }
+	document.write(message);
+}
+function display_expire_day()
+{
+	document.write(document.formSP_License.expire_day.value);
+}
+function display_update_day()
+{
+	return (document.formSP_License.update_day.value);
+}
+function chSubmit(F)
+{
+	F.submit();
+}
+function falseSubmit(n,F)
+{
+	document.formSP_License.submitStatus.value=n;
+	document.formSP_License.submitStatus.value=111;
+	document.getElementById(F.id).disabled=true;
+	document.formSP_License.submit();
+}
+var datSubWinVar = null;
+function closeWin(win_var)
+{
+	if ( ((win_var != null) && (win_var.close)) || ((win_var != null) && (win_var.closed==false)) )
+		win_var.close();
+}
+function openDataSubWin(filename,win_type)
+{
+	var SP_result= document.formSP_License.result.value;
+	var cf = document.forms[1];
+	closeWin(datSubWinVar);
+	datSubWinVar = window.open(filename,'datasub_win',win_type);
+	if(SP_result==999)
+	{
+		document.formSP_License.getspstatus.value=11;
+		cf.submit();
+	}
+	if (datSubWinVar.focus)
+		setTimeout('datSubWinVar.focus()',200);
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";					// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var helplink ='help_Security_Protection_License.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 600;
+var head_width = 130;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintProtectionLicense(0);
+	PrintTrenMicro(1);
+	PrintLicenseInfo(0);
+	PrintEndContent();
+}
+
+function PrintProtectionLicense(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Infotable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="1">');
+	document.write('<img name="license_status">');
+	document.write('</td>');	
+	document.write('<td>');	
+	display_result();
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintTrenMicro(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+FixedTableWidth+'">');
+	document.write('<tr><td>');
+	document.write('<b class="b1f"></b><b class="b2f head"></b><b class="b3f head"></b><b class="b4f head"></b>');
+	document.write('<div class="head">');
+	document.write('<table width="560" border="0">');
+	document.write('<tr><td width="72%">');
+	document.write('<span>License information last updated on: '+display_update_day()+'</span>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<div align="right">');	   
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("Update_Information", "Update", "falseSubmit(2,this);");
+	document.write('</div></td></tr>');
+	document.write('</table>');
+	document.write('</div>');	
+	document.write('<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>');
+	document.write('</td></tr></table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintLicenseInfo(hasUnderLine)
+{
+	PrintBeginBlock(1, "License Information");
+	document.write('<table class="Infotable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Status&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	display_status();
+	document.write('<img border="0" src="images/_blank.gif" width="10" height="1">');
+	document.write('<a href=# onClick="Javascript:activate()">')
+	document.write('View detailed license online');
+	document.write('</a>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td>');
+	document.write('Platform&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	display_Platform();
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td>');
+	document.write('License expires on&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	display_expire_day();
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');		
+	
+	document.write('<table class="STtable" height="32" width="'+FixedTableWidth+'" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write("<td>");	
+	PrintSTButton("Renew", "Renew", "JavaScript:openDataSubWin('Security_Protection_Renewal.htm','height=305, width=600, top=0, left=0, toolbar=no, menubar=no, scrollbars=no,resizable=no,location=no, status=no')");
+	document.write('</td>') 
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');	
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 11, 3);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formSP_License" method="post" action="Security_Protection_License.htm">
+	<input type="hidden" name="result" value='<!--#nk_get SP_Get_License="status"-->'>
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="spstatus" id="spstatus" value="1">
+	<input type="hidden" name="getspstatus" id="getspstatus" value='<!--#nk_get SP_Get_License="spstatus"-->'>
+	<input type="hidden" name="expire_day" value='<!--#nk_get SP_Get_License="expire_day"-->'>
+	<input type="hidden" name="update_day" value='<!--#nk_get SP_Get_License="update"-->'>
+	<input type="hidden" name="UDI" value='<!--#nk_get SP_GetUDI=""-->'>
+	<input type="hidden" name="status_platform" value='<!--#nk_get SP_Get_License="model"-->'>
+	<input type="hidden" name="gray" id="gray" value='<!--#nk_get SP_Check_rg_gray="gray"-->'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

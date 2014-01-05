@@ -1,0 +1,232 @@
+#!/bin/sh
+while [ ! -z $1 ]
+do
+ if [ "$1" == "--enable-lcmgr" ]
+ then
+        enable_lcmgr="true"
+ elif [ "$1" == "--use-httpd" ]
+ then
+        use_httpd="true"
+ elif [ "$1" == "--enable-md5-session" ]
+ then
+        md5_session="true"
+ elif [ "$1" == "--use-tz-env" ]
+ then
+        tz_env="true"
+ elif [ "$1" == "--enable-strip" ]
+ then
+        enable_strip="true"
+ elif [ "$1" == "--recompile-java" ]
+ then
+        recompile_java="true"
+ elif [ "$1" == "--enable-optimization" ]
+ then
+        enable_optimization="true"
+ elif [ "$1" == "--enable-statistics" ]
+ then
+        enable_statistics="true"
+ elif [ "$1" == "--enable-ipv6" ]
+ then
+        enable_ipv6="true"
+        echo "Forcing use of httpd for ipv6 build"
+        use_httpd="true"
+ elif [ "$1" == "--enable-eps" ]
+ then
+		enable_eps="true"
+ else
+        echo "usage: Configure 
+                        --enable-lcmgr: Enable Licence Manager (default=no)
+                        --enable-md5-session: Use MD5 for generating session string
+                        --use-tz-env: Use TZ environment variable for Time Zone 
+                        --enable-strip: Strip symbols before installation (default=no)
+                        --recompile-java: Recompile Java using native javac, default use VJ++ pre-compiled jars
+                        --enable-optimization: Use optimization CFLAGS
+                        --use-httpd: Use httpd instead of apache
+                        --enable-ipv6: include Ipv6 support to EasyAccess
+                        --enable-statistics: include Statistics support (default=no)
+						--enable-eps: Enable End Point Security support (default=no)
+                Note: PRODUCT_ID, VENDOR_ID, PRODUCT_STRING environment variables can be used to change OEM name."
+        exit 1
+ fi
+ shift
+done
+     
+# Creating bin directory for smm, firebase, httpd, tunneld etc. .
+install -d bin
+
+# Creating main header
+echo "#ifndef __CONFIG_H
+#define __CONFIG_H" > src/lib/Config.h
+
+if [ -n "$PRODUCT_ID" ]
+then
+echo "#define PRODUCT_ID" '"'$PRODUCT_ID'"'"" >> src/lib/Config.h
+fi
+if [ -n "$VENDOR_ID" ]
+then
+echo "#define VENDOR_ID" '"'$VENDOR_ID'"'"" >> src/lib/Config.h
+fi
+if [ -n "$PRODUCT_STRING" ]
+then
+echo "#define PRODUCT_STRING" '"'$PRODUCT_STRING'"'"" >> src/lib/Config.h
+fi
+if [ ! -z "$ACCESSPOINT_TOP_DIR" ]
+then
+echo "#define AP_TOP_DIR" '"'$ACCESSPOINT_TOP_DIR'"'"" >> src/lib/Config.h
+else
+echo "#define AP_TOP_DIR" '"'`pwd`'"'"" >> src/lib/Config.h
+fi
+echo "#define SITE_NAME " '"'`hostname`'"'" ">> src/lib/Config.h
+if [ "$enable_lcmgr" == "true" ]
+then
+echo "Enabling Licence Manager..."
+echo "#define USE_LICMGR 1" >> src/lib/Config.h
+fi
+if [ "$md5_session" == "true" ]
+then
+echo "Using MD5 for session strings ..."
+echo "#define USE_MD5_SESSION 1" >> src/lib/Config.h
+fi
+if [ "$tz_env" == "true" ]
+then
+echo "Using TZ environment variable for Time Zone..."
+echo "#define USE_TZ_ENV 1" >> src/lib/Config.h
+fi
+if [ "$use_httpd" == "true" ]
+then
+echo "#define USE_HTTPD 1" >> src/lib/Config.h
+fi
+if [ "$enable_ipv6" == "true" ]
+then
+echo "#define CONFIG_IPV6 1" >> src/lib/Config.h
+fi
+if [ "$enable_statistics" == "true" ]
+then
+echo "#define STATISTICS 1" >> src/lib/Config.h
+fi
+if [ "$enable_eps" == "true" ]
+then
+echo "#define CONFIG_EPS 1" >> src/lib/Config.h
+fi
+echo "#endif /* _CONFIG_H */" >> src/lib/Config.h
+
+# Creating base path for EasyAccessCtrl
+echo "AP_BASE=`pwd`" > bin/base.sh
+
+#Creating src make include.
+unlink src/make-include.mk
+echo "TOP_DIR=`pwd`" > src/make-include.mk
+if [ "$enable_strip" == "true" ]
+then
+   echo "Strip symbols before installation...."
+   echo "STRIP=strip" >> src/make-include.mk
+else
+   echo "STRIP=true" >> src/make-include.mk
+fi
+
+if [ "$enable_optimization" == "true" ]
+then
+   echo "Using -02 for compiler optimization...."
+   echo "OPTFLAG=-O2" >> src/make-include.mk
+else
+   echo "OPTFLAG=-O0" >> src/make-include.mk
+fi
+
+if [ "$recompile_java" == "true" ]
+then
+   echo "Java will be re compiled..."
+   echo "RECOMPILE_JAVA=true" >> src/make-include.mk
+fi
+
+if [ "$use_httpd" == "true" ]
+then
+   echo "using httpd instead of apache"
+   echo "CONFIG_USE_HTTPD=y" >> src/make-include.mk
+fi
+if [ "$enable_ipv6" == "true" ]
+then
+   echo "turning ipv6 ON..."
+   echo "CONFIG_IPV6=true" >> src/make-include.mk
+fi
+if [ "$enable_statistics" == "true" ]
+then
+   echo "turning statistics ON..."
+   echo "STATISTICS=true" >> src/make-include.mk
+fi
+if [ "$enable_eps" == "true" ]
+then
+   echo "turning eps ON..."
+   echo "CONFIG_EPS=y" >> src/make-include.mk
+fi
+cat src/make-include.in >> src/make-include.mk
+
+#Creating CGI make include
+unlink src/WWW/cgi-bin/cgi-include.mk
+echo "include `pwd`/src/make-include.mk" > `pwd`/src/WWW/cgi-bin/cgi-include.mk
+cat `pwd`/src/WWW/cgi-bin/cgi-include.in >> `pwd`/src/WWW/cgi-bin/cgi-include.mk
+
+unlink Makefile
+cat Makefile.glibc > Makefile
+
+if [ "$use_httpd" == "true" ]
+then
+echo "HTTPD_PARAM=\"-d\"" >> bin/base.sh
+echo "Configuring httpd"
+echo "#ifndef __HTTPD_CONFIG_H" > src/httpd/Config.h
+echo "#define __HTTPD_CONFIG_H" >> src/httpd/Config.h
+echo "#define HTTPD_TOP_DIR \"`pwd`\"" >> src/httpd/Config.h
+echo "#define HTTPD_SERVER_ROOT \"`pwd`/www/conf\""  >> src/httpd/Config.h
+echo "#define HTTPD_DOCUMENT_ROOT \"`pwd`/www/htdocs\""  >> src/httpd/Config.h
+echo "#define HTTPD_CGI_PATH \"`pwd`/www/cgi-bin/\""  >> src/httpd/Config.h
+echo "#define HTTPD_CERTBIN_PATH \"`pwd`/www/cert-bin/\""  >> src/httpd/Config.h
+echo "#define HTTPD_SSL_CERT \"`pwd`/var/cert/server.crt\"" >> src/httpd/Config.h
+echo "#define HTTPD_SSL_KEY \"`pwd`/var/cert/server.key\"" >> src/httpd/Config.h
+echo "#define HTTPD_SSL_PASSWD_FILE \"`pwd`/var/cert/password.sh\"" >> src/httpd/Config.h
+echo "#endif /* __HTTPD_CONFIG_H */" >> src/httpd/Config.h
+
+#Adjust Makefile
+echo "Adjusting make file for httpd.."
+echo "CONFIG_USE_HTTPD=y" > Makefile
+echo "#-----EasyAccess Makefile----" >> Makefile
+cat Makefile.glibc >> Makefile
+else
+echo "HTTPD_PARAM=\"-DSSL\"" >> bin/base.sh
+#Configuring Apache
+#Writing config.layout
+echo "<Layout EasyAccess>
+    prefix:        `pwd`
+    exec_prefix:   \$prefix/www
+    bindir:        \$prefix/bin
+    sbindir:       \$prefix/bin
+    libexecdir:    \$prefix/libexec
+    mandir:        \$prefix/www/man
+    sysconfdir:    \$prefix/www/conf
+    datadir:       \$prefix/www
+    iconsdir:      \$datadir/icons
+    htdocsdir:     \$datadir/htdocs
+    manualdir:     \$htdocsdir/manual
+    cgidir:        \$datadir/cgi-bin
+    includedir:    \$prefix/www/include
+    localstatedir: \$prefix/var
+    runtimedir:    \$localstatedir/logs
+    logfiledir:    \$localstatedir/logs
+    proxycachedir: \$localstatedir/proxy
+</Layout>" > 3rdParty/apache/config.layout
+
+export CFLAGS="-DOPENSSL_NO_KRB5"
+
+unlink Makefile
+echo "Adjusting make file for apache"
+echo "CONFIG_USE_APACHE=y" > Makefile
+echo "#-----EasyAccess Makefile----" >> Makefile
+cat Makefile.glibc >> Makefile
+cd 3rdParty/apache; 
+./configure --with-layout=EasyAccess --enable-module=ssl --enable-module=proxy  --disable-rule=EXPAT
+cd -
+fi
+
+#RUN libxml2
+if [ -e 3rdParty/libxml2/Makefile ]; then
+  exit 0
+fi
+cd 3rdParty/libxml2 ; ./RUN ; cd -;

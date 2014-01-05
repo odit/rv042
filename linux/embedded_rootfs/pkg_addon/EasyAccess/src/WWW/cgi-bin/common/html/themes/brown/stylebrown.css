@@ -1,0 +1,76 @@
+TD.tabback{background-color:#6f6250;}
+.onmiddletab{background: url("/images/others/middletab.gif");background-color:#837664;}
+.onmiddletabbottom{background: url("/images/others/middletab1.gif");BACKGROUND-COLOR:#cac0a4;}
+.bottomtabfont{Font-family:"Trebuchet MS", Arial, sans-serif;color:#000000;font-size:11px;}
+.toptabfont{Font-family:"Trebuchet MS",Arial, sans-serif;color:#ffffff;font-size:11px;}
+.centertable{background-color:#fbfbf0;overflow-x:hidden;overflow-y:hidden;}
+.centertablenb{background-color:#fbfbf0;overflow-x:hidden;overflow-y:hidden;}
+.backs2{BACKGROUND-COLOR:#B1A383;}
+.mainback{BACKGROUND-COLOR:#EaE6D2; COLOR:#000000; FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+TD.mainback{BACKGROUND-COLOR:#EaE6D2; COLOR:#000000; FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+.mainback2{COLOR:#393c3f; FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+TD.titlerow{BACKGROUND-COLOR:#6f6250;border: 1px solid #554433;}
+TD.HeadingStyle{FONT-size:12px;FONT-FAMILY:"Trebuchet MS", Tahoma, Tahoma, sans-serif, arial; COLOR:#ffffff;background-color:#B1A383;font-weight: bold;}
+.darkback{BACKGROUND-COLOR:#554433;}
+.middleback{BACKGROUND-COLOR:#554433;}
+.toolbar{COLOR:#2f2620; FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+A.toolbar{COLOR:#2f2620; FONT-FAMILY: "Trebuchet MS", Arial, Helvetica; FONT-SIZE:12px; TEXT-DECORATION:none;}
+.toolBarsmall{COLOR:#2f2620; FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:11px;}
+.toolBarsmall2{COLOR:#304050; FONT-FAMILY: "Trebuchet MS", sans-serif, Helvetica; FONT-SIZE:12px;}
+A{COLOR:#0011f0; TEXT-DECORATION:none}
+.windowsfont{COLOR:#050505; FONT-FAMILY: Tahoma, sans-serif, Arial, Helvetica; FONT-SIZE:11px;}
+.button{COLOR:#ffffff; FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:12px; FONT-WEIGHT: bold}
+.toolbar2{COLOR:#304050; FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:12px; TEXT-DECORATION:none}
+A.toolbar2{COLOR:#51616a; FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:12px; TEXT-DECORATION:none}
+.headingstylenomargin{FONT-size:13px;FONT-FAMILY:"Trebuchet MS", Tahoma, sans-serif, arial; COLOR:#ffffff; font-weight: bold;}
+.HeadingStyle3{FONT-SIZE:13px;COLOR:#B1A383;FONT-FAMILY: "Lucida Sans",Tahoma;font-weight: bold;}
+.titlerow{BACKGROUND-COLOR:#6f6250;color:#ffffff;}
+.bodyback{FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:12px;backGROUND-COLOR:#dEd8c2;}
+A:visited{TEXT-DECORATION:none;COLOR:#51616a;}
+.windowsfont{COLOR:#050505; FONT-FAMILY: Tahoma, sans-serif, Arial, Helvetica; FONT-SIZE:11px;} 
+.navmenuback{BACKGROUND-COLOR:#eeebe9;}
+a:hover.bbuttons{COLOR:#ffff88; FONT-WEIGHT: bold;}
+a:hover{COLOR:#f0da33;}
+.allow{font-size:11px; FONT-WEIGHT: bold;FONT-FAMILY:"Trebuchet MS", sans-serif, Arial; color:#00b000;}
+.permit{font-size:11px; FONT-WEIGHT: bold;FONT-FAMILY:Tahoma, sans-serif, Arial; color:#00b000;}
+.deny{font-size:11px; FONT-WEIGHT: bold; font-FAMILY:Tahoma, sans-serif, Arial; color:#dc0005;}
+.badval{font-size:12px; FONT-WEIGHT: bold; font-FAMILY:Tahoma, sans-serif, Arial; color:#dc0005;}
+.bcenter{border:1px #887966 solid;margin:2px;background-color:#B1A383;height:22px;vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#ffd1c4a5, endColorstr=#ffB1A383);}
+.bleft{padding: 0px;width:0px;margin:0px;}
+.bright{padding: 0px;width:0px;margin:0px;}
+.buttons{font-family:"Trebuchet MS",'trebuchet ms',helvetica,sans-serif;font-size:11px;text-align:center;text-decoration:none;margin:0px;color:#ffffff;background-color:transparent;border-width:0px;padding:0px; cursor:hand;}
+.bhover{font-family:"Trebuchet MS",'trebuchet ms',helvetica,sans-serif;font-size:11px;text-align:center;text-decoration:none;margin:0px;color:#ffffbb;background-color:transparent;border-width:0px;padding:0px;}
+.bbcenter{margin:2px;background-color:#6f6250;height:22px;vertical-align:center;BORDER: #554433 1px solid;}
+.bbcenteron{margin:2px;background-color:#998975;height:22px;vertical-align:center;cursor:hand;BORDER: #554433 1px solid;}
+.bbuttons{Font-size:12px;font-family:"Trebuchet MS",Tahoma, sans-serif,Arial;text-align:center;font-weight: bold;margin:1px;color:#ffffff;border-width:0px;padding:0px;cursor:hand;}
+.bbhover{FOnt-size:12px;font-family:"Trebuchet MS",Tahoma, sans-serif,Arial;text-align:center;font-weight:bold;margin:1px;background-color:transparent;border-width:0px;color:#ffee66;padding:0px;cursor:hand;}
+.statuspagetable{background-color:#fcfcfc;}
+.TableStyle{font-family: Tahoma, sans-serif; FONT-SIZE:10pt;COLOR:#112233;}
+TR.HeadingStyle{font-weight: bold;background-color:#B1A383;}
+.HeadingStyle{FONT-size:13px;FONT-FAMILY:"Trebuchet MS", Arial, Tahoma, sans-serif; COLOR:#ffffff; font-weight: bold;}
+.OddRowStyle{font-size:12px;FONT-FAMILY:"Trebuchet MS", Tahoma, sans-serif, Arial;color:#102030;}
+.EvenRowStyle{font-size:12px;FONT-FAMILY:"Trebuchet MS", Tahoma, sans-serif, Arial;color:#102030;}
+A.EvenRowStyle2{font-size:11px;FONT-FAMILY:"Trebuchet MS", Tahoma, sans-serif, Arial;color:#0104f0}
+A.OddRowStyle{font-size:12px;FONT-FAMILY:"Trebuchet MS", Tahoma, sans-serif, Arial;color:#0104f0;}
+A.OddRowStyle2{font-size:11px;FONT-FAMILY:"Trebuchet MS", Tahoma, sans-serif, Arial;color:#0104f0;}
+TR.OddRowStyle2{font-size:11px;FONT-FAMILY:"Trebuchet MS", Tahoma, sans-serif, Arial;background-color:#dEd8c2;}
+TR.OnRowStyle2{font-size:11px;FONT-FAMILY:"Trebuchet MS", Tahoma, sans-serif, Arial;background-color:#c1baa2;}
+TR.EvenRowStyle2{font-size:11px;FONT-FAMILY:"Trebuchet MS", Tahoma, sans-serif, Arial;background-color:#f8f4e4;}
+.accesspointRowOdd{Font-size:11px;padding-top:3px;padding-bottom:3px;border-top:1px #5A646E solid;background-color:#ffffff;}
+.accesspointRowEven{Font-size:11px; 
+padding-top:3px;padding-bottom:3px;border-top:1px #5A646E solid;background-color:#f4f4e7;}
+.accesspointRowOn{Font-size:11px; 
+padding-top:3px;padding-bottom:3px;border-top:1px #5A646E solid;background-color:#dad6c2;}
+.TotalRowStyle{background-COLOR:#96b6ff; font-weight: bold}
+.input{height:20px;filter: progid:DXImageTransform.Microsoft.Shadow(color:#6688aa,direction=135, Strength='1'); FONT-SIZE:12px;BORDER: #66605c 1px solid;FONT-FAMILY: "Trebuchet MS",sans-serif, Tahoma, Arial, Helvetica;padding-top: 2px;color:#393c3f;valign=bottom;}
+.select{background-COLOR:#fdfeff;FONT-SIZE:12px;BORDER: #66605c 1px solid;FONT-FAMILY: "Trebuchet MS", sans-serif, Tahoma, Arial, Helvetica;color:#393c3f;}
+.hintsClass{width:100%;border:1px solid #000000;font-size:11px;font-family:Tahoma, sans-serif,Arial;layer-background-color:#fbfb9b;background-color:#fcfcdc;padding:4px;filter:progid:DXImageTransform.Microsoft.Shadow(color:#64646f,direction=135, strength=3);COLOR:#000000;} 
+.navigator{color:#fcfc98; cursor:hand; font-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:11px;}
+A.linkblue{color:#2211f8;FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:12px;}
+A.linkblue2{color:#2211f8;FONT-FAMILY: "Trebuchet MS", sans-serif, Arial, Helvetica; FONT-SIZE:11px;}
+td.bookmarktop{background: url("/images/bookmarkblacktop.png");background-repeat: no-repeat;margin:0px;height:16px;padding:0px;background-color:#ffffff;}
+td.bookmarkbottom{background: url("/images/bookmarkblackbottom.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#ffffff;}
+td.bigbookmarktop{background: url("/images/bookmarkblacktop.png");margin:0px;height:16px;padding:0px;background-color:#ffffff;}
+td.bigbookmarkbottom{background: url("/images/bookmarkblackbottom.png");margin:0px;padding:0px;background-color:#ffffff;}
+td.loginbottom{background: url("/images/loginblackbottom.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#ffffff;}
+td.logintop{background: url("/images/logintopblack.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#ffffff;}

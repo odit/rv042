@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:15" />
+    <title>Setting up Access Rules</title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=0;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998294"> </a><h2 class="pHeading2">
+Setting up Access Rules
+</h2>
+<a name="wp998296"> </a><p class="pBody">
+After you click <b class="cBold">Add New Rule</b> or the <b class="cBold">Edit</b> icon on the <em class="cEmphasis">Access Rules</em> table, enter the 
+following information on the add/edit page.
+
+</p>
+<a name="wp999188"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings. When the 
+Success message appears, click <b class="cBold">OK</b> to remain on the current page to add another 
+access rule, or click <b class="cBold">Cancel</b> to return to the <em class="cEmphasis">Access Rules</em> table. To undo your 
+changes on this page, click <b class="cBold">Cancel</b>. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp998297"> </a><h2 class="pHeading2">
+Services
+</h2>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998298"> </a><li class="pSmartList1"><b class="cBold">Action:</b> Choose the action that the rule performs, to Allow or Deny access.
+</li>
+<a name="wp998299"> </a><li class="pSmartList1"><b class="cBold">Service:</b> Choose the service that is affected by this rule. If you need to add 
+a service, click <b class="cBold">Service Management</b>. For more information, see <a href="#wp998552">Adding a 
+service</a>.
+</li>
+<a name="wp998303"> </a><li class="pSmartList1"><b class="cBold">Source Interface:</b> Choose the source interface that is affected by this rule.
+</li>
+<a name="wp998304"> </a><li class="pSmartList1"><b class="cBold">Source:</b> Identify the source of the traffic that is affected by this rule. From 
+the drop-down list, choose Single for a single IP address, Range for a range 
+of IP addresses, or Any for any IP address. Then enter the IP address or 
+addresses. 
+</li>
+<a name="wp998305"> </a><li class="pSmartList1"><b class="cBold">Destination:</b> Identify the destination of the traffic that is affected by this 
+rule. From the drop-down list, choose Single for a single IP address, Range 
+for a range of IP addresses, or Any for any IP address. Then enter the IP 
+address or addresses. 
+</li>
+</ul></div>
+<a name="wp998306"> </a><h2 class="pHeading2">
+Schedule (IPv4 Only)
+</h2>
+<a name="wp999140"> </a><p class="pBody">
+Keep the default settings or specify a schedule when this rule is active:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998980"> </a><li class="pSmartList1"><b class="cBold">Time:</b> Choose one of the following options:
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998981"> </a><li class="pSmartList2"><b class="cBold">Always:</b> Choose this option if the rule applies at all times and on all days of the week. Optionally, you can enter a time period in the <em class="cEmphasis">From</em> and <em class="cEmphasis">To</em> fields. </li>
+<a name="wp998982"> </a><li class="pSmartList2"><b class="cBold">Interval:</b> Choose this option to specify the time period when the rule is active. If you choose this option, you must enter a time period in the <em class="cEmphasis">From</em> and <em class="cEmphasis">To</em> fields. Optionally, you can specify the days of the week.</li>
+</ul></div>
+<a name="wp998983"> </a><li class="pSmartList1"><b class="cBold">From </b>and <b class="cBold">To: </b>If you chose Interval, use these fields to specify the times and 
+days when the rule is active. Enter the start time in the <em class="cEmphasis">From</em> field and enter 
+end time in the <em class="cEmphasis">To</em> field. Use hh:mm format, such as 15:30 for 3:30 p.m. Enter 
+00:00 to 00:00 if the rule applies during all times of day.
+</li>
+<a name="wp998984"> </a><li class="pSmartList1"><b class="cBold">Effective on:</b> If you chose Interval, use these check boxes to specify the 
+days when the rule is active. Check the <b class="cBold">Everyday</b> box if the rule is active on 
+all days. To choose specific days, uncheck the <b class="cBold">Everyday</b> box and then 
+check the box for each day when the rule is active.
+</li>
+</ul></div>
+<a name="wp998552"> </a><h3 class="pHeading3">
+Adding a service
+</h3>
+<a name="wp998553"> </a><p class="pBody">
+To add a new entry to the <em class="cEmphasis">Service</em> list, or to change an entry that you created 
+previously, click <b class="cBold">Service Management</b>. If the web browser displays a warning 
+about the pop-up window, allow the blocked content.
+
+</p>
+<a name="wp999117"> </a><p class="pBody">
+In the <em class="cEmphasis">Service </em>Management window, add or update entries as needed. Before 
+closing this window, click <span style="font-weight: bold">OK</span> to save your settings, or click <b class="cBold">Cancel</b> to undo them. 
+Any unsaved changes are abandoned.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998556"> </a><li class="pSmartList1"><b class="cBold">To add a service to the list:</b> Enter the following information, and then click 
+<b class="cBold">Add to List</b>. You can have up to 30 services in the list.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998557"> </a><li class="pSmartList2"><b class="cBold">Service Name:</b> Enter a short description.</li>
+<a name="wp998558"> </a><li class="pSmartList2"><b class="cBold">Protocol:</b> Choose the required protocol. Refer to the documentation for the service that you are hosting.</li>
+<a name="wp998559"> </a><li class="pSmartList2"><b class="cBold">Port Range:</b> Enter the required port range. </li>
+</ul></div>
+<a name="wp998560"> </a><li class="pSmartList1"><b class="cBold">To add another new service: </b>Enter the information, and then click <b class="cBold">Add to 
+list</b>.
+</li>
+<a name="wp998561"> </a><li class="pSmartList1"><b class="cBold">To modify a service you created: </b>Click the service in the list. The 
+information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the service and clear the text fields.
+</li>
+<a name="wp998562"> </a><li class="pSmartList1"><b class="cBold">To delete a service from the list:</b> Click the entry that you want to delete. To 
+select a block of entries, click the first entry, hold down the Shift key, and 
+click the final entry in the block. To select individual entries, hold down the 
+Ctrl key while clicking. Click <b class="cBold">Delete</b>.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

@@ -1,0 +1,28 @@
+SOURCES= RadiusLib.o\
+	SmbAuthUtil.o\
+        LDAPAuthUtil.o\
+        ADAuthUtil.o
+
+LIB=libAuth.a
+
+include ../make-include-uClinux.mk
+
+CFLAGS+=-I$(SYS_LIB) -I$(KRB_INC_DIR) -I$(SAMBA_INC_DIR) -I$(LDAP_INC_DIR)
+
+all: $(LIB)
+
+$(LIB): $(SOURCES)
+	$(AR) cr $(LIB) $(SOURCES)
+
+cleanbin:
+	rm $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+clean:
+	rm -f *.o
+	rm -f $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+install:
+
+un-install:

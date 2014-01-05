@@ -1,0 +1,24 @@
+config CONFIG_ipsec-tools
+	bool "ipsec-tools"
+	select CONFIG_openssl
+	select CONFIG_flex
+	default y
+	help
+		From the ipsec-tools homepage:
+		IPsec-Tools is a port of KAME's IPsec utilities to the
+		Linux-2.6 IPsec implementation. It supports NetBSD and FreeBSD
+		as well.
+
+		Contents:
+		libipsec
+			Library with PF_KEY implementation.
+		setkey
+			Tool to manipulate and dump the kernel Security Policy
+			Database (SPD) and Security Association Database (SAD).
+		racoon
+			Internet Key Exchange (IKE) daemon for automatically
+			keying IPsec connections.
+		racoonctl
+			A shell-based control tool for racoon
+
+

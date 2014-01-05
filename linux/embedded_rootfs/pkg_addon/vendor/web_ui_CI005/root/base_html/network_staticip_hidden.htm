@@ -1,0 +1,200 @@
+<head>
+<title>Web Management</title>
+<script language="JavaScript">
+var Layoutwidth = "90%";	
+var TableAlign ="center" ;
+var SpecialTableThclass = "TableSTG";			// Special Table Title
+var SpecialTablealign="center";				// Special Table Align
+var ColumTitleclass = "TableSTD";
+var ColumTitlealign = "center";
+var Contentclass = "TableSTH";					// Content Style for table
+var RowTitleclass = "TableSTG";				// Row Title Style for table
+var RowTitlealign = "right";
+
+function chSubmit()
+{
+	document.formNetworkHidden.WAN1ConnectionType1.value="1";
+	document.formNetworkHidden.WAN1ConnectionType2.value="1";
+	document.formNetworkHidden.WAN1ConnectionType3.value="1";
+	document.formNetworkHidden.WAN1ConnectionType4.value="1";
+	document.formNetworkHidden.WAN1ConnectionType5.value="1";
+	document.formNetworkHidden.WAN1ConnectionType6.value="1";
+	document.formNetworkHidden.WAN1ConnectionType7.value="1";
+	document.formNetworkHidden.WAN1ConnectionType8.value="1";
+
+	document.formNetworkHidden.submitStatus.value=1;
+    document.formNetworkHidden.submit();
+}
+function PrintContent()
+{
+	PrintWANSpecifyIP();
+}
+
+function PrintWANSpecifyIP()
+{
+	document.write('<center>');
+	var num_wan=parseInt(document.formNetworkHidden.wanNumbers.value)-parseInt(document.formNetworkHidden.DmzEnable.value);
+
+	if(num_wan>3)
+		PrintTwoLine(num_wan);
+	else
+		PrintOneLine(num_wan);
+	
+	document.write("<table border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"4\" id=\"AutoNumber15\">");
+	document.write("<tr>"); 
+	document.write("<td height=\"25\"><img src=\"cn/apply-0.gif\" name=\"Image18\" height=\"20\" border=\"0\" ");
+	document.write(" onclick=\"chSubmit();");
+	document.write("\"");
+	document.write(" onMouseOver=\"this.src='cn/apply-1.gif'\"");
+	document.write(" onMouseOut=\"this.src='cn/apply-0.gif'\"></td>\n") 
+	document.write("<td><img src=\"cn/cancel-0.gif\" name=\"Image17\" height=\"20\" border=\"0\" ");
+	document.write(" onclick=\"location.reload();");
+	document.write("\"");
+	document.write(" onMouseOver=\"this.src='cn/cancel-1.gif'\"");
+	document.write(" onMouseOut=\"this.src='cn/cancel-0.gif'\"></td>\n") 
+	document.write("</tr>\n");
+	document.write("</table>\n");
+	document.write('</center>');
+}
+function PrintOneLine(num_wan)
+{
+	for(i=1; i<=num_wan; i++)
+	{
+		document.write('<table class="TableST" width="35%">');
+		document.write('<tr>');
+		document.write('<th align="center" width="35%" height="23">');
+		document.write('WAN'+i);
+		document.write('</th>');
+		document.write('</tr>');
+		document.write('<tr>');
+		document.write('<td align="center" width="35%" height="23">');
+		eval("var obj = document.getElementById("+"\"wan"+i+"ip\""+");"); 
+		document.write('<input type="text" name="Wan1AliasIp'+i+'" value="'+obj.value+'" maxlength="15" size="15" onFocus="this.select();">');
+		document.write('</td>');
+		document.write('</tr>');
+		document.write('<tr>');
+		document.write('<td align="center" width="35%" height="23">');
+		eval("var obj = document.getElementById("+"\"wan"+i+"mask\""+");"); 
+		document.write('<input type="text" name="Wan1AliasMaskIp'+i+'" value="'+obj.value+'" maxlength="15" size="15" onFocus="this.select();">');
+		document.write('</td>');
+		document.write('</tr>');
+		document.write('<tr>');
+		document.write('<td align="center" width="35%" height="23">');
+		eval("var obj = document.getElementById("+"\"wan"+i+"gw\""+");"); 
+		document.write('<input type="text" name="Wan1RouterIp'+i+'" value="'+obj.value+'" maxlength="15" size="15" onFocus="this.select();">');
+		document.write('</td>');
+		document.write('</tr>');
+		document.write('</table>');
+		document.write("<br>");
+	}
+}
+function PrintTwoLine(num_wan)
+{
+	for(i=1; i<=num_wan; i++)
+	{
+		j=i+1;
+
+		document.write('<table class="TableST" width="55%">');
+		//wan name
+		document.write('<tr>');
+		document.write('<th align="center" width="35%" height="23">');
+		document.write('WAN'+i);
+		document.write('</th>');
+		document.write('<th align="center" width="35%" height="23">');
+		if(j<=num_wan)
+			document.write('WAN'+j);
+		document.write('</th>');
+		document.write('</tr>');
+		//wan ip
+		document.write('<tr>');
+		document.write('<td align="center" width="35%" height="23">');
+		eval("var obj = document.getElementById("+"\"wan"+i+"ip\""+");"); 
+		document.write('<input type="text" name="Wan1AliasIp'+i+'" value="'+obj.value+'" maxlength="15" size="15" onFocus="this.select();">');
+		document.write('</td>');
+		document.write('<td align="center" width="35%" height="23">');
+		if(j<=num_wan)
+		{
+			eval("var obj = document.getElementById("+"\"wan"+j+"ip\""+");"); 
+			document.write('<input type="text" name="Wan1AliasIp'+j+'" value="'+obj.value+'" maxlength="15" size="15" onFocus="this.select();">');
+		}
+		document.write('</td>');
+		document.write('</tr>');
+		//wan mask
+		document.write('<tr>');
+		document.write('<td align="center" width="35%" height="23">');
+		eval("var obj = document.getElementById("+"\"wan"+i+"mask\""+");"); 
+		document.write('<input type="text" name="Wan1AliasMaskIp'+i+'" value="'+obj.value+'" maxlength="15" size="15" onFocus="this.select();">');
+		document.write('</td>');
+		document.write('<td align="center" width="35%" height="23">');
+		if(j<=num_wan)
+		{
+			eval("var obj = document.getElementById("+"\"wan"+j+"mask\""+");"); 
+			document.write('<input type="text" name="Wan1AliasMaskIp'+j+'" value="'+obj.value+'" maxlength="15" size="15" onFocus="this.select();">');
+		}
+		document.write('</td>');
+		document.write('</tr>');
+		//wan gateway
+		document.write('<tr>');
+		document.write('<td align="center" width="35%" height="23">');
+		eval("var obj = document.getElementById("+"\"wan"+i+"gw\""+");"); 
+		document.write('<input type="text" name="Wan1RouterIp'+i+'" value="'+obj.value+'" maxlength="15" size="15" onFocus="this.select();">');
+		document.write('</td>');
+		document.write('<td align="center" width="35%" height="23">');
+		if(j<=num_wan)
+		{
+			eval("var obj = document.getElementById("+"\"wan"+j+"gw\""+");"); 
+			document.write('<input type="text" name="Wan1RouterIp'+j+'" value="'+obj.value+'" maxlength="15" size="15" onFocus="this.select();">');
+		}
+		document.write('</td>');
+		document.write('</tr>');
+		document.write('</table>');
+		document.write("<br>");
+
+		i=j;
+	}
+}
+</script>
+</head>
+<body>
+	<form name="formNetworkHidden" action="network_staticip_hidden.htm" method="post">
+		<input type="hidden" name="page" value="network_staticip_hidden.htm">
+		<input type="hidden" name="submitStatus" value="1">
+		<input type="hidden" name="DmzEnable" value='<!--#nk_get DMZEnable="1"-->'>
+		<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+		<input type="hidden" name="wan1ip" id="wan1ip" value='<!--#nk_get 1to1_Handle="Wan1AliasIp1"--> '>
+		<input type="hidden" name="wan2ip" id="wan2ip" value='<!--#nk_get 1to1_Handle="Wan1AliasIp2"--> '>
+		<input type="hidden" name="wan3ip" id="wan3ip" value='<!--#nk_get 1to1_Handle="Wan1AliasIp3"--> '>
+		<input type="hidden" name="wan4ip" id="wan4ip" value='<!--#nk_get 1to1_Handle="Wan1AliasIp4"--> '>
+		<input type="hidden" name="wan5ip" id="wan5ip" value='<!--#nk_get 1to1_Handle="Wan1AliasIp5"--> '>
+		<input type="hidden" name="wan6ip" id="wan6ip" value='<!--#nk_get 1to1_Handle="Wan1AliasIp6"--> '>
+		<input type="hidden" name="wan7ip" id="wan7ip" value='<!--#nk_get 1to1_Handle="Wan1AliasIp7"--> '>
+		<input type="hidden" name="wan8ip" id="wan8ip" value='<!--#nk_get 1to1_Handle="Wan1AliasIp8"--> '>
+		<input type="hidden" name="wan1mask" id="wan1mask" value='<!--#nk_get 1to1_Handle="Wan1AliasMaskIp1"--> '>
+		<input type="hidden" name="wan2mask" id="wan2mask" value='<!--#nk_get 1to1_Handle="Wan1AliasMaskIp2"--> '>
+		<input type="hidden" name="wan3mask" id="wan3mask" value='<!--#nk_get 1to1_Handle="Wan1AliasMaskIp3"--> '>
+		<input type="hidden" name="wan4mask" id="wan4mask" value='<!--#nk_get 1to1_Handle="Wan1AliasMaskIp4"--> '>
+		<input type="hidden" name="wan5mask" id="wan5mask" value='<!--#nk_get 1to1_Handle="Wan1AliasMaskIp5"--> '>
+		<input type="hidden" name="wan6mask" id="wan6mask" value='<!--#nk_get 1to1_Handle="Wan1AliasMaskIp6"--> '>
+		<input type="hidden" name="wan7mask" id="wan7mask" value='<!--#nk_get 1to1_Handle="Wan1AliasMaskIp7"--> '>
+		<input type="hidden" name="wan8mask" id="wan8mask" value='<!--#nk_get 1to1_Handle="Wan1AliasMaskIp8"--> '>
+		<input type="hidden" name="wan1gw" id="wan1gw" value='<!--#nk_get 1to1_Handle="Wan1RouterIp1"--> '>
+		<input type="hidden" name="wan2gw" id="wan2gw" value='<!--#nk_get 1to1_Handle="Wan1RouterIp2"--> '>
+		<input type="hidden" name="wan3gw" id="wan3gw" value='<!--#nk_get 1to1_Handle="Wan1RouterIp3"--> '>
+		<input type="hidden" name="wan4gw" id="wan4gw" value='<!--#nk_get 1to1_Handle="Wan1RouterIp4"--> '>
+		<input type="hidden" name="wan5gw" id="wan5gw" value='<!--#nk_get 1to1_Handle="Wan1RouterIp5"--> '>
+		<input type="hidden" name="wan6gw" id="wan6gw" value='<!--#nk_get 1to1_Handle="Wan1RouterIp6"--> '>
+		<input type="hidden" name="wan7gw" id="wan7gw" value='<!--#nk_get 1to1_Handle="Wan1RouterIp7"--> '>
+		<input type="hidden" name="wan8gw" id="wan8gw" value='<!--#nk_get 1to1_Handle="Wan1RouterIp8"--> '>
+		<input type="hidden" name="WAN1ConnectionType1" id="WAN1ConnectionType1" value='<!--#nk_get 1to1_Handle="WAN1ConnectionType1"--> '>
+		<input type="hidden" name="WAN1ConnectionType2" id="WAN1ConnectionType2" value='<!--#nk_get 1to1_Handle="WAN1ConnectionType2"--> '>
+		<input type="hidden" name="WAN1ConnectionType3" id="WAN1ConnectionType3" value='<!--#nk_get 1to1_Handle="WAN1ConnectionType3"--> '>
+		<input type="hidden" name="WAN1ConnectionType4" id="WAN1ConnectionType4" value='<!--#nk_get 1to1_Handle="WAN1ConnectionType4"--> '>
+		<input type="hidden" name="WAN1ConnectionType5" id="WAN1ConnectionType5" value='<!--#nk_get 1to1_Handle="WAN1ConnectionType5"--> '>
+		<input type="hidden" name="WAN1ConnectionType6" id="WAN1ConnectionType6" value='<!--#nk_get 1to1_Handle="WAN1ConnectionType6"--> '>
+		<input type="hidden" name="WAN1ConnectionType7" id="WAN1ConnectionType7" value='<!--#nk_get 1to1_Handle="WAN1ConnectionType7"--> '>
+		<input type="hidden" name="WAN1ConnectionType8" id="WAN1ConnectionType8" value='<!--#nk_get 1to1_Handle="WAN1ConnectionType8"--> '>
+	<script>PrintContent();</script>
+	</form>
+</body>
+</html>
+<!--#nk_get NetworkUpdate=""-->

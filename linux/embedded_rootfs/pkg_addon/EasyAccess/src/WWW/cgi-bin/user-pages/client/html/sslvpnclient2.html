@@ -1,0 +1,23 @@
+if 1 < XTunnel1.CurrentVPInstanceCount then
+alert("Another instance of Virtual Passage already running")
+return
+end if
+if 1 < XTunnel1.isVirtualPassageRunning then
+alert("Virtual Passage already running")
+return
+end if
+call XTunnel1.LaunchSSLDialog()
+window.close()
+end sub
+-->
+</script>
+</head>
+<body  class="mainback" margin=0 TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0 onload="resizer();" style="overflow-x:hidden;overflow-y:hidden">
+
+<OBJECT ID="VPLaunch1" CLASSID="CLSID:19DFFB5D-E30A-4E3B-8524-0AD8F4D88D32" CODEBASE="/XTunnel.cab#version=1,6,1,1">
+<br><font class=toolbar><font class=badval><b>WARNING: </b></font>
+<font class=toolbar2>Virtual Passage could not be installed.
+ Verify you are running Microsoft Internet Explorer and your
+ browser security settings allow ActiveX controls.
+ To enable ActiveX, add this site as a <b>Trusted Site</b> in your browser's <b>Internet Options &#187; Security</b> menu
+</object><br>

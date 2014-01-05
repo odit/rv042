@@ -1,0 +1,104 @@
+#!/bin/sh
+#
+# Script to create/delete 6to4 tunnels.
+# written by Olaf Titz, 2004-06-12. Public domain.
+#
+# This creates a standard 6to4 tunnel. With this tunnel, everyone with an
+# IPv4 connection can give their network full IPv6 connectivity without
+# the need for further configuration.
+# In case of a dynamically assigned IPv4 address, this creates a dynamic,
+# but fully functional, IPv6 network prefix.
+# See RFC 3056, RFC 3068.
+#
+# Requires Linux 2.6 and an appropriate version of iproute; radvd recommended.
+#
+# Assume your IPv4 address (e.g. the local end of your PPP connection) is
+# 1.2.3.4, the tunnel is created from 2002:0102:0304::1 to ::192.88.99.1.
+# Also the local network is assigned the address 2002:0102:0304::/48 and
+# the IPv6 default route is set into the tunnel. (Where "default" currently
+# means 2000::/3, which includes all assigned global unicast addresses.)
+# The kernel routing handles the 2002::/16 prefix specially as defined
+# in RFC 3056. The remote address is a globally assigned anycast
+# address for tunneling; there are routers all over the world which
+# handle this transparently.
+# (If you happen to have a dedicated IPv6 tunnel router change the REMOTE
+# addresses below.)
+#
+# This script can be called from /etc/ppp/ip-up like:
+#   6to4 up "$4" eth0
+# and likewise from /etc/ppp/ip-down:
+#   6to4 down "$4" eth0
+# Substitute the local ethernet interface for eth0 as needed.
+#
+# To announce the 6to4 network prefix and default route into your local
+# network, use the following radvd.conf:
+#   interface eth0 { 
+#        AdvSendAdvert on;
+#        MinRtrAdvInterval 20; 
+#        MaxRtrAdvInterval 60;
+#        AdvLinkMTU 1400; # adapt as needed
+#        prefix 2002::/64 { 
+#                AdvOnLink off; 
+#                AdvAutonomous on; 
+#                AdvRouterAddr on; 
+#                Base6to4Interface tun64; # note this!
+#                AdvPreferredLifetime 90;
+#                AdvValidLifetime 120;
+#        };
+#   };
+# The trick here is that we assign the local IPv4 address (redundantly)
+# to the tunnel interface, so radvd picks it from the tunnel instead of
+# the PPP device. So radvd announces the tunnel only when it's really up.
+
+usage() {
+    echo "usage: 6to4 [up|down] <ip4addr> <iface> <remote4>"
+    echo "<ipv4addr>: address of internet link (e.g. PPP)"
+    echo "<iface>: local network interface (e.g. eth0)"
+    exit 1
+}
+
+FUNC=$1						# what to do
+LOCAL4=$2					# local IPv4 address
+IFACE=$3					# local network interface
+TUN=tun64					# tunnel device
+TTL=64						# tunnel TTL
+x=`echo $LOCAL4 | tr "." " "`
+LOCAL6=`printf "2002:%02x%02x:%02x%02x::1" $x`	# local IPv6 address
+PREFIX=`printf "2002:%02x%02x:%02x%02x::/64" $x`	# prefix
+#REMOTE4=192.88.99.1				# remote IPv4 address (RFC3068)
+REMOTE4=$4
+DEFAULT=2000::/3				# default IPv6 route
+
+tunnel_up() {
+    echo "Adding 6to4 tunnel for $LOCAL6"
+    ip tunnel add $TUN mode sit ttl $TTL remote any local $LOCAL4
+    ip link set dev $TUN up
+    ip addr add $LOCAL4 dev $TUN
+    ip -6 addr add $LOCAL6/16 dev $TUN
+    ip -6 route add $LOCAL6/48 dev $IFACE
+    ip -6 route add $DEFAULT via ::$REMOTE4 dev $TUN metric 1
+    sysconfig -w RADVD PREFIX=$PREFIX
+}
+
+tunnel_down() {
+    echo "Taking down 6to4 tunnel for $LOCAL6"
+    ip -6 route del $DEFAULT via ::$REMOTE4 dev $TUN metric 1
+    ip -6 route del $LOCAL6/48 dev $IFACE
+    ip -6 addr del $LOCAL6/16 dev $TUN
+    ip addr del $LOCAL4 dev $TUN
+    ip link set dev $TUN down
+    ip tunnel del $TUN
+    sysconfig -w RADVD PREFIX= 
+}
+
+[ "$LOCAL4" ] || usage
+[ "$IFACE" ] || usage
+case "$FUNC" in
+up) 	tunnel_up ;;
+down)	tunnel_down ;;
+*)	usage ;;
+esac
+
+[ -x /etc/init.d/radvd ] && /etc/init.d/radvd reload
+
+exit 0

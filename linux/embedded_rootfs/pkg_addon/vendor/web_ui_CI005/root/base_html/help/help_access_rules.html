@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/26/10 15:44:05" />
+    <title>Configuring Firewall Access Rules </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=32;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1050013"> </a><h1 class="pTitle">
+Configuring Firewall Access Rules
+
+</h1>
+<a name="wp1050014"> </a><p class="pBody">
+The default access rules should be sufficient for most small businesses. However, 
+you can use the <em class="cEmphasis">Firewall &gt; Access Rules</em> page to modify or add new access rules 
+for your network. Access rules determine which traffic is allowed to pass through 
+the router&#39;s firewall. Optionally, you can set a schedule to activate or deactivate 
+each access rule for specified days and times (IPv4 Only).
+
+</p>
+<a name="wp1079032"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp1079027"> </a><p class="pBody">
+Refer to these topics:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1077185"> </a><li class="pSmartList1"><a href="#wp1077173">About Access Rules</a>
+</li>
+<a name="wp1077206"> </a><li class="pSmartList1"><a href="#wp1050030">Configuring Access Rules</a>
+</li>
+<a name="wp1077225"> </a><li class="pSmartList1"><a href="help_index.htm?url=help_edit_access_rules.html">Setting up Access Rules</a>
+</li>
+</ul></div>
+<a name="wp1077173"> </a><h2 class="pHeading2">
+About Access Rules
+</h2>
+<a name="wp1050016"> </a><p class="pBody">
+The router has the following default rules: 
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1050017"> </a><li class="pSmartList1">All traffic from the LAN to the WAN is allowed.
+</li>
+<a name="wp1050018"> </a><li class="pSmartList1">All traffic from the WAN to the LAN is denied.
+</li>
+<a name="wp1050019"> </a><li class="pSmartList1">All traffic from the LAN to the DMZ is allowed.
+</li>
+<a name="wp1050020"> </a><li class="pSmartList1">All traffic from the DMZ to the LAN is denied.
+</li>
+<a name="wp1050021"> </a><li class="pSmartList1">All traffic from the WAN to the DMZ is allowed.
+</li>
+<a name="wp1050022"> </a><li class="pSmartList1">All traffic from the DMZ to the WAN is allowed.
+</li>
+<a name="wp1074681"> </a><p class="pCaution">
+<table border="0">
+<tr>
+<td>
+<strong>CAUTION	&nbsp;&nbsp;&nbsp;</strong>
+</td>
+<td>
+<p>With the use of custom rules, it is possible to disable all firewall protection or block 
+all access to the Internet, so use extreme caution when creating or deleting access 
+rules. 
+</p>
+</td>
+</tr>
+</table>
+
+</p>
+</ul></div>
+<a name="wp1050023"> </a><p class="pBody">
+There are four additional default rules that will be always active and cannot be 
+overridden by any custom rules:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1074695"> </a><li class="pSmartList1">HTTP service from the LAN to the router is always allowed.
+</li>
+<a name="wp1074704"> </a><li class="pSmartList1">DHCP service from the LAN is always allowed. 
+</li>
+<a name="wp1074705"> </a><li class="pSmartList1">DNS service from the LAN is always allowed. 
+</li>
+<a name="wp1074706"> </a><li class="pSmartList1">Ping service from the LAN to the router is always allowed.
+</li>
+</ul></div>
+<a name="wp1050030"> </a><h2 class="pHeading2">
+Configuring Access Rules
+</h2>
+<a name="wp1050031"> </a><p class="pBody">
+Except for the default rules, all configured access rules are listed in the Access 
+Rules table, and you can set the priority for each custom rule.
+
+</p>
+<a name="wp1076637"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> As an alternative to this procedure, you can use the Access Rule Wizard. For more 
+information, see <a href="help_index.htm?url=help_wizard.html">&quot;Wizard.&quot;</a>
+
+</p>
+<a name="wp1076642"> </a><p class="pBody">
+If you have numerous rules, you can adjust the display. Use the <em class="cEmphasis">Rows per page list</em> 
+at the top right corner of the table to choose the number of rules to display on each 
+page. Use the <em class="cEmphasis">Page</em> list below the table to choose a particular page. Use the 
+navigation buttons to view the first page, previous page, next page, or final page. 
+Some buttons may be unavailable, depending on the number of pages and the 
+current selection.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1077951"> </a><li class="pSmartList1"><b class="cBold">Priority:</b> The priority of the access rule, with 1 indicating the highest priority. 
+To change the priority for a rule, select an option from the drop-down list. If 
+there is a conflict between two access rules, then the higher priority rule 
+takes precedence. The default access rules have the lowest priority.
+</li>
+<a name="wp1074771"> </a><p class="pListBodyLevel1">
+When an access rule is created, the router automatically assigns a priority; 
+however, you can change the priority after the rule is created.
+
+</p>
+<a name="wp1074810"> </a><li class="pSmartList1"><b class="cBold">Enable:</b> To enable a rule, check the <span style="font-weight: bold">Enable</span> box. To disable a rule, uncheck 
+the box. You cannot change the default rules.
+</li>
+</ul></div>
+<a name="wp1078021"> </a><p class="pBody">
+Additional information appears that cannot be changed on this page:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1050036"> </a><li class="pSmartList1"><b class="cBold">Action:</b> The action that the rule performs, to Allow or Deny access
+</li>
+<a name="wp1050037"> </a><li class="pSmartList1"><b class="cBold">Service:</b> The service that is affected by this rule
+</li>
+<a name="wp1050038"> </a><li class="pSmartList1"><b class="cBold">Source Interface:</b> The source interface that is affected by this rule
+</li>
+<a name="wp1050039"> </a><li class="pSmartList1"><b class="cBold">Source:</b> The IP address for the source of the traffic, or Any
+</li>
+<a name="wp1050040"> </a><li class="pSmartList1"><b class="cBold">Destination:</b> The IP address for the destination of the traffic, or Any
+</li>
+<a name="wp1050041"> </a><li class="pSmartList1"><b class="cBold">Time:</b> A specific time interval when the access rule is active, or Always (IPv4 Only)
+</li>
+<a name="wp1050042"> </a><li class="pSmartList1"><b class="cBold">Day:</b> Specific days when the access rule is active, or Always (IPv4 Only)
+</li>
+</ul></div>
+<a name="wp1074893"> </a><p class="pBody">
+Add or edit rules as needed.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1075398"> </a><li class="pSmartList1"><b class="cBold">To add a rule: </b>Click <b class="cBold">Add New Rule</b>. Enter the settings, as described in 
+<a href="help_index.htm?url=help_edit_access_rules.html">Setting up Access Rules</a>.
+</li>
+<a name="wp1075408"> </a><li class="pSmartList1"><b class="cBold">To modify a custom rule: </b>Click the <span style="font-weight: bold">Edit</span> icon. Enter the settings, as 
+described in <a href="help_index.htm?url=help_edit_access_rules.html">Setting up Access Rules</a>.
+</li>
+<a name="wp1075412"> </a><li class="pSmartList1"><b class="cBold">To delete an access rule: </b>Click the <span style="font-weight: bold">Delete </span>icon. When the confirmation 
+message appears, click <b class="cBold">OK</b> to continue, or click <b class="cBold">Cancel</b> to close the 
+message without deleting the rule.
+</li>
+<a name="wp1075414"> </a><li class="pSmartList1"><b class="cBold">To delete all custom rules: </b>Click <span style="font-weight: bold">Restore to Default Rules</span>.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

@@ -1,0 +1,81 @@
+// XTSAC.odl : type library source for ActiveX Control project.
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (XTSAC.tlb) that will become a resource in
+// XTSAC.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(FC5E7A0A-0562-4873-97CA-F13A2EF0552B), version(1.0),
+  helpfile("XTSAC.hlp"),
+  helpstring("XTSAC ActiveX Control module"),
+  control ]
+library XTSACLib
+{
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+
+	//  Primary dispatch interface for CXTSACCtrl
+
+	[ uuid(7EBC020F-B290-4B3D-A7D1-E3DD693458F3),
+	  helpstring("Dispatch interface for XTSAC Control"), hidden ]
+	dispinterface _DXTSAC
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CXTSACCtrl)
+			[id(1)] BSTR AccessPointSrvIP;
+			[id(2)] BSTR SessionId;
+			[id(3)] long TSACClientHt;
+			[id(4)] long TSACClientWd;
+			[id(5)] BSTR TermSrvIP;
+			[id(6)] short isFullScreen;
+			[id(7)] BSTR TSACUserName;
+			[id(8)] BSTR TSACPasswd;
+			[id(9)] long TSACColorDepth;
+			[id(10)] BSTR TSACStartProgram;
+			[id(11)] BSTR TSACCwd;
+			[id(12)] boolean isCertRootValidate;
+			[id(14)] long TSACServerPort;
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CXTSACCtrl)
+			[id(13)] long LaunchTSACClient();
+			//}}AFX_ODL_METHOD
+	};
+
+	//  Event dispatch interface for CXTSACCtrl
+
+	[ uuid(4A80E79D-9953-47B7-BC66-9AF952D87744),
+	  helpstring("Event interface for XTSAC Control") ]
+	dispinterface _DXTSACEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CXTSACCtrl)
+			//}}AFX_ODL_EVENT
+	};
+
+	//  Class information for CXTSACCtrl
+
+	[ uuid(44C1E3A2-B594-401C-B27A-D1B4476E4797),
+	  helpstring("XTSAC Control"), control ]
+	coclass XTSAC
+	{
+		[default] dispinterface _DXTSAC;
+		[default, source] dispinterface _DXTSACEvents;
+	};
+
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

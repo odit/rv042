@@ -1,0 +1,91 @@
+#!/bin/sh
+# For Cramfs
+
+echo "inserting nk_switch module"
+insmod /lib/modules/nk_switch.ko
+
+echo inserting cavium ethernet module
+insmod /lib/modules/cavium-ethernet.ko
+
+echo "Opimizing linux kernel"
+echo 1 > /proc/sys/net/ipv4/ip_forward || echo "  /proc not available"
+echo 1 > /proc/sys/net/ipv6/conf/all/forwarding || echo "  /proc not available"
+
+echo "inserting hdlc module"
+insmod /lib/modules/n_hdlc.ko
+
+echo "inserting cavium crypto module"
+insmod /lib/modules/cavmodexp.ko
+
+echo "inserting nk_netlink module"
+insmod /lib/modules/nk_netlink.ko
+echo "excuting netlinkctl application"
+netlinkctl &
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
+
+echo "Setup links for temp dirs"
+ln -s /tmp /usr/local/EasyAccess/var/locks/ppp
+ln -s /tmp /usr/local/EasyAccess/var/msg
+ln -s /tmp /usr/local/EasyAccess/var/logs
+
+echo "Setup links for /etc/ppp/ip-down and /etc/ppp/ip-up"
+ln -s -f /usr/local/EasyAccess/bin/ip-up.local /etc/ppp/ip-up
+ln -s -f /usr/local/EasyAccess/bin/ip-up.down /etc/ppp/ip-down
+
+mkdir /var/log
+mkdir /var/run
+
+/bin/webBoot &
+/usr/sbin/lan_up_daemon &
+
+if [ -f /usr/local/EasyAccess/var/cert/default/server.crt ]; then
+echo "delete cert/default/..."
+rm -f /usr/local/EasyAccess/var/cert/default/server.crt
+rm -f /usr/local/EasyAccess/var/cert/default/server.key
+else
+echo "cert/default/..."
+fi
+
+date 010108002010
+if [ -f /etc/flash/etc/rvCertName.txt ]; then
+echo "rvCertName..."
+else
+echo "no rvCertName..."
+rm -f /etc/flash/etc/server.pem
+rm -f /etc/flash/etc/server.crt
+rm -f /etc/flash/etc/server.key
+fi
+
+if [ -f /etc/flash/etc/server.pem ]; then
+echo "server.pem..."
+else
+echo "generate server.pem...."
+mtd_debug read /dev/mtd4 0x00 0x5A /tmp/.factory
+/usr/sbin/certificate_management &
+fi
+
+sleep 5
+/usr/sbin/check_ui_lock &
+chmod 755 /usr/sbin/test.sh
+chmod 755 /usr/sbin/get_db.sh
+
+ln -sf /etc/flash/etc/server.crt /usr/local/EasyAccess/var/cert/server.crt
+ln -sf /etc/flash/etc/server.key /usr/local/EasyAccess/var/cert/server.key
+
+echo "Starting /usr/local/EasyAccess/bin/firebase"
+/usr/local/EasyAccess/bin/firebase -d
+
+echo "Starting /usr/local/EasyAccess/bin/smm"
+/usr/local/EasyAccess/bin/smm -d
+
+echo "Starting /usr/local/EasyAccess/www/cgi-bin/compareDB"
+/usr/local/EasyAccess/www/cgi-bin/compareDB
+
+echo "Starting /usr/local/EasyAccess/bin/ftpsession"
+/usr/local/EasyAccess/bin/ftpsession -d
+
+echo "Starting /usr/local/EasyAccess/bin/httpd"
+/usr/local/EasyAccess/bin/httpd
+
+

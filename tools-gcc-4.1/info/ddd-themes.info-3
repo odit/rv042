@@ -1,0 +1,276 @@
+This is ../../../src/ddd/ddd/ddd-themes.info, produced by makeinfo
+version 4.3 from ../../../src/ddd/ddd/ddd-themes.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD-Themes: (ddd-themes).       Writing DDD Themes.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 2001-02-01, of `Writing DDD themes' for DDD
+Version 3.3.11.
+
+Copyright (C) 2001 Universität Passau
+Lehrstuhl für Software-Systeme
+Innstraße 33
+D-94032 Passau
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd-themes.info,  Node: Index,  Prev: Documentation License,  Up: Top
+
+Index
+*****
+
+* Menu:
+
+* ( <1>:                                 Creating Lists.
+* ( <2>:                                 Negation Functions.
+* ( <3>:                                 Comparison Functions.
+* ( <4>:                                 Arithmetic Functions.
+* ( <5>:                                 Overlays.
+* ( <6>:                                 Textual Composition.
+* ( <7>:                                 Vertical Composition.
+* (:                                     Horizontal Composition.
+* and:                                   VSL Boolean Operators.
+* annotation:                            Displaying Data Displays.
+* append:                                Creating Lists.
+* arc:                                   Arc Basics.
+* arcs.vsl:                              Arc Functions.
+* arcthickness:                          Arc Basics.
+* array_color:                           Displaying Colors.
+* bf:                                    Font Selection.
+* bi:                                    Font Selection.
+* bin:                                   String Functions.
+* box:                                   Box Dimensions.
+* builtin.vsl:                           VSL Operators.
+* car:                                   Accessing List Elements.
+* cdr:                                   Accessing List Elements.
+* center:                                Centering Functions.
+* changed_color:                         Displaying Colors.
+* changed_value:                         Displaying Extra Properties.
+* chars:                                 Lists and Strings.
+* circle:                                Custom Arc Functions.
+* collapsed_array:                       Displaying Arrays.
+* collapsed_list_value:                  Displaying Lists.
+* collapsed_pointer_value:               Displaying Pointers.
+* collapsed_reference_value:             Displaying References.
+* collapsed_sequence_value:              Displaying Sequences.
+* collapsed_simple_value:                Displaying Simple Values.
+* collapsed_struct_value:                Displaying Structs.
+* collapsed_text_value:                  Displaying Multi-Line Texts.
+* color:                                 Color Functions.
+* colors.vsl:                            Color Functions.
+* commalist:                             Textual Composition.
+* crossline:                             Emphasis Functions.
+* ddd.vsl:                               DDD VSL Functions.
+* dec:                                   String Functions.
+* delete:                                Manipulating Lists.
+* dereferenced_pointer_value:            Displaying Pointers.
+* disabled:                              Displaying Data Displays.
+* disabled_color:                        Displaying Colors.
+* display_box:                           Displaying Data Displays.
+* display_color:                         Displaying Colors.
+* doubleframe:                           Frame Functions.
+* doublestrike:                          Emphasis Functions.
+* dtab:                                  Table Functions.
+* e_arrow:                               Arrow Functions.
+* e_flush:                               Flushing Functions.
+* elem:                                  Accessing List Elements.
+* ellipse:                               Custom Arc Functions.
+* else:                                  VSL Conditionals.
+* elsif:                                 VSL Conditionals.
+* empty_array:                           Displaying Arrays.
+* empty_list_value:                      Displaying Lists.
+* empty_struct_value:                    Displaying Structs.
+* fall:                                  Slope Basics.
+* family_courier:                        Font Name Selection.
+* family_helvetica:                      Font Name Selection.
+* family_new_century:                    Font Name Selection.
+* family_times:                          Font Name Selection.
+* family_typewriter:                     Font Name Selection.
+* fi:                                    VSL Conditionals.
+* fill:                                  Empty Space.
+* fix:                                   Controlling Stretch.
+* flat:                                  Manipulating Lists.
+* font:                                  Font Basics.
+* fontname:                              Font Name Selection.
+* fonts.vsl:                             Font Functions.
+* frame:                                 Frame Functions.
+* Functions, in VSL <1>:                 VSL Library.
+* Functions, in VSL:                     DDD VSL Functions.
+* halign:                                Horizontal Composition.
+* hcenter:                               Centering Functions.
+* head:                                  Accessing List Elements.
+* hex:                                   String Functions.
+* hfill:                                 Empty Space.
+* hfix:                                  Controlling Stretch.
+* horizontal_array:                      Displaying Arrays.
+* horizontal_unnamed_list:               Displaying Lists.
+* horizontal_unnamed_struct:             Displaying Structs.
+* hralign:                               Horizontal Composition.
+* hrule:                                 Black Lines.
+* hspace:                                Box Dimensions.
+* hwhite:                                White Space.
+* if:                                    VSL Conditionals.
+* indent:                                Indentation Functions.
+* indentamount:                          Indentation Functions.
+* isatom:                                List Properties.
+* islist:                                List Properties.
+* it:                                    Font Selection.
+* last:                                  Accessing List Elements.
+* length:                                List Properties.
+* let:                                   VSL Local Variables.
+* Library, VSL:                          VSL Library.
+* License, Documentation:                Documentation License.
+* list:                                  Lists and Strings.
+* list.vsl:                              List Functions.
+* list_color:                            Displaying Colors.
+* list_member:                           Displaying Lists.
+* list_member_name:                      Displaying Lists.
+* list_value:                            Displaying Lists.
+* max:                                   Maximum and Minimum Functions.
+* member:                                List Properties.
+* min:                                   Maximum and Minimum Functions.
+* n_arrow:                               Arrow Functions.
+* n_flush:                               Flushing Functions.
+* ne_arrow:                              Arrow Functions.
+* ne_flush:                              Flushing Functions.
+* none:                                  Displaying Data Displays.
+* not:                                   VSL Boolean Operators.
+* num:                                   String Functions.
+* numeric_value:                         Displaying Simple Values.
+* nw_arrow:                              Arrow Functions.
+* nw_flush:                              Flushing Functions.
+* oct:                                   String Functions.
+* octogon:                               Custom Slope Functions.
+* or:                                    VSL Boolean Operators.
+* oval:                                  Custom Arc Functions.
+* overline:                              Emphasis Functions.
+* pointer_color:                         Displaying Colors.
+* pointer_value:                         Displaying Pointers.
+* pos:                                   Accessing List Elements.
+* prefix:                                List Properties.
+* punchcard:                             Custom Slope Functions.
+* reference_color:                       Displaying Colors.
+* reference_value:                       Displaying References.
+* repeated_value:                        Displaying Extra Properties.
+* reverse:                               Manipulating Lists.
+* rhomb:                                 Custom Slope Functions.
+* rise:                                  Slope Basics.
+* rm:                                    Font Selection.
+* rule:                                  Black Lines.
+* ruleframe:                             Frame Functions.
+* rulethickness:                         Black Lines.
+* s_arrow:                               Arrow Functions.
+* s_flush:                               Flushing Functions.
+* se_arrow:                              Arrow Functions.
+* se_flush:                              Flushing Functions.
+* select:                                Manipulating Lists.
+* semicolonlist:                         Textual Composition.
+* sequence_value:                        Displaying Sequences.
+* shadow:                                Displaying Shadows.
+* shadow_color:                          Displaying Colors.
+* simple_color:                          Displaying Colors.
+* simple_value:                          Displaying Simple Values.
+* slant_italic:                          Font Name Selection.
+* slant_unslanted:                       Font Name Selection.
+* slopes.vsl:                            Slope Functions.
+* slopethickness:                        Slope Basics.
+* small_bf:                              Displaying Fonts.
+* small_bi:                              Displaying Fonts.
+* small_it:                              Displaying Fonts.
+* small_rm:                              Displaying Fonts.
+* small_size:                            Displaying Fonts.
+* sort:                                  Manipulating Lists.
+* square:                                Box Dimensions.
+* std.vsl:                               VSL Library.
+* stdfontfamily:                         Font Defaults.
+* stdfontpixels:                         Font Defaults.
+* stdfontpoints:                         Font Defaults.
+* stdfontsize:                           Font Defaults.
+* stdfontslant:                          Font Defaults.
+* stdfontweight:                         Font Defaults.
+* string:                                String Functions.
+* struct_color:                          Displaying Colors.
+* struct_member:                         Displaying Structs.
+* struct_member_name:                    Displaying Structs.
+* struct_value:                          Displaying Structs.
+* sublist:                               List Properties.
+* suffix:                                List Properties.
+* sw_arrow:                              Arrow Functions.
+* sw_flush:                              Flushing Functions.
+* tab:                                   Table Functions.
+* tab.vsl:                               Table Functions.
+* tab_elem:                              Table Functions.
+* tail:                                  Accessing List Elements.
+* talign:                                Textual Composition.
+* text_color:                            Displaying Colors.
+* text_value:                            Displaying Multi-Line Texts.
+* then:                                  VSL Conditionals.
+* thickframe:                            Frame Functions.
+* tiny_bf:                               Displaying Fonts.
+* tiny_bi:                               Displaying Fonts.
+* tiny_it:                               Displaying Fonts.
+* tiny_rm:                               Displaying Fonts.
+* tiny_size:                             Displaying Fonts.
+* title:                                 Displaying Data Displays.
+* title_bf:                              Displaying Fonts.
+* title_bi:                              Displaying Fonts.
+* title_color:                           Displaying Colors.
+* title_it:                              Displaying Fonts.
+* title_rm:                              Displaying Fonts.
+* tlist:                                 Textual Composition.
+* tralign:                               Textual Composition.
+* twodim_array:                          Displaying Arrays.
+* twodim_array_elem:                     Displaying Arrays.
+* underline:                             Emphasis Functions.
+* valign:                                Vertical Composition.
+* value_bf:                              Displaying Fonts.
+* value_bi:                              Displaying Fonts.
+* value_box:                             Displaying Data Displays.
+* value_it:                              Displaying Fonts.
+* value_rm:                              Displaying Fonts.
+* vcenter:                               Centering Functions.
+* vertical_array:                        Displaying Arrays.
+* vertical_unnamed_list:                 Displaying Lists.
+* vertical_unnamed_struct:               Displaying Structs.
+* vfill:                                 Empty Space.
+* vfix:                                  Controlling Stretch.
+* vlist:                                 Vertical Composition.
+* vralign:                               Vertical Composition.
+* vrule:                                 Black Lines.
+* VSL:                                   VSL Reference.
+* VSL Functions <1>:                     VSL Library.
+* VSL Functions:                         DDD VSL Functions.
+* VSL Library:                           VSL Library.
+* vspace:                                Box Dimensions.
+* vwhite:                                White Space.
+* w_arrow:                               Arrow Functions.
+* w_flush:                               Flushing Functions.
+* weight_bold:                           Font Name Selection.
+* weight_medium:                         Font Name Selection.
+* where:                                 VSL Local Variables.
+* whiteframe:                            Frame Functions.
+* whitethickness:                        White Space.
+
+

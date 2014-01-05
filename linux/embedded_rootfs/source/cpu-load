@@ -1,0 +1,42 @@
+#!/bin/sh
+
+start=`cat /proc/stat | grep cpu`
+sleep 1
+stop=`cat /proc/stat | grep cpu`
+
+let words=0
+for d in $start
+do
+    eval start_data${words}=$d
+    let words++
+done
+
+let words=0
+for d in $stop
+do
+    eval stop_data${words}=$d
+    let words++
+done
+
+let i=0
+while [ $i -ne $words ]
+do
+    eval cpu=\$stop_data$i; let i++
+    let user=stop_data$i-start_data$i; let i++
+    let nice=stop_data$i-start_data$i; let i++
+    let system=stop_data$i-start_data$i; let i++
+    let idle=stop_data$i-start_data$i; let i++
+    let iowait=stop_data$i-start_data$i; let i++
+    let irq=stop_data$i-start_data$i; let i++
+    let softirq=stop_data$i-start_data$i; let i++
+    let unknown=stop_data$i-start_data$i; let i++
+    let total=user+nice+system+idle+iowait+irq+softirq+unknown
+    let puser=user*1000/total
+    let pnice=nice*1000/total
+    let psystem=system*1000/total
+    let pidle=idle*1000/total
+    let piowait=iowait*1000/total
+    let pirq=irq*1000/total
+    let psoftirq=softirq*1000/total
+    echo "%*10 $cpu user=$puser nice=$pnice system=$psystem idle=$pidle iowait=$piowait irq=$pirq softirq=$psoftirq"
+done

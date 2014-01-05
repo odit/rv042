@@ -1,0 +1,149 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<!--(==============================================================)-->
+<!--(Document created with RoboEditor. )============================-->
+<!--(==============================================================)-->
+
+<head>
+
+<title>Client Routes</title>
+
+<!--(Meta)==========================================================-->
+
+<meta http-equiv=content-type content="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+<meta name=generator-major-version content=0.1>
+<meta name=generator-minor-version content=1>
+<meta name=filetype content=kadov>
+<meta name=filetype-version content=1>
+<meta name=page-count content=1>
+<meta name=layout-height content=827>
+<meta name=layout-width content=692>
+
+
+<!--(Links)=========================================================-->
+
+<link rel="StyleSheet" href="default.css">
+
+
+
+</head>
+
+<!--(Body)==========================================================-->
+
+
+<body>
+
+<h4>Virtual Passage Client Routes</h4>
+
+<p>To configure SSL VPN client routes, click the <span style="font-weight: bold;">Virtual 
+ Passage</span> option in the left navigation menu, then click <span style="font-weight: bold;">Client 
+ Routes</span>. <!--kadov_tag{{<spaces>}}-->&nbsp;<!--kadov_tag{{</spaces>}}--></p>
+
+<h6>Define Client Routes</h6>
+
+<p>The <span style="font-weight: bold;">Client Routes</span> page enables 
+ you to define the addresses of devices on your local network. Client routes 
+ are only required if the client address range is in a different subnet 
+ then the corporate network or if your network has multiple subnets. Client 
+ routes inform the Virtual Passage client that other networks are located 
+ across the Virtual Passage tunnel. </p>
+
+<p>&nbsp;</p>
+
+<p>How does the Virtual Passage client determine which addresses are located 
+ across the Virtual Passage? Well, first Virtual Passage client assumes 
+ that addresses in the same subnet as the client IP address (PPP interface) 
+ are located across the Virtual Passage tunnel. </p>
+
+<p>&nbsp;</p>
+
+<p>What addresses are in the client subnet? It depends on the client address. 
+ The specific subnet is determined by the class of the IP address. Addresses 
+ between <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">1.0.0.0</span> 
+ and <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">126.255.255.255</span>, 
+ are <span style="font-weight: bold;">Class A</span> addresses; the Virtual 
+ Passage client will assume that all addresses with the same first octet 
+ are located across the VPN tunnel. Addresses between <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">128.0.0.0</span> 
+ – <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">191.255.255.255</span> 
+ are <span style="font-weight: bold;">Class B</span> addresses; the Virtual 
+ Passage client will assume that all addresses with the same first two 
+ octets are located across the VPN tunnel. Addresses between <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">192.0.0.0</span> 
+ – <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">223.255.255.255</span> 
+ are <span style="font-weight: bold;">Class C</span> addresses; the Virtual 
+ Passage client will assume that all addresses with the same first three 
+ octets are located across the VPN tunnel.</p>
+
+<p>&nbsp;</p>
+
+<p>The subnet classes for the designated private IP address ranges are:</p>
+
+<p>&nbsp;</p>
+
+<ul style="list-style: disc;"
+	type=disc>
+	
+	<li class=kadov-p><p style="margin-bottom: 5pt;">10.0.0.0 – 10.255.255.255 
+ – Class A subnet</p></li>
+	
+	<li class=kadov-p><p style="margin-bottom: 5pt;">172.16.0.0 – 172.16.31.255.255 
+ – Class B subnet</p></li>
+	
+	<li class=kadov-p><p>192.168.0.1 – 192.168.255.255 – Class C subnet</p></li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>If Virtual Passage clients need to connect to addresses on the corporate 
+ network that are not in the same subnet as the client address range, then 
+ you will need to add client routes. </p>
+
+<p>&nbsp;</p>
+
+<p>To add a client route:</p>
+
+<p>&nbsp;</p>
+
+<ol style="list-style: decimal;"
+	type=1>
+	
+	<li class=kadov-p><p style="margin-bottom: 6pt;">Enter the network 
+ address of your local subnet in the <span style="font-weight: bold;">Destination 
+ Network</span> field. </p></li>
+	
+	<li class=kadov-p><p style="margin-bottom: 6pt;">Enter the subnet mask 
+ for the local subnet in the <span style="font-weight: bold;">Subnet Mask</span> 
+ field.</p></li>
+	
+	<li class=kadov-p><p>Click <span style="font-weight: bold;">Submit</span> 
+ to update the configuration. </p></li>
+</ol>
+
+<p>&nbsp;</p>
+
+<p><span style="font-style: italic; font-weight: bold;">NOTE:</span><span 
+ style="font-style: italic;"> You will also need to add a static route 
+ on your corporate firewall or router that directs traffic destined for 
+ the Virtual Passage client address range to the SSL VPN gateway.</span> 
+ </p>
+
+<p>&nbsp;</p>
+
+<p>Restart the EasyAccess software if Virtual Passage clients are currently 
+ connected to the SSL VPN gateway. Restarting forces clients to reconnect 
+ and receive new addresses and routes. <!--kadov_tag{{<spaces>}}-->&nbsp;<!--kadov_tag{{</spaces>}}--></p>
+
+<p>&nbsp;</p>
+
+<p>Now users will be able to connect to the SSL VPN gateway and receive 
+ a virtual IP address from the client address range.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+</body>
+
+</html>

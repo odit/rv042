@@ -1,0 +1,6 @@
+config CONFIG_broadcom-wireless-driver
+	bool "broadcom-wireless-driver"
+	default y
+	help
+		Add support for Broadcom 802.11n multiband driver.
+

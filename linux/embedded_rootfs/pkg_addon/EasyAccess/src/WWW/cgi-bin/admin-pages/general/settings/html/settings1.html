@@ -1,0 +1,126 @@
+<script src="/js/mainframe.js"></script>
+<SCRIPT LANGUAGE=JAVASCRIPT TYPE="TEXT/JAVASCRIPT">  
+<!-- Begin
+function restoreDefault()
+{
+if (window.confirm('Are you sure you want to restore the default settings? The SSL VPN Gateway will be restarted and all current connections will be dropped.') == true)
+{ 
+window.location="/cgi-bin/restoredefault";
+}
+}
+// End hiding script --> 
+</script>
+</head>
+<body  class="mainback" margin=0 TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0 onload=resizer()>
+<table border=0 cellpadding=0 cellspacing=0 class="mainback2" width=542 valign=top>
+<TR>
+<td width=29><img src="/images/shim.gif" height=4 width=29></td>
+<td width=513 valign="top"><!--Form Start-->
+<form name="Settings" action="/cgi-bin/settings" method="post" enctype="x-www-form-encoded">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=titletable>
+<tr class=titlerow>
+<td width=513 height=22 class=titlerow valign=center style="padding-bottom:0px">
+&nbsp;&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title(strsettings); </script></td>
+</tr>
+</table><img src="/images/shim.gif" height=21 width=1 class=titleimage><BR>
+<table width="" height="" cellspacing=0 cellpadding=0 border=0 valign="top">
+<tbody><tr>
+<td width="" height=1 colspan=4 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+<td width="" align="center">
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="headingstyle">
+<tbody><tr class="HeadingStyle"><td width=513 height=21 class="HeadingStyle" valign="center" colspan=2>
+&nbsp;
+<font class="HeadingStyle"><b>&nbsp;Manage Configuration Settings</b></font></td></tr>
+</table>
+<table class="centertable" valign="top" cellspacing=0 cellpadding=0 border=0 width=513>
+<tr><td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td></tr>
+<tr><td width="" height=2 colspan=3><img src="/images/shim.gif" width=1 height=14 border=0></td></tr>
+<tr><td width=10><img src="/images/shim.gif" width=10></td><td>
+<table border=0><tbody><tr>
+<td height=27><!-- Button to Export Settings-->
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td class=bleft></td>
+<td width=72 class=bcenter align=center><a href="/cgi-bin/exportConfigFile" class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(bexport); </script> 
+</a></td>
+<td class=bright></td></tr></table>
+</td><td valign="center" height=27><div class="toolbar"> &nbsp;&nbsp;Save your current configuration file to disk.<br><img src="/images/shim.gif" height=3><br></div>
+</td></tr>
+<tr><td height=27><!-- Button to Import Settings-->
+<table cellpadding=0 cellspacing=0 border=0 margin=0>
+<TR>
+<td class=bleft></td>
+<td width=72 class=bcenter align=center><a href="/cgi-bin/importconfig" class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(bimport); </script> 
+</a></td>
+<td class=bright></td></tr></table>
+</td><td valign="center" height=27><div class="toolbar"> &nbsp;&nbsp;Import a saved configuration file.<br><img src="/images/shim.gif" height=3><br></div>
+</td></tr>
+<tr><td height=27><!-- Button to Upgrade Software-->
+<table cellpadding=0 cellspacing=0 border=0 margin=0>
+<TR>
+<td class=bleft></td>
+<td width=72 class=bcenter align=center><a href="/cgi-bin/upgradefirmware" class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(bupgrade); </script> 
+</a></td>
+<td class=bright></td></tr></table>
+</td><td valign="center" height=27><div class="toolbar"> &nbsp;&nbsp;Upgrade software file.<br><img src="/images/shim.gif" height=3><br></div>
+</td></tr>
+<!--<tr><td height=27>
+<table cellpadding=0 cellspacing=0 border=0 margin=0>
+<TR>
+<td class=bleft></td>
+<td width=72 class=bcenter align=center><a href="/cgi-bin/importlicense" class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button("License"); </script> 
+</a></td>
+<td class=bright></td></tr></table>
+</td><td valign="center" height=27><div class="toolbar"> &nbsp;&nbsp;Import license key.<br><img src="/images/shim.gif" height=3><br></div>
+</td></tr>-->
+<tr><td height=27><!-- Button to Restore Default Settings-->
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td class=bleft></td>
+<td width=72 class=bcenter align=center><A HREF="javascript:restoreDefault();" class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(brestore); </script> 
+</a></td>
+<td class=bright></td></tr></table>
+</td><td valign="center" height=27> <div class="toolbar"> &nbsp;&nbsp;Restore the  default settings and restart.<br><img src="/images/shim.gif" height=3><br></div>
+</td></tr>
+<tr><td height=27><!-- Button to Save Settings-->
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td class=bleft></td>
+<td width=72 class=bcenter align=center><A href="/cgi-bin/savenow" class=buttons onmouseover="this.className='bhover'" onmouseout="this.className='buttons'">
+<SCRIPT type="text/JavaScript" language="JavaScript">button(bsavenow); </script> 
+</a></td>
+<td class=bright><img src="/images/shim.gif" width=3 height=1></td></tr></table>
+</td><td valign="center" height=27> <div class="toolbar"> &nbsp;&nbsp;Save configuration to file now.<br><img src="/images/shim.gif" height=3><br></div>
+</td></tr>
+</tbody></table>
+<img src="/images/shim.gif" height=13><br>
+</td></tr></tbody></table>
+</td>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width="" height=1 colspan=4 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+</tbody></table>
+<img src="/images/shim.gif" height=21><br>
+<table width="" height="" cellspacing=0 cellpadding=0 border=0 valign="top">
+<tbody><tr>
+<td width="" height=1 colspan=4 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+<td width="" align="center">
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="headingstyle">
+<tbody><tr class="HeadingStyle"><td width=513 height=21 class="HeadingStyle" valign="center" colspan=2>
+&nbsp;
+<font class="HeadingStyle"><b>&nbsp;Configuration File Options</b></font></td></tr>
+</table>
+<table class="centertable" valign="top" cellspacing=0 cellpadding=0 border=0 width=513>
+<tr><td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td></tr>
+<tr><td width="" height=2 colspan=3><img src="/images/shim.gif" width=1 height=10 border=0></td></tr>
+<tr><td width=10><img src="/images/shim.gif" width=10></td><td>

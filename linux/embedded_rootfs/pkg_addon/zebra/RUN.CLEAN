@@ -1,0 +1,6 @@
+#!/bin/sh -x
+if [ -e Makefile ]; then
+  ${MAKE} distclean
+  rm -f */Makefile
+  rm -rf */.deps
+fi

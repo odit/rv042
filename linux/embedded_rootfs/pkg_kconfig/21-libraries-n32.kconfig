@@ -1,0 +1,7 @@
+config CONFIG_libraries-n32
+	bool "libraries-n32"
+	default y
+	help
+		Install the gcc and glibc shared libraries required for N32
+		applications to run.
+

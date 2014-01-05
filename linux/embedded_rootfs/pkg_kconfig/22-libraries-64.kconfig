@@ -1,0 +1,7 @@
+config CONFIG_libraries-64
+	bool "libraries-64"
+	default y
+	help
+		Install the gcc and glibc shared libraries required for N64
+		applications to run.
+

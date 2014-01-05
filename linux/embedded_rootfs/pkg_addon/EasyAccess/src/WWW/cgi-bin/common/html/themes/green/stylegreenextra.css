@@ -1,0 +1,21 @@
+
+.cifsbodyback{background-image: url(/images/backallgreen.png);overflow-x:hidden;}
+.cifsmenuleft{background-color:#Acd376;}
+.cifstop3{BACKGROUND-COLOR:#f5750c;border-top:1px #ffffff solid;}
+.cifstop5{background-color:#e3fea8;border-bottom:1px #a2a2a2 solid;border-left:1px #a2a2a2 solid;border-top:2px #ffffff solid;}
+.cifstop6{background-color:#e3fea8;border-bottom:1px #a2a2a2 solid;border-top:2px #ffffff solid;}
+.toolbarcifs{color:#000000;FONT-FAMILY: tahoma,verdana,"lucida sans", sans-serif, Arial, Helvetica; FONT-SIZE:11px;font-weight:bold;}
+td.darkback{background-color:#ffffff;}
+.other{color:#ffffff;}
+.other2{color:#000000;}
+.mainbackcifs{COLOR:#000000; font-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.onmainbackcifs{COLOR:#000000; background-color:#e3fea8;FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+A.mainbackcifs{COLOR:#000000;FONT-FAMILY: "lucida sans", Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.navigator{color:#2c7c28; cursor:hand; font-FAMILY: tahoma,verdana,"lucida sans",sans-serif, Arial, Helvetica; FONT-SIZE:11px;font-weight:bold;}
+.cifslefttable{BACKGROUND-COLOR:#f5750c;}
+.cifsleftcell{BACKGROUND-COLOR:#ffffff;}
+.cifslefttitle{color:#ffffff;FONT-FAMILY: Verdana, "Lucida Console", Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;FONT-WEIGHT: bold;}
+.disableduplink{color:#6f9f6f; FONT-size:11px;FONT-WEIGHT: bold;FONT-FAMILY:tahoma,Lucida Sans, sans-serif, Arial, Garamond;}
+.demo1{color:#ffffff;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:1px solid; margin:2px;border-top-color:#808790;border-left-color:#808790;border-right-color:#556066;border-bottom-color:#556066;background-color:#e6e2df; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}
+.onhovers{margin:2px;margin-color:#ccbb44;color:#dfbf4f;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:2px solid #dfbf4f;background-color:#e6e2df;cursor:hand; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}}
+.cifsback{background-color:#ffffff;}

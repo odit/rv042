@@ -1,0 +1,1363 @@
+This is ../../../src/ddd/ddd/ddd.info, produced by makeinfo version 4.3
+from ../../../src/ddd/ddd/ddd.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD: (ddd).                     The Data Display Debugger.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 15 January, 2004, of `Debugging with DDD'
+for DDD Version 3.3.11.
+
+Copyright (C) 2004 Universität des Saarlandes
+Lehrstuhl Softwaretechnik
+Postfach 15 11 50
+66041 Saarbrücken
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd.info,  Node: Customizing Help,  Next: Customizing Undo,  Prev: How Customizing Works,  Up: Customizing
+
+Customizing DDD Help
+--------------------
+
+   DDD Help can be customized in various ways.
+
+* Menu:
+
+* Button tips::                 Turning off tips.
+* Tip of the day::              Turning off the tip of the day.
+* Help Helpers::                Helper programs invoked by Help.
+
+
+File: ddd.info,  Node: Button tips,  Next: Tip of the day,  Up: Customizing Help
+
+Button Tips
+...........
+
+   Button tips are helpful for novices, but may be distracting for
+experienced users.  You can turn off button tips via `Edit =>
+Preferences => General => Automatic display of Button Hints => as Popup
+Tips'.
+
+   You can also turn off the hint that is displayed in the status line.
+Just toggle `Edit => Preferences => General => Automatic Display of
+Button Hints => in the Status Line'.
+
+   These are the related DDD resources (*note Customizing::):
+
+ - Resource: buttonTips (class Tips)
+     If `on' (default), enable button tips.
+
+ - Resource: buttonDocs (class Docs)
+     If `on' (default), show button hints in the status line.
+
+
+File: ddd.info,  Node: Tip of the day,  Next: Help Helpers,  Prev: Button tips,  Up: Customizing Help
+
+Tip of the day
+..............
+
+   You can turn off the tip of the day by toggling `Edit => Preferences
+=> Startup => Startup Windows => Tip of the Day'.
+
+   Here is the related DDD resource (*note Customizing::):
+
+ - Resource: startupTips (class StartupTips)
+     If `on' (default), show a tip of the day upon DDD startup.
+
+   *Note Options::, for options to set this resource upon DDD
+invocation.
+
+   The actual tips are controlled by these resources (*note
+Customizing::):
+
+ - Resource: startupTipCount (class StartupTipCount)
+     The number N of the tip of the day to be shown at startup.  See
+     also the `tipN' resources.
+
+ - Resource: tipN (class Tip)
+     The tip of the day numbered N (a string).
+
+
+File: ddd.info,  Node: Help Helpers,  Prev: Tip of the day,  Up: Customizing Help
+
+Help Helpers
+............
+
+   DDD relies on a number of external commands, specified via `Edit =>
+Preferences => Helpers'.
+
+   To uncompress help texts, you can define a `Uncompress' command:
+
+ - Resource: uncompressCommand (class UncompressCommand)
+     The command to uncompress the built-in DDD manual, the DDD
+     license, and the DDD news.  Takes a compressed text from standard
+     input and writes the uncompressed text to standard output.  The
+     default value is `gzip -d -c'; typical values include `zcat' and
+     `gunzip -c'.
+
+   To view WWW pages, you can define a `Web Browser' command:
+
+ - Resource: wwwCommand (class WWWCommand)
+     The command to invoke a WWW browser.  The string `@URL@' is
+     replaced by the URL to open.  Default is to try a running Netscape
+     first (trying `mozilla', then `netscape'), then `$WWWBROWSER',
+     then to invoke a new Netscape process, then to let a running Emacs
+     or XEmacs do the job (via `gnudoit'), then to invoke Mosaic, then
+     to invoke Lynx in an xterm.
+
+     To specify `netscape-6.0' as browser, use the setting:
+
+          Ddd*wwwCommand: \
+               netscape-6.0 -remote 'openURL(@URL@)' \
+            || netscape-6.0 '@URL@'
+
+     This command first tries to connect to a running `netscape-6.0'
+     browser; if this fails, it starts a new `netscape-6.0' process.
+
+   This is the default WWW Page shown by `Help => DDD WWW Page':
+
+ - Resource: wwwPage (class WWWPage)
+     The DDD WWW page.  Value: `http://www.gnu.org/software/ddd/'
+
+
+File: ddd.info,  Node: Customizing Undo,  Next: Customizing Windows,  Prev: Customizing Help,  Up: Customizing
+
+Customizing Undo
+----------------
+
+   DDD Undo can be customized in various ways.
+
+   To set a maximum size for the undo buffer, set `Edit => Preferences
+=> General => Undo Buffer Size'.
+
+   This is related to the `maxUndoSize' resource:
+
+ - Resource: maxUndoSize (class MaxUndoSize)
+     The maximum memory usage (in bytes) of the undo buffer.  Useful for
+     limiting DDD memory usage.  A negative value means to place no
+     limit.  Default is `2000000', or 2000 kBytes.
+
+   You can also limit the number of entries in the undo buffer,
+regardless of size (*note Customizing::):
+
+ - Resource: maxUndoDepth (class MaxUndoDepth)
+     The maximum number of entries in the undo buffer.  This limits the
+     number of actions that can be undone, and the number of states that
+     can be shown in historic mode.  Useful for limiting DDD memory
+     usage.  A negative value (default) means to place no limit.
+
+   To clear the undo buffer at any time, thus reducing memory usage, use
+`Edit => Preferences => General => Clear Undo Buffer'
+
+
+File: ddd.info,  Node: Customizing Windows,  Next: Debugger Settings,  Prev: Customizing Undo,  Up: Customizing
+
+Customizing the DDD Windows
+---------------------------
+
+   You can customize the DDD Windows in various ways.
+
+* Menu:
+
+* Splash Screen::               Turning off the splash screen.
+* Window Layout::               Re-arranging windows.
+* Customizing Fonts::           Using alternate fonts.
+* Toggling Windows::            Turning off windows.
+* Text Fields::                 Popdown histories.
+* Icons::                       Iconifying DDD windows.
+* Adding Buttons::              Create your own button set.
+* More Customizations::
+
+
+File: ddd.info,  Node: Splash Screen,  Next: Window Layout,  Up: Customizing Windows
+
+Splash Screen
+.............
+
+   You can turn off the DDD splash screen shown upon startup.  Just
+select `Edit => Preferences => Startup DDD Splash Screen'.
+
+   The value applies only to the next DDD invocation.
+
+   This setting is related to the following resource:
+
+ - Resource: splashScreen (class SplashScreen)
+     If `on' (default), show a DDD splash screen upon start-up.
+
+   You can also customize the appearance of the splash screen (*note
+Customizing::):
+
+ - Resource: splashScreenColorKey (class ColorKey)
+     The color key to use for the DDD splash screen.  Possible values
+     include:
+
+        * `c' (default) for a color visual,
+
+        * `g' for a multi-level greyscale visual,
+
+        * `g4' for a 4-level greyscale visual, and
+
+        * `m' for a dithered monochrome visual.
+
+        * `best' chooses the best visual available for your display.
+
+     Please note: if DDD runs on a monochrome display, or if DDD was
+     compiled without the XPM library, only the monochrome version
+     (`m') can be shown.
+
+
+File: ddd.info,  Node: Window Layout,  Next: Customizing Fonts,  Prev: Splash Screen,  Up: Customizing Windows
+
+Window Layout
+.............
+
+   By default, DDD stacks commands, source, and data in one single
+top-level window.  To have separate top-level windows for source, data,
+and debugger console, set `Edit => Preferences => Startup => Window
+Layout => Separate Windows'.
+
+   Here are the related DDD resources:
+
+ - Resource: separateDataWindow (class Separate)
+     If `on', the data window and the debugger console are realized in
+     different top-level windows.  If `off' (default), the data window
+     is attached to the debugger console.
+
+ - Resource: separateSourceWindow (class Separate)
+     If `on', the source window and the debugger console are realized in
+     different top-level windows.  If `off' (default), the source window
+     is attached to the debugger console.
+
+   By default, the DDD tool bars are located on top of the window.  If
+you prefer the tool bar being located at the bottom, as in DDD 2.x and
+earlier, set `Edit => Preferences => Startup => Tool Bar Appearance =>
+Bottom'.
+
+   This is related to the `toolbarsAtBottom' resource:
+
+ - Resource: toolbarsAtBottom (class ToolbarsAtBottom)
+     Whether source and data tool bars should be placed above source and
+     data, respectively (`off', default), or below, as in DDD 2.x
+     (`on').
+
+   The bottom setting is only supported for separate tool bars--that is,
+you must either choose separate windows or configure the tool bar to
+have neither images nor captions (*note Customizing the Tool Bar::).
+
+   If you use stacked windows, you can choose whether there should be
+one tool bar or two tool bars.  By default, DDD uses two tool bars if
+you use separate windows and disable captions and images, but you can
+also explicitly change the setting via this resource:
+
+ - Resource: commonToolBar (class ToolBar)
+     Whether the tool bar buttons should be shown in one common tool
+     bar at the top of the common DDD window (`on', default), or
+     whether they should be placed in two separate tool bars, one for
+     data, and one for source operations, as in DDD 2.x (`off').
+
+   You can also change the location of the _status line_ (*note
+Customizing::):
+
+ - Resource: statusAtBottom (class StatusAtBottom)
+     If `on' (default), the status line is placed at the bottom of the
+     DDD source window.  If `off', the status line is placed at the top
+     of the DDD source window (as in DDD 1.x).
+
+   *Note Options::, for options to set these resources upon DDD
+invocation.
+
+
+File: ddd.info,  Node: Customizing Fonts,  Next: Toggling Windows,  Prev: Window Layout,  Up: Customizing Windows
+
+Customizing Fonts
+.................
+
+   You can configure the basic DDD fonts at run-time.  Each font is
+specified using two members:
+
+   * The "font family" is an X font specifications, where the initial
+     `FOUNDRY-' specification may be omitted, as well as any
+     specification after FAMILY.  Thus, a pair `FAMILY-WEIGHT' usually
+     suffices.
+
+   * The "font size" is given as (resolution-independent) 1/10 points.
+
+   To specify fonts, select `Edit => Preferences => Fonts'.
+
+   The `Browse' button opens a font selection program, where you can
+select fonts and attributes interactively.  Clicking `quit' or `select'
+in the font selector causes all non-default values to be transferred to
+the DDD font preferences panel.
+
+   The following fonts can be set using the preferences panel:
+
+`Default Font'
+     The default DDD font to use for labels, menus, and buttons.
+     Default is `helvetica-bold'.
+
+`Variable Width'
+     The variable width DDD font to use for help texts and messages.
+     Default is `helvetica-medium'.
+
+`Fixed Width'
+     The fixed width DDD font to use for source code, the debugger
+     console, text fields, and the execution window.  Default is
+     `lucidatypewriter-medium'.
+
+`Data'
+     The DDD font to use for data displays.  Default is
+     `lucidatypewriter-medium'.
+
+   Changes in this panel will take effect only in the next DDD session.
+To make it effective right now, restart DDD (using `File => Restart
+DDD').
+
+   After having made changes in the panel, DDD will automatically offer
+you to restart itself, such that you can see the changes taking effect.
+
+   The `Reset' button restores the most recently saved preferences.
+
+   Here are the resources related to font specifications:
+
+ - Resource: defaultFont (class Font)
+     The default DDD font to use for labels, menus, buttons, etc.  The
+     font is specified as an X font spec, where the initial FOUNDRY
+     specification may be omitted, as well as any specification after
+     FAMILY.
+
+     Default value is `helvetica-bold'.
+
+     To set the default DDD font to, say, `helvetica medium', insert a
+     line
+
+          Ddd*defaultFont: helvetica-medium
+
+     in your `~/.ddd/init' file.
+
+ - Resource: defaultFontSize (class FontSize)
+     The size of the default DDD font, in 1/10 points.  This resource
+     overrides any font size specification in the `defaultFont' resource
+     (see above).  The default value is `120' for a 12.0 point font.
+
+ - Resource: variableWidthFont (class Font)
+     The variable width DDD font to use for help texts and messages.
+     The font is specified as an X font spec, where the initial FOUNDRY
+     specification may be omitted, as well as any specification after
+     FAMILY.
+
+     Default value is `helvetica-medium-r'.
+
+     To set the variable width DDD font family to, say, `times', insert
+     a line
+
+          Ddd*fixedWidthFont: times-medium
+
+     in your `~/.ddd/init' file.
+
+ - Resource: variableWidthFontSize (class FontSize)
+     The size of the variable width DDD font, in 1/10 points.  This
+     resource overrides any font size specification in the
+     `variableWidthFont' resource (see above).  The default value is
+     `120' for a 12.0 point font.
+
+ - Resource: fixedWidthFont (class Font)
+     The fixed width DDD font to use for source code, the debugger
+     console, text fields, and the execution window.  The font is
+     specified as an X font spec, where the initial FOUNDRY
+     specification may be omitted, as well as any specification after
+     FAMILY.
+
+     Default value is `lucidatypewriter-medium'.
+
+     To set the fixed width DDD font family to, say, `courier', insert
+     a line
+
+          Ddd*fixedWidthFont: courier-medium
+
+     in your `~/.ddd/init' file.
+
+ - Resource: fixedWidthFontSize (class FontSize)
+     The size of the fixed width DDD font, in 1/10 points.  This
+     resource overrides any font size specification in the
+     `fixedWidthFont' resource (see above).  The default value is `120'
+     for a 12.0 point font.
+
+ - Resource: dataFont (class Font)
+     The fixed width DDD font to use data displays.  The font is
+     specified as an X font spec, where the initial FOUNDRY
+     specification may be omitted, as well as any specification after
+     FAMILY.
+
+     Default value is `lucidatypewriter-medium'.
+
+     To set the DDD data font family to, say, `courier', insert a line
+
+          Ddd*dataFont: courier-medium
+
+     in your `~/.ddd/init' file.
+
+ - Resource: dataFontSize (class FontSize)
+     The size of the DDD data font, in 1/10 points.  This resource
+     overrides any font size specification in the `dataFont' resource
+     (see above).  The default value is `120' for a 12.0 point font.
+
+   As all font size resources have the same class (and by default the
+same value), you can easily change the default DDD font size to, say,
+9.0 points by inserting a line
+
+     Ddd*FontSize: 90
+
+in your `~/.ddd/init' file.
+
+   Here's how to specify the command to select fonts:
+
+ - Resource: fontSelectCommand (class FontSelectCommand)
+     A command to select from a list of fonts.  The string `@FONT@' is
+     replaced by the current DDD default font; the string `@TYPE@' is
+     replaced by a symbolic name of the DDD font to edit.  The program
+     must either place the name of the selected font in the `PRIMARY'
+     selection or print the selected font on standard output.  A
+     typical value is:
+          Ddd*fontSelectCommand: xfontsel -print
+
+   *Note Options::, for options to set these resources upon DDD
+invocation.
+
+
+File: ddd.info,  Node: Toggling Windows,  Next: Text Fields,  Prev: Customizing Fonts,  Up: Customizing Windows
+
+Toggling Windows
+................
+
+   In the default stacked window setting, you can turn the individual
+DDD windows on and off by toggling the respective items in the `View'
+menu (*note View Menu::).  When using separate windows (*note Window
+Layout::), you can close the individual windows via `File => Close' or
+by closing them via your window manager.
+
+   Whether windows are opened or closed when starting DDD is controlled
+by the following resources, immediately tied to the `View' menu items:
+
+ - Resource: openDataWindow (class Window)
+     If `off' (default), the data window is closed upon start-up.
+
+ - Resource: openDebuggerConsole (class Window)
+     If `off', the debugger console is closed upon start-up.
+
+ - Resource: openSourceWindow (class Window)
+     If `off', the source window is closed upon start-up.
+
+   *Note Options::, for options to set these resources upon DDD
+invocation.
+
+
+File: ddd.info,  Node: Text Fields,  Next: Icons,  Prev: Toggling Windows,  Up: Customizing Windows
+
+Text Fields
+...........
+
+   The DDD text fields can be customized using the following resources:
+
+ - Resource: popdownHistorySize (class HistorySize)
+     The maximum number of items to display in pop-down value
+     histories.  A value of `0' (default) means an unlimited number of
+     values.
+
+ - Resource: sortPopdownHistory (class SortPopdownHistory)
+     If `on' (default), items in the pop-down value histories are sorted
+     alphabetically.  If `off', most recently used values will appear at
+     the top.
+
+
+File: ddd.info,  Node: Icons,  Next: Adding Buttons,  Prev: Text Fields,  Up: Customizing Windows
+
+Icons
+.....
+
+   If you frequently switch between DDD and other multi-window
+applications, you may like to set `Edit => Preferences => General =>
+Iconify all windows at once'.  This way, all DDD windows are iconified
+and deiconified as a group.
+
+   This is tied to the following resource:
+
+ - Resource: groupIconify (class GroupIconify)
+     If this is `on', (un)iconifying any DDD window causes all other
+     DDD windows to (un)iconify as well.  Default is `off', meaning
+     that each DDD window can be iconified on its own.
+
+   If you want to keep DDD off your desktop during a longer
+computation, you may like to set `Edit => Preferences => General =>
+Uniconify when ready'.  This way, you can iconify DDD while it is busy
+on a command (e.g. running a program); DDD will automatically pop up
+again after becoming ready (e.g. after the debugged program has stopped
+at a breakpoint).  *Note Program Stop::, for a discussion.
+
+   Here is the related resource:
+
+ - Resource: uniconifyWhenReady (class UniconifyWhenReady)
+     If this is `on' (default), the DDD windows are uniconified
+     automatically whenever GDB becomes ready.  This way, you can
+     iconify DDD during some longer operation and have it uniconify
+     itself as soon as the program stops.  Setting this to `off' leaves
+     the DDD windows iconified.
+
+
+File: ddd.info,  Node: Adding Buttons,  Next: More Customizations,  Prev: Icons,  Up: Customizing Windows
+
+Adding Buttons
+..............
+
+   You can extend DDD with new buttons.  *Note Defining Buttons::, for
+details.
+
+
+File: ddd.info,  Node: More Customizations,  Prev: Adding Buttons,  Up: Customizing Windows
+
+More Customizations
+...................
+
+   You can change just about any label, color, keyboard mapping, etc.
+by changing resources from the `Ddd' application defaults file which
+comes with the DDD source distribution.  Here's how it works:
+
+   * Identify the appropriate resource in the `Ddd' file.
+
+   * Copy the resource line to your `~/.ddd/init' file and change it at
+     will.
+
+   *Note Application Defaults::, for details on the application-defaults
+file.
+
+
+File: ddd.info,  Node: Debugger Settings,  Prev: Customizing Windows,  Up: Customizing
+
+Debugger Settings
+-----------------
+
+   For most inferior debuggers, you can change their internal settings
+using `Edit => Settings'.  Using the settings editor, you can determine
+whether C++ names are to be demangled, how many array elements are to
+print, and so on.
+
+   The capabilities of the settings editor depend on the capabilities of
+your inferior debugger.  Clicking on `?' gives an an explanation on the
+specific item; the GDB documentation gives more details.
+
+   Use `Edit => Undo' to undo changes.  Clicking on `Reset' restores
+the most recently saved settings.
+
+   Some debugger settings are insensitive and cannot be changed, because
+doing so would endanger DDD operation.  See the `gdbInitCommands' and
+`dbxInitCommands' resources for details.
+
+   All debugger settings (except source and object paths) are saved with
+DDD options.
+
+
+File: ddd.info,  Node: Navigating,  Next: Stopping,  Prev: Windows,  Up: Top
+
+Navigating through the Code
+***************************
+
+   This chapter discusses how to access code from within DDD.
+
+* Menu:
+
+* Compiling for Debugging::     Always use `-g' to compile.
+* Opening Files::               How to open a program for debugging.
+* Looking up Items::            Searching files and functions.
+* Customizing Source::          Arranging the source window.
+
+
+File: ddd.info,  Node: Compiling for Debugging,  Next: Opening Files,  Up: Navigating
+
+Compiling for Debugging
+=======================
+
+   In order to debug a program effectively, you need to generate
+debugging information when you compile it.  This debugging information
+is stored in the object file; it describes the data type of each
+variable or function and the correspondence between source line numbers
+and addresses in the executable code.(1)
+
+   To request debugging information, specify the `-g' option when you
+run the compiler.
+
+   Many C compilers are unable to handle the `-g' and `-O' options
+together.  Using those compilers, you cannot generate optimized
+executables containing debugging information.
+
+   GCC, the GNU C compiler, supports `-g' with or without `-O', making
+it possible to debug optimized code.  We recommend that you _always_
+use `-g' whenever you compile a program.  You may think your program is
+correct, but there is no sense in pushing your luck.
+
+   When you debug a program compiled with `-g -O', remember that the
+optimizer is rearranging your code; the debugger shows you what is
+really there.  Do not be too surprised when the execution path does not
+exactly match your source file!  An extreme example: if you define a
+variable, but never use it, DDD never sees that variable--because the
+compiler optimizes it out of existence.
+
+   ---------- Footnotes ----------
+
+   (1) If you use DDD to debug Perl, Python or Bash scripts, then this
+section does not apply.
+
+
+File: ddd.info,  Node: Opening Files,  Next: Looking up Items,  Prev: Compiling for Debugging,  Up: Navigating
+
+Opening Files
+=============
+
+   If you did not invoke DDD specifying a program to be debugged, you
+can use the `File' menu to open programs, core dumps and sources.
+
+* Menu:
+
+* Opening Programs::            How to open a program for debugging.
+* Opening Core Dumps::          Analyze a previous crash.
+* Opening Source Files::        Open a source file of the program.
+* Filtering Files::             DDD only lists matching files.
+
+
+File: ddd.info,  Node: Opening Programs,  Next: Opening Core Dumps,  Up: Opening Files
+
+Opening Programs
+----------------
+
+   To open a program to be debugged, select `File => Open Program'.(1)
+Click on `Open' to open the program
+
+   In JDB, select `File => Open Class' instead.  This gives you a list
+of available classes to choose from.
+
+   To re-open a recently debugged program or class, select `File =>
+Open Recent' and choose a program or class from the list.
+
+   If no sources are found, *Note Source Path::, for specifying source
+directories.
+
+   ---------- Footnotes ----------
+
+   (1) With XDB and some DBX variants, the debugged program must be
+specified upon invocation and cannot be changed at run time.
+
+
+File: ddd.info,  Node: Opening Core Dumps,  Next: Opening Source Files,  Prev: Opening Programs,  Up: Opening Files
+
+Opening Core Dumps
+------------------
+
+   If a previous run of the program has crashed and you want to find out
+why, you can have DDD examine its "core dump".(1)
+
+   To open a core dump for the program, select `File => Open Core
+Dump'.  Click on `Open' to open the core dump.
+
+   Before `Open Core Dump', you should first use `File => Open Program'
+to specify the program that generated the core dump and to load its
+symbol table.
+
+   ---------- Footnotes ----------
+
+   (1) JDB, PYDB, Perl, and Bash do not support core dumps.
+
+
+File: ddd.info,  Node: Opening Source Files,  Next: Filtering Files,  Prev: Opening Core Dumps,  Up: Opening Files
+
+Opening Source Files
+--------------------
+
+   To open a source file of the debugged program, select `File => Open
+Source'.
+
+   * Using GDB, this gives you a list of the sources used for compiling
+     your program.
+
+   * Using other inferior debuggers, this gives you a list of accessible
+     source files, which may or may not be related to your program.
+
+   Click on `Open' to open the source file.  *Note Source Path::, if no
+sources are found.
+
+
+File: ddd.info,  Node: Filtering Files,  Prev: Opening Source Files,  Up: Opening Files
+
+Filtering Files
+---------------
+
+   When presenting files to be opened, DDD by default filters files
+when opening execution files, core dumps, or source files, such that the
+selection shows only suitable files.  This requires that DDD opens each
+file, which may take time.  *Note Customizing File Filtering::, if you
+want to turn off this feature.
+
+
+File: ddd.info,  Node: Looking up Items,  Next: Customizing Source,  Prev: Opening Files,  Up: Navigating
+
+Looking up Items
+================
+
+   As soon as the source of the debugged program is available, the
+_source window_ displays its current source text.  (*note Source
+Path::, if a source text cannot be found.)
+
+   In the source window, you can lookup and examine function and
+variable definitions as well as search for arbitrary occurrences in the
+source text.
+
+* Menu:
+
+* Looking up Definitions::      Jump towards a specific item.
+* Textual Search::              Search within the current source.
+* Looking up Previous Locations::  Navigate back and forth.
+* Source Path::                 Make DDD know where to search.
+
+
+File: ddd.info,  Node: Looking up Definitions,  Next: Textual Search,  Up: Looking up Items
+
+Looking up Definitions
+----------------------
+
+   If you wish to lookup a specific function or variable definition
+whose name is visible in the source text, click with _mouse button 1_ on
+the function or variable name.  The name is copied to the argument
+field.  Change the name if desired and click on the `Lookup' button to
+find its definition.
+
+   As a faster alternative, you can simply press _mouse button 3_ on the
+function name and select the `Lookup' item from the source popup menu.
+
+   As an even faster alternative, you can also double-click on a
+function call (an identifier followed by a `(' character) to lookup the
+function definition.
+
+   If a source file is not found, *Note Source Path::, for specifying
+source directories.
+
+
+File: ddd.info,  Node: Textual Search,  Next: Looking up Previous Locations,  Prev: Looking up Definitions,  Up: Looking up Items
+
+Textual Search
+--------------
+
+   If the item you wish to search is visible in the source text, click
+with _mouse button 1_ on it.  The identifier is copied to the argument
+field.  Click on the `Find >>' button to find following occurrences and
+on `Find >> => Find << ()' to find previous occurrences.
+
+   By default, DDD finds only complete words.  To search for arbitrary
+substrings, change the value of the `Source => Find Words Only' option.
+
+
+File: ddd.info,  Node: Looking up Previous Locations,  Next: Source Path,  Prev: Textual Search,  Up: Looking up Items
+
+Looking up Previous Locations
+-----------------------------
+
+   After looking up a location, use `Edit => Undo' (or the `Undo'
+button on the command tool) to go back to the original locations.
+`Edit => Redo' brings you back again to the location you looked for.
+
+
+File: ddd.info,  Node: Source Path,  Prev: Looking up Previous Locations,  Up: Looking up Items
+
+Specifying Source Directories
+-----------------------------
+
+   Executable programs sometimes do not record the directories of the
+source files from which they were compiled, just the names.  Even when
+they do, the directories could be moved between the compilation and your
+debugging session.
+
+   Here's how GDB accesses source files; other inferior debuggers have
+similar methods.
+
+   GDB has a list of directories to search for source files; this is
+called the "source path".  Each time GDB wants a source file, it tries
+all the directories in the list, in the order they are present in the
+list, until it finds a file with the desired name.  Note that the
+executable search path is _not_ used for this purpose.  Neither is the
+current working directory, unless it happens to be in the source path.
+
+   If GDB cannot find a source file in the source path, and the object
+program records a directory, GDB tries that directory too.  If the
+source path is empty, and there is no record of the compilation
+directory, GDB looks in the current directory as a last resort.
+
+   To specify a source path for your inferior debugger, use `Edit =>
+Debugger Settings' (*note Debugger Settings:: and search for
+appropriate entries (in GDB, this is `Search path for source files').
+
+   If `Debugger Settings' has no suitable entry, you can also specify a
+source path for the inferior debugger when invoking DDD.  *Note
+Inferior Debugger Options::, for details.
+
+   When using JDB, you can set the `CLASSPATH' environment variable to
+specify directories where JDB (and DDD) should search for classes.
+
+   If DDD does not find a source file for any reason, check the
+following issues:
+
+   * In order to debug a program effectively, you need to generate
+     debugging information when you compile it.  Without debugging
+     information, the inferior debugger will be unable to locate the
+     source code. To request debugging information, specify the `-g'
+     option when you run the compiler.  *Note Compiling for
+     Debugging::, for details.
+
+   * You may need to tell your inferior debugger where the source code
+     files are.  *Note Source Path::, for details.
+
+     Using GDB, you can also create a local `.gdbinit' file that
+     contains a line `directory PATH'.  Here, PATH is a colon-separated
+     list of source paths.
+
+
+File: ddd.info,  Node: Customizing Source,  Prev: Looking up Items,  Up: Navigating
+
+Customizing the Source Window
+=============================
+
+   The source window can be customized in a number of ways, most of them
+accessed via `Edit => Preferences => Source'.
+
+* Menu:
+
+* Customizing Glyphs::
+* Customizing Searching::
+* Customizing Source Appearance::
+* Customizing Source Scrolling::
+* Customizing Source Lookup::
+* Customizing File Filtering::
+
+
+File: ddd.info,  Node: Customizing Glyphs,  Next: Customizing Searching,  Up: Customizing Source
+
+Customizing Glyphs
+------------------
+
+   In the source text, the current execution position and breakpoints
+are indicated by symbols ("glyphs").  As an alternative, DDD can also
+indicate these positions using text characters.  If you wish to disable
+glyphs, set `Edit => Preferences => Source => Show Position and
+Breakpoints => as Text Characters' option.  This also makes DDD run
+slightly faster, especially when scrolling.
+
+   This setting is tied to this resource:
+
+ - Resource: displayGlyphs (class DisplayGlyphs)
+     If this is `on', the current execution position and breakpoints are
+     displayed as glyphs; otherwise, they are shown through characters
+     in the text.  The default is `on'.  *Note Options::, for the
+     `--glyphs' and `--no-glyphs' options.
+
+   You can further control glyphs using the following resources:
+
+ - Resource: cacheGlyphImages (class CacheMachineCode)
+     Whether to cache (share) glyph images (`on') or not (`off').
+     Caching glyph images requires less X resources, but has been
+     reported to fail with OSF/Motif 2.1 on XFree86 servers.  Default
+     is `off' for OSF/Motif 2.1 or later on GNU/Linux machines, and `on'
+     otherwise.
+
+ - Resource: glyphUpdateDelay (class GlyphUpdateDelay)
+     A delay (in ms) that says how much time to wait before updating
+     glyphs while scrolling the source text.  A small value results in
+     glyphs being scrolled with the text, a large value disables glyphs
+     while scrolling and makes scrolling faster.  Default: `10'.
+
+ - Resource: maxGlyphs (class MaxGlyphs)
+     The maximum number of glyphs to be displayed (default: `10').
+     Raising this value causes more glyphs to be allocated, possibly
+     wasting resources that are never needed.
+
+
+File: ddd.info,  Node: Customizing Searching,  Next: Customizing Source Appearance,  Prev: Customizing Glyphs,  Up: Customizing Source
+
+Customizing Searching
+---------------------
+
+   Searching in the source text (*note Textual Search::) is controlled
+by these resources, changed via the `Source' menu:
+
+ - Resource: findCaseSensitive (class FindCaseSensitive)
+     If this is `on' (default), the `Find' commands are case-sensitive.
+     Otherwise, occurrences are found regardless of case.
+
+ - Resource: findWordsOnly (class FindWordsOnly)
+     If this is `on' (default), the `Find' commands find complete words
+     only.  Otherwise, arbitrary occurrences are found.
+
+
+File: ddd.info,  Node: Customizing Source Appearance,  Next: Customizing Source Scrolling,  Prev: Customizing Searching,  Up: Customizing Source
+
+Customizing Source Appearance
+-----------------------------
+
+   You can have DDD show line numbers within the source window.  Use
+`Edit => Preferences => Source => Display Source Line Numbers'.
+
+ - Resource: displayLineNumbers (class DisplayLineNumbers)
+     If this is `on', lines in the source text are prefixed with their
+     respective line number.  The default is `off'.
+
+   You can instruct DDD to indent the source code, leaving more room
+for breakpoints and execution glyphs.  This is done using the `Edit =>
+Preferences => Source => Source indentation' slider.  The default value
+is `0' for no indentation at all.
+
+ - Resource: indentSource (class Indent)
+     The number of columns to indent the source code, such that there is
+     enough place to display breakpoint locations.  Default: `0'.
+
+   By default, DDD uses a minimum indentation for script languages.
+
+ - Resource: indentScript (class Indent)
+     The minimum indentation for script languages, such as Perl,
+     Python, and Bash.  Default: `4'.
+
+   The maximum width of line numbers is controlled by this resource.
+
+ - Resource: lineNumberWidth (class LineNumberWidth)
+     The number of columns to use for line numbers (if displaying line
+     numbers is enabled).  Line numbers wider than this value extend
+     into the breakpoint space.  Default: `4'.
+
+   If your source code uses a tab width different from `8' (the
+default), you can set an alternate width using the `Edit => Preferences
+=> Source => Tab width' slider.
+
+ - Resource: tabWidth (class TabWidth)
+     The tab width used in the source window (default: `8')
+
+
+File: ddd.info,  Node: Customizing Source Scrolling,  Next: Customizing Source Lookup,  Prev: Customizing Source Appearance,  Up: Customizing Source
+
+Customizing Source Scrolling
+----------------------------
+
+   These resources control when the source window is scrolled:
+
+ - Resource: linesAboveCursor (class LinesAboveCursor)
+     The minimum number of lines to show before the current location.
+     Default is `2'.
+
+ - Resource: linesBelowCursor (class LinesBelowCursor)
+     The minimum number of lines to show after the current location.
+     Default is `3'.
+
+
+File: ddd.info,  Node: Customizing Source Lookup,  Next: Customizing File Filtering,  Prev: Customizing Source Scrolling,  Up: Customizing Source
+
+Customizing Source Lookup
+-------------------------
+
+   Some DBX and XDB variants do not properly handle paths in source file
+specifications.  If you want the inferior debugger to refer to source
+locations by source base names only, unset the `Edit => Preferences =>
+Source => Refer to Program Sources by full path name' option.
+
+   This is related to the following resource:
+
+ - Resource: useSourcePath (class UseSourcePath)
+     If this is `off' (default), the inferior debugger refers to source
+     code locations only by their base names.  If this is `on'
+     (default), DDD uses the full source code paths.
+
+   By default, DDD caches source files in memory.  This is convenient
+for remote debugging, since remote file access may be slow.  If you
+want to reduce memory usage, unset the `Edit => Preferences => Source
+=> Cache source files' option.
+
+   This is related to the following resource:
+
+ - Resource: cacheSourceFiles (class CacheSourceFiles)
+     Whether to cache source files (`on', default) or not (`off').
+     Caching source files requires more memory, but makes DDD run
+     faster.
+
+
+File: ddd.info,  Node: Customizing File Filtering,  Prev: Customizing Source Lookup,  Up: Customizing Source
+
+Customizing File Filtering
+--------------------------
+
+   You can control whether DDD should filter files to be opened.
+
+ - Resource: filterFiles (class FilterFiles)
+     If this is `on' (default), DDD filters files when opening
+     execution files, core dumps, or source files, such that the
+     selection shows only suitable files.  This requires that DDD opens
+     each file, which may take time.  If this is `off', DDD always
+     presents all available files.
+
+
+File: ddd.info,  Node: Stopping,  Next: Running,  Prev: Navigating,  Up: Top
+
+Stopping the Program
+********************
+
+   The principal purposes of using a debugger are so that you can stop
+your program before it terminates; or so that, if your program runs into
+trouble, you can investigate and find out why.
+
+   Inside DDD, your program may stop for any of several reasons, such
+as a signal, a breakpoint, or reaching a new line after a DDD command
+such as `Step'.  You may then examine and change variables, set new
+breakpoints or remove old ones, and then continue execution.
+
+   The inferior debuggers supported by DDD support two mechanisms for
+stopping a program upon specific events:
+
+   * A "breakpoint" makes your program stop whenever a certain point in
+     the program is reached.  For each breakpoint, you can add
+     conditions to control in finer detail whether your program stops.
+     Typically, breakpoints are set before running the program.
+
+   * A "watchpoint" is a special breakpoint that stops your program when
+     the value of an expression changes.
+
+* Menu:
+
+* Breakpoints::                 Stop at a certain point.
+* Watchpoints::                 Stop at a certain condition.
+* Interrupting::                Stop manually.
+* Stopping X Programs::         Take care of grabbed pointers!
+
+
+File: ddd.info,  Node: Breakpoints,  Next: Watchpoints,  Up: Stopping
+
+Breakpoints
+===========
+
+* Menu:
+
+* Setting Breakpoints::
+* Deleting Breakpoints::
+* Disabling Breakpoints::
+* Temporary Breakpoints::
+* Editing Breakpoint Properties::
+* Breakpoint Conditions::
+* Breakpoint Ignore Counts::
+* Breakpoint Commands::
+* Moving and Copying Breakpoints::
+* Looking up Breakpoints::
+* Editing all Breakpoints::
+* Hardware-Assisted Breakpoints::
+
+
+File: ddd.info,  Node: Setting Breakpoints,  Next: Deleting Breakpoints,  Up: Breakpoints
+
+Setting Breakpoints
+-------------------
+
+   You can set breakpoints by location or by name.
+
+Setting Breakpoints by Location
+...............................
+
+   Breakpoints are set at a specific location in the program.
+
+   If the source line is visible, click with _mouse button 1_ on the
+left of the source line and then on the `Break' button.
+
+   As a faster alternative, you can simply press _mouse button 3_ on
+the left of the source line and select the `Set Breakpoint' item from
+the line popup menu.
+
+   As an even faster alternative, you can simply double-click on the
+left of the source line to set a breakpoint.
+
+   As yet another alternative, you can select `Source => Breakpoints'.
+Click on the `Break' button and enter the location.
+
+   (If you find this number of alternatives confusing, be aware that
+DDD users fall into three categories, which must all be supported.
+_Novice users_ explore DDD and may prefer to use one single mouse
+button.  _Advanced users_ know how to use shortcuts and prefer popup
+menus.  _Experienced users_ prefer the command line interface.)
+
+   Breakpoints are indicated by a plain stop sign, or as `#N', where N
+is the breakpoint number.  A greyed out stop sign (or `_N_') indicates
+a disabled breakpoint.  A stop sign with a question mark (or `?N?')
+indicates a conditional breakpoint or a breakpoint with an ignore count
+set.
+
+   If you set a breakpoint by mistake, use `Edit => Undo' to delete it
+again.
+
+Setting Breakpoints by Name
+...........................
+
+   If the function name is visible, click with _mouse button 1_ on the
+function name.  The function name is then copied to the argument field.
+Click on the `Break' button to set a breakpoint there.
+
+   As a shorter alternative, you can simply press _mouse button 3_ on
+the function name and select the `Break at' item from the popup menu.
+
+   As yet another alternative, you can click on `Break...' from the
+Breakpoint editor (invoked through `Source => Breakpoints') and enter
+the function name.
+
+Setting Regexp Breakpoints
+..........................
+
+   Using GDB, you can also set a breakpoint on all functions that match
+a given string.  `Break => Set Breakpoints at Regexp ()' sets a
+breakpoint on all functions whose name matches the _regular expression_
+given in `()'.  Here are some examples:
+
+   * To set a breakpoint on every function that starts with `Xm', set
+     `()' to `^Xm'.
+
+   * To set a breakpoint on every member of class `Date', set `()' to
+     `^Date::'.
+
+   * To set a breakpoint on every function whose name contains `_fun',
+     set `()' to `_fun'.
+
+   * To set a breakpoint on every function that ends in `_test', set
+     `()' to `_test$'.
+
+
+File: ddd.info,  Node: Deleting Breakpoints,  Next: Disabling Breakpoints,  Prev: Setting Breakpoints,  Up: Breakpoints
+
+Deleting Breakpoints
+--------------------
+
+   To delete a visible breakpoint, click with _mouse button 1_ on the
+breakpoint.  The breakpoint location is copied to the argument field.
+Click on the `Clear' button to delete all breakpoints there.
+
+   If the function name is visible, click with _mouse button 1_ on the
+function name.  The function name is copied to the argument field.
+Click on the `Clear' button to clear all breakpoints there.
+
+   As a faster alternative, you can simply press _mouse button 3_ on
+the breakpoint and select the `Delete Breakpoint' item from the popup
+menu.
+
+   As yet another alternative, you can select the breakpoint and click
+on `Delete' in the Breakpoint editor (invoked through `Source =>
+Breakpoints').
+
+   As an even faster alternative, you can simply double-click on the
+breakpoint while holding <Ctrl>.
+
+
+File: ddd.info,  Node: Disabling Breakpoints,  Next: Temporary Breakpoints,  Prev: Deleting Breakpoints,  Up: Breakpoints
+
+Disabling Breakpoints
+---------------------
+
+   Rather than deleting a breakpoint or watchpoint, you might prefer to
+"disable" it.  This makes the breakpoint inoperative as if it had been
+deleted, but remembers the information on the breakpoint so that you
+can "enable" it again later.(1)
+
+   To disable a breakpoint, press _mouse button 3_ on the breakpoint
+symbol and select the `Disable Breakpoint' item from the breakpoint
+popup menu.  To enable it again, select `Enable Breakpoint'.
+
+   As an alternative, you can select the breakpoint and click on
+`Disable' or `Enable' in the Breakpoint editor (invoked through `Source
+=> Breakpoints'.
+
+   Disabled breakpoints are indicated by a grey stop sign, or `_N_',
+where N is the breakpoint number.
+
+   The `Disable Breakpoint' item is also accessible via the `Clear'
+button.  Just press and hold _mouse button 1_ on the button to get a
+popup menu.
+
+   ---------- Footnotes ----------
+
+   (1) JDB does not support breakpoint disabling.
+
+
+File: ddd.info,  Node: Temporary Breakpoints,  Next: Editing Breakpoint Properties,  Prev: Disabling Breakpoints,  Up: Breakpoints
+
+Temporary Breakpoints
+---------------------
+
+   A "temporary breakpoint" is immediately deleted as soon as it is
+reached.(1)
+
+   To set a temporary breakpoint, press _mouse button 3_ on the left of
+the source line and select the `Set Temporary Breakpoint' item from the
+popup menu.
+
+   As a faster alternative, you can simply double-click on the left of
+the source line while holding <Ctrl>.
+
+   Temporary breakpoints are convenient to make the program continue up
+to a specific location: just set the temporary breakpoint at this
+location and continue execution.
+
+   The `Continue Until Here' item from the popup menu sets a temporary
+breakpoint on the left of the source line and immediately continues
+execution.  Execution stops when the temporary breakpoint is reached.
+
+   The `Set Temporary Breakpoint' and `Continue Until Here' items are
+also accessible via the `Break' button.  Just press and hold _mouse
+button 1_ on the button to get a popup menu.
+
+   ---------- Footnotes ----------
+
+   (1) JDB does not support temporary breakpoints.
+
+
+File: ddd.info,  Node: Editing Breakpoint Properties,  Next: Breakpoint Conditions,  Prev: Temporary Breakpoints,  Up: Breakpoints
+
+Editing Breakpoint Properties
+-----------------------------
+
+   You can change all properties of a breakpoint by pressing _mouse
+button 3_ on the breakpoint symbol and select `Properties' from the
+breakpoint popup menu.  This will pop up a dialog showing the current
+properties of the selected breakpoint.
+
+   As an even faster alternative, you can simply double-click on the
+breakpoint.
+
+   * Click on `Lookup' to move the cursor to the breakpoint's location.
+
+   * Click on `Enable' to enable the breakpoint.
+
+   * Click on `Disable' to disable the breakpoint.
+
+   * Click on `Temp' to make the breakpoint temporary.(1)
+
+   * Click on `Delete' to delete the breakpoint.
+
+   ---------- Footnotes ----------
+
+   (1) GDB has no way to make a temporary breakpoint non-temporary
+again.
+
+
+File: ddd.info,  Node: Breakpoint Conditions,  Next: Breakpoint Ignore Counts,  Prev: Editing Breakpoint Properties,  Up: Breakpoints
+
+Breakpoint Conditions
+---------------------
+
+   The simplest sort of breakpoint breaks every time your program
+reaches a specified place.  You can also specify a "condition" for a
+breakpoint.  A condition is just a Boolean expression in your
+programming language.  A breakpoint with a condition evaluates the
+expression each time your program reaches it, and your program stops
+only if the condition is _true_.
+
+   This is the converse of using assertions for program validation; in
+that situation, you want to stop when the assertion is violated-that is,
+when the condition is false.  In C, if you want to test an assertion
+expressed by the condition ASSERTION, you should set the condition
+`!ASSERTION' on the appropriate breakpoint.
+
+   Break conditions can have side effects, and may even call functions
+in your program.  This can be useful, for example, to activate functions
+that log program progress, or to use your own print functions to format
+special data structures. The effects are completely predictable unless
+there is another enabled breakpoint at the same address.  (In that case,
+DDD might see the other breakpoint first and stop your program without
+checking the condition of this one.)
+
+   Note that breakpoint commands are usually more convenient and
+flexible for the purpose of performing side effects when a breakpoint
+is reached.  *Note Breakpoint Commands::, for details.
+
+
+File: ddd.info,  Node: Breakpoint Ignore Counts,  Next: Breakpoint Commands,  Prev: Breakpoint Conditions,  Up: Breakpoints
+
+Breakpoint Ignore Counts
+------------------------
+
+   A special case of a breakpoint condition is to stop only when the
+breakpoint has been reached a certain number of times.  This is so
+useful that there is a special way to do it, using the "ignore count"
+of the breakpoint.  Every breakpoint has an ignore count, which is an
+integer.  Most of the time, the ignore count is zero, and therefore has
+no effect.  But if your program reaches a breakpoint whose ignore count
+is positive, then instead of stopping, it just decrements the ignore
+count by one and continues.  As a result, if the ignore count value is
+N, the breakpoint does not stop the next N times your program reaches
+it.
+
+   In the field `Ignore Count' of the `Breakpoint Properties' panel,
+you can specify the breakpoint ignore count.(1)
+
+   If a breakpoint has a positive ignore count and a condition, the
+condition is not checked.  Once the ignore count reaches zero, DDD
+resumes checking the condition.
+
+   ---------- Footnotes ----------
+
+   (1) JDB, Perl and some DBX variants do not support breakpoint ignore
+counts.
+
+
+File: ddd.info,  Node: Breakpoint Commands,  Next: Moving and Copying Breakpoints,  Prev: Breakpoint Ignore Counts,  Up: Breakpoints
+
+Breakpoint Commands
+-------------------
+
+   You can give any breakpoint (or watchpoint) a series of DDD commands
+to execute when your program stops due to that breakpoint.  For
+example, you might want to print the values of certain expressions, or
+enable other breakpoints.(1)
+
+   Using the `Commands' buttons of the `Breakpoint Properties' panel,
+you can edit commands to be executed when the breakpoint is hit.
+
+   To edit breakpoint commands, click on `Edit >>' and enter the
+commands in the commands editor.  When done with editing, click on
+`Edit <<' to close the commands editor.
+
+   Using GDB, you can also "record" a command sequence to be executed.
+To record a command sequence, follow these steps:
+
+  1. Click on `Record' to begin the recording of the breakpoint
+     commands.
+
+  2. Now interact with DDD.  While recording, DDD does not execute
+     commands, but simply records them to be executed when the
+     breakpoint is hit.  The recorded debugger commands are shown in the
+     debugger console.
+
+  3. To stop the recording, click on `End' or enter `end' at the GDB
+     prompt.  To "cancel" the recording, click on `Interrupt' or press
+     <ESC>.
+
+  4. You can edit the breakpoint commands just recorded using `Edit >>'.
+
+   ---------- Footnotes ----------
+
+   (1) JDB, PYDB, and some DBX variants do not support breakpoint
+commands.
+

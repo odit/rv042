@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+var wWizard = null;
+function openWizard(n)
+{
+	if (n==1)
+	{
+		if (wWizard!=null) closeTable(wWizard);
+	    		wWizard=window.open('wizard.htm', '','location=yes, menubar=no, scrollbars=no , width=500, height=500');
+	}
+	else if (n==2)	
+	{
+		if (wWizard!=null) closeTable(wWizard);
+	    		wWizard=window.open('wizard.htm', '','location=yes, menubar=no, scrollbars=no , width=500, height=500');
+	}
+}
+function chSubmit(F)
+{
+	if(F.BonjourSetting.checked)
+		F.BonjourEnable.value=1;
+	else
+		F.BonjourEnable.value=0;
+	F.log_ch.value=1;
+	F.submitStatus.value=1;
+	F.submit();
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.formBonjour);";
+var Cancellink = ""; 
+var helplink ='help_bonjour.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width = 70;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintBonjourConfig(0);
+	//PrintEnableDefaultService(0);
+	PrintEndContent();
+}
+
+function PrintBonjourConfig(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Setuptable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td valign="top" width="'+head_width+'">');
+	document.write('Enable&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td style="text-align:justify">');
+	document.write('<input type=hidden name="BonjourEnable" value=\'0\'>');
+	document.write('<input type="hidden" id="BonjourSave" name="BonjourSave" value=\'<!--#nk_get CheckboxSave="BonjourEnable"-->\'>');
+	document.write('<input type="checkbox" name="BonjourSetting" id="BonjourSetting" onClick="" <!--#nk_get CheckboxStatus="BonjourEnable"-->>');
+	document.write('</td>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 1);
+}
+function Service_List(ServiceData)
+{
+	var list="";
+	var items="";
+	var icheck="";
+	var idisable="";
+	list=ServiceData.split("@");
+	for(var i=0;i<(list.length-1);i++)
+	{
+		items=list[i].split(";");
+			document.write('<tr>');
+		document.write('<td valign="top" width="'+head_width+'">');
+		document.write(items[0]+'&nbsp;:&nbsp;');
+		document.write('</td>');
+		document.write('<td style="text-align:justify">');
+		if(items[1]==1)
+			icheck="checked";
+		else
+			icheck="";
+		idisable="true";
+		document.write('<input type="checkbox" name="BonjourService_1" onClick="" '+icheck+' disabled="'+idisable+'">');
+		document.write('</td>');
+		document.write('</tr>');
+	}
+}
+function PrintEnableDefaultService(hasUnderLine)
+{
+	PrintBeginBlock(1, "Default Service");
+	document.write('<table class="Setuptable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');
+	Service_List(document.formBonjour.ServiceList.value);
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <form name="formdualwan" method="post" action="">
+      <input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+    </form>
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 9);		// Set Selected Node
+   	  if (document.formdualwan.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formBonjour" method="post" action="bonjour.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="ServiceList" value='<!--#nk_get BonjourServiceList=""-->'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="bonjour.htm"-->
+<!--#nk_get BonjourUpdate=""-->

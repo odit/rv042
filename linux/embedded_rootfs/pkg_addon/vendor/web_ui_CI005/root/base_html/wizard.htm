@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+}
+function Leavefunction()
+{
+	chLeave();
+}
+var wWizard = null;
+function openWizard(n)
+{
+	if (n==1)
+	{
+		if (wWizard!=null) closeTable(wWizard);
+		{
+			if (MaxWanPortNumber > 2)
+	    			wWizard=window.open('wizard_basic_multi.htm', '','location=yes, menubar=no, scrollbars=no , width=750, height=500');
+			else	
+	    			wWizard=window.open('wizard_basic_dual.htm', '','location=yes, menubar=no, scrollbars=no , width=750, height=500');
+		}		
+	}
+	else if (n==2)	
+	{
+		if (wWizard!=null) closeTable(wWizard);
+	    		wWizard=window.open('wizard_policy.htm', '','location=yes, menubar=no, scrollbars=no , width=750, height=500');
+	}
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var helplink ='help_wizard.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width = 222;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintBasicSetup(1);
+	PrintAccessRuleSetup(0);
+	PrintEndContent();
+}
+
+function PrintBasicSetup(hasUnderLine)
+{
+	PrintBeginBlock(1, "Basic Setup");
+	document.write('<table class="Infotable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td valign="top" width="'+head_width+'">');
+	document.write('Launch "Basic Setup" Wizard&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td style="text-align:justify">');
+	document.write('To help you quickly setup the router to access internet, you may launch the Basic setup wizard. ');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td colspan="2">');
+	PrintSTButton("Basic", "Launch Now", "openWizard(1)");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 1);
+}
+
+function PrintAccessRuleSetup(hasUnderLine)
+{
+	PrintBeginBlock(1, "Access Rule Setup");
+	document.write('<table class="Infotable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td valign="top" width="'+head_width+'">');
+	document.write('Launch "Access Rule Setup" Wizard&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td style="text-align:justify">');
+	document.write('To help you easily setup the security policy for router, you may launch the Access Rule setup wizard. ');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td colspan="2">');
+	PrintSTButton("AccessRule", "Launch Now", "openWizard(2)");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 9, 0);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="form_name" method="post" action="">
+	<input type="hidden" name="submitStatus" value='0'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

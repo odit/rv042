@@ -1,0 +1,2797 @@
+This is libc.info, produced by makeinfo version 4.3 from libc.texinfo.
+
+INFO-DIR-SECTION GNU libraries
+START-INFO-DIR-ENTRY
+* Libc: (libc).                 C library.
+END-INFO-DIR-ENTRY
+
+INFO-DIR-SECTION GNU C library functions and macros
+START-INFO-DIR-ENTRY
+* ALTWERASE: (libc)Local Modes.
+* ARGP_ERR_UNKNOWN: (libc)Argp Parser Functions.
+* ARG_MAX: (libc)General Limits.
+* BC_BASE_MAX: (libc)Utility Limits.
+* BC_DIM_MAX: (libc)Utility Limits.
+* BC_SCALE_MAX: (libc)Utility Limits.
+* BC_STRING_MAX: (libc)Utility Limits.
+* BRKINT: (libc)Input Modes.
+* BUFSIZ: (libc)Controlling Buffering.
+* CCTS_OFLOW: (libc)Control Modes.
+* CHILD_MAX: (libc)General Limits.
+* CIGNORE: (libc)Control Modes.
+* CLK_TCK: (libc)CPU Time.
+* CLOCAL: (libc)Control Modes.
+* CLOCKS_PER_SEC: (libc)CPU Time.
+* COLL_WEIGHTS_MAX: (libc)Utility Limits.
+* CPU_CLR: (libc)CPU Affinity.
+* CPU_ISSET: (libc)CPU Affinity.
+* CPU_SET: (libc)CPU Affinity.
+* CPU_SETSIZE: (libc)CPU Affinity.
+* CPU_ZERO: (libc)CPU Affinity.
+* CREAD: (libc)Control Modes.
+* CRTS_IFLOW: (libc)Control Modes.
+* CS5: (libc)Control Modes.
+* CS6: (libc)Control Modes.
+* CS7: (libc)Control Modes.
+* CS8: (libc)Control Modes.
+* CSIZE: (libc)Control Modes.
+* CSTOPB: (libc)Control Modes.
+* DES_FAILED: (libc)DES Encryption.
+* DTTOIF: (libc)Directory Entries.
+* E2BIG: (libc)Error Codes.
+* EACCES: (libc)Error Codes.
+* EADDRINUSE: (libc)Error Codes.
+* EADDRNOTAVAIL: (libc)Error Codes.
+* EADV: (libc)Error Codes.
+* EAFNOSUPPORT: (libc)Error Codes.
+* EAGAIN: (libc)Error Codes.
+* EALREADY: (libc)Error Codes.
+* EAUTH: (libc)Error Codes.
+* EBACKGROUND: (libc)Error Codes.
+* EBADE: (libc)Error Codes.
+* EBADF: (libc)Error Codes.
+* EBADFD: (libc)Error Codes.
+* EBADMSG: (libc)Error Codes.
+* EBADR: (libc)Error Codes.
+* EBADRPC: (libc)Error Codes.
+* EBADRQC: (libc)Error Codes.
+* EBADSLT: (libc)Error Codes.
+* EBFONT: (libc)Error Codes.
+* EBUSY: (libc)Error Codes.
+* ECANCELED: (libc)Error Codes.
+* ECHILD: (libc)Error Codes.
+* ECHO: (libc)Local Modes.
+* ECHOCTL: (libc)Local Modes.
+* ECHOE: (libc)Local Modes.
+* ECHOK: (libc)Local Modes.
+* ECHOKE: (libc)Local Modes.
+* ECHONL: (libc)Local Modes.
+* ECHOPRT: (libc)Local Modes.
+* ECHRNG: (libc)Error Codes.
+* ECOMM: (libc)Error Codes.
+* ECONNABORTED: (libc)Error Codes.
+* ECONNREFUSED: (libc)Error Codes.
+* ECONNRESET: (libc)Error Codes.
+* ED: (libc)Error Codes.
+* EDEADLK: (libc)Error Codes.
+* EDEADLOCK: (libc)Error Codes.
+* EDESTADDRREQ: (libc)Error Codes.
+* EDIED: (libc)Error Codes.
+* EDOM: (libc)Error Codes.
+* EDOTDOT: (libc)Error Codes.
+* EDQUOT: (libc)Error Codes.
+* EEXIST: (libc)Error Codes.
+* EFAULT: (libc)Error Codes.
+* EFBIG: (libc)Error Codes.
+* EFTYPE: (libc)Error Codes.
+* EGRATUITOUS: (libc)Error Codes.
+* EGREGIOUS: (libc)Error Codes.
+* EHOSTDOWN: (libc)Error Codes.
+* EHOSTUNREACH: (libc)Error Codes.
+* EIDRM: (libc)Error Codes.
+* EIEIO: (libc)Error Codes.
+* EILSEQ: (libc)Error Codes.
+* EINPROGRESS: (libc)Error Codes.
+* EINTR: (libc)Error Codes.
+* EINVAL: (libc)Error Codes.
+* EIO: (libc)Error Codes.
+* EISCONN: (libc)Error Codes.
+* EISDIR: (libc)Error Codes.
+* EISNAM: (libc)Error Codes.
+* EKEYEXPIRED: (libc)Error Codes.
+* EKEYREJECTED: (libc)Error Codes.
+* EKEYREVOKED: (libc)Error Codes.
+* EL2HLT: (libc)Error Codes.
+* EL2NSYNC: (libc)Error Codes.
+* EL3HLT: (libc)Error Codes.
+* EL3RST: (libc)Error Codes.
+* ELIBACC: (libc)Error Codes.
+* ELIBBAD: (libc)Error Codes.
+* ELIBEXEC: (libc)Error Codes.
+* ELIBMAX: (libc)Error Codes.
+* ELIBSCN: (libc)Error Codes.
+* ELNRNG: (libc)Error Codes.
+* ELOOP: (libc)Error Codes.
+* EMEDIUMTYPE: (libc)Error Codes.
+* EMFILE: (libc)Error Codes.
+* EMLINK: (libc)Error Codes.
+* EMSGSIZE: (libc)Error Codes.
+* EMULTIHOP: (libc)Error Codes.
+* ENAMETOOLONG: (libc)Error Codes.
+* ENAVAIL: (libc)Error Codes.
+* ENEEDAUTH: (libc)Error Codes.
+* ENETDOWN: (libc)Error Codes.
+* ENETRESET: (libc)Error Codes.
+* ENETUNREACH: (libc)Error Codes.
+* ENFILE: (libc)Error Codes.
+* ENOANO: (libc)Error Codes.
+* ENOBUFS: (libc)Error Codes.
+* ENOCSI: (libc)Error Codes.
+* ENODATA: (libc)Error Codes.
+* ENODEV: (libc)Error Codes.
+* ENOENT: (libc)Error Codes.
+* ENOEXEC: (libc)Error Codes.
+* ENOKEY: (libc)Error Codes.
+* ENOLCK: (libc)Error Codes.
+* ENOLINK: (libc)Error Codes.
+* ENOMEDIUM: (libc)Error Codes.
+* ENOMEM: (libc)Error Codes.
+* ENOMSG: (libc)Error Codes.
+* ENONET: (libc)Error Codes.
+* ENOPKG: (libc)Error Codes.
+* ENOPROTOOPT: (libc)Error Codes.
+* ENOSPC: (libc)Error Codes.
+* ENOSR: (libc)Error Codes.
+* ENOSTR: (libc)Error Codes.
+* ENOSYS: (libc)Error Codes.
+* ENOTBLK: (libc)Error Codes.
+* ENOTCONN: (libc)Error Codes.
+* ENOTDIR: (libc)Error Codes.
+* ENOTEMPTY: (libc)Error Codes.
+* ENOTNAM: (libc)Error Codes.
+* ENOTRECOVERABLE: (libc)Error Codes.
+* ENOTSOCK: (libc)Error Codes.
+* ENOTSUP: (libc)Error Codes.
+* ENOTTY: (libc)Error Codes.
+* ENOTUNIQ: (libc)Error Codes.
+* ENXIO: (libc)Error Codes.
+* EOF: (libc)EOF and Errors.
+* EOPNOTSUPP: (libc)Error Codes.
+* EOVERFLOW: (libc)Error Codes.
+* EOWNERDEAD: (libc)Error Codes.
+* EPERM: (libc)Error Codes.
+* EPFNOSUPPORT: (libc)Error Codes.
+* EPIPE: (libc)Error Codes.
+* EPROCLIM: (libc)Error Codes.
+* EPROCUNAVAIL: (libc)Error Codes.
+* EPROGMISMATCH: (libc)Error Codes.
+* EPROGUNAVAIL: (libc)Error Codes.
+* EPROTO: (libc)Error Codes.
+* EPROTONOSUPPORT: (libc)Error Codes.
+* EPROTOTYPE: (libc)Error Codes.
+* EQUIV_CLASS_MAX: (libc)Utility Limits.
+* ERANGE: (libc)Error Codes.
+* EREMCHG: (libc)Error Codes.
+* EREMOTE: (libc)Error Codes.
+* EREMOTEIO: (libc)Error Codes.
+* ERESTART: (libc)Error Codes.
+* EROFS: (libc)Error Codes.
+* ERPCMISMATCH: (libc)Error Codes.
+* ESHUTDOWN: (libc)Error Codes.
+* ESOCKTNOSUPPORT: (libc)Error Codes.
+* ESPIPE: (libc)Error Codes.
+* ESRCH: (libc)Error Codes.
+* ESRMNT: (libc)Error Codes.
+* ESTALE: (libc)Error Codes.
+* ESTRPIPE: (libc)Error Codes.
+* ETIME: (libc)Error Codes.
+* ETIMEDOUT: (libc)Error Codes.
+* ETOOMANYREFS: (libc)Error Codes.
+* ETXTBSY: (libc)Error Codes.
+* EUCLEAN: (libc)Error Codes.
+* EUNATCH: (libc)Error Codes.
+* EUSERS: (libc)Error Codes.
+* EWOULDBLOCK: (libc)Error Codes.
+* EXDEV: (libc)Error Codes.
+* EXFULL: (libc)Error Codes.
+* EXIT_FAILURE: (libc)Exit Status.
+* EXIT_SUCCESS: (libc)Exit Status.
+* EXPR_NEST_MAX: (libc)Utility Limits.
+* FD_CLOEXEC: (libc)Descriptor Flags.
+* FD_CLR: (libc)Waiting for I/O.
+* FD_ISSET: (libc)Waiting for I/O.
+* FD_SET: (libc)Waiting for I/O.
+* FD_SETSIZE: (libc)Waiting for I/O.
+* FD_ZERO: (libc)Waiting for I/O.
+* FILENAME_MAX: (libc)Limits for Files.
+* FLUSHO: (libc)Local Modes.
+* FOPEN_MAX: (libc)Opening Streams.
+* FP_ILOGB0: (libc)Exponents and Logarithms.
+* FP_ILOGBNAN: (libc)Exponents and Logarithms.
+* F_DUPFD: (libc)Duplicating Descriptors.
+* F_GETFD: (libc)Descriptor Flags.
+* F_GETFL: (libc)Getting File Status Flags.
+* F_GETLK: (libc)File Locks.
+* F_GETOWN: (libc)Interrupt Input.
+* F_OK: (libc)Testing File Access.
+* F_SETFD: (libc)Descriptor Flags.
+* F_SETFL: (libc)Getting File Status Flags.
+* F_SETLK: (libc)File Locks.
+* F_SETLKW: (libc)File Locks.
+* F_SETOWN: (libc)Interrupt Input.
+* HUGE_VAL: (libc)Math Error Reporting.
+* HUGE_VALF: (libc)Math Error Reporting.
+* HUGE_VALL: (libc)Math Error Reporting.
+* HUPCL: (libc)Control Modes.
+* I: (libc)Complex Numbers.
+* ICANON: (libc)Local Modes.
+* ICRNL: (libc)Input Modes.
+* IEXTEN: (libc)Local Modes.
+* IFNAMSIZ: (libc)Interface Naming.
+* IFTODT: (libc)Directory Entries.
+* IGNBRK: (libc)Input Modes.
+* IGNCR: (libc)Input Modes.
+* IGNPAR: (libc)Input Modes.
+* IMAXBEL: (libc)Input Modes.
+* INADDR_ANY: (libc)Host Address Data Type.
+* INADDR_BROADCAST: (libc)Host Address Data Type.
+* INADDR_LOOPBACK: (libc)Host Address Data Type.
+* INADDR_NONE: (libc)Host Address Data Type.
+* INFINITY: (libc)Infinity and NaN.
+* INLCR: (libc)Input Modes.
+* INPCK: (libc)Input Modes.
+* IPPORT_RESERVED: (libc)Ports.
+* IPPORT_USERRESERVED: (libc)Ports.
+* ISIG: (libc)Local Modes.
+* ISTRIP: (libc)Input Modes.
+* IXANY: (libc)Input Modes.
+* IXOFF: (libc)Input Modes.
+* IXON: (libc)Input Modes.
+* LINE_MAX: (libc)Utility Limits.
+* LINK_MAX: (libc)Limits for Files.
+* L_ctermid: (libc)Identifying the Terminal.
+* L_cuserid: (libc)Who Logged In.
+* L_tmpnam: (libc)Temporary Files.
+* MAXNAMLEN: (libc)Limits for Files.
+* MAXSYMLINKS: (libc)Symbolic Links.
+* MAX_CANON: (libc)Limits for Files.
+* MAX_INPUT: (libc)Limits for Files.
+* MB_CUR_MAX: (libc)Selecting the Conversion.
+* MB_LEN_MAX: (libc)Selecting the Conversion.
+* MDMBUF: (libc)Control Modes.
+* MSG_DONTROUTE: (libc)Socket Data Options.
+* MSG_OOB: (libc)Socket Data Options.
+* MSG_PEEK: (libc)Socket Data Options.
+* NAME_MAX: (libc)Limits for Files.
+* NAN: (libc)Infinity and NaN.
+* NCCS: (libc)Mode Data Types.
+* NGROUPS_MAX: (libc)General Limits.
+* NOFLSH: (libc)Local Modes.
+* NOKERNINFO: (libc)Local Modes.
+* NSIG: (libc)Standard Signals.
+* NULL: (libc)Null Pointer Constant.
+* ONLCR: (libc)Output Modes.
+* ONOEOT: (libc)Output Modes.
+* OPEN_MAX: (libc)General Limits.
+* OPOST: (libc)Output Modes.
+* OXTABS: (libc)Output Modes.
+* O_ACCMODE: (libc)Access Modes.
+* O_APPEND: (libc)Operating Modes.
+* O_ASYNC: (libc)Operating Modes.
+* O_CREAT: (libc)Open-time Flags.
+* O_EXCL: (libc)Open-time Flags.
+* O_EXEC: (libc)Access Modes.
+* O_EXLOCK: (libc)Open-time Flags.
+* O_FSYNC: (libc)Operating Modes.
+* O_IGNORE_CTTY: (libc)Open-time Flags.
+* O_NDELAY: (libc)Operating Modes.
+* O_NOATIME: (libc)Operating Modes.
+* O_NOCTTY: (libc)Open-time Flags.
+* O_NOLINK: (libc)Open-time Flags.
+* O_NONBLOCK: (libc)Open-time Flags.
+* O_NONBLOCK: (libc)Operating Modes.
+* O_NOTRANS: (libc)Open-time Flags.
+* O_RDONLY: (libc)Access Modes.
+* O_RDWR: (libc)Access Modes.
+* O_READ: (libc)Access Modes.
+* O_SHLOCK: (libc)Open-time Flags.
+* O_SYNC: (libc)Operating Modes.
+* O_TRUNC: (libc)Open-time Flags.
+* O_WRITE: (libc)Access Modes.
+* O_WRONLY: (libc)Access Modes.
+* PARENB: (libc)Control Modes.
+* PARMRK: (libc)Input Modes.
+* PARODD: (libc)Control Modes.
+* PATH_MAX: (libc)Limits for Files.
+* PA_FLAG_MASK: (libc)Parsing a Template String.
+* PENDIN: (libc)Local Modes.
+* PF_FILE: (libc)Local Namespace Details.
+* PF_INET6: (libc)Internet Namespace.
+* PF_INET: (libc)Internet Namespace.
+* PF_LOCAL: (libc)Local Namespace Details.
+* PF_UNIX: (libc)Local Namespace Details.
+* PIPE_BUF: (libc)Limits for Files.
+* P_tmpdir: (libc)Temporary Files.
+* RAND_MAX: (libc)ISO Random.
+* RE_DUP_MAX: (libc)General Limits.
+* RLIM_INFINITY: (libc)Limits on Resources.
+* R_OK: (libc)Testing File Access.
+* SA_NOCLDSTOP: (libc)Flags for Sigaction.
+* SA_ONSTACK: (libc)Flags for Sigaction.
+* SA_RESTART: (libc)Flags for Sigaction.
+* SEEK_CUR: (libc)File Positioning.
+* SEEK_END: (libc)File Positioning.
+* SEEK_SET: (libc)File Positioning.
+* SIGABRT: (libc)Program Error Signals.
+* SIGALRM: (libc)Alarm Signals.
+* SIGBUS: (libc)Program Error Signals.
+* SIGCHLD: (libc)Job Control Signals.
+* SIGCLD: (libc)Job Control Signals.
+* SIGCONT: (libc)Job Control Signals.
+* SIGEMT: (libc)Program Error Signals.
+* SIGFPE: (libc)Program Error Signals.
+* SIGHUP: (libc)Termination Signals.
+* SIGILL: (libc)Program Error Signals.
+* SIGINFO: (libc)Miscellaneous Signals.
+* SIGINT: (libc)Termination Signals.
+* SIGIO: (libc)Asynchronous I/O Signals.
+* SIGIOT: (libc)Program Error Signals.
+* SIGKILL: (libc)Termination Signals.
+* SIGLOST: (libc)Operation Error Signals.
+* SIGPIPE: (libc)Operation Error Signals.
+* SIGPOLL: (libc)Asynchronous I/O Signals.
+* SIGPROF: (libc)Alarm Signals.
+* SIGQUIT: (libc)Termination Signals.
+* SIGSEGV: (libc)Program Error Signals.
+* SIGSTOP: (libc)Job Control Signals.
+* SIGSYS: (libc)Program Error Signals.
+* SIGTERM: (libc)Termination Signals.
+* SIGTRAP: (libc)Program Error Signals.
+* SIGTSTP: (libc)Job Control Signals.
+* SIGTTIN: (libc)Job Control Signals.
+* SIGTTOU: (libc)Job Control Signals.
+* SIGURG: (libc)Asynchronous I/O Signals.
+* SIGUSR1: (libc)Miscellaneous Signals.
+* SIGUSR2: (libc)Miscellaneous Signals.
+* SIGVTALRM: (libc)Alarm Signals.
+* SIGWINCH: (libc)Miscellaneous Signals.
+* SIGXCPU: (libc)Operation Error Signals.
+* SIGXFSZ: (libc)Operation Error Signals.
+* SIG_ERR: (libc)Basic Signal Handling.
+* SOCK_DGRAM: (libc)Communication Styles.
+* SOCK_RAW: (libc)Communication Styles.
+* SOCK_RDM: (libc)Communication Styles.
+* SOCK_SEQPACKET: (libc)Communication Styles.
+* SOCK_STREAM: (libc)Communication Styles.
+* SOL_SOCKET: (libc)Socket-Level Options.
+* SSIZE_MAX: (libc)General Limits.
+* STREAM_MAX: (libc)General Limits.
+* SUN_LEN: (libc)Local Namespace Details.
+* SV_INTERRUPT: (libc)BSD Handler.
+* SV_ONSTACK: (libc)BSD Handler.
+* SV_RESETHAND: (libc)BSD Handler.
+* S_IFMT: (libc)Testing File Type.
+* S_ISBLK: (libc)Testing File Type.
+* S_ISCHR: (libc)Testing File Type.
+* S_ISDIR: (libc)Testing File Type.
+* S_ISFIFO: (libc)Testing File Type.
+* S_ISLNK: (libc)Testing File Type.
+* S_ISREG: (libc)Testing File Type.
+* S_ISSOCK: (libc)Testing File Type.
+* S_TYPEISMQ: (libc)Testing File Type.
+* S_TYPEISSEM: (libc)Testing File Type.
+* S_TYPEISSHM: (libc)Testing File Type.
+* TMP_MAX: (libc)Temporary Files.
+* TOSTOP: (libc)Local Modes.
+* TZNAME_MAX: (libc)General Limits.
+* VDISCARD: (libc)Other Special.
+* VDSUSP: (libc)Signal Characters.
+* VEOF: (libc)Editing Characters.
+* VEOL2: (libc)Editing Characters.
+* VEOL: (libc)Editing Characters.
+* VERASE: (libc)Editing Characters.
+* VINTR: (libc)Signal Characters.
+* VKILL: (libc)Editing Characters.
+* VLNEXT: (libc)Other Special.
+* VMIN: (libc)Noncanonical Input.
+* VQUIT: (libc)Signal Characters.
+* VREPRINT: (libc)Editing Characters.
+* VSTART: (libc)Start/Stop Characters.
+* VSTATUS: (libc)Other Special.
+* VSTOP: (libc)Start/Stop Characters.
+* VSUSP: (libc)Signal Characters.
+* VTIME: (libc)Noncanonical Input.
+* VWERASE: (libc)Editing Characters.
+* WCHAR_MAX: (libc)Extended Char Intro.
+* WCHAR_MIN: (libc)Extended Char Intro.
+* WCOREDUMP: (libc)Process Completion Status.
+* WEOF: (libc)EOF and Errors.
+* WEOF: (libc)Extended Char Intro.
+* WEXITSTATUS: (libc)Process Completion Status.
+* WIFEXITED: (libc)Process Completion Status.
+* WIFSIGNALED: (libc)Process Completion Status.
+* WIFSTOPPED: (libc)Process Completion Status.
+* WSTOPSIG: (libc)Process Completion Status.
+* WTERMSIG: (libc)Process Completion Status.
+* W_OK: (libc)Testing File Access.
+* X_OK: (libc)Testing File Access.
+* _Complex_I: (libc)Complex Numbers.
+* _Exit: (libc)Termination Internals.
+* _IOFBF: (libc)Controlling Buffering.
+* _IOLBF: (libc)Controlling Buffering.
+* _IONBF: (libc)Controlling Buffering.
+* _Imaginary_I: (libc)Complex Numbers.
+* _PATH_UTMP: (libc)Manipulating the Database.
+* _PATH_WTMP: (libc)Manipulating the Database.
+* _POSIX2_C_DEV: (libc)System Options.
+* _POSIX2_C_VERSION: (libc)Version Supported.
+* _POSIX2_FORT_DEV: (libc)System Options.
+* _POSIX2_FORT_RUN: (libc)System Options.
+* _POSIX2_LOCALEDEF: (libc)System Options.
+* _POSIX2_SW_DEV: (libc)System Options.
+* _POSIX_CHOWN_RESTRICTED: (libc)Options for Files.
+* _POSIX_JOB_CONTROL: (libc)System Options.
+* _POSIX_NO_TRUNC: (libc)Options for Files.
+* _POSIX_SAVED_IDS: (libc)System Options.
+* _POSIX_VDISABLE: (libc)Options for Files.
+* _POSIX_VERSION: (libc)Version Supported.
+* __fbufsize: (libc)Controlling Buffering.
+* __flbf: (libc)Controlling Buffering.
+* __fpending: (libc)Controlling Buffering.
+* __fpurge: (libc)Flushing Buffers.
+* __freadable: (libc)Opening Streams.
+* __freading: (libc)Opening Streams.
+* __fsetlocking: (libc)Streams and Threads.
+* __fwritable: (libc)Opening Streams.
+* __fwriting: (libc)Opening Streams.
+* __gconv_end_fct: (libc)glibc iconv Implementation.
+* __gconv_fct: (libc)glibc iconv Implementation.
+* __gconv_init_fct: (libc)glibc iconv Implementation.
+* __va_copy: (libc)Argument Macros.
+* _exit: (libc)Termination Internals.
+* _flushlbf: (libc)Flushing Buffers.
+* _tolower: (libc)Case Conversion.
+* _toupper: (libc)Case Conversion.
+* a64l: (libc)Encode Binary Data.
+* abort: (libc)Aborting a Program.
+* abs: (libc)Absolute Value.
+* accept: (libc)Accepting Connections.
+* access: (libc)Testing File Access.
+* acos: (libc)Inverse Trig Functions.
+* acosf: (libc)Inverse Trig Functions.
+* acosh: (libc)Hyperbolic Functions.
+* acoshf: (libc)Hyperbolic Functions.
+* acoshl: (libc)Hyperbolic Functions.
+* acosl: (libc)Inverse Trig Functions.
+* addmntent: (libc)mtab.
+* addseverity: (libc)Adding Severity Classes.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
+* aio_cancel64: (libc)Cancel AIO Operations.
+* aio_cancel: (libc)Cancel AIO Operations.
+* aio_error64: (libc)Status of AIO Operations.
+* aio_error: (libc)Status of AIO Operations.
+* aio_fsync64: (libc)Synchronizing AIO Operations.
+* aio_fsync: (libc)Synchronizing AIO Operations.
+* aio_init: (libc)Configuration of AIO.
+* aio_read64: (libc)Asynchronous Reads/Writes.
+* aio_read: (libc)Asynchronous Reads/Writes.
+* aio_return64: (libc)Status of AIO Operations.
+* aio_return: (libc)Status of AIO Operations.
+* aio_suspend64: (libc)Synchronizing AIO Operations.
+* aio_suspend: (libc)Synchronizing AIO Operations.
+* aio_write64: (libc)Asynchronous Reads/Writes.
+* aio_write: (libc)Asynchronous Reads/Writes.
+* alarm: (libc)Setting an Alarm.
+* alloca: (libc)Variable Size Automatic.
+* alphasort64: (libc)Scanning Directory Content.
+* alphasort: (libc)Scanning Directory Content.
+* argp_error: (libc)Argp Helper Functions.
+* argp_failure: (libc)Argp Helper Functions.
+* argp_help: (libc)Argp Help.
+* argp_parse: (libc)Argp.
+* argp_state_help: (libc)Argp Helper Functions.
+* argp_usage: (libc)Argp Helper Functions.
+* argz_add: (libc)Argz Functions.
+* argz_add_sep: (libc)Argz Functions.
+* argz_append: (libc)Argz Functions.
+* argz_count: (libc)Argz Functions.
+* argz_create: (libc)Argz Functions.
+* argz_create_sep: (libc)Argz Functions.
+* argz_delete: (libc)Argz Functions.
+* argz_extract: (libc)Argz Functions.
+* argz_insert: (libc)Argz Functions.
+* argz_next: (libc)Argz Functions.
+* argz_replace: (libc)Argz Functions.
+* argz_stringify: (libc)Argz Functions.
+* asctime: (libc)Formatting Calendar Time.
+* asctime_r: (libc)Formatting Calendar Time.
+* asin: (libc)Inverse Trig Functions.
+* asinf: (libc)Inverse Trig Functions.
+* asinh: (libc)Hyperbolic Functions.
+* asinhf: (libc)Hyperbolic Functions.
+* asinhl: (libc)Hyperbolic Functions.
+* asinl: (libc)Inverse Trig Functions.
+* asprintf: (libc)Dynamic Output.
+* assert: (libc)Consistency Checking.
+* assert_perror: (libc)Consistency Checking.
+* atan2: (libc)Inverse Trig Functions.
+* atan2f: (libc)Inverse Trig Functions.
+* atan2l: (libc)Inverse Trig Functions.
+* atan: (libc)Inverse Trig Functions.
+* atanf: (libc)Inverse Trig Functions.
+* atanh: (libc)Hyperbolic Functions.
+* atanhf: (libc)Hyperbolic Functions.
+* atanhl: (libc)Hyperbolic Functions.
+* atanl: (libc)Inverse Trig Functions.
+* atexit: (libc)Cleanups on Exit.
+* atof: (libc)Parsing of Floats.
+* atoi: (libc)Parsing of Integers.
+* atol: (libc)Parsing of Integers.
+* atoll: (libc)Parsing of Integers.
+* backtrace: (libc)Backtraces.
+* backtrace_symbols: (libc)Backtraces.
+* backtrace_symbols_fd: (libc)Backtraces.
+* basename: (libc)Finding Tokens in a String.
+* basename: (libc)Finding Tokens in a String.
+* bcmp: (libc)String/Array Comparison.
+* bcopy: (libc)Copying and Concatenation.
+* bind: (libc)Setting Address.
+* bind_textdomain_codeset: (libc)Charset conversion in gettext.
+* bindtextdomain: (libc)Locating gettext catalog.
+* brk: (libc)Resizing the Data Segment.
+* bsearch: (libc)Array Search Function.
+* btowc: (libc)Converting a Character.
+* bzero: (libc)Copying and Concatenation.
+* cabs: (libc)Absolute Value.
+* cabsf: (libc)Absolute Value.
+* cabsl: (libc)Absolute Value.
+* cacos: (libc)Inverse Trig Functions.
+* cacosf: (libc)Inverse Trig Functions.
+* cacosh: (libc)Hyperbolic Functions.
+* cacoshf: (libc)Hyperbolic Functions.
+* cacoshl: (libc)Hyperbolic Functions.
+* cacosl: (libc)Inverse Trig Functions.
+* calloc: (libc)Allocating Cleared Space.
+* canonicalize_file_name: (libc)Symbolic Links.
+* carg: (libc)Operations on Complex.
+* cargf: (libc)Operations on Complex.
+* cargl: (libc)Operations on Complex.
+* casin: (libc)Inverse Trig Functions.
+* casinf: (libc)Inverse Trig Functions.
+* casinh: (libc)Hyperbolic Functions.
+* casinhf: (libc)Hyperbolic Functions.
+* casinhl: (libc)Hyperbolic Functions.
+* casinl: (libc)Inverse Trig Functions.
+* catan: (libc)Inverse Trig Functions.
+* catanf: (libc)Inverse Trig Functions.
+* catanh: (libc)Hyperbolic Functions.
+* catanhf: (libc)Hyperbolic Functions.
+* catanhl: (libc)Hyperbolic Functions.
+* catanl: (libc)Inverse Trig Functions.
+* catclose: (libc)The catgets Functions.
+* catgets: (libc)The catgets Functions.
+* catopen: (libc)The catgets Functions.
+* cbc_crypt: (libc)DES Encryption.
+* cbrt: (libc)Exponents and Logarithms.
+* cbrtf: (libc)Exponents and Logarithms.
+* cbrtl: (libc)Exponents and Logarithms.
+* ccos: (libc)Trig Functions.
+* ccosf: (libc)Trig Functions.
+* ccosh: (libc)Hyperbolic Functions.
+* ccoshf: (libc)Hyperbolic Functions.
+* ccoshl: (libc)Hyperbolic Functions.
+* ccosl: (libc)Trig Functions.
+* ceil: (libc)Rounding Functions.
+* ceilf: (libc)Rounding Functions.
+* ceill: (libc)Rounding Functions.
+* cexp: (libc)Exponents and Logarithms.
+* cexpf: (libc)Exponents and Logarithms.
+* cexpl: (libc)Exponents and Logarithms.
+* cfgetispeed: (libc)Line Speed.
+* cfgetospeed: (libc)Line Speed.
+* cfmakeraw: (libc)Noncanonical Input.
+* cfree: (libc)Freeing after Malloc.
+* cfsetispeed: (libc)Line Speed.
+* cfsetospeed: (libc)Line Speed.
+* cfsetspeed: (libc)Line Speed.
+* chdir: (libc)Working Directory.
+* chmod: (libc)Setting Permissions.
+* chown: (libc)File Owner.
+* cimag: (libc)Operations on Complex.
+* cimagf: (libc)Operations on Complex.
+* cimagl: (libc)Operations on Complex.
+* clearenv: (libc)Environment Access.
+* clearerr: (libc)Error Recovery.
+* clearerr_unlocked: (libc)Error Recovery.
+* clock: (libc)CPU Time.
+* clog10: (libc)Exponents and Logarithms.
+* clog10f: (libc)Exponents and Logarithms.
+* clog10l: (libc)Exponents and Logarithms.
+* clog: (libc)Exponents and Logarithms.
+* clogf: (libc)Exponents and Logarithms.
+* clogl: (libc)Exponents and Logarithms.
+* close: (libc)Opening and Closing Files.
+* closedir: (libc)Reading/Closing Directory.
+* closelog: (libc)closelog.
+* confstr: (libc)String Parameters.
+* conj: (libc)Operations on Complex.
+* conjf: (libc)Operations on Complex.
+* conjl: (libc)Operations on Complex.
+* connect: (libc)Connecting.
+* copysign: (libc)FP Bit Twiddling.
+* copysignf: (libc)FP Bit Twiddling.
+* copysignl: (libc)FP Bit Twiddling.
+* cos: (libc)Trig Functions.
+* cosf: (libc)Trig Functions.
+* cosh: (libc)Hyperbolic Functions.
+* coshf: (libc)Hyperbolic Functions.
+* coshl: (libc)Hyperbolic Functions.
+* cosl: (libc)Trig Functions.
+* cpow: (libc)Exponents and Logarithms.
+* cpowf: (libc)Exponents and Logarithms.
+* cpowl: (libc)Exponents and Logarithms.
+* cproj: (libc)Operations on Complex.
+* cprojf: (libc)Operations on Complex.
+* cprojl: (libc)Operations on Complex.
+* creal: (libc)Operations on Complex.
+* crealf: (libc)Operations on Complex.
+* creall: (libc)Operations on Complex.
+* creat64: (libc)Opening and Closing Files.
+* creat: (libc)Opening and Closing Files.
+* crypt: (libc)crypt.
+* crypt_r: (libc)crypt.
+* csin: (libc)Trig Functions.
+* csinf: (libc)Trig Functions.
+* csinh: (libc)Hyperbolic Functions.
+* csinhf: (libc)Hyperbolic Functions.
+* csinhl: (libc)Hyperbolic Functions.
+* csinl: (libc)Trig Functions.
+* csqrt: (libc)Exponents and Logarithms.
+* csqrtf: (libc)Exponents and Logarithms.
+* csqrtl: (libc)Exponents and Logarithms.
+* ctan: (libc)Trig Functions.
+* ctanf: (libc)Trig Functions.
+* ctanh: (libc)Hyperbolic Functions.
+* ctanhf: (libc)Hyperbolic Functions.
+* ctanhl: (libc)Hyperbolic Functions.
+* ctanl: (libc)Trig Functions.
+* ctermid: (libc)Identifying the Terminal.
+* ctime: (libc)Formatting Calendar Time.
+* ctime_r: (libc)Formatting Calendar Time.
+* cuserid: (libc)Who Logged In.
+* dcgettext: (libc)Translation with gettext.
+* dcngettext: (libc)Advanced gettext functions.
+* des_setparity: (libc)DES Encryption.
+* dgettext: (libc)Translation with gettext.
+* difftime: (libc)Elapsed Time.
+* dirfd: (libc)Opening a Directory.
+* dirname: (libc)Finding Tokens in a String.
+* div: (libc)Integer Division.
+* dngettext: (libc)Advanced gettext functions.
+* drand48: (libc)SVID Random.
+* drand48_r: (libc)SVID Random.
+* drem: (libc)Remainder Functions.
+* dremf: (libc)Remainder Functions.
+* dreml: (libc)Remainder Functions.
+* dup2: (libc)Duplicating Descriptors.
+* dup: (libc)Duplicating Descriptors.
+* ecb_crypt: (libc)DES Encryption.
+* ecvt: (libc)System V Number Conversion.
+* ecvt_r: (libc)System V Number Conversion.
+* encrypt: (libc)DES Encryption.
+* encrypt_r: (libc)DES Encryption.
+* endfsent: (libc)fstab.
+* endgrent: (libc)Scanning All Groups.
+* endhostent: (libc)Host Names.
+* endmntent: (libc)mtab.
+* endnetent: (libc)Networks Database.
+* endnetgrent: (libc)Lookup Netgroup.
+* endprotoent: (libc)Protocols Database.
+* endpwent: (libc)Scanning All Users.
+* endservent: (libc)Services Database.
+* endutent: (libc)Manipulating the Database.
+* endutxent: (libc)XPG Functions.
+* envz_add: (libc)Envz Functions.
+* envz_entry: (libc)Envz Functions.
+* envz_get: (libc)Envz Functions.
+* envz_merge: (libc)Envz Functions.
+* envz_strip: (libc)Envz Functions.
+* erand48: (libc)SVID Random.
+* erand48_r: (libc)SVID Random.
+* erf: (libc)Special Functions.
+* erfc: (libc)Special Functions.
+* erfcf: (libc)Special Functions.
+* erfcl: (libc)Special Functions.
+* erff: (libc)Special Functions.
+* erfl: (libc)Special Functions.
+* err: (libc)Error Messages.
+* errno: (libc)Checking for Errors.
+* error: (libc)Error Messages.
+* error_at_line: (libc)Error Messages.
+* errx: (libc)Error Messages.
+* execl: (libc)Executing a File.
+* execle: (libc)Executing a File.
+* execlp: (libc)Executing a File.
+* execv: (libc)Executing a File.
+* execve: (libc)Executing a File.
+* execvp: (libc)Executing a File.
+* exit: (libc)Normal Termination.
+* exp10: (libc)Exponents and Logarithms.
+* exp10f: (libc)Exponents and Logarithms.
+* exp10l: (libc)Exponents and Logarithms.
+* exp2: (libc)Exponents and Logarithms.
+* exp2f: (libc)Exponents and Logarithms.
+* exp2l: (libc)Exponents and Logarithms.
+* exp: (libc)Exponents and Logarithms.
+* expf: (libc)Exponents and Logarithms.
+* expl: (libc)Exponents and Logarithms.
+* expm1: (libc)Exponents and Logarithms.
+* expm1f: (libc)Exponents and Logarithms.
+* expm1l: (libc)Exponents and Logarithms.
+* fabs: (libc)Absolute Value.
+* fabsf: (libc)Absolute Value.
+* fabsl: (libc)Absolute Value.
+* fchdir: (libc)Working Directory.
+* fchmod: (libc)Setting Permissions.
+* fchown: (libc)File Owner.
+* fclean: (libc)Cleaning Streams.
+* fclose: (libc)Closing Streams.
+* fcloseall: (libc)Closing Streams.
+* fcntl: (libc)Control Operations.
+* fcvt: (libc)System V Number Conversion.
+* fcvt_r: (libc)System V Number Conversion.
+* fdatasync: (libc)Synchronizing I/O.
+* fdim: (libc)Misc FP Arithmetic.
+* fdimf: (libc)Misc FP Arithmetic.
+* fdiml: (libc)Misc FP Arithmetic.
+* fdopen: (libc)Descriptors and Streams.
+* fdopendir: (libc)Opening a Directory.
+* feclearexcept: (libc)Status bit operations.
+* fedisableexcept: (libc)Control Functions.
+* feenableexcept: (libc)Control Functions.
+* fegetenv: (libc)Control Functions.
+* fegetexcept: (libc)Control Functions.
+* fegetexceptflag: (libc)Status bit operations.
+* fegetround: (libc)Rounding.
+* feholdexcept: (libc)Control Functions.
+* feof: (libc)EOF and Errors.
+* feof_unlocked: (libc)EOF and Errors.
+* feraiseexcept: (libc)Status bit operations.
+* ferror: (libc)EOF and Errors.
+* ferror_unlocked: (libc)EOF and Errors.
+* fesetenv: (libc)Control Functions.
+* fesetexceptflag: (libc)Status bit operations.
+* fesetround: (libc)Rounding.
+* fetestexcept: (libc)Status bit operations.
+* feupdateenv: (libc)Control Functions.
+* fflush: (libc)Flushing Buffers.
+* fflush_unlocked: (libc)Flushing Buffers.
+* fgetc: (libc)Character Input.
+* fgetc_unlocked: (libc)Character Input.
+* fgetgrent: (libc)Scanning All Groups.
+* fgetgrent_r: (libc)Scanning All Groups.
+* fgetpos64: (libc)Portable Positioning.
+* fgetpos: (libc)Portable Positioning.
+* fgetpwent: (libc)Scanning All Users.
+* fgetpwent_r: (libc)Scanning All Users.
+* fgets: (libc)Line Input.
+* fgets_unlocked: (libc)Line Input.
+* fgetwc: (libc)Character Input.
+* fgetwc_unlocked: (libc)Character Input.
+* fgetws: (libc)Line Input.
+* fgetws_unlocked: (libc)Line Input.
+* fileno: (libc)Descriptors and Streams.
+* fileno_unlocked: (libc)Descriptors and Streams.
+* finite: (libc)Floating Point Classes.
+* finitef: (libc)Floating Point Classes.
+* finitel: (libc)Floating Point Classes.
+* flockfile: (libc)Streams and Threads.
+* floor: (libc)Rounding Functions.
+* floorf: (libc)Rounding Functions.
+* floorl: (libc)Rounding Functions.
+* fma: (libc)Misc FP Arithmetic.
+* fmaf: (libc)Misc FP Arithmetic.
+* fmal: (libc)Misc FP Arithmetic.
+* fmax: (libc)Misc FP Arithmetic.
+* fmaxf: (libc)Misc FP Arithmetic.
+* fmaxl: (libc)Misc FP Arithmetic.
+* fmemopen: (libc)String Streams.
+* fmin: (libc)Misc FP Arithmetic.
+* fminf: (libc)Misc FP Arithmetic.
+* fminl: (libc)Misc FP Arithmetic.
+* fmod: (libc)Remainder Functions.
+* fmodf: (libc)Remainder Functions.
+* fmodl: (libc)Remainder Functions.
+* fmtmsg: (libc)Printing Formatted Messages.
+* fnmatch: (libc)Wildcard Matching.
+* fopen64: (libc)Opening Streams.
+* fopen: (libc)Opening Streams.
+* fopencookie: (libc)Streams and Cookies.
+* fork: (libc)Creating a Process.
+* forkpty: (libc)Pseudo-Terminal Pairs.
+* fpathconf: (libc)Pathconf.
+* fpclassify: (libc)Floating Point Classes.
+* fprintf: (libc)Formatted Output Functions.
+* fputc: (libc)Simple Output.
+* fputc_unlocked: (libc)Simple Output.
+* fputs: (libc)Simple Output.
+* fputs_unlocked: (libc)Simple Output.
+* fputwc: (libc)Simple Output.
+* fputwc_unlocked: (libc)Simple Output.
+* fputws: (libc)Simple Output.
+* fputws_unlocked: (libc)Simple Output.
+* fread: (libc)Block Input/Output.
+* fread_unlocked: (libc)Block Input/Output.
+* free: (libc)Freeing after Malloc.
+* freopen64: (libc)Opening Streams.
+* freopen: (libc)Opening Streams.
+* frexp: (libc)Normalization Functions.
+* frexpf: (libc)Normalization Functions.
+* frexpl: (libc)Normalization Functions.
+* fscanf: (libc)Formatted Input Functions.
+* fseek: (libc)File Positioning.
+* fseeko64: (libc)File Positioning.
+* fseeko: (libc)File Positioning.
+* fsetpos64: (libc)Portable Positioning.
+* fsetpos: (libc)Portable Positioning.
+* fstat64: (libc)Reading Attributes.
+* fstat: (libc)Reading Attributes.
+* fsync: (libc)Synchronizing I/O.
+* ftell: (libc)File Positioning.
+* ftello64: (libc)File Positioning.
+* ftello: (libc)File Positioning.
+* ftruncate64: (libc)File Size.
+* ftruncate: (libc)File Size.
+* ftrylockfile: (libc)Streams and Threads.
+* ftw64: (libc)Working with Directory Trees.
+* ftw: (libc)Working with Directory Trees.
+* funlockfile: (libc)Streams and Threads.
+* futimes: (libc)File Times.
+* fwide: (libc)Streams and I18N.
+* fwprintf: (libc)Formatted Output Functions.
+* fwrite: (libc)Block Input/Output.
+* fwrite_unlocked: (libc)Block Input/Output.
+* fwscanf: (libc)Formatted Input Functions.
+* gamma: (libc)Special Functions.
+* gammaf: (libc)Special Functions.
+* gammal: (libc)Special Functions.
+* gcvt: (libc)System V Number Conversion.
+* get_avphys_pages: (libc)Query Memory Parameters.
+* get_current_dir_name: (libc)Working Directory.
+* get_nprocs: (libc)Processor Resources.
+* get_nprocs_conf: (libc)Processor Resources.
+* get_phys_pages: (libc)Query Memory Parameters.
+* getc: (libc)Character Input.
+* getc_unlocked: (libc)Character Input.
+* getchar: (libc)Character Input.
+* getchar_unlocked: (libc)Character Input.
+* getcontext: (libc)System V contexts.
+* getcwd: (libc)Working Directory.
+* getdate: (libc)General Time String Parsing.
+* getdate_r: (libc)General Time String Parsing.
+* getdelim: (libc)Line Input.
+* getdomainnname: (libc)Host Identification.
+* getegid: (libc)Reading Persona.
+* getenv: (libc)Environment Access.
+* geteuid: (libc)Reading Persona.
+* getfsent: (libc)fstab.
+* getfsfile: (libc)fstab.
+* getfsspec: (libc)fstab.
+* getgid: (libc)Reading Persona.
+* getgrent: (libc)Scanning All Groups.
+* getgrent_r: (libc)Scanning All Groups.
+* getgrgid: (libc)Lookup Group.
+* getgrgid_r: (libc)Lookup Group.
+* getgrnam: (libc)Lookup Group.
+* getgrnam_r: (libc)Lookup Group.
+* getgrouplist: (libc)Setting Groups.
+* getgroups: (libc)Reading Persona.
+* gethostbyaddr: (libc)Host Names.
+* gethostbyaddr_r: (libc)Host Names.
+* gethostbyname2: (libc)Host Names.
+* gethostbyname2_r: (libc)Host Names.
+* gethostbyname: (libc)Host Names.
+* gethostbyname_r: (libc)Host Names.
+* gethostent: (libc)Host Names.
+* gethostid: (libc)Host Identification.
+* gethostname: (libc)Host Identification.
+* getitimer: (libc)Setting an Alarm.
+* getline: (libc)Line Input.
+* getloadavg: (libc)Processor Resources.
+* getlogin: (libc)Who Logged In.
+* getmntent: (libc)mtab.
+* getmntent_r: (libc)mtab.
+* getnetbyaddr: (libc)Networks Database.
+* getnetbyname: (libc)Networks Database.
+* getnetent: (libc)Networks Database.
+* getnetgrent: (libc)Lookup Netgroup.
+* getnetgrent_r: (libc)Lookup Netgroup.
+* getopt: (libc)Using Getopt.
+* getopt_long: (libc)Getopt Long Options.
+* getopt_long_only: (libc)Getopt Long Options.
+* getpagesize: (libc)Query Memory Parameters.
+* getpass: (libc)getpass.
+* getpeername: (libc)Who is Connected.
+* getpgid: (libc)Process Group Functions.
+* getpgrp: (libc)Process Group Functions.
+* getpgrp: (libc)Process Group Functions.
+* getpid: (libc)Process Identification.
+* getppid: (libc)Process Identification.
+* getpriority: (libc)Traditional Scheduling Functions.
+* getprotobyname: (libc)Protocols Database.
+* getprotobynumber: (libc)Protocols Database.
+* getprotoent: (libc)Protocols Database.
+* getpt: (libc)Allocation.
+* getpwent: (libc)Scanning All Users.
+* getpwent_r: (libc)Scanning All Users.
+* getpwnam: (libc)Lookup User.
+* getpwnam_r: (libc)Lookup User.
+* getpwuid: (libc)Lookup User.
+* getpwuid_r: (libc)Lookup User.
+* getrlimit64: (libc)Limits on Resources.
+* getrlimit: (libc)Limits on Resources.
+* getrusage: (libc)Resource Usage.
+* gets: (libc)Line Input.
+* getservbyname: (libc)Services Database.
+* getservbyport: (libc)Services Database.
+* getservent: (libc)Services Database.
+* getsid: (libc)Process Group Functions.
+* getsockname: (libc)Reading Address.
+* getsockopt: (libc)Socket Option Functions.
+* getsubopt: (libc)Suboptions.
+* gettext: (libc)Translation with gettext.
+* gettimeofday: (libc)High-Resolution Calendar.
+* getuid: (libc)Reading Persona.
+* getumask: (libc)Setting Permissions.
+* getutent: (libc)Manipulating the Database.
+* getutent_r: (libc)Manipulating the Database.
+* getutid: (libc)Manipulating the Database.
+* getutid_r: (libc)Manipulating the Database.
+* getutline: (libc)Manipulating the Database.
+* getutline_r: (libc)Manipulating the Database.
+* getutmp: (libc)XPG Functions.
+* getutmpx: (libc)XPG Functions.
+* getutxent: (libc)XPG Functions.
+* getutxid: (libc)XPG Functions.
+* getutxline: (libc)XPG Functions.
+* getw: (libc)Character Input.
+* getwc: (libc)Character Input.
+* getwc_unlocked: (libc)Character Input.
+* getwchar: (libc)Character Input.
+* getwchar_unlocked: (libc)Character Input.
+* getwd: (libc)Working Directory.
+* glob64: (libc)Calling Glob.
+* glob: (libc)Calling Glob.
+* globfree64: (libc)More Flags for Globbing.
+* globfree: (libc)More Flags for Globbing.
+* gmtime: (libc)Broken-down Time.
+* gmtime_r: (libc)Broken-down Time.
+* grantpt: (libc)Allocation.
+* gsignal: (libc)Signaling Yourself.
+* gtty: (libc)BSD Terminal Modes.
+* hasmntopt: (libc)mtab.
+* hcreate: (libc)Hash Search Function.
+* hcreate_r: (libc)Hash Search Function.
+* hdestroy: (libc)Hash Search Function.
+* hdestroy_r: (libc)Hash Search Function.
+* hsearch: (libc)Hash Search Function.
+* hsearch_r: (libc)Hash Search Function.
+* htonl: (libc)Byte Order.
+* htons: (libc)Byte Order.
+* hypot: (libc)Exponents and Logarithms.
+* hypotf: (libc)Exponents and Logarithms.
+* hypotl: (libc)Exponents and Logarithms.
+* iconv: (libc)Generic Conversion Interface.
+* iconv_close: (libc)Generic Conversion Interface.
+* iconv_open: (libc)Generic Conversion Interface.
+* if_freenameindex: (libc)Interface Naming.
+* if_indextoname: (libc)Interface Naming.
+* if_nameindex: (libc)Interface Naming.
+* if_nametoindex: (libc)Interface Naming.
+* ilogb: (libc)Exponents and Logarithms.
+* ilogbf: (libc)Exponents and Logarithms.
+* ilogbl: (libc)Exponents and Logarithms.
+* imaxabs: (libc)Absolute Value.
+* imaxdiv: (libc)Integer Division.
+* in6addr_any: (libc)Host Address Data Type.
+* in6addr_loopback: (libc)Host Address Data Type.
+* index: (libc)Search Functions.
+* inet_addr: (libc)Host Address Functions.
+* inet_aton: (libc)Host Address Functions.
+* inet_lnaof: (libc)Host Address Functions.
+* inet_makeaddr: (libc)Host Address Functions.
+* inet_netof: (libc)Host Address Functions.
+* inet_network: (libc)Host Address Functions.
+* inet_ntoa: (libc)Host Address Functions.
+* inet_ntop: (libc)Host Address Functions.
+* inet_pton: (libc)Host Address Functions.
+* initgroups: (libc)Setting Groups.
+* initstate: (libc)BSD Random.
+* initstate_r: (libc)BSD Random.
+* innetgr: (libc)Netgroup Membership.
+* int: (libc)Random Access Directory.
+* ioctl: (libc)IOCTLs.
+* isalnum: (libc)Classification of Characters.
+* isalpha: (libc)Classification of Characters.
+* isascii: (libc)Classification of Characters.
+* isatty: (libc)Is It a Terminal.
+* isblank: (libc)Classification of Characters.
+* iscntrl: (libc)Classification of Characters.
+* isdigit: (libc)Classification of Characters.
+* isfinite: (libc)Floating Point Classes.
+* isgraph: (libc)Classification of Characters.
+* isgreater: (libc)FP Comparison Functions.
+* isgreaterequal: (libc)FP Comparison Functions.
+* isinf: (libc)Floating Point Classes.
+* isinff: (libc)Floating Point Classes.
+* isinfl: (libc)Floating Point Classes.
+* isless: (libc)FP Comparison Functions.
+* islessequal: (libc)FP Comparison Functions.
+* islessgreater: (libc)FP Comparison Functions.
+* islower: (libc)Classification of Characters.
+* isnan: (libc)Floating Point Classes.
+* isnan: (libc)Floating Point Classes.
+* isnanf: (libc)Floating Point Classes.
+* isnanl: (libc)Floating Point Classes.
+* isnormal: (libc)Floating Point Classes.
+* isprint: (libc)Classification of Characters.
+* ispunct: (libc)Classification of Characters.
+* isspace: (libc)Classification of Characters.
+* isunordered: (libc)FP Comparison Functions.
+* isupper: (libc)Classification of Characters.
+* iswalnum: (libc)Classification of Wide Characters.
+* iswalpha: (libc)Classification of Wide Characters.
+* iswblank: (libc)Classification of Wide Characters.
+* iswcntrl: (libc)Classification of Wide Characters.
+* iswctype: (libc)Classification of Wide Characters.
+* iswdigit: (libc)Classification of Wide Characters.
+* iswgraph: (libc)Classification of Wide Characters.
+* iswlower: (libc)Classification of Wide Characters.
+* iswprint: (libc)Classification of Wide Characters.
+* iswpunct: (libc)Classification of Wide Characters.
+* iswspace: (libc)Classification of Wide Characters.
+* iswupper: (libc)Classification of Wide Characters.
+* iswxdigit: (libc)Classification of Wide Characters.
+* isxdigit: (libc)Classification of Characters.
+* j0: (libc)Special Functions.
+* j0f: (libc)Special Functions.
+* j0l: (libc)Special Functions.
+* j1: (libc)Special Functions.
+* j1f: (libc)Special Functions.
+* j1l: (libc)Special Functions.
+* jn: (libc)Special Functions.
+* jnf: (libc)Special Functions.
+* jnl: (libc)Special Functions.
+* jrand48: (libc)SVID Random.
+* jrand48_r: (libc)SVID Random.
+* kill: (libc)Signaling Another Process.
+* killpg: (libc)Signaling Another Process.
+* l64a: (libc)Encode Binary Data.
+* labs: (libc)Absolute Value.
+* lcong48: (libc)SVID Random.
+* lcong48_r: (libc)SVID Random.
+* ldexp: (libc)Normalization Functions.
+* ldexpf: (libc)Normalization Functions.
+* ldexpl: (libc)Normalization Functions.
+* ldiv: (libc)Integer Division.
+* lfind: (libc)Array Search Function.
+* lgamma: (libc)Special Functions.
+* lgamma_r: (libc)Special Functions.
+* lgammaf: (libc)Special Functions.
+* lgammaf_r: (libc)Special Functions.
+* lgammal: (libc)Special Functions.
+* lgammal_r: (libc)Special Functions.
+* link: (libc)Hard Links.
+* lio_listio64: (libc)Asynchronous Reads/Writes.
+* lio_listio: (libc)Asynchronous Reads/Writes.
+* listen: (libc)Listening.
+* llabs: (libc)Absolute Value.
+* lldiv: (libc)Integer Division.
+* llrint: (libc)Rounding Functions.
+* llrintf: (libc)Rounding Functions.
+* llrintl: (libc)Rounding Functions.
+* llround: (libc)Rounding Functions.
+* llroundf: (libc)Rounding Functions.
+* llroundl: (libc)Rounding Functions.
+* localeconv: (libc)The Lame Way to Locale Data.
+* localtime: (libc)Broken-down Time.
+* localtime_r: (libc)Broken-down Time.
+* log10: (libc)Exponents and Logarithms.
+* log10f: (libc)Exponents and Logarithms.
+* log10l: (libc)Exponents and Logarithms.
+* log1p: (libc)Exponents and Logarithms.
+* log1pf: (libc)Exponents and Logarithms.
+* log1pl: (libc)Exponents and Logarithms.
+* log2: (libc)Exponents and Logarithms.
+* log2f: (libc)Exponents and Logarithms.
+* log2l: (libc)Exponents and Logarithms.
+* log: (libc)Exponents and Logarithms.
+* logb: (libc)Exponents and Logarithms.
+* logbf: (libc)Exponents and Logarithms.
+* logbl: (libc)Exponents and Logarithms.
+* logf: (libc)Exponents and Logarithms.
+* login: (libc)Logging In and Out.
+* login_tty: (libc)Logging In and Out.
+* logl: (libc)Exponents and Logarithms.
+* logout: (libc)Logging In and Out.
+* logwtmp: (libc)Logging In and Out.
+* longjmp: (libc)Non-Local Details.
+* lrand48: (libc)SVID Random.
+* lrand48_r: (libc)SVID Random.
+* lrint: (libc)Rounding Functions.
+* lrintf: (libc)Rounding Functions.
+* lrintl: (libc)Rounding Functions.
+* lround: (libc)Rounding Functions.
+* lroundf: (libc)Rounding Functions.
+* lroundl: (libc)Rounding Functions.
+* lsearch: (libc)Array Search Function.
+* lseek64: (libc)File Position Primitive.
+* lseek: (libc)File Position Primitive.
+* lstat64: (libc)Reading Attributes.
+* lstat: (libc)Reading Attributes.
+* lutimes: (libc)File Times.
+* madvise: (libc)Memory-mapped I/O.
+* makecontext: (libc)System V contexts.
+* mallinfo: (libc)Statistics of Malloc.
+* malloc: (libc)Basic Allocation.
+* mallopt: (libc)Malloc Tunable Parameters.
+* mblen: (libc)Non-reentrant Character Conversion.
+* mbrlen: (libc)Converting a Character.
+* mbrtowc: (libc)Converting a Character.
+* mbsinit: (libc)Keeping the state.
+* mbsnrtowcs: (libc)Converting Strings.
+* mbsrtowcs: (libc)Converting Strings.
+* mbstowcs: (libc)Non-reentrant String Conversion.
+* mbtowc: (libc)Non-reentrant Character Conversion.
+* mcheck: (libc)Heap Consistency Checking.
+* memalign: (libc)Aligned Memory Blocks.
+* memccpy: (libc)Copying and Concatenation.
+* memchr: (libc)Search Functions.
+* memcmp: (libc)String/Array Comparison.
+* memcpy: (libc)Copying and Concatenation.
+* memfrob: (libc)Trivial Encryption.
+* memmem: (libc)Search Functions.
+* memmove: (libc)Copying and Concatenation.
+* mempcpy: (libc)Copying and Concatenation.
+* memrchr: (libc)Search Functions.
+* memset: (libc)Copying and Concatenation.
+* mkdir: (libc)Creating Directories.
+* mkdtemp: (libc)Temporary Files.
+* mkfifo: (libc)FIFO Special Files.
+* mknod: (libc)Making Special Files.
+* mkstemp: (libc)Temporary Files.
+* mktemp: (libc)Temporary Files.
+* mktime: (libc)Broken-down Time.
+* mlock: (libc)Page Lock Functions.
+* mlockall: (libc)Page Lock Functions.
+* mmap64: (libc)Memory-mapped I/O.
+* mmap: (libc)Memory-mapped I/O.
+* modf: (libc)Rounding Functions.
+* modff: (libc)Rounding Functions.
+* modfl: (libc)Rounding Functions.
+* mount: (libc)Mount-Unmount-Remount.
+* mprobe: (libc)Heap Consistency Checking.
+* mrand48: (libc)SVID Random.
+* mrand48_r: (libc)SVID Random.
+* mremap: (libc)Memory-mapped I/O.
+* msync: (libc)Memory-mapped I/O.
+* mtrace: (libc)Tracing malloc.
+* munlock: (libc)Page Lock Functions.
+* munlockall: (libc)Page Lock Functions.
+* munmap: (libc)Memory-mapped I/O.
+* muntrace: (libc)Tracing malloc.
+* nan: (libc)FP Bit Twiddling.
+* nanf: (libc)FP Bit Twiddling.
+* nanl: (libc)FP Bit Twiddling.
+* nanosleep: (libc)Sleeping.
+* nearbyint: (libc)Rounding Functions.
+* nearbyintf: (libc)Rounding Functions.
+* nearbyintl: (libc)Rounding Functions.
+* nextafter: (libc)FP Bit Twiddling.
+* nextafterf: (libc)FP Bit Twiddling.
+* nextafterl: (libc)FP Bit Twiddling.
+* nexttoward: (libc)FP Bit Twiddling.
+* nexttowardf: (libc)FP Bit Twiddling.
+* nexttowardl: (libc)FP Bit Twiddling.
+* nftw64: (libc)Working with Directory Trees.
+* nftw: (libc)Working with Directory Trees.
+* ngettext: (libc)Advanced gettext functions.
+* nice: (libc)Traditional Scheduling Functions.
+* nl_langinfo: (libc)The Elegant and Fast Way.
+* nrand48: (libc)SVID Random.
+* nrand48_r: (libc)SVID Random.
+* ntohl: (libc)Byte Order.
+* ntohs: (libc)Byte Order.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
+* obstack_1grow: (libc)Growing Objects.
+* obstack_1grow_fast: (libc)Extra Fast Growing.
+* obstack_alignment_mask: (libc)Obstacks Data Alignment.
+* obstack_alloc: (libc)Allocation in an Obstack.
+* obstack_base: (libc)Status of an Obstack.
+* obstack_blank: (libc)Growing Objects.
+* obstack_blank_fast: (libc)Extra Fast Growing.
+* obstack_chunk_size: (libc)Obstack Chunks.
+* obstack_copy0: (libc)Allocation in an Obstack.
+* obstack_copy: (libc)Allocation in an Obstack.
+* obstack_finish: (libc)Growing Objects.
+* obstack_free: (libc)Freeing Obstack Objects.
+* obstack_grow0: (libc)Growing Objects.
+* obstack_grow: (libc)Growing Objects.
+* obstack_init: (libc)Preparing for Obstacks.
+* obstack_int_grow: (libc)Growing Objects.
+* obstack_int_grow_fast: (libc)Extra Fast Growing.
+* obstack_next_free: (libc)Status of an Obstack.
+* obstack_object_size: (libc)Growing Objects.
+* obstack_object_size: (libc)Status of an Obstack.
+* obstack_printf: (libc)Dynamic Output.
+* obstack_ptr_grow: (libc)Growing Objects.
+* obstack_ptr_grow_fast: (libc)Extra Fast Growing.
+* obstack_room: (libc)Extra Fast Growing.
+* obstack_vprintf: (libc)Variable Arguments Output.
+* offsetof: (libc)Structure Measurement.
+* on_exit: (libc)Cleanups on Exit.
+* open64: (libc)Opening and Closing Files.
+* open: (libc)Opening and Closing Files.
+* open_memstream: (libc)String Streams.
+* open_obstack_stream: (libc)Obstack Streams.
+* opendir: (libc)Opening a Directory.
+* openlog: (libc)openlog.
+* openpty: (libc)Pseudo-Terminal Pairs.
+* parse_printf_format: (libc)Parsing a Template String.
+* pathconf: (libc)Pathconf.
+* pause: (libc)Using Pause.
+* pclose: (libc)Pipe to a Subprocess.
+* perror: (libc)Error Messages.
+* pipe: (libc)Creating a Pipe.
+* popen: (libc)Pipe to a Subprocess.
+* posix_memalign: (libc)Aligned Memory Blocks.
+* pow10: (libc)Exponents and Logarithms.
+* pow10f: (libc)Exponents and Logarithms.
+* pow10l: (libc)Exponents and Logarithms.
+* pow: (libc)Exponents and Logarithms.
+* powf: (libc)Exponents and Logarithms.
+* powl: (libc)Exponents and Logarithms.
+* pread64: (libc)I/O Primitives.
+* pread: (libc)I/O Primitives.
+* printf: (libc)Formatted Output Functions.
+* printf_size: (libc)Predefined Printf Handlers.
+* printf_size_info: (libc)Predefined Printf Handlers.
+* psignal: (libc)Signal Messages.
+* ptsname: (libc)Allocation.
+* ptsname_r: (libc)Allocation.
+* putc: (libc)Simple Output.
+* putc_unlocked: (libc)Simple Output.
+* putchar: (libc)Simple Output.
+* putchar_unlocked: (libc)Simple Output.
+* putenv: (libc)Environment Access.
+* putpwent: (libc)Writing a User Entry.
+* puts: (libc)Simple Output.
+* pututline: (libc)Manipulating the Database.
+* pututxline: (libc)XPG Functions.
+* putw: (libc)Simple Output.
+* putwc: (libc)Simple Output.
+* putwc_unlocked: (libc)Simple Output.
+* putwchar: (libc)Simple Output.
+* putwchar_unlocked: (libc)Simple Output.
+* pwrite64: (libc)I/O Primitives.
+* pwrite: (libc)I/O Primitives.
+* qecvt: (libc)System V Number Conversion.
+* qecvt_r: (libc)System V Number Conversion.
+* qfcvt: (libc)System V Number Conversion.
+* qfcvt_r: (libc)System V Number Conversion.
+* qgcvt: (libc)System V Number Conversion.
+* qsort: (libc)Array Sort Function.
+* raise: (libc)Signaling Yourself.
+* rand: (libc)ISO Random.
+* rand_r: (libc)ISO Random.
+* random: (libc)BSD Random.
+* random_r: (libc)BSD Random.
+* rawmemchr: (libc)Search Functions.
+* read: (libc)I/O Primitives.
+* readdir64: (libc)Reading/Closing Directory.
+* readdir64_r: (libc)Reading/Closing Directory.
+* readdir: (libc)Reading/Closing Directory.
+* readdir_r: (libc)Reading/Closing Directory.
+* readlink: (libc)Symbolic Links.
+* readv: (libc)Scatter-Gather.
+* realloc: (libc)Changing Block Size.
+* realpath: (libc)Symbolic Links.
+* recv: (libc)Receiving Data.
+* recvfrom: (libc)Receiving Datagrams.
+* recvmsg: (libc)Receiving Datagrams.
+* regcomp: (libc)POSIX Regexp Compilation.
+* regerror: (libc)Regexp Cleanup.
+* regexec: (libc)Matching POSIX Regexps.
+* regfree: (libc)Regexp Cleanup.
+* register_printf_function: (libc)Registering New Conversions.
+* remainder: (libc)Remainder Functions.
+* remainderf: (libc)Remainder Functions.
+* remainderl: (libc)Remainder Functions.
+* remove: (libc)Deleting Files.
+* rename: (libc)Renaming Files.
+* rewind: (libc)File Positioning.
+* rewinddir: (libc)Random Access Directory.
+* rindex: (libc)Search Functions.
+* rint: (libc)Rounding Functions.
+* rintf: (libc)Rounding Functions.
+* rintl: (libc)Rounding Functions.
+* rmdir: (libc)Deleting Files.
+* round: (libc)Rounding Functions.
+* roundf: (libc)Rounding Functions.
+* roundl: (libc)Rounding Functions.
+* rpmatch: (libc)Yes-or-No Questions.
+* sbrk: (libc)Resizing the Data Segment.
+* scalb: (libc)Normalization Functions.
+* scalbf: (libc)Normalization Functions.
+* scalbl: (libc)Normalization Functions.
+* scalbln: (libc)Normalization Functions.
+* scalblnf: (libc)Normalization Functions.
+* scalblnl: (libc)Normalization Functions.
+* scalbn: (libc)Normalization Functions.
+* scalbnf: (libc)Normalization Functions.
+* scalbnl: (libc)Normalization Functions.
+* scandir64: (libc)Scanning Directory Content.
+* scandir: (libc)Scanning Directory Content.
+* scanf: (libc)Formatted Input Functions.
+* sched_get_priority_max: (libc)Basic Scheduling Functions.
+* sched_get_priority_min: (libc)Basic Scheduling Functions.
+* sched_getaffinity: (libc)CPU Affinity.
+* sched_getparam: (libc)Basic Scheduling Functions.
+* sched_getscheduler: (libc)Basic Scheduling Functions.
+* sched_rr_get_interval: (libc)Basic Scheduling Functions.
+* sched_setaffinity: (libc)CPU Affinity.
+* sched_setparam: (libc)Basic Scheduling Functions.
+* sched_setscheduler: (libc)Basic Scheduling Functions.
+* sched_yield: (libc)Basic Scheduling Functions.
+* seed48: (libc)SVID Random.
+* seed48_r: (libc)SVID Random.
+* seekdir: (libc)Random Access Directory.
+* select: (libc)Waiting for I/O.
+* send: (libc)Sending Data.
+* sendmsg: (libc)Receiving Datagrams.
+* sendto: (libc)Sending Datagrams.
+* setbuf: (libc)Controlling Buffering.
+* setbuffer: (libc)Controlling Buffering.
+* setcontext: (libc)System V contexts.
+* setdomainname: (libc)Host Identification.
+* setegid: (libc)Setting Groups.
+* setenv: (libc)Environment Access.
+* seteuid: (libc)Setting User ID.
+* setfsent: (libc)fstab.
+* setgid: (libc)Setting Groups.
+* setgrent: (libc)Scanning All Groups.
+* setgroups: (libc)Setting Groups.
+* sethostent: (libc)Host Names.
+* sethostid: (libc)Host Identification.
+* sethostname: (libc)Host Identification.
+* setitimer: (libc)Setting an Alarm.
+* setjmp: (libc)Non-Local Details.
+* setkey: (libc)DES Encryption.
+* setkey_r: (libc)DES Encryption.
+* setlinebuf: (libc)Controlling Buffering.
+* setlocale: (libc)Setting the Locale.
+* setlogmask: (libc)setlogmask.
+* setmntent: (libc)mtab.
+* setnetent: (libc)Networks Database.
+* setnetgrent: (libc)Lookup Netgroup.
+* setpgid: (libc)Process Group Functions.
+* setpgrp: (libc)Process Group Functions.
+* setpriority: (libc)Traditional Scheduling Functions.
+* setprotoent: (libc)Protocols Database.
+* setpwent: (libc)Scanning All Users.
+* setregid: (libc)Setting Groups.
+* setreuid: (libc)Setting User ID.
+* setrlimit64: (libc)Limits on Resources.
+* setrlimit: (libc)Limits on Resources.
+* setservent: (libc)Services Database.
+* setsid: (libc)Process Group Functions.
+* setsockopt: (libc)Socket Option Functions.
+* setstate: (libc)BSD Random.
+* setstate_r: (libc)BSD Random.
+* settimeofday: (libc)High-Resolution Calendar.
+* setuid: (libc)Setting User ID.
+* setutent: (libc)Manipulating the Database.
+* setutxent: (libc)XPG Functions.
+* setvbuf: (libc)Controlling Buffering.
+* shutdown: (libc)Closing a Socket.
+* sigaction: (libc)Advanced Signal Handling.
+* sigaddset: (libc)Signal Sets.
+* sigaltstack: (libc)Signal Stack.
+* sigblock: (libc)Blocking in BSD.
+* sigdelset: (libc)Signal Sets.
+* sigemptyset: (libc)Signal Sets.
+* sigfillset: (libc)Signal Sets.
+* siginterrupt: (libc)BSD Handler.
+* sigismember: (libc)Signal Sets.
+* siglongjmp: (libc)Non-Local Exits and Signals.
+* sigmask: (libc)Blocking in BSD.
+* signal: (libc)Basic Signal Handling.
+* signbit: (libc)FP Bit Twiddling.
+* significand: (libc)Normalization Functions.
+* significandf: (libc)Normalization Functions.
+* significandl: (libc)Normalization Functions.
+* sigpause: (libc)Blocking in BSD.
+* sigpending: (libc)Checking for Pending Signals.
+* sigprocmask: (libc)Process Signal Mask.
+* sigsetjmp: (libc)Non-Local Exits and Signals.
+* sigsetmask: (libc)Blocking in BSD.
+* sigstack: (libc)Signal Stack.
+* sigsuspend: (libc)Sigsuspend.
+* sigvec: (libc)BSD Handler.
+* sin: (libc)Trig Functions.
+* sincos: (libc)Trig Functions.
+* sincosf: (libc)Trig Functions.
+* sincosl: (libc)Trig Functions.
+* sinf: (libc)Trig Functions.
+* sinh: (libc)Hyperbolic Functions.
+* sinhf: (libc)Hyperbolic Functions.
+* sinhl: (libc)Hyperbolic Functions.
+* sinl: (libc)Trig Functions.
+* sleep: (libc)Sleeping.
+* snprintf: (libc)Formatted Output Functions.
+* socket: (libc)Creating a Socket.
+* socketpair: (libc)Socket Pairs.
+* sprintf: (libc)Formatted Output Functions.
+* sqrt: (libc)Exponents and Logarithms.
+* sqrtf: (libc)Exponents and Logarithms.
+* sqrtl: (libc)Exponents and Logarithms.
+* srand48: (libc)SVID Random.
+* srand48_r: (libc)SVID Random.
+* srand: (libc)ISO Random.
+* srandom: (libc)BSD Random.
+* srandom_r: (libc)BSD Random.
+* sscanf: (libc)Formatted Input Functions.
+* ssignal: (libc)Basic Signal Handling.
+* stat64: (libc)Reading Attributes.
+* stat: (libc)Reading Attributes.
+* stime: (libc)Simple Calendar Time.
+* stpcpy: (libc)Copying and Concatenation.
+* stpncpy: (libc)Copying and Concatenation.
+* strcasecmp: (libc)String/Array Comparison.
+* strcasestr: (libc)Search Functions.
+* strcat: (libc)Copying and Concatenation.
+* strchr: (libc)Search Functions.
+* strchrnul: (libc)Search Functions.
+* strcmp: (libc)String/Array Comparison.
+* strcoll: (libc)Collation Functions.
+* strcpy: (libc)Copying and Concatenation.
+* strcspn: (libc)Search Functions.
+* strdup: (libc)Copying and Concatenation.
+* strdupa: (libc)Copying and Concatenation.
+* strerror: (libc)Error Messages.
+* strerror_r: (libc)Error Messages.
+* strfmon: (libc)Formatting Numbers.
+* strfry: (libc)strfry.
+* strftime: (libc)Formatting Calendar Time.
+* strlen: (libc)String Length.
+* strncasecmp: (libc)String/Array Comparison.
+* strncat: (libc)Copying and Concatenation.
+* strncmp: (libc)String/Array Comparison.
+* strncpy: (libc)Copying and Concatenation.
+* strndup: (libc)Copying and Concatenation.
+* strndupa: (libc)Copying and Concatenation.
+* strnlen: (libc)String Length.
+* strpbrk: (libc)Search Functions.
+* strptime: (libc)Low-Level Time String Parsing.
+* strrchr: (libc)Search Functions.
+* strsep: (libc)Finding Tokens in a String.
+* strsignal: (libc)Signal Messages.
+* strspn: (libc)Search Functions.
+* strstr: (libc)Search Functions.
+* strtod: (libc)Parsing of Floats.
+* strtof: (libc)Parsing of Floats.
+* strtoimax: (libc)Parsing of Integers.
+* strtok: (libc)Finding Tokens in a String.
+* strtok_r: (libc)Finding Tokens in a String.
+* strtol: (libc)Parsing of Integers.
+* strtold: (libc)Parsing of Floats.
+* strtoll: (libc)Parsing of Integers.
+* strtoq: (libc)Parsing of Integers.
+* strtoul: (libc)Parsing of Integers.
+* strtoull: (libc)Parsing of Integers.
+* strtoumax: (libc)Parsing of Integers.
+* strtouq: (libc)Parsing of Integers.
+* strverscmp: (libc)String/Array Comparison.
+* strxfrm: (libc)Collation Functions.
+* stty: (libc)BSD Terminal Modes.
+* swapcontext: (libc)System V contexts.
+* swprintf: (libc)Formatted Output Functions.
+* swscanf: (libc)Formatted Input Functions.
+* symlink: (libc)Symbolic Links.
+* sync: (libc)Synchronizing I/O.
+* syscall: (libc)System Calls.
+* sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
+* syslog: (libc)syslog; vsyslog.
+* system: (libc)Running a Command.
+* sysv_signal: (libc)Basic Signal Handling.
+* tan: (libc)Trig Functions.
+* tanf: (libc)Trig Functions.
+* tanh: (libc)Hyperbolic Functions.
+* tanhf: (libc)Hyperbolic Functions.
+* tanhl: (libc)Hyperbolic Functions.
+* tanl: (libc)Trig Functions.
+* tcdrain: (libc)Line Control.
+* tcflow: (libc)Line Control.
+* tcflush: (libc)Line Control.
+* tcgetattr: (libc)Mode Functions.
+* tcgetpgrp: (libc)Terminal Access Functions.
+* tcgetsid: (libc)Terminal Access Functions.
+* tcsendbreak: (libc)Line Control.
+* tcsetattr: (libc)Mode Functions.
+* tcsetpgrp: (libc)Terminal Access Functions.
+* tdelete: (libc)Tree Search Function.
+* tdestroy: (libc)Tree Search Function.
+* tempnam: (libc)Temporary Files.
+* textdomain: (libc)Locating gettext catalog.
+* tfind: (libc)Tree Search Function.
+* tgamma: (libc)Special Functions.
+* tgammaf: (libc)Special Functions.
+* tgammal: (libc)Special Functions.
+* time: (libc)Simple Calendar Time.
+* timegm: (libc)Broken-down Time.
+* timelocal: (libc)Broken-down Time.
+* times: (libc)Processor Time.
+* tmpfile64: (libc)Temporary Files.
+* tmpfile: (libc)Temporary Files.
+* tmpnam: (libc)Temporary Files.
+* tmpnam_r: (libc)Temporary Files.
+* toascii: (libc)Case Conversion.
+* tolower: (libc)Case Conversion.
+* toupper: (libc)Case Conversion.
+* towctrans: (libc)Wide Character Case Conversion.
+* towlower: (libc)Wide Character Case Conversion.
+* towupper: (libc)Wide Character Case Conversion.
+* trunc: (libc)Rounding Functions.
+* truncate64: (libc)File Size.
+* truncate: (libc)File Size.
+* truncf: (libc)Rounding Functions.
+* truncl: (libc)Rounding Functions.
+* tsearch: (libc)Tree Search Function.
+* ttyname: (libc)Is It a Terminal.
+* ttyname_r: (libc)Is It a Terminal.
+* twalk: (libc)Tree Search Function.
+* tzset: (libc)Time Zone Functions.
+* ulimit: (libc)Limits on Resources.
+* umask: (libc)Setting Permissions.
+* umount2: (libc)Mount-Unmount-Remount.
+* umount: (libc)Mount-Unmount-Remount.
+* uname: (libc)Platform Type.
+* ungetc: (libc)How Unread.
+* ungetwc: (libc)How Unread.
+* unlink: (libc)Deleting Files.
+* unlockpt: (libc)Allocation.
+* unsetenv: (libc)Environment Access.
+* updwtmp: (libc)Manipulating the Database.
+* utime: (libc)File Times.
+* utimes: (libc)File Times.
+* utmpname: (libc)Manipulating the Database.
+* utmpxname: (libc)XPG Functions.
+* va_arg: (libc)Argument Macros.
+* va_end: (libc)Argument Macros.
+* va_start: (libc)Argument Macros.
+* va_start: (libc)Old Varargs.
+* valloc: (libc)Aligned Memory Blocks.
+* vasprintf: (libc)Variable Arguments Output.
+* verr: (libc)Error Messages.
+* verrx: (libc)Error Messages.
+* versionsort64: (libc)Scanning Directory Content.
+* versionsort: (libc)Scanning Directory Content.
+* vfork: (libc)Creating a Process.
+* vfprintf: (libc)Variable Arguments Output.
+* vfscanf: (libc)Variable Arguments Input.
+* vfwprintf: (libc)Variable Arguments Output.
+* vfwscanf: (libc)Variable Arguments Input.
+* vlimit: (libc)Limits on Resources.
+* vprintf: (libc)Variable Arguments Output.
+* vscanf: (libc)Variable Arguments Input.
+* vsnprintf: (libc)Variable Arguments Output.
+* vsprintf: (libc)Variable Arguments Output.
+* vsscanf: (libc)Variable Arguments Input.
+* vswprintf: (libc)Variable Arguments Output.
+* vswscanf: (libc)Variable Arguments Input.
+* vsyslog: (libc)syslog; vsyslog.
+* vtimes: (libc)Resource Usage.
+* vwarn: (libc)Error Messages.
+* vwarnx: (libc)Error Messages.
+* vwprintf: (libc)Variable Arguments Output.
+* vwscanf: (libc)Variable Arguments Input.
+* wait3: (libc)BSD Wait Functions.
+* wait4: (libc)Process Completion.
+* wait: (libc)Process Completion.
+* waitpid: (libc)Process Completion.
+* warn: (libc)Error Messages.
+* warnx: (libc)Error Messages.
+* wcpcpy: (libc)Copying and Concatenation.
+* wcpncpy: (libc)Copying and Concatenation.
+* wcrtomb: (libc)Converting a Character.
+* wcscasecmp: (libc)String/Array Comparison.
+* wcscat: (libc)Copying and Concatenation.
+* wcschr: (libc)Search Functions.
+* wcschrnul: (libc)Search Functions.
+* wcscmp: (libc)String/Array Comparison.
+* wcscoll: (libc)Collation Functions.
+* wcscpy: (libc)Copying and Concatenation.
+* wcscspn: (libc)Search Functions.
+* wcsdup: (libc)Copying and Concatenation.
+* wcsftime: (libc)Formatting Calendar Time.
+* wcslen: (libc)String Length.
+* wcsncasecmp: (libc)String/Array Comparison.
+* wcsncat: (libc)Copying and Concatenation.
+* wcsncmp: (libc)String/Array Comparison.
+* wcsncpy: (libc)Copying and Concatenation.
+* wcsnlen: (libc)String Length.
+* wcsnrtombs: (libc)Converting Strings.
+* wcspbrk: (libc)Search Functions.
+* wcsrchr: (libc)Search Functions.
+* wcsrtombs: (libc)Converting Strings.
+* wcsspn: (libc)Search Functions.
+* wcsstr: (libc)Search Functions.
+* wcstod: (libc)Parsing of Floats.
+* wcstof: (libc)Parsing of Floats.
+* wcstoimax: (libc)Parsing of Integers.
+* wcstok: (libc)Finding Tokens in a String.
+* wcstol: (libc)Parsing of Integers.
+* wcstold: (libc)Parsing of Floats.
+* wcstoll: (libc)Parsing of Integers.
+* wcstombs: (libc)Non-reentrant String Conversion.
+* wcstoq: (libc)Parsing of Integers.
+* wcstoul: (libc)Parsing of Integers.
+* wcstoull: (libc)Parsing of Integers.
+* wcstoumax: (libc)Parsing of Integers.
+* wcstouq: (libc)Parsing of Integers.
+* wcswcs: (libc)Search Functions.
+* wcsxfrm: (libc)Collation Functions.
+* wctob: (libc)Converting a Character.
+* wctomb: (libc)Non-reentrant Character Conversion.
+* wctrans: (libc)Wide Character Case Conversion.
+* wctype: (libc)Classification of Wide Characters.
+* wmemchr: (libc)Search Functions.
+* wmemcmp: (libc)String/Array Comparison.
+* wmemcpy: (libc)Copying and Concatenation.
+* wmemmove: (libc)Copying and Concatenation.
+* wmempcpy: (libc)Copying and Concatenation.
+* wmemset: (libc)Copying and Concatenation.
+* wordexp: (libc)Calling Wordexp.
+* wordfree: (libc)Calling Wordexp.
+* wprintf: (libc)Formatted Output Functions.
+* write: (libc)I/O Primitives.
+* writev: (libc)Scatter-Gather.
+* wscanf: (libc)Formatted Input Functions.
+* y0: (libc)Special Functions.
+* y0f: (libc)Special Functions.
+* y0l: (libc)Special Functions.
+* y1: (libc)Special Functions.
+* y1f: (libc)Special Functions.
+* y1l: (libc)Special Functions.
+* yn: (libc)Special Functions.
+* ynf: (libc)Special Functions.
+* ynl: (libc)Special Functions.
+END-INFO-DIR-ENTRY
+
+   This file documents the GNU C library.
+
+   This is Edition 0.10, last updated 2001-07-06, of `The GNU C Library
+Reference Manual', for Version 2.3.x.
+
+   Copyright (C) 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2001, 2002,
+2003 Free Software Foundation, Inc.
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being "Free Software Needs Free Documentation" and
+"GNU Lesser General Public License", the Front-Cover texts being (a)
+(see below), and with the Back-Cover Texts being (b) (see below).  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   (a) The FSF's Front-Cover Text is:
+
+   A GNU Manual
+
+   (b) The FSF's Back-Cover Text is:
+
+   You have freedom to copy and modify this GNU Manual, like GNU
+software.  Copies published by the Free Software Foundation raise
+funds for GNU development.
+
+
+File: libc.info,  Node: Copying and Concatenation,  Next: String/Array Comparison,  Prev: String Length,  Up: String and Array Utilities
+
+Copying and Concatenation
+=========================
+
+   You can use the functions described in this section to copy the
+contents of strings and arrays, or to append the contents of one string
+to another.  The `str' and `mem' functions are declared in the header
+file `string.h' while the `wstr' and `wmem' functions are declared in
+the file `wchar.h'.
+
+   A helpful way to remember the ordering of the arguments to the
+functions in this section is that it corresponds to an assignment
+expression, with the destination array specified to the left of the
+source array.  All of these functions return the address of the
+destination array.
+
+   Most of these functions do not work properly if the source and
+destination arrays overlap.  For example, if the beginning of the
+destination array overlaps the end of the source array, the original
+contents of that part of the source array may get overwritten before it
+is copied.  Even worse, in the case of the string functions, the null
+character marking the end of the string may be lost, and the copy
+function might get stuck in a loop trashing all the memory allocated to
+your program.
+
+   All functions that have problems copying between overlapping arrays
+are explicitly identified in this manual.  In addition to functions in
+this section, there are a few others like `sprintf' (*note Formatted
+Output Functions::) and `scanf' (*note Formatted Input Functions::).
+
+ - Function: void * memcpy (void *restrict TO, const void *restrict
+          FROM, size_t SIZE)
+     The `memcpy' function copies SIZE bytes from the object beginning
+     at FROM into the object beginning at TO.  The behavior of this
+     function is undefined if the two arrays TO and FROM overlap; use
+     `memmove' instead if overlapping is possible.
+
+     The value returned by `memcpy' is the value of TO.
+
+     Here is an example of how you might use `memcpy' to copy the
+     contents of an array:
+
+          struct foo *oldarray, *newarray;
+          int arraysize;
+          ...
+          memcpy (new, old, arraysize * sizeof (struct foo));
+
+ - Function: wchar_t * wmemcpy (wchar_t *restrict WTO, const wchar_t
+          *restrict WFROM, size_t SIZE)
+     The `wmemcpy' function copies SIZE wide characters from the object
+     beginning at WFROM into the object beginning at WTO.  The behavior
+     of this function is undefined if the two arrays WTO and WFROM
+     overlap; use `wmemmove' instead if overlapping is possible.
+
+     The following is a possible implementation of `wmemcpy' but there
+     are more optimizations possible.
+
+          wchar_t *
+          wmemcpy (wchar_t *restrict wto, const wchar_t *restrict wfrom,
+                   size_t size)
+          {
+            return (wchar_t *) memcpy (wto, wfrom, size * sizeof (wchar_t));
+          }
+
+     The value returned by `wmemcpy' is the value of WTO.
+
+     This function was introduced in Amendment 1 to ISO C90.
+
+ - Function: void * mempcpy (void *restrict TO, const void *restrict
+          FROM, size_t SIZE)
+     The `mempcpy' function is nearly identical to the `memcpy'
+     function.  It copies SIZE bytes from the object beginning at
+     `from' into the object pointed to by TO.  But instead of returning
+     the value of TO it returns a pointer to the byte following the
+     last written byte in the object beginning at TO.  I.e., the value
+     is `((void *) ((char *) TO + SIZE))'.
+
+     This function is useful in situations where a number of objects
+     shall be copied to consecutive memory positions.
+
+          void *
+          combine (void *o1, size_t s1, void *o2, size_t s2)
+          {
+            void *result = malloc (s1 + s2);
+            if (result != NULL)
+              mempcpy (mempcpy (result, o1, s1), o2, s2);
+            return result;
+          }
+
+     This function is a GNU extension.
+
+ - Function: wchar_t * wmempcpy (wchar_t *restrict WTO, const wchar_t
+          *restrict WFROM, size_t SIZE)
+     The `wmempcpy' function is nearly identical to the `wmemcpy'
+     function.  It copies SIZE wide characters from the object
+     beginning at `wfrom' into the object pointed to by WTO.  But
+     instead of returning the value of WTO it returns a pointer to the
+     wide character following the last written wide character in the
+     object beginning at WTO.  I.e., the value is `WTO + SIZE'.
+
+     This function is useful in situations where a number of objects
+     shall be copied to consecutive memory positions.
+
+     The following is a possible implementation of `wmemcpy' but there
+     are more optimizations possible.
+
+          wchar_t *
+          wmempcpy (wchar_t *restrict wto, const wchar_t *restrict wfrom,
+                    size_t size)
+          {
+            return (wchar_t *) mempcpy (wto, wfrom, size * sizeof (wchar_t));
+          }
+
+     This function is a GNU extension.
+
+ - Function: void * memmove (void *TO, const void *FROM, size_t SIZE)
+     `memmove' copies the SIZE bytes at FROM into the SIZE bytes at TO,
+     even if those two blocks of space overlap.  In the case of
+     overlap, `memmove' is careful to copy the original values of the
+     bytes in the block at FROM, including those bytes which also
+     belong to the block at TO.
+
+     The value returned by `memmove' is the value of TO.
+
+ - Function: wchar_t * wmemmove (wchar *WTO, const wchar_t *WFROM,
+          size_t SIZE)
+     `wmemmove' copies the SIZE wide characters at WFROM into the SIZE
+     wide characters at WTO, even if those two blocks of space overlap.
+     In the case of overlap, `memmove' is careful to copy the original
+     values of the wide characters in the block at WFROM, including
+     those wide characters which also belong to the block at WTO.
+
+     The following is a possible implementation of `wmemcpy' but there
+     are more optimizations possible.
+
+          wchar_t *
+          wmempcpy (wchar_t *restrict wto, const wchar_t *restrict wfrom,
+                    size_t size)
+          {
+            return (wchar_t *) mempcpy (wto, wfrom, size * sizeof (wchar_t));
+          }
+
+     The value returned by `wmemmove' is the value of WTO.
+
+     This function is a GNU extension.
+
+ - Function: void * memccpy (void *restrict TO, const void *restrict
+          FROM, int C, size_t SIZE)
+     This function copies no more than SIZE bytes from FROM to TO,
+     stopping if a byte matching C is found.  The return value is a
+     pointer into TO one byte past where C was copied, or a null
+     pointer if no byte matching C appeared in the first SIZE bytes of
+     FROM.
+
+ - Function: void * memset (void *BLOCK, int C, size_t SIZE)
+     This function copies the value of C (converted to an `unsigned
+     char') into each of the first SIZE bytes of the object beginning
+     at BLOCK.  It returns the value of BLOCK.
+
+ - Function: wchar_t * wmemset (wchar_t *BLOCK, wchar_t WC, size_t SIZE)
+     This function copies the value of WC into each of the first SIZE
+     wide characters of the object beginning at BLOCK.  It returns the
+     value of BLOCK.
+
+ - Function: char * strcpy (char *restrict TO, const char *restrict
+          FROM)
+     This copies characters from the string FROM (up to and including
+     the terminating null character) into the string TO.  Like
+     `memcpy', this function has undefined results if the strings
+     overlap.  The return value is the value of TO.
+
+ - Function: wchar_t * wcscpy (wchar_t *restrict WTO, const wchar_t
+          *restrict WFROM)
+     This copies wide characters from the string WFROM (up to and
+     including the terminating null wide character) into the string
+     WTO.  Like `wmemcpy', this function has undefined results if the
+     strings overlap.  The return value is the value of WTO.
+
+ - Function: char * strncpy (char *restrict TO, const char *restrict
+          FROM, size_t SIZE)
+     This function is similar to `strcpy' but always copies exactly
+     SIZE characters into TO.
+
+     If the length of FROM is more than SIZE, then `strncpy' copies
+     just the first SIZE characters.  Note that in this case there is
+     no null terminator written into TO.
+
+     If the length of FROM is less than SIZE, then `strncpy' copies all
+     of FROM, followed by enough null characters to add up to SIZE
+     characters in all.  This behavior is rarely useful, but it is
+     specified by the ISO C standard.
+
+     The behavior of `strncpy' is undefined if the strings overlap.
+
+     Using `strncpy' as opposed to `strcpy' is a way to avoid bugs
+     relating to writing past the end of the allocated space for TO.
+     However, it can also make your program much slower in one common
+     case: copying a string which is probably small into a potentially
+     large buffer.  In this case, SIZE may be large, and when it is,
+     `strncpy' will waste a considerable amount of time copying null
+     characters.
+
+ - Function: wchar_t * wcsncpy (wchar_t *restrict WTO, const wchar_t
+          *restrict WFROM, size_t SIZE)
+     This function is similar to `wcscpy' but always copies exactly
+     SIZE wide characters into WTO.
+
+     If the length of WFROM is more than SIZE, then `wcsncpy' copies
+     just the first SIZE wide characters.  Note that in this case there
+     is no null terminator written into WTO.
+
+     If the length of WFROM is less than SIZE, then `wcsncpy' copies
+     all of WFROM, followed by enough null wide characters to add up to
+     SIZE wide characters in all.  This behavior is rarely useful, but
+     it is specified by the ISO C standard.
+
+     The behavior of `wcsncpy' is undefined if the strings overlap.
+
+     Using `wcsncpy' as opposed to `wcscpy' is a way to avoid bugs
+     relating to writing past the end of the allocated space for WTO.
+     However, it can also make your program much slower in one common
+     case: copying a string which is probably small into a potentially
+     large buffer.  In this case, SIZE may be large, and when it is,
+     `wcsncpy' will waste a considerable amount of time copying null
+     wide characters.
+
+ - Function: char * strdup (const char *S)
+     This function copies the null-terminated string S into a newly
+     allocated string.  The string is allocated using `malloc'; see
+     *Note Unconstrained Allocation::.  If `malloc' cannot allocate
+     space for the new string, `strdup' returns a null pointer.
+     Otherwise it returns a pointer to the new string.
+
+ - Function: wchar_t * wcsdup (const wchar_t *WS)
+     This function copies the null-terminated wide character string WS
+     into a newly allocated string.  The string is allocated using
+     `malloc'; see *Note Unconstrained Allocation::.  If `malloc'
+     cannot allocate space for the new string, `wcsdup' returns a null
+     pointer.  Otherwise it returns a pointer to the new wide character
+     string.
+
+     This function is a GNU extension.
+
+ - Function: char * strndup (const char *S, size_t SIZE)
+     This function is similar to `strdup' but always copies at most
+     SIZE characters into the newly allocated string.
+
+     If the length of S is more than SIZE, then `strndup' copies just
+     the first SIZE characters and adds a closing null terminator.
+     Otherwise all characters are copied and the string is terminated.
+
+     This function is different to `strncpy' in that it always
+     terminates the destination string.
+
+     `strndup' is a GNU extension.
+
+ - Function: char * stpcpy (char *restrict TO, const char *restrict
+          FROM)
+     This function is like `strcpy', except that it returns a pointer to
+     the end of the string TO (that is, the address of the terminating
+     null character `to + strlen (from)') rather than the beginning.
+
+     For example, this program uses `stpcpy' to concatenate `foo' and
+     `bar' to produce `foobar', which it then prints.
+
+          #include <string.h>
+          #include <stdio.h>
+          
+          int
+          main (void)
+          {
+            char buffer[10];
+            char *to = buffer;
+            to = stpcpy (to, "foo");
+            to = stpcpy (to, "bar");
+            puts (buffer);
+            return 0;
+          }
+
+     This function is not part of the ISO or POSIX standards, and is not
+     customary on Unix systems, but we did not invent it either.
+     Perhaps it comes from MS-DOG.
+
+     Its behavior is undefined if the strings overlap.  The function is
+     declared in `string.h'.
+
+ - Function: wchar_t * wcpcpy (wchar_t *restrict WTO, const wchar_t
+          *restrict WFROM)
+     This function is like `wcscpy', except that it returns a pointer to
+     the end of the string WTO (that is, the address of the terminating
+     null character `wto + strlen (wfrom)') rather than the beginning.
+
+     This function is not part of ISO or POSIX but was found useful
+     while developing the GNU C Library itself.
+
+     The behavior of `wcpcpy' is undefined if the strings overlap.
+
+     `wcpcpy' is a GNU extension and is declared in `wchar.h'.
+
+ - Function: char * stpncpy (char *restrict TO, const char *restrict
+          FROM, size_t SIZE)
+     This function is similar to `stpcpy' but copies always exactly
+     SIZE characters into TO.
+
+     If the length of FROM is more then SIZE, then `stpncpy' copies
+     just the first SIZE characters and returns a pointer to the
+     character directly following the one which was copied last.  Note
+     that in this case there is no null terminator written into TO.
+
+     If the length of FROM is less than SIZE, then `stpncpy' copies all
+     of FROM, followed by enough null characters to add up to SIZE
+     characters in all.  This behavior is rarely useful, but it is
+     implemented to be useful in contexts where this behavior of the
+     `strncpy' is used.  `stpncpy' returns a pointer to the _first_
+     written null character.
+
+     This function is not part of ISO or POSIX but was found useful
+     while developing the GNU C Library itself.
+
+     Its behavior is undefined if the strings overlap.  The function is
+     declared in `string.h'.
+
+ - Function: wchar_t * wcpncpy (wchar_t *restrict WTO, const wchar_t
+          *restrict WFROM, size_t SIZE)
+     This function is similar to `wcpcpy' but copies always exactly
+     WSIZE characters into WTO.
+
+     If the length of WFROM is more then SIZE, then `wcpncpy' copies
+     just the first SIZE wide characters and returns a pointer to the
+     wide character directly following the last non-null wide character
+     which was copied last.  Note that in this case there is no null
+     terminator written into WTO.
+
+     If the length of WFROM is less than SIZE, then `wcpncpy' copies
+     all of WFROM, followed by enough null characters to add up to SIZE
+     characters in all.  This behavior is rarely useful, but it is
+     implemented to be useful in contexts where this behavior of the
+     `wcsncpy' is used.  `wcpncpy' returns a pointer to the _first_
+     written null character.
+
+     This function is not part of ISO or POSIX but was found useful
+     while developing the GNU C Library itself.
+
+     Its behavior is undefined if the strings overlap.
+
+     `wcpncpy' is a GNU extension and is declared in `wchar.h'.
+
+ - Macro: char * strdupa (const char *S)
+     This macro is similar to `strdup' but allocates the new string
+     using `alloca' instead of `malloc' (*note Variable Size
+     Automatic::).  This means of course the returned string has the
+     same limitations as any block of memory allocated using `alloca'.
+
+     For obvious reasons `strdupa' is implemented only as a macro; you
+     cannot get the address of this function.  Despite this limitation
+     it is a useful function.  The following code shows a situation
+     where using `malloc' would be a lot more expensive.
+
+          #include <paths.h>
+          #include <string.h>
+          #include <stdio.h>
+          
+          const char path[] = _PATH_STDPATH;
+          
+          int
+          main (void)
+          {
+            char *wr_path = strdupa (path);
+            char *cp = strtok (wr_path, ":");
+          
+            while (cp != NULL)
+              {
+                puts (cp);
+                cp = strtok (NULL, ":");
+              }
+            return 0;
+          }
+
+     Please note that calling `strtok' using PATH directly is invalid.
+     It is also not allowed to call `strdupa' in the argument list of
+     `strtok' since `strdupa' uses `alloca' (*note Variable Size
+     Automatic::) can interfere with the parameter passing.
+
+     This function is only available if GNU CC is used.
+
+ - Macro: char * strndupa (const char *S, size_t SIZE)
+     This function is similar to `strndup' but like `strdupa' it
+     allocates the new string using `alloca' *note Variable Size
+     Automatic::.  The same advantages and limitations of `strdupa' are
+     valid for `strndupa', too.
+
+     This function is implemented only as a macro, just like `strdupa'.
+     Just as `strdupa' this macro also must not be used inside the
+     parameter list in a function call.
+
+     `strndupa' is only available if GNU CC is used.
+
+ - Function: char * strcat (char *restrict TO, const char *restrict
+          FROM)
+     The `strcat' function is similar to `strcpy', except that the
+     characters from FROM are concatenated or appended to the end of
+     TO, instead of overwriting it.  That is, the first character from
+     FROM overwrites the null character marking the end of TO.
+
+     An equivalent definition for `strcat' would be:
+
+          char *
+          strcat (char *restrict to, const char *restrict from)
+          {
+            strcpy (to + strlen (to), from);
+            return to;
+          }
+
+     This function has undefined results if the strings overlap.
+
+ - Function: wchar_t * wcscat (wchar_t *restrict WTO, const wchar_t
+          *restrict WFROM)
+     The `wcscat' function is similar to `wcscpy', except that the
+     characters from WFROM are concatenated or appended to the end of
+     WTO, instead of overwriting it.  That is, the first character from
+     WFROM overwrites the null character marking the end of WTO.
+
+     An equivalent definition for `wcscat' would be:
+
+          wchar_t *
+          wcscat (wchar_t *wto, const wchar_t *wfrom)
+          {
+            wcscpy (wto + wcslen (wto), wfrom);
+            return wto;
+          }
+
+     This function has undefined results if the strings overlap.
+
+   Programmers using the `strcat' or `wcscat' function (or the
+following `strncat' or `wcsncar' functions for that matter) can easily
+be recognized as lazy and reckless.  In almost all situations the
+lengths of the participating strings are known (it better should be
+since how can one otherwise ensure the allocated size of the buffer is
+sufficient?)  Or at least, one could know them if one keeps track of the
+results of the various function calls.  But then it is very inefficient
+to use `strcat'/`wcscat'.  A lot of time is wasted finding the end of
+the destination string so that the actual copying can start.  This is a
+common example:
+
+     /* This function concatenates arbitrarily many strings.  The last
+        parameter must be `NULL'.  */
+     char *
+     concat (const char *str, ...)
+     {
+       va_list ap, ap2;
+       size_t total = 1;
+       const char *s;
+       char *result;
+     
+       va_start (ap, str);
+       /* Actually `va_copy', but this is the name more gcc versions
+          understand.  */
+       __va_copy (ap2, ap);
+     
+       /* Determine how much space we need.  */
+       for (s = str; s != NULL; s = va_arg (ap, const char *))
+         total += strlen (s);
+     
+       va_end (ap);
+     
+       result = (char *) malloc (total);
+       if (result != NULL)
+         {
+           result[0] = '\0';
+     
+           /* Copy the strings.  */
+           for (s = str; s != NULL; s = va_arg (ap2, const char *))
+             strcat (result, s);
+         }
+     
+       va_end (ap2);
+     
+       return result;
+     }
+
+   This looks quite simple, especially the second loop where the strings
+are actually copied.  But these innocent lines hide a major performance
+penalty.  Just imagine that ten strings of 100 bytes each have to be
+concatenated.  For the second string we search the already stored 100
+bytes for the end of the string so that we can append the next string.
+For all strings in total the comparisons necessary to find the end of
+the intermediate results sums up to 5500!  If we combine the copying
+with the search for the allocation we can write this function more
+efficient:
+
+     char *
+     concat (const char *str, ...)
+     {
+       va_list ap;
+       size_t allocated = 100;
+       char *result = (char *) malloc (allocated);
+     
+       if (result != NULL)
+         {
+           char *newp;
+           char *wp;
+     
+           va_start (ap, str);
+     
+           wp = result;
+           for (s = str; s != NULL; s = va_arg (ap, const char *))
+             {
+               size_t len = strlen (s);
+     
+               /* Resize the allocated memory if necessary.  */
+               if (wp + len + 1 > result + allocated)
+                 {
+                   allocated = (allocated + len) * 2;
+                   newp = (char *) realloc (result, allocated);
+                   if (newp == NULL)
+                     {
+                       free (result);
+                       return NULL;
+                     }
+                   wp = newp + (wp - result);
+                   result = newp;
+                 }
+     
+               wp = mempcpy (wp, s, len);
+             }
+     
+           /* Terminate the result string.  */
+           *wp++ = '\0';
+     
+           /* Resize memory to the optimal size.  */
+           newp = realloc (result, wp - result);
+           if (newp != NULL)
+             result = newp;
+     
+           va_end (ap);
+         }
+     
+       return result;
+     }
+
+   With a bit more knowledge about the input strings one could fine-tune
+the memory allocation.  The difference we are pointing to here is that
+we don't use `strcat' anymore.  We always keep track of the length of
+the current intermediate result so we can safe us the search for the
+end of the string and use `mempcpy'.  Please note that we also don't
+use `stpcpy' which might seem more natural since we handle with
+strings.  But this is not necessary since we already know the length of
+the string and therefore can use the faster memory copying function.
+The example would work for wide characters the same way.
+
+   Whenever a programmer feels the need to use `strcat' she or he
+should think twice and look through the program whether the code cannot
+be rewritten to take advantage of already calculated results.  Again: it
+is almost always unnecessary to use `strcat'.
+
+ - Function: char * strncat (char *restrict TO, const char *restrict
+          FROM, size_t SIZE)
+     This function is like `strcat' except that not more than SIZE
+     characters from FROM are appended to the end of TO.  A single null
+     character is also always appended to TO, so the total allocated
+     size of TO must be at least `SIZE + 1' bytes longer than its
+     initial length.
+
+     The `strncat' function could be implemented like this:
+
+          char *
+          strncat (char *to, const char *from, size_t size)
+          {
+            to[strlen (to) + size] = '\0';
+            strncpy (to + strlen (to), from, size);
+            return to;
+          }
+
+     The behavior of `strncat' is undefined if the strings overlap.
+
+ - Function: wchar_t * wcsncat (wchar_t *restrict WTO, const wchar_t
+          *restrict WFROM, size_t SIZE)
+     This function is like `wcscat' except that not more than SIZE
+     characters from FROM are appended to the end of TO.  A single null
+     character is also always appended to TO, so the total allocated
+     size of TO must be at least `SIZE + 1' bytes longer than its
+     initial length.
+
+     The `wcsncat' function could be implemented like this:
+
+          wchar_t *
+          wcsncat (wchar_t *restrict wto, const wchar_t *restrict wfrom,
+                   size_t size)
+          {
+            wto[wcslen (to) + size] = L'\0';
+            wcsncpy (wto + wcslen (wto), wfrom, size);
+            return wto;
+          }
+
+     The behavior of `wcsncat' is undefined if the strings overlap.
+
+   Here is an example showing the use of `strncpy' and `strncat' (the
+wide character version is equivalent).  Notice how, in the call to
+`strncat', the SIZE parameter is computed to avoid overflowing the
+character array `buffer'.
+
+     #include <string.h>
+     #include <stdio.h>
+     
+     #define SIZE 10
+     
+     static char buffer[SIZE];
+     
+     main ()
+     {
+       strncpy (buffer, "hello", SIZE);
+       puts (buffer);
+       strncat (buffer, ", world", SIZE - strlen (buffer) - 1);
+       puts (buffer);
+     }
+
+The output produced by this program looks like:
+
+     hello
+     hello, wo
+
+ - Function: void bcopy (const void *FROM, void *TO, size_t SIZE)
+     This is a partially obsolete alternative for `memmove', derived
+     from BSD.  Note that it is not quite equivalent to `memmove',
+     because the arguments are not in the same order and there is no
+     return value.
+
+ - Function: void bzero (void *BLOCK, size_t SIZE)
+     This is a partially obsolete alternative for `memset', derived from
+     BSD.  Note that it is not as general as `memset', because the only
+     value it can store is zero.
+
+
+File: libc.info,  Node: String/Array Comparison,  Next: Collation Functions,  Prev: Copying and Concatenation,  Up: String and Array Utilities
+
+String/Array Comparison
+=======================
+
+   You can use the functions in this section to perform comparisons on
+the contents of strings and arrays.  As well as checking for equality,
+these functions can also be used as the ordering functions for sorting
+operations.  *Note Searching and Sorting::, for an example of this.
+
+   Unlike most comparison operations in C, the string comparison
+functions return a nonzero value if the strings are _not_ equivalent
+rather than if they are.  The sign of the value indicates the relative
+ordering of the first characters in the strings that are not
+equivalent:  a negative value indicates that the first string is "less"
+than the second, while a positive value indicates that the first string
+is "greater".
+
+   The most common use of these functions is to check only for equality.
+This is canonically done with an expression like `! strcmp (s1, s2)'.
+
+   All of these functions are declared in the header file `string.h'.
+
+ - Function: int memcmp (const void *A1, const void *A2, size_t SIZE)
+     The function `memcmp' compares the SIZE bytes of memory beginning
+     at A1 against the SIZE bytes of memory beginning at A2.  The value
+     returned has the same sign as the difference between the first
+     differing pair of bytes (interpreted as `unsigned char' objects,
+     then promoted to `int').
+
+     If the contents of the two blocks are equal, `memcmp' returns `0'.
+
+ - Function: int wmemcmp (const wchar_t *A1, const wchar_t *A2, size_t
+          SIZE)
+     The function `wmemcmp' compares the SIZE wide characters beginning
+     at A1 against the SIZE wide characters beginning at A2.  The value
+     returned is smaller than or larger than zero depending on whether
+     the first differing wide character is A1 is smaller or larger than
+     the corresponding character in A2.
+
+     If the contents of the two blocks are equal, `wmemcmp' returns `0'.
+
+   On arbitrary arrays, the `memcmp' function is mostly useful for
+testing equality.  It usually isn't meaningful to do byte-wise ordering
+comparisons on arrays of things other than bytes.  For example, a
+byte-wise comparison on the bytes that make up floating-point numbers
+isn't likely to tell you anything about the relationship between the
+values of the floating-point numbers.
+
+   `wmemcmp' is really only useful to compare arrays of type `wchar_t'
+since the function looks at `sizeof (wchar_t)' bytes at a time and this
+number of bytes is system dependent.
+
+   You should also be careful about using `memcmp' to compare objects
+that can contain "holes", such as the padding inserted into structure
+objects to enforce alignment requirements, extra space at the end of
+unions, and extra characters at the ends of strings whose length is less
+than their allocated size.  The contents of these "holes" are
+indeterminate and may cause strange behavior when performing byte-wise
+comparisons.  For more predictable results, perform an explicit
+component-wise comparison.
+
+   For example, given a structure type definition like:
+
+     struct foo
+       {
+         unsigned char tag;
+         union
+           {
+             double f;
+             long i;
+             char *p;
+           } value;
+       };
+
+you are better off writing a specialized comparison function to compare
+`struct foo' objects instead of comparing them with `memcmp'.
+
+ - Function: int strcmp (const char *S1, const char *S2)
+     The `strcmp' function compares the string S1 against S2, returning
+     a value that has the same sign as the difference between the first
+     differing pair of characters (interpreted as `unsigned char'
+     objects, then promoted to `int').
+
+     If the two strings are equal, `strcmp' returns `0'.
+
+     A consequence of the ordering used by `strcmp' is that if S1 is an
+     initial substring of S2, then S1 is considered to be "less than"
+     S2.
+
+     `strcmp' does not take sorting conventions of the language the
+     strings are written in into account.  To get that one has to use
+     `strcoll'.
+
+ - Function: int wcscmp (const wchar_t *WS1, const wchar_t *WS2)
+     The `wcscmp' function compares the wide character string WS1
+     against WS2.  The value returned is smaller than or larger than
+     zero depending on whether the first differing wide character is
+     WS1 is smaller or larger than the corresponding character in WS2.
+
+     If the two strings are equal, `wcscmp' returns `0'.
+
+     A consequence of the ordering used by `wcscmp' is that if WS1 is
+     an initial substring of WS2, then WS1 is considered to be "less
+     than" WS2.
+
+     `wcscmp' does not take sorting conventions of the language the
+     strings are written in into account.  To get that one has to use
+     `wcscoll'.
+
+ - Function: int strcasecmp (const char *S1, const char *S2)
+     This function is like `strcmp', except that differences in case are
+     ignored.  How uppercase and lowercase characters are related is
+     determined by the currently selected locale.  In the standard `"C"'
+     locale the characters A" and a" do not match but in a locale which
+     regards these characters as parts of the alphabet they do match.
+
+     `strcasecmp' is derived from BSD.
+
+ - Function: int wcscasecmp (const wchar_t *WS1, const wchar_T *WS2)
+     This function is like `wcscmp', except that differences in case are
+     ignored.  How uppercase and lowercase characters are related is
+     determined by the currently selected locale.  In the standard `"C"'
+     locale the characters A" and a" do not match but in a locale which
+     regards these characters as parts of the alphabet they do match.
+
+     `wcscasecmp' is a GNU extension.
+
+ - Function: int strncmp (const char *S1, const char *S2, size_t SIZE)
+     This function is the similar to `strcmp', except that no more than
+     SIZE wide characters are compared.  In other words, if the two
+     strings are the same in their first SIZE wide characters, the
+     return value is zero.
+
+ - Function: int wcsncmp (const wchar_t *WS1, const wchar_t *WS2,
+          size_t SIZE)
+     This function is the similar to `wcscmp', except that no more than
+     SIZE wide characters are compared.  In other words, if the two
+     strings are the same in their first SIZE wide characters, the
+     return value is zero.
+
+ - Function: int strncasecmp (const char *S1, const char *S2, size_t N)
+     This function is like `strncmp', except that differences in case
+     are ignored.  Like `strcasecmp', it is locale dependent how
+     uppercase and lowercase characters are related.
+
+     `strncasecmp' is a GNU extension.
+
+ - Function: int wcsncasecmp (const wchar_t *WS1, const wchar_t *S2,
+          size_t N)
+     This function is like `wcsncmp', except that differences in case
+     are ignored.  Like `wcscasecmp', it is locale dependent how
+     uppercase and lowercase characters are related.
+
+     `wcsncasecmp' is a GNU extension.
+
+   Here are some examples showing the use of `strcmp' and `strncmp'
+(equivalent examples can be constructed for the wide character
+functions).  These examples assume the use of the ASCII character set.
+(If some other character set--say, EBCDIC--is used instead, then the
+glyphs are associated with different numeric codes, and the return
+values and ordering may differ.)
+
+     strcmp ("hello", "hello")
+         => 0    /* These two strings are the same. */
+     strcmp ("hello", "Hello")
+         => 32   /* Comparisons are case-sensitive. */
+     strcmp ("hello", "world")
+         => -15  /* The character `'h'' comes before `'w''. */
+     strcmp ("hello", "hello, world")
+         => -44  /* Comparing a null character against a comma. */
+     strncmp ("hello", "hello, world", 5)
+         => 0    /* The initial 5 characters are the same. */
+     strncmp ("hello, world", "hello, stupid world!!!", 5)
+         => 0    /* The initial 5 characters are the same. */
+
+ - Function: int strverscmp (const char *S1, const char *S2)
+     The `strverscmp' function compares the string S1 against S2,
+     considering them as holding indices/version numbers.  Return value
+     follows the same conventions as found in the `strverscmp'
+     function.  In fact, if S1 and S2 contain no digits, `strverscmp'
+     behaves like `strcmp'.
+
+     Basically, we compare strings normally (character by character),
+     until we find a digit in each string - then we enter a special
+     comparison mode, where each sequence of digits is taken as a
+     whole.  If we reach the end of these two parts without noticing a
+     difference, we return to the standard comparison mode.  There are
+     two types of numeric parts: "integral" and "fractional" (those
+     begin with a '0'). The types of the numeric parts affect the way
+     we sort them:
+
+        * integral/integral: we compare values as you would expect.
+
+        * fractional/integral: the fractional part is less than the
+          integral one.  Again, no surprise.
+
+        * fractional/fractional: the things become a bit more complex.
+          If the common prefix contains only leading zeroes, the
+          longest part is less than the other one; else the comparison
+          behaves normally.
+
+          strverscmp ("no digit", "no digit")
+              => 0    /* same behavior as strcmp. */
+          strverscmp ("item#99", "item#100")
+              => <0   /* same prefix, but 99 < 100. */
+          strverscmp ("alpha1", "alpha001")
+              => >0   /* fractional part inferior to integral one. */
+          strverscmp ("part1_f012", "part1_f01")
+              => >0   /* two fractional parts. */
+          strverscmp ("foo.009", "foo.0")
+              => <0   /* idem, but with leading zeroes only. */
+
+     This function is especially useful when dealing with filename
+     sorting, because filenames frequently hold indices/version numbers.
+
+     `strverscmp' is a GNU extension.
+
+ - Function: int bcmp (const void *A1, const void *A2, size_t SIZE)
+     This is an obsolete alias for `memcmp', derived from BSD.
+
+
+File: libc.info,  Node: Collation Functions,  Next: Search Functions,  Prev: String/Array Comparison,  Up: String and Array Utilities
+
+Collation Functions
+===================
+
+   In some locales, the conventions for lexicographic ordering differ
+from the strict numeric ordering of character codes.  For example, in
+Spanish most glyphs with diacritical marks such as accents are not
+considered distinct letters for the purposes of collation.  On the
+other hand, the two-character sequence `ll' is treated as a single
+letter that is collated immediately after `l'.
+
+   You can use the functions `strcoll' and `strxfrm' (declared in the
+headers file `string.h') and `wcscoll' and `wcsxfrm' (declared in the
+headers file `wchar') to compare strings using a collation ordering
+appropriate for the current locale.  The locale used by these functions
+in particular can be specified by setting the locale for the
+`LC_COLLATE' category; see *Note Locales::.
+
+   In the standard C locale, the collation sequence for `strcoll' is
+the same as that for `strcmp'.  Similarly, `wcscoll' and `wcscmp' are
+the same in this situation.
+
+   Effectively, the way these functions work is by applying a mapping to
+transform the characters in a string to a byte sequence that represents
+the string's position in the collating sequence of the current locale.
+Comparing two such byte sequences in a simple fashion is equivalent to
+comparing the strings with the locale's collating sequence.
+
+   The functions `strcoll' and `wcscoll' perform this translation
+implicitly, in order to do one comparison.  By contrast, `strxfrm' and
+`wcsxfrm' perform the mapping explicitly.  If you are making multiple
+comparisons using the same string or set of strings, it is likely to be
+more efficient to use `strxfrm' or `wcsxfrm' to transform all the
+strings just once, and subsequently compare the transformed strings
+with `strcmp' or `wcscmp'.
+
+ - Function: int strcoll (const char *S1, const char *S2)
+     The `strcoll' function is similar to `strcmp' but uses the
+     collating sequence of the current locale for collation (the
+     `LC_COLLATE' locale).
+
+ - Function: int wcscoll (const wchar_t *WS1, const wchar_t *WS2)
+     The `wcscoll' function is similar to `wcscmp' but uses the
+     collating sequence of the current locale for collation (the
+     `LC_COLLATE' locale).
+
+   Here is an example of sorting an array of strings, using `strcoll'
+to compare them.  The actual sort algorithm is not written here; it
+comes from `qsort' (*note Array Sort Function::).  The job of the code
+shown here is to say how to compare the strings while sorting them.
+(Later on in this section, we will show a way to do this more
+efficiently using `strxfrm'.)
+
+     /* This is the comparison function used with `qsort'. */
+     
+     int
+     compare_elements (char **p1, char **p2)
+     {
+       return strcoll (*p1, *p2);
+     }
+     
+     /* This is the entry point--the function to sort
+        strings using the locale's collating sequence. */
+     
+     void
+     sort_strings (char **array, int nstrings)
+     {
+       /* Sort `temp_array' by comparing the strings. */
+       qsort (array, nstrings,
+              sizeof (char *), compare_elements);
+     }
+
+ - Function: size_t strxfrm (char *restrict TO, const char *restrict
+          FROM, size_t SIZE)
+     The function `strxfrm' transforms the string FROM using the
+     collation transformation determined by the locale currently
+     selected for collation, and stores the transformed string in the
+     array TO.  Up to SIZE characters (including a terminating null
+     character) are stored.
+
+     The behavior is undefined if the strings TO and FROM overlap; see
+     *Note Copying and Concatenation::.
+
+     The return value is the length of the entire transformed string.
+     This value is not affected by the value of SIZE, but if it is
+     greater or equal than SIZE, it means that the transformed string
+     did not entirely fit in the array TO.  In this case, only as much
+     of the string as actually fits was stored.  To get the whole
+     transformed string, call `strxfrm' again with a bigger output
+     array.
+
+     The transformed string may be longer than the original string, and
+     it may also be shorter.
+
+     If SIZE is zero, no characters are stored in TO.  In this case,
+     `strxfrm' simply returns the number of characters that would be
+     the length of the transformed string.  This is useful for
+     determining what size the allocated array should be.  It does not
+     matter what TO is if SIZE is zero; TO may even be a null pointer.
+
+ - Function: size_t wcsxfrm (wchar_t *restrict WTO, const wchar_t
+          *WFROM, size_t SIZE)
+     The function `wcsxfrm' transforms wide character string WFROM
+     using the collation transformation determined by the locale
+     currently selected for collation, and stores the transformed
+     string in the array WTO.  Up to SIZE wide characters (including a
+     terminating null character) are stored.
+
+     The behavior is undefined if the strings WTO and WFROM overlap;
+     see *Note Copying and Concatenation::.
+
+     The return value is the length of the entire transformed wide
+     character string.  This value is not affected by the value of
+     SIZE, but if it is greater or equal than SIZE, it means that the
+     transformed wide character string did not entirely fit in the
+     array WTO.  In this case, only as much of the wide character
+     string as actually fits was stored.  To get the whole transformed
+     wide character string, call `wcsxfrm' again with a bigger output
+     array.
+
+     The transformed wide character string may be longer than the
+     original wide character string, and it may also be shorter.
+
+     If SIZE is zero, no characters are stored in TO.  In this case,
+     `wcsxfrm' simply returns the number of wide characters that would
+     be the length of the transformed wide character string.  This is
+     useful for determining what size the allocated array should be
+     (remember to multiply with `sizeof (wchar_t)').  It does not
+     matter what WTO is if SIZE is zero; WTO may even be a null pointer.
+
+   Here is an example of how you can use `strxfrm' when you plan to do
+many comparisons.  It does the same thing as the previous example, but
+much faster, because it has to transform each string only once, no
+matter how many times it is compared with other strings.  Even the time
+needed to allocate and free storage is much less than the time we save,
+when there are many strings.
+
+     struct sorter { char *input; char *transformed; };
+     
+     /* This is the comparison function used with `qsort'
+        to sort an array of `struct sorter'. */
+     
+     int
+     compare_elements (struct sorter *p1, struct sorter *p2)
+     {
+       return strcmp (p1->transformed, p2->transformed);
+     }
+     
+     /* This is the entry point--the function to sort
+        strings using the locale's collating sequence. */
+     
+     void
+     sort_strings_fast (char **array, int nstrings)
+     {
+       struct sorter temp_array[nstrings];
+       int i;
+     
+       /* Set up `temp_array'.  Each element contains
+          one input string and its transformed string. */
+       for (i = 0; i < nstrings; i++)
+         {
+           size_t length = strlen (array[i]) * 2;
+           char *transformed;
+           size_t transformed_length;
+     
+           temp_array[i].input = array[i];
+     
+           /* First try a buffer perhaps big enough.  */
+           transformed = (char *) xmalloc (length);
+     
+           /* Transform `array[i]'.  */
+           transformed_length = strxfrm (transformed, array[i], length);
+     
+           /* If the buffer was not large enough, resize it
+              and try again.  */
+           if (transformed_length >= length)
+             {
+               /* Allocate the needed space. +1 for terminating
+                  `NUL' character.  */
+               transformed = (char *) xrealloc (transformed,
+                                                transformed_length + 1);
+     
+               /* The return value is not interesting because we know
+                  how long the transformed string is.  */
+               (void) strxfrm (transformed, array[i],
+                               transformed_length + 1);
+             }
+     
+           temp_array[i].transformed = transformed;
+         }
+     
+       /* Sort `temp_array' by comparing transformed strings. */
+       qsort (temp_array, sizeof (struct sorter),
+              nstrings, compare_elements);
+     
+       /* Put the elements back in the permanent array
+          in their sorted order. */
+       for (i = 0; i < nstrings; i++)
+         array[i] = temp_array[i].input;
+     
+       /* Free the strings we allocated. */
+       for (i = 0; i < nstrings; i++)
+         free (temp_array[i].transformed);
+     }
+
+   The interesting part of this code for the wide character version
+would look like this:
+
+     void
+     sort_strings_fast (wchar_t **array, int nstrings)
+     {
+       ...
+           /* Transform `array[i]'.  */
+           transformed_length = wcsxfrm (transformed, array[i], length);
+     
+           /* If the buffer was not large enough, resize it
+              and try again.  */
+           if (transformed_length >= length)
+             {
+               /* Allocate the needed space. +1 for terminating
+                  `NUL' character.  */
+               transformed = (wchar_t *) xrealloc (transformed,
+                                                   (transformed_length + 1)
+                                                   * sizeof (wchar_t));
+     
+               /* The return value is not interesting because we know
+                  how long the transformed string is.  */
+               (void) wcsxfrm (transformed, array[i],
+                               transformed_length + 1);
+             }
+       ...
+
+Note the additional multiplication with `sizeof (wchar_t)' in the
+`realloc' call.
+
+   *Compatibility Note:* The string collation functions are a new
+feature of ISO C90.  Older C dialects have no equivalent feature.  The
+wide character versions were introduced in Amendment 1 to ISO C90.
+

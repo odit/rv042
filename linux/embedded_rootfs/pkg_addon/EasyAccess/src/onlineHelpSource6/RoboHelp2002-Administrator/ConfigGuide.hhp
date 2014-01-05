@@ -1,0 +1,94 @@
+[OPTIONS]
+Compiled File=ConfigGuide.chm
+Title=EasyAccess Administrative Help
+Contents File=ConfigGuide.hhc
+Index File=ConfigGuide.hhk
+Default topic=Logging_into_the_SSL_VPN_Portal.htm
+Default Window=NewWindow
+Error log file=
+Display compile progress=No
+Display compile notes=No
+Full-text search=Yes
+Binary Index=Yes
+Auto Index=No
+Enhanced decompilation=No
+Binary TOC=No
+Flat=No
+Full text search stop list file=C:\Program Files\RoboHelp Office\RoboHTML\Language\English\System.stp
+
+[WINDOWS]
+NewWindow="New Window Caption","ConfigGuide.hhc","ConfigGuide.hhk","","",,,,,0x420,0,0x200e,[0,0,500,400],0x0,0x0,,0,0,0
+
+[FILES]
+Logging_into_the_SSL_VPN_Portal.htm
+Active_Directory.htm
+view.htm
+rest.htm
+ipse.htm
+rout.htm
+SSL_Handshake.htm
+Web_Browser.htm
+Security.htm
+AccessPoint_Overview.htm
+Authenticating.htm
+Java_Requirements.htm
+edit.htm
+NT_Domain.htm
+doma.htm
+Domain_Management.htm
+Edit_Group_Settings.htm
+Radius.htm
+Network_Resources.htm
+kerberos.htm
+LDAP.htm
+sslc.htm
+newc.htm
+sett.htm
+dnss.htm
+etch.htm
+stat.htm
+User_Bookmarks.htm
+ifac.htm
+logc.htm
+Logging.htm
+even.htm
+Group_Bookmarks.htm
+grou.htm
+user.htm
+User_Password.htm
+date.htm
+addd.htm
+netw.htm
+Global_Bookmarks.htm
+clie.htm
+Global_Policies.htm
+site.htm
+ImportRedirect.htm
+ldapattr.htm
+Client_Routes.htm
+User_Database_Authentication.htm
+Home_Page.htm
+tran.htm
+Configurationvt.htm
+port.htm
+acti.htm
+AccessPoint_SSL_VPN.htm
+Antivirus.htm
+RegistryKeyPair.htm
+Browser.htm
+Patch.htm
+EPS_Policy.htm
+Firewall.htm
+eHelp.xml
+
+ConfigGuide.brs
+[ALIAS]
+#include ConfigGuide.ali
+
+[MAP]
+#include BSSCDefault.h
+
+[TEXT POPUPS]
+BSSCDefault.h
+
+

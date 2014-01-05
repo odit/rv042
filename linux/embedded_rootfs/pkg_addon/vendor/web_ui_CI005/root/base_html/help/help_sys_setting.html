@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:13" />
+    <title>Backing Up and Restoring the Settings </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=26;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998417"> </a><h1 class="pTitle">
+Backing Up and Restoring the Settings
+
+</h1>
+<a name="wp998418"> </a><p class="pBody">
+Use the System Management &gt; <em class="cEmphasis">Backup and Restore </em>page to import, export, and 
+copy your configuration files. The router has two configuration files: the startup 
+and the mirror. The Startup file is the configuration file that the router loads when it 
+boots up. Upon a successful bootup, the router automatically copies the startup 
+file to the mirror. Thus, the Mirror file contains the last known valid configuration. In 
+the future, if the Startup configuration file fails for any reason, then the Mirror 
+configuration file is used.
+
+</p>
+<a name="wp1006591"> </a><p class="pBody">
+You can perform the following tasks:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1006595"> </a><li class="pSmartList1"><a href="#wp998438">Restoring the Settings from a Configuration File</a>
+</li>
+<a name="wp1006599"> </a><li class="pSmartList1"><a href="#wp1002932">Backing Up Configuration Files and Mirror Files</a>
+</li>
+<a name="wp1006603"> </a><li class="pSmartList1"><a href="#wp1002961">Copying a Startup File or Mirror File</a>
+</li>
+</ul></div>
+<a name="wp998438"> </a><h2 class="pHeading2">
+Restoring the Settings from a Configuration File
+</h2>
+<a name="wp998439"> </a><p class="pBody">
+If you want to revert to previously saved settings, you can import a configuration 
+file.
+
+</p>
+<div class="pSmartList1"><ol type="1" class="pSmartList1">
+<a name="wp998440"> </a><li class="pSmartList1">In the Restore Startup C<em class="cEmphasis">onfiguration File</em> section, click <b class="cBold">Browse</b>. 
+</li>
+<a name="wp998442"> </a><li class="pSmartList1">Select a configuration file (.config). 
+</li>
+<a name="wp998443"> </a><li class="pSmartList1">Click <b class="cBold">Restore</b>. This process may take up to a minute. 
+</li>
+<a name="wp998444"> </a><li class="pSmartList1">Click <b class="cBold">System Management &gt; Restart</b> in the navigation tree. 
+</li>
+<a name="wp998445"> </a><li class="pSmartList1">When the confirmation message appears, click <b class="cBold">OK</b>. If you do not want to restart 
+the router, click <b class="cBold">Cancel</b>. The imported settings are not applied until you restart the 
+router.
+</li>
+<a name="wp998446"> </a><p class="pListBodyLevel1">
+<b class="cBold">NOTE: </b>Alternatively, you can use the Restart button. Press the <b class="cBold">Restart</b> button for 
+one second and then release it to restart the router.
+
+</p>
+</ol></div>
+<a name="wp1002932"> </a><h2 class="pHeading2">
+Backing Up Configuration Files and Mirror Files
+</h2>
+<a name="wp1002806"> </a><p class="pBody">
+You can save your startup and mirror configuration files to your computer. If 
+needed, you can use these files to restore the settings.
+
+</p>
+<div class="pSmartList1"><ol type="1" class="pSmartList1">
+<a name="wp998454"> </a><li class="pSmartList1">Click <b class="cBold">Backup S</b><b class="cBold">tartup </b><b class="cBold">Configuration </b>or <b class="cBold">Backup Mirror Configuration</b>.
+</li>
+<a name="wp998455"> </a><li class="pSmartList1">When the <em class="cEmphasis">File Download</em> window appears, click <b class="cBold">Save</b>, and then choose a file 
+location. Optionally, you can enter a descriptive filename. Then click <b class="cBold">Save</b>.
+</li>
+<a name="wp998456"> </a><p class="pListBodyLevel1">
+<b class="cBold">TIP:</b> The default filenames are <em class="cEmphasis">Startup.config</em> and <em class="cEmphasis">Mirror.config</em>. It may be helpful 
+to enter a filename that includes the current date and time, for easier identification 
+if you need to import a file later.
+
+</p>
+<a name="wp1003435"> </a><li class="pSmartList1">Close the <em class="cEmphasis">Download Complete</em> window.
+</li>
+</ol></div>
+<a name="wp1002961"> </a><h2 class="pHeading2">
+Copying a Startup File or Mirror File
+</h2>
+<a name="wp1002962"> </a><p class="pBody">
+If needed, you can manually copy your startup configuration file to your mirror 
+configuration file or you can copy your mirror to your startup. 
+
+</p>
+<a name="wp1006525"> </a><p class="pBodyAutonumRel">
+<strong>TIP	&nbsp;&nbsp;&nbsp;</strong> You can use this process to back up a known configuration before you make 
+changes. Copy the startup file to the mirror before making your changes. If you are 
+dissatisfied with your changes, copy the mirror to the startup to restore the settings.
+
+</p>
+<a name="wp1006464"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> 
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1006514"> </a><li class="pSmartList1">The startup configuration file is automatically copied to the mirror 
+configuration file every 24 hours. 
+</li>
+<a name="wp1006518"> </a><li class="pSmartList1">If a setting is changed, the time counter resets, and the next automatic copy 
+will occur 24 hours later. 
+</li>
+<a name="wp1006519"> </a><li class="pSmartList1">If the mirror config file is still in its factory default state, copying the mirror to 
+the startup immediately resets the router to the factory default settings.
+</li>
+</ul></div>
+<a name="wp1006457"> </a><p class="pBody">
+To copy a file, click the button:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998462"> </a><li class="pSmartList1"><b class="cBold">Copy Startup to Mirror: </b>Click this button to replace the mirror file with the 
+startup file. The copy operation is performed immediately, with no option to 
+cancel. When the operation is finished, the browser page refreshes.
+</li>
+<a name="wp1003452"> </a><li class="pSmartList1"><b class="cBold">Copy Mirror to Startup: </b>Click this button to replace the startup file with the 
+mirror file. The copy operation is performed immediately, with no option to 
+cancel. After a short time, the router restarts. If your PC is unable to 
+immediately reload the login page, re-enter the IP address for the 
+configuration utility in the Address bar. Then log in.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

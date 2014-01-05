@@ -1,0 +1,23 @@
+body{FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+.bodyback{FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:12px; BACKGROUND-COLOR:#ded8d5;}
+.mainback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f; FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TD.mainback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f; FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TR.mainback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f; FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+A{TEXT-DECORATION:none;COLOR:#51616a;}
+A:visited{TEXT-DECORATION:none;COLOR:#51616a;}
+a:hover{COLOR:#f8da00; cursor:pointer; cursor:hand;}
+.darkback{BACKGROUND-COLOR:#3f4f6f; COLOR:#393c3f; FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TD.darkback{BACKGROUND-COLOR:#3f4f6f; COLOR:#393c3f; FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+DIV.clk7{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#eeebe9; border-right:1px solid #5A646E;} 
+DIV.clk7k{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#dddbd9; border-right:1px solid #5A646E;}
+DIV.clk7Sub1{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#eeebe9; border-right:1px solid #5A646E;} 
+DIV.menubottomrow{background-color:#eeebe9;border-bottom:1px solid #5A646E; border-right:1px solid #5A646E;}
+DIV.clk7Sub1k{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#dddbd9; border-right:1px solid #5A646E;} 
+#divk7Cont{position:relative; left:0px; top:0px; height:322px; width:175px; visibility:hidden}
+A.clk7Links{font-family:Verdana, Arial, Helvetica; font-size:12px; text-decoration:none; color:#506069; width:175px; height:25px; line-height:180%}
+A.clk71Links{font-family:Verdana, Arial, Helvetica; font-size:11px; text-decoration:none; color:#506069; width:175px; height:25px; line-height:180%}
+td.mainbottom{background: url("/images/newbottom.png");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop1{background: url("/images/newtopright.png");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop0{background: url("/images/mainlogo.gif");background-repeat: no-repeat;}
+td.maintop2{background: url("/images/newtopbottom.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#ffffff;}
+.menubackground{background-color:#eeebe9;border-right:1px solid #5A646E;}

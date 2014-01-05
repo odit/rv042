@@ -1,0 +1,6 @@
+#!/bin/sh -x
+#
+if [ -e Makefile ]; then
+  ${MAKE} clean 
+  ${MAKE} un-install
+fi

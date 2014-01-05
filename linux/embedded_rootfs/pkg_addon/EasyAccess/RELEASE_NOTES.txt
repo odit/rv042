@@ -1,0 +1,1623 @@
+Cavium Networks EasyAccess SSL VPN Software Suite
+*************************************************
+--------------------------------
+Release Version 1.6.1 2007/5/31
+--------------------------------
+apache (Web Server):
+	* New Features 
+		- Track User Sessions (733)
+		- Runtime debug level configuration (734)
+		- Statistics support (735)
+	* Bug Fixes - None
+	* Other - None
+
+CIFS (Network Neighborhood):
+	* New Features 
+		- Track User Sessions (733)
+		- Statistics support (735)
+	* Bug Fixes - None
+	* Other - None
+
+firebase (Target Porting Module):
+	* New Features
+		- Runtime debug level configuration (734)
+	* Bug Fixes - None
+	* Other - None
+
+firewall:
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+ftp (FTP Session Management):
+	* New Features 
+		- FTP listing for more than 250 file entries.
+		- Track User Sessions (733)
+		- Runtime debug level configuration (734)
+		- Statistics support (735)
+		- Path based policies support (748)
+	* Bug Fixes
+		- Ftp filenames with ']' do not display correctly [553].
+	* Other - None
+
+Firmware Upgrade:
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+httpd (Web Server):
+	* New Features
+		- Track User Sessions (733)
+		- Runtime debug level configuration (734)
+		- Statistics support (735)
+	* Bug Fixes - None
+	* Other - None
+
+httprp (Reverse Proxy):
+	* New Features 
+		- Track User Sessions (733)
+		- Runtime debug level configuration (734)
+		- Configurabe Cipher support for Httpd (742)
+	* Bug Fixes - None
+	* Other - None
+
+lib (EasyAccess Common Library):
+	* New Features
+		- End Point Security Support (444)
+		- FTP listing for more than 250 file entries.
+		- Track User Sessions (733)
+		- Runtime debug level configuration (734)
+		- Statistics support (735)
+		- Configurabe Cipher support for Httpd (742)
+		- Support for secondary radius server (746)
+	* Bug Fixes - None
+	
+	* Other - None
+
+libauth (AAA / EasyAccess Authentication Library):
+	* New Features
+		- Support for secondary radius server (746)
+	* Bug Fixes - None
+	* Other - None
+
+libgcgi (CGI Common Utilities Library):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+libsslcert (SSL Certificate Management Library):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+onlineHelpSource (Portal Help Module):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+smm (System Management Module):
+	* New Features 
+		- End Point Security Support (444)
+		- Track User Sessions (733)
+		- Runtime debug level configuration (734)
+		- Statistics support (735)
+		- Support for secondary radius server (746)
+	* Bug Fixes - None
+	* Other - None
+
+TSAC (Terminal Services):
+	* New Features
+		- Track User Sessions (733)
+	* Bug Fixes
+		- Disable AutoReconnect in TerminalServices (736)
+	* Other - None
+
+uiaddon (Portal Store):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+Virtual Passage (Windows):
+	* New Features
+		- Track User Sessions (733)
+		- Virtual Passage Desktop Client (749)
+	* Bug Fixes
+		- Vista Install issue (442)
+		- WHQL releated changes (551)
+	* Other - None
+
+Virtual Passage - Posix (Linux and Mac):
+	* New Features - None
+		- Track User Sessions (733)
+	* Bug Fixes
+	* Other - None
+
+Virtual Transport:
+	* New Features
+		- Track User Sessions (733)
+	* Bug Fixes - None
+	* Other - None
+
+Web Cache Cleaner:
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+End Point Security Client:
+	* New Features
+		- End Point Security Support (444)
+	* Bug Fixes - None
+	* Other - None
+
+WWW (User-Interface Modules):
+	* New Features
+		- End Point Security Support (444)
+		- Track User Sessions (733)
+		- Runtime debug level configuration (734)
+		- Support for secondary radius server (746)
+		- Path based policies support (748)
+		- Virtual Passage Desktop Client (749)
+	* Bug Fixes - None
+	* Other - None
+Others:
+	* New Features
+		- Track User Sessions (733)
+	* Bug Fixes  - None
+	* Other - None
+
+------------
+KNOWN ISSUES
+------------
+      - IPV6 Support
+		* Telnet, SSH, VT, FTP, CIFS, Terminal Services do not support
+		  IPv6
+		* AAA does not support IPv6
+		* Bookmarks do not support IPv6
+		* NTP, Syslog not supported for IPv6
+		* Octeon IPv6 for EasyAccess is not supported.
+      - SMM: Does not reset timeout for reverse-proxy (93)
+      - HTTPRP: Multi-language and multi-encoding formats not handled.
+        (175, 290)
+      - VT:  Existing  windows  of Internet Explorer versions below 6.0 SP1 do
+        not work after VT is launched. (239)
+      - VP: Residual device if found in RAS capable Device List. (253)
+      - HTTPD:  During  an active Virtual Transport connection, if there is an
+        unexpected network loss;  On reconnect  the  board does not respond to
+        any traffic like icmp requests (259)
+      - WINS resolution support for SOHO (286)
+      - VT: Existing windows of Firefox don't work after VT is launched. (298)
+      - HTTPRP:  In  some  cases,  download  of  files  using  wget  does  not
+        complete. (379)
+      - HTTPRP: In some cases, OWA attachments are corrupted. (380)
+      - HTTPRP:  There  are some problems while handling special characters in
+        content. (403)
+      - HTTPRP: Header termination is incorrect in some cases. It is seen that
+        the connection header becomes part of the content. (404)
+      - HTTPD:  In  some  cases  an  issue  with  reaping child processes (CGI
+        scripts) which are  fork()'ed and  exec()'ed is seen. Child process is
+        killed before it completes. (411)
+      - HTTPRP: IBM Lotus notes is not supported currently. (436)
+      - HTTPRP:  For  some  regular expressions, regexec() is found to cause a
+        to cause a kernel panic. The regular expressions currently used do not
+        exhibit any kernel panics. (438)
+      - User Interface: Firmware upgrade fails in 64MB SOHO board. (496, 498, 500)
+      - SSLCERT: Imported Windows Generated Certificate shown as Blank entry. (535)
+      - VT: Not able to connect as a non-admin user (619)
+
+--------------------------------
+Release Version 1.6.0 2007/3/30
+--------------------------------
+apache (Web Server):
+	* New Features - None
+	* Bug Fixes - Policies should be based on IP Address and Port Number (714)
+	* Other - None
+
+CIFS (Network Neighborhood):
+	* New Features 
+		- CIFS Policies (709)
+	* Bug Fixes
+		- Umlaut upload/download issues (644)
+		- Progress bar during CIFS upload (706)
+		- CIFS session bookmark for NT and AD domain users (711)
+	* Other - None
+
+firebase (Target Porting Module):
+	* New Features
+		- Configuration of time to send Email Logs (708)
+	* Bug Fixes - None
+	* Other - None
+
+firewall:
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+ftp (FTP Session Management):
+	* New Features - None
+	* Bug Fixes
+		- FTP session list not displayed under Sessions link (279)
+		- Ftp filenames with ']' do not display correctly (553)
+		- Umlaut upload/download issues (644)
+		- Progress bar during FTP upload (706)
+	* Other - None
+
+Firmware Upgrade:
+	* New Features - None
+	* Bug Fixes
+		- Progress bar during upgrade (706)
+	* Other - None
+
+httpd (Web Server):
+	* New Features - None			
+	* Bug Fixes
+		- Virtual Passage PPP address is not releasing in SOHO & Octeon (540)
+	* Other - None
+
+httprp (Reverse Proxy):
+	* New Features 
+		- Policy & Network resources validation includes port support (714 & 715)
+	* Bug Fixes - None
+	* Other - None
+
+lib (EasyAccess Common Library):
+	* New Features
+		- Admin should be able to edit TSAC Applications listed in Portal Layout (699)
+		- 'Change password' should be configurable in portal configuration page (663)
+		- New Domain for Kerberos Authentication (698)
+		- Configuration of time to send Email Logs (708)
+		- Policy & Network resources validation includes port support (714 & 715)
+	* Bug Fixes
+		- Current working directory to be passed to TSAC applications (653)
+		- Umlaut upload/download issues (644)
+		- CIFS session bookmark for NT and AD domain users (711)		
+	* Other - None
+
+libauth (AAA / EasyAccess Authentication Library):
+	* New Features
+		- New Domain for Kerberos Authentication (698)
+	* Bug Fixes - None
+	* Other - None
+
+libgcgi (CGI Common Utilities Library):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+libsslcert (SSL Certificate Management Library):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+onlineHelpSource (Portal Help Module):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+smm (System Management Module):
+	* New Features 
+		- Admin should be able to edit TSAC Applications listed in Portal Layout (699)
+		- 'Change password' should be configurable in portal configuration page (663)
+		- New Domain for Kerberos Authentication (698)
+		- Policy & Network resources validation includes port support (714 & 715)
+	* Bug Fixes
+		- Current working directory to be passed to TSAC applications (653)
+		- CIFS session bookmark for NT and AD domain users (711)	
+	* Other - None
+
+TSAC (Terminal Services):
+	* New Features
+		- Vista support (442)
+		- Admin should be able to edit TSAC Applications listed in Portal Layout (699)
+	* Bug Fixes
+		- Added bookmark does not open the configured RDP application (629)
+		- Current working directory to be passed to TSAC applications (653)
+	* Other - None
+
+uiaddon (Portal Store):
+	* New Features
+		- 'Change password' should be configurable in portal configuration page (663)
+	* Bug Fixes - None
+	* Other - None
+
+Virtual Passage (Windows):
+	* New Features
+		- Vista support (442)
+	* Bug Fixes
+		- VP for windows(Java) remains connected even after user logsout portal (685)
+	* Other - None
+
+Virtual Passage - Posix (Linux and Mac):
+	* New Features - None
+	* Bug Fixes
+		- VP client remains connected even after logging out from User portal page (655)
+	* Other - None
+
+Virtual Transport:
+	* New Features
+		- Vista support (442)
+	* Bug Fixes
+		- VT Deactivate on logout (239)
+	* Other - None
+
+Web Cache Cleaner:
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+WWW (User-Interface Modules):
+	* New Features
+		- Configuration of time to send Email Logs (708)
+		- Policy & Network resources validation includes port support (714 & 715)
+	* Bug Fixes
+		- Log message when a user is denied login (399)
+		- VP deny policy for 'All Addresses' issue (654)
+		- Policy denial and bookmark issue - VNC, Telnet, SSH (657)
+		- IP address validation (690)
+		- In Date Settings page - Hour is not getting updated for invalid configuration (623)
+		- Enable automatic daylight savings for NTP (634)
+	* Other - None
+Others:
+	* New Features - None
+	* Bug Fixes 
+		- Octeon 1.5.0 SDK support (712)
+	      - Octeon: Unable to login Active Directory Domain (679)
+	* Other - None
+
+------------
+KNOWN ISSUES
+------------
+      - IPV6 Support
+		* Telnet, SSH, VT, FTP, CIFS, Terminal Services do not support
+		  IPv6
+		* AAA does not support IPv6
+		* Bookmarks do not support IPv6
+		* NTP, Syslog not supported for IPv6
+		* Octeon IPv6 for EasyAccess is not supported.
+      - SMM: Does not reset timeout for reverse-proxy (93)
+      - Able  to  work  in remote desktop & VP for Mac even after the main
+        EasyAccess browser window is closed (142, 295, 655)
+      - HTTPRP: Multi-language and multi-encoding formats not handled.
+        (175, 290)
+      - VT:  Existing  windows  of Internet Explorer versions below 6.0 SP1 do
+        not work after VT is launched. (239)
+      - VP: Residual device if found in RAS capable Device List. (253)
+      - HTTPD:  During  an active Virtual Transport connection, if there is an
+        unexpected network loss;  On reconnect  the  board does not respond to
+        any traffic like icmp requests (259)
+      - WINS resolution support for SOHO (286)
+      - VT: Existing windows of Firefox don't work after VT is launched. (298)
+      - HTTPRP:  In  some  cases,  download  of  files  using  wget  does  not
+        complete. (379)
+      - HTTPRP: In some cases, OWA attachments are corrupted. (380)
+      - HTTPRP:  There  are some problems while handling special characters in
+        content. (403)
+      - HTTPRP: Header termination is incorrect in some cases. It is seen that
+        the connection header becomes part of the content. (404)
+      - HTTPD:  In  some  cases  an  issue  with  reaping child processes (CGI
+        scripts) which are  fork()'ed and  exec()'ed is seen. Child process is
+        killed before it completes. (411)
+      - HTTPRP: IBM Lotus notes is not supported currently. (436)
+      - HTTPRP:  For  some  regular expressions, regexec() is found to cause a
+        to cause a kernel panic. The regular expressions currently used do not
+        exhibit any kernel panics. (438)
+      - Virtual Passage connected even after forced user logout from server (454)
+      - User Interface: Firmware upgrade fails in 64MB SOHO board. (496, 498, 500)
+      - SSLCERT: Imported Windows Generated Certificate shown as Blank entry. (535)
+	- VT: Not able to connect as a non-admin user (619)
+
+--------------------------------
+Release Version 1.5.1 2007/1/05
+--------------------------------
+apache (Web Server):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+CIFS (Network Neighborhood):
+	* New Features - None
+	* Bug Fixes
+		- WebCIFS Umlaut Display error (45)
+		- Wrong error message for no permission to access files (647)
+		- CIFS uploads always redirect to workgroups (644)
+	* Other
+		- Samba upgraded to 3.0.22
+
+firebase (Target Porting Module):
+	* New Features
+		- New Daylight savings settings for USA 2007 (633)
+		- Automatic daylight savings should be optional (634)
+	* Bug Fixes - None
+	* Other - None
+
+firewall:
+	* New Features
+		- IP6Tables support (640)
+	* Bug Fixes - None
+	* Other - None
+
+ftp (FTP Session Management):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+Firmware Upgrade:
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+httpd (Web Server):
+	* New Features - None			
+	* Bug Fixes - None
+	* Other - None
+
+httprp (Reverse Proxy):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+lib (EasyAccess Common Library):
+	* New Features - None		
+	* Bug Fixes - None
+	* Other - None
+
+libauth (AAA / EasyAccess Authentication Library):
+	* New Features - None
+	* Bug Fixes
+		- Login to external domains whose servers cannot be reached
+		shows '502 Bad Gateway' (601)
+	* Other - None
+
+libgcgi (CGI Common Utilities Library):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+libsslcert (SSL Certificate Management Library):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+onlineHelpSource (Portal Help Module):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+smm (System Management Module):
+	* New Features 
+		- Allow users to change their password (84)
+		- IPv6 support for Network resources and policies(640)
+		- Support for policies for VT (583)
+	* Bug Fixes
+		- Group policies of external domain does not work for 
+		Virtual Passage (636)
+	* Other - None
+
+TSAC (Terminal Services):
+	* New Features
+                - Password must not be shown in cleartext in HTML (35)
+	* Bug Fixes - None
+	* Other - None
+
+uiaddon (Portal Store):
+	* New Features
+		- Default portal must be configurable (603)
+	* Bug Fixes - None
+	* Other - None
+
+Virtual Passage (Windows):
+	* New Features
+		- Virtual Passage needs to support user configurable
+		subnet mask (589)
+		- Connection specific DNS Suffix support in Virtual
+		Passage (590)
+		- Virtual Passage needs to support full tunnel mode (594)		
+	* Bug Fixes - None
+	* Other - None
+
+Virtual Passage - Posix (Linux and Mac):
+	* New Features
+		- Virtual Passage needs to support user configurable
+		subnet mask (589)
+		- Connection specific DNS Suffix support in Virtual
+		Passage (590)
+		- Virtual Passage needs to support full tunnel mode (594)
+		- Overlapping address range checked and default route added
+		if needed. Route command ported for MAC (561)
+	* Bug Fixes - None
+	* Other
+		- Support for Intel MAC (615)
+
+Virtual Transport:
+	* New Features
+		- VB or JavaScript utility to turn on Passive FTP in 
+		  IE (291)
+	* Bug Fixes - None
+	* Other - None
+
+Web Cache Cleaner:
+	* New Features - None
+	* Bug Fixes
+		- Typed URL is not getting deleted (596)
+	* Other - None
+
+WWW (User-Interface Modules):
+	* New Features - None
+	* Bug Fixes
+		- Email addresses truncated during certificate creation (602)
+		- Buttons not rendered properly in MacOS (641)
+		- Adding more than 12 policies crashes edit user CGI (78)
+	* Other - None
+Others:
+	* New Features
+		- VNC on non-default port and non-zero terminal (637)
+	* Bug Fixes
+		- SSH/telnet is not terminated when window is manually
+		closed (592)
+	* Other - None
+
+------------
+KNOWN ISSUES
+------------
+      - IPV6 Support
+		* Telnet, SSH, VT, FTP, CIFS, Terminal Services do not support
+		  IPv6
+		* AAA does not support IPv6
+		* Bookmarks do not support IPv6
+		* NTP, Syslog not supported for IPv6
+		* Octeon does not IPv6 because IPv6 is not turned on in the 
+		  Octeon kernel
+      - SMM: Does not reset timeout for reverse-proxy (93)
+      - Able  to  work  in remote desktop, VT & Java VP even after the main
+        EasyAccess browser window is closed (142, 295, 655)
+      - HTTPRP: Multi-language and multi-encoding formats not handled.
+        (175, 290)
+      - VT:  Existing  windows  of Internet Explorer versions below 6.0 SP1 do
+        not work after VT is launched. (239)
+      - VP: Residual device if found in RAS capable Device List. (253)
+      - HTTPD:  During  an active Virtual Transport connection, if there is an
+        unexpected network loss;  On reconnect  the  board does not respond to
+        any traffic like icmp requests (259)
+      - WINS resolution support for SOHO (286)
+      - VT: Existing windows of Firefox don't work after VT is launched. (298)
+      - HTTPRP:  In  some  cases,  download  of  files  using  wget  does  not
+        complete. (379)
+      - HTTPRP: In some cases, OWA attachments are corrupted. (380)
+      - HTTPRP:  There  are some problems while handling special characters in
+        content. (403)
+      - HTTPRP: Header termination is incorrect in some cases. It is seen that
+        the connection header becomes part of the content. (404)
+      - HTTPD:  In  some  cases  an  issue  with  reaping child processes (CGI
+        scripts) which are  fork()'ed and  exec()'ed is seen. Child process is
+        killed before it completes. (411)
+      - HTTPRP: IBM Lotus notes is not supported currently. (436)
+      - HTTPRP:  For  some  regular expressions, regexec() is found to cause a
+        to cause a kernel panic. The regular expressions currently used do not
+        exhibit any kernel panics. (438)
+      - Virtual Passage connected even after forced user logout from server (454)
+      - User Interface: Firmware upgrade fails in 64MB SOHO board. (496, 498, 500)
+      - SSLCERT: Imported Windows Generated Certificate shown as Blank entry. (535)
+      - Octeon: Unable to login Active Directory Domain (679)
+	- CIFS & FTP - umlaut characters support in Mac.
+
+--------------------------------
+Release Version 1.5.0 2006/10/18
+--------------------------------
+apache (Web Server):
+	* New Features - None
+	* Bug Fixes - None
+	* Other
+			- firewall/ip-up.c needs sessionname instead of Username(581)
+
+CIFS (Network Neighborhood):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+firebase (Target Porting Module):
+	* New Features
+			- IPV6 Support (568)	
+	* Bug Fixes - None
+	* Other - None
+
+firewall:
+	* New Features
+			- firewall/ip-up.c needs sessionname instead of Username(581)
+			- IPV6 Support (568)	
+	* Bug Fixes - None
+	* Other - None
+
+ftp (FTP Session Management):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+Firmware Upgrade:
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+httpd (Web Server):
+	* New Features
+			- IPV6 Support (568)	
+	* Bug Fixes - None
+	* Other - None
+
+httprp (Reverse Proxy):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+lib (EasyAccess Common Library):
+	* New Features
+			- IPV6 Support (568)	
+	* Bug Fixes - None
+	* Other - None
+
+libauth (AAA / EasyAccess Authentication Library):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+libgcgi (CGI Common Utilities Library):
+	* New Features
+			- IPV6 Support (568)
+	* Bug Fixes - None
+	* Other - None
+
+libsslcert (SSL Certificate Management Library):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+MacOS:
+	* New Features - None
+	* Bug Fixes - None
+	* Other
+			- Removed and Merged with Posix VP Client
+
+onlineHelpSource (Portal Help Module):
+	* New Features
+			- IPV6 Support (568)
+	* Bug Fixes - None
+	* Other - None
+
+smm (System Management Module):
+	* New Features 
+			- IPV6 Support (568)
+	* Bug Fixes
+	* Other - None
+
+TSAC (Terminal Services):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+uiaddon (Portal Store):
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+Virtual Passage (Windows):
+	* New Features
+			- IPV6 Support (568)
+			- Mozilla Support (285)
+	* Bug Fixes - None
+	* Other - None
+
+Virtual Passage - Posix (Linux and Mac):
+	* New Features
+			- IPV6 Support (568)
+			- MAC VP client should be based on Posix VP Client(582)
+	* Bug Fixes - None
+	* Other - None
+
+Virtual Transport:
+	* New Features - None
+	* Bug Fixes
+			- VT throws decrypt error in Multi-threaded environment (580)
+	* Other - None
+
+Web Cache Cleaner:
+	* New Features - None
+	* Bug Fixes - None
+	* Other - None
+
+WWW (User-Interface Modules):
+	* New Features
+			- IPV6 Support (568)
+	* Bug Fixes
+			- Certificates status is listed as Active always (563)
+			- Accepts password for a non password protected certificate (477)
+			- Inactivity Timeout -  Submit button not working for External Users (575)
+	* Other - None
+Others:
+	* New Features
+			- Support for SMTP Authentication (569)
+	* Bug Fixes - None
+	* Other
+			- Octeon Build integrated into EA (584)
+
+------------
+KNOWN ISSUES
+------------
+      - IPV6 Support
+		* Telnet, SSH, VT, FTP, CIFS, Terminal Services do not support
+		  IPv6
+		* AAA does not support IPv6
+		* VP Policies are not supported for IPv6
+		* Bookmarks do not support IPv6
+		* Network Resources do not support IPv6
+		* NTP, Syslog not supported for IPv6
+		* Octeon does not IPv6 because IPv6 is not turned on in the 
+		  Octeon kernel
+      - WebCIFS: Umlaut display error (45)
+      - Policy  Management:  Adding  more  than 12 policy crashes edituser CGI
+        page (78)
+      - SMM: Does not reset timeout for reverse-proxy (93)
+      - Mac routes should be aligned to class boundary (104)
+      - Able  to  work  in Terminal service remote desktop even after the main
+        EasyAccess browser window is closed (142)
+      -	HTTPRP: Multi-language and multi-encoding formats not handled.
+        (175, 290)
+      - VT:  Existing  windows  of Internet Explorer versions below 6.0 SP1 do
+        not work after VT is launched. (239)
+      - VP: Residual device if found in RAS capable Device List. (253)
+      - HTTPD:  During  an active Virtual Transport connection, if there is an
+        unexpected network loss;  On reconnect  the  board does not respond to
+        any traffic like icmp requests (259)
+      - WINS resolution support for SOHO (286)
+      - VT: Existing windows of Firefox don't work after VT is launched. (298)
+      - HTTPRP:  In  some  cases,  download  of  files  using  wget  does  not
+        complete. (379)
+      - HTTPRP: In some cases, OWA attachments are corrupted. (380)
+      - HTTPRP:  There  are some problems while handling special characters in
+        content. (403)
+      - HTTPRP: Header termination is incorrect in some cases. It is seen that
+        the connection header becomes part of the content. (404)
+      - HTTPD:  In  some  cases  an  issue  with  reaping child processes (CGI
+        scripts) which are  fork()'ed and  exec()'ed is seen. Child process is
+        killed before it completes. (411)
+      - HTTPD: In some cases, file-descriptor leaks are seen. (422)
+      - HTTPRP: IBM Lotus notes is not supported currently. (436)
+      - HTTPRP:  For  some  regular expressions, regexec() is found to cause a
+        to cause a kernel panic. The regular expressions currently used do not
+        exhibit any kernel panics. (438)
+      - Virtual Passage connected even after forced user logout from server (454)
+      - User Interface: Firmware upgrade fails in 64MB SOHO board. (496, 498, 500)
+      - FTP: FTP sessions persist after logout (524)
+      - SSLCERT: Imported Windows Generated Certificate shown as Blank entry. (535)
+      - VT: VT Policies are not supported in SOHO (583)
+
+--------------------------------
+Release Version 1.4.2 2006/09/25
+--------------------------------
+apache (Web Server):
+       * New Features - None
+       * Bug Fixes
+			- Apache module: severs closes connection, when TCP retransmissions packets has incomplete SSL record (558)
+	   * Other - None
+
+Virtual Passage (Windows):
+       * New Features
+			- Support for non-admin users in windows (Non Admin users can now connect to VP though for installation admin permissions are needed)(9)
+	   * Bug Fixes
+			- Proxy - VP - HTTP connection is not working for bypass configuration (537)
+			- VP is not working with same class drivers - Two instances of VP cannot be installed (565)
+	   * Other - None
+
+Virtual Passage (Linux):
+       * New Features - None
+	   * Bug Fixes - None
+	   * Other
+			- New feature added (101)
+
+Web Cache Cleaner:
+       * New Features - None
+       * Bug Fixes - None
+	   * Other - None
+
+firebase (Target Porting Module):
+       * New Features
+			- NTP sync takes too long - Needs to run in background (548)
+       * Bug Fixes
+			- Network Interfaces: Fails to disable (264)
+			- New interface ppp0 is added in interfaces list (471)
+			- Date updation always use NTP server if it configured (546)
+	   * Other - None
+
+firewall:
+       * New Features - None
+       * Bug Fixes - None
+	   * Other - None
+
+ftp (FTP Session Management):
+       * New Features - None
+       * Bug Fixes
+			- FTP file listing not working for some ftp server setting (MS-DOS Style) - For Multiple Sessions (89)
+			- FTP Session: Uploads blocked during multiple sessions (277)
+	   * Other - None
+
+Firmware Upgrade:
+	   * New Features - None
+	   * Bug Fixes
+			- Firmware Upgrade Fails in Windows Xp Professional (547)
+	   * Other - None
+
+httpd (Web Server):
+       * New Features - None
+       * Bug Fixes
+			- memory leakage after vfork() while spawning cgi scripts (566)
+	   * Other - None
+
+httprp (Reverse Proxy):
+       * New Features - None
+       * Bug Fixes - None
+	   * Other - None
+
+lib (EasyAccess Common Library):
+       * New Features - None
+       * Bug Fixes
+			- Issues in handling time when day light savings are enabled (71)
+	   * Other - None
+
+libauth (AAA / EasyAccess Authentication Library):
+       * New Features - None
+       * Bug Fixes - None
+	   * Other - None
+
+libgcgi (CGI Common Utilities Library):
+       * New Features - None
+       * Bug Fixes - None
+	   * Other - None
+
+libsslcert (SSL Certificate Management Library):
+       * New Features
+			- Support for generating Self-signed Certificates from EA GUI (545)
+       * Bug Fixes - None
+	   * Other - None
+
+MacOS:
+       * New Features - None
+       * Bug Fixes - None
+	   * Other - None
+
+onlineHelpSource (Portal Help Module):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+smm (System Management Module):
+       * New Features - None
+       * Bug Fixes
+			- SMM is dead when tried to add already existing group again(503)
+			- "Add Book Mark" should not be present - Radius domains and other External domains (519)
+			- smm becomes dead at logout, when Inactivity Timeout is set (555)
+			- Memory Leakage im smm while handling USER_LOGIN service (567)
+	   * Other - None
+
+TSAC (Terminal Services):
+       * New Features - None
+       * Bug Fixes - None
+	   * Other - None
+
+uiaddon (Portal Store):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+VirtualTransport:
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+WWW (User-Interface Modules):
+       * New Features - None
+       * Bug Fixes
+			- Not able to make any changes in Login Policies.(306)
+			- Certificates are listed as bogus entries (508)
+			- Active certificate can be deleted (542)
+			- New CSR returns '502 Bad gateway' error for keypair length 512 (544)
+			- certificate description not unique (557)
+	   * Other - None
+Others:
+       * New Features - None
+       * Bug Fixes
+			- Telnet - Enter key does not work with windows server (549)
+       * Other
+			- FC4/GCC 4.x compilation errors (522)
+
+------------
+KNOWN ISSUES
+------------
+      - WebCIFS: Umlaut display error (45)
+      - Policy  Management:  Adding  more  than 12 policy crashes edituser CGI
+        page (78)
+      - SMM: Does not reset timeout for reverse-proxy (93)
+      - Mac routes should be aligned to class boundary (104)
+      - Able  to  work  in Terminal service remote desktop even after the main
+        EasyAccess browser window is closed (142)
+      -	HTTPRP: Multi-language and multi-encoding formats not handled.
+        (175, 290)
+      - VT:  Existing  windows  of Internet Explorer versions below 6.0 SP1 do
+        not work after VT is launched. (239)
+      - VP: Residual device if found in RAS capable Device List. (253)
+      - HTTPD:  During  an active Virtual Transport connection, if there is an
+        unexpected network loss;  On reconnect  the  board does not respond to
+        any traffic like icmp requests. (259)
+      - WINS resolution support for SOHO (286)
+      - VT: Existing windows of Firefox don't work after VT is launched. (298)
+      - HTTPRP:  In  some  cases,  download  of  files  using  wget  does  not
+        complete. (379)
+      - HTTPRP: In some cases, OWA attachments are corrupted. (380)
+      - HTTPRP:  There  are some problems while handling special characters in
+        content. (403)
+      - HTTPRP: Header termination is incorrect in some cases. It is seen that
+        the connection header becomes part of the content. (404)
+      - HTTPD:  In  some  cases  an  issue  with  reaping child processes (CGI
+        scripts) which are  fork()'ed and  exec()'ed is seen. Child process is
+        killed before it completes. (411)
+      - HTTPD: In some cases, file-descriptor leaks are seen. (422)
+      - HTTPRP: IBM Lotus notes is not supported currently. (436)
+      - HTTPRP:  For  some  regular expressions, regexec() is found to cause a
+        to cause a kernel panic. The regular expressions currently used do not
+        exhibit any kernel panics. (438)
+      - Virtual Passage connected even after forced user logout from server (454)
+      - User Interface: Firmware upgrade fails in 64MB SOHO board. (496, 498, 500)
+      - FTP: FTP sessions persist after logout (524)
+      - SSLCERT: Imported Windows Generated Certificate shown as Blank entry. (535)
+      
+--------------------------------
+Release Version 1.4.1 2006/04/14
+--------------------------------
+apache (Web Server):
+       * New Features - None
+       * Bug Fixes
+	  - Virtual passage address range drops one IP address (450)
+       * Other - None
+
+Virtual Passage:
+       * New Features
+	   - Support for HTTP Proxy, Socks V and Socks IV which includes username and password authentication (7)
+       * Bug Fixes - None
+       * Other - None
+
+Web Cache Cleaner:
+       * New Features - None
+       * Bug Fixes
+	 - Removed debug messages (410)
+       * Other - None
+
+firebase (Target Porting Module):
+       * New Features - None
+       * Bug Fixes
+         - Support timezone through TZ environment variable in SOHO (465)
+	 - NTP not working in SOHO (469)
+       * Other - None
+
+firewall:
+       * New Features - None
+       * Bug Fixes
+	 - Support virtual passage policies like denying ipaddress. In SOHO it needs a SDK patch (466).
+	 - Address range configurations in Policy and Resources doest work in SOHO. SDK patch is required (468)
+       * Other - None
+
+ftp (FTP Session Management):
+       * New Features - None
+       * Bug Fixes - None
+       * Other
+
+httpd (Web Server):
+       * New Features - None
+       * Bug Fixes
+	 - Tunnel close not handled properly (420)
+	 - Httpd fails to start if the DNS is mis-configured (470)
+	 - Virtual Transport telnet data is seen in next tunnel application (533)
+       * Other - None
+
+httprp (Reverse Proxy):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+lcmgr (License Manager):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+lib (EasyAccess Common Library):
+       * New Features
+         - Radius CHAP, MSCHAP, MSCHAPV2 authentication support (448)
+       * Bug Fixes
+         - Support timezone through TZ environment variable in SOHO (465)
+	 - Support virtual passage policies like denying ipaddress. In SOHO it needs a SDK patch (466).
+	 - Address range configurations in Policy and Resources doest work in SOHO. SDK patch is required (468)
+         - Buffer overflow in messages passed between modules in EA (491)
+       * Other - None
+
+libauth (AAA / EasyAccess Authentication Library):
+       * New Features
+         - Radius CHAP, MSCHAP, MSCHAPV2 authentication support (448)
+       * Bug Fixes - None
+       * Other - None
+
+libgcgi (CGI Common Utilities Library):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+libsslcert (SSL Certificate Management Library):
+       * New Features - None
+       * Bug Fixes
+	 - CSR generated by EA gives ASN parsing errors in windows server (489)
+       * Other - None
+
+MacOS:
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+onlineHelpSource (Portal Help Module):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+smm (System Management Module):
+       * New Features
+         - Radius CHAP, MSCHAP, MSCHAPV2 authentication support (448)
+       * Bug Fixes
+	 - Support virtual passage policies like denying ipaddress. In SOHO it needs a SDK patch (466).
+	 - Address range configurations in Policy and Resources doest work in SOHO. SDK patch is required (468)
+         - Buffer overflow in messages passed between modules in EA (491)
+         - Kernel panic in Soho while adding of portal layouts (492)
+         - Browsing for web UI shows "502 Bad Gateway"(493)
+       * Other - None
+
+TSAC (Terminal Services):
+       * New Features
+         - Support for HTTP Proxy, Socks V and Socks IV which includes username and password authentication (8)
+       * Bug Fixes - None
+       * Other - None
+
+uiaddon (Portal Store):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+VirtualTransport:
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+WWW (User-Interface Modules):
+       * New Features
+         - Upgraded java vncviewer to TightVNC 1.3.7 from TightVNC 1.2.6 (48)
+         - Radius CHAP, MSCHAP, MSCHAPV2 authentication support (448)
+         - Configurable telnet/ssh port support (456)
+         - Firmware upgrade support in SOHO - Refer firmware upgrade document for detailed usage (482).
+       * Bug Fixes
+	 - FTP Session: Incorrect attempt changes Servername (276)
+         - Support timezone through TZ environment variable in SOHO (465)
+	 - Support virtual passage policies like denying ipaddress. In SOHO it needs a SDK patch (466).
+	 - Address range configurations in Policy and Resources doest work in SOHO. SDK patch is required (468)
+         - Enable active certificate radio button in SOHo (475)
+	 - Pre-install and Post-install scripts to be added for firmware upgrade (486).
+         - Support to display software version and failure messages in firmware upgrade (487)
+         - Buffer overflow in messages passed between modules in EA (491)
+         - Kernel panic in Soho while adding of portal layouts (492)
+         - Support to display firmware upgrade status (494).
+	 - Spawn only one firmware uprade process (499)
+	 - Configurable Telnet/SSH requires Port validation (529)
+	 - IE window crashes while launching multile RDP bookmarks (536)
+	 - WebCIFS  uploads  do  not  work  for file sizes above 512KB. (258)
+       * Other
+	 - WebCIFS: User permissions need to be configured properly for that windows shared folder to access 
+	   Password protected shares(458).
+Others:
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+------------
+KNOWN ISSUES
+------------
+      - WebCIFS: Umlaut display error (45)
+      - Policy  Management:  Adding  more  than 12 policy crashes edituser CGI
+        page (78)
+      - FTP: Default (/) top level folder displays a blank page (92)
+      - SMM: Does not reset timeout for reverse-proxy (93)
+      - Mac routes should be aligned to class boundary (104)
+      - Able  to  work  in Terminal service remote desktop even after the main
+        EasyAccess browser window is closed (142)
+      -	HTTPRP: Multi-language and multi-encoding formats not handled.
+        (175, 290)
+      - VT:  Existing  windows  of Internet Explorer versions below 6.0 SP1 do
+        not work after VT is launched. (239)
+      - VP: Residual device if found in RAS capable Device List. (253)
+      - HTTPD:  During  an active Virtual Transport connection, if there is an
+        unexpected network loss;  On reconnect  the  board does not respond to
+        any traffic like icmp requests. (259)
+      - WebTelnet: Login prompt does not come up on SOHO targets. (260)
+      - WINS resolution support for SOHO (286)
+      - VT: Existing windows of Firefox don't work after VT is launched. (298)
+      - Cannot edit login policies. (306)
+      - HTTPRP:  In  some  cases,  download  of  files  using  wget  does  not
+        complete. (379)
+      - HTTPRP: In some cases, OWA attachments are corrupted. (380)
+      - HTTPRP:  There  are some problems while handling special characters in
+        content. (403)
+      - HTTPRP: Header termination is incorrect in some cases. It is seen that
+        the connection header becomes part of the content. (404)
+      - HTTPD:  In  some  cases  an  issue  with  reaping child processes (CGI
+        scripts) which are  fork()'ed and  exec()'ed is seen. Child process is
+        killed before it completes. (411)
+      - HTTPD: In some cases, file-descriptor leaks are seen. (422)
+      - HTTPRP: IBM Lotus notes is not supported currently. (436)
+      - HTTPRP:  For  some  regular expressions, regexec() is found to cause a
+        to cause a kernel panic. The regular expressions currently used do not
+        exhibit any kernel panics. (438)
+      - Virtual Passage connected even after forced user logout from server (454)
+      - User Interface: Firmware upgrade fails in 64MB SOHO board. (496, 498, 500)
+      - FTP: FTP sessions persist after logout (524)
+      - SSLCERT: Imported Windows Generated Certificate shown as Blank entry. (535)
+      
+--------------------------------
+Release Version 1.4.0 2006/01/09
+--------------------------------
+
+apache (Web Server):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+Virtual Passage:
+       * New Features 
+         - PNP for Virtual Passage. (25)
+       * Bug Fixes 
+         - Unable to shutdown or logoff, when VP is installed. (166)
+         - Hibernate/Standby issues. (167)
+         - Uninstall/Install issues. (247)
+         - IE crashes when Virtual Passage window is closed. (292)
+         - System crashes when remote side closes the TCP connection abruptly.
+           (296)
+         - Unable to access other links in portal/admin page. (407)
+         - If Install fails, VP is not cleaned Completely. (428)
+       * Other - None
+
+Web Cache Cleaner:
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+firebase (Target Porting Module):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+firewall:
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+ftp (FTP Session Management):
+       * New Features - None
+       * Bug Fixes
+         - FTP  file  listing not working for some ftp server settings - MS-DOS
+           Style. (89)
+       * Other
+         - Documentation:  File  download  window  prompts twice for file open.
+           This is default IE behavior, and cannot be fixed. (110)
+
+httpd (Web Server):
+       * New Features
+         - Support for client certificates in httpd. (287)
+       * Bug Fixes
+         - Fixed issues in un-escaping URI's
+           (314, 315, 316, 317, 327, 359, 360, 361, 362)
+         - Tunnel  closure  is  now  handled  properly by properly closing the
+           correct  fd  and  preserving  the  SSL  context  until  the  entire
+           connection is freed. (395, 420)
+         - A  general  httpd  problem seen while handling POST requests is now
+           fixed.  The exec()'ed  CGI was not able to read the buffer in stdin
+           because of non-closure on httpd side. (408)
+         - SSL  Connections  in httpd were accept()'ed with an assumption that
+           the accept()  will  always  return  immediately.  This has now been
+           changed by adding a HTTPD_ACCEPT_PENDING state,  and the daemon now
+           handles accept() attempts as part of the httpd state machine.
+           This fix solves the issue of: "HTTPD does not respond when accessed
+           Mozilla-1.0.1". (419)
+         - File-descriptor / pipe  leaks  in  GET  request processing has been
+           fixed. (422)
+         - Incorrect  closure  of  the  connection file-descriptor  in the per
+           connection handling structure,  caused  multiple  connections  from
+           Virtual Transport to fail. (263, 421)
+         - Copying  of  remote and local ip addresses in to the per-connection
+           structure  was  done  with  length  out  of  bounds,  resulting  in
+           segmentation faults. (427)
+         - Rewrite  Engine  in  httpd  fails  in  some  cases  to redirect the
+           Requested URL to httprp. (429)
+         - Support for MacOS 10.4 Tiger clients. (288)
+         - Added mime type application/x-bzip2 for files ending with extension
+           bz2.  This was done to fix the MacOS VP Installation and connection
+           discovered while testing MacOS VP client with httpd. (457)
+       * Other - None
+
+httprp (Reverse Proxy):
+       * New Features - None
+       * Bug Fixes
+         - Import statement in CSS translated properly (140)
+         - Path  and  Domain  attributes of  Set-Cookie have been handled in a
+           case-insensitive manner. (172)
+         - HTML  tag attributes are now rewritten as per the case found in the
+           original web content received from the backend web server. (173)
+         - Regular  expression  to  parse  window.location  statements  within
+           embedded and inline javascripts have been fixed. (177)
+         - URI path parsing and translation has been fixed to support download
+           of  content  from   sub-directories  within  the  web  server  root
+           directory. (201, 202, 203, 212)
+         - Request  Protocol  regular  expressions have been fixed. These bugs
+           are  related to  content  not being displayed on browser because of
+           incorrect protocol translations. (217)
+         - CSS links/reference to other style-sheets starting with '#' symbols
+           i.e.  references  to  bookmarks   within  the  same  page  are  not
+           translated anymore. (309, 310, 312)
+         - HTML  Tags with attributes without explicit Javascript statement to
+           indicate  that  the  tag  refers  to a Javascript statement are now
+           being  translated  correctly.  These  changes also fix the bug when
+           httprp  crashes  when a page with base tag present and CSS urls are
+           present. (311, 388)
+         - HTML  Tag  "option"  and  attribute  "value" is now being parsed to
+           check if the value has any urls.
+           URLs are translated in these cases. (358, 414)
+         - Javascript Translation fixes
+           - Translation   of  location.href   statements  within  inline  and
+             embedded javascripts have been fixed. (126, 413)
+           - Translation  of  javascript  statements  with location, href, and
+             window properties and methods  have  been  fixed to recognize the
+             different combination of single-quote and double-quote.
+             (319, 320, 321, 323, 324, 325, 326, 328, 329, 330, 332, 333, 334,
+              335, 336, 337, 332, 339, 340, 344, 346, 347, 348, 349, 350, 351,
+              364, 365, 367, 369, 370, 371)
+         - HTTP  Header  de-limiter  recognition  and  processing has now been
+           changed to accept the following combinations - "\r\n", "\n".
+           Delimiter of the header  portion  itself can now be parsed with the
+           following combinations - "\r\n\r\n", "\n\n" (345)
+         - Crash seen while handling escaped cookies is now fixed. (381)
+         - An  interim  solution  to handle large content coming from  backend
+           web  server  is  provided  by  simply  increasing  the  size of the
+           incoming  response  buffer  to  512K.  This  is an interim solution
+           until the reverse proxy module is made more scaleable. (382)
+         - HTML  Entities starting from 'fnof' until 'diams' were not included
+           in the encoding process in libxml2. This is now included. (386)
+         - Script  statements/reference  within document.write bodies were not
+           being handled.  As a result some  javascripts referenced within the
+           src tag was not downloaded by the browsers. (412)
+         - Values  for  attributes  of tags compulsorily prefixed and suffixed
+           with quotes.  This behaviour is now  changed to include quotes only
+           if the original content has quotes. (415)
+         - Inserting  end  of  tags  is  fixed  and  may  differ from original
+           content. This default behaviour is now changed to recognize how the
+           tag is closed in the original content, and is reflected in the
+           translated content. (416)
+         - Outlook Web Access (OWA)
+           - When  "Options"  page  is  clicked in OWA, an javascript error on
+             invalid object used to come up. (198)
+           - When  "Manage Junk E-mail Lists"  within  "Options"  was clicked,
+             a  javascript  error  "Object  does  not support this property or
+             method" used to show up. (200)
+         - Microsoft Sharepoint Support
+           - Alignment  of  left  navigation  menu has been fixed with correct
+             translation. (309)
+           - Few  tags  required for parsing Sharepoint content, which are not
+             part  of  the standard HTML tags definition are added. (313, 318)
+         - Miscellaneous Bug Fixes
+           - Errors in translation of content from Google website.
+             (204, 205, 206)
+           - Errors in translation of content from Yahoo Sites. (233)
+           - Errors in translation of content from ebay sites.  (353)
+       * Other - None
+
+lcmgr (License Manager):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+lib (EasyAccess Common Library):
+       * New Features - None
+       * Bug Fixes - None
+         - FTP  file listing not working for some ftp server settings - MS-DOS
+           Style (89)
+       * Other - None
+
+libauth (AAA / EasyAccess Authentication Library):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+libgcgi (CGI Common Utilities Library):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+libsslcert (SSL Certificate Management Library):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+MacOS:
+       * New Features 
+         - Support for MacOS 10.4 Tiger clients. (288)
+       * Bug Fixes
+         - Fixed  MacOS  VP Client installation and connection issue which was
+           discovered while tesing with httpd. (457)
+       * Other - None
+
+onlineHelpSource (Portal Help Module):
+       * New Features - None
+       * Bug Fixes
+         - Due  to  incorrect mapping of themes to WebHelp, script errors were
+           seen while viewing Online Help. (283)
+       * Other - None
+
+smm (System Management Module):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+TSAC (Terminal Services):
+       * New Features - None
+       * Bug Fixes
+         - Terminal  services  remote  desktop  (RDP5)  window title bar shows
+           Menlologic Secure Remote desktop client. (244)
+         - TSC 5.0 client goes blank when re-sized. (32)
+         - Multiple TSAC crashes IE. (33)
+         - Unable to open  terminal service application when remote desktop is
+           already connected and vice versa. (145)
+       * Other - None
+
+uiaddon (Portal Store):
+       * New Features - None
+       * Bug Fixes - None
+       * Other - None
+
+VirtualTransport:
+       * New Features - None
+       * Bug Fixes - None
+       * Other
+         - Documentation:  CIFS is not working with VT. Since Windows does not
+           use  Windows  Sockets  Library  for  CIFS,  the  technology used by
+           Virtual Transport cannot be used. (147)
+         - Documentation:  Command  line FTP in  windows  and  FTP  through IE
+           5.0 will not work  through  Virtual  Transport  because they do not
+           support passive mode of FTP. (149, 150)
+
+WWW (User-Interface Modules):
+       * New Features - None
+       * Bug Fixes
+         - CIFS Delete does not work for Windows 2003. (41)
+         - Adding bookmarks for users from Mozilla Firefox Browser. (76)
+         - FTP  file listing not working for some ftp server settings - MS-DOS
+           Style. (89)
+         - WebCIFS: Script errors while accessing hosts (273)
+         - Domain  List  Management: The issue where adding the 27th domain in
+           a  SOHO target,  and  SMM  crash  while  retrieving  more  than the
+           MAX_DOMAIN_COUNT count of domains has been fixed. (423)
+         - Virtual Transport:  User-portal:  Roll-back  fix to support Virtual
+           Transport Installation from IE. (452)
+       * Other
+         - Documentation:  In  the  Event  log page, the options search, find,
+           exclude,  Reset,  and  Go  to are all missing in when accessed from
+           IE 5.0,  which  is  the default IE version on Windows 2000 Systems.
+           This is because IE 5.0 does not support DHTML. (248)
+         - Documentation:  The  default company Logo still displays Menlologic
+           logo. This link has been removed since 1.3.0 (249)
+
+Others:
+       * New Features - None
+       * Bug Fixes
+         - sslvpnclient.c  was  not  being  included in the single_cgi_files.c
+           in  the  SOHO build. This is now fixed to remove single_cgi_files.c
+           if  it  exists,   and  to  be  generated  during  a   fresh   build
+           process.(418)
+       * Other
+         - Documentation:  Clock Sync issue in 4102 with Active Directory (70)
+           Active Directory  uses  Kerberos  protocol. Kerberos works on token
+           exchange  mechanism. It  is  not  like  a  simple admission control
+           mechanism like user-id/password. Kerberos  authenticates a user for
+           a  certain time  period, after that the client should  authenticate
+           again. Clock between the client and server should in perfect synch,
+           if not kerberos will not work, should not work. EasyAccess and 2003
+           server must be in clock sync.
+
+------------
+KNOWN ISSUES
+------------
+      - WebCIFS: Umlaut display error (45)
+      - Policy  Management:  Adding  more  than 12 policy crashes edituser CGI
+        page (78)
+      - FTP: Default (/) top level folder displays a blank page (92)
+      - FTP: File/Directory rename fails in x86-Apache. (91)
+      - SMM: Does not reset timeout for reverse-proxy (93)
+      - Mac routes should be aligned to class boundary (104)
+      - Able  to  work  in Terminal service remote desktop even after the main
+        EasyAccess browser window is closed (142)
+      -	HTTPRP: Multi-language and multi-encoding formats not handled.
+        (175, 290)
+      - VT:  Existing  windows  of Internet Explorer versions below 6.0 SP1 do
+        not work after VT is launched. (239)
+      - VP: Residual device if found in RAS capable Device List. (253)
+      - User-Interface:  WebCIFS  uploads  do  not  work  for file sizes above
+        512KB. (258)
+      - HTTPD:  During  an active Virtual Transport connection, if there is an
+        unexpected network loss;  On reconnect  the  board does not respond to
+        any traffic like icmp requests. (259)
+      - WebFTP:  Second attempt to login to a backend FTP server causes a junk
+        value to be formed in the Server Name. (276)
+      - WINS resolution support for SOHO (286)
+      - VT: Existing windows of Firefox don't work after VT is launched. (298)
+      - Cannot edit login policies. (306)
+      - HTTPRP:  In  some  cases,  download  of  files  using  wget  does  not
+        complete. (379)
+      - HTTPRP: In some cases, OWA attachments are corrupted. (380)
+      - HTTPRP:  There  are some problems while handling special characters in
+        content. (403)
+      - HTTPRP: Header termination is incorrect in some cases. It is seen that
+        the connection header becomes part of the content. (404)
+      - HTTPD:  In  some  cases  an  issue  with  reaping child processes (CGI
+        scripts) which are  fork()'ed and  exec()'ed is seen. Child process is
+        killed before it completes. (411)
+      - HTTPD:  In some cases,  tunnels  created for VP and VT connections are
+        not closed properly. (420)
+      - HTTPD: In some cases, file-descriptor leaks are seen. (422)
+      - HTTPRP: IBM Lotus notes is not supported currently. (436)
+      - HTTPRP:  For  some  regular expressions, regexec() is found to cause a
+        to cause a kernel panic. The regular expressions currently used do not
+        exhibit any kernel panics. (438)
+      - WebCIFS: Cannot create, delete, upload, and download files to password
+        protected shares.
+      - WebTelnet: Login prompt does not come up on SOHO targets.
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+Cavium Networks EasyAccess SSL VPN Software Suite
+*************************************************
+
+Release Version 1.3.1                                          2005/08/26
+
+HttpRP:
+        * trio is turned off in libxml2. (200Kb reduction in binary size)
+        * www.ebay.com crash issues were resolved.
+        * RUN in libxml2 is modified to support non compatible autoconf,
+          autoheader build enviroments.
+
+Httpd:
+        * POST handling is modified, tempfiles usage is removed.
+        * URL re-write is turned on by default. Two new files HttpdRewrite.h
+          and HttpdRewrite.c is added.
+
+WebFTP:
+        * 512KB upload limitation is removed. ftp-upload is re-written to
+          directly handle x-www-form-urlencoded data.
+        * ftp-download buffer size is increased from 1024 to 2048.
+
+libgcgi:
+        * decodeBaseSixtyFourString() function is exported as global function.
+
+WebCIFS:
+        * JavaScript errors in slide-show is resolved.
+        * Authentication window compatibility issues with IE 5.0 is resolved.
+
+VirtualPassage:
+        * ReadMe.txt is updated with more instructions for build process.
+
+Portal CGI:
+        * VirtualPassage CGI is modified to launch the ActiveX from a hidden
+          frame, to allow users to simultaneously use VirtualPassage and other
+          services.
+        * VirtualTransport CGI is modified to launch onClick() rather than
+         onLoad().
+        * JavaScript URL validation in http and https is extended to support
+          full URLs.
+        * services html files are modified to launch WebFTP with status bar.
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+Cavium Networks Easy Access SSL VPN Software Suite
+
+Release Version 1.3             2005/07/30
+
+
+Please see individual components' Release Notes for open issues and updates. 
+
+Cavium has changed the following features from the previous release:
+        * libxml2 has been moved to EasyAccess/3rdParty.
+        * C based HttpRP is now the default HTTP Proxy. Configure
+          option '--use-c-proxy' is removed.
+        * Virtual Passage (src/AccessPointDial) is converted into a
+        single cab with built-in un-install and installer.
+        * Web Cache cleaner is re-written as COM
+        * Virtual Passage and XTSAC RDP5.0 clients have a new property
+          to disable trusted root certificate validation.
+        * libSys is optimized for CN2xx. 
+                - All the CGI clients that use clientApi must call
+                  initClientApi().
+        * TLV parameters are changed.
+        * AAA libauth is enabled by default in SOHO.
+        * libgcgi now has a simpler wrapper, getCookie(), that wraps
+          all the common CGI operations like initCgi() and fetchCookie().
+        * Unused code in libgcgi is wrapped under EXPANDED_FEATURES
+        * WebFTP is enabled by default for CN22xx builds. 
+        * userLogin is removed from single_cgi and it is now 
+          a stand alone CGI.
+        * All the CGIs are modified to use initClientApi() and getCookie().
+        * Certificate management CGIs are re-written to use libsslcert
+        * CGIs that launch cabs like 
+                - portal
+                - accesspoint
+                - tscapplications
+                - tscbookmark
+          are updated with newer cab versions.
+        * tscapplications and tsc CGI now only handle RDP 5.0.
+        * themes and site customization CGIs only supports default layout.
+        * The homepage CGI now reflects the added Service types for picture
+          sharing and photo sharing.
+        * editglobal, editusers, editgroups, and homepage now handle more service
+          types like CIFS, PHOTO-SHARE, SLIDE-SHOW
+        * The CIFS module is re-written as a single CGI. New CIFS module has 
+          multiple ways to display contents like photo sharing and slideshows.
+        * single_cgi doesn't refer to userLogin, certVerifyLogin, importlogo,
+          importlicense. New CGIs like transportapps, virtualtransport is included
+          in single_cgi.
+        * PCRE is not required for EasyAccess operations
+
+
+Cavium has added the following components for this release
+        * libsslcert is a small compact certificate management library. 
+          It replaced the requirement of openssl cli in the production 
+          targets
+        * Virtual Transport is a LSP/NSP based VPN connector for TCP
+          applications. All the applications that use WinSock2 for their
+        TCP communications are supported. 
+          The Windows client is located in EasyAccess/src/VirtualTransport
+        * CGI for Virtual Transport Management 
+                EasyAccess/src/WWW/cgi-bin/admin-pages/sslvpnclient/transportapps
+        * RoboHelp based online help source is included with the source distribution.
+          
+
+This uCLinux NITROX Soho release Easy Access v1.3 does not include the following components:
+        * Topmenu portal layouts
+        * Import Logo functionality
+        * Import license functionality
+        * CIFS rename
+        * Perl based HttpRP
+        
+Open Errata in This Release:
+------------------------------------------------------------------------
+        * HttpRP does not  work in GCC 4.0(Fedora core 4)
+                GCC 4.0 is not part uCLinux NITROX Soho toolchain
+        * Outlook 2003 stalls when Virtual Transport is deactivated
+        * Client certificates are not supported in this uCLinux NITROX Soho release
+        * Virtual hosting is not supported in this uCLinux NITROX Soho release
+
+------------------------------------------------------------------------
+
+Known Limitations:
+------------------------------------------------------------------------
+        * File uploads are limited to 512 KB to prevent memory overrun
+        * MacOS Virtual Passage supports 10.3 (Panther) only
+        * Daylight Savings Time (DST) is not supported in this uCLinux NITROX Soho release
+        * Microsoft FTP server is not supported by WebFTP
+
+------------------------------------------------------------------------
+
+
+Minimum System Requirements:
+------------------------------------------------------------------------
+        * Cavium Nitrox SOHO 2.8 SDK for NITROX Soho software development
+        * Windows 2000 + SP4, VC++ 6.0, MS PSDK 2003, MS DDK 2003
+                for Virtual Passage, Virtual Transport, Cache Cleaner, XTSAC
+        * VJ++ 6.0 for VNC and Telnet/SSH Java applets
+        * MacOS 10.3 with XCode 1.2 for MacOS Virtual Passage
+
+------------------------------------------------------------------------

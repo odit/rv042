@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+
+function Entryfunction()
+{
+	if ('<!--#nk_get RadioHandle="setIpMode:0"-->' == "checked" )
+	{
+		document.formDhcpRouter.RADVDEnable_show.disabled=true;
+		document.formDhcpRouter.raMode.disabled=true;
+		document.formDhcpRouter.raInteral.disabled=true;
+		document.formDhcpRouter.raPref.disabled=true;
+		document.formDhcpRouter.FlagManaSetting.disabled=true;
+		document.formDhcpRouter.FlagOtherSetting.disabled=true;
+		document.formDhcpRouter.raMTU.disabled=true;
+		document.formDhcpRouter.raLife.disabled=true;
+		SetButtonStatus('Save','disabled');
+		SetButtonStatus('Cancel','disabled');
+	}else{
+		if (document.formDhcpRouter.raMode.value == 0)
+			chDisplayRa();
+
+		if (document.formDhcpRouter.RADVDEnable_show.checked==true)
+			chDisplayRa(0);
+		else 
+			chDisplayRa(1);
+	}	
+
+	chChangeIPmode();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chDisplayRa(F)
+{	
+	if(document.formDhcpRouter.RADVDEnable_show.checked==false)
+	{
+			document.formDhcpRouter.raMode.disabled=true;
+			document.formDhcpRouter.raInteral.disabled=true;
+			document.formDhcpRouter.raPref.disabled=true;
+			document.formDhcpRouter.FlagManaSetting.disabled=true;
+			document.formDhcpRouter.FlagOtherSetting.disabled=true;
+			document.formDhcpRouter.raMTU.disabled=true;
+			document.formDhcpRouter.raLife.disabled=true;
+	}
+	else
+	{
+
+			document.formDhcpRouter.raMode.disabled=false;
+			document.formDhcpRouter.raInteral.disabled=false;
+			document.formDhcpRouter.raPref.disabled=false;
+			document.formDhcpRouter.FlagManaSetting.disabled=false;
+			document.formDhcpRouter.FlagOtherSetting.disabled=false;
+			document.formDhcpRouter.raMTU.disabled=false;
+			document.formDhcpRouter.raLife.disabled=false;
+			//break;
+			if (document.formDhcpRouter.raMode.value == 0)
+			{
+				document.formDhcpRouter.raInteral.disabled=false;
+			}
+			else //Unicast
+			{
+				document.formDhcpRouter.raInteral.disabled=true;	
+			}
+	}
+
+	
+}
+
+function falseSubmit(F)
+{
+
+}
+
+function chSubmit(F)
+{
+	if (F.raInteral.value<4 || F.raInteral.value >1800)
+	{
+		alert("Please input Advertise Interval value within 4~1800 seconds.");
+		F.raInteral.select();
+		return;
+	}
+	if (F.raMTU.value >1500 || F.raMTU.value<1280)
+	{
+		alert("Please input MTU within 1280~1500.");
+		F.raMTU.select();
+		return;
+	}
+	if (F.raLife.value >9000 || F.raLife.value <0)
+	{
+		alert("Please input Router Lifetime within 0~9000 seconds.");
+		F.raLife.select();
+		return;
+	}
+	if (F.raLife.value < F.raInteral.value)
+	{
+		alert("Router Lifetime should be larger than Advertise Interval !");
+		F.raLife.select();
+		return;
+	}
+	
+	if (F.RADVDEnable_show.checked==true)
+	    F.RADVDEnable.value=1;
+	else
+	    F.RADVDEnable.value=0;
+
+	if (F.FlagManaSetting.checked==true)
+	    F.manaEnable.value=1;
+	else
+	    F.manaEnable.value=0;
+
+	if (F.FlagOtherSetting.checked==true)
+	    F.otherEnable.value=1;
+	else
+	    F.otherEnable.value=0;
+
+	F.submitStatus.value=1;
+	F.log_ch.value=1;
+	F.submit();
+}
+
+function chChangeIPmode()
+{	
+	var serviceName="IPv6 RADVD";
+	 
+	if ('<!--#nk_get RadioHandle="setIpMode:0"-->'== "checked")
+	{
+		var tempValue=confirm(alertMessageBegin+serviceName+selectMessage);
+		if (tempValue){
+			document.location.href="network.htm";
+		}else{
+			document.location.href="javascript:history.back();";
+		}	
+	}
+	return 0;
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.formDhcpRouter);";
+var Cancellink = ""; 
+var helplink ='help_dhcp_ra.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 660;
+var head_width=120;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintEnable(1);
+	PrintRADVD();
+	PrintEndContent();
+
+}
+
+function PrintEnable(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border="'+Tableborder+'">');	
+	document.write('<tr><td width="1">');
+	document.write('<input type="checkbox" name="RADVDEnable_show" onChange="chDisplayRa(this.form);" <!--#nk_get CheckboxStatus="RADVDEnable"--> >');
+	document.write('</td><td>');
+	document.write('Enable Router Advertisement');
+	document.write('</td></tr></table>');	
+	PrintEndBlock(hasUnderLine, 0,1);
+}
+
+
+function PrintRADVD()
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border="'+Tableborder+'">');	
+	document.write('<tr><td width="25%">');
+	document.write('Prefix :');
+	document.write('</td><td>');
+	document.write('<!--#nk_get DisplayOnly="raPrefix"-->');	
+	document.write('</tr></td>');
+	document.write('<tr><td>');
+	document.write('Advertisement Mode :');
+	document.write('</td><td>');
+	document.write('<select class="select" name="raMode" style="width:150px" onChange="chDisplayRa(this.form);">');
+	document.write('<option  value="0" <!--#nk_get SelectHandle="raMode:0"-->>Unsolicited Multicast</option>');
+	document.write('<option  value="1" <!--#nk_get SelectHandle="raMode:1"-->>Unicast Only</option>');
+	document.write('</select>');
+	document.write('</tr></td>');	
+	document.write('<tr><td>');	
+	document.write('Advertisement Interval :');
+	document.write('</td><td>');
+	document.write('<input type="text" name="raInteral" maxlength="4" size="6" value="<!--#nk_get 1to1_Handle="raInteral"-->" onKeypress="return Check_User_Input(event)" > seconds');	
+	document.write('</tr></td>');
+	document.write('<tr><td>');
+	document.write('RA Flags :');
+	document.write('</td><td>');
+	document.write('<input type="checkbox" name="FlagManaSetting"  <!--#nk_get CheckboxStatus="manaEnable"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Managed');	
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="checkbox" name="FlagOtherSetting" <!--#nk_get CheckboxStatus="otherEnable"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Other');
+	document.write('</tr></td>');
+	document.write('<tr><td>');
+	document.write('Router Preference :');
+	document.write('</td><td>');
+	document.write('<select class="select" name="raPref" style="width:135px">');
+	document.write('<option value="0" <!--#nk_get SelectHandle="raPref:0"-->>Low</option>');
+	document.write('<option value="1" <!--#nk_get SelectHandle="raPref:1"-->>Medium</option>');
+	document.write('<option value="2" <!--#nk_get SelectHandle="raPref:2"-->>High</option>');
+	document.write('</select>');
+	document.write('</tr></td>');
+	document.write('<tr><td>');
+	document.write('MTU :');
+	document.write('</td><td>');
+	document.write('<input type="text" name="raMTU" maxlength="4" size="6" value="<!--#nk_get 1to1_Handle="raMTU"-->" onKeypress="return Check_User_Input(event)">');	
+	document.write('</tr></td>');
+	document.write('<tr><td>');
+	document.write('Router Lifetime :');
+	document.write('</td><td>');
+	document.write('<input type="text" name="raLife" maxlength="4" size="6" value="<!--#nk_get 1to1_Handle="raLife"-->" onKeypress="return Check_User_Input(event)"> seconds');	
+	document.write('</tr></td>');
+	document.write('</table>');	
+	PrintEndBlock(0);
+}
+
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 3, 3);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formDhcpRouter" method="post" action="dhcp_ra.htm">
+	<input type="hidden" name="page" value="dhcp_ra.htm">	
+	<input type="hidden" name="submitStatus" value='0'>	
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="manaEnable" value='<!--#nk_get CheckboxSave="manaEnable"-->'>
+	<input type="hidden" name="otherEnable" value='<!--#nk_get CheckboxSave="otherEnable"-->'>
+	<input type="hidden" name="RADVDEnable" value='<!--#nk_get CheckboxSave="RADVDEnable"-->'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="dhcp_ra.htm"-->
+<!--#nk_get DhcpRaUpdate=""-->

@@ -1,0 +1,72 @@
+.TH DHCP-HELPER 8
+.SH NAME
+dhcp-helper \- A DHCP/BOOTP relay agent.
+.SH SYNOPSIS
+.B dhcp-helper
+.I [OPTION]...
+.SH "DESCRIPTION"
+.BR dhcp-helper
+is a DHCP and BOOTP relay agent. It listens for DHCP and BOOTP broadcasts on directly connected 
+subnets and relays them to DHCP or BOOTP servers elsewhere. It also relays replies from the remote
+servers back to partially configured hosts. Once hosts are fully configured they can communicate 
+directly with their servers and no longer need the services of a relay.
+
+.SH OPTIONS
+The only required option is at least one DHCP server to relay to. The
+simplest way to configure dhcp-helper on a router is just to give the interface to
+the network containing the DHCP server with a 
+.B \-b
+option. All the other interfaces present on the machine will then
+accept DHCP requests. On a machine which does not have an interface
+on the network containing the DHCP server, use a 
+.B \-s
+option instead.
+.TP
+.B \-s <server>
+Specify a DHCP or BOOTP server to relay to. The server may be given as a machine name or
+dotted-quad IP address. More than one server may be specified.
+.TP
+.B \-b <interface>
+Relay to a DHCP or BOOTP server using broadcast via <interface>. This
+eliminates the need to give a server address. <interface> is
+automatically added to the list of interfaces which will not receive
+DHCP requests.
+.TP
+.B \-i <interface>
+Specify which local interfaces to listen on for DHCP/BOOTP broadcasts. If no 
+.B \-i
+flags are given all interfaces are used except those specified by
+.B \-e
+flags and those specified by 
+.B \-b
+flags.
+.TP
+.B \-e <interface>
+Specify which local interfaces to exclude.
+.TP 
+.B \-p
+Use alternative ports (1067/1068) for the DHCP client and server.
+.TP
+.B \-v
+Report the software release version and copyright information.
+.TP
+.B \-d
+Debug mode, do not change UID, write a pid-file or go into the background.
+.TP
+.B \-r <file>
+Specify an alternate path for dhcp-helper to record its process-id in. Normally /var/run/dhcp-helper.pid.
+.TP
+.B \-u <username>
+Specify the userid to which dhcp-helper will change after startup. The daemon must normally be
+started as root, but it will drop root 
+priviledges after startup by changing id to another user. Normally this user is "nobody" but that 
+can be over-ridden with this switch.
+.SH NOTES
+Dhcp-helper requires a 2.2 or later Linux kernel. The "Linux packet
+filter" and "packet socket" facilities are 
+.I not
+required, which is the chief advantage of this software over the ISC DHCP relay daemon.
+.SH AUTHOR
+This manual page was written by Simon Kelley <simon@thekelleys.org.uk>.
+
+

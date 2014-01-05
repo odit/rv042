@@ -1,0 +1,129 @@
+all:
+	$(MAKE) -C src
+ifeq "$(CONFIG_USE_APACHE)" "y"
+	$(MAKE) -C 3rdParty/apache
+endif
+
+clean:
+ifeq "$(CONFIG_USE_APACHE)" "y"
+	$(MAKE) -C 3rdParty/apache clean
+endif
+	$(MAKE) -C src clean
+	$(MAKE) -C 3rdParty/libxml2 distclean
+
+install: src-install certificate 
+
+default-install: src-install system-install
+
+src-install: 
+ifeq "$(CONFIG_USE_APACHE)" "y"
+	$(MAKE) -C 3rdParty/apache install
+endif
+
+ifeq "$(CONFIG_USE_HTTPD)" "y"
+	@install -d bin
+	@install -d www
+	@install -d www/htdocs
+	@install -d www/cgi-bin
+	@install -d www/conf
+	@install -d var/logs
+endif
+
+	@install -d var/cert
+	@install -d var/ca
+	@install -d var/conf
+	@install -d var/msg
+	@install -d var/tmp
+	@install -d var/images
+	@install -d var/locks/ppp
+	@install -d var/db
+	@install -d www/cert-bin
+	@install -d www/htdocs/graphs
+	$(MAKE) -C src install
+	cat bin/base.sh tools/EasyAccessCtrl > bin/EasyAccessCtrl; chmod +x bin/EasyAccessCtrl
+ifeq "$(CONFIG_USE_APACHE)" "y"
+	@rm -rf bin/apachectl bin/apxs bin/checkgid bin/dbmmanage bin/htdigest bin/htpasswd bin/logresolve bin/rotatelogs bin/ab
+endif
+	@rm -rf www/htdocs/manual
+	@rm -rf www/images/CVS
+	@rm -rf www/conf/*.default
+	@rm -rf www/conf/ssl.*
+	@rm -rf www/icons www/include www/man
+	@cp tools/verifyFirmware.sh www/cgi-bin
+	@cp src/utils/ca-bundle.crt var/ca
+	@cp src/lcmgr/lcfirst bin/
+	@cp -rf src/uiaddon .
+
+	@chmod -R 777 uiaddon
+	@chmod -R 777 var
+	@chmod -R 777 www/cgi-bin/
+	@chmod -R 777 www/htdocs/
+	@chmod ugo+s www/cgi-bin/status
+	@chmod ugo+s www/cgi-bin/date
+	@chmod ugo+s www/cgi-bin/restoredefault
+	@chmod ugo+s www/cgi-bin/restart
+	@chmod ugo+s www/cgi-bin/importconfig
+	@chmod ugo+s www/cgi-bin/viewcert
+	@chmod ugo+s www/cgi-bin/sslcert
+	@chmod ugo+s www/cgi-bin/importcert
+	@chmod ugo+s www/cgi-bin/eventlog
+	@chmod ugo+s www/cgi-bin/upgradefirmware
+	@chmod ugo+s www/cgi-bin/eventlog
+	@chmod ugo+s www/cgi-bin/ifacesettings
+	@chmod ugo+s www/cgi-bin/networkinterface
+#	@chmod ugo+s www/cgi-bin/importlicense
+	@chmod ugo+s www/cgi-bin/verifyFirmware.sh
+	@chmod ugo+s bin/*
+	@rm -rf libexec
+
+system-install:
+	cp bin/*.so /lib
+	ldconfig -f /etc/ld.so.conf
+	@install -d var/cert/default
+	@cp tools/server.crt var/cert/default
+	@cp tools/server.key var/cert/default
+	@cp src/firewall/rc.firewall /etc/rc.d/
+	@touch var/cert/default/password.sh; chmod +x var/cert/default/password.sh
+	@ln -s -f default/server.crt var/cert/server.crt
+	@ln -s -f default/server.key var/cert/server.key
+	@ln -s -f default/password.sh var/cert/password.sh
+	@rm bin/*.so
+
+
+src-clean:
+	@rm -rf src 3rdParty CVS EasyAccess.spec Makefile* tags Configure *.txt RUN* vimrc
+
+un-install:
+	@rm -rf var www bin libexec uiaddon
+	$(MAKE) -C src un-install
+
+certificate:
+	@install -d var/cert/default
+	#@openssl req -new -nodes -newkey rsa:1024 -x509 -keyout var/cert/default/server.key -out var/cert/default/server.crt
+	@touch var/cert/default/password.sh; chmod +x var/cert/default/password.sh
+	@cp -rf tools/server* var/cert/default/
+	@ln -s -f default/server.crt var/cert/server.crt
+	@ln -s -f default/server.key var/cert/server.key
+	@ln -s -f default/password.sh var/cert/password.sh
+
+rpm:
+	@rm -rf /tmp/build
+	@install -d /tmp/build/usr/local/src
+	cp -r ../EasyAccess /tmp/build/usr/local/src
+	rm -rf /tmp/build/usr/local/src/EasyAccess/src
+	rm -rf /tmp/build/usr/local/src/EasyAccess/3rdParty
+	rm -rf /tmp/build/usr/local/src/EasyAccess/libexec
+	rm -rf /tmp/build/usr/local/src/EasyAccess/Configure
+	rm -rf /tmp/build/usr/local/src/EasyAccess/Makefile
+	rm -rf /tmp/build/usr/local/src/EasyAccess/CVS
+	rm -rf /tmp/build/usr/local/src/EasyAccess/EasyAccess.spec
+	rm -rf /tmp/build/usr/local/src/EasyAccess/bin/ab
+	rm -rf /tmp/build/usr/local/src/EasyAccess/bin/apxs
+	rm -rf /tmp/build/usr/local/src/EasyAccess/bin/checkgid
+	rm -rf /tmp/build/usr/local/src/EasyAccess/bin/dbmmanage
+	rm -rf /tmp/build/usr/local/src/EasyAccess/bin/htdigest
+	rm -rf /tmp/build/usr/local/src/EasyAccess/bin/htpasswd
+	rm -rf /tmp/build/usr/local/src/EasyAccess/bin/logresolve
+	rm -rf /tmp/build/usr/local/src/EasyAccess/bin/rotatelogs
+	rpmbuild -bb EasyAccess.spec
+	@rm -rf /tmp/build/

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/26/10 15:44:01" />
+    <title>Setting Up One-to-One NAT </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=10;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998413"> </a><h1 class="pTitle">
+Setting Up One-to-One NAT
+
+</h1>
+<a name="wp1006976"> </a><p class="pBody">
+Use the <em class="cEmphasis">Setup &gt; One-to-One NAT</em> page to enable One-to-One NAT (Network 
+Address Translation). This process creates a relationship that maps a valid 
+external IP address to an internal IP address that is hidden by NAT. Traffic can then 
+be routed from the Internet to the specified internal resource. 
+
+</p>
+<a name="wp1006977"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> For best results, reserve IP addresses for the internal resources that you want to 
+reach through one-to-one NAT. See <a href="help_index.htm?url=help_dhcp_setup.html#wp1076163">Static IP Addresses</a>.
+
+</p>
+<a name="wp1007430"> </a><p class="pBody">
+You can map a single relationship, or map an internal IP address range to an 
+external range of equal length (for example, three internal addresses and three 
+external addresses). The first internal address is mapped to the first external 
+address, the second IP internal IP address is mapped to the second external 
+address, and so on. 
+
+</p>
+<a name="wp1007433"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp998423"> </a><p class="pBody">
+To enable this feature, check the <span style="font-weight: bold">Enable </span><b class="cBold">One-to-One NAT</b> box. Add or edit entries 
+as needed.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998424"> </a><li class="pSmartList1"><b class="cBold">To add an entry to the list:</b> Enter the following information, and then click 
+<b class="cBold">Add to List</b>. 
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998425"> </a><li class="pSmartList2"><b class="cBold">Private Range Begin:</b> Enter the starting IP address of the internal IP address range that you want to map to the public range. Do not include the router&#39;s LAN IP address in this range. </li>
+<a name="wp998427"> </a><li class="pSmartList2"><b class="cBold">Public Range Begin:</b> Enter the starting IP address of the public IP address range provided by the ISP. Do not include the router&#39;s WAN IP address in this range. </li>
+<a name="wp998428"> </a><li class="pSmartList2"><b class="cBold">Range Length:</b> Enter the number of IP addresses in the range. The range length cannot exceed the number of valid IP addresses. To map a single address, enter 1. </li>
+</ul></div>
+<a name="wp998429"> </a><li class="pSmartList1"><b class="cBold">To add another new entry: </b>Enter the information, and then click <b class="cBold">Add to list</b>.
+</li>
+<a name="wp998430"> </a><li class="pSmartList1"><b class="cBold">To modify an entry in the list:</b> Click the entry that you want to modify. The 
+information appears in the text fields. Make the changes, and then click 
+<b class="cBold">Update</b>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the entry and clear the text fields.
+</li>
+<a name="wp1008006"> </a><li class="pSmartList1"><b class="cBold">To delete an entry from the list:</b> Click the entry that you want to delete, and 
+then click <b class="cBold">Delete</b>. To select a block of entries, click the first entry, hold down 
+the Shift key, and then click the final entry in the block. To select individual 
+entries, press the Ctrl key while clicking each entry. To de-select an entry, 
+press the Ctrl key while clicking the entry.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

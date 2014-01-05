@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Outgoing Log Table</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script language=JavaScript>
+function refreshLog(F)
+{
+    F.submit();
+}
+function chCend(F)
+{
+    F.submitStatus.value="1";
+    if(F.cend.value=="1")
+	F.cend.value="0";
+    else if(F.cend.value=="0")
+	F.cend.value="1";
+
+    F.submit();
+}
+
+function FilterString(Str)
+{
+	var index = Str.indexOf("kernel:",0);
+	if (index > 0)
+		return Str.substring(index+8, Str.length);
+	else
+		return Str;
+}
+
+function Print_table_tr_cell(cell_type,time,event_type, message)
+{
+	if (cell_type == "OddRow")
+		cell_type = "popOddRow";
+	else
+		cell_type = "popEvenRow";
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td width="150" >'+FilterDate(time)+'</td>');
+	document.write('<td width="150">'+event_type+'</td>');
+	document.write('<td>'+FilterString(message)+'</td>');	
+	document.write('</tr>');
+}
+</script>
+</head>
+<body class="poplist" onLoad="ChangeWhiteTable()" onResize="ChangeWhiteTable()" style="overflow:hidden">
+<form name="formLog" method="post" action="outgoing_log.htm">
+<input type="hidden" name="page" value="outgoing_log.htm">
+<input type="hidden" name="submitStatus" value="0"> 
+<input type="hidden" name="cend" value='<!--#nk_get 1to1_Handle="cend"-->'> 
+  <table class="pop_title_table" border="0" width="100%">     
+    <tr> 
+      <td valign="bottom" width="90">Current Time&nbsp;:&nbsp;<img border="0" src="images/_blank.gif" width="8" height="1"></td>
+      <td valign="bottom">
+        <!--#config timefmt="%a %b %e %H:%M:%S %Y"-->
+        <!--#echo var="DATE_LOCAL"-->		
+      </td>          
+      <th>
+        <script language="JavaScript">
+        	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+        	PrintSTButton('refresh', 'Refresh', 'refreshLog(this.form)', "","", 70);
+		document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+		PrintSTButton('close', 'Close', 'closeWindow();', "","", 70);
+        </script> 
+      </th>  
+    </tr>     
+  </table>  
+  <script>PrintWhiteTableBegin();</script>
+  <table width="100%" class="STtable" border="1">
+  <tr>
+	<td>
+        <table width="100%" class="STtable" border="0">
+          <tr>
+	<td width="144" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="8" height="1">Time</td>
+	<td width="20" bgcolor="#D9E3E9">
+	<script>	 /* Up_Cend & Down_Cend Icon display*/
+	if (document.formLog.cend.value == 1)
+		document.write('<img src=\'images/cend21.gif\' width="12" height="12" onClick="chCend(document.formLog)">');		
+	else
+		document.write('<img src=\'images/cend11.gif\' width="12" height="12" onClick="chCend(document.formLog)">');
+	</script><img border="0" src="images/_blank.gif" width="8" height="1"></td>
+	<td bgcolor="#FFFFFF" style="width:1px"></td>
+	<td bgcolor="#A2B9C9" style="width:1px"></td>
+	<td width="164" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Event-Type</td>
+	<td bgcolor="#FFFFFF" style="width:1px"></td>
+	<td bgcolor="#A2B9C9" style="width:1px"></td>
+	<td bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Message</td>	
+          </tr>
+        </table>
+	</td>
+  </tr>
+  <!--#nk_get SysLogList="outbound"-->
+  </table>
+  <script>PrintWhiteTableEnd();</script>
+</form>     
+</body>
+</html>

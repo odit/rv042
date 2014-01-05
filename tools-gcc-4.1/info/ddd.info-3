@@ -1,0 +1,1466 @@
+This is ../../../src/ddd/ddd/ddd.info, produced by makeinfo version 4.3
+from ../../../src/ddd/ddd/ddd.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD: (ddd).                     The Data Display Debugger.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 15 January, 2004, of `Debugging with DDD'
+for DDD Version 3.3.11.
+
+Copyright (C) 2004 Universität des Saarlandes
+Lehrstuhl Softwaretechnik
+Postfach 15 11 50
+66041 Saarbrücken
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd.info,  Node: Opening the Selection,  Prev: Finding a Place to Start,  Up: Debugger Initialization
+
+Opening the Selection
+.....................
+
+ - Resource: openSelection (class OpenSelection)
+     If this is `on', DDD invoked without argument checks whether the
+     current selection or clipboard contains the file name or URL of an
+     executable program.  If this is so, DDD will automatically open
+     this program for debugging.  If this resource is `off' (default),
+     DDD invoked without arguments will always start without a debugged
+     program.
+
+
+File: ddd.info,  Node: Debugger Communication,  Prev: Debugger Initialization,  Up: Customizing Debugger Interaction
+
+Communication with the Inferior Debugger
+----------------------------------------
+
+   The following resources control the communication with the inferior
+debugger.
+
+ - Resource: blockTTYInput (class BlockTTYInput)
+     Whether DDD should block when reading data from the inferior
+     debugger via the pseudo-tty interface.  Most UNIX systems except
+     GNU/Linux _require_ this; set it to `on'.  On GNU/Linux, set it to
+     `off'.  The value `auto' (default) will always select the "best"
+     choice (that is, the best choice known to the DDD developers).
+
+ - Resource: bufferGDBOutput (class BufferGDBOutput)
+     If this is `on', all output from the inferior debugger is buffered
+     until a debugger prompt appears.  This makes it easier for DDD to
+     parse the output, but has the drawback that interaction with a
+     running debuggee in the debugger console is not possible.  If
+     `off', output is shown as soon as it arrives, enabling
+     interaction, but making it harder for DDD to parse the output.  If
+     `auto' (default), output is buffered if and only if the execution
+     window is open, which redirects debuggee output and thus enables
+     interaction.  *Note Using the Execution Window::, for details.
+
+ - Resource: contInterruptDelay (class InterruptDelay)
+     The time (in ms) to wait before automatically interrupting a `cont'
+     command.  DDD cannot interrupt a `cont' command immediately,
+     because this may disturb the status change of the process.
+     Default is `200'.
+
+ - Resource: displayTimeout (class DisplayTimeout)
+     The time (in ms) to wait for the inferior debugger to finish a
+     partial display information.  Default is `2000'.
+
+ - Resource: positionTimeout (class PositionTimeout)
+     The time (in ms) to wait for the inferior debugger to finish a
+     partial position information.  Default is `500'.
+
+ - Resource: questionTimeout (class QuestionTimeout)
+     The time (in seconds) to wait for the inferior debugger to reply.
+     Default is `10'.
+
+ - Resource: runInterruptDelay (class InterruptDelay)
+     The time (in ms) to wait before automatically interrupting a `run'
+     command.  DDD cannot interrupt a `cont' command immediately,
+     because this may disturb process creation.  Default is `2000'.
+
+ - Resource: stopAndContinue (class StopAndContinue)
+     If `on' (default), debugger commands interrupt program execution,
+     resuming execution after the command has completed.  This only
+     happens if the last debugger command was either a `run' or a
+     `continue' command.  If `off', debugger commands do not interrupt
+     program execution.
+
+ - Resource: synchronousDebugger (class SynchronousDebugger)
+     If `on', X events are not processed while the debugger is busy.
+     This may result in slightly better performance on single-processor
+     systems.  *Note Options::, for the `--sync-debugger' option.
+
+ - Resource: terminateOnEOF (class TerminateOnEOF)
+     If `on', DDD terminates the inferior debugger when DDD detects an
+     EOF condition (that is, as soon as the inferior debugger closes
+     its output channel).  This was the default behavior in DDD 2.x and
+     earlier.  If `off' (default), DDD takes no special action.
+
+ - Resource: useTTYCommand (class UseTTYCommand)
+     If `on', use the GDB `tty' command for redirecting input/output to
+     the separate execution window.  If `off', use explicit redirection
+     through shell redirection operators `<' and `>'.  The default is
+     `off' (explicit redirection), since on some systems, the `tty'
+     command does not work properly on some GDB versions.
+
+
+File: ddd.info,  Node: Windows,  Next: Navigating,  Prev: Invocation,  Up: Top
+
+The DDD Windows
+***************
+
+   DDD is composed of three main windows.  From top to bottom, we have:
+
+   * The "Data Window" shows the current data of the debugged program.
+     *Note Displaying Values::, for details.
+
+   * The "Source Window" shows the current source code of the debugged
+     program.  *Note Navigating::, for details.
+
+   * The "Debugger Console" accepts debugger commands and shows debugger
+     messages.  *Note Commands::, for details.
+
+   Besides these three main windows, there are some other optional
+windows:
+
+   * The "Command Tool" offers buttons for frequently used commands.
+     It is usually placed on the source window.  *Note Command Tool::,
+     for details.
+
+   * The "Machine Code Window" shows the current machine code.  It is
+     usually placed beneath the current source.  *Note Machine Code::,
+     for details.
+
+   * The "Execution Window" shows the input and output of the debugged
+     program.  *Note Using the Execution Window::, for details.
+
+* Menu:
+
+* Menu Bar::                    All DDD pull-down menus.
+* Tool Bar::                    The DDD icon buttons.
+* Command Tool::                The floating command tool.
+* Getting Help::                What does this thing mean?
+* Undo and Redo::               Oops!
+* Customizing::                 You can customize DDD
+
+
+File: ddd.info,  Node: Menu Bar,  Next: Tool Bar,  Up: Windows
+
+The Menu Bar
+============
+
+   The DDD Menu Bar gives you access to all DDD functions.
+
+`File'
+     Perform file-related operations such as selecting programs,
+     processes, and sessions, printing graphs, recompiling, as well as
+     exiting DDD.
+
+`Edit'
+     Perform standard editing operations, such as cutting, copying,
+     pasting, and killing selected text.  Also allows editing DDD
+     options and preferences.
+
+`View'
+     Allows accessing the individual DDD windows.
+
+`Program'
+     Perform operations related to the program being debugged, such as
+     starting and stopping the program.
+
+`Commands'
+     Perform operations related to DDD commands, such as accessing the
+     command history or defining new commands.
+
+`Status'
+     Examine the program status, such as the stack traces, registers, or
+     threads.
+
+`Source'
+     Perform source-related operations such as looking up items or
+     editing breakpoints.
+
+`Data'
+     Perform data-related operations such as editing displays or
+     layouting the display graph.
+
+`Maintenance'
+     Perform operations that are useful for debugging DDD.  By default,
+     this menu is disabled.
+
+`Help'
+     Give help on DDD usage.
+
+   There are two ways of selecting an item from a pull-down menu:
+
+   * Select an item in the menu bar by moving the cursor over it and
+     click _mouse button 1_.  Then move the cursor over the menu item
+     you want to choose and click left again.
+
+   * Select an item in the menu bar by moving the cursor over it and
+     click and hold _mouse button 1_.  With the mouse button depressed,
+     move the cursor over the menu item you want, then release it to
+     make your selection.
+
+   The menus can also be "torn off" (i.e. turned into a persistent
+window) by selecting the dashed line at the top.
+
+   If a command in the pull-down menu is not applicable in a given
+situation, the command is "disabled" and its name appears faded.  You
+cannot invoke items that are faded.  For example, many commands on the
+`Edit' menu appear faded until you select text on which they are to
+operate; after you select a block of text, edit commands are enabled.
+
+* Menu:
+
+* File Menu::                   Selecting programs and processes.
+* Edit Menu::                   Cut, copy, paste, and preferences.
+* View Menu::                   All DDD windows.
+* Program Menu::                Starting and stopping.
+* Commands Menu::               All DDD commands.
+* Status Menu::                 Examining the program status.
+* Source Menu::                 Navigating around.
+* Data Menu::                   Examining data.
+* Maintenance Menu::            Maintaining DDD.
+* Help Menu::                   Getting help.
+* Customizing the Menu Bar::    Alternate key bindings, etc.
+
+
+File: ddd.info,  Node: File Menu,  Next: Edit Menu,  Up: Menu Bar
+
+The File Menu
+-------------
+
+   The `File' menu contains file-related operations such as selecting
+programs, processes, and sessions, printing graphs, recompiling, as well
+as exiting DDD.
+
+`Open Program'
+`Open Class'
+     Open a program or class to be debugged (<Ctrl+O>).  *Note Opening
+     Programs::, for details.
+
+`Open Recent'
+     Re-open a recently opened program to be debugged.  *Note Opening
+     Programs::, for details.
+
+`Open Core Dump'
+     Open a core dump for the currently debugged program.  *Note
+     Opening Core Dumps::, for details.
+
+`Open Source'
+     Open a source file of the currently debugged program.  *Note
+     Opening Source Files::, for details.
+
+`Open Session'
+     Resume a previously saved DDD session (<Ctrl+N>).  *Note Resuming
+     Sessions::, for details.
+
+`Save Session As'
+     Save the current DDD session such that you can resume it later
+     (<Ctrl+S>).  *Note Saving Sessions::, for details.
+
+`Attach to Process'
+     Attach to a running process of the debugged program.  *Note
+     Attaching to a Process::, for details.
+
+`Detach Process'
+     Detach from the running process.  *Note Attaching to a Process::,
+     for details.
+
+`Print Graph'
+     Print the current graph on a printer.  *Note Printing the Graph::,
+     for details.
+
+`Change Directory'
+     Change the working directory of your program.  *Note Working
+     Directory::, for details.
+
+`Make'
+     Run the `make' program (<Ctrl+M>).  *Note Recompiling::, for
+     details.
+
+`Close'
+     Close this DDD window (<Ctrl+W>).  *Note Quitting::, for details.
+
+`Restart'
+     Restart DDD.
+
+`Exit'
+     Exit DDD (<Ctrl+Q>).  *Note Quitting::, for details.
+
+
+File: ddd.info,  Node: Edit Menu,  Next: View Menu,  Prev: File Menu,  Up: Menu Bar
+
+The Edit Menu
+-------------
+
+   The `Edit' menu contains standard editing operations, such as
+cutting, copying, pasting, and killing selected text.  Also allows
+editing DDD options and preferences.
+
+`Undo'
+     Undo the most recent action (<Ctrl+Z>).  Almost all commands can be
+     undone this way.  *Note Undo and Redo::, for details.
+
+`Redo'
+     Redo the action most recently undone (<Ctrl+Y>).  Every command
+     undone can be redone this way.  *Note Undo and Redo::, for details.
+
+`Cut'
+     Removes the selected text block from the current text area and
+     makes it the X clipboard selection (<Ctrl+X> or <Shift+Del>; *Note
+     Customizing the Edit Menu::, for details).  Before executing this
+     command, you have to select a region in a text area--either with
+     the mouse or with the usual text selection keys.
+
+     This item can also be applied to displays (*note Deleting
+     Displays::).
+
+`Copy'
+     Makes a selected text block the X clipboard selection (<Ctrl+C> or
+     <Ctrl+Ins>; *Note Customizing the Edit Menu::, for details).  You
+     can select text by selecting a text region with the usual text
+     selection keys or with the mouse.  *Note Customizing the Edit
+     Menu::, for changing the default accelerator.
+
+     This item can also be applied to displays (*note Deleting
+     Displays::).
+
+`Paste'
+     Inserts the current value of the X clipboard selection in the most
+     recently selected text area (<Ctrl+V> or <Shift+Ins>; *Note
+     Customizing the Edit Menu::, for details).  You can paste in text
+     you have placed in the clipboard using `Copy' or `Cut'.  You can
+     also use `Paste' to insert text that was pasted into the clipboard
+     from other applications.
+
+`Clear'
+     Clears the most recently selected text area (<Ctrl+U>).
+
+`Delete'
+     Removes the selected text block from the most recently selected
+     text area, but does not make it the X clipboard selection.
+
+     This item can also be applied to displays (*note Deleting
+     Displays::).
+
+`Select All'
+     Selects all characters from the most recently selected text area
+     (<Ctrl+A> or or <Ctrl+Shift+A>; *note Customizing the Edit Menu::,
+     for details).
+
+`Preferences'
+     Allows you to customize DDD interactively.  *Note Customizing::,
+     for details.
+
+`Debugger Settings'
+     Allows you to customize the inferior debugger.  *Note Debugger
+     Settings::, for details.
+
+`Save Options'
+     If set, all preferences and settings will be saved for the next DDD
+     invocation.  *Note Saving Options::, for details.
+
+
+File: ddd.info,  Node: View Menu,  Next: Program Menu,  Prev: Edit Menu,  Up: Menu Bar
+
+The View Menu
+-------------
+
+   The `View' menu allows accessing the individual DDD windows.
+
+`Command Tool'
+     Open and recenter the command tool (<Alt+8>).  *Note Command
+     Tool::, for details.
+
+`Execution Window'
+     Open the separate execution window (<Alt+9>).  *Note Using the
+     Execution Window::, for details.
+
+`Debugger Console'
+     Open the debugger console (<Alt+1>).  *Note Commands::, for
+     details.
+
+`Source Window'
+     Open the source window (<Alt+2>).  *Note Navigating::, for details.
+
+`Data Window'
+     Open the data window (<Alt+3>).  *Note Displaying Values::, for
+     details.
+
+`Machine Code Window'
+     Show machine code (<Alt+4>).  *Note Machine Code::, for details.
+
+
+File: ddd.info,  Node: Program Menu,  Next: Commands Menu,  Prev: View Menu,  Up: Menu Bar
+
+The Program Menu
+----------------
+
+   The `Program' menu performs operations related to the program being
+debugged, such as starting and stopping the program.
+
+   Most of these operations are also found on the command tool (*note
+Command Tool::).
+
+`Run'
+     Start program execution, prompting for program arguments (<F2>).
+     *Note Starting Program Execution::, for details.
+
+`Run Again'
+     Start program execution with the most recently used arguments
+     (<F3>).  *Note Starting Program Execution::, for details.
+
+`Run in Execution Window'
+     If enabled, start next program execution in separate execution
+     window.  *Note Using the Execution Window::, for details.
+
+`Step'
+     Continue running your program until control reaches a different
+     source line, then stop it and return control to DDD (<F5>).  *Note
+     Resuming Execution::, for details.
+
+`Step Instruction'
+     Execute one machine instruction, then stop and return to DDD
+     (<Shift+F5>).  *Note Machine Code Execution::, for details.
+
+`Next'
+     Continue to the next source line in the current (innermost) stack
+     frame (<F6>).  This is similar to `Step', but function calls that
+     appear within the line of code are executed without stopping.
+     *Note Resuming Execution::, for details.
+
+`Next Instruction'
+     Execute one machine instruction, but if it is a function call,
+     proceed until the function returns (<Shift+F6>).  *Note Machine
+     Code Execution::, for details.
+
+`Until'
+     Continue running until a source line past the current line, in the
+     current stack frame, is reached (<F7>).  *Note Resuming
+     Execution::, for details.
+
+`Finish'
+     Continue running until just after function in the selected stack
+     frame returns (<F8>).  Print the returned value (if any).  *Note
+     Resuming Execution::, for details.
+
+`Continue'
+     Resume program execution, at the address where your program last
+     stopped (<F9>); any breakpoints set at that address are bypassed.
+     *Note Resuming Execution::, for details.
+
+`Continue Without Signal'
+     Continue execution without giving a signal (<Shift+F9>).  This is
+     useful when your program stopped on account of a signal and would
+     ordinary see the signal when resumed with `Continue'.  *Note
+     Signals::, for details.
+
+`Kill'
+     Kill the process of the debugged program (<F4>).  *Note Killing
+     the Program::, for details.
+
+`Interrupt'
+     Interrupt program execution (<Esc> or <Ctrl+C>; *note Customizing
+     the Edit Menu::, for details).  This is equivalent to sending an
+     interrupt signal to the process.  *Note Interrupting::, for
+     details.
+
+`Abort'
+     Abort program execution (and maybe debugger execution, too;
+     <Ctrl+\>).  This is equivalent to sending a `SIGABRT' signal to
+     the process.  *Note Quitting::, for details.
+
+
+File: ddd.info,  Node: Commands Menu,  Next: Status Menu,  Prev: Program Menu,  Up: Menu Bar
+
+The Commands Menu
+-----------------
+
+   The `Commands' menu performs operations related to DDD commands,
+such as accessing the command history or defining new commands.
+
+   Most of these items are not meant to be actually executed via the
+menu; instead, they serve as _reminder_ for the equivalent keyboard
+commands.
+
+`Command History'
+     View the command history.  *Note Command History::, for details.
+
+`Previous'
+     Show the previous command from the command history (<Up>).  *Note
+     Command History::, for details.
+
+`Next'
+     Show the next command from the command history (<Down>).  *Note
+     Command History::, for details.
+
+`Find Backward'
+     Do an incremental search backward through the command history
+     (<Ctrl+B>).  *Note Command History::, for details.
+
+`Find Forward'
+     Do an incremental search forward through the command history
+     (<Ctrl+F>).  *Note Command History::, for details.
+
+`Quit Search'
+     Quit incremental search through the command history (<Esc>).
+     *Note Command History::, for details.
+
+`Complete'
+     Complete the current command in the debugger console (<Tab>).
+     *Note Entering Commands::, for details.
+
+`Apply'
+     Apply the current command in the debugger console (<Apply>).
+     *Note Entering Commands::, for details.
+
+`Clear Line'
+     Clear the current command line in the debugger console (<Ctrl+U>).
+     *Note Entering Commands::, for details.
+
+`Clear Window'
+     Clear the debugger console (<Shift+Ctrl+U>).  *Note Entering
+     Commands::, for details.
+
+`Define Command'
+     Define a new debugger command.  *Note Defining Commands::, for
+     details.
+
+`Edit Buttons'
+     Customize DDD buttons.  *Note Defining Buttons::, for details.
+
+
+File: ddd.info,  Node: Status Menu,  Next: Source Menu,  Prev: Commands Menu,  Up: Menu Bar
+
+The Status Menu
+---------------
+
+   The `Status' menu lets you examine the program status, such as the
+stack traces, registers, or threads.
+
+`Backtrace'
+     View the current backtrace.  *Note Backtraces::, for a discussion.
+
+`Registers'
+     View the current register contents.  *Note Registers::, for
+     details.
+
+`Threads'
+     View the current threads.  *Note Threads::, for details.
+
+`Signals'
+     View and edit the current signal handling.  *Note Signals::, for
+     details.
+
+`Up'
+     Select the stack frame (i.e. the function) that called this one
+     (<Ctrl+Up>).  This advances toward the outermost frame, to higher
+     frame numbers, to frames that have existed longer.  *Note Stack::,
+     for details.
+
+`Down'
+     Select the stack frame (i.e. the function) that was called by this
+     one (<Ctrl+Down>).  This advances toward the innermost frame, to
+     lower frame numbers, to frames that were created more recently.
+     *Note Stack::, for details.
+
+
+File: ddd.info,  Node: Source Menu,  Next: Data Menu,  Prev: Status Menu,  Up: Menu Bar
+
+The Source Menu
+---------------
+
+   The `Source' menu performs source-related operations such as looking
+up items or editing breakpoints.
+
+`Breakpoints'
+     Edit all Breakpoints.  *Note Editing all Breakpoints::, for
+     details.
+
+`Lookup ()'
+     Look up the argument `()' in the source code (<Ctrl+/>).  *Note
+     Looking up Definitions::, for details.
+
+`Find >> ()'
+     Look up the next occurrence of the argument `()' in the current
+     source code (<Ctrl+.>).  *Note Textual Search::, for details.
+
+`Find << ()'
+     Look up the previous occurrence of the argument `()' in the current
+     source code (<Ctrl+,>).  *Note Textual Search::, for details.
+
+`Find Words Only'
+     If enabled, find only complete words (<Alt+W>).  *Note Textual
+     Search::, for details.
+
+`Find Case Sensitive'
+     If enabled, find is case-sensitive (<Alt+I>).  *Note Textual
+     Search::, for details.
+
+`Display Line Numbers'
+     If enabled, prefix source lines with their line number (<Alt+N>).
+     *Note Customizing Source::, for details.
+
+`Display Machine Code'
+     If enabled, show machine code (<Alt+4>).  *Note Machine Code::,
+     for details.
+
+`Edit Source'
+     Invoke an editor for the current source file (<Shift+Ctrl+V>).
+     *Note Editing Source Code::, for details.
+
+`Reload Source'
+     Reload the current source file (<Shift+Ctrl+L>).  *Note Editing
+     Source Code::, for details.
+
+
+File: ddd.info,  Node: Data Menu,  Next: Maintenance Menu,  Prev: Source Menu,  Up: Menu Bar
+
+The Data Menu
+-------------
+
+   The `Data' menu performs data-related operations such as editing
+displays or layouting the display graph.
+
+`Displays'
+     Invoke the Display Editor.  *Note Editing all Displays::, for
+     details.
+
+`Watchpoints'
+     Edit all Watchpoints.  *Note Editing all Watchpoints::, for
+     details.
+
+`Memory'
+     View a memory dump.  *Note Examining Memory::, for details.
+
+`Print ()'
+     Print the value of `()' in the debugger console (<Ctrl+=>).  *Note
+     Printing Values::, for details.
+
+`Display ()'
+     Display the value of `()' in the data window (<Ctrl+->).  *Note
+     Displaying Values::, for details.
+
+`Detect Aliases'
+     If enabled, detect shared data structures (<Alt+A>).  *Note Shared
+     Structures::, for a discussion.
+
+`Display Local Variables'
+     Show all local variables in a display (<Alt+L>).  *Note Displaying
+     Local Variables::, for details.
+
+`Display Arguments'
+     Show all arguments of the current function in a display (<Alt+U>).
+     *Note Displaying Local Variables::, for details.
+
+`Status Displays'
+     Show current debugging information in a display.  *Note Displaying
+     Program Status::, for details.
+
+`Align on Grid'
+     Align all displays on the grid (<Alt+G>).  *Note Aligning
+     Displays::, for a discussion.
+
+`Rotate Graph'
+     Rotate the graph by 90 degrees (<Alt+R>).  *Note Rotating the
+     Graph::, for details.
+
+`Layout Graph'
+     Layout the graph (<Alt+Y>).  *Note Layouting the Graph::, for
+     details.
+
+`Refresh'
+     Update all values in the data window (<Ctrl+L>).  *Note Refreshing
+     the Data Window::, for details.
+
+
+File: ddd.info,  Node: Maintenance Menu,  Next: Help Menu,  Prev: Data Menu,  Up: Menu Bar
+
+The Maintenance Menu
+--------------------
+
+   The `Maintenance' menu performs operations that are useful for
+debugging DDD.
+
+   By default, this menu is disabled; it is enabled by specifically
+requesting it at DDD invocation (via the `--maintenance' option; *note
+Options::).  It is also enabled when DDD gets a fatal signal.
+
+`Debug DDD'
+     Invoke a debugger (typically, GDB) and attach it to this DDD
+     process (<F12>).  This is useful only if you are a DDD maintainer.
+
+`Dump Core Now'
+     Make this DDD process dump core.  This can also be achieved by
+     sending DDD a `SIGUSR1' signal.
+
+`Tic Tac Toe'
+     Invoke a Tic Tac Toe game.  You must try to get three stop signs
+     in a row, while preventing DDD from doing so with its skulls.
+     Click on `New Game' to restart.
+
+`When DDD Crashes'
+     Select what to do when DDD gets a fatal signal.
+
+    `Debug DDD'
+          Invoke a debugger on the DDD core dump when DDD crashes.
+          This is useful only if you are a DDD maintainer.
+
+    `Dump Core'
+          Just dump core when DDD crashes; don't invoke a debugger.
+          This is the default setting, as the core dump may contain
+          important information required for debugging DDD.
+
+    `Do Nothing'
+          Do not dump core or invoke a debugger when DDD crashes.
+
+`Remove Menu'
+     Make this menu inaccessible again.
+
+
+File: ddd.info,  Node: Help Menu,  Next: Customizing the Menu Bar,  Prev: Maintenance Menu,  Up: Menu Bar
+
+The Help Menu
+-------------
+
+   The `Help' menu gives help on DDD usage.  *Note Getting Help::, for
+a discussion on how to get help within DDD.
+
+`Overview'
+     Explains the most important concepts of DDD help.
+
+`On Item'
+     Lets you click on an item to get help on it.
+
+`On Window'
+     Gives you help on this DDD window.
+
+`What Now?'
+     Gives a hint on what to do next.
+
+`Tip of the Day'
+     Shows the current tip of the day.
+
+`DDD Reference'
+     Shows the DDD Manual.
+
+`DDD News'
+     Shows what's new in this DDD release.
+
+`Debugger Reference'
+     Shows the on-line documentation for the inferior debugger.
+
+`DDD License'
+     Shows the DDD License (*note License::).
+
+`DDD WWW Page'
+     Invokes a WWW browser for the DDD WWW page.
+
+`About DDD'
+     Shows version and copyright information.
+
+
+File: ddd.info,  Node: Customizing the Menu Bar,  Prev: Help Menu,  Up: Menu Bar
+
+Customizing the Menu Bar
+------------------------
+
+   The Menu Bar can be customized in various ways (*note Customizing::).
+
+* Menu:
+
+* Auto-Raise Menus::
+* Customizing the Edit Menu::
+
+
+File: ddd.info,  Node: Auto-Raise Menus,  Next: Customizing the Edit Menu,  Up: Customizing the Menu Bar
+
+Auto-Raise Menus
+................
+
+   You can cause pull-down menus to be raised automatically.
+
+ - Resource: autoRaiseMenu (class AutoRaiseMenu)
+     If `on' (default), DDD will always keep the pull down menu on top
+     of the DDD main window.  If this setting interferes with your
+     window manager, or if your window manager does not auto-raise
+     windows, set this resource to `off'.
+
+ - Resource: autoRaiseMenuDelay (class AutoRaiseMenuDelay)
+     The time (in ms) during which an initial auto-raised window blocks
+     further auto-raises.  This is done to prevent two overlapping
+     auto-raised windows from entering an _auto-raise loop_.  Default is
+     `100'.
+
+
+File: ddd.info,  Node: Customizing the Edit Menu,  Prev: Auto-Raise Menus,  Up: Customizing the Menu Bar
+
+Customizing the Edit Menu
+.........................
+
+   In the Menu Bar, the `Edit' Menu can be customized in various ways.
+Use `Edit => Preferences => Startup' to customize these keys.
+
+   The <Ctrl+C> key can be bound to different actions, each in
+accordance with a specific style guide.
+
+`Copy'
+     This setting binds <Ctrl+C> to the Copy operation, as specified by
+     the KDE style guide.  In this setting, use <ESC> to interrupt the
+     debuggee.
+
+`Interrupt'
+   This (default) setting binds <Ctrl+C> to the Interrupt operation, as
+used in several UNIX command-line programs.  In this setting, use
+<Ctrl+Ins> to copy text to the clipboard.
+
+   The <Ctrl+A> key can be bound to different actions, too.
+
+`Select All'
+     This (default) setting binds <Ctrl+A> to the `Select All'
+     operation, as specified by the KDE style guide.  In this setting,
+     use <Home> to move the cursor to the beginning of a line.
+
+`Beginning of Line'
+     This setting binds <Ctrl+A> to the `Beginning of Line' operation,
+     as used in several UNIX text-editing programs.  In this setting,
+     use <Ctrl+Shift+A> to select all text.
+
+   Here are the related DDD resources:
+
+ - Resource: cutCopyPasteBindings (class BindingStyle)
+     Controls the key bindings for clipboard operations.
+
+        * If this is `Motif' (default), Cut/Copy/Paste is on
+          <Shift+Del>/<Ctrl+Ins>/<Shift+Ins>.  This is conformant to
+          the M*tif style guide.
+
+        * If this is `KDE', Cut/Copy/Paste is on
+          <Ctrl+X>/<Ctrl+C>/<Ctrl+V>.  This is conformant to the KDE
+          style guide.  Note that this means that <Ctrl+C> no longer
+          interrupts the debuggee; use <ESC> instead.
+
+ - Resource: selectAllBindings (class BindingStyle)
+     Controls the key bindings for the `Select All' operation.
+
+        * If this is `Motif', Select All is on <Shift+Ctrl+A>.
+
+        * If this is `KDE' (default), Select All is on <Ctrl+A>.  This
+          is conformant to the KDE style guide.  Note that this means
+          that <Ctrl+A> no longer moves the cursor to the beginning of
+          a line; use <Home> instead.
+
+
+File: ddd.info,  Node: Tool Bar,  Next: Command Tool,  Prev: Menu Bar,  Up: Windows
+
+The Tool Bar
+============
+
+   Some DDD commands require an _argument_.  This argument is specified
+in the _argument field_, labeled `():'.  Basically, there are four ways
+to set arguments:
+
+   * You can _key in_ the argument manually.
+
+   * You can _paste_ the current selection into the argument field
+     (typically using `mouse button 2').  To clear old contents
+     beforehand, click on the `():' label.
+
+   * You can _select an item_ from the source and data windows.  This
+     will automatically copy the item to the argument field.
+
+   * You can select a _previously used argument_ from the drop-down
+     menu at the right of the argument field.
+
+   Using GDB and Perl, the argument field provides a completion
+mechanism.  You can enter the first few characters of an item an press
+the <TAB> key to complete it.  Pressing <TAB> again shows alternative
+completions.
+
+   After having entered an argument, you can select one of the buttons
+on the right.  Most of these buttons also have menus associated with
+them; this is indicated by a small arrow in the upper right corner.
+Pressing and holding _mouse button 1_ on such a button will pop up a
+menu with further operations.
+
+   These are the buttons of the tool bar.  Note that not all buttons
+may be inactive, depending on the current state and the capabilities of
+the inferior debugger.
+
+`Lookup'
+     Look up the argument `()' in the source code.  *Note Looking up
+     Definitions::, for details.
+
+`Find >>'
+     Look up the next occurrence of the argument `()' in the current
+     source code.  *Note Textual Search::, for details.
+
+`Break/Clear'
+     Toggle a breakpoint (*note Breakpoints::) at the location `()'.
+
+    `Break'
+          If there is no breakpoint at `()', then this button is labeled
+          `Break'.  Clicking on `Break' sets a breakpoint at the
+          location `()'.  *Note Setting Breakpoints::, for details.
+
+    `Clear'
+          If there already is a breakpoint at `()', then this button is
+          labeled `Clear'.  Clicking on `Clear' clears (deletes) the
+          breakpoint at the location `()'.  *Note Deleting
+          Breakpoints::, for details.
+
+`Watch/Unwatch'
+     Toggle a watchpoint (*note Watchpoints::) on the expression `()'.
+
+    `Watch'
+          If `()' is not being watched, then this button is labeled
+          `Watch'.  Clicking on `Watch' creates a watchpoint on the
+          expression `()'.  *Note Setting Watchpoints::, for details.
+
+    `Unwatch'
+          If `()' is being watched, then this button is labeled
+          `Unwatch'.  Clicking on `Unwatch' clears (deletes) the
+          watchpoint on `()'.  *Note Deleting Watchpoints::, for
+          details.
+
+`Print'
+     Print the value of `()' in the debugger console.  *Note Printing
+     Values::, for details.
+
+`Display'
+     Display the value of `()' in the data window.  *Note Displaying
+     Values::, for details.
+
+`Plot'
+     Plot `()' in a plot window.  *Note Plotting Values::, for details.
+
+`Show/Hide'
+     Toggle details of the selected display(s).  *Note Showing and
+     Hiding Details::, for a discussion.
+
+`Rotate'
+     Rotate the selected display(s).  *Note Rotating Displays::, for
+     details.
+
+`Set'
+     Set (change) the value of `()'.  *Note Assignment::, for details.
+
+`Undisp'
+     Undisplay (delete) the selected display(s).  *Note Deleting
+     Displays::, for details.
+
+* Menu:
+
+* Customizing the Tool Bar::
+
+
+File: ddd.info,  Node: Customizing the Tool Bar,  Up: Tool Bar
+
+Customizing the Tool Bar
+------------------------
+
+   The DDD tool bar buttons can appear in a variety of styles,
+customized via `Edit => Preferences => Startup'.
+
+`Images'
+     This lets each tool bar button show an image illustrating the
+     action.
+
+`Captions'
+     This shows the action name below the image.
+
+   The default is to have images as well as captions, but you can
+choose to have only images (saving space) or only captions.
+
+   If you choose to have neither images nor captions, tool bar buttons
+are labeled like other buttons, as in DDD 2.x.  Note that this implies
+that in the stacked window configuration, the common tool bar cannot be
+displayed; it is replaced by two separate tool bars, as in DDD 2.x.
+
+   If you enable `Flat' buttons (default), the border of tool bar
+buttons will appear only if the mouse pointer is over them.  This
+latest-and-greatest GUI invention can be disabled, such that the button
+border is always shown.
+
+   If you enable `Color' buttons, tool bar images will be colored when
+entered.  If DDD was built using M*tif 2.0 and later, you can also
+choose a third setting, where buttons appear in color all the time.
+
+   Here are the related resources (*note Customizing::):
+
+ - Resource: activeButtonColorKey (class ColorKey)
+     The XPM color key to use for the images of active buttons (entered
+     or armed).  `c' means color, `g' (default) means grey, and `m'
+     means monochrome.
+
+ - Resource: buttonCaptions (class ButtonCaptions)
+     Whether the tool bar buttons should be shown using captions (`on',
+     default) or not (`off').  If neither captions nor images are
+     enabled, tool bar buttons are shown using ordinary labels.  See
+     also `buttonImages', below.
+
+ - Resource: buttonCaptionGeometry (class ButtonCaptionGeometry)
+     The geometry of the caption subimage within the button icons.
+     Default is `29x7+0-0'.
+
+ - Resource: buttonImages (class ButtonImages)
+     Whether the tool bar buttons should be shown using images (`on',
+     default) or not (`off').  If neither captions nor images are
+     enabled, tool bar buttons are shown using ordinary labels.  See
+     also `buttonCaptions', above.
+
+ - Resource: buttonImageGeometry (class ButtonImageGeometry)
+     The geometry of the image within the button icon.  Default is
+     `25x21+2+0'.
+
+ - Resource: buttonColorKey (class ColorKey)
+     The XPM color key to use for the images of inactive buttons
+     (non-entered or insensitive).  `c' means color, `g' (default)
+     means grey, and `m' means monochrome.
+
+ - Resource: flatToolbarButtons (class FlatButtons)
+     If `on' (default), all tool bar buttons with images or captions
+     are given a `flat' appearance--the 3-D border only shows up when
+     the pointer is over the icon.  If `off', the 3-D border is shown
+     all the time.
+
+ - Resource: flatDialogButtons (class FlatButtons)
+     If `on' (default), all dialog buttons with images or captions are
+     given a `flat' appearance--the 3-D border only shows up when the
+     pointer is over the icon.  If `off', the 3-D border is shown all
+     the time.
+
+
+File: ddd.info,  Node: Command Tool,  Next: Getting Help,  Prev: Tool Bar,  Up: Windows
+
+The Command Tool
+================
+
+   The command tool is a small window that gives you access to the most
+frequently used DDD commands.  It can be moved around on top of the DDD
+windows, but it can also be placed besides them.
+
+   By default, the command tool _sticks_ to the DDD source window:
+Whenever you move the DDD source window, the command tool follows such
+that the distance between source window and command tool remains the
+same.  By default, the command tool is also _auto-raised_, such that it
+stays on top of other DDD windows.
+
+   The command tool can be configured to appear as a command tool bar
+above the source window; see `Edit => Preferences => Source => Tool
+Buttons Location' for details.
+
+   Whenever you save DDD state, DDD also saves the distance between
+command tool and source window, such that you can select your own
+individual command tool placement.  To move the command tool to its
+saved position, use `View => Command Tool'.
+
+   These are the buttons of the command tool.  Note that not all buttons
+may be inactive, depending on the current state and the capabilities of
+the inferior debugger.
+
+`Run'
+     Start program execution.  When you click this button, your program
+     will begin to execute immediately.  *Note Starting Program
+     Execution::, for details.
+
+`Interrupt'
+     Interrupt program execution.  This is equivalent to sending an
+     interrupt signal to the process.  *Note Interrupting::, for
+     details.
+
+`Step'
+     Continue running your program until control reaches a different
+     source line, then stop it and return control to DDD.  *Note
+     Resuming Execution::, for details.
+
+`Stepi'
+     Execute one machine instruction, then stop and return to DDD.
+     *Note Machine Code Execution::, for details.
+
+`Next'
+     Continue to the next source line in the current (innermost) stack
+     frame.  This is similar to `Step', but function calls that appear
+     within the line of code are executed without stopping.  *Note
+     Resuming Execution::, for details.
+
+`Nexti'
+     Execute one machine instruction, but if it is a function call,
+     proceed until the function returns.  *Note Machine Code
+     Execution::, for details.
+
+`Until'
+     Continue running until a source line past the current line, in the
+     current stack frame, is reached.  *Note Resuming Execution::, for
+     details.
+
+`Finish'
+     Continue running until just after function in the selected stack
+     frame returns.  Print the returned value (if any).  *Note Resuming
+     Execution::, for details.
+
+`Cont'
+     Resume program execution, at the address where your program last
+     stopped; any breakpoints set at that address are bypassed.  *Note
+     Resuming Execution::, for details.
+
+`Kill'
+     Kill the process of the debugged program.  *Note Killing the
+     Program::, for details.
+
+`Up'
+     Select the stack frame (i.e. the function) that called this one.
+     This advances toward the outermost frame, to higher frame numbers,
+     to frames that have existed longer.  *Note Stack::, for details.
+
+`Down'
+     Select the stack frame (i.e. the function) that was called by this
+     one.  This advances toward the innermost frame, to lower frame
+     numbers, to frames that were created more recently.  *Note
+     Stack::, for details.
+
+`Undo'
+     Undo the most recent action.  Almost all commands can be undone
+     this way.  *Note Undo and Redo::, for details.
+
+`Redo'
+     Redo the action most recently undone.  Every command undone can be
+     redone this way.  *Note Undo and Redo::, for details.
+
+`Edit'
+     Invoke an editor for the current source file.  *Note Editing
+     Source Code::, for details.
+
+`Make'
+     Run the `make' program with the most recently given arguments.
+     *Note Recompiling::, for details.
+
+* Menu:
+
+* Customizing the Command Tool::
+* Customizing Tool Position::
+
+
+File: ddd.info,  Node: Customizing the Command Tool,  Next: Customizing Tool Position,  Up: Command Tool
+
+Customizing the Command Tool
+----------------------------
+
+   The Command Tool can be customized in various ways.
+
+* Menu:
+
+* Disabling the Command Tool::
+
+   *Note Customizing Buttons::, for details on customizing the tool
+buttons.
+
+
+File: ddd.info,  Node: Disabling the Command Tool,  Up: Customizing the Command Tool
+
+Disabling the Command Tool
+..........................
+
+   You can disable the command tool and show its buttons in a separate
+row beneath the tool bar.  To disable the command tool, set `Edit =>
+Preferences => Source => Tool Buttons Location => Source Window'.
+
+   Here's the related resource:
+
+ - Resource: commandToolBar (class ToolBar)
+     Whether the tool buttons should be shown in a tool bar above the
+     source window (`on') or within the command tool (`off', default).
+     Enabling the command tool bar disables the command tool and vice
+     versa.
+
+
+File: ddd.info,  Node: Customizing Tool Position,  Prev: Customizing the Command Tool,  Up: Command Tool
+
+Command Tool Position
+---------------------
+
+   The following resources control the position of the command tool
+(*note Customizing::):
+
+ - Resource: autoRaiseTool (class AutoRaiseTool)
+     If `on' (default), DDD will always keep the command tool on top of
+     other DDD windows.  If this setting interferes with your window
+     manager, or if your window manager keeps the command tool on top
+     anyway, set this resource to `off'.
+
+ - Resource: stickyTool (class StickyTool)
+     If `on' (default), the command tool automatically follows every
+     movement of the source window.  Whenever the source window is
+     moved, the command tool is moved by the same offset such that its
+     position relative to the source window remains unchanged.  If
+     `off', the command tool does not follow source window movements.
+
+ - Resource: toolRightOffset (class Offset)
+     The distance between the right border of the command tool and the
+     right border of the source text (in pixels).  Default is 8.
+
+ - Resource: toolTopOffset (class Offset)
+     The distance between the upper border of the command tool and the
+     upper border of the source text (in pixels).  Default is 8.
+
+* Menu:
+
+* Customizing Tool Decoration::
+
+
+File: ddd.info,  Node: Customizing Tool Decoration,  Up: Customizing Tool Position
+
+Customizing Tool Decoration
+...........................
+
+   The following resources control the decoration of the command tool
+(*note Customizing::):
+
+ - Resource: decorateTool (class Decorate)
+     This resource controls the decoration of the command tool.
+
+        * If this is `off', the command tool is created as a _transient
+          window_.  Several window managers keep transient windows
+          automatically on top of their parents, which is appropriate
+          for the command tool.  However, your window manager may be
+          configured not to decorate transient windows, which means
+          that you cannot easily move the command tool around.
+
+        * If this is `on', DDD realizes the command tool as a
+          _top-level window_.  Such windows are always decorated by the
+          window manager.  However, top-level windows are not
+          automatically kept on top of other windows, such that you may
+          wish to set the `autoRaiseTool' resource, too.
+
+        * If this is `auto' (default), DDD checks whether the window
+          manager decorates transients.  If yes, the command tool is
+          realized as a transient window (as in the `off' setting); if
+          no, the command tool is realized as a top-level window (as in
+          the `on' setting).  Hence, the command tool is always
+          decorated using the "best" method, but the extra check takes
+          some time.
+
+
+File: ddd.info,  Node: Getting Help,  Next: Undo and Redo,  Prev: Command Tool,  Up: Windows
+
+Getting Help
+============
+
+   DDD has an extensive on-line help system.  Here's how to get help
+while working with DDD.
+
+   * You can get a short help text on most DDD buttons by simply moving
+     the mouse pointer on it and leave it there.  After a second, a
+     small window (called "button tip"; also known as "tool tip" or
+     "balloon help") pops up, giving a hint on the button's meaning.
+     The button tip disappears as soon as you move the mouse pointer to
+     another item.
+
+   * The "status line" also displays information about the currently
+     selected item.  By clicking on the status line, you can redisplay
+     the most recent messages.
+
+   * You can get detailed help on any visible DDD item.  Just point on
+     the item you want help and press the `F1' key.  This pops up a
+     detailed help text.
+
+   * The DDD dialogs all contain `Help' buttons that give detailed
+     information about the dialog.
+
+   * You can get help on debugger commands by entering `help' at the
+     debugger prompt.  *Note Entering Commands::, for details on
+     entering commands.
+
+   * If you are totally stuck, try `Help => What Now?' (the `What Now?'
+     item in the `Help' menu) or press <Ctrl+F1>.  Depending on the
+     current state, DDD will give you some hints on what you can do
+     next.
+
+   * Of course, you can always refer to the _on-line documentation_:
+
+        - `Help => DDD Reference' gives you access to the DDD manual,
+          the ultimate DDD reference.
+
+        - `Help => Debugger Reference' shows you the on-line
+          documentation of the inferior debugger.
+
+        - `Help => DDD WWW Page' gives you access to the latest and
+          greatest information on DDD.
+
+   * Finally, the DDD "Tip Of The Day" gives you important hints with
+     each new DDD invocation.
+
+   All these functions can be customized in various ways (*note
+Customizing Help::).
+
+   If, after all, you made a mistake, don't worry: almost every DDD
+command can be undone.  *Note Undo and Redo::, for details.
+
+
+File: ddd.info,  Node: Undo and Redo,  Next: Customizing,  Prev: Getting Help,  Up: Windows
+
+Undoing and Redoing Commands
+============================
+
+   Almost every DDD command can be undone, using `Edit => Undo' or the
+`Undo' button on the command tool.
+
+   Likewise, `Edit => Redo' repeats the command most recently undone.
+
+   The `Edit' menu shows which commands are to be undone and redone
+next; this is also indicated by the popup help on the `Undo' and `Redo'
+buttons.
+
+
+File: ddd.info,  Node: Customizing,  Prev: Undo and Redo,  Up: Windows
+
+Customizing DDD
+===============
+
+   DDD is controlled by several _resources_--user-defined variables
+that take specific values in order to control and customize DDD
+behavior.
+
+   Most DDD resources can be set interactively while DDD is running or
+when invoking DDD.  *Note Resource Index::, for the full list of DDD
+resources.
+
+   We first discuss how customizing works in general; then we turn to
+customizing parts of DDD introduced so far.
+
+* Menu:
+
+* How Customizing Works::
+* Customizing Help::
+* Customizing Undo::
+* Customizing Windows::
+* Debugger Settings::
+
+
+File: ddd.info,  Node: How Customizing Works,  Next: Customizing Help,  Up: Customizing
+
+How Customizing DDD Works
+-------------------------
+
+* Menu:
+
+* Resources::
+* Changing Resources::
+* Saving Options::
+
+
+File: ddd.info,  Node: Resources,  Next: Changing Resources,  Up: How Customizing Works
+
+Resources
+.........
+
+   Just like any X program, DDD has a number of places to get resource
+values from.  For DDD, the most important places to specify resources
+are:
+
+   * The `~/.ddd/init' file (`~' stands for your home directory).  This
+     file is read in by DDD upon start-up; the resources specified
+     herein override all other sources (except for resources given
+     implicitly by command-line options).
+
+     If the environment variable `DDD_STATE' is set, its value is used
+     instead of `~/.ddd/'.
+
+   * The `Ddd' application-defaults file.  This file is typically
+     compiled into the DDD executable.  If it exists, its resource
+     values override the values compiled into DDD.  If the versions of
+     the `Ddd' application-defaults file and the DDD executable do not
+     match, DDD may not function properly; DDD will give you a warning
+     in this case.(1)
+
+   * The command-line options.  These options override all other
+     resource settings.
+
+   * If the environment variable `DDD_SESSION' is set, it indicates the
+     name of a session to start, overriding all options and resources.
+     This is used by DDD when restarting itself.
+
+   Not every resource has a matching command-line option.  Each resource
+(whether in `~/.ddd/init' or `Ddd') is specified using a line
+
+     Ddd*RESOURCE: VALUE
+
+   For instance, to set the `pollChildStatus' resource to `off', you
+would specify in `~/.ddd/init':
+
+     Ddd*pollChildStatus: off
+
+   For more details on the syntax of resource specifications, see the
+section `RESOURCES' in the `X(1)' manual page.
+
+   ---------- Footnotes ----------
+
+   (1) If you use a `Ddd' application-defaults file, you will not be
+able to maintain multiple DDD versions at the same time.  This is why
+the suiting `Ddd' is normally compiled into the DDD executable.
+
+
+File: ddd.info,  Node: Changing Resources,  Next: Saving Options,  Prev: Resources,  Up: How Customizing Works
+
+Changing Resources
+..................
+
+   You can change DDD resources by three methods:
+
+   * Use DDD to change the options, notably `Edit => Preferences'.
+     This works for the most important DDD resources.  Be sure to save
+     the options (*note Saving Options::) such that they apply to
+     future DDD sessions, too.
+
+   * You can also invoke DDD with an appropriate command-line option.
+     This changes the related DDD resource for this particular DDD
+     invocation.  However, if you save the options (*note Saving
+     Options::), the changed resource will also apply to future
+     invocations.
+
+   * Finally, you can set the appropriate resource in a file named
+     `.ddd/init' in your home directory.  *Note Resource Index::, for a
+     list of DDD resources to be set.
+
+
+File: ddd.info,  Node: Saving Options,  Prev: Changing Resources,  Up: How Customizing Works
+
+Saving Options
+..............
+
+   You can save the current option settings by setting `Edit => Save
+Options'.  Options are saved in a file named `.ddd/init' in your home
+directory when DDD exits.  If a session SESSION is active, options will
+be saved in `~/.ddd/sessions/SESSION/init' instead.
+
+   The options are automatically saved when exiting DDD.  You can turn
+off this feature by unsetting `Edit => Save Options'.  This is tied to
+the following resource:
+
+ - Resource: saveOptionsOnExit (class SaveOnExit)
+     If `on' (default), the current option settings are automatically
+     saved when DDD exits.
+

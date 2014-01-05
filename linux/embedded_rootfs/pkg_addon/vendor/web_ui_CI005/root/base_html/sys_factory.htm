@@ -1,0 +1,100 @@
+<!--#nk_get SysManageSetup=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chSubmit(F)
+{
+  if (confirm(cFactoryDefault))
+  {
+	F.workType.value="factory";
+    window.status=wDefaultSetting; 
+    F.submit();
+  }  
+}
+
+//=============== End of Javascript ===============*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";
+var Savelink = "";
+var Cancellink = ""; 
+var helplink ='help_sys_factory.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 720;
+var head_width=80;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintFactoryDefaultButton(0);
+	PrintEndContent();
+}
+
+function PrintFactoryDefaultButton(hasUnderLine)
+{
+	
+	PrintBeginBlock(0);
+	document.write('<table width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'"></td>');
+	document.write('<td>');
+	PrintSTButton("restart3","Return to Factory Default Setting","chSubmit(this.form)");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0"  >
+    <form name="formdualwan" method="post" action="">
+      <input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+    </form>
+    
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 5);		// Set Selected Node
+   	  if (document.formdualwan.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+	<form name="formRestart" action="sys_factory.htm" method="post">
+	<input type=hidden name="page" value="sys_factory.htm">
+	<input type=hidden name="factory" value="Return to Factory Default Setting">				  
+	<input type=hidden name="workType" value=''>		
+		
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

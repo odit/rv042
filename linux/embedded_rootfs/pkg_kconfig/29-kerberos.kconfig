@@ -1,0 +1,6 @@
+config CONFIG_kerberos
+	bool "kerberos"
+	default n
+	help
+		Include kerberos
+

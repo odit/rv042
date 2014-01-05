@@ -1,0 +1,791 @@
+<!--#nk_get CheckBlockDBExist=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	if (GetURLParam() != "")
+		document.getElementById("Trusted_Domains").scrollIntoView(true);
+	chDismatch();
+	chDMZ();
+	chSH();
+	chTrust(); 
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function addSel(t,s)
+{
+
+    var p=-1;
+
+    if (t.value == "")
+    {
+        alert(aTrustedDomain);
+	    s.form.forbiddenURLs_add.select();
+	    return;
+    }
+
+    if (s.form.btnAddToList.value==sUpdateDomain)
+    {
+     	while (s.form.local_forbiddenURLs_del.options[++p].selected != true);
+    }	
+
+	for (var i=0; i < s.length; i++)
+    {
+          if (s.options[i].text==t.value)
+  	      {
+		      if (p != i)
+			  {
+                  alert(aTrustedDomainAlready);
+	              return;
+			  }
+	      }
+    }
+
+	for (var i=0; i < s.form.local_forbiddenURLs_del.length; i++)
+    {
+
+        s.form.local_forbiddenURLs_del.options[i].selected=false;
+
+    }
+
+	if (s.form.btnAddToList.value==sAddtoList)
+	{
+
+    	if (s.length==50)
+    	{
+        	alert(aLimitTrustedDomain+"50"+aLimitEnd);
+        	return;
+    	}            	
+
+	    p=s.length;
+		s.length+=1;
+	}	
+    s.options[p].text=t.value;
+	s.options[p].value=t.value;
+    clearContent(t);
+}
+
+function clearContent(I)
+{
+	blurList2(I.form);
+	I.value="";
+	SetButtonStatus('showNew','disabled'); 
+	SetButtonStatus("deleteForbidden", "disabled");
+	I.select();
+
+}
+
+function tmpWord(n)
+{
+  this.length=n;
+  for (var i=1; i<=n; i++)
+  this[i]=0;
+  return this;
+}
+
+function port2to65534Check(I)
+{
+  var d;
+  d=parseInt(I.value,10);
+  if (!(d<=65534 && d>=2))
+  {
+    alert(aPort2to65534Check);
+    I.value=I.defaultValue;
+    return;
+  }
+  I.value=d;
+}
+
+function delSel(s)
+{
+  var z;  
+  var k;
+  if (s.length > 0)
+  {
+
+    tmp=new tmpWord(s.length);
+	tmpChanged=new tmpWord(s.length); 
+    opvtmp=new tmpWord(s.length);
+    opvtmpChanged=new tmpWord(s.length);
+    for (var i=0; i < s.length; i++)
+	{
+	  tmp[i+1]=s.options[i].text;
+	  opvtmp[i+1]=s.options[i].value;
+	}	
+
+   for (var i=0; i < s.length; i++)
+	{
+	  if (s.options[i].selected==true)
+	  { 
+		s.options[i].text="";
+		s.options[i].value="";
+	    tmp[i+1]=" ";
+		opvtmp[i+1]=" ";	
+		s.options[i].selected=false;
+	  }
+	}
+
+	k=1;
+	z=0;
+    for (var j=1; j<=s.length; j++) 
+	{ 
+	     if (tmp[j]!=" ") 
+         {
+            tmpChanged[k]=tmp[j];
+    		 opvtmpChanged[k]=opvtmp[j];
+		     k++;
+         }
+		 else
+		 {
+			 z++;
+		 }
+    }
+    for (var i=0; i < s.length-z; i++)
+	{
+ 	    s.options[i].text=tmpChanged[i+1];  
+        s.options[i].value=opvtmpChanged[i+1];
+	}
+    s.length-=z;
+  }
+  clearContent(s.form.forbiddenURLs_add);
+}
+
+function exPosion(s)
+{
+  if (s.length > 0)
+  {
+    tmp=new tmpWord(s.length);
+	tmpChanged=new tmpWord(s.length); 
+    opvtmp=new tmpWord(s.length);
+    opvtmpChanged=new tmpWord(s.length);
+    for (var i=0; i < s.length; i++)
+	{
+	  tmp[i+1]=s.options[i].text;
+	  opvtmp[i+1]=s.options[i].value;
+	}	
+    for (var i=0; i < s.length; i++)
+	{
+	  s.options[i].text=tmp[s.length-i];
+	  s.options[i].value=opvtmp[s.length-i];
+	}
+    for (var i=0; i < s.length; i++)
+	{
+	    tmp[i+1]=" ";
+		opvtmp[i+1]=" ";	
+	}
+
+   }
+}
+
+function falseSubmit(F)
+{
+	F.submitStatus.value=0; 
+	checkboxCheck(F);
+	if (F.noblockTrusted_check.checked)
+	{
+		F.action="f_general.htm#1";
+		obj = MM_findObj('Trusted_Domains','');
+		obj.style.display=style_display_on();
+	}
+	else
+	{
+		obj = MM_findObj('Trusted_Domains','');		
+		obj.style.display='none';
+		clearContent(F.forbiddenURLs_add);
+	}
+	F.submit();
+}
+
+function showdeleteButton2(F)
+{
+	F.forbiddenURLs_add.value=F.local_forbiddenURLs_del.options[F.local_forbiddenURLs_del.selectedIndex].text;
+	F.btnAddToList.value=sUpdateDomain; 
+	SetButtonStatus('showNew',''); 
+	SetButtonStatus("deleteForbidden", "");  
+}
+
+function blurList2(F)
+{
+    for (var i=0; i < F.local_forbiddenURLs_del.length; i++)
+    {
+      F.local_forbiddenURLs_del.options[i].selected=false;
+    }
+    F.btnAddToList.value=sAddtoList; 
+    F.deleteForbidden.disabled=true;
+}
+
+function disable_FW1()
+{
+	if (document.formf_general.adPassword.value=="06fc156ffc9b48c01c389695aab118b6")
+	{
+		document.formf_general.firewall[0].checked=true;
+		document.formf_general.firewall[1].checked=false; 
+		if (confirm(cChangePassword1))
+			window.location.replace("password.htm");
+		return;
+	}
+	else
+		disable_FW();
+}
+function chSH1()
+{
+	if (document.formf_general.adPassword.value=="06fc156ffc9b48c01c389695aab118b6")
+	{
+		document.formf_general.remoteMng[0].checked=false;
+		document.formf_general.remoteMng[1].checked=true;
+		if (confirm(cChangePassword2))
+			window.location.replace("password.htm");
+		return;
+	}
+	else
+		chSH();
+}
+
+function chHttpsSH1()
+{
+	if (document.formf_general.adPassword.value=="06fc156ffc9b48c01c389695aab118b6")
+	{
+		document.formf_general.https[0].checked=false;
+		document.formf_general.https[1].checked=true;
+		if (confirm(cChangePassword3))
+			window.location.replace("password.htm");
+		return;
+	}
+	else
+		chSH();
+}
+
+function chSH()
+{
+	var rmPort=document.formf_general.rmPort.value;
+	var str_array =document.formf_general.port443.value.split(":");
+	var str_l=str_array.length;
+
+    	if (document.formf_general.firewall[0].checked && document.formf_general.remoteMng[0].checked==true)
+		document.formf_general.rmPort.disabled=false;
+	else
+		document.formf_general.rmPort.disabled=true;
+	
+	if (document.formf_general.remoteMng[0].checked==true)
+	{
+		if (document.formf_general.https[0].checked==true)
+		{	
+			var tmp=document.formf_general.rmPort.value;
+			for(var i=0;i<parseInt(str_l);i+=2)
+			{
+				if((parseInt(str_array[i])==0) && (parseInt(str_array[i+1])==0))
+				{
+					alert("Port "+rmPort+" has been forwarded, thus not usable for remote management");
+					document.formf_general.rmPort.select();
+					return 1;
+				}
+				if (((parseInt(tmp) > parseInt(str_array[i])) && (parseInt(tmp) < parseInt(str_array[i+1]))) || (parseInt(tmp) == parseInt(str_array[i+1])) || (parseInt(tmp) == parseInt(str_array[i])))
+				{
+					alert("Port "+rmPort+" has been forwarded, thus not usable for remote management");
+					document.formf_general.rmPort.select();
+					return 1;
+				}
+			}
+			if(('<!--#nk_get CheckboxStatus="remoteMng"-->' != 'checked' || '<!--#nk_get CheckboxStatus="https"-->' != 'checked' ) && document.formf_general.submitStatus.value == 1)
+				alert("Please use https://x.x.x.x:"+rmPort+" to login the router remotely.");
+
+			return 0;
+		}
+		else
+		{
+		      var tmp=document.formf_general.rmPort.value;
+			for(var i=0;i<parseInt(str_l);i+=2)
+			{
+				if((parseInt(str_array[i])==0) && (parseInt(str_array[i+1])==0))
+				{
+					alert("Port "+rmPort+" has been forwarded, thus not usable for remote management");
+					document.formf_general.rmPort.select();
+					return 1;
+				}
+	   			if (((parseInt(tmp) > parseInt(str_array[i])) && (parseInt(tmp) < parseInt(str_array[i+1]))) || (parseInt(tmp) == parseInt(str_array[i+1])) || (parseInt(tmp) == parseInt(str_array[i])))
+				{
+					alert("Port "+rmPort+" has been forwarded, thus not usable for remote management");
+					document.formf_general.rmPort.select();
+					return 1;
+				}
+			}
+			if(('<!--#nk_get CheckboxStatus="remoteMng"-->' != 'checked' || '<!--#nk_get CheckboxStatus="https"-->' == 'checked' ) && document.formf_general.submitStatus.value == 1)
+				alert("Please use http://x.x.x.x:"+rmPort+" to login the router remotely.");
+
+			return 0;
+		}
+	}
+	return 0;
+}
+
+function chTrust()
+{
+
+	if ((document.formf_general.blockJava_check.checked==false) && (document.formf_general.blockCookies_check.checked==false) && (document.formf_general.blockActiveX_check.checked==false) && (document.formf_general.blockProxy_check.checked==false))
+	{
+		document.formf_general.noblockTrusted_check.checked=false;
+		document.formf_general.noblockTrusted_check.disabled=true;
+		if (document.formf_general.local_forbiddenURLs_del) // grey out
+		{
+		        obj = MM_findObj('Trusted_Domains','');		
+	  			obj.style.display='none';
+			clearContent(document.formf_general.forbiddenURLs_add);
+		}
+	}
+	else
+	    document.formf_general.noblockTrusted_check.disabled=false;		
+}
+
+function enable_FW()
+{
+
+  if(document.formf_general.firewall_SDBR_flag.value.charAt(0) == 1)
+  	document.formf_general.spi[0].checked=true;
+  else 
+ 	 document.formf_general.spi[1].checked=true;
+  if(document.formf_general.firewall_SDBR_flag.value.charAt(1) == 1) 
+  	document.formf_general.dos[0].checked=true;
+  else 
+ 	 document.formf_general.dos[1].checked=true;
+   if(document.formf_general.firewall_SDBR_flag.value.charAt(2) == 1) 
+  	document.formf_general.blockWANReq[0].checked=true;
+  else 
+  	document.formf_general.blockWANReq[1].checked=true;
+   if(document.formf_general.firewall_SDBR_flag.value.charAt(3) == 1) 
+  {
+	document.formf_general.remoteMng[0].checked=true;
+	document.formf_general.rmPort.disabled=false;
+  }
+  else 
+  {
+	document.formf_general.remoteMng[1].checked=true;
+	document.formf_general.rmPort.disabled=true;
+  }
+  document.formf_general.spi[0].disabled=false;
+  document.formf_general.spi[1].disabled=false;
+  document.formf_general.dos[0].disabled=false;
+  document.formf_general.dos[1].disabled=false;
+  document.formf_general.blockWANReq[0].disabled=false;
+  document.formf_general.blockWANReq[1].disabled=false;
+  document.formf_general.remoteMng[0].disabled=false;
+  document.formf_general.remoteMng[1].disabled=false;
+}
+
+function disable_FW()
+{
+  document.formf_general.spi[1].checked=true;
+  document.formf_general.dos[1].checked=true;
+  document.formf_general.blockWANReq[1].checked=true;
+  document.formf_general.remoteMng[0].checked=true;  
+
+  document.formf_general.spi[0].disabled=true;
+  document.formf_general.spi[1].disabled=true;
+  document.formf_general.dos[0].disabled=true;
+  document.formf_general.dos[1].disabled=true;
+  document.formf_general.blockWANReq[0].disabled=true;
+  document.formf_general.blockWANReq[1].disabled=true;
+  document.formf_general.remoteMng[0].disabled=true;
+  document.formf_general.remoteMng[1].disabled=true;
+  document.formf_general.rmPort.disabled=true;
+
+}
+
+function chSubmit(F)
+{
+	F.submitStatus.value=1;
+	if(chSH()==1)
+	{
+		F.submitStatus.value=0;
+		return;
+	}	
+	checkboxCheck(F);
+	if(document.formf_general.noblockTrusted_check.checked==true)
+	{
+		if (F.local_forbiddenURLs_del)
+			selAll(F.local_forbiddenURLs_del);
+	}
+	
+	if (document.formf_general.firewall[0].checked)
+	{
+		document.formf_general.firewall_SDBR_flag_update.value="";
+		if(document.formf_general.spi[0].checked)
+			document.formf_general.firewall_SDBR_flag_update.value+="1";
+		else
+			document.formf_general.firewall_SDBR_flag_update.value+="0";
+
+		if(document.formf_general.dos[0].checked)
+			document.formf_general.firewall_SDBR_flag_update.value+="1";
+		else
+			document.formf_general.firewall_SDBR_flag_update.value+="0";
+
+		if(document.formf_general.blockWANReq[0].checked)
+			document.formf_general.firewall_SDBR_flag_update.value+="1";
+		else
+			document.formf_general.firewall_SDBR_flag_update.value+="0";	
+
+		if(document.formf_general.remoteMng[0].checked)
+			document.formf_general.firewall_SDBR_flag_update.value+="1";
+		else
+			document.formf_general.firewall_SDBR_flag_update.value+="0";	
+	}
+	F.log_ch.value = 1;
+	window.status=wSave;
+	F.submit();
+}
+
+function bytesCheck(I)
+{
+
+  var d;
+
+  d=parseInt(I.value,10);
+  if (!(d<1501 && d>=68))
+  {
+    alert(aBytesCheck);
+    I.value=I.defaultValue;
+    return;
+  }
+  I.value=d;  
+}
+
+function chDMZ()
+{
+
+    if (document.formf_general.firewall[1].checked)
+	{
+        disable_FW();
+	}
+}
+
+function chDismatch()
+{
+     if (document.formf_general.noblockTrusted_check.checked==true)
+  {
+		obj = MM_findObj('Trusted_Domains','');
+		obj.style.display=style_display_on();
+  }
+  else
+  {
+	  obj = MM_findObj('Trusted_Domains','');		
+	  obj.style.display='none';
+	  clearContent(document.formf_general.forbiddenURLs_add);
+  } 
+}
+function checkboxCheck(F)
+{
+	if(F.blockJava_check)
+		if(F.blockJava_check.checked==true)
+			F.blockJava.value=1;
+		else
+			F.blockJava.value=0;
+	if(F.blockCookies_check)
+		if(F.blockCookies_check.checked==true)
+			F.blockCookies.value=1;
+		else
+			F.blockCookies.value=0;
+	if(F.blockActiveX_check)
+		if(F.blockActiveX_check.checked==true)
+			F.blockActiveX.value=1;
+		else
+			F.blockActiveX.value=0;
+	if(F.blockProxy_check)
+		if(F.blockProxy_check.checked==true)
+			F.blockProxy.value=1;
+		else
+			F.blockProxy.value=0;
+	if(F.noblockTrusted_check)
+		if(F.noblockTrusted_check.checked==true)
+			F.noblockTrusted.value=1;
+		else
+			F.noblockTrusted.value=0;
+
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formf_general);";
+var Cancellink = ""; 
+var helplink ='help_f_general.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=200;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintGeneral(1);
+	PrintRestricWebFeatures(0);
+	PrintEndContent();
+}
+
+function PrintGeneral(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table width="'+NormallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width='+head_width+'>');
+	document.write('Firewall&nbsp;:&nbsp;</td>');
+	document.write('<td width="210">');
+	document.write('<input type="radio" name="firewall" value="1" onClick="enable_FW();" <!--#nk_get RadioHandle2="firewall:1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Enable');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="firewall" value="0" onClick="disable_FW1();" <!--#nk_get RadioHandle2="firewall:0"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Disable');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('</td>');
+	document.write('<td colspan="2"></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>SPI');
+	document.write(' (Stateful Packet Inspection)&nbsp;:&nbsp;<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="spi" value="1" <!--#nk_get RadioHandle2="spi:1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Enable');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="spi" value="0" <!--#nk_get RadioHandle2="spi:0"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Disable');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('</td>');	
+	document.write('<td colspan="2">'); 
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>'); 
+	document.write('<td>DoS'); 
+	document.write(' (Denial of Service)&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="dos" value="1" <!--#nk_get RadioHandle2="dos:1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Enable');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="dos" value="0" <!--#nk_get RadioHandle2="dos:0"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Disable');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');	
+	document.write('<td colspan="2">');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Block WAN Request&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="blockWANReq" value="1" <!--#nk_get RadioHandle2="blockWANReq:1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Enable');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');	
+	document.write('<input type="radio" name="blockWANReq" value="0" <!--#nk_get RadioHandle2="blockWANReq:0"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Disable');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');	
+	document.write('<td colspan="2">');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Remote Management&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="remoteMng" value="1" onClick="chSH1()" <!--#nk_get RadioHandle2="remoteMng:1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Enable');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="remoteMng" value="0" onClick="chSH()" <!--#nk_get RadioHandle2="remoteMng:0"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Disable');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');	
+	document.write('<td width="120">Port&nbsp;:&nbsp;');
+	document.write('<input name="rmPort" size="5" maxlength="5" onFocus="this.select();" onBlur="port2to65534Check(this)" value=\'<!--#nk_get 1to1_Handle="rmPort"-->\'>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<input type="hidden" name="port443" value=\'<!--#nk_get FW_general_port="https"-->\'>');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>HTTPS&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="https" value="1" onClick="chHttpsSH1()" <!--#nk_get RadioHandle2="https:1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Enable');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="https" value="0" onClick="chSH()" <!--#nk_get RadioHandle2="https:0"-->>');
+	document.write('<input type="hidden" name="https0" value=\'<!--#nk_get RadioHandle2="https:1"-->\'>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Disable');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<td colspan="2"></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Multicast Passthrough&nbsp;:&nbsp;</td>');
+	document.write('<td>');
+	document.write('<input type="radio" name="passMulti" value="1" <!--#nk_get RadioHandle2="passMulti:1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Enable');
+	document.write('<img border="0" src="images/_blank.gif" width="40" height="1">');
+	document.write('<input type="radio" name="passMulti" value="0" <!--#nk_get RadioHandle2="passMulti:0"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Disable');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td colspan="2"></td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 0, 1);
+}
+function PrintRestricWebFeatures(hasUnderLine)
+{
+	var in_head_width=head_width-5;
+	
+	PrintBeginBlock(1, "Restrict Web Features");
+	document.write('<table width="'+SmallLayoutwidth+'" class="Setuptable" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width='+head_width+'>');
+	document.write('Block&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td width="280">');
+	document.write('<input type=hidden name="blockJava" value=\'<!--#nk_get CheckboxSave="blockJava"-->\'>');  
+	document.write('<input type="checkbox" name="blockJava_check" value="1" onClick="chTrust()" <!--#nk_get CheckboxStatus="blockJava"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Java<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('<input type=hidden name="blockCookies" value=\'<!--#nk_get CheckboxSave="blockCookies"-->\'>');
+	document.write('<input type="checkbox" name="blockCookies_check" value="1" onClick="chTrust()" <!--#nk_get CheckboxStatus="blockCookies"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Cookies<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('<input type=hidden name="blockActiveX" value=\'<!--#nk_get CheckboxSave="blockActiveX"-->\'>');
+	document.write('<input type="checkbox" name="blockActiveX_check" value="1" onClick="chTrust()" <!--#nk_get CheckboxStatus="blockActiveX"--> >');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('ActiveX<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('<input type=hidden name="blockProxy" value=\'<!--#nk_get CheckboxSave="blockProxy"-->\'>');
+	document.write('<input type="checkbox" name="blockProxy_check" value="1" onClick="chTrust()" <!--#nk_get CheckboxStatus="blockProxy"--> >');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('Access to HTTP Proxy Servers<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td align="left" colspan=3>');
+	document.write('<input type=hidden name="noblockTrusted" value=\'<!--#nk_get CheckboxSave="noblockTrusted"-->\'>'); 
+	document.write('<input type="checkbox"  name="noblockTrusted_check" value="1" onClick="falseSubmit(this.form)" <!--#nk_get CheckboxStatus="noblockTrusted"--> >');
+	document.write('&nbsp;&nbsp;Don\'t  block Java/ActiveX/Cookies/Proxy to Trusted Domains');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write(' </table>');
+
+	document.write('<table id="Trusted_Domains" class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+' style="display:none">');
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td width='+in_head_width+' align="left">Add&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input name="forbiddenURLs_add" size="23" maxlength="23" onFocus="this.select();" onBlur="sTrim(this);">');
+	document.write('</td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<th align="center" colspan="2">');
+	PrintSTButton("btnAddToList","Add to list", "addSel(this.form.forbiddenURLs_add,this.form.local_forbiddenURLs_del);");
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<th colspan="2">');
+	document.write('<select multiple name="local_forbiddenURLs_del" size="10" onChange="showdeleteButton2(this.form);" style="width: 100%">');
+	document.write('<!--#nk_get TrustDomainList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" colspan="2">');
+	PrintSTButton("deleteForbidden","Delete","delSel(this.form.local_forbiddenURLs_del);");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="0">');
+	PrintSTButton("showNew","Add New","clearContent(this.form.forbiddenURLs_add);");
+	SetButtonStatus("showNew", "disabled");
+	SetButtonStatus("deleteForbidden", "disabled");
+	document.write('<br><img border="0" src="images/_blank.gif" width="1" height="1"></td>');
+	document.write('<td></td>');	
+	document.write('</tr>');		
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 6, 1);		// Set Selected Node
+	  if ('<!--#nk_get RadioHandle2="firewall:0"-->' == 'checked')
+	  {
+	  	SetItemlink(foldersTree, 6, 2, "access_rules0.htm");
+		SetItemlink(foldersTree, 6, 3, "content_filter0.htm");
+	  }
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formf_general" method="post" action="f_general.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="adPassword" value='<!--#nk_get DisplayOnly="adPassword"-->'>
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="firewall_open_flag" value='<!--#nk_get DisplayOnly="firewall"-->'>
+	<input type="hidden" name="firewall_SDBR_flag" value='<!--#nk_get SDBR_flag=""-->'>
+	<input type="hidden" name="firewall_SDBR_flag_update" value="NULL">
+	
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="f_general.htm"-->
+<!--#nk_get FireWallUpdate=""-->

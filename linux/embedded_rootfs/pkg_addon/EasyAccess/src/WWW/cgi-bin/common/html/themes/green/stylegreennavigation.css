@@ -1,0 +1,24 @@
+body{FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+table.newtable{filter: progid:DXImageTransform.Microsoft.Shadow(color:#88aa88,direction=134, Strength='3');}
+.bodyback{FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px; background: url("/images/greenback.png");}
+.mainback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f; FONT-FAMILY: Tahoma, Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TD.mainback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TR.mainback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+A{TEXT-DECORATION:none;COLOR:#150702;}
+A:visited{TEXT-DECORATION:none;COLOR:#150702;}
+a:hover{COLOR:#332502; cursor:pointer; cursor:hand;}
+.darkback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TD.darkback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+DIV.clk7{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#d4cdb0; border-right:0px solid #ffffff;border-left:6px solid #ffffff;} 
+DIV.clk7k{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#d4cdb0; border-right:0px solid #ffffff;border-left:6px solid #ffffff;}
+DIV.clk7Sub1{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#d4cdb0; border-right:0px solid #ffffff;border-left:6px solid #ffffff;} 
+DIV.menubottomrow{background-color:#d4cdb0;border-bottom:1px solid #ffffff; border-right:0px solid #ffffff;border-left:6px solid #ffffff;}
+DIV.clk7Sub1k{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#d4cdb0; border-right:0px solid #ffffff;border-left:6px solid #ffffff;} 
+#divk7Cont{position:relative; left:0px; top:0px; height:322px; width:172px; visibility:hidden}
+A.clk7Links{font-family:Verdana, Arial, Helvetica; font-size:11px; text-decoration:none; color:#150702; width:175px; height:25px; line-height:180%}
+A.clk71Links{font-family:Verdana, Arial, Helvetica; font-size:11px; text-decoration:none; color:#150702; width:175px; height:25px; line-height:180%}
+td.mainbottom{background: url("/images/greenbottom.png");background-repeat: no-repeat;margin:0px;border-right:2px solid #ffffff;padding:0px;width:765px;}
+td.maintop1{background: url("/images/greenbacktop.png");border-right:6px solid #ffffff;height:37px;}
+td.maintop0{background: url("/images/mainlogo.gif");border-left:0px solid #ffffff;border-top:3px solid #ffffff;border-right:8px solid #ffffff;height:34px;margin:0px;padding:0 0 0 0;background-color:#ffffff}
+td.maintop2{background: url("/images/greenback3.gif");margin:0px;height:29px;padding:0px;}
+.menubackground{background-color:#d4cdb0;border-right:0px solid #ffffff;border-left:6px solid #ffffff;}

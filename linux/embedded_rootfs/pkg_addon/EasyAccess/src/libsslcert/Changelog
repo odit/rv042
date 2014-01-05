@@ -1,0 +1,13 @@
+Apr 27, 2005 Guruprasad Nagaraj
+        * Created directory libsslcert
+	* Created document README
+	* Source files -
+		libsslcert.c
+		libsslcert.h
+		lscCertReq.c
+		lscinternal.h
+		lscrand.c
+		lscrand.h
+		lscrsa.c
+		lscx509.c
+		Makefile

@@ -1,0 +1,68 @@
+
+#CROSS = arm-linux-
+
+STRIP=$(CROSS)strip
+#INSTALL = /usr/bin/install -c
+USRSBINDIR=${ROOT}/bin
+INSTALL = install
+VERSION = 1.2.3
+#LIBS = -lkd_web
+CFLAGS+=-DHAVE_CONFIG_H -I. -O2 -Wall  -I. -I../include -I../../linux/include -I/usr/local/arm/arm-linux/include/ -DSBINDIR='"/bin"'
+LDFLAGS+=-lutil
+
+PROG1=	pptpd
+PROG2=	pptpctrl
+
+
+DAEMONS= ${PROG1} ${PROG2}
+SRCS1=pqueue.o pptpd.o configfile.o pptpmanager.o compat.o inststr.o getopt.o getopt1.o
+SRCS2=pqueue.o pptpctrl.o ctrlpacket.o inststr.o compat.o pptpgre.o ppphdlc.o
+#PROG3=bcrelay.o
+#SRCS4=duck.o
+
+OBJS1	+= ${SRCS1:.c=.o}
+OBJS2	+= ${SRCS2:.c=.o}
+#OBJS3	+= ${SRCS3:.c=.o}
+#OBJS4	+= ${SRCS4:.c=.o}
+SUBDIR = plugins
+
+all:	${DAEMONS}
+#---------------
+${PROG1}: ${OBJS1}
+	${CC} $(CFLAGS) -o ${PROG1} ${LIBS} ${OBJS1} ${LDADD}
+#	$(CROSS)strip $@
+#---------------
+${PROG2}: ${OBJS2}
+	${CC} $(CFLAGS) -o ${PROG2} ${LIBS} ${OBJS2} ${LDADD}
+#	$(CROSS)strip $@
+	@for i in $(SUBDIR); do \
+	$(MAKE) -C $$i; \
+	done
+	@echo "make completed."
+
+
+clean:
+	rm -f *.o ${DAEMONS}
+	@for i in $(SUBDIR); do \
+	$(MAKE) clean -C $$i; \
+	done
+	@echo "clean completed."
+
+install: ${DAEMONS}
+	$(INSTALL) $(DAEMONS) $(USRSBINDIR)
+	@for i in $(SUBDIR); do \
+	$(MAKE) install -C $$i; \
+	done
+
+	#------Add by Robert-----
+	cp nk_default/pptpd.conf $(ROOT)/etc
+	cp nk_default/options.pptpd $(PPPDIR)
+	cp nk_default/chap-secrets $(PPPDIR)
+
+	@echo "install completed."
+#	for d in plugins; do make -w -C $d all; done
+#	install ${DAEMONS} $(DEST)/ramdisk/sbin/.
+#	$(INSTALL) pptpd ../ramdisk/sbin/pptpd
+#	$(INSTALL) pptpctrl ../ramdisk/sbin/pptpctrl
+#	$(INSTALL) bcrelay ../ramdisk/sbin/bcrelay
+#	$(INSTALL) duck ../ramdisk/sbin/duck

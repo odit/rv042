@@ -1,0 +1,77 @@
+// MLVT.idl : IDL source for MLVT.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MLVT.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(5380F7EC-0692-4770-BA00-E9931FDE95AD),
+		dual,
+		helpstring("IVTInterface Interface"),
+		pointer_default(unique)
+	]
+	interface IVTInterface : IDispatch
+	{
+		[propget, id(1), helpstring("property ServerAddress")] HRESULT ServerAddress([out, retval] BSTR *pVal);
+		[propput, id(1), helpstring("property ServerAddress")] HRESULT ServerAddress([in] BSTR newVal);
+		[propput, id(2), helpstring("property userSession")] HRESULT userSession([in] BSTR newVal);
+		[propget, id(3), helpstring("property IsUninstall")] HRESULT IsUninstall([out, retval] BOOL *pVal);
+		[propput, id(3), helpstring("property IsUninstall")] HRESULT IsUninstall([in] BOOL newVal);
+		[id(4), helpstring("method SetConnectionString")] HRESULT SetConnectionString([in] BSTR bstrAppln, [in] BSTR bstrDestAddr, [in] long lDestPort);
+		[id(5), helpstring("method SetNameSpaceString")] HRESULT SetNameSpaceString([in] BSTR bstrHostName, [in] BSTR bstrIPAddress);
+		[id(6), helpstring("method StartVirtualTransport")] HRESULT StartVirtualTransport();
+		[id(7), helpstring("method EnableLogging")] HRESULT EnableLogging([in] BOOL bEnable);
+		[propget, id(8), helpstring("property EnableFTPAlg")] HRESULT EnableFTPAlg([out, retval] BOOL *pVal);
+		[propput, id(8), helpstring("property EnableFTPAlg")] HRESULT EnableFTPAlg([in] BOOL newVal);
+		[propget, id(9), helpstring("property FtpPort")] HRESULT FtpPort([out, retval] long *pVal);
+		[propput, id(9), helpstring("property FtpPort")] HRESULT FtpPort([in] long newVal);
+		[propget, id(10), helpstring("property LogLevel")] HRESULT LogLevel([out, retval] long *pVal);
+		[propput, id(10), helpstring("property LogLevel")] HRESULT LogLevel([in] long newVal);
+		[propget, id(11), helpstring("property IsCertRootValidate")] HRESULT IsCertRootValidate([out, retval] BOOL *pVal);
+		[propput, id(11), helpstring("property IsCertRootValidate")] HRESULT IsCertRootValidate([in] BOOL newVal);
+		[id(12), helpstring("method InstallVirtualTransport")] HRESULT InstallVirtualTransport();
+		[id(13), helpstring("method SetIeFtpPassive")] HRESULT SetIeFtpPassive();
+	};
+	[
+		object,
+		uuid(BC1A8AF7-E084-4009-9151-E33443857411),
+		dual,
+		helpstring("IVTLaunch Interface"),
+		pointer_default(unique)
+	]
+	interface IVTLaunch : IDispatch
+	{
+		[id(1), helpstring("method GetVTInterfaceObject")] HRESULT GetVTInterfaceObject([out, retval] IVTInterface **ppVal);
+	};
+
+[
+	uuid(C3E89074-65F1-468C-B815-B5B82EE6FB43),
+	version(1.0),
+	helpstring("MLVT 1.0 Type Library")
+]
+library MLVTLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(400CC15A-9D7B-45C0-9794-C3CB7A19EB66),
+		helpstring("VTInterface Class")
+	]
+	coclass VTInterface
+	{
+		[default] interface IVTInterface;
+	};
+	[
+		uuid(B4F7ED32-94FC-46B6-B8CD-B7EC255305E0),
+		helpstring("VTLaunch Class")
+	]
+	coclass VTLaunch
+	{
+		[default] interface IVTLaunch;
+	};
+};
+	

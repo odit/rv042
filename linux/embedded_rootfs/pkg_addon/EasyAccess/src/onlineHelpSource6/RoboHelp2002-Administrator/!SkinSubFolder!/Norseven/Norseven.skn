@@ -1,0 +1,263 @@
+<?xml version="1.0" ?><sqwebskin version="1.0">
+<summary>
+<skinname>Norseven</skinname>
+<defaulttab>Contents</defaulttab>
+<font>font-family:Arial font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal</font>
+<color></color>
+</summary>
+<panesummary>
+<![CDATA[
+<frameset rows="32,*" >
+<frame name="Custom Toolbar Pane" noresize="yes" scrolling="no" id="3" />
+<frameset cols="220,*" frameborder="1" borderspace="0" >
+<frameset rows="24,*" >
+<frame name="MiniBar Pane" marginwidth="-1" scrolling="no" id="6" />
+<frame name="Navigation Pane" id="2" />
+</frameset>
+<frame name="Topic Pane" frameborder="1" borderspace="1" bordercolor="Gray" marginwidth="-1" marginheight="-1" id="4" />
+</frameset>
+</frameset>
+]]>
+</panesummary>
+<frameset rows="32,*" >
+<frame name="Custom Toolbar Pane" noresize="yes" scrolling="no" id="3" />
+<frameset cols="220,*" frameborder="1" borderspace="0" >
+<frameset rows="24,*" >
+<frame name="MiniBar Pane" marginwidth="-1" scrolling="no" id="6" />
+<frame name="Navigation Pane" id="2" />
+</frameset>
+<frame name="Topic Pane" frameborder="1" borderspace="1" bordercolor="Gray" marginwidth="-1" marginheight="-1" id="4" />
+</frameset>
+</frameset>
+<pane name="Custom Toolbar Pane">
+<image>background:nor_back_I.gif?</image>
+<color>background:#f0f2f4</color>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+<btnselected>
+<color>background:#639ace</color>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:White</font>
+</btnselected>
+<alignment>left</alignment>
+<toolbaritem mode="BtnWithIcon Mode" type="built-in-content" id="1">
+<name>Contents</name>
+<text></text>
+<color></color>
+<image>onload:nor_con_deact.gif?onmouseover:nor_con_act.gif</image>
+<icontype>customized</icontype>
+<selected>
+<color></color>
+<image>onload:nor_con_act.gif</image>
+<icontype>customized</icontype>
+</selected>
+<style>100</style>
+</toolbaritem>
+<toolbaritem mode="BtnWithIcon Mode" type="built-in-index" id="2">
+<name>Index</name>
+<text></text>
+<color></color>
+<image>onload:nor_ind_deact.gif?onmouseover:nor_ind_act.gif</image>
+<icontype>customized</icontype>
+<selected>
+<color></color>
+<image>onload:nor_ind_act.gif</image>
+<icontype>customized</icontype>
+</selected>
+<style>100</style>
+</toolbaritem>
+<toolbaritem mode="BtnWithIcon Mode" type="built-in-search" id="3">
+<name>Search</name>
+<text></text>
+<color></color>
+<image>onload:nor_sea_deact.gif?onmouseover:nor_sea_act.gif</image>
+<icontype>customized</icontype>
+<selected>
+<color></color>
+<image>onload:nor_sea_act.gif</image>
+<icontype>customized</icontype>
+</selected>
+<style>100</style>
+</toolbaritem>
+<toolbaritem mode="BtnWithIcon Mode" type="built-in-glossary" id="4">
+<name>Glossary</name>
+<text></text>
+<color></color>
+<image>onload:nor_glo_deact.gif?onmouseover:nor_glo_act.gif</image>
+<icontype>customized</icontype>
+<selected>
+<color></color>
+<image>onload:nor_glo_act.gif</image>
+<icontype>customized</icontype>
+</selected>
+<style>100</style>
+</toolbaritem>
+<toolbaritem mode="BtnWithIcon Mode" type="built-in-websearch" id="5">
+<name>WebSearch</name>
+<text></text>
+<color></color>
+<image>onload:nor_websea_deact.gif?onmouseover:nor_websea_act.gif</image>
+<icontype>customized</icontype>
+<selected>
+<color></color>
+<image>onload:nor_websea_act.gif</image>
+<icontype>customized</icontype>
+</selected>
+<style>100</style>
+</toolbaritem>
+<toolbaritem mode="Form Mode" type="built-in-form" id="6">
+<name>Search Input</name>
+<image></image>
+<color></color>
+<textbox width="20" />
+<title>
+<text></text>
+</title>
+<button mode="graphic mode">
+<image>onload:nor_go.gif</image>
+</button>
+</toolbaritem>
+<toolbaritem mode="Logo Mode" type="built-in-logo" id="7">
+<name>Logo/Author</name>
+<image></image>
+<author>Stefan Schäffler</author>
+</toolbaritem>
+</pane>
+<pane name="MiniBar Pane">
+<image>background:nor_back_I.gif?</image>
+<color>background:#f0f2f4</color>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+<btnselected>
+<color>background:#639ace</color>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:White</font>
+</btnselected>
+<toolbaritem mode="BtnWithIcon Mode" type="built-in-previous" id="8">
+<name>Previous</name>
+<text>::??DefaultWebSkinText??::</text>
+<color></color>
+<image>onload:nor_prev_on.gif</image>
+<icontype>customized</icontype>
+<selected>
+<color></color>
+<image>onload:nor_prev_out.gif</image>
+<icontype>customized</icontype>
+</selected>
+<style>100</style>
+</toolbaritem>
+<toolbaritem mode="BtnWithIcon Mode" type="built-in-next" id="9">
+<name>Next</name>
+<text>::??DefaultWebSkinText??::</text>
+<color></color>
+<image>onload:nor_forw_on.gif</image>
+<icontype>customized</icontype>
+<selected>
+<color></color>
+<image>onload:nor_forw_out.gif</image>
+<icontype>customized</icontype>
+</selected>
+<style>100</style>
+</toolbaritem>
+<toolbaritem mode="BtnWithIcon Mode" type="built-in-synctoc" id="10">
+<name>Sync TOC</name>
+<text>::??DefaultWebSkinText??::</text>
+<color></color>
+<image>onload:nor_sync.gif</image>
+<icontype>customized</icontype>
+<selected>
+<color></color>
+<image>onload:view_flat.gif</image>
+<icontype>customized</icontype>
+</selected>
+<style>100</style>
+</toolbaritem>
+<toolbaritem mode="BtnWithIcon Mode" type="built-in-hide" id="11">
+<name>Hide</name>
+<text>::??DefaultWebSkinText??::</text>
+<color></color>
+<image>onload:nor_hide.gif</image>
+<icontype>customized</icontype>
+<selected>
+<color></color>
+<image>onload:general_view.gif</image>
+<icontype>customized</icontype>
+</selected>
+<style>100</style>
+</toolbaritem>
+</pane>
+<pane name="Navigation Pane">
+<image></image>
+<color></color>
+<label>
+<image></image>
+<color></color>
+</label>
+<subpane name="Contents">
+<image>page:nor_topic.gif?remoteurl:nor_www.gif?openedbook:nor_folder_op.gif?closedbook:nor_folder_cl.gif?</image>
+<color>background:White alink:#dfdfdf hover-color:#203a68</color>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+</subpane>
+<subpane name="Index">
+<image></image>
+<color>background:White alink:#dfdfdf hover-color:#203a68</color>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+<inputbox>
+<image>background:nor_back_II.gif?</image>
+<color>background:#203a68</color>
+<textbox width="0" />
+<title>
+<text>::??DefaultWebSkinText??::</text>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:White</font>
+</title>
+<button mode="none">
+</button>
+</inputbox>
+</subpane>
+<subpane name="Search">
+<image></image>
+<color>background:White alink:#dfdfdf hover-color:#203a68</color>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+<inputbox>
+<image>background:nor_back_II.gif?</image>
+<color>background:#203a68</color>
+<textbox width="0" />
+<title>
+<text>::??DefaultWebSkinText??::</text>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:White</font>
+</title>
+<button mode="graphic mode">
+<image>onload:nor_go.gif</image>
+</button>
+</inputbox>
+</subpane>
+<subpane name="Glossary">
+<image></image>
+<color>background:White alink:#dfdfdf hover-color:#203a68</color>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+<definitiontext>
+<text>::??DefaultWebSkinText??::</text>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:White</font>
+<color>background:#203a68</color>
+<image>background:nor_back_II.gif?</image>
+</definitiontext>
+<definition>
+<text>::??DefaultWebSkinText??::</text>
+<color></color>
+<image></image>
+</definition>
+<termtext>
+<text>::??DefaultWebSkinText??::</text>
+<font>font-family:Tahoma font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:White</font>
+<color>background:#203a68</color>
+<image>background:nor_back_II.gif?</image>
+</termtext>
+<term>
+<text>::??DefaultWebSkinText??::</text>
+<color></color>
+<image></image>
+</term>
+</subpane>
+</pane>
+<pane name="Topic Pane">
+<in-topic-navbar>
+<alignment>none</alignment>
+</in-topic-navbar>
+</pane>
+</sqwebskin>

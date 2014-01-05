@@ -1,0 +1,803 @@
+<!--#nk_get Network=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+var LANIP="";
+var NetMask ="";
+function Entryfunction()
+{
+	if (GetURLParam() != "")
+		document.getElementById("LAN Setting").scrollIntoView(true);	
+	chLanMask(document.formNetwork);
+	chMultiLan(document.formNetwork);
+	chSelectWan(document.formNetwork);
+	if (document.formNetwork.DmzMode.value == 1)
+	{
+		if (document.formNetwork.dmz_enable)
+		{
+			document.formNetwork.dmz_enable.checked = true;
+			document.formNetwork.dmzStatusChange.value = 1;
+		}	
+	}
+	LANIP = document.formNetwork.ipAddr.value;
+	NetMask = document.formNetwork.lanMask.value;
+	chDisplayWan(document.formNetwork);
+	chHostDomain(document.formNetwork);
+
+	if (document.formNetwork.setIpMode[0].checked)
+		document.formNetwork.setIpMode_value.value=0;
+	else if (document.formNetwork.setIpMode[1].checked)
+		document.formNetwork.setIpMode_value.value=1;
+
+	switch(document.formNetwork.ipTypeValue.value){
+		case '0':
+			document.formNetwork.setIpMode[0].checked=true;
+			break;
+		case '1':
+			document.formNetwork.setIpMode[1].checked=true;
+			break;
+		default:
+			break;
+	}
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chLanMask(F)
+{
+	for(var i=0;i<F.lanMask.length;i++)
+	{
+		if(F.lanMask.options[i].value==F.lanMackselect.value)
+			F.lanMask.options[i].selected=true;
+	}
+}
+
+function chHostDomain(F)
+{
+	var MAC =  F.LanMAC.value.toLowerCase();
+	var tmp=MAC.split("-");
+	if (F.hostname.value =="" || F.hostname.value ==" ")
+		F.hostname.value = "router" + tmp[3] + "" +tmp[4] + "" + tmp[5];
+
+	if (F.DomainName.value =="" || F.DomainName.value ==" ")
+		F.DomainName.value = F.hostname.value + ".com";
+}
+
+function chSelectWan(F)
+{
+	var Nowwan="";
+	var Defwan="";
+	var Currentwan="";
+	if (F.SelectNumbers)
+	{
+		for(var i=0;i<F.SelectNumbers.length;i++)
+		{
+			Nowwan=F.wanNumbers_now.value;
+			Defwan=F.wanNumbers.value;
+			if(Defwan!=Nowwan)
+				Currentwan=Nowwan;
+			else
+				Currentwan=Defwan;
+			if(F.SelectNumbers.options[i].value==Currentwan)
+				F.SelectNumbers.options[i].selected=true;
+		}
+	}
+}	
+function chDisplayWan(F)
+{	
+	var tr_cell ="";
+	if (F.SelectNumbers)
+	{
+		for (var j=1;j<=MaxWanPortNumber;j++)
+		{
+			tr_cell = "wan"+j;
+			if (j <= F.SelectNumbers.value)
+				document.getElementById(tr_cell).style.display="";
+			else
+				document.getElementById(tr_cell).style.display="none";
+		}
+		if (parseInt(F.wanNumbers.value,10) != parseInt(F.SelectNumbers.value,10) + 1)
+			F.ChangeSelect.value="1";
+		else
+			F.ChangeSelect.value="0";
+	}
+	else
+	{
+		for (var j=1;j<=2;j++)
+		{
+			tr_cell = "wan"+j;
+			if (j == 2 && F.dmz_enable.checked == true)
+			{
+				document.getElementById(tr_cell).style.display="none";
+				document.getElementById("DMZtable").style.display="";
+			}	
+			else
+			{
+				if (j == 2){
+					document.getElementById("DMZtable").style.display="none";
+				}
+
+				document.getElementById(tr_cell).style.display="";
+
+			}	
+		}	
+		if(F.dmz_enable.checked== true)
+			F.dmzStatusChange.value = 1;
+		else
+			F.dmzStatusChange.value = 0;			
+	}
+}
+
+function chMultiLan(F)
+{
+	if(F.MLanSetting.checked==true)
+	{
+		SetButtonStatus("mlan", "enabled");
+		document.getElementById("SubLAN").style.display="";		
+	}	
+	else
+	{
+		SetButtonStatus("mlan", "disabled");
+		document.getElementById("SubLAN").style.display="none";		
+	}	
+}
+
+function chSettingSave(F)
+{
+	if (IPCheck(F.ipAddr, 1, 254, 0, 0, 0, "Device IP")<0)
+	{
+		F.ipAddr.select();
+		return -1;
+	}	
+
+	if ('<!--#nk_get CheckboxStatus="PPTPEnabled"-->' =='checked')
+	if (IPRangeCheck(F.PPTP_StartIP, F.PPTP_EndIP, 0, F.ipAddr, 0, 1) < 0)
+	{
+		alert(aLanIpConflict);
+		F.ipAddr.select();
+		return -2;
+	}
+
+	if ('<!--#nk_get CheckboxStatus="dhcpStatusChange"-->' == 'checked')
+	if (IPRangeCheck(F.DHCP_StartIP, F.DHCP_EndIP, 0, F.ipAddr, 0, 1) < 0)
+	{
+		alert(aDhcpLanIpConflict);
+		F.ipAddr.select();
+		return -3;
+	}
+
+	if (LANIP != document.formNetwork.ipAddr.value)
+	{
+		if (!confirm(cDeviceIP))
+	    	return -4;
+	}
+	else if (NetMask != document.formNetwork.lanMask.value)
+		alert(aChangedSubnet);
+	
+	return 0;
+}
+
+function chSttingLeave(Type)
+{
+	if (document.formNetwork.setIpMode[document.formNetwork.setIpMode_value.value].checked !=true )
+	{
+		if (Type<8)
+		{
+			if (confirm(cWANportSave))
+				chSubmit(document.formNetwork);
+		}
+		else
+		{
+			if (confirm(cWANChange))
+				chSubmit(document.formNetwork);
+		}					
+		return -1;
+	}
+
+	
+	if (document.formNetwork.ChangeSelect.value == 1)
+	{
+		if (Type<8)
+		{
+			if (confirm(cWANportSave))
+				chSubmit(document.formNetwork);
+		}
+		else
+		{
+			if (confirm(cWANChange))
+				chSubmit(document.formNetwork);
+		}					
+		return -1;
+	}
+
+	if (ShareDMZPort && (document.formNetwork.DmzMode.value != document.formNetwork.dmzStatusChange.value))
+	{
+		if (Type<8)
+		{
+			if (confirm(cWANportSave))
+				chSubmit(document.formNetwork);
+		}
+		else
+		{
+			if (confirm(cWANChange))
+				chSubmit(document.formNetwork);
+		}		
+		return -1;
+	}
+	return 0;
+}
+
+function editInterface(n)
+{
+	if (chSttingLeave(n)<0) return;
+	
+	if (n==99 || n==996)
+	{
+		if (ShareDMZPort)
+			document.formNetwork.editInterface.value=eval(document.formNetwork.wanNumbers.value) - 1;
+		else
+			document.formNetwork.editInterface.value=8;
+		document.formNetwork.submitStatus.value=100;
+		if(n==99)
+			document.formNetwork.action="edit_network2.htm";
+		else
+			document.formNetwork.action="edit_network26.htm";
+	}
+	else 
+	{
+		document.formNetwork.submitStatus.value=100;  
+		document.formNetwork.editInterface.value = n;
+		if(n>0 && n < 9)
+			document.formNetwork.action="edit_network.htm";
+		else{
+			document.formNetwork.action="edit_network6.htm";
+			document.formNetwork.editInterface.value = n-60;
+		}
+			
+	}
+	window.status=wEditInterface;  
+	   MM_showHideLayers('AutoNumber15','','hide');  
+	document.formNetwork.submit();
+}
+
+function ipTypeClick()
+{
+	if (document.formNetwork.setIpMode[document.formNetwork.setIpMode_value.value].checked !=true )
+	{
+		if (confirm(cWANChange)){
+
+			document.formNetwork.submitStatus.value=100;
+			document.formNetwork.action="network1.htm";   
+			chSubmit(document.formNetwork);
+		}
+							
+		return -1;
+	}
+
+	document.formNetwork.submitStatus.value=100;
+	document.formNetwork.action="network1.htm";   
+	document.formNetwork.submit();
+}
+
+function chChangeIPmode(val)
+{	
+	var serviceName="IPv6 Setting. \nPress 'Ok' to set Dual-Stack IP, or press 'Cancel' to do nothing.";
+	 
+	if ('<!--#nk_get RadioHandle="setIpMode:0"-->'== "checked")
+	{
+		if (confirm(alertMessageBegin+serviceName)){
+			document.formNetwork.setIpMode[1].checked=true;
+			document.formNetwork.submitStatus.value=100;
+			document.formNetwork.action="network1.htm";   
+			chSubmit(document.formNetwork);
+		}
+	}
+	else
+	{
+		ipTypeClick();
+	}
+}
+
+var wMLan=null;
+function openMLan()
+{
+  	wMLan=window.open('edit_multisubnet.htm','edit_multisubnet','menubar=no,scrollbars=no,width=500,height=360');
+}
+function closeService()
+{
+  timer1=setTimeout("closeChild()",1000);
+  timer2=setTimeout("refreshMe()",3000);
+}
+function closeChild()
+{
+	if (wMLan!=null)
+	{
+		wMLan.close();
+		wMLan=null;
+	}  
+}
+function refreshMe()
+{
+    falseSubmit(document.formNetwork);
+}
+
+function falseSubmit(F)
+{
+    F.submitStatus.value=1; 
+    F.mlanEnable.value=1;	
+    if(F.dmz_enable)	
+    if(F.dmz_enable.checked)
+    	F.dmzStatusChange.value=1;
+    else
+    	F.dmzStatusChange.value=0;
+
+    F.log_ch.value=1;	
+    F.action = "network.htm#1";	
+    MM_showHideLayers('AutoNumber15','','hide');  	
+    F.submit();
+}
+function chSubmit(F)
+{
+	if(F.dmz_enable)
+	if(F.dmz_enable.checked)
+		F.dmzStatusChange.value=1;
+	else
+		F.dmzStatusChange.value=0;
+		
+	if(F.MLanSetting.checked==true)
+		F.mlanEnable.value=1;
+	else
+		F.mlanEnable.value=0;
+
+	var s_ip=ip_range_start_get(F.ipAddr , F.lanMask.options[F.lanMask.selectedIndex] , F.ipAddr,1);
+	var e_ip=ip_range_end_get(F.ipAddr , F.lanMask.options[F.lanMask.selectedIndex] , F.ipAddr,1);
+	var l_ip=F.ipAddr.value.split(".")[3];
+
+	if( (parseInt(l_ip) < parseInt(s_ip)) || (parseInt(l_ip) > parseInt(e_ip)) )
+	{
+		alert(aLANIPSubnetConflict);
+		return;
+	}
+	
+	if (chSettingSave(F) < 0) return;
+		
+	if(IPCheck(F.ipAddr, 1, 254, 0, 0, 0, 'Device IP')<0) return;
+	if(F.ipAddr.value=="")
+	{
+		alert('Please input Device IP with correct format!');
+		return;
+	}
+	
+	
+	var re=/[^a-zA-Z0-9-]/;//not english characters, numbers, and "-"
+	var re1=/^-/;//first word is "-"
+	var re2=/-$/;//end word is "-"
+	if(re.test(F.hostname.value))
+	{
+		alert(aCheckHostName);
+		F.hostname.select();
+		return;
+	}
+	else if(re1.test(F.hostname.value) || re2.test(F.hostname.value))
+	{
+		alert(aCheckHostNameFirstLast);
+		F.hostname.select();
+		return;
+	}
+
+	if (TotalPortNumber == 16)
+	{
+		var LanNumber;
+		SelectedWanNumber = parseInt(F.SelectNumbers.value);
+		LanNumber = TotalPortNumber - SelectedWanNumber - 1;
+		if (LanNumber<=F.disabledLanIndex.value)
+		{
+			alert(aDisableLANPort1 + F.SelectNumbers.value + aDisableLANPort2);
+			return;
+		}
+	}
+
+	F.submitStatus.value=1;
+	F.log_ch.value=1;
+	MM_showHideLayers('AutoNumber15','','hide');  
+	F.submit();
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "OkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.formNetwork);";
+var Cancellink = ""; 
+var helplink ='help_network.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 520;
+var head_width=120;
+
+function PrintContent()
+{
+	PrintBeginContent();
+
+	PrintHostNameSetting(1);
+	PrintIPMode(1);
+	document.write('<table width="100%" class="block" border="0" cellpadding="0" cellspacing="0">');
+	document.write('<tr><td>');
+	PrintIPTypeTab('IPv4','true','IPv6','false');
+	document.write('</td></tr>');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#CBD8E1" style="border-left:1px solid #666;border-right:1px solid #666;border-bottom:1px solid #666;"><tr><td>');
+	PrintLANSetting(1);
+	PrintWANSetting(1);
+	if(ShareDMZPort)
+		PrintWANDMZSetting(0);
+	PrintDMZSetting(0);
+	document.write('</td></tr></table>');
+	document.write('</td></tr>');
+	PrintEndContent();
+}
+
+function PrintHostNameSetting(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Host Name&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="hostname" maxlength="31" size="30" onFocus="" value="<!--#nk_get 1to1_Handle="hostname"-->">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('(Required by some ISPs)');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Domain Name&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="DomainName" maxlength="31" size="30" onFocus="" value="<!--#nk_get 1to1_Handle="DomainName"-->">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('(Required by some ISPs)');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');	
+	PrintEndBlock(hasUnderLine, 0, 1);
+}
+
+function PrintIPMode(hasUnderLine)
+{
+	PrintBeginBlock(1, "IP Mode");
+	document.write('<table class="STtable" width="'+FixedTableWidth+'"  border="1">');	
+	document.write('<tr><td colspan=8>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="32%" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Mode');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td bgcolor="#D9E3E9" width=33%>');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('WAN');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="165" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('LAN');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+
+	document.write('<tr><input type="hidden" name="setIpMode_value" value="0" ><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr><td class="OddRow" width="34%">');
+	document.write('<input type="radio" name="setIpMode" value="0" <!--#nk_get RadioHandle="setIpMode:0"-->>');
+	document.write('IPv4 Only</td>');
+	document.write('<td class="OddRow" width=33%>IPv4</td>');
+	document.write('<td class="OddRow" width=33%>IPv4</td>');
+	document.write('</tr>');
+
+	document.write('<tr>');
+	document.write('<td class="EvenRow" width=34%>');
+	document.write('<input type="radio" name="setIpMode" value="1" <!--#nk_get RadioHandle="setIpMode:1"-->>');
+	document.write('Dual-Stack IP</td>');
+	document.write('<td class="EvenRow" width=33%>IPv4 and IPv6</td>');
+	document.write('<td class="EvenRow" width=33%>IPv4 and IPv6</td>')
+	document.write('</tr></table>');
+
+	document.write('</td></tr>');
+	document.write('</table>');
+
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintLANSetting(hasUnderLine)
+{
+	var MAC_Address = filterMAC(document.formNetwork.LanMAC.value);
+	document.write('<br>');
+	PrintBeginBlock(1, "LAN Setting");
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td width="100%" align="left" colspan="2">');
+	document.write('MAC Address&nbsp;:&nbsp;');	
+	document.write(MAC_Address);
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td >');
+	document.write('<table id="IPModeIPv4" class="Setuptable"  border="0" >');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Device IP Address&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td colspan="2">');
+	document.write('<input type="text" name="ipAddr" maxlength="15" size="20" onBlur="IPCheck(this, 1, 254, 0, 0, 0, \'Device IP\');" onKeypress="return Check_User_Input(event)" value="<!--#nk_get 1to1_Handle="ipAddr"-->">');	
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');	
+	document.write('Subnet Mask&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td colspan="2">');
+	document.write('<input type="hidden" name="lanMackselect" value=\'<!--#nk_get LanNetMaskJp=""-->\'>');
+	document.write('<select class="select" name="lanMask" style="width:133px">');
+	document.write('<option value="255.255.255.0">255.255.255.0</option>');
+	document.write('<option value="255.255.255.128">255.255.255.128</option>');
+	document.write('<option value="255.255.255.192">255.255.255.192</option>');
+	document.write('<option value="255.255.255.224">255.255.255.224</option>');
+	document.write('<option value="255.255.255.240">255.255.255.240</option>'); 
+	document.write('<option value="255.255.255.248">255.255.255.248</option>');
+	document.write('<option value="255.255.255.252">255.255.255.252</option>');
+	document.write('</select>');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Multiple Subnet &nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td width="30%">');
+	document.write('<input type="hidden" id="mlanEnable" name="mlanEnable" value=\'<!--#nk_get CheckboxSave="mlanEnable"-->\'>');
+	document.write('<input type="checkbox" name="MLanSetting" onClick="chMultiLan(this.form);" <!--#nk_get CheckboxStatus="mlanEnable"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Enable');	
+	document.write('</td>');	
+	document.write('<td width="200">');	
+	PrintSTButton("mlan", "Add/Edit", "openMLan();");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+
+	document.write('</tr>');
+	document.write('</table>');
+
+	document.write('<table id="SubLAN" class="Setuptable" width="'+SmallLayoutwidth+'" border='+Tableborder+' style="display:">');		
+	document.write('<!--#nk_get MLanSubnetIP=""-->');		
+	document.write('</table>');
+
+	PrintEndBlock(hasUnderLine,0, 1);
+}
+
+function Print_table_tr_cell(cell_type,wanif,conntype)
+{
+	if(wanif==99 || wanif==996)
+		var displayif="DMZ";
+	else if (wanif>60)
+		var displayif="WAN"+(wanif-60);
+	else
+		var displayif="WAN"+wanif;
+	document.write('<tr class='+cell_type+' id="wan'+wanif+'">');	
+	document.write('<td width="65">'+displayif+'</td>');
+	document.write('<td >'+conntype+'</td>');
+	document.write('<td width="85"><a href="javascript: editInterface('+wanif+')">');
+	document.write('<img src=images/edit.gif width=20 height=16 border=0 title="Edit">');
+	document.write('</a></td>');
+	document.write('</tr>');
+}
+
+function PrintMultiWanSwitch()
+{
+	document.write('<table width="'+(FixedTableWidth+head_width)+'" border='+Tableborder+' bordercolor="'+Tablebordercolor+'" cellpadding="'+Tablecellpadding+'" cellspacing="'+Tablecellspacing+'" style="'+Tablestyle+'">');
+	document.write('<tr><td height="21">');
+	document.write('Please choose how many WAN ports you prefer to use&nbsp;:&nbsp;');
+	document.write('<select class="select" name="SelectNumbers" onChange="chDisplayWan(this.form);">');
+	document.write('<option value="2">2</option>');
+	document.write('<option value="3">3</option>');
+	document.write('<option value="4">4</option>');
+	document.write('<option value="5">5</option>');
+	document.write('<option value="6">6</option>');
+	document.write('<option value="7">7</option>');
+	document.write('</select>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<b>(Default value is 2)</b>');	
+	document.write('</td></tr>');
+	document.write('<tr><td>');
+	document.write('<img border="0" src="images/_blank.gif" width="1" height="10">');	
+	document.write('</td></tr>');	
+	document.write('</table>');
+}
+
+function PrintWANSetting(hasUnderLine)
+{
+	PrintBeginBlock(1, "WAN Setting");
+	if(MaxWanPortNumber>2)
+		PrintMultiWanSwitch();
+	document.write('<table class="Setuptable" border="'+Tableborder+'">');
+	document.write('<tr><td>');
+	document.write('<table id="WANSetting" width="'+FixedTableWidth+'"class="STtable" border="1">');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="80" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Interface');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Connection Type');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="100" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Configuration');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');
+	for (var i=1;i<=MaxWanPortNumber;i++)
+	{
+		if (i%2 == 1)
+		{
+			if (i==1) Print_table_tr_cell("OddRow",i,'<!--#nk_get WanConnectionType="1"-->');
+			else if (i==3) Print_table_tr_cell("OddRow",i,'<!--#nk_get WanConnectionType="3"-->');	
+			else if (i==5) Print_table_tr_cell("OddRow",i,'<!--#nk_get WanConnectionType="5"-->');
+			else if (i==7) Print_table_tr_cell("OddRow",i,'<!--#nk_get WanConnectionType="7"-->');
+		}
+		else
+		{
+			if (i==2) Print_table_tr_cell("EvenRow",i,'<!--#nk_get WanConnectionType="2"-->');
+			else if (i==4) Print_table_tr_cell("EvenRow",i,'<!--#nk_get WanConnectionType="4"-->');	
+			else if (i==6) Print_table_tr_cell("EvenRow",i,'<!--#nk_get WanConnectionType="6"-->');
+		}
+	}
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td></tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 0, 1);
+}
+
+function PrintWANDMZSetting(hasUnderLine)
+{
+	PrintBeginBlock(1, "DMZ Setting");
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');	
+	document.write('<input type="checkbox" name="dmz_enable" value="1" onClick="chDisplayWan(this.form);">');
+	document.write('<input type="hidden" name="dmzStatusChange" value="0" >');
+	document.write('Enable DMZ');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');	
+	PrintEndBlock(hasUnderLine, 0, 1);
+}
+
+function PrintDMZSetting(hasUnderLine)
+{
+	PrintBeginBlock(0);
+	document.write('<table class="Setuptable" border="'+Tableborder+'">');
+	document.write('<tr><td>');
+	document.write('<table width="'+FixedTableWidth+'" id="DMZtable" class="STtable" border="1">');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="80" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Interface');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('IP Address');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="100" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Configuration');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');
+	Print_table_tr_cell("OddRow","99",'<!--#nk_get DisplayDMZIp=""-->');
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('<br>');
+	PrintEndBlock(hasUnderLine, 0, 1);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 1);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formNetwork" method="post" action="network.htm">
+	<input type="hidden" name="page" value="network.htm">	
+	<input type="hidden" name="submitStatus" value='0'>	
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name="wanNumbers_now" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+	<input type="hidden" name="disabledLanIndex" value='<!--#nk_get GetSystemNum="disabled_lan_index"-->'>
+	<input type="hidden" name="editInterface" value="0">
+	<input type="hidden" name="ChangeSelect" value='0'>
+	<input type="hidden" name="LanMAC" value='<!--#nk_get LanMacShowOnly=""-->'>
+	<input type="hidden" name="DmzMode" value='<!--#nk_get DMZModeCheck=""-->'>
+	<input type="hidden" name="DHCP_StartIP" value='<!--#nk_get IPHandle2="ds-DHCP1:1"-->.<!--#nk_get IPHandle2="ds-DHCP2:2"-->.<!--#nk_get IPHandle2="ds-DHCP3:3"-->.<!--#nk_get IPHandle2="ds-DHCP4:4"-->'> 
+	<input type="hidden" name="DHCP_EndIP" value='<!--#nk_get IPHandle2="ds-DHCP1:1"-->.<!--#nk_get IPHandle2="ds-DHCP2:2"-->.<!--#nk_get IPHandle2="ds-DHCP3:3"-->.<!--#nk_get IPHandle2="de-DHCP4:8"-->'> 	
+	<input type="hidden" name="PPTP_StartIP" value='<!--#nk_get IPHandle1="dsPPTP:1"-->.<!--#nk_get IPHandle1="dsPPTP:2"-->.<!--#nk_get IPHandle1="dsPPTP:3"-->.<!--#nk_get IPHandle1="dsPPTP:4"-->'> 
+	<input type="hidden" name="PPTP_EndIP" value='<!--#nk_get IPHandle1="dsPPTP:1"-->.<!--#nk_get IPHandle1="dsPPTP:2"-->.<!--#nk_get IPHandle1="dsPPTP:3"-->.<!--#nk_get IPHandle1="dePPTP:4"-->'> 
+	<input type="hidden" name="ipTypeValue" value='<!--#nk_get EditeIPType=""-->'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="network.htm"-->
+<!--#nk_get NetworkUpdate=""-->

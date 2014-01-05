@@ -1,0 +1,13 @@
+--- Makefile.orig	2006-11-02 20:20:54.000000000 +0530
++++ Makefile	2006-11-02 20:25:59.000000000 +0530
+@@ -498,8 +498,8 @@
+ thisconfigdir=.
+ myfulldir=.
+ mydir=.
+-MY_SUBDIRS=util include lib  kdc kadmin slave clients appl tests \
+-	config-files gen-manpages
++MY_SUBDIRS=util include lib  kdc kadmin slave clients
++
+ BUILDTOP=$(REL)$(C)
+ LOCALINCLUDES = -I$(srcdir) 
+ 

@@ -1,0 +1,26 @@
+HKCR
+{
+	XTunnel.VPLaunch.1 = s 'VPLaunch Class'
+	{
+		CLSID = s '{19DFFB5D-E30A-4E3B-8524-0AD8F4D88D32}'
+	}
+	XTunnel.VPLaunch = s 'VPLaunch Class'
+	{
+		CLSID = s '{19DFFB5D-E30A-4E3B-8524-0AD8F4D88D32}'
+		CurVer = s 'XTunnel.VPLaunch.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {19DFFB5D-E30A-4E3B-8524-0AD8F4D88D32} = s 'VPLaunch Class'
+		{
+			ProgID = s 'XTunnel.VPLaunch.1'
+			VersionIndependentProgID = s 'XTunnel.VPLaunch'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{B07BF399-5214-493C-84C1-EC7F60AE41AF}'
+		}
+	}
+}

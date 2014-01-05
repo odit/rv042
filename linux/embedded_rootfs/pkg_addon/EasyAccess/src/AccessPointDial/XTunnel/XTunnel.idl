@@ -1,0 +1,159 @@
+// XTunnel.idl : IDL source for XTunnel.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (XTunnel.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(C28A8FE6-CD2A-495B-8C52-DE0AD2C245A5),
+		dual,
+		helpstring("IXTunnelCtrl Interface"),
+		pointer_default(unique)
+	]
+	interface IXTunnelCtrl : IDispatch
+	{
+		[propput, id(1), helpstring("property IPAddress")] HRESULT IPAddress([in] BSTR newVal);
+		[propput, id(2), helpstring("property SessionId")] HRESULT SessionId([in] BSTR newVal);
+		[propput, id(3), helpstring("property ClientIPLower")] HRESULT ClientIPLower([in] BSTR newVal);
+		[propput, id(4), helpstring("property ClientIPHigher")] HRESULT ClientIPHigher([in] BSTR newVal);
+		[propput, id(5), helpstring("property isSSLTunnel")] HRESULT isSSLTunnel([in] short newVal);
+		[propput, id(6), helpstring("property ServerPort")] HRESULT ServerPort([in] short newVal);
+		[id(7), helpstring("method AddRouteEntry")] HRESULT AddRouteEntry(BSTR szDestIP, BSTR szDestMask);
+		[id(8), helpstring("method LaunchSSLDialog")] HRESULT LaunchSSLDialog();
+		[propget, id(9), helpstring("property isVirtualPassageRunning")] HRESULT isVirtualPassageRunning([out, retval] BOOL *pVal);
+		[propget, id(10), helpstring("property isUninstallClicked")] HRESULT isUninstallClicked([out, retval] BOOL *pVal);
+		[propput, id(10), helpstring("property isUninstallClicked")] HRESULT isUninstallClicked([in] BOOL newVal);
+		[propget, id(11), helpstring("property CurrentVPInstanceCount")] HRESULT CurrentVPInstanceCount([out, retval] short *pVal);
+		[propget, id(12), helpstring("property isCertRootValidate")] HRESULT isCertRootValidate([out, retval] BOOL *pVal);
+		[propput, id(12), helpstring("property isCertRootValidate")] HRESULT isCertRootValidate([in] BOOL newVal);
+		[propput, id(13), helpstring("property SSLIfv6IP")] HRESULT SSLIfv6IP([in] BSTR newVal);
+		[propput, id(14), helpstring("property Peerv6IP")] HRESULT Peerv6IP([in] BSTR newVal);
+		[propput, id(15), helpstring("property v6NwPrefix")] HRESULT v6NwPrefix([in] short newVal);
+		[id(16), helpstring("method AddRouteEntry6")] HRESULT AddRouteEntry6(BSTR szDestIP, short shPrefixLen);
+		[propput, id(17), helpstring("property ClientIPLower6")] HRESULT ClientIPLower6([in] BSTR newVal);
+		[propput, id(18), helpstring("property ClientIPHigher6")] HRESULT ClientIPHigher6([in] BSTR newVal);
+		[propput, id(19), helpstring("property isForceIPv6")] HRESULT isForceIPv6([in] BOOL newVal);
+		[propput, id(20), helpstring("property DNSSuffix")] HRESULT DNSSuffix([in] BSTR newVal);
+		[propput, id(21), helpstring("property NetworkMask")] HRESULT NetworkMask([in] BSTR newVal);
+		[propput, id(22), helpstring("property EnableFullTunnel")] HRESULT EnableFullTunnel([in] BOOL newVal);
+		[propget, id(23), helpstring("property EnableTrayIcon")] HRESULT EnableTrayIcon([out, retval] BOOL *pVal);
+		[propput, id(23), helpstring("property EnableTrayIcon")] HRESULT EnableTrayIcon([in] BOOL newVal);
+		[propget, id(24), helpstring("property isConnectStatus")] HRESULT isConnectStatus([out, retval] BOOL *pVal);
+		[propput, id(24), helpstring("property isConnectStatus")] HRESULT isConnectStatus([in] BOOL newVal);
+		[id(25), helpstring("method CallShowStatus")] HRESULT CallShowStatus();
+		[id(26), helpstring("method CallDisconnect")] HRESULT CallDisconnect();
+		[propget, id(27), helpstring("property ShowUninstall")] HRESULT ShowUninstall([out, retval] BOOL *pVal);
+		[propput, id(27), helpstring("property ShowUninstall")] HRESULT ShowUninstall([in] BOOL newVal);
+		[id(28), helpstring("method UninstallDriverAndControl")] HRESULT UninstallDriverAndControl();
+
+	};
+	[
+		object,
+		uuid(CAC8438B-FD2F-4554-87DE-4699B1980834),
+		dual,
+		helpstring("IVPLaunch Interface"),
+		pointer_default(unique)
+	]
+	interface IVPLaunch : IDispatch
+	{
+		[id(1), helpstring("method GetVPInterface")] HRESULT GetVPInterface([out, retval] IXTunnelCtrl** ppXTunnelCtrl);
+	};
+
+[
+	uuid(B07BF399-5214-493C-84C1-EC7F60AE41AF),
+	version(1.0),
+	helpstring("XTunnel 1.0 Type Library")
+]
+library XTUNNELLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(50580095-16DB-4B28-BCFC-70989E09AA5F),
+		helpstring("XTunnelCtrl Class")
+	]
+	coclass XTunnelCtrl
+	{
+		[default] interface IXTunnelCtrl;
+	};
+	[
+		uuid(19DFFB5D-E30A-4E3B-8524-0AD8F4D88D32),
+		helpstring("VPLaunch Class")
+	]
+	coclass VPLaunch
+	{
+		[default] interface IVPLaunch;
+	};
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

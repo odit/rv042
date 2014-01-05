@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="06/28/10 15:53:26" />
+    <title>Setting Up a Gateway to Gateway (Site to Site) VPN </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=48;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"  bgcolor="#ffffff">
+    <script>
+	var tmp="",str=location.href;
+
+        if(str.indexOf("#")!=-1)
+	{
+	    var ary=str.split("#")	
+	    tmp = ary[1];                  
+        }
+alert(tmp);
+        document.location="#"+tmp;
+    </script>
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1050158"> </a><h1 class="pTitle">
+Setting Up a Gateway to Gateway (Site to Site) VPN
+
+</h1>
+<a name="wp1080491"> </a><p class="pBody">
+Use the <em class="cEmphasis">VPN &gt; Gateway to Gateway</em> page to create a new tunnel between two 
+VPN devices, such as an RV082 router at your office and an RV042 router at a 
+teleworker&#39;s home.
+
+</p>
+<a name="wp1080492"> </a><p class="pBody">
+You will enter the settings for the local group and the remote group, and you will 
+mirror these settings when configuring the other router. A successful connection 
+requires that at least one router is identifiable by a static IP address or a Dynamic 
+DNS hostname. If one router has only a dynamic IP address, you can use an email 
+address as authentication to establish the connection.
+
+</p>
+<a name="wp1077501"> </a><p class="pBody">
+The Local Group and Remote Group settings must be mirrored on the two routers. 
+When you configure this router (Router A), enter its settings in the <em class="cEmphasis">Local Group 
+Setup</em> section, and enter the settings for the other router (Router B) in the <em class="cEmphasis">Remote 
+Group Setup </em>section. When you configure the other router (Router B), enter its 
+settings in the <em class="cEmphasis">Local Group Setup</em> section, and enter the Router A settings in the 
+<em class="cEmphasis">Remote Group Setup </em>section. 
+
+</p>
+<a name="wp1100314"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp1076354"> </a><h2 class="pHeading2">
+Add a New Tunnel
+</h2>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1050163"> </a><li class="pSmartList1"><b class="cBold">Tunnel No:</b> The ID number, which is automatically generated
+</li>
+<a name="wp1050164"> </a><li class="pSmartList1"><b class="cBold">Tunnel Name:</b> Enter a name for this VPN tunnel, such as Los Angeles Office, 
+Chicago Branch, or New York Division. This description is for your reference. 
+It does not have to match the name used at the other end of the tunnel.
+</li>
+<a name="wp1050165"> </a><li class="pSmartList1"><b class="cBold">Interface:</b> Select the WAN port to use for this tunnel.
+</li>
+<a name="wp1050166"> </a><li class="pSmartList1"><b class="cBold">Enable:</b> Check this box to enable a VPN tunnel. (When you create a VPN 
+tunnel, this check box will be disabled.)
+</li>
+</ul></div>
+<a name="wp1081065"> </a><h2 class="pHeading2">
+Local Group Setup and Remote Group Setup 
+</h2>
+<a name="wp1098969"> </a><p class="pBody">
+Enter the settings described below. The Local settings are for this router, and the 
+Remote settings are for the router on the other end of the tunnel. Be sure to mirror 
+these settings when configuring the VPN tunnel on the other router. 
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1081066"> </a><li class="pSmartList1"><b class="cBold">Local/Remote Security Gateway Type:</b> Specify the method for identifying 
+the router to establish the VPN tunnel. The Local Security Gateway is on this 
+router; the Remote Security Gateway is on the other router. At least one of 
+the routers must have either a static IP address or a dynamic DNS hostname 
+to make a connection.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1078824"> </a><li class="pSmartList2"><b class="cBold">IP Only: </b>Choose this option if this router has a static WAN IP address. The WAN IP address appears automatically. </li>
+<a name="wp1094079"> </a><p class="pBodyRelative">
+For the <em class="cEmphasis">Remote Security Gateway Type</em>, an extra field appears. If you know the IP address of the remote VPN router, choose <b class="cBold">IP Address</b>, and then enter the address. If you do not know the IP address of the remote VPN router, select <b class="cBold">IP by DNS Resolved</b>, and then enter the real domain name of the router on the Internet. RV082 will get the IP address of remote VPN device by DNS Resolved, and IP address of remote VPN device will be displayed in the VPN Status section of the Summary page. 
+</p>
+<a name="wp1094162"> </a><li class="pSmartList2"><b class="cBold">IP + Domain Name (FQDN) Authentication: </b>Choose this option if this router has a static IP address and a registered domain name. Also enter a <b class="cBold">Domain Name</b> to use for authentication. The domain name can be used only for one tunnel connection. </li>
+<a name="wp1094172"> </a><p class="pBodyRelative">
+For the <em class="cEmphasis">Remote Security Gateway Type</em>, an extra field appears. If you know the IP address of the remote VPN router, choose <b class="cBold">IP Address</b>, and then enter the address. If you do not know the IP address of the remote VPN router, select <b class="cBold">IP by DNS Resolved</b>, and then enter the real domain name of the router on the Internet. RV082 will get the IP address of remote VPN device by DNS Resolved, and IP address of remote VPN device will be displayed in the VPN Status section of the Summary page. 
+</p>
+<a name="wp1094163"> </a><li class="pSmartList2"><b class="cBold">IP + E-mail Addr.(USER FQDN) Authentication:</b> Choose this option if this router has a static IP address and you want to use an email address for authentication. The current WAN IP address appears automatically. Enter the <b class="cBold">Email Address</b> to use for authentication. </li>
+<a name="wp1094179"> </a><p class="pBodyRelative">
+For the <em class="cEmphasis">Remote Security Gateway Type</em>, an extra field appears. If you know the IP address of the remote VPN router, choose <b class="cBold">IP Address</b>, and then enter the address. If you do not know the IP address of the remote VPN router, select <b class="cBold">IP by DNS Resolved</b>, and then enter the real domain name of the router on the Internet. RV082 will get the IP address of remote VPN device by DNS Resolved, and IP address of remote VPN device will be displayed in the VPN Status section of the Summary page. 
+</p>
+<a name="wp1094255"> </a><li class="pSmartList2"><b class="cBold">Dynamic IP + Domain Name (FQDN) Authentication:</b> Choose this option if this router has a dynamic IP address and a registered Dynamic DNS hostname (available from providers such as DynDNS.com). Enter the <b class="cBold">Domain Name</b> to use for authentication. The domain name can be used only for one tunnel connection.</li>
+<a name="wp1094256"> </a><li class="pSmartList2"><b class="cBold">Dynamic IP +</b> <b class="cBold">E-mail Addr.(USER FQDN) Authentication:</b> Choose this option if this router has a dynamic IP address and does not have a Dynamic DNS hostname. Enter the <b class="cBold">Email Address</b> to use for authentication. </li>
+<a name="wp1092627"> </a><p class="pBodyRelative">
+If both routers have dynamic IP addresses (as with PPPoE connections), do not choose Dynamic IP + Email Addr. for both gateways. For the remote gateway, choose <b class="cBold">IP Address</b> and <b class="cBold">IP Address by DNS Resolved</b>. 
+</p>
+</ul></div>
+<a name="wp1050205"> </a><li class="pSmartList1"><b class="cBold">Local/Remote Security Group Type:</b> Specify the LAN resources that can 
+be accessed from this tunnel. The Local Security Group is for this router&#39;s 
+LAN resources; the Remote Security Group is for the other router&#39;s LAN 
+resources.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1079972"> </a><li class="pSmartList2"><b class="cBold">IP Address: </b>Choose this option to specify one device. Then enter the IP address of the device. Only this device can be accessed from this tunnel.</li>
+<a name="wp1080285"> </a><li class="pSmartList2"><b class="cBold">Subnet: </b>Choose this option (the default option) to allow all devices on a subnet to be accessed from the VPN tunnel. Then enter the subnetwork IP address and mask.</li>
+<a name="wp1080286"> </a><li class="pSmartList2"><b class="cBold">IP Range: </b>Choose this option to allow a range of devices to be accessed from the VPN tunnel. Then identify the range of IP addresses by entering the first address in the <b class="cBold">Begin IP</b> field and the final address in the <b class="cBold">End IP</b> field.</li>
+</ul></div>
+</ul></div>
+<a name="wp1081397"> </a><h2 class="pHeading2">
+IPSec Setup
+</h2>
+<a name="wp1099078"> </a><p class="pBody">
+Enter the Internet Protocol Security settings for this tunnel. Be sure to enter the 
+same settings when configuring the VPN tunnel on the other router. 
+
+</p>
+<a name="wp1088662"> </a><p class="pBody">
+<b class="cBold">IMPORTANT: </b>In order for any encryption to occur, the two ends of a VPN tunnel 
+must agree on the methods of encryption, decryption, and authentication. Enter 
+exactly the same settings on both routers.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1088664"> </a><li class="pSmartList1"><b class="cBold">Keying Mode:</b> Choose one of the following key management methods:
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1088665"> </a><li class="pSmartList2"><span style="font-weight: bold">Manual: </span>Choose this option if you want to generate the key yourself and you do not want to enable key negotiation. Manual key management is used in small static environments or for troubleshooting purposes. Enter the required settings. For information, see <a href="#wp1088677">�Required fields for Manual mode</a>.</li>
+<a name="wp1088669"> </a><li class="pSmartList2"><span style="font-weight: bold">IKE with Preshared Key: </span>Choose this option to use the Internet Key Exchange protocol to set up a Security Association (SA) for your tunnel. IKE uses a preshared key to authenticate the remote IKE peer. This setting is recommended and is selected by default. Enter the required settings. For more information, see <a href="#wp1088685">�Required fields for IKE with Preshared Key</a> and <a href="#wp1088699">�Advanced settings for IKE with Preshared Key</a>.</li>
+</ul></div>
+<a name="wp1088677"> </a><li class="pSmartList1"><b class="cBold">Required fields for Manual mode
+</b></li>
+<a name="wp1088678"> </a><p class="pListBodyLevel1">
+Enter the settings for manual mode. Be sure to enter the same settings when 
+configuring other router for this tunnel. The Incoming / Outgoing SPI settings 
+must be mirrored on the other router.
+
+</p>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1088679"> </a><li class="pSmartList2"><b class="cBold">Incoming </b>/<b class="cBold"> Outgoing SPI: </b>The Security Parameter Index is carried in the ESP (Encapsulating Security Payload Protocol) header and enables the receiver and sender to select the security association, under which a packet should be processed. You can enter hexadecimal values from 100~ffffffff. Each tunnel must have a unique Incoming SPI and Outgoing SPI. No two tunnels share the same SPI. The Incoming SPI here must match the Outgoing SPI value at the other end of the tunnel, and vice versa.</li>
+<a name="wp1088680"> </a><li class="pSmartList2"><b class="cBold">Encryption:</b> Select a method of encryption: DES or 3DES. This setting determines the length of the key used to encrypt or decrypt ESP packets. DES is 56-bit encryption and 3DES is 168-bit encryption. 3DES is recommended because it is more secure. </li>
+<a name="wp1088681"> </a><li class="pSmartList2"><b class="cBold">Authentication:</b> Select a method of authentication: MD5 or SHA1. The authentication method determines how the ESP packets are validated. MD5 is a one-way hashing algorithm that produces a 128-bit digest. SHA is a one-way hashing algorithm that produces a 160-bit digest. SHA1 is recommended because it is more secure. Make sure both ends of the VPN tunnel use the same authentication method.</li>
+<a name="wp1088682"> </a><li class="pSmartList2"><b class="cBold">Encryption Key:</b> Enter a key to use to encrypt and decrypt IP traffic. If you selected DES encryption, enter 16 hexadecimal values. If you selected 3DES encryption enter 40 hexadecimal values. If you do not enter enough hexadecimal values, then zeroes will be appended to the key to meet the required length. </li>
+<a name="wp1088683"> </a><li class="pSmartList2"><b class="cBold">Authentication Key:</b> Enter a key to use to authenticate IP traffic. If you selected MD5 authentication, enter 32 hexadecimal values. If you selected SHA, enter 40 hexadecimal values. If you do not enter enough hexadecimal values, then zeroes will be appended to the key to meet the required length. </li>
+</ul></div>
+<a name="wp1088685"> </a><li class="pSmartList1"><b class="cBold">Required fields for IKE with Preshared Key
+</b></li>
+<a name="wp1088686"> </a><p class="pListBodyLevel1">
+Enter the settings for Phase 1 and Phase 2. Phase 1 establishes the 
+preshared keys to create a secure authenticated communication channel. In 
+Phase 2, the IKE peers use the secure channel to negotiate Security 
+Associations on behalf of other services such as IPsec. Be sure to enter the 
+same settings when configuring other router for this tunnel.
+
+</p>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1088687"> </a><li class="pSmartList2"><b class="cBold">Phase 1 / Phase 2 DH Group:</b> DH (Diffie-Hellman) is a key exchange protocol. There are three groups of different prime key lengths: Group 1 - 768 bits, Group 2 - 1,024 bits, and Group 5 - 1,536 bits. For faster speed but lower security, choose <span style="font-weight: bold">Group 1</span>. For slower speed but higher security, choose <span style="font-weight: bold">Group 5</span>. Group 1 is selected by default.</li>
+<a name="wp1088690"> </a><li class="pSmartList2"><b class="cBold">Phase 1 / Phase 2 Encryption:</b> Select a method of encryption for this phase: DES, 3DES, AES-128, AES-192, or AES-256. The method determines the length of the key used to encrypt or decrypt ESP packets. AES-256 is recommended because it is more secure. </li>
+<a name="wp1088691"> </a><li class="pSmartList2"><b class="cBold">Phase 1 / Phase 2 Authentication:</b> Select a method of authentication for this phase: MD5 or SHA. The authentication method determines how the ESP (Encapsulating Security Payload Protocol) header packets are validated. MD5 is a one-way hashing algorithm that produces a 128-bit digest. SHA is a one-way hashing algorithm that produces a 160-bit digest. SHA is recommended because it is more secure. Make sure both ends of the VPN tunnel use the same authentication method.</li>
+<a name="wp1088692"> </a><li class="pSmartList2"><b class="cBold">Phase 1 / Phase 2 SA Life Time:</b> Configure the length of time a VPN tunnel is active in this phase. The default value for Phase 1 is 28800<span style="font-weight: bold"> </span>seconds. The default value for Phase 2 is 3600 seconds.</li>
+<a name="wp1088693"> </a><li class="pSmartList2"><b class="cBold">Perfect Forward Secrecy:</b> If the Perfect Forward Secrecy (PFS) feature is enabled, IKE Phase 2 negotiation will generate new key material for IP traffic encryption and authentication, so hackers using brute force to break encryption keys will not be able to obtain future IPSec keys. Check the box to enable this feature, or uncheck the box to disable this feature. This feature is recommended.</li>
+<a name="wp1088694"> </a><li class="pSmartList2"><b class="cBold">Preshared Key:</b> Enter a pre-shared key to use to authenticate the remote IKE peer. You can enter up to 30 keyboard characters and hexadecimal values, such as My_@123 or 4d795f40313233. Both ends of the VPN tunnel must use the same Preshared Key. It is strongly recommended that you change the Preshared Key periodically to maximize VPN security.</li>
+<a name="wp1088695"> </a><li class="pSmartList2"><b class="cBold">Minimum Preshared Key Complexity:</b> Check the <b class="cBold">Enable</b> box if you want to enable the Preshared Key Strength Meter. </li>
+<a name="wp1088696"> </a><li class="pSmartList2"><b class="cBold">Preshared Key Strength Meter:</b> If you enable Minimum Preshared Key Complexity, this meter indicates the preshared key strength. As you enter a preshared key, colored bars appear. The scale goes from red (weak) to yellow (acceptable) to green (strong).</li>
+<a name="wp1088697"> </a><p class="pBodyRelative">
+<b class="cBold">TIP:</b> Enter a complex preshared key that includes more than eight characters, upper- and lowercase letters, numbers, and symbols such as -*^+=. 
+</p>
+</ul></div>
+<a name="wp1088699" id="wp1088699"> </a><li class="pSmartList1"><b class="cBold">Advanced settings for IKE with Preshared Key
+</b></li>
+<a name="wp1088700"> </a><p class="pListBodyLevel1">
+When the Keying Mode is set to IKE with Preshared Key mode, advanced 
+settings are available. For most users, the basic settings should suffice; 
+advanced users can click <span style="font-weight: bold">Advanced&#160;+</span> to view the advanced settings. To 
+hide these settings, click <b class="cBold">Advanced&#160;-
+</b>
+</p>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1088701"> </a><li class="pSmartList2"><b class="cBold">Aggressive Mode:</b> Two modes of IKE SA negotiation are possible: Main Mode and Aggressive Mode. If network security is preferred, Main Mode is recommended. If network speed is preferred, Aggressive Mode is recommended. You can adjust this setting if the Remote Security Gateway Type is <em class="cEmphasis">IP Only</em> or one of the <em class="cEmphasis">IP +</em> types. Check this box to enable Aggressive Mode, or uncheck the box to disable Aggressive Mode and use Main Mode.</li>
+<a name="wp1088702"> </a><li class="pSmartList2"><b class="cBold">NOTE: </b>If the Remote Security Gateway Type is one of the <em class="cEmphasis">Dynamic IP</em> types, Aggressive Mode is required. The box is checked automatically, and this setting cannot be changed.</li>
+<a name="wp1088703"> </a><li class="pSmartList2"><b class="cBold">Compress (Support IP Payload Compression Protocol (IP Comp))</b>: IP Comp is a protocol that reduces the size of IP datagrams. Check the box to enable the router to propose compression when it initiates a connection. If the responders reject this proposal, then the router will not implement compression. When the router works as a responder, it will always accept compression, even if compression is not enabled.</li>
+<a name="wp1088704"> </a><li class="pSmartList2"><b class="cBold">Keep-Alive:</b> This feature enables the router to attempt to automatically re-establish the VPN connection if it is dropped. Check the box to enable this feature, or uncheck the box to disable it.</li>
+<a name="wp1088705"> </a><li class="pSmartList2"><b class="cBold">AH Hash Algorithm:</b> The AH (Authentication Header) protocol describes the packet format and default standards for packet structure. With the use of AH as the security protocol, protection is extended forward into the IP header to verify the integrity of the entire packet. Check the box to use this feature. Then select an authentication method: MD5 or SHA1. MD5 produces a 128-bit digest to authenticate packet data. SHA produces a 160-bit digest to authenticate packet data. Both sides of the tunnel should use the same algorithm. </li>
+<a name="wp1088706"> </a><li class="pSmartList2"><b class="cBold">NetBIOS Broadcast:</b> NetBIOS broadcast messages are used for name resolution in Windows networking, to identify resources such as computers, printers, and file servers. These messages are used by some software applications and Windows features such as Network Neighborhood. LAN broadcast traffic is typically not forwarded over a VPN tunnel. However, you can check this box to allow NetBIOS broadcasts from one end of the tunnel to be rebroadcast to the other end.</li>
+<a name="wp1088708"> </a><li class="pSmartList2"><b class="cBold">NAT Traversal:</b> Network Address Translation (NAT) enables users with private LAN addresses to access Internet resources by using a publicly routable IP address as the source address. However, for inbound traffic, the NAT gateway has no automatic method of translating the public IP address to a particular destination on the private LAN. This issue prevents successful IPsec exchanges. If your VPN router is behind a NAT gateway, check this box to enable NAT traversal. Uncheck the box to disable this feature.</li>
+<a name="wp1088710"> </a><li class="pSmartList2"><b class="cBold">Dead Peer Detection (DPD):</b> Check the box to enable the router to send periodic HELLO/ACK messages to check the status of the VPN tunnel. This feature can be used only when it is enabled on both ends of the VPN tunnel. Specify the interval between HELLO/ACK messages (how often you want the messages to be sent). </li>
+<a name="wp1088712"> </a><li class="pSmartList2"><b class="cBold">Tunnel Backup:</b> When DPD determines that the remote peer is unavailable, this feature enables the router to re-establish the VPN tunnel by using either an alternative IP address for the remote peer or an alternative local WAN interface. Check the box to enable this feature. Then enter the settings described below. This feature is available only if Dead Peer Detection is enabled. </li>
+<a name="wp1088713"> </a><p class="pBodyRelative">
+<b class="cBold">Remote Backup IP Address:</b> Specify an alternative IP address for the remote peer, or re-enter the WAN IP address that was already set for the remote gateway. 
+</p>
+<a name="wp1088714"> </a><p class="pBodyRelative">
+<b class="cBold">Local Interface:</b> Choose the WAN interface to use to reestablish the connection. 
+</p>
+<a name="wp1088715"> </a><p class="pBodyRelative">
+<b class="cBold">VPN Tunnel Backup Idle Time:</b> Enter the number of seconds of idle time that can elapse before the routers attempt to verify the VPN connection. If a connection cannot be established by using the normal tunnel settings, the router attempts to re-establish the tunnel by using the Tunnel Backup settings. The default idle time is 30 seconds. 
+</p>
+<a name="wp1088718"> </a><li class="pSmartList2"><b class="cBold">Split DNS:</b> Split DNS enables the router to send some DNS requests to one DNS server and other DNS requests to another DNS server, based on specified domain names. When the router receives an address resolution request from client, it inspects the domain name. If it matches one of the domain names in the Split DNS settings, then it passes the request to the specified DNS server. Otherwise, the request is passed to the DNS server that is specified in the WAN interface settings. Check the box to enable this feature, or uncheck the box to disable it.</li>
+<a name="wp1088719"> </a><p class="pBodyRelative">
+<b class="cBold">DNS1:</b> Specify the IP address of the DNS server to use for the specified domains. Optionally, specify a secondary DNS server in the <b class="cBold">DNS2</b> field.
+</p>
+<a name="wp1088720"> </a><p class="pBodyRelative">
+<b class="cBold">Domain Name 1 - Domain Name 4:</b> Specify the domain names for these DNS servers. Requests for these domains will be passed to the specified DNS server(s).
+</p>
+</ul></div>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

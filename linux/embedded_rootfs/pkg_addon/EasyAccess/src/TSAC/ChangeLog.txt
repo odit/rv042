@@ -1,0 +1,65 @@
+version 1,6,1,1 (May 31 2007)
+-----------------------------
+1.Version changed for release.
+
+version 1,6,0,1 (Mar 14 2007)
+-----------------------------
+1.Bug #442 - Vista Support.
+
+version 1,5,1,1 (Jan 12 2007)
+-----------------------------
+1.Version changed for release.
+
+version 1,5,0,1 (Oct 17 2006)
+-----------------------------
+1.Version has been changed for release.
+
+version 1,4,1,1 (Mar 31 2006)
+-----------------------------
+1.Version has been changed for release.
+
+Version 1,4,0,2 (Feb 28 2006)
+------------------------------
+1. Bug #8 - Support for SOCKSV and HTTP Proxy
+
+Version 1,4,0,1 (Jan 09 2006)
+------------------------------
+1. Bug # 244 - Terminal services remote desktop (RDP5) window title bar shows Menlologic Secure Remote desktop client.
+2. Bug # 32 - TSC 5.0 clent goes blank when re-sized.
+3. Bug # 33 - Multiple TSAC crashes IE.
+4. Bug # 145 - Unable to open terminal service application when remote desktop is already connected and vice versa.
+
+Version 1,3,0,1 (July 27 2005)
+------------------------------
+1. Version changed for release.
+
+Version 1,2,15,1 (July 1 2005)
+------------------------------
+1. Version reverted to 1.2.15.1
+
+Version 1,3,0,1 (June 16 2005)
+------------------------------
+1. Property added to control Root Certificate Validation
+
+Version 1,0,0,5 (June 8 2005)
+------------------------------
+1. Multiple Instances Blocked
+
+Version 1,0,0,4 (May 28 2005)
+------------------------------
+1. TCP_NODELAY removed because of compatibility issues with win 2k TSAC Server
+2. Thread count added to ensure proper cleanup
+
+Version 1,0,0,3 (May 19 2005)
+------------------------------
+1. Does not crash on cancel during login
+2. Does not crash on wrong server IP
+3. Incorrect COntrol Size fixed.
+
+Version 1,0,0,2 (Dec 17 2004)
+------------------------------
+1. XP SP2 -  the presence of tcpip.sys hotfix is detected
+
+Version 1,0,0,1
+---------------
+1. Default version

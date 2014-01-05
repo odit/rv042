@@ -1,0 +1,6 @@
+config CONFIG_openldap
+	bool "openldap"
+	default n
+	help
+		Include openldap
+

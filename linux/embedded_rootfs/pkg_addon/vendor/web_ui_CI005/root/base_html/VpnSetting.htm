@@ -1,0 +1,174 @@
+<!--#nk_get VpnSetting=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script language="JavaScript">
+var ButtonType = "Close";
+var Savelink = "chSubmit(this.form);";
+var Cancellink = ""; 
+
+function Print_table1_tr_cell(cell_type,no,name,status, phase2,LocalGroup,RemoteGroup,Gateway,bn,bv,mode)
+{
+	if (cell_type == "OddRow")
+		cell_type = "popOddRow";
+	else	
+		cell_type = "popEvenRow";
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td width="20">'+no+'</td>');
+	document.write('<td width="120">'+name+'</td>');
+	document.write('<td>'+status+'</td>');
+	document.write('<td width="80">'+phase2+'</td>');
+	document.write('<td width="150">');
+	if (LocalGroup == "")
+		document.write('N/A');
+	else	
+		document.write(LocalGroup+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');
+	document.write('<td width="110">');
+	if (RemoteGroup == "")
+		document.write('N/A');
+	else	
+		document.write(RemoteGroup+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');		
+	document.write('<td width="110">'+Gateway+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('</tr>');
+}
+
+function GRP_Tunnel_List(TunnelData)
+{
+	var items;
+	var list=TunnelData.split("?");
+	if(document.formVpnSetting.GRPTunnelListData.value=="" || list[0].substring(1,4) == '!--')
+		return;
+
+ 	document.write('<table width="100%" class="STtable" border="1">');
+ 	document.write('<tr>');
+ 	document.write('<td>');
+ 	document.write('<table width="100%" class="STtable" border="0">');
+ 	document.write('<tr>');
+ 	document.write('<td bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="8" height="1">Group Name</td>');
+ 	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+ 	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="134" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Connected Tunnels</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+ 	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="94" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Phase 2<br><img border="0" src="images/_blank.gif" width="7" height="1">Enc/Auth/Grp</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+ 	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="165" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Local Group</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+ 	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="248" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Remote Client</td>');
+ 	document.write('</tr>');
+	document.write('</table>');
+ 	document.write('</td>');
+ 	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');
+	for(var i=0;i<list.length;i++)
+	{		
+		if(list[i]=="")
+			continue;
+		items=list[i].split(splitVarforSpecialWordField);
+		if(i%2 == 0)
+			Print_table2_tr_cell("popOddRow",items[1],items[2],items[3],items[4],items[5],items[6]);
+		else
+			Print_table2_tr_cell("popEvenRow",items[1],items[2],items[3],items[4],items[5],items[6]);
+	}
+	document.write('</table>');		
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');	
+}
+
+function Print_table2_tr_cell(cell_type,GroupName,conn_Tunnel, phase2,LocalIP,RemoteIP)
+{
+	document.write('<tr class='+cell_type+' >');	
+	document.write('<td>'+GroupName+'</td>');
+	document.write('<td width="120">'+conn_Tunnel+'</td>');
+	document.write('<td width="80">'+phase2+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="150">');
+	if (LocalIP == "")
+		document.write('N/A');
+	else	
+		document.write(LocalIP+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>')
+	document.write('<td width="233">');
+	if (RemoteIP == "")
+		document.write('N/A');
+	else	
+		document.write(RemoteIP+'<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('</td>');		
+	document.write('</tr>');
+}
+</script>
+</head>
+<body class="poplist" onResize="ChangeWhiteTable()" style="overflow:hidden">
+<form name="formVpnSetting" method="post" action="VpnSetting.htm">
+<input type="hidden" name="tunnelDefined" value='<!--#nk_get tunnelDefined=""-->'>
+<input type="hidden" name="GRPTunnelListData" value='<!--#nk_get NewGroupList=""-->'>
+<table class="pop_title_table" border="0" width="100%"> 
+ 	<tr>
+	   <th>
+ 		<script language="JavaScript">
+			PrintSTButton('refresh', 'Refresh', "javascript:location.href='VpnSetting.htm'", "","", 70);
+			document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+			PrintSTButton('close', 'Close', 'closeWindow();', "","", 70);
+		</script>
+ 	   </th>
+ 	</tr>
+ </table>
+<script>PrintWhiteTableBegin();</script>
+ <table width="100%" class="STtable" border="1">
+ <tr>
+ 	<td>
+ 	<table width="100%" class="STtable" border="0">
+ 		<tr>
+ 			<td width="34" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="8" height="1">No.</td>
+ 			<td bgcolor="#FFFFFF" style="width:1px"></td>
+ 			<td bgcolor="#A2B9C9" style="width:1px"></td>
+ 			<td width="134" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Name</td>
+ 			<td bgcolor="#FFFFFF" style="width:1px"></td>
+ 			<td bgcolor="#A2B9C9" style="width:1px"></td>
+			<td bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Status</td>
+			<td bgcolor="#FFFFFF" style="width:1px"></td>
+ 			<td bgcolor="#A2B9C9" style="width:1px"></td>
+			<td width="94" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Phase 2 <br><img border="0" src="images/_blank.gif" width="7" height="1">Enc/Auth/Grp</td>
+			<td bgcolor="#FFFFFF" style="width:1px"></td>
+ 			<td bgcolor="#A2B9C9" style="width:1px"></td>
+			<td width="164" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Local Group</td>
+			<td bgcolor="#FFFFFF" style="width:1px"></td>
+ 			<td bgcolor="#A2B9C9" style="width:1px"></td>
+			<td width="124" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Remote Group</td>
+			<td bgcolor="#FFFFFF" style="width:1px"></td>
+ 			<td bgcolor="#A2B9C9" style="width:1px"></td>
+			<td width="126" bgcolor="#D9E3E9"><img border="0" src="images/_blank.gif" width="7" height="1">Remote Gateway</td>
+ 		</tr>
+	</table>
+ 	</td>
+ </tr>
+<script language="JavaScript">
+if(document.formVpnSetting.tunnelDefined.value!=0)
+{
+        document.write('<tr>');
+        document.write('<td class="STtable">');
+        document.write('<table width="100%"  class="STtable"  border="0">');
+	<!--#nk_get TunnelDataList=""-->
+	document.write('</table></td></tr>');
+}
+</script>
+</table>
+<br>
+<script language="JavaScript">
+	GRP_Tunnel_List(document.formVpnSetting.GRPTunnelListData.value);
+</script>
+<script>PrintWhiteTableEnd();</script>
+</form>
+</body>
+</html>

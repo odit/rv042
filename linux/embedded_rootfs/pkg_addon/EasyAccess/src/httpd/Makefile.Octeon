@@ -1,0 +1,85 @@
+HTTPD_HEADERS=Httpd.h\
+	HttpdErrors.h\
+        HttpdRewrite.h \
+	Config.h
+
+HTTPD_SOURCES= HttpdAlias.o\
+	HttpdBuffer.o\
+	Httpd.o\
+	HttpdCgi.o\
+	HttpdConfig.o\
+	HttpdGet.o\
+	HttpdLog.o\
+	HttpdMain.o\
+	HttpdRead.o\
+	HttpdResponse.o\
+	HttpdSSL.o\
+	HttpdTunnel.o\
+        HttpdRewrite.o\
+	HttpdUtils.o
+
+BIN=httpd
+
+all: $(BIN)
+
+include ../make-include-Octeon.mk
+
+CFLAGS+=-I$(TOP_DIR)/src
+
+CFLAGS+=-DHTTPD_DEBUG -UHTTPD_ASSERT -UUSE_FORK -UHTTPD_USE_BLOCKING_TUNNEL_FD -UHTTPD_READ_CONFIG_FILE \
+        -DHTTPD_ALTER_SOCKBUFSIZE -DHTTPD_USE_TCPNODELAY -DHTTPD_MULTIPLE_LOOP \
+ 	-UHTTPD_URL_REWRITE -DHTTPD_ENABLE_CLIENT_CERTS
+
+ifndef CONFIG_RV0XX
+#CFLAGS+=-DCAVIUM_OCTEON_SSL
+endif
+
+ifdef CONFIG_IPV6
+CFLAGS+=-DHTTPD_IPV6
+endif
+
+LDFLAGS += -Wl,--defsym,__stack_size__=1048576 -ldl
+
+$(BIN): $(HTTPD_SOURCES) $(HTTPD_HEADERS)
+	${CC} $(CFLAGS) $(LDFLAGS) -o $@ $(HTTPD_SOURCES) -L$(SYS_LIB) -lSys $(SSL_LIBS) -lutil -lnku
+	$(STRIP) $(BIN)
+
+cleanbin:
+	rm $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+clean:
+	rm -f *.o
+	rm -f $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+install:
+	install -d ${INSTALL_TOP_DIR}/bin
+	install -d ${INSTALL_TOP_DIR}/www
+	install -d ${INSTALL_TOP_DIR}/www/cgi-bin
+#purpose     : 0013102 author : Jason.Huang date : 2010-08-01
+#description : rv0xx do not use this
+
+# 	install -d ${INSTALL_TOP_DIR}/www/cert-bin
+	install -d ${INSTALL_TOP_DIR}/www/htdocs
+	install -d ${INSTALL_TOP_DIR}/www/htdocs/graphs
+	install -d ${INSTALL_TOP_DIR}/www/conf
+	install -d ${INSTALL_TOP_DIR}/var
+	install -d ${INSTALL_TOP_DIR}/var/conf
+	install -d ${INSTALL_TOP_DIR}/uiaddon
+	$(INSTALL) *.png ${INSTALL_TOP_DIR}/www/htdocs/graphs
+	if [ -n '$(BIN)' ]; then $(INSTALL) $(BIN) $(ACCESS_POINT_BIN); fi
+
+	install -d ${INSTALL_TOP_DIR}/var/locks
+	install -d ${INSTALL_TOP_DIR}/var/cert
+	install -d ${INSTALL_TOP_DIR}/var/cert/default
+	#openssl req -new -nodes -newkey rsa:1024 -x509 -keyout var/cert/default/server.key -out var/cert/default/server.crt
+	touch ${INSTALL_TOP_DIR}/var/cert/default/password.sh; chmod +x ${INSTALL_TOP_DIR}/var/cert/default/password.sh
+	cp -rf ../../tools/server* ${INSTALL_TOP_DIR}/var/cert/default/
+	cp -rf ../../tools/cipher.conf ${INSTALL_TOP_DIR}/var/conf/
+	ln -s -f default/server.crt ${INSTALL_TOP_DIR}/var/cert/server.crt
+	ln -s -f default/server.key ${INSTALL_TOP_DIR}/var/cert/server.key
+	ln -s -f default/password.sh ${INSTALL_TOP_DIR}/var/cert/password.sh
+
+un-install:
+	if [ -n '$(BIN)' ]; then cd $(ACCESS_POINT_BIN); rm -rf $(BIN); fi

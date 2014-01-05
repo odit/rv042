@@ -1,0 +1,204 @@
+config CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	bool "Enable Octeon specific options"
+	depends on CPU_CAVIUM_OCTEON
+	default "y"
+
+config CAVIUM_OCTEON_BOOTBUS_COMPACT_FLASH
+	bool "Enable support for Compact flash hooked to the Octeon Boot Bus"
+	depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	default "y"
+	help
+	  This option enables a polled compact flash driver for use with
+	  compact flash cards attached to the Octeon boot bus. This interface
+	  is quite slow. It has a maximum rate of about 1.5 MB/s.
+
+config CAVIUM_OCTEON_HW_FIX_UNALIGNED
+	bool "Enable hardware fixups of unaligned loads and stores"
+	depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	default "y"
+	help
+	  Configure the Octeon hardware to automatically fix unaligned loads
+	  and stores. Normally unaligned accesses are fixed using a kernel
+	  exception handler. This option enables the hardware automatic fixups,
+	  which requires only an extra 3 cycles. Disable this option if you
+	  are running code that relies on address exceptions on unaligned
+	  accesses.
+
+config FAST_ACCESS_TO_THREAD_POINTER
+	bool "Enable fast access to the thread pointer"
+	depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	default "y"
+	help
+	  For Mips, normally the TLS thread pointer is accessed by the
+	  userspace program executing a "rdhwr" from register $29. This
+	  register doesn't exist, so the kernel emulates the instruction
+	  assigning the thread pointer to the value register. This option
+	  supplies an alternate, faster access to the thread pointer. A
+	  side effect of this option is that the highest 8 bytes of CVMSEG
+	  is used by the kernel to save and restore the thread pointer during
+	  the TLB fault handlers. This CVMSEG address isn't available to user
+	  applications.
+	
+config REPLACE_EMULATED_ACCESS_TO_THREAD_POINTER
+	bool "Support dynamically replacing emulated thread pointer accesses"
+	depends on FAST_ACCESS_TO_THREAD_POINTER
+	default "y"
+	help
+	  When this option is set, the kernel can dynamically replace slower
+	  references to the thread pointer with fast accesses. This involves
+	  replacing userspace instructions at runtime, so it may not work with
+	  all programs. It is advised to use a toolchain that creates code for
+	  FAST_ACCESS_TO_THREAD_POINTER instead of this option. If you have
+	  code compiled with a Cavium compiler prior to release 1.5, or are
+	  using a non Cavium compiler, this option may allow you to receive
+	  most of the benefit of direct access to the thread pointer. It may
+	  also cause programs to fail.
+	
+	  Instruction replacement is disabled on boot. It can be controlled by
+	  writing a mode to /sys/module/traps/parameters/thread_pointer_mode.
+	  The supported modes are:
+	
+	  0 - Use the normal kernel emulation without any changes.
+	  1 - Replace emulated instructions with direct accesses to the thread
+		register.
+	  2 - Replace emulated instructions and log the replacement PC.
+	  3 - Replace emulated instructions with break instructions. This will
+		cause programs to fail, but makes it easy to stop gdb on the
+		instruction.
+
+config CAVIUM_OCTEON_CVMSEG_SIZE
+	int "Number of L1 cache lines reserved for CVMSEG memory"
+	depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	range 1 54
+	default 1
+	help
+          CVMSEG LM is a segment that accesses portions of the dcache as a
+	  local memory; the larger CVMSEG is, the smaller the cache is.
+	  This selects the size of CVMSEG LM, which is in cache blocks. The
+	  legally range is from zero to 54 cache blocks (i.e. CVMSEG LM is
+	  between zero and 6192 bytes).
+
+config CAVIUM_OCTEON_LOCK_L2
+	bool "Lock often used kernel code in the L2"
+	depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	default "y"
+	help
+	  Enable locking parts of the kernel into the L2 cache.
+
+config CAVIUM_OCTEON_LOCK_L2_TLB
+	bool "Lock the TLB handler in L2"
+	depends on CAVIUM_OCTEON_LOCK_L2
+	default "y"
+	help
+	  Lock the low level TLB fast path into L2.
+
+config CAVIUM_OCTEON_LOCK_L2_EXCEPTION
+	bool "Lock the exception handler in L2"
+	depends on CAVIUM_OCTEON_LOCK_L2
+	default "y"
+	help
+	  Lock the low level exception handler into L2.
+
+config CAVIUM_OCTEON_LOCK_L2_LOW_LEVEL_INTERRUPT
+	bool "Lock the interrupt handler in L2"
+	depends on CAVIUM_OCTEON_LOCK_L2
+	default "y"
+	help
+	  Lock the low level interrupt handler into L2.
+
+config CAVIUM_OCTEON_LOCK_L2_INTERRUPT
+	bool "Lock the 2nd level interrupt handler in L2"
+	depends on CAVIUM_OCTEON_LOCK_L2
+	default "y"
+	help
+	  Lock the 2nd level interrupt handler in L2.
+
+config CAVIUM_OCTEON_LOCK_L2_MEMCPY
+	bool "Lock memcpy() in L2"
+	depends on CAVIUM_OCTEON_LOCK_L2
+	default "y"
+	help
+	  Lock the kernel's implementation of memcpy() into L2.
+
+config CAVIUM_OCTEON_USER_IO
+	bool "Allow User space to access hardware IO directly"
+	depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	help
+	  Allows user applications to directly access the Octeon hardware
+	  IO addresses (0x1000000000000 - 0x1ffffffffffff). This allows high
+	  performance networking applications to run in user space with minimal
+	  performance penalties. This also means a user application can bring
+	  down the entire system. Only use this option on embedded devices
+	  where all user applications are strictly controlled.
+
+config CAVIUM_OCTEON_USER_MEM
+	bool "Allow User space to access memory directly"
+	depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	depends on CAVIUM_OCTEON_USER_IO
+	help
+	  Allows user applications to use XKPHYS addresses directly to memory.
+	  This allows user space direct access to shared memory not in use by
+	  Linux. This memory is suitable for use with the Octeon hardware.
+	  Cavium simple executive applications also share this memory. Since
+	  this bypass all of the Linux memory protection, only use this option
+	  on embedded devices where all user applications are strictly
+	  controlled.
+
+config CAVIUM_RESERVE32
+	int "Memory to reserve for user processes shared region (MB)"
+	range 0 1024
+	depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	depends on CAVIUM_OCTEON_USER_IO
+	default "0"
+	help
+	  Reserve a shared memory region for user processes to use for hardware
+	  memory buffers. This is required for 32bit applications to be able to
+	  send and receive packets directly. Applications access this memory by
+	  memory mapping /dev/mem for the addresses in /proc/octeon_info. For
+	  optimal performance with HugeTLBs, keep this size an even number of
+	  megabytes.
+
+config CAVIUM_OCTEON_NUM_PACKET_BUFFERS
+	int "Number of packet buffers (and work queue entries) for shared access"
+	range 0 8192
+	depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+	depends on CAVIUM_OCTEON_USER_IO
+	default "0"
+	help
+	  Number of packet buffers (and work queue entries) to allocate from
+	  reserved user memory. These buffers are in the userspace address
+	  range and may be used for zero copy access to ethernet packets from
+	  userspace. Normal kernel ethernet performance will suffer since
+	  received ethernet packets will need to be copied from these buffers
+	  into the normal kernel skbuf structures. Only use this option if
+	  high performance ethernet is need in userspace, bypassing the kernel.
+	  This will reduce the userspace shared region by
+	  (2048 + 128) * (number of buffers).
+
+config ARCH_SPARSEMEM_ENABLE
+	def_bool y
+	select SPARSEMEM_STATIC
+	depends on CPU_CAVIUM_OCTEON
+
+config CAVIUM_OCTEON_POW_ONLY_ETHERNET
+	tristate "POW based internal only ethernet driver"
+	default n
+	help
+	  This option enables a very simple ethernet driver for internal core
+	  to core traffic. It relies on another driver, cavium-ethernet,
+	  to perform all hardware setup. This driver's purpose is to supply
+	  basic networking between different Linux images running on the same
+	  chip. A single core loads the cavium-ethernet module, all other cores
+	  load this driver. On load, the driver waits for some other core to
+	  perform hardware setup.
+
+config CAVIUM_OCTEON_IPSEC
+   bool "Enable enhancements to the IPSec stack to allow procotol offload."
+   depends on CAVIUM_OCTEON_SPECIFIC_OPTIONS
+   default "n"
+   help
+     This enables enhancements to the IPSec stack to allow some of the
+     processing required for IPSec to be performed on another processor
+     which must be running the ipsec-filter application.
+
+

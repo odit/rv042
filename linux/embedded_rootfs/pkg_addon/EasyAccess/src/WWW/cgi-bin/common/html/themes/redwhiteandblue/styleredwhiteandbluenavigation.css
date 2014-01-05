@@ -1,0 +1,23 @@
+body{FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+.bodyback{FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px; BACKGROUND-COLOR:#f8f4da;}
+.mainback{BACKGROUND-COLOR:#fbfbe8; COLOR:#393c3f; FONT-FAMILY: Tahoma, Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TD.mainback{BACKGROUND-COLOR:#fbfbe8; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TR.mainback{BACKGROUND-COLOR:#fbfbe8; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+A{TEXT-DECORATION:none;COLOR:#50606a;}
+A:visited{TEXT-DECORATION:none;COLOR:#50606a;}
+a:hover{COLOR:#407fcf; cursor:pointer; cursor:hand;}
+.darkback{BACKGROUND-COLOR:#66769f; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TD.darkback{BACKGROUND-COLOR:#66769f; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+DIV.clk7{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#ffffff; border-right:1px solid #66769f;} 
+DIV.clk7k{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#f8f5da; border-right:1px solid #66769f;}
+DIV.clk7Sub1{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#ffffff; border-right:1px solid #66769f;} 
+DIV.menubottomrow{background-color:#ffffff;border-bottom:1px solid #66769f; border-right:1px solid #66769f;}
+DIV.clk7Sub1k{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#f8f5da; border-right:1px solid #66769f;} 
+#divk7Cont{position:relative; left:0px; top:0px; height:322px; width:175px; visibility:hidden}
+A.clk7Links{font-family:Tahoma, Verdana, Arial, Helvetica; font-size:11px; text-decoration:none; color:#50606a; width:175px; height:25px; line-height:180%}
+A.clk71Links{font-family:Tahoma, Verdana, Arial, Helvetica; font-size:11px; text-decoration:none; color:#50606a; width:175px; height:25px; line-height:180%}
+td.mainbottom{background: url("/images/bottomredcc0022.gif");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop1{background: url("/images/topright3c5fa6.gif");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop0{background: url("/images/mainlogo.gif");}
+td.maintop2{background: url("/images/topredbottom.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#fbfbe8;}
+.menubackground{background-color:#ffffff;border-right:1px solid #66769f;}

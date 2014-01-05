@@ -1,0 +1,32 @@
+How to create Certificate store for signing Java Code from (.spc) and (.pvk) files
+__________________________________________________________________________________
+
+Step 1:
+	On a Windows machine install the tool "pvkimprt".
+	
+Step 2:
+	Import the certificate into a known location using pvkimprt <.spc filename> <.pvk filename>.
+
+Step 3:
+	Start->Run->mmc
+	On the main window click "Console->Add/Remove Snap-in".Choose Certificates and select the 
+	certificate imported in Step 2.
+
+Step 4:
+	Right click on the selected certificate and chose "properties" and give a friendly name that 
+	will server as our <alias> (e.g. mycertalias)
+
+Step 5:
+	From the Actions drop down select Export and export the certificate imported in Step 2.The 
+	exported file will get saved as .pfx file.
+	
+Step 6:
+	Import the .pfx file from Mozilla/Firefox browser through Edit->Preferences->Advanced->
+	Certificates->Manage Certificates into "Your Certificates".This would import the contents of 
+	the .pfx file into the Browser's certificate store.
+	
+Step 7:
+	Export the certificate imported in Step 6, by clicking on "Backup".This file should have 
+	a .p12 extension.
+	
+	This is the certificate store that is to be used for signing Java Code.

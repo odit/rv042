@@ -1,0 +1,31 @@
+--- lib/krb5/asn.1/asn1_k_decode.h.orig	2006-12-16 23:30:14.000000000 -0800
++++ lib/krb5/asn.1/asn1_k_decode.h	2006-12-16 23:29:51.000000000 -0800
+@@ -141,7 +141,7 @@
+ 	(asn1buf *buf, krb5_pa_data *val);
+ asn1_error_code asn1_decode_passwdsequence
+ 	(asn1buf *buf, passwd_phrase_element *val);
+-asn1_error_code asn1_decode_etype_info_entry
++static asn1_error_code asn1_decode_etype_info_entry
+ 	(asn1buf *buf, krb5_etype_info_entry *val);
+ asn1_error_code asn1_decode_sam_challenge
+ 	(asn1buf *buf, krb5_sam_challenge *val);
+--- appl/gssftp/ftpd/ftpd.c.orig	2006-12-17 09:36:32.000000000 -0800
++++ appl/gssftp/ftpd/ftpd.c	2006-12-17 09:37:24.000000000 -0800
+@@ -1271,7 +1271,7 @@
+ 	FILE *fout, *din;
+ 	struct stat st;
+ 	int (*closefunc)();
+-	static char *gunique();
++	char *gunique();
+ 
+ 	if (logging > 1) syslog(LOG_NOTICE, "put %s", path_expand(name));
+ 
+@@ -2206,7 +2206,7 @@
+  * The file named "local" is already known to exist.
+  * Generates failure reply on error.
+  */
+-static char *
++char *
+ gunique(local)
+ 	char *local;
+ {

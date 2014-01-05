@@ -1,0 +1,447 @@
+<!--#nk_get AccessRuleSetup=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	if(document.formdualwan.firewall0.value == "checked")
+	 	window.location.replace('access_rules0.htm');
+	afterRemove();
+	setValueToPerPage(document.formaccess_rules.perPage);
+	setValueToThisPage();
+	if (parseInt(document.formaccess_rules.totalRules.value,10)>=LimitAccessRules)
+		SetButtonStatus("B3", "disabled");
+}
+
+function Leavefunction()
+{
+	chLeave();
+}
+function setValueToThisPage()
+{
+	document.submitform.thisPage.value=document.formaccess_rules.thisPage.value;
+}
+function setValueToPerPage(It)
+{
+	document.submitform.perPage.value=It.value;
+}
+function afterRemove()
+{
+  if (document.formaccess_rules.AfterRemove.value=="1")
+  	window.location.replace("access_rules.htm");
+}
+
+function chTotalRules(F)
+{
+	if (parseInt(F.totalRules.value,10)>=LimitAccessRules)
+	{
+		alert(aLimitRules + LimitAccessRules + aLimitEnd);
+		return;
+	}
+	else
+	{
+		document.formaccess_rules.action = "edit_access_rules.htm";
+		document.formaccess_rules.submit();
+	}	
+}
+
+function perPageRefresh()
+{
+	document.formaccess_rules.submitStatus.value="1";
+	window.status=wRefresh;  
+	document.formaccess_rules.submit();
+}
+
+function reqPage(n)
+{
+	if( n == -1)
+	if(document.formaccess_rules.thisPage.value==1)
+	{
+		alert("It is first page!");
+		return;
+	}
+	if( n ==1)
+	if( document.formaccess_rules.thisPage.value == document.formaccess_rules.totalPage.value )
+	{
+		alert("It is last page!");
+		return;
+	}
+	document.formaccess_rules.ReqPage.value=document.formaccess_rules.JumpPage.selectedIndex+1+parseInt(n,10);
+	document.formaccess_rules.submitStatus.value="2";
+	window.status=wDownLoad;  
+	document.formaccess_rules.submit();
+}
+function reqPage_first_last(n)
+{
+	k = parseInt(n,10) ;
+	if( k == -1 )
+	if(document.formaccess_rules.thisPage.value==1)
+	{
+		alert("It is first page!");
+		return;
+	}
+	if( k ==1 )
+	if( document.formaccess_rules.thisPage.value == document.formaccess_rules.totalPage.value )
+	{
+		alert("It is last page!");
+		return;
+	}
+	if(k == - 1)
+		document.formaccess_rules.ReqPage.value=1;
+	else if(k == 1)
+		 document.formaccess_rules.ReqPage.value=document.formaccess_rules.totalPage.value;
+	 
+	  document.formaccess_rules.submitStatus.value="2";
+	  window.status=wDownLoad;  
+	  document.formaccess_rules.submit();
+}
+
+function changePolicy(s,e,p)
+{
+  if (confirm(cChangePriority))
+  {
+    document.formaccess_rules.ChangeEntry.value=e;
+    document.formaccess_rules.ChangePolicy.value=p;  
+    document.formaccess_rules.submitStatus.value="3"; 
+    window.status=wChangePriority;	 
+    document.formaccess_rules.submit();
+  }
+  else
+  {
+    s.selectedIndex=e-1;
+  }
+}
+
+function enableLine(c,e)
+{
+  if (c.checked)
+  { 
+      document.formaccess_rules.EnableLine.value=e;
+      window.status=wEnableRules; 	 
+  }	  
+  else 
+  {
+      document.formaccess_rules.DisableLine.value=e;
+      window.status=wDisableRules;	  
+  }	  
+  document.formaccess_rules.submitStatus.value="4";  
+  window.status=wRefresh;   
+  document.formaccess_rules.submit();
+}
+
+function editLine(n)
+{
+
+  document.formaccess_rules.EditLine.value=n;
+  document.formaccess_rules.submitStatus.value="5";  
+  window.status=wEditRules;  
+  document.formaccess_rules.submit();
+
+}
+
+function removeLine(n)
+{
+
+  if (document.formaccess_rules.submitClick.value == "0")
+  if (confirm(cRemoveRules1+n+cRightNow))
+  {
+
+    document.formaccess_rules.submitClick.value="1";
+    document.formaccess_rules.RemoveLine.value=n;
+    document.formaccess_rules.submitStatus.value="6";  
+    window.status=wRemoveRules;	
+    document.formaccess_rules.submit();
+
+  }
+}
+
+function defaultRules()
+{
+	if (confirm(cRestoreDefaultRule))
+	{
+		document.formaccess_rules.submitStatus.value="10";  
+		window.status=wRestoreRules;	
+		document.formaccess_rules.submit();
+	}
+}
+
+function falseSubmit(F)
+{
+
+  F.submitStatus.value=0; 
+  MM_showHideLayers('AutoNumber15','','hide'); 
+  F.submit();
+}
+
+function chChangeIPmode(val)
+{	
+	var serviceName="IPv6 Access Rule";
+	 
+	if ('<!--#nk_get RadioHandle="setIpMode:0"-->'== "checked")
+	{
+		if (confirm(alertMessageBegin+serviceName+selectMessage)){
+			document.location.href="network.htm";
+		}
+	}else{
+		document.location.href="access_rules1.htm";
+	}
+}
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "NULL";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Reloadlink = "";
+var Savelink = "chSubmit(this.form);";
+var Cancellink = ""; 
+var Backlink = "";
+var helplink ='help_access_rules.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 880;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	document.write('<table width="100%" class="block" border="0" cellpadding="0" cellspacing="0">');
+	document.write('<tr><td>');
+	PrintIPTypeTab('IPv4','true','IPv6','false');
+	document.write('</td></tr>');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#CBD8E1" style="border-left:1px solid #666;border-right:1px solid #666;border-bottom:1px solid #666;"><tr><td>');
+	PrintAccess_Rules(0);
+	document.write('</td></tr></table>');
+	document.write('</td></tr>');
+	PrintEndContent();
+}
+
+function PrintAccess_Rules(hasUnderLine)
+{
+	PrintBeginBlock(0);
+
+	document.write('<table class="STtable" height="29" width="'+FixedTableWidth+'" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<td align="right"><b>');
+	document.write('Item <!--#nk_get AccessRule="77"--> Rows ');
+	document.write('<img border="0" src="images/_blank.gif" width="8">');
+	document.write('per page&nbsp;:');
+	document.write('<img border="0" src="images/_blank.gif" width="10" height="1">');
+	document.write('<select name="perPage" onChange="perPageRefresh();setValueToPerPage(this)" style="font-family:Arial; font-size: 12px;height:20px">');
+	document.write('<!--#nk_get AccessRule="4"-->');
+	document.write('</select>');	
+	document.write('</b></td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	
+	document.write('<table width="'+FixedTableWidth+'" class="STtable" border="1">');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" class="STtable" border="0">');	
+	document.write('<tr>');	
+	document.write('<td width="64" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Priority');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="58" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Enable');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+	document.write('<td width="52" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Action');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="111" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Service');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="101" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Source <br><img border="0" src="images/_blank.gif" width="7" height="1">Interface');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="109" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Source');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="112" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Destination');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="96" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Time');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td width="73" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Day');
+	document.write('</td>');
+	document.write('<td bgcolor="#FFFFFF" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding-left: 0px;padding-right: 0px;width:1px"></td>');	
+	document.write('<td bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('</td>');	
+	document.write('<td bgcolor="#FFFFFF" style="padding: 0px;width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="padding: 0px; width:1px"></td>');	
+	document.write('<td width="50" bgcolor="#D9E3E9">');
+	document.write('<img border="0" src="images/_blank.gif" width="7" height="1">');
+	document.write('Delete');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td colspan="10" class="STtable">');
+	document.write('<table width="100%"  class="STtable"  border="0">');	
+	<!--#nk_get AccessRuleList=""-->	
+	document.write('</table>');		
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<table class="ListButtom" height="29" width="100%" cellspacing="'+Tablecellspacing+'" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write("<td>");	
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	PrintSTButton("B3", "    Add    ", "chTotalRules(this.form)");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("btnDefault", "Restore to Default Rules", "defaultRules()");
+	document.write('</td>') 
+	document.write("<td width=21>");	
+	if (parseInt(document.formaccess_rules.thisPage.value,10) > 1) PrintPageButton("first", "reqPage_first_last(-1)");
+	else PrintPageButton("first", "reqPage_first_last(-1)", "disabled");
+	document.write('</td>') 	
+	document.write("<td width=26>");	
+	if (parseInt(document.formaccess_rules.thisPage.value,10) > 1) PrintPageButton("previous", "reqPage('-1')");
+	else PrintPageButton("previous", "reqPage('-1')", "disabled");	
+	document.write('</td>') ;
+	document.write('<td width="108">Page');
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	document.write('<select class="select" name="JumpPage" onChange="reqPage(\'0\')">');
+	document.write('<!--#nk_get AccessRule="3"-->');
+	document.write('</select>');	
+	document.write('<img border="0" src="images/_blank.gif" width="4" height="1">');
+	document.write('of '+document.formaccess_rules.totalPage.value);
+	document.write('<img border="0" src="images/_blank.gif" width="10" height="1">');
+	document.write('</td>');
+	document.write("<td width=21>");	
+	if (parseInt(document.formaccess_rules.thisPage.value,10) < parseInt(document.formaccess_rules.totalPage.value,10)) PrintPageButton("next", "reqPage('1')");
+	else PrintPageButton("next", "reqPage('1')", "disabled");
+	document.write('</td>') ;	
+	document.write("<td width=20>");	
+	if (parseInt(document.formaccess_rules.thisPage.value,10) < parseInt(document.formaccess_rules.totalPage.value,10)) PrintPageButton("end", "reqPage_first_last(1)");
+	else PrintPageButton("end", "reqPage_first_last(1)", "disabled");	
+	document.write('</td>') ;	
+	document.write('</tr>');
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('<br>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function Print_table_tr_cell(cell_type,priority,enable,Action,Service,Interface,Source, Dest, Time, Day,edit_num,rm_num )
+{
+	document.write('<tr class='+cell_type+' >');	
+	if(priority == '&nbsp;' || priority =='' )
+ 		document.write('<td width="50" >&nbsp;</td>');
+	 else
+		document.write('<td width="50" >'+priority+'</td>');
+	document.write('<td width="45" >'+enable+'</td>');
+	document.write('<td width="40" >'+Action+'</td>');
+	document.write('<td width="100">'+Service+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="90">'+Interface+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');	
+	document.write('<td width="100">'+Source+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td width="100">'+Dest+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');		
+	document.write('<td width="85">'+Time+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	if(Day == '&nbsp;' || Day == '' )
+		document.write('<td width="60">&nbsp;<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	else
+		document.write('<td width="60">'+Day+'<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	document.write('<td>');
+	if( edit_num < 0 || edit_num =='&nbsp;'  )
+		document.write('<img border="0" src="images/_blank.gif" width="20" height="1">');
+	else
+		document.write('<a href=\'javascript: editLine('+edit_num+')\'><img src=images/edit.gif width=20 height=16 border=0 alt=Edit></a>');	 
+ 	document.write('</td>');
+ 	document.write('<td width="35" >');
+	if(rm_num < 0 || rm_num == '&nbsp;')
+		document.write('&nbsp;');
+	else
+		document.write('<a href="javascript: removeLine('+rm_num+')"><img src=images/trash.gif width=20 height=16 border=0 alt=Delete></a>');
+	document.write('</td>');	
+	document.write('</tr>');
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground("",FixedTableWidth);</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<form id="submitform" name="submitform"  method="post">
+		<input type="hidden" name="thisPage" value="0">
+		<input type="hidden" name="perPage" value="0">
+	</form>
+	
+	<form name="formdualwan" method="post" action="">
+		<input type="hidden" name="firewall0" value='<!--#nk_get RadioHandle2="firewall:0"-->'> 
+	</form>
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 6, 2);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formaccess_rules" method="post" action="access_rules.htm">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="page" value="access_rules.htm">
+	<input type="hidden" name="ReqPage" value="0">
+	<input type="hidden" name="ChangeEntry" value="0">
+	<input type="hidden" name="ChangePolicy" value="0">
+	<input type="hidden" name="EnableLine" value="0">
+	<input type="hidden" name="DisableLine" value="0">
+	<input type="hidden" name="EditLine" value="0">
+	<input type="hidden" name="RemoveLine" value="0">
+	<input type="hidden" name="thisPage" value='<!--#nk_get AccessRule="1"-->'>
+	<input type="hidden" name="totalPage" value='<!--#nk_get AccessRule="2"-->'>
+	<input type="hidden" name="totalRules" value='<!--#nk_get AccessRule="5"-->'>
+	<input type="hidden" name="AfterRemove" value='<!--#nk_get AccessRule="6"-->'>
+	<input type="hidden" name="submitClick" value="0">
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>

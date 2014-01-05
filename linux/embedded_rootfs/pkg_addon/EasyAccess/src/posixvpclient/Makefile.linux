@@ -1,0 +1,79 @@
+include posixvpclient.mk
+
+JAR=jar 
+INSTALLER_FLAGS=cvfM
+DIALER_FLAGS=cvfm
+
+DEPENDENCY  =  $(JAVA)/$(PACKAGE)/CaviumSSLApplet.class 
+DEPENDENCY +=  $(JAVA)/$(PACKAGE)/CaviumDialer.class 
+DEPENDENCY +=  $(JAVA)/$(PACKAGE)/CaviumMgr.class 
+DEPENDENCY +=  $(JAVA)/$(PACKAGE)/CustomLabel.class 
+DEPENDENCY +=  $(JAVA)/$(PACKAGE)/Debug.class 
+DEPENDENCY +=  $(VPDIALER)/$(IP-UP) 
+DEPENDENCY +=  $(VPDIALER)/$(ROUTE)
+DEPENDENCY +=  $(VPDIALER)/$(DNSCOMMAND) 
+DEPENDENCY +=  $(VPDIALER)/$(JNILIB) 
+DEPENDENCY +=  $(VPDIALER)/$(IP-DOWN) 
+DEPENDENCY +=  $(VPDIALER)/$(PPP_WRAP) 
+DEPENDENCY +=  $(VPDIALER)/$(ROUTE_WRAP) 
+DEPENDENCY +=  $(PPPD)/$(CUSTOM_PPPD) 
+DEPENDENCY +=  $(LINUX_CONFIG_SCRIPT)
+
+ARCHIVE_LIST  = -C $(JAVA) $(PACKAGE)/CaviumSSLApplet.class 
+ARCHIVE_LIST += -C $(JAVA) $(PACKAGE)/CaviumDialer.class 
+ARCHIVE_LIST += -C $(JAVA) $(PACKAGE)/CaviumMgr.class 
+ARCHIVE_LIST += -C $(JAVA) $(PACKAGE)/CustomLabel.class 
+ARCHIVE_LIST += -C $(JAVA) $(PACKAGE)/Debug.class 
+ARCHIVE_LIST += -C $(VPDIALER) $(IP-UP) 
+ARCHIVE_LIST += -C $(VPDIALER) $(ROUTE) 
+ARCHIVE_LIST += -C $(VPDIALER) $(DNSCOMMAND) 
+ARCHIVE_LIST += -C $(VPDIALER) $(JNILIB) 
+ARCHIVE_LIST += -C $(VPDIALER) $(IP-DOWN) 
+ARCHIVE_LIST += -C $(VPDIALER) $(PPP_WRAP) 
+ARCHIVE_LIST += -C $(VPDIALER) $(ROUTE_WRAP) 
+ARCHIVE_LIST += -C $(PPPD) $(CUSTOM_PPPD) 
+ARCHIVE_LIST +=    $(LINUX_CONFIG_SCRIPT) 
+
+ifdef IPV6
+
+DEPENDENCY += $(VPDIALER)/$(IFCONF) 
+ARCHIVE_LIST += -C $(VPDIALER) $(IFCONF)
+
+endif
+
+default:  binaries $(INSTALLER_JAR) $(DIALER_JAR)
+
+$(DIALER_JAR): $(DEPENDENCY)
+			   
+	$(JAR) $(DIALER_FLAGS) $(DIALER_JAR) $(MANIFEST_FILE) $(ARCHIVE_LIST);
+	jarsigner -keystore $(KEYSTORE) -storetype $(STORETYPE) $(DIALER_JAR) $(ALIAS)
+	
+binaries:
+	$(MAKE) -C $(JAVA) -f $(MAKEFILE_LINUX) 
+	$(MAKE) -C $(PPPD) -f $(MAKEFILE_LINUX) 
+	$(MAKE) -C $(VPDIALER) -f $(MAKEFILE_LINUX) 
+
+	
+$(INSTALLER_JAR): $(JAVA)/$(PACKAGE)/Installer.class \
+		  $(JAVA)/$(PACKAGE)/Debug.class \
+		  $(JAVA)/$(PACKAGE)/Extracter.class \
+		  $(JAVA)/$(PACKAGE)/UnInstaller.class
+				  
+	$(JAR) $(INSTALLER_FLAGS) $(INSTALLER_JAR) -C $(JAVA)/$(PACKAGE) Installer.class \
+				-C $(JAVA)/$(PACKAGE) Extracter.class \
+				-C $(JAVA)/$(PACKAGE) UnInstaller.class;
+				
+	$(JAR) uvfM $(INSTALLER_JAR) -C $(JAVA) $(PACKAGE)/Debug.class ;
+	
+	jarsigner -keystore $(KEYSTORE) -storetype $(STORETYPE) $(INSTALLER_JAR) $(ALIAS)
+
+
+clean:
+	$(MAKE) -C $(JAVA) -f $(MAKEFILE_LINUX) clean; \
+	$(MAKE) -C $(PPPD) -f $(MAKEFILE_LINUX) clean; \
+	$(MAKE) -C $(VPDIALER) -f $(MAKEFILE_LINUX) clean; \
+	$(RM) $(DIALER_JAR) $(INSTALLER_JAR)
+
+standalone:
+	$(MAKE) -C $(PPPD) -f $(MAKEFILE_LINUX)
+	$(MAKE) -C $(VPDIALER) -f $(MAKEFILE_LINUX) standalone

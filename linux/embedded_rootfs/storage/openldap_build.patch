@@ -1,0 +1,11 @@
+--- Makefile.orig	2006-11-02 12:18:44.000000000 +0530
++++ Makefile	2006-11-02 20:37:56.000000000 +0530
+@@ -263,7 +263,7 @@
+ ## top-level directory of the distribution or, alternatively, at
+ ## <http://www.OpenLDAP.org/license.html>.
+ 
+-SUBDIRS= include libraries clients servers tests doc
++SUBDIRS= include libraries clients
+ CLEANDIRS=
+ INSTALLDIRS= 
+ 

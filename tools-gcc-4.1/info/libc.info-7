@@ -1,0 +1,396 @@
+This is libc.info, produced by makeinfo version 4.3 from
+/usr/local/Cavium_Networks/toolchain/src/newlib/libc/libc.texinfo.
+
+START-INFO-DIR-ENTRY
+* libc::                        The ANSI C library.
+END-INFO-DIR-ENTRY
+
+   This file documents the ANSI C library.
+
+   Copyright (C) 1992, 1993, 1994-2004 Red Hat, Inc.
+
+   `libc' includes software developed by the University of California,
+Berkeley and its contributors.
+
+   libc includes software developed by Martin Jackson, Graham Haley and
+Steve Chamberlain of Tadpole Technology and released to Cygnus.
+
+   libc uses floating-point conversion software developed at AT&T, which
+includes this copyright information:
+
+   The author of this software is David M. Gay.
+
+   Copyright (c) 1991 by AT&T.
+
+   Permission to use, copy, modify, and distribute this software for any
+purpose without fee is hereby granted, provided that this entire notice
+is included in all copies of any software which is or includes a copy
+or modification of this software and in all copies of the supporting
+documentation for such software.
+
+   THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR
+IMPLIED  WARRANTY.  IN PARTICULAR, NEITHER THE AUTHOR NOR AT&T MAKES ANY
+REPRESENTATION OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY
+OF THIS SOFTWARE OR ITS FITNESS FOR ANY PARTICULAR PURPOSE.
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, subject to the
+terms of the GNU General Public License, which includes the provision
+that the entire resulting derived work is distributed under the terms
+of a permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions.
+
+
+File: libc.info,  Node: Library Index,  Prev: Arglists,  Up: Top
+
+Index
+*****
+
+* Menu:
+
+* __env_lock:                            __env_lock.
+* __env_unlock:                          __env_lock.
+* __malloc_lock:                         __malloc_lock.
+* __malloc_unlock:                       __malloc_lock.
+* __tz_lock:                             __tz_lock.
+* __tz_unlock:                           __tz_lock.
+* _asctime_r:                            asctime.
+* _atoi_r:                               atoi.
+* _atol_r:                               atoi.
+* _atoll_r:                              atoll.
+* _calloc_r:                             calloc.
+* _close_r:                              Reentrant Syscalls.
+* _exit:                                 Stubs.
+* _Exit:                                 _Exit.
+* _fclose_r:                             fclose.
+* _fcloseall_r:                          fcloseall.
+* _fdopen_r:                             fdopen.
+* _fgetpos_r:                            fgetpos.
+* _fopen_r:                              fopen.
+* _fork_r:                               Reentrant Syscalls.
+* _free_r:                               malloc.
+* _freopen_r:                            freopen.
+* _fseek_r:                              fseek.
+* _fseeko_r:                             fseek.
+* _fsetpos_r:                            fsetpos.
+* _fstat_r:                              Reentrant Syscalls.
+* _ftell_r:                              ftell.
+* _ftello_r:                             ftell.
+* _getchar_r:                            getchar.
+* _gets_r:                               gets.
+* _impure_ptr:                           Reentrancy.
+* _link_r:                               Reentrant Syscalls.
+* _localeconv_r:                         setlocale.
+* _lseek_r:                              Reentrant Syscalls.
+* _mallinfo_r:                           mallinfo.
+* _malloc_r:                             malloc.
+* _malloc_stats_r:                       mallinfo.
+* _malloc_usable_size_r:                 malloc.
+* _mallopt_r:                            mallinfo.
+* _memalign_r:                           malloc.
+* _mkstemp_r:                            mktemp.
+* _mktemp_r:                             mktemp.
+* _open_r:                               Reentrant Syscalls.
+* _perror_r:                             perror.
+* _putchar_r:                            putchar.
+* _puts_r:                               puts.
+* _raise_r:                              raise.
+* _read_r:                               Reentrant Syscalls.
+* _realloc_r:                            malloc.
+* _reent:                                Reentrancy.
+* _rename_r:                             rename.
+* _rewind_r:                             rewind.
+* _sbrk_r:                               Reentrant Syscalls.
+* _setlocale_r:                          setlocale.
+* _signal_r:                             signal.
+* _stat_r:                               Reentrant Syscalls.
+* _strtod_r:                             strtod.
+* _strtol_r:                             strtol.
+* _strtoll_r:                            strtoll.
+* _strtoul_r:                            strtoul.
+* _strtoull_r:                           strtoull.
+* _system_r:                             system.
+* _tempnam_r:                            tmpnam.
+* _tmpfile_r:                            tmpfile.
+* _tmpnam_r:                             tmpnam.
+* _tolower:                              tolower.
+* _toupper:                              toupper.
+* _unlink_r:                             Reentrant Syscalls.
+* _wait_r:                               Reentrant Syscalls.
+* _write_r:                              Reentrant Syscalls.
+* a64l:                                  a64l.
+* abort:                                 abort.
+* abs:                                   abs.
+* asctime:                               asctime.
+* asiprintf:                             iprintf.
+* asprintf:                              printf.
+* assert:                                assert.
+* atexit:                                atexit.
+* atof:                                  atof.
+* atoff:                                 atof.
+* atoi:                                  atoi.
+* atol:                                  atoi.
+* atoll:                                 atoll.
+* bcmp:                                  bcmp.
+* bzero:                                 bzero.
+* calloc:                                calloc.
+* clearerr:                              clearerr.
+* clock:                                 clock.
+* close:                                 Stubs.
+* ctime:                                 ctime.
+* difftime:                              difftime.
+* div:                                   div.
+* dprintf:                               dprintf.
+* drand48:                               rand48.
+* ecvt:                                  ecvt.
+* ecvtbuf:                               ecvtbuf.
+* environ <1>:                           Stubs.
+* environ:                               getenv.
+* erand48:                               rand48.
+* errno global vs macro:                 Stubs.
+* execve:                                Stubs.
+* exit:                                  exit.
+* extra argument, reentrant fns:         Reentrancy.
+* fclose:                                fclose.
+* fcloseall:                             fcloseall.
+* fcvt:                                  ecvt.
+* fcvtbuf:                               ecvtbuf.
+* fdopen:                                fdopen.
+* feof:                                  feof.
+* ferror:                                ferror.
+* fflush:                                fflush.
+* ffs:                                   ffs.
+* fgetc:                                 fgetc.
+* fgetpos:                               fgetpos.
+* fgets:                                 fgets.
+* fileno:                                fileno.
+* fiprintf:                              iprintf.
+* fiscanf:                               iscanf.
+* fopen:                                 fopen.
+* fork:                                  Stubs.
+* fprintf:                               printf.
+* fputc:                                 fputc.
+* fputs:                                 fputs.
+* fread:                                 fread.
+* free:                                  malloc.
+* freopen:                               freopen.
+* fscanf:                                scanf.
+* fseek:                                 fseek.
+* fseeko:                                fseek.
+* fsetpos:                               fsetpos.
+* fstat:                                 Stubs.
+* ftell:                                 ftell.
+* ftello:                                ftell.
+* fwrite:                                fwrite.
+* gcvt:                                  gvcvt.
+* gcvtf:                                 gvcvt.
+* getc:                                  getc.
+* getc_unlocked:                         getc_unlocked.
+* getchar:                               getchar.
+* getchar_unlocked:                      getchar_unlocked.
+* getdelim:                              getdelim.
+* getenv:                                getenv.
+* getline:                               getline.
+* getpid:                                Stubs.
+* gets:                                  gets.
+* getw:                                  getw.
+* global reentrancy structure:           Reentrancy.
+* gmtime:                                gmtime.
+* index:                                 index.
+* iprintf:                               iprintf.
+* isalnum:                               isalnum.
+* isalpha:                               isalpha.
+* isascii:                               isascii.
+* isatty:                                Stubs.
+* iscanf:                                iscanf.
+* iscntrl:                               iscntrl.
+* isdigit:                               isdigit.
+* isgraph:                               isprint.
+* islower:                               islower.
+* isprint:                               isprint.
+* ispunct:                               ispunct.
+* isspace:                               isspace.
+* isupper:                               isupper.
+* iswalnum:                              iswalnum.
+* iswalpha:                              iswalpha.
+* iswblank:                              iswblank.
+* iswcntrl:                              iswcntrl.
+* iswctype:                              iswctype.
+* iswdigit:                              iswdigit.
+* iswgraph:                              iswgraph.
+* iswlower:                              iswlower.
+* iswprint:                              iswprint.
+* iswpunct:                              iswpunct.
+* iswspace:                              iswspace.
+* iswupper:                              iswupper.
+* iswxdigit:                             iswxdigit.
+* isxdigit:                              isxdigit.
+* jrand48:                               rand48.
+* kill:                                  Stubs.
+* l64a:                                  a64l.
+* labs:                                  labs.
+* lcong48:                               rand48.
+* ldiv:                                  ldiv.
+* link:                                  Stubs.
+* linking the C library:                 Syscalls.
+* list of reentrant functions:           Reentrancy.
+* llabs:                                 llabs.
+* lldiv:                                 lldiv.
+* localeconv:                            setlocale.
+* localtime:                             localtime.
+* lrand48:                               rand48.
+* lseek:                                 Stubs.
+* mallinfo:                              mallinfo.
+* malloc:                                malloc.
+* malloc_stats:                          mallinfo.
+* malloc_usable_size:                    malloc.
+* mallopt:                               mallinfo.
+* mblen:                                 mblen.
+* mbstowcs:                              mbstowcs.
+* mbtowc:                                mbtowc.
+* memalign:                              malloc.
+* memchr:                                memchr.
+* memcmp:                                memcmp.
+* memmove:                               memmove.
+* memset:                                memset.
+* mkstemp:                               mktemp.
+* mktemp:                                mktemp.
+* mktime:                                mktime.
+* mrand48:                               rand48.
+* nrand48:                               rand48.
+* on_exit:                               on_exit.
+* open:                                  Stubs.
+* OS interface subroutines:              Stubs.
+* perror:                                perror.
+* printf:                                printf.
+* putc:                                  putc.
+* putc_unlocked:                         putc_unlocked.
+* putchar:                               putchar.
+* putchar_unlocked:                      putchar_unlocked.
+* puts:                                  puts.
+* putw:                                  putw.
+* raise:                                 raise.
+* rand:                                  rand.
+* rand48:                                rand48.
+* rand_r:                                rand.
+* read:                                  Stubs.
+* realloc:                               malloc.
+* reent.h:                               Reentrancy.
+* reentrancy:                            Reentrancy.
+* reentrancy structure:                  Reentrancy.
+* reentrant function list:               Reentrancy.
+* remove:                                remove.
+* rename:                                rename.
+* rewind:                                rewind.
+* rindex:                                rindex.
+* sbrk:                                  Stubs.
+* scanf:                                 scanf.
+* seed48:                                rand48.
+* setbuf:                                setbuf.
+* setbuffer:                             setbuffer.
+* setlinebuf:                            setlinebuf.
+* setlocale:                             setlocale.
+* setvbuf:                               setvbuf.
+* signal:                                signal.
+* siprintf:                              iprintf.
+* siscanf:                               iscanf.
+* sniprintf:                             iprintf.
+* snprintf:                              printf.
+* sprintf:                               printf.
+* srand:                                 rand.
+* srand48:                               rand48.
+* sscanf:                                scanf.
+* stat:                                  Stubs.
+* strcasecmp:                            strcasecmp.
+* strcat:                                strcat.
+* strchr:                                strchr.
+* strcmp:                                strcmp.
+* strcoll:                               strcoll.
+* strcpy:                                strcpy.
+* strcspn:                               strcspn.
+* strerror:                              strerror.
+* strerror_r:                            strerror_r.
+* strftime:                              strftime.
+* strlen:                                strlen.
+* strlwr:                                strlwr.
+* strncasecmp:                           strncasecmp.
+* strncat:                               strncat.
+* strncmp:                               strncmp.
+* strncpy:                               strncpy.
+* strnlen:                               strnlen.
+* strpbrk:                               strpbrk.
+* strrchr:                               strrchr.
+* strsep:                                strtok.
+* strspn:                                strspn.
+* strstr:                                strstr.
+* strtod:                                strtod.
+* strtof:                                strtod.
+* strtok:                                strtok.
+* strtok_r:                              strtok.
+* strtol:                                strtol.
+* strtoll:                               strtoll.
+* strtoul:                               strtoul.
+* strtoull:                              strtoull.
+* strupr:                                strupr.
+* strxfrm:                               strxfrm.
+* stubs:                                 Stubs.
+* subroutines for OS interface:          Stubs.
+* system:                                system.
+* tempnam:                               tmpnam.
+* time:                                  time.
+* times:                                 Stubs.
+* tmpfile:                               tmpfile.
+* tmpnam:                                tmpnam.
+* toascii:                               toascii.
+* tolower:                               tolower.
+* toupper:                               toupper.
+* towctrans:                             towctrans.
+* towlower:                              towlower.
+* towupper:                              towupper.
+* tzset:                                 tzset.
+* unctrl:                                unctrl.
+* unctrllen:                             unctrl.
+* unlink:                                Stubs.
+* va_alist:                              va_alist.
+* va_arg <1>:                            va_arg-trad.
+* va_arg:                                va_arg.
+* va_dcl:                                va_alist.
+* va_end <1>:                            va_end-trad.
+* va_end:                                va_end.
+* va_start <1>:                          va_start-trad.
+* va_start:                              va_start.
+* vdprintf:                              dprintf.
+* vfiprintf:                             viprintf.
+* vfiscanf:                              viscanf.
+* vfprintf:                              vprintf.
+* vfscanf:                               vscanf.
+* viprintf:                              viprintf.
+* viscanf:                               viscanf.
+* vprintf:                               vprintf.
+* vscanf:                                vscanf.
+* vsiprintf:                             viprintf.
+* vsiscanf:                              viscanf.
+* vsniprintf:                            viprintf.
+* vsnprintf:                             vprintf.
+* vsprintf:                              vprintf.
+* vsscanf:                               vscanf.
+* wait:                                  Stubs.
+* wcscat:                                wcscat.
+* wcscoll:                               wcscoll.
+* wcsnlen:                               wcsnlen.
+* wcstombs:                              wcstombs.
+* wcswidth:                              wcswidth.
+* wctomb:                                wctomb.
+* wctrans:                               wctrans.
+* wctype:                                wctype.
+* wcwidth:                               wcwidth.
+* write:                                 Stubs.
+
+

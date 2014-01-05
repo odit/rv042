@@ -1,0 +1,23 @@
+body{}
+.bodyback{FONT-FAMILY: Tahoma, Verdana; BACKGROUND-COLOR:#ffffff;}
+.mainback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f;}
+TD.mainback{BACKGROUND-COLOR:#f4f4f4;}
+TR.mainback{BACKGROUND-COLOR:#f4f4f4;}
+A{TEXT-DECORATION:none;COLOR:#000000;}
+A:visited{TEXT-DECORATION:none;COLOR:#000000;}
+a:hover{COLOR:#0077f0; cursor:pointer; cursor:hand;}
+.darkback{BACKGROUND-COLOR:#999999;}
+TD.darkback{BACKGROUND-COLOR:#999999;}
+DIV.clk7{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#eaeaea; border-right:1px solid #999999;} 
+DIV.clk7k{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#dddddd; border-right:1px solid #999999;}
+DIV.clk7Sub1{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#eaeaea; border-right:1px solid #999999;} 
+DIV.menubottomrow{background-color:#eaeaea;border-bottom:1px solid #999999; border-right:1px solid #999999;}
+DIV.clk7Sub1k{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#dddddd; border-right:1px solid #999999;} 
+#divk7Cont{position:relative; left:0px; top:0px; height:322px; width:175px; visibility:hidden}
+A.clk7Links{font-family:"lucida Sans", Tahoma, Verdana, Arial, Helvetica; font-size:12px; text-decoration:none; color:#000000; width:175px; height:25px; line-height:180%}
+A.clk71Links{font-family:"lucida Sans", Tahoma, Verdana, Arial, Helvetica; font-size:12px; text-decoration:none; color:#000000; width:175px; height:25px; line-height:180%}
+td.mainbottom{background: url("/images/bottomblack.png");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop1{background: url("/images/toprightblackblue.png");background-repeat:no-repeat;margin:0px;padding:0px;}
+td.maintop0{background: url("/images/mainlogo.gif");}
+td.maintop2{background: url("/images/topbottomblacknoback.gif");background-repeat: no-repeat;margin:0px;padding:0px;BACKGROUND-COLOR:#f4f4f4;}
+.menubackground{background-color:#eaeaea;border-right:1px solid #999999;}

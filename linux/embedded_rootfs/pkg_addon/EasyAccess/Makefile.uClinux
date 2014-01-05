@@ -1,0 +1,15 @@
+all:
+	$(MAKE) -C src -f Makefile.uClinux
+
+clean:
+	$(MAKE) -C src clean -f Makefile.uClinux
+	$(MAKE) -C 3rdParty/libxml2 distclean
+	unlink Makefile
+
+install: src-install
+
+src-install:
+	$(MAKE) -C src install -f Makefile.uClinux
+
+un-install:
+	$(MAKE) -C src/httpd un-install -f Makefile.uClinux

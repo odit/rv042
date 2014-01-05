@@ -1,0 +1,11 @@
+prefix=/bm/cdc/CA2/linux/embedded_rootfs/pkg_addon/libupnp
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libupnp
+Description: Linux SDK for UPnP Devices
+Version: 1.6.6
+Libs:  -L${libdir} -lupnp -lthreadutil -lixml 
+Cflags: -pthread -I${includedir}/upnp
+

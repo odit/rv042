@@ -1,0 +1,22 @@
+include ../make-include-Octeon.mk
+
+BIN=
+
+ifdef STATISTICS
+BIN+=EasyAccessStats
+endif
+
+all: $(BIN)
+
+CFLAGS+=-I$(SYS_LIB) -I$(AUTH_LIB)
+
+ifdef STATISTICS
+EasyAccessStats: EasyAccessStats.c ${SYS_LIB}/libSys.a
+	${CC} $(CFLAGS) $(LDFLAGS) -o $@ EasyAccessStats.c -L$(SYS_LIB) -lSys $(SSL_LIBS)
+endif
+
+clean:
+	$(RM) $(BIN)
+
+install:
+

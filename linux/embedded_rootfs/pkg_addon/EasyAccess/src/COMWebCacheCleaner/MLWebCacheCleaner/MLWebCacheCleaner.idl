@@ -1,0 +1,40 @@
+// MLWebCacheCleaner.idl : IDL source for MLWebCacheCleaner.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MLWebCacheCleaner.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(7FD297CE-76D5-4F7E-96BB-F2B5EECF05BF),
+		dual,
+		helpstring("IWebCacheCleaner Interface"),
+		pointer_default(unique)
+	]
+	interface IWebCacheCleaner : IDispatch
+	{
+		[id(1), helpstring("method CacheCleanAndHistory")] HRESULT CacheCleanAndHistory(BSTR szURLName);
+		[id(2), helpstring("method FileDelete")] HRESULT FileDelete(BSTR szURLName1);
+	};
+
+[
+	uuid(8A2EB073-C64D-4FB4-86B0-45FA58CD986C),
+	version(1.0),
+	helpstring("MLWebCacheCleaner 1.0 Type Library")
+]
+library MLWEBCACHECLEANERLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(79D6214F-CFCE-480F-9901-27950E78F1E6),
+		helpstring("WebCacheCleaner Class")
+	]
+	coclass WebCacheCleaner
+	{
+		[default] interface IWebCacheCleaner;
+	};
+};

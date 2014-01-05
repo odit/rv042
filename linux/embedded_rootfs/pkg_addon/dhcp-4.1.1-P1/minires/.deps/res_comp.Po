@@ -1,0 +1,206 @@
+res_comp.o res_comp.o: res_comp.c \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/types.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/features.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/cdefs.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wordsize.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gnu/stubs.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/types.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/stddef.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/typesizes.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/time.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/endian.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/endian.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/select.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/select.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sigset.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/time.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/sysmacros.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/pthreadtypes.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/param.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/limits.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/syslimits.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/limits.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/posix1_lim.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/local_lim.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/linux/limits.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/posix2_lim.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/linux/param.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/asm/param.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/netinet/in.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/stdint.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wchar.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/socket.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/uio.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/uio.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/socket.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sockaddr.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/asm/socket.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/asm/sockios.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/asm/ioctl.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/in.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/byteswap.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/ctype.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/stdio.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/libio.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/_G_config.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/wchar.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gconv.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/stdarg.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/stdio_lim.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sys_errlist.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/string.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/unistd.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/posix_opt.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/confname.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/getopt.h \
+  ../includes/minires/minires.h ../includes/cdefs.h ../includes/osdep.h \
+  ../includes/site.h ../includes/config.h \
+  /home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/inttypes.h \
+  ../includes/minires/resolv.h ../includes/minires/res_update.h \
+  ../includes/arpa/nameser.h ../includes/arpa/nameser_compat.h \
+  ../includes/isc-dhcp/list.h ../includes/isc-dhcp/result.h \
+  ../includes/isc-dhcp/boolean.h ../includes/isc-dhcp/lang.h \
+  ../includes/isc-dhcp/types.h ../includes/isc-dhcp/int.h \
+  ../includes/arpa/nameser.h
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/types.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/features.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/cdefs.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wordsize.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gnu/stubs.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/types.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/stddef.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/typesizes.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/time.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/endian.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/endian.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/select.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/select.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sigset.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/time.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/sysmacros.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/pthreadtypes.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/param.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/limits.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/syslimits.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/limits.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/posix1_lim.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/local_lim.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/linux/limits.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/posix2_lim.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/linux/param.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/asm/param.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/netinet/in.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/stdint.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wchar.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/socket.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/uio.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/uio.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/socket.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sockaddr.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/asm/socket.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/asm/sockios.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/asm/ioctl.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/in.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/byteswap.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/ctype.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/stdio.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/libio.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/_G_config.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/wchar.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gconv.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.2/include/stdarg.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/stdio_lim.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sys_errlist.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/string.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/unistd.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/posix_opt.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/confname.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/getopt.h:
+
+../includes/minires/minires.h:
+
+../includes/cdefs.h:
+
+../includes/osdep.h:
+
+../includes/site.h:
+
+../includes/config.h:
+
+/home/lenny/Project/openwrt/cisco_RV0XX-v4.0.2.08-tm-GPL_CI005-ipv6/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/inttypes.h:
+
+../includes/minires/resolv.h:
+
+../includes/minires/res_update.h:
+
+../includes/arpa/nameser.h:
+
+../includes/arpa/nameser_compat.h:
+
+../includes/isc-dhcp/list.h:
+
+../includes/isc-dhcp/result.h:
+
+../includes/isc-dhcp/boolean.h:
+
+../includes/isc-dhcp/lang.h:
+
+../includes/isc-dhcp/types.h:
+
+../includes/isc-dhcp/int.h:
+
+../includes/arpa/nameser.h:

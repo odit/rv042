@@ -1,0 +1,85 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(peekfd.c)
+
+dnl
+dnl Set versions 
+dnl
+DHCPCD_MAJOR_VERSION=1
+DHCPCD_MINOR_VERSION=3
+DHCPCD_MICRO_VERSION=18
+DHCPCD_INTERFACE_AGE=0
+DHCPCD_BINARY_AGE=0
+DHCPCD_VERSION=$DHCPCD_MAJOR_VERSION.$DHCPCD_MINOR_VERSION.$DHCPCD_MICRO_VERSION
+
+AC_SUBST(DHCPCD_MAJOR_VERSION)
+AC_SUBST(DHCPCD_MINOR_VERSION)
+AC_SUBST(DHCPCD_MICRO_VERSION)
+AC_SUBST(DHCPCD_INTERFACE_AGE)
+AC_SUBST(DHCPCD_BINARY_AGE)
+AC_SUBST(DHCPCD_VERSION)
+
+dnl
+dnl Setup for automake
+dnl
+AM_INIT_AUTOMAKE(dhcpcd, $DHCPCD_VERSION)
+
+dnl
+dnl Detect the canonical host and target build environment
+dnl
+AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
+
+dnl
+dnl Determining the compilation flags
+dnl
+OSNAME=`uname`
+ARCH=`uname -m`
+
+case $OSNAME in
+	Linux)	CFLAGS=' -O2 -fomit-frame-pointer -Wall'
+		;;
+	*)	CFLAGS=
+esac
+
+case $ARCH in
+	i486)	CFLAGS="$CFLAGS -m486 -malign-loops=2 -malign-jumps=2 -malign-functions=2"
+		;;
+	i[356]86)	CFLAGS=$CFLAGS
+		;;
+	*)	CFLAGS=$CFLAGS
+		;;
+esac
+
+LDFLAGS=' -s -O2 -static'
+
+dnl
+dnl Checks for programs.
+dnl
+AC_PROG_CC
+AC_PROG_INSTALL
+
+dnl
+dnl Checks for libraries.
+dnl
+
+dnl
+dnl Checks for header files.
+dnl
+AC_HEADER_STDC
+AC_CHECK_HEADERS(fcntl.h paths.h sys/ioctl.h sys/time.h syslog.h unistd.h)
+
+dnl
+dnl Checks for typedefs, structures, and compiler characteristics.
+dnl
+AC_TYPE_MODE_T
+AC_TYPE_PID_T
+AC_HEADER_TIME
+
+dnl
+dnl Checks for library functions.
+dnl
+AC_PROG_GCC_TRADITIONAL
+AC_FUNC_MEMCMP
+AC_CHECK_FUNCS(select socket uname)
+
+AC_OUTPUT([Makefile dhcpcd.spec])

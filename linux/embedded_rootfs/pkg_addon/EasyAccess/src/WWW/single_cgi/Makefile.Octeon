@@ -1,0 +1,168 @@
+include ../../make-include-Octeon.mk
+include ../../../../nkuserland.config
+#CONFIG_CAVIUM_UI=y
+
+ifeq "$(CONFIG_ANTI_SPAM)" "y"
+	ifeq "$(NK_CONFIG_CLAMAV)" "y"
+		BIN=single_cgi ssi.cgi fw_upgrade.cgi edittscapplication.cgi import_config.cgi import_spam_1.cgi import_spam_2.cgi import_spam_3.cgi export_spam_1.cgi export_whitelist.cgi export_blacklist.cgi import_virus_signs.cgi config.exp
+	else
+		BIN=single_cgi ssi.cgi fw_upgrade.cgi edittscapplication.cgi import_config.cgi import_spam_1.cgi import_spam_2.cgi import_spam_3.cgi export_spam_1.cgi export_whitelist.cgi export_blacklist.cgi config.exp
+	endif
+else
+	ifeq "$(NK_CONFIG_CLAMAV)" "y"
+		BIN=single_cgi ssi.cgi fw_upgrade.cgi edittscapplication.cgi import_config.cgi import_virus_signs.cgi config.exp config_mirror.exp
+	else
+		BIN=single_cgi ssi.cgi fw_upgrade.cgi edittscapplication.cgi import_config.cgi config.exp config_mirror.exp
+	endif
+endif
+ifeq "$(CONFIG_NK_LICENSE_COUNT_DOWN)" "y"
+$(shell cp -rf ../../../../web_mng/web_ui_Cgi/LicenseKey/fun_key.o .)
+endif
+SQLIB=
+
+LDFLAGS +=-L$(SYS_LIB) -lSys -L$(GCGI_LIB) -lgcgi -L$(SSLCERT_LIB) -lsslcert -lm $(SSL_LIBS) -lutil  -ldl
+CERT_OPENSSL_OBJ = ../../../../../build/openssl-0.9.8d/apps/apps.o
+INCLUDE_DIRS = -I../../../../../build/openssl-0.9.8d/apps -I../../../../../build/openssl-0.9.8d
+
+ifdef CONFIG_CAVIUM_UI
+FILES= welcome portal userLogout accesspoint \
+                    addUserBookmark ppp_launch themes userBookmarkEdit ftp-logout telnet editBookmark \
+                    ssh showBookmark https ftp-upload http ftp-rename ftp-frame \
+                    ftp-addnew services ftp-download servicesBookmarkDelete addservicesbookmark \
+                    tsc tscapplications clientmac sslvpnclient vpdesktopclient clientlinux \
+                    installcert homepage deskBookmarkDelete vnc tscbookmark desktop adddesktopbookmark \
+                    eventlog logconfig clientroutes clientaddresses homeconfig sitecustomization edittscapplication \
+                    portallist addpolicy adminBookmarkDelete users editPolicy policyresource \
+                    addbookmarkadmin editgroups showPolicy adduser addgroup editglobal bookmarkadmin \
+                    policyrange editusers userDelete policyall policyadmin policyDelete groupDelete adddomainldap \
+                    policy6admin policy6range policy6all \
+                    adddomainradius adddomainntdomain editdomain adddomainactivedirectory adddomain domains \
+                    addtunnel networkresource editresource addresource sslcert viewcert importcert \
+                    gencsr delcert newcsr status activeusers restart settings importlogo restoredefault importlicense \
+                    importconfig upgradefirmware saveoptions encryptoptions layout savenow exportConfigFile \
+                    date networkinterface staticroutes dnssettings ifacesettings etchosts \
+                    transportapps virtualtransport userattributes changepassword activeconnections
+else
+FILES= ftp-upload ftp-rename ftp-frame ftp-addnew ftp-download ftp-logout vnc telnet ssh ppp_launch http https
+endif
+
+FILES+=compareDB setVPNATRule
+
+ifdef CONFIG_EPS
+FILES+=epslogin epsverify
+ENV=CONFIG_EPS=$(CONFIG_EPS)
+endif
+
+all: $(BIN)
+
+CFLAGS +=-I$(SYS_LIB) -I$(GCGI_LIB) -I$(SSLCERT_LIB) -DUSE_NO_EXTERNAL_AAA
+CFLAGS += -DSINGLE_CGI=1 -I$(AUTH_LIB) \
+                -I../cgi-bin/user-pages/services -I../cgi-bin/user-pages/cifs \
+                -I ../cgi-bin/admin-pages/general/certificates $(INCLUDE_DIRS)
+
+# modify by chihmou 20080725, let single_cgi use database, so link the library "libnku.a"
+single_cgi: single_cgi.c single_cgi_files.c
+	$(CC) ${CFLAGS} single_cgi.c ${LDFLAGS} -o single_cgi -lnku
+	$(STRIP) single_cgi
+
+single_cgi_files.c:
+	$(ENV) ./make_cgi.sh
+
+ifeq "$(CONFIG_NK_LICENSE_COUNT_DOWN)" "y"
+ssi.cgi: ssi.o fun_key.o
+	$(CC) ${CFLAGS} -o ssi.cgi ssi.o fun_key.o ${CERT_OPENSSL_OBJ} ${LDFLAGS} -lnku
+	$(STRIP) ssi.cgi 
+else
+ssi.cgi: ssi.o
+	$(CC) ${CFLAGS} -o ssi.cgi ssi.o ${CERT_OPENSSL_OBJ} ${LDFLAGS} -lnku
+endif
+	$(STRIP) ssi.cgi 
+
+fw_upgrade.cgi: fw_upgrade.o
+	$(CC) ${CFLAGS} -o fw_upgrade.cgi fw_upgrade.o ${LDFLAGS} -lnku 
+	$(STRIP) fw_upgrade.cgi
+
+edittscapplication.cgi: edittscapplication.o
+	$(CC) ${CFLAGS} -o edittscapplication.cgi edittscapplication.o ${LDFLAGS} -lnku 
+	$(STRIP) edittscapplication.cgi
+
+import_config.cgi: import_config.o
+	$(CC) ${CFLAGS} -o import_config.cgi import_config.o ${LDFLAGS} -lnku
+	$(STRIP) import_config.cgi
+
+import_spam_1.cgi: import_spam_1.o
+	$(CC) ${CFLAGS} -o import_spam_1.cgi import_spam_1.o ${LDFLAGS} -lnku
+	$(STRIP) import_spam_1.cgi
+
+import_spam_2.cgi: import_spam_2.o
+	$(CC) ${CFLAGS} -o import_spam_2.cgi import_spam_2.o ${LDFLAGS} -lnku
+	$(STRIP) import_spam_2.cgi
+
+import_spam_3.cgi: import_spam_3.o
+	$(CC) ${CFLAGS} -o import_spam_3.cgi import_spam_3.o ${LDFLAGS} -lnku
+	$(STRIP) import_spam_3.cgi
+
+export_spam_1.cgi: export_spam_1.o
+	$(CC) ${CFLAGS} -o export_spam_1.cgi export_spam_1.o ${LDFLAGS} -lnku
+	$(STRIP) export_spam_1.cgi
+
+export_whitelist.cgi: export_whitelist.o
+	$(CC) ${CFLAGS} -o export_whitelist.cgi export_whitelist.o ${LDFLAGS} -lnku
+	$(STRIP) export_whitelist.cgi
+
+export_blacklist.cgi: export_blacklist.o
+	$(CC) ${CFLAGS} -o export_blacklist.cgi export_blacklist.o ${LDFLAGS} -lnku
+	$(STRIP) export_blacklist.cgi
+
+import_virus_signs.cgi: import_virus_signs.o
+	$(CC) ${CFLAGS} -o import_virus_signs.cgi import_virus_signs.o ${LDFLAGS} -lnku
+	$(STRIP) import_virus_signs.cgi
+
+config.exp: exportconfig.o
+	$(CC) ${CFLAGS} -o config.exp exportconfig.o ${CERT_OPENSSL_OBJ} ${LDFLAGS} -lnku
+	$(STRIP) config.exp
+
+config_mirror.exp: exportconfig_mirror.o
+	$(CC) ${CFLAGS} -o config_mirror.exp exportconfig_mirror.o ${CERT_OPENSSL_OBJ} ${LDFLAGS} -lnku
+	$(STRIP) config_mirror.exp
+install:
+#	if [ -n '$(BIN)' ]; then $(INSTALL) $(BIN) $(DEST_CGI_BIN); fi
+	if [ -n '$(BIN)' ]; then cp $(BIN) $(DEST_CGI_BIN); fi
+	cd $(DEST_CGI_BIN) && for i in $(FILES); do\
+	        ln -sf single_cgi $$i; \
+	done 
+
+#purpose     : 0013102 author : Jason.Huang date : 2010-08-01
+#description : rv0xx do not use this
+
+# 	cd $(DEST_CERT_BIN) && for i in certVerifyLogin; do \
+# 		ln -sf ../cgi-bin/single_cgi $$i; \
+# 	done
+
+ifndef CONFIG_CAVIUM_UI
+	cd $(DEST_CGI_BIN) && for i in welcome; do\
+	        ln -sf welcome.cgi $$i; \
+	done
+endif
+
+clean:
+
+	#rm -rf import_spam_1.cgi import_spam_2.cgi import_spam_3.cgi export_spam_1.cgi
+	#rm -rf export_whitelist.cgi export_blacklist.cgi
+	rm -rf single_cgi ssi.cgi fw_upgrade.cgi edittscapplication.cgi import_config.cgi config.exp config_mirror.exp *.o
+	rm -rf single_cgi_files.c
+
+un-install:
+	rm -rf $(DEST_CGI_BIN)/single_cgi
+	cd $(DEST_CGI_BIN); for i in $(FILES); \
+do \
+	        rm -f $$i; \
+	done
+
+#purpose     : 0013102 author : Jason.Huang date : 2010-08-01
+#description : rv0xx do not use this
+
+# 	cd $(DEST_CERT_BIN); for i in certVerifyLogin; do \
+# 		rm -f $$i; \
+# 	done
+

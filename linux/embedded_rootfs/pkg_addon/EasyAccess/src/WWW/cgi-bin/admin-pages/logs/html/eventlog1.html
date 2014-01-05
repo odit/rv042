@@ -1,0 +1,43 @@
+<script src="/js/mainframe.js"></script>
+<link href="/js/logtable.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/js/logtable.js">
+</script>
+<script type="text/javascript">
+function resizer1()
+{
+init();
+window.onerror=no_error;
+var heights;
+heights=document.body.scrollHeight;
+if(heights == null) {
+heights = 430;
+}
+if(heights < 100) {
+heights = 430;
+}
+parent.resizeme(heights);
+}
+</script>
+</head>
+<body style="" onload="resizer1()" marginheight=0 marginwidth=0 leftmargin=0 topmargin=0 margin=0 class="mainback">   
+<table border=0 cellpadding=0 cellspacing=0 class="mainback2" width=542 valign=top>
+<TR>
+<td width=29><img src="/images/shim.gif" height=4 width=29></td>
+<td width=513 valign="top">
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class=titletable>
+<tr class="titlerow">
+<td width=513 height=22 class="titlerow" valign="center" style="padding-top:1px;padding-bottom:0px;">
+&nbsp;
+<script type="text/JavaScript" language="JavaScript">
+title(streventlog);
+</script>
+<br>
+<img src="/images/shim.gif" height=1 width=1><br>
+</td>
+</tr>
+</table><img src="/images/shim.gif" height=21 width=1 class=titleimage><br>
+<script type="text/javascript">
+FireBase = new Array();
+trow = new Array();
+colNames = new Array();
+var numberofrows=50;

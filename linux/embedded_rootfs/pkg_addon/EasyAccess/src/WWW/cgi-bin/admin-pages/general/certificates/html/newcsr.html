@@ -1,0 +1,128 @@
+<script src="/js/mainframe.js"></script>
+<SCRIPT src="/js/formval.js" type=text/javascript></script>
+</head>
+<body  class="mainback" margin=0 TOPMARGIN=0 LEFTMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0 onload=resizer() style="overflow-x:hidden;overflow-y:hidden">
+<SCRIPT TYPE="text/javascript">
+function validateOnSubmit() {
+var elem;
+var errs=0;
+if (!notnull  (window.document.newCSR.f1, 'fn1', true)) errs += 1; 
+if (!notnull  (window.document.newCSR.f2, 'fn2', true)) errs += 1; 
+if (!notnull  (window.document.newCSR.f3, 'fn3', true)) errs += 1; 
+if (!notnull  (window.document.newCSR.f4, 'fn4', true)) errs += 1; 
+if (!notnull  (window.document.newCSR.f5, 'fn5', true)) errs += 1; 
+if (!country  (window.document.newCSR.f6, 'fn6', true)) errs += 1; 
+if (!notnull  (window.document.newCSR.f7, 'fn7', true)) errs += 1; 
+if (!notnull  (window.document.newCSR.f8, 'fn8', true)) errs += 1; 
+if (errs>1)  alert('Please correct two or more fields before submitting');
+if (errs==1) alert('Please correct a field before submitting');
+if (errs==0){window.document.newCSR.submit();}
+}
+</SCRIPT>
+<table border=0 cellpadding=0 cellspacing=0 class="mainback2" width=542 valign=top>
+<TR>
+<td width=29><img src="/images/shim.gif" height=4 width=29></td>
+<td width=513 valign="top">
+<table border=0 cellpadding=0 cellspacing=0 valign=top class=titletable>
+<tr class=titlerow><td width=513 height=22 class=titlerow valign=center>&nbsp;&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title(strnewcsr);</script><BR><img src="/images/shim.gif" height=1 width=1><br></td></tr>
+</table><img src="/images/shim.gif" height=21 width=1 class=titleimage><BR>
+<table width="" height="" cellspacing=0 cellpadding=0 border=0 valign="top">
+<tbody>
+<tr><td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td></tr>
+<tr><td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+<td width="" align="center">
+<table border=0 cellpadding=0 cellspacing=0 valign="top" class="headingstyle">
+<tbody><tr class="HeadingStyle"><td width=413 height=21 class="HeadingStyle" valign="center" colspan=2>&nbsp;
+<font class="HeadingStyle"><b>&nbsp;Generate a New Certificate Signing Request (CSR) OR<BR>&nbsp;&nbsp;&nbsp;Generate a New Self-signed Certificate (CRT)</b></font></td>
+<td width=100 height=21 class="HeadingStyle" valign="bottom" align="right">&nbsp;&nbsp;</td></tr></table>
+<table border=0 cellpadding=0 cellspacing=0 valign="top" width=513 class="centertable">
+<tr><td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td></tr>
+<tr><td width="" height=2 colspan=3><img src="/images/shim.gif" width=1 height=15 border=0></td></tr>
+<tr><td colspan=3><table border=0 cellspacing=0 width="95%"><tbody><tr>
+<td align="right" width=215 height=28><div class="toolbar" id="fn1">Name:&nbsp;&nbsp;</div>
+</td><td height=28>
+<form name="newCSR" action="/cgi-bin/gencsr" method="post">
+<input class="input" type="text" name="name" value="" style="width:165px;"  maxlength=255 id="f1">
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar" id="fn2">Organization:&nbsp;&nbsp;</div>
+</td><td height=28>
+<input class="input" type="text" name="organization" value="" style="width:165px;" maxlength=255 id="f2">
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar" id="fn3">Unit/Department:&nbsp;&nbsp;</div>
+</td><td height=28>
+<input class="input" type="text" name="department" value="" style="width:165px;" maxlength=255 id="f3">
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar" id="fn4">City/Locality:&nbsp;&nbsp;</div>
+</td><td height=28>
+<input class="input" type="text" name="county" value="" style="width:165px;" maxlength=255 id="f4">
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar" id="fn5">State (Full Name):&nbsp;&nbsp;</div>
+</td><td height=28>
+<input class="input" type="text" name="state" style="width:165px;"  maxlength=255 id="f5">
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar" id="fn6">Country:&nbsp;&nbsp;</div>
+</td><td height=28>
+<input class="input" type="text" name="country" style="width:165px;"  maxlength=2 id="f6">
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar" id="fn7">FQDN (Domain Name):&nbsp;&nbsp;</div>
+</td><td height=28>
+<input class="input" type="text" name="fqdn" value="" style="width:165px;" maxlength=255 id="f7">
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar" id="fn8">Email:&nbsp;&nbsp;</div>
+</td><td height=28>
+<input class="input" type="text" name="email" style="width:165px;"  maxlength=127 id="f8">
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar">Password:&nbsp;&nbsp;</div>
+</td><td height=28>
+<input class="input" type="password" name="password" style="width:165px;" maxlength=255>
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar">New key pair length:&nbsp;&nbsp;</div>
+</td><td height=28>
+<select name="key_size" class="select" style="width:166px;">
+<option value=512>512
+</option><option value=768>768
+</option><option value=1024 selected="selected">1024
+</option><option value=2048>2048
+</option></select> 
+</td></tr>
+<tr>
+<td align="right" width=215 height=28><div class="toolbar">Generate a Self-signed Certificate:</div>
+</td><td height=28>
+<input type="checkbox" name="gencrt" align="middle" vspace="0" hspace="0" height="14" width="14">
+</td></tr>
+</tbody></table><img src="/images/shim.gif" height=17 width=1><br>
+<center><font class=toolbar2><b>NOTE:</b> A CSR may be provided to a Certificate
+Authority (CA) to generate a valid <BR> certificate. It should not be directly uploaded 
+to the SSL VPN gateway.
+<br><img src="/images/shim.gif" height=17 width=1>
+</td></tr></tbody></table>
+</td>
+<td width=1 height="" class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+<tr>
+<td width="" height=1 colspan=3 class="darkback"><img src="/images/shim.gif" width=1 height=1 border=0></td>
+</tr>
+</tbody></table>
+<img src="/images/shim.gif" height=18 width=1><br>
+<table border=0 cellpadding=0 cellspacing=0 valign="top">
+<tbody><tr><td width=439></td>
+<td width=74 height=19 valign="center" align="center">
+<table cellpadding=0 cellspacing=0 border=0 margin=0 class=mybutton><TR>
+<td width=72 class=bbcenter align=center onClick="JavaScript:validateOnSubmit()" onMouseOver="JavaScript:this.className='bbcenteron';window.status='';" onMouseOut="JavaScript:this.className='bbcenter';">
+<SCRIPT type="text/JavaScript" language="JavaScript">bbutton(bsubmit); </script> </td>
+</tr></table></td>
+</tr></tbody></table>
+<img src="/images/shim.gif" width=1 height=19 border=0><br>
+</form>
+</td></tr></table></center>
+</body>
+</html>

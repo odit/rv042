@@ -1,0 +1,43 @@
+HKCR
+{
+	NoRemove AppID
+    {
+        {49CBF6DE-E552-49f1-BCBF-5CA3B349D33A} = s 'XTunnel'
+        {
+            val DllSurrogate = s ''
+        }
+        'XTunnel.DLL'
+        {
+            val AppID = s {49CBF6DE-E552-49f1-BCBF-5CA3B349D33A}
+        }
+    }
+	XTunnel.XTunnelCtrl.1 = s 'XTunnelCtrl Class'
+	{
+		CLSID = s '{50580095-16DB-4B28-BCFC-70989E09AA5F}'
+	}
+	XTunnel.XTunnelCtrl = s 'XTunnelCtrl Class'
+	{
+		CLSID = s '{50580095-16DB-4B28-BCFC-70989E09AA5F}'
+		CurVer = s 'XTunnel.XTunnelCtrl.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {50580095-16DB-4B28-BCFC-70989E09AA5F} = s 'XTunnelCtrl Class'
+		{
+			ProgID = s 'XTunnel.XTunnelCtrl.1'
+			VersionIndependentProgID = s 'XTunnel.XTunnelCtrl'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '{49CBF6DE-E552-49f1-BCBF-5CA3B349D33A}'
+			'TypeLib' = s '{B07BF399-5214-493C-84C1-EC7F60AE41AF}'
+			Elevation
+            {
+                val Enabled = d 1
+            }
+            val LocalizedString = s '@%MODULE%,-101'
+		}
+	}
+}

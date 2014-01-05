@@ -1,0 +1,43 @@
+; Sample INF file for LSP.DLL
+[version] 
+; version
+signature="$CHICAGO$"
+AdvancedINF=2.0  
+
+[Add.Code]
+MLVT.dll=MLVT.dll
+MLVTLsp.dll=MLVTLsp.dll
+MLVTNsp.dll=MLVTNsp.dll
+SpOrder.dll=SpOrder.dll
+VirtualTransportUninstall.exe=VirtualTransportUninstall.exe
+
+[MLVT.dll]
+file-win32-x86=thiscab
+clsid={400CC15A-9D7B-45C0-9794-C3CB7A19EB66} 
+clsid={B4F7ED32-94FC-46B6-B8CD-B7EC255305E0}
+FileVersion=1,6,1,1
+RegisterServer=yes
+
+[MLVTLsp.dll]
+file-win32-x86=thiscab
+FileVersion=1,6,1,1
+DestDir=11
+
+[MLVTNsp.dll]
+file-win32-x86=thiscab
+FileVersion=1,6,1,1
+DestDir=11
+
+
+[SpOrder.dll]
+file-win32-x86=thiscab
+FileVersion=-1,-1,-1,-1
+DestDir=11
+
+
+[VirtualTransportUninstall.exe]
+file-win32-x86=thiscab
+FileVersion=1,6,1,1
+DestDir=11
+
+; end of INF file

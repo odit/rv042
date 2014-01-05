@@ -1,0 +1,159 @@
+#
+# Automated tests for Octeon Linux
+#
+# This makefile runs a series of automated test against the Linux kernel
+# and the minimal root filesystem. Each test produces a log file with the
+# output. Any failure will cause this makefile to fail.
+#
+
+#
+# The following defines some globals for every test
+#
+example_path=${shell find ${OCTEON_ROOT}/ -maxdepth 1 -type d -and -name CN3XXX-EXAMPLE\*}
+
+ifeq (${example_path},)
+example_path=${OCTEON_ROOT}/examples
+endif
+
+top=${shell pwd}
+rootfs=${top}/embedded_rootfs/rootfs.ext3
+kernel=${top}/kernel_2.6/linux/vmlinux.64
+mount_point=/mnt/${USER}/linux_dev
+memsize=384
+uart_port=2023
+packet_port=2002
+
+
+rootfs_address=0x40000000
+envfile=${top}/kernel_2.6/u-boot-env
+linux_cmd=time oct-sim ${kernel} -memsize=${memsize} -envfile=${envfile}
+tests=
+
+#
+# Each target found in the "tests" variable will be run one after the other.
+# Since all of the tests envolve a series of Linux shell commands and checking
+# the output, each test shares the same template target. The specifics of each
+# test are controlled by variables. Here is a description of each variable:
+#
+# TEST-time
+#	Expected runtime of test. Just for user info
+# TEST-cmds
+#	List of shell commands to execute in the simulator. Each comamnd
+#	should be surrounded by quotes. The command "poweroff" will be
+#	executed after these command to end the simulation.
+# TEST-opts
+#	Extra simulator arguments for the test. Most commonly used:
+#		-quiet -noperf
+# TEST-before
+#	Optional host linux command line to execute before the test
+# TEST-after
+#	Optional host linux command line to execute after the test
+# TEST-grep
+#	String expression for grep to determine the PASS condition for the
+#	test. In addition, any test producing the string "FAIL" will be
+#	considered a failure
+#
+
+#
+# Minimal boot of the root filesystem
+#
+tests += test-boot
+test-boot-time = 3 min (AMD64 3700+)
+test-boot-cmds = "echo TEST PASSED"
+test-boot-opts = -quiet -noperf -maxcycles=120000000
+test-boot-grep = "TEST PASSED"
+
+#
+# Run the crypto. It produces FAIL messages on errors, but no pass indicator.
+# Use the aes cbc output as a pass indicator.
+#
+tests += test-crypto
+test-crypto-time = 3 min (AMD64 3700+)
+test-crypto-cmds = "/examples/crypto"
+test-crypto-opts = -quiet -noperf -maxcycles=120000000
+test-crypto-grep = "aes cbc:  e5a82dea368354dcb2982f24ed13bc170b4256f2222e06362e54096ace81568f"
+
+#
+# Run the linux-filter example
+#
+tests += test-linux-filter
+test-linux-filter-time = 3 min (AMD64 3700+)
+test-linux-filter-before = make -C $(example_path)/linux-filter; oct-packet-io -p ${packet_port} -c -I 0:${example_path}/linux-filter/linux-filter.input &
+test-linux-filter-cmds = "insmod /lib/modules/2.6.16.26-Cavium-Octeon/cavium-ethernet.ko pow_send_group=14" "ifconfig eth0 up promisc" "ifconfig pow0"
+test-linux-filter-opts = -ld0x11000000:${example_path}/linux-filter/linux-filter -serve=${packet_port} -quiet -noperf -numcores=3 -envfile=linux-filter.env -maxcycles=200000000
+test-linux-filter-grep = "RX packets:0 errors:0 dropped:10"
+
+#
+# Run the hardware zip example
+#
+tests += test-zip
+test-zip-time = 3 min (AMD64 3700+)
+test-zip-cmds = "cp /sbin/rc input" "gzip < input > input.gz" "/examples/zip"
+test-zip-opts = -quiet -noperf -maxcycles=120000000
+test-zip-grep = "TEST PASSED"
+
+#
+# Run the LLM example with two cores. Test creates pass / fail output.
+#
+tests += test-llm
+test-llm-time = 5 min (AMD64 3700+)
+test-llm-cmds = "/examples/low-latency-mem"
+test-llm-opts = -quiet -llsize=655360 -numcores=2 -maxcycles=200000000
+test-llm-grep = "TEST PASSED"
+
+#
+# Run the passthrough example with 4 cores. We must spawn the oct-packet-io
+# utility before the test runs. Test creates fail output.
+#
+tests += test-passthrough
+test-passthrough-time = 10 min (AMD64 3700+)
+test-passthrough-before = pushd ${example_path}/passthrough; ./build_data.sh; popd; oct-packet-io -p ${packet_port} -i ${example_path}/passthrough/input-0.data -i ${example_path}/passthrough/input-1.data -i ${example_path}/passthrough/input-2.data -i ${example_path}/passthrough/input-3.data > /dev/null &
+test-passthrough-cmds = "/examples/passthrough"
+test-passthrough-opts = -quiet -numcores=4 -serve=${packet_port} -maxcycles=220000000
+test-passthrough-grep = "Total 6064 packets"
+
+#
+# Run the busybox testsuite. Test creates pass / fail output.
+#
+tests += test-busybox
+test-busybox-time = 2 hours 3 min (AMD64 3700+)
+test-busybox-cmds = "cd examples/busybox-testsuite" "./runtest -v"
+test-busybox-opts = -quiet -noperf
+test-busybox-grep = "PASS: xargs-works"
+
+
+.PHONY: all-tests
+all-tests: clean ${tests:=.rootfs} ${tests}
+	@echo "RESULT: Run and passed ${words ${tests}} tests"
+
+.PHONY: clean
+clean:
+	echo Cleaning test results
+	rm -f *.log *.rootfs
+	
+%.rootfs: ${rootfs}
+	echo Building $@
+	cp ${rootfs} /tmp/${USER}-$@
+	mkdir -p ${mount_point}
+	sudo mount -o loop  /tmp/${USER}-$@ ${mount_point}
+	sudo chmod 777 ${mount_point}/sbin/rc
+	for line in ${${@:.rootfs=}-cmds} poweroff; do echo "$$line" >> ${mount_point}/sbin/rc;done
+	sudo umount ${mount_point}
+	mv /tmp/${USER}-$@ $@
+	
+test-%: test-%.rootfs ${kernel}
+	echo
+	echo "Starting:" $@ `date`
+	echo "Expected Time: ${$@-time}"
+	${$@-before}
+	oct-uart-io -q -t 30 -p ${uart_port} -l $@.log &
+	${linux_cmd} -uart0=${uart_port} ${$@-opts} -ld${rootfs_address}:$? > $@-sim.log
+	${$@-after}
+	if grep "FAIL" $@.log; then exit -1; else exit 0;fi
+	grep "SIMULATION COMPLETE" $@-sim.log
+	grep ${$@-grep} $@.log
+	echo "*******************************"
+	echo "PASS:" $@
+	echo "*******************************"
+
+

@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<tocdata>
+<book name="Overview" >
+  <item name="AccessPoint SSL VPN Overview" url="AccessPoint_SSL_VPN.htm" />
+</book>
+<book name="Browser Requirements" >
+  <item name="Web Browser" url="Web_Browser.htm" />
+  <item name="Java Requirements" url="Java_Requirements.htm" />
+</book>
+<book name="Authentication" >
+  <item name="AccessPoint Authentication" url="AccessPoint_Overview.htm" />
+  <item name="Logging into the Portal" url="Authenticating.htm" />
+</book>
+<book name="Status and Logs" >
+  <item name="Status" url="stat.htm" />
+  <item name="Event Log" url="even.htm" />
+  <item name="Active Users" url="acti.htm" />
+  <item name="Log Settings" url="logc.htm" />
+</book>
+<book name="General" >
+  <item name="File Settings" url="sett.htm" />
+  <item name="Restart" url="rest.htm" />
+  <item name="Date" url="date.htm" />
+  <book name="Certificate Management" >
+    <item name="Certificates" url="sslc.htm" />
+    <item name="Generate New CSR" url="newc.htm" />
+    <item name="View Certificates" url="view.htm" />
+  </book>
+</book>
+<book name="Network" >
+  <item name="Interfaces" url="netw.htm" />
+  <item name="IP Settings" url="ipse.htm" />
+  <item name="Routes" url="rout.htm" />
+  <item name="DNS Settings" url="dnss.htm" />
+  <item name="Host Resolution" url="etch.htm" />
+</book>
+<book name="Access" >
+  <book name="Users" >
+    <item name="Overview" url="user.htm" />
+    <item name="User Policies" url="edit.htm" />
+    <item name="User Bookmarks" url="User_Bookmarks.htm" />
+  </book>
+  <book name="Groups" >
+    <item name="Overview" url="grou.htm" />
+    <item name="Group Policies" url="Edit_Group_Settings.htm" />
+    <item name="LDAP Attributes" url="ldapattr.htm" />
+    <item name="Group Bookmarks" url="Group_Bookmarks.htm" />
+  </book>
+  <book name="Global" >
+    <item name="Global Policies" url="Global_Policies.htm" />
+    <item name="Global Bookmarks" url="Global_Bookmarks.htm" />
+  </book>
+  <book name="Network Resources" >
+    <item name="Network Resources" url="Network_Resources.htm" />
+  </book>
+  <book name="Domains" >
+    <item name="Domains" url="doma.htm" />
+    <item name="Internal User Database" url="User_Database_Authentication.htm" />
+    <item name="Radius" url="Radius.htm" />
+    <item name="Active Directory" url="Active_Directory.htm" />
+    <item name="LDAP" url="LDAP.htm" />
+    <item name="NT Domain" url="NT_Domain.htm" />
+    <item name="Domain Management" url="Domain_Management.htm" />
+    <item name="kerberos" url="kerberos.htm" />
+  </book>
+  <book name="Portal Layouts" >
+    <item name="Portal Layouts Scheme" url="port.htm" />
+    <item name="Defining the Layout" url="site.htm" />
+    <item name="Home Page" url="Home_Page.htm" />
+  </book>
+</book>
+<book name="Virtual Passage" >
+  <item name="Client Addresses" url="clie.htm" />
+  <item name="Client Routes" url="Client_Routes.htm" />
+</book>
+<book name="Virtual Transport" >
+  <item name="Overview" url="tran.htm" />
+  <item name="Configuration" url="Configurationvt.htm" />
+</book>
+<book name="EPS" >
+  <item name="EPS Policy" url="EPS_Policy.htm" />
+  <item name="Patch" url="Patch.htm" />
+  <item name="Browser" url="Browser.htm" />
+  <item name="RegistryKeyPair" url="RegistryKeyPair.htm" />
+  <item name="Antivirus" url="Antivirus.htm" />
+  <item name="Firewall" url="Firewall.htm" />
+</book>
+<book name="Security" >
+  <item name="Security" url="Security.htm" />
+  <item name="SSL Handshake Process" url="SSL_Handshake.htm" />
+</book>
+
+</tocdata>

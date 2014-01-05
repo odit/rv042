@@ -1,0 +1,54 @@
+#!/bin/ash
+
+# this script sets up and triggers ez-ipupdate daemon according
+# to the system configuration set in the sysconfig file.
+# created by Kide 2005/03/15
+
+
+##########################################################################
+ddns_start()
+{
+	WAN=$(sysconfig -p ISP1 WAN)
+	if [ $WAN = "0.0.0.0" ]; then
+		exit 1
+	fi
+	
+	STATUS=$(/bin/sysconfig -p DDNS1 STATUS)
+
+	# start ez-ipupdate daemon if needed
+	if [ "$STATUS" = "YES" ]; then
+		echo "ez-ipupdate start"
+		/bin/sysconfig -t DDNS1
+		ez-ipupdate -c /etc/ez-ipupdate.conf-1
+	fi
+}
+
+
+ddns_stop()
+{
+	# stop ez-ipupdate daemon first
+	ps > /tmp/ps
+	PID=$(grep ez-ipupdate /tmp/ps)
+	if [ "$PID" != "" ]; then
+		echo "stop ez-ipupdate"
+		/usr/bin/killall -9 ez-ipupdate > /dev/null 2>&1
+	fi
+	# remove update status file
+	rm -f /tmp/.ddns_update.status
+	sleep 2
+}
+
+
+##########################################################################
+# ez-ipupdate script command
+##########################################################################
+case "$1" in
+	'stop')
+		ddns_stop
+		;;
+
+	*)
+		ddns_stop
+		ddns_start
+		;;
+esac

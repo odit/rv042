@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!--#nk_get RedirectPage="network1.htm:0"-->
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	chType(document.formedit_Network2);
+	//chDismatch(document.formedit_Network2);
+}	
+function Leavefunction()
+{
+	chLeave();
+}
+
+var DMZIP = "";
+var Subnet ="";
+var DMZStartIP = "";
+var DMZEndIP = "";
+
+function chSubmit(F)
+{
+	var obj,objPrefix;
+	var tmp="";
+	/*if(F.DmzSubnetRange_v6[1].checked==true)
+	{
+		if (F.Wan1IP_v6.value=="::")
+		{
+			alert(aDmzrangeIFaceConfict);
+			return;
+		}	
+		
+		if (F.DmzStartIp_v6.value=="")
+		{
+			alert(aIPAddressStart);
+			return;
+		}
+
+		if (F.DmzEndIp_v6.value=="")
+		{
+			alert(aIPAddressEnd);
+			return;
+		}
+		
+
+		if(!IPRangeCheck_v6(F.DmzStartIp_v6, F.DmzEndIp_v6, F.Wan1IP_v6, F.Wan1IP_v6prefix, 'check_range_DMZ')){
+
+			return;
+		}
+		
+		for (var i=1;i<=MaxWanPortNumber -ShareDMZPort;i++)
+		{
+			if (i > F.wanNumbers_now.value)
+				break;
+		
+			tmp = "WAN" + i + "IP_v6"; 
+			obj = document.getElementById(tmp);
+
+			tmp = "WAN" + i + "IP_v6prefix";
+			objPrefix = document.getElementById(tmp);
+			
+			if (obj && obj.value != "::")
+			{	
+				//check Lan
+
+				if(!IPRangeCheck_v6(F.DmzStartIp_v6, F.DmzEndIp_v6, obj, objPrefix, 'check_range_DMZ')){
+					return;
+				}
+				
+			}
+		}
+	}
+	else
+	{*/	
+		if(!CheckIPv6(F.Wan2AliasIp_v6,'global')){
+			F.Wan2AliasIp_v6.select();
+			return;
+		}
+		
+		if(!CheckIPv6Prefix(F.Wan2AliasPre_v6)){
+			F.Wan2AliasPre_v6.select();
+			return;
+		} 
+		if (!IPRangeCheck_v6(F.Wan2AliasIp_v6, F.Wan2AliasIp_v6, F.ipAddr_v6, F.ipAddr_v6pre, 'check_v6DMZ')) 
+		{
+
+			return;
+		}
+		
+	//}
+	F.submitStatus.value = 1;	
+	F.log_ch.value=1;
+	F.submit();
+}
+
+function chType(F)
+{
+	/*if(document.formedit_Network2.DmzSubnetRange_v6 && document.formedit_Network2.DmzSubnetRange_v6[1].checked == true)
+	{
+		document.getElementById("DMZIP").style.display="none";
+		document.getElementById("DMZSubnet").style.display="none";
+		//document.getElementById("DMZRange").style.display=""; 
+	}
+	else
+	{*/
+		document.getElementById("DMZIP").style.display="";
+		document.getElementById("DMZSubnet").style.display="";
+		//document.getElementById("DMZRange").style.display="none";
+	//}
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "BackOkCancel";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var Savelink = "chSubmit(document.formedit_Network2);";
+var Cancellink = ""; 
+var Backlink = "network1.htm";
+var helplink ='help_edit_network26.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var head_width=160;
+var FixedTableWidth = 800;
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintDMZSetup(0);
+	PrintEndContent();
+}
+
+function PrintDMZSetup(hasUnderLine)
+{
+	PrintBeginBlock(1, "Edit DMZ Connection");
+	PrintDMZInterface();
+	PrintDMZSubnetIP();
+	//PrintDMZRange();
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintDMZInterface()
+{
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Interface&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td>');
+	document.write('DMZ');
+	document.write('</td>');
+	document.write('</tr>');
+/*	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="radio" value="0" name="DmzSubnetRange_v6" onClick="chType(document.formedit_Network2)" <!--#nk_get DmzType_v6="0"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Subnet');
+	document.write('<img border="0" src="images/_blank.gif" width="50" height="1">');
+	document.write('<input type="radio" value="1" name="DmzSubnetRange_v6" onClick="chType(document.formedit_Network2)" <!--#nk_get DmzType_v6="1"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('Range (DMZ & WAN within same subnet)');
+	document.write('</td>');
+	document.write('</tr>');*/
+}
+
+function PrintDMZSubnetIP()
+{
+	document.write('<tr id="DMZIP" style="display:none" width="100%">');
+	document.write('<td width="'+head_width+'">');
+	document.write('Specify DMZ IPv6 Address&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="Wan2AliasIp_v6" maxlength="39" size="50" value="<!--#nk_get 1to1_Handle_DMZ="Wan2AliasIp_v6"-->">');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr id="DMZSubnet" style="display:none">');
+	document.write('<td width="'+head_width+'">');
+	document.write('Prefix&nbsp;Length&nbsp;:&nbsp;'); 
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="Wan2AliasPre_v6" maxlength="15" size="15" onKeypress="return Check_User_Input(event)"  value="<!--#nk_get 1to1_Handle_DMZ="Wan2AliasPre_v6"-->">');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');	
+}
+
+function PrintDMZRange()
+{
+	document.write('<tr id="DMZRange" style="display:none" width="100%">');
+	document.write('<td width="'+head_width+'">');
+	document.write('IPv6 Range for DMZ port&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="DmzStartIp_v6" maxlength="39" size="50" value="<!--#nk_get 1to1_Handle_DMZ="DmzStartIp_v6"-->">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('to');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');	
+	document.write('<input type="text" name="DmzEndIp_v6" maxlength="39" size="50"  value="<!--#nk_get 1to1_Handle_DMZ="DmzEndIp_v6"-->" >');		
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');	
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 2, 1);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+		
+	<form name="formedit_Network2" method="post" action="edit_network26.htm">
+	<input type="hidden" name="page" value="edit_network26.htm"> 	
+	<input type="hidden" name="submitStatus" value="1">
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="editInterface" value='<!--#nk_get WanEditInterface=""-->'>		
+	<input type="hidden" name="Wan1IP_v6" id="WAN1IP_v6" value='<!--#nk_get DisplayOnly="Wan1AliasIp_v61"-->'> 
+	<input type="hidden" name="Wan2IP_v6" id="WAN2IP_v6" value='<!--#nk_get DisplayOnly="Wan1AliasIp_v62"-->'> 
+	<input type="hidden" name="Wan3IP_v6" id="WAN3IP_v6" value='<!--#nk_get DisplayOnly="Wan1AliasIp_v63"-->'> 
+	<input type="hidden" name="Wan4IP_v6" id="WAN4IP_v6" value='<!--#nk_get DisplayOnly="Wan1AliasIp_v64"-->'> 
+	<input type="hidden" name="Wan5IP_v6" id="WAN5IP_v6" value='<!--#nk_get DisplayOnly="Wan1AliasIp_v65"-->'> 
+	<input type="hidden" name="Wan6IP_v6" id="WAN6IP_v6" value='<!--#nk_get DisplayOnly="Wan1AliasIp_v66"-->'> 
+	<input type="hidden" name="Wan7IP_v6" id="WAN7IP_v6" value='<!--#nk_get DisplayOnly="Wan1AliasIp_v66"-->'> 		
+	<input type="hidden" name="Wan1IP_v6prefix" id="WAN1IP_v6prefix" value='<!--#nk_get DisplayOnly="Wan1AliasPrefix_v61"-->'> 
+	<input type="hidden" name="Wan2IP_v6prefix" id="WAN2IP_v6prefix" value='<!--#nk_get DisplayOnly="Wan1AliasPrefix_v62"-->'> 
+	<input type="hidden" name="Wan3IP_v6prefix" id="WAN3IP_v6prefix" value='<!--#nk_get DisplayOnly="Wan1AliasPrefix_v63"-->'> 
+	<input type="hidden" name="Wan4IP_v6prefix" id="WAN4IP_v6prefix" value='<!--#nk_get DisplayOnly="Wan1AliasPrefix_v64"-->'> 
+	<input type="hidden" name="Wan5IP_v6prefix" id="WAN5IP_v6prefix" value='<!--#nk_get DisplayOnly="Wan1AliasPrefix_v65"-->'> 
+	<input type="hidden" name="Wan6IP_v6prefix" id="WAN6IP_v6prefix" value='<!--#nk_get DisplayOnly="Wan1AliasPrefix_v66"-->'> 
+	<input type="hidden" name="Wan7IP_v6prefix" id="WAN7IP_v6prefix" value='<!--#nk_get DisplayOnly="Wan1AliasPrefix_v67"-->'> 		
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name="wanNumbers_now" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+	<input type="hidden" name="ipAddr_v6" value='<!--#nk_get DisplayOnly="ipAddr_v6"-->'>
+	<input type="hidden" name="ipAddr_v6pre" value='<!--#nk_get DisplayOnly="ipAddr_v6pre"-->'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="edit_network26.htm"-->
+<!--#nk_get Network_IPV6_Update=""-->

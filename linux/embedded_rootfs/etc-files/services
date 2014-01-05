@@ -1,0 +1,13 @@
+# Here is a simple services file.
+#
+ftp-data		20/tcp
+ftp			21/tcp
+ssh			22/tcp
+telnet			23/tcp
+uptime			24/tcp
+tftp			69/udp
+http			80/tcp
+syslog                  514/udp
+ntp			123/tcp
+ntp			123/udp
+# End of services file.

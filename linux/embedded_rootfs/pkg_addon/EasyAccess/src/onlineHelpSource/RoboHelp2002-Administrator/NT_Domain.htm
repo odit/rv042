@@ -1,0 +1,226 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<!--(==============================================================)-->
+<!--(Document created with RoboEditor. )============================-->
+<!--(==============================================================)-->
+
+<head>
+
+<title>NT Domain</title>
+
+<!--(Meta)==========================================================-->
+
+<meta http-equiv=content-type content="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+<meta name=generator-major-version content=0.1>
+<meta name=generator-minor-version content=1>
+<meta name=filetype content=kadov>
+<meta name=filetype-version content=1>
+<meta name=page-count content=1>
+<meta name=layout-height content=580>
+<meta name=layout-width content=735>
+
+
+<!--(Links)=========================================================-->
+
+<link rel="stylesheet" href="default_ns.css">
+
+
+
+<!--(Style Sheets)==================================================-->
+
+<style>
+<!--
+
+ol.whs1 {
+	list-style: decimal;
+}
+
+div.whs2 {
+	text-align: center;
+	font-family: Arial;
+	font-size: 12pt;
+	color: #ff0000;
+}
+
+-->
+</style>
+
+<style>
+<!--
+
+div.WebHelpPopupMenu {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 4;
+	visibility: hidden;
+}
+
+-->
+</style>
+
+<!--(Scripts)=======================================================-->
+
+<script type="text/javascript"
+		language=JavaScript
+		title=WebHelpSplitCss><!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='default.css'>");}
+//--></script>
+
+<script type="text/javascript"
+		language=JavaScript
+		title=WebHelpInlineScript><!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//--></script>
+
+<script type="text/javascript"
+		language=javascript1.2
+		src="whmsg.js"></script>
+
+<script type="text/javascript"
+		language=javascript
+		src="whver.js"></script>
+
+<script type="text/javascript"
+		language=javascript1.2
+		src="whproxy.js"></script>
+
+<script type="text/javascript"
+		language=javascript1.2
+		src="whutils.js"></script>
+
+<script type="text/javascript"
+		language=javascript1.2
+		src="whtopic.js"></script>
+
+</head>
+
+<!--(Body)==========================================================-->
+
+
+<body>
+
+<script type="text/javascript"
+		language=javascript1.2><!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Access\nDomains\nNT Domain");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("ConfigGuide.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//--></script>
+
+<h4>&nbsp;NT Domain</h4>
+
+<p>To create a domain with Microsoft NT Domain authentication, click <span 
+ style="font-weight: bold;"><b>Add Domain </b></span>in the <span style="font-weight: bold;"><b>Access 
+ &gt;&gt; Domains</b></span> window. The <span style="font-weight: bold;"><b>Add 
+ New Domain </b></span>window will be displayed.</p>
+
+<p>&nbsp;</p>
+
+<p>In the <span style="font-weight: bold;"><b>Add New Domain</b></span> 
+ window:</p>
+
+<p>&nbsp;</p>
+
+<ol class=whs1
+	style="list-style: decimal;"
+	type=1>
+	
+	<li class=kadov-p><p style="margin-bottom: 8pt;">Select <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ "><u>NT 
+ Domain</u></span> from the <span style="font-weight: bold;"><b>Authentication 
+ Type</b></span> menu. The NT Domain configuration fields will be displayed.</p></li>
+	
+	<li class=kadov-p><p style="margin-bottom: 8pt;">Enter a descriptive 
+ name for the authentication domain in the <span style="font-weight: bold;">EasyAccess 
+ Domain Name</span> field. This is the domain name selected by users when 
+ they authenticate to the SSL VPN portal. It may be the same value as the 
+ NT Domain Name.</p></li>
+	
+	<li class=kadov-p><p style="margin-bottom: 8pt;">Enter the NT authentication 
+ domain in the <span style="font-weight: bold;">NT Domain Name</span> field. 
+ This is the domain name configured on the Windows authentication server 
+ for network authentication.</p></li>
+	
+	<li class=kadov-p><p style="margin-bottom: 8pt;">Enter the IP address 
+ or host and domain name of the server in the <span style="font-weight: bold;">NT 
+ Server Address</span> field.</p></li>
+	
+	<li class=kadov-p><p style="margin-bottom: 8pt;">Enter the name of 
+ the layout in the <span style="font-weight: bold;">Portal Layout Name</span> 
+ field. The default layout is <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">EasyAccess</span>. 
+ Additional layouts may be defined in the <span style="font-weight: bold;">Access 
+ &gt;&gt; Portal Layouts</span> page.</p></li>
+	
+	<li class=kadov-p><p style="margin-bottom: 8pt;">Check the <span style="font-weight: bold;">Require 
+ client digital certificates</span> checkbox to force users to supply a 
+ valid digital certificate before granting access. The CNAME of the client 
+ certificate must match the user name that the user supplies to login and 
+ the certificate must be generated by a certificate authority (CA) that 
+ is trusted by EasyAccess.</p></li>
+	
+	<li class=kadov-p><p style="margin-bottom: 8pt;">Check the <span style="font-weight: bold;">Require 
+ CIFS bookmark to home directory</span> checkbox to add bookmark for server's 
+ <span style="font-weight: bold;">Home Directory Base Path</span>, which 
+ has Home Directories for that specific domain users. </p></li>
+	
+	<li class=kadov-p><p style="margin-bottom: 8pt;">Click <span style="font-weight: bold;">Submit</span> 
+ to update the configuration. </p></li>
+</ol>
+
+<p style="margin-bottom: 8pt;">Once the domain has been added, the domain 
+ will be added to the <span style="font-weight: bold;">Current Domains</span> 
+ table.</p>
+
+<p>Users that have been defined in the NT Domain database can log into 
+ the EasyAccess SSL VPN portal by entering their NT Domain name and password 
+ and selecting the new NT Domain authentication domain from the <span style="font-weight: bold;"><b>Domain</b></span> 
+ menu in the <span style="font-weight: bold;"><b>EasyAccess Authentication</b></span> 
+ window.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<script type="text/javascript"
+		language=javascript1.2><!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//--></script>
+
+</body>
+
+</html>

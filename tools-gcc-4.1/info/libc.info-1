@@ -1,0 +1,1413 @@
+This is libc.info, produced by makeinfo version 4.3 from
+/usr/local/Cavium_Networks/toolchain/src/newlib/libc/libc.texinfo.
+
+START-INFO-DIR-ENTRY
+* libc::                        The ANSI C library.
+END-INFO-DIR-ENTRY
+
+   This file documents the ANSI C library.
+
+   Copyright (C) 1992, 1993, 1994-2004 Red Hat, Inc.
+
+   `libc' includes software developed by the University of California,
+Berkeley and its contributors.
+
+   libc includes software developed by Martin Jackson, Graham Haley and
+Steve Chamberlain of Tadpole Technology and released to Cygnus.
+
+   libc uses floating-point conversion software developed at AT&T, which
+includes this copyright information:
+
+   The author of this software is David M. Gay.
+
+   Copyright (c) 1991 by AT&T.
+
+   Permission to use, copy, modify, and distribute this software for any
+purpose without fee is hereby granted, provided that this entire notice
+is included in all copies of any software which is or includes a copy
+or modification of this software and in all copies of the supporting
+documentation for such software.
+
+   THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR
+IMPLIED  WARRANTY.  IN PARTICULAR, NEITHER THE AUTHOR NOR AT&T MAKES ANY
+REPRESENTATION OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY
+OF THIS SOFTWARE OR ITS FITNESS FOR ANY PARTICULAR PURPOSE.
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, subject to the
+terms of the GNU General Public License, which includes the provision
+that the entire resulting derived work is distributed under the terms
+of a permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions.
+
+
+File: libc.info,  Node: Top,  Next: Introduction,  Up: (dir)
+
+The Red Hat newlib C Library
+****************************
+
+* Menu:
+
+* Introduction::
+* Stdlib::
+* Ctype::
+* Stdio::
+
+* Strings::
+* Wchar strings::
+
+* Signals::
+
+* Timefns::
+* Locale::
+* Reentrancy::
+
+* Misc::
+* Syscalls::
+* Arglists::
+
+* Library Index::
+
+
+File: libc.info,  Node: Introduction,  Next: Stdlib,  Prev: Top,  Up: Top
+
+Introduction
+************
+
+   This reference manual describes the functions provided by the Red Hat
+"newlib" version of the standard ANSI C library.  This document is not
+intended as an overview or a tutorial for the C library.  Each library
+function is listed with a synopsis of its use, a brief description,
+return values (including error handling), and portability issues.
+
+   Some of the library functions depend on support from the underlying
+operating system and may not be available on every platform.  For
+embedded systems in particular, many of these underlying operating
+system services may not be available or may not be fully functional.
+The specific operating system subroutines required for a particular
+library function are listed in the "Portability" section of the
+function description.  *Note Syscalls::, for a description of the
+relevant operating system calls.
+
+
+File: libc.info,  Node: Stdlib,  Next: Ctype,  Prev: Introduction,  Up: Top
+
+Standard Utility Functions (`stdlib.h')
+***************************************
+
+   This chapter groups utility functions useful in a variety of
+programs.  The corresponding declarations are in the header file
+`stdlib.h'.
+
+* Menu:
+
+* _Exit::       End program execution without cleaning up
+* a64l::        String to long long
+* abort::       Abnormal termination of a program
+* abs::         Integer absolute value (magnitude)
+* assert::      Macro for Debugging Diagnostics
+* atexit::      Request execution of functions at program exit
+* atof::        String to double or float
+* atoi::        String to integer
+* atoll::       String to long long
+* calloc::      Allocate space for arrays
+* div::         Divide two integers
+* ecvtbuf::     Double or float to string of digits
+* ecvt::        Double or float to string of digits (malloc result)
+* __env_lock::		Lock environment list for getenv and setenv
+* gvcvt::       Format double or float as string
+* exit::        End program execution
+* getenv::      Look up environment variable
+* labs::        Long integer absolute value (magnitude)
+* ldiv::        Divide two long integers
+* llabs::       Long long integer absolute value (magnitude)
+* lldiv::       Divide two long long integers
+* malloc::      Allocate and manage memory (malloc, realloc, free)
+* mallinfo::	Get information about allocated memory
+* __malloc_lock::	Lock memory pool for malloc and free
+* mbstowcs::	Minimal multibyte string to wide string converter
+* mblen::	Minimal multibyte length
+* mbtowc::      Minimal multibyte to wide character converter
+* on_exit::     Request execution of functions at program exit
+* rand::        Pseudo-random numbers
+* rand48::      Uniformly distributed pseudo-random numbers
+* strtod::      String to double or float
+* strtol::      String to long
+* strtoll::     String to long long
+* strtoul::     String to unsigned long
+* strtoull::    String to unsigned long long
+* system::      Execute command string
+* wcstombs::	Minimal wide string to multibyte string converter
+* wctomb::      Minimal wide character to multibyte converter
+
+
+File: libc.info,  Node: _Exit,  Next: a64l,  Up: Stdlib
+
+`_Exit'--end program execution with no cleanup processing
+=========================================================
+
+   *Synopsis*
+     #include <stdlib.h>
+     void _Exit(int CODE);
+   *Description*
+Use `_Exit' to return control from a program to the host operating
+environment.  Use the argument CODE to pass an exit status to the
+operating environment: two particular values, `EXIT_SUCCESS' and
+`EXIT_FAILURE', are defined in ``stdlib.h'' to indicate success or
+failure in a portable fashion.
+
+   `_Exit' differs from `exit' in that it does not run any
+application-defined cleanup functions registered with `atexit' and it
+does not clean up files and streams.  It is identical to `_exit'.
+
+*Returns*
+`_Exit' does not return to its caller.
+
+*Portability*
+`_Exit' is defined by the C99 standard.
+
+   Supporting OS subroutines required: `_exit'.
+
+
+File: libc.info,  Node: a64l,  Next: abort,  Prev: _Exit,  Up: Stdlib
+
+`a64l', `l64a'--convert between radix-64 ASCII string and long
+==============================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     long a64l(const char *INPUT);
+     char *l64a(long INPUT);
+   *Description*
+Conversion is performed between long and radix-64 characters.  The
+`l64a' routine transforms up to 32 bits of input value starting from
+least significant bits to the most significant bits.  The input value
+is split up into a maximum of 5 groups of 6 bits and possibly one group
+of 2 bits (bits 31 and 30).
+
+   Each group of 6 bits forms a value from 0-63 which is translated into
+a character as follows:
+
+   * 0 = '.'
+
+   * 1 = '/'
+
+   * 2-11 = '0' to '9'
+
+   * 12-37 = 'A' to 'Z'
+
+   * 38-63 = 'a' to 'z'
+
+   When the remaining bits are zero or all bits have been translated, a
+null terminator is appended to the string.  An input value of 0 results
+in the empty string.
+
+   The `a64l' function performs the reverse translation.  Each
+character is used to generate a 6-bit value for up to 30 bits and then
+a 2-bit value to complete a 32-bit result.  The null terminator means
+that the remaining digits are 0.  An empty input string or NULL string
+results in 0L.  An invalid string results in undefined behavior.  If
+the size of a long is greater than 32 bits, the result is sign-extended.
+
+*Returns*
+`l64a' returns a null-terminated string of 0 to 6 characters.  `a64l'
+returns the 32-bit translated value from the input character string.
+
+*Portability*
+`l64a' and `a64l' are non-ANSI and are defined by the Single Unix
+Specification.
+
+   Supporting OS subroutines required: None.
+
+
+File: libc.info,  Node: abort,  Next: abs,  Prev: a64l,  Up: Stdlib
+
+`abort'--abnormal termination of a program
+==========================================
+
+*Synopsis*
+     #include <stdlib.h>
+     void abort(void);
+   *Description*
+Use `abort' to signal that your program has detected a condition it
+cannot deal with.  Normally, `abort' ends your program's execution.
+
+   Before terminating your program, `abort' raises the exception
+`SIGABRT' (using ``raise(SIGABRT)'').  If you have used `signal' to
+register an exception handler for this condition, that handler has the
+opportunity to retain control, thereby avoiding program termination.
+
+   In this implementation, `abort' does not perform any stream- or
+file-related cleanup (the host environment may do so; if not, you can
+arrange for your program to do its own cleanup with a `SIGABRT'
+exception handler).
+
+*Returns*
+`abort' does not return to its caller.
+
+*Portability*
+ANSI C requires `abort'.
+
+   Supporting OS subroutines required: `_exit' and optionally, `write'.
+
+
+File: libc.info,  Node: abs,  Next: assert,  Prev: abort,  Up: Stdlib
+
+`abs'--integer absolute value (magnitude)
+=========================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int abs(int I);
+   *Description*
+`abs' returns the absolute value of I (also called the magnitude of I).
+That is, if I is negative, the result is the opposite of I, but if I
+is nonnegative the result is I.
+
+   The similar function `labs' uses and returns `long' rather than
+`int' values.
+
+*Returns*
+The result is a nonnegative integer.
+
+*Portability*
+`abs' is ANSI.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: assert,  Next: atexit,  Prev: abs,  Up: Stdlib
+
+`assert'--macro for debugging diagnostics
+=========================================
+
+*Synopsis*
+     #include <assert.h>
+     void assert(int EXPRESSION);
+   *Description*
+Use this macro to embed debuggging diagnostic statements in your
+programs.  The argument EXPRESSION should be an expression which
+evaluates to true (nonzero) when your program is working as you
+intended.
+
+   When EXPRESSION evaluates to false (zero), `assert' calls `abort',
+after first printing a message showing what failed and where:
+
+      Assertion failed: EXPRESSION, file FILENAME, line LINENO
+
+   The macro is defined to permit you to turn off all uses of `assert'
+at compile time by defining `NDEBUG' as a preprocessor variable.   If
+you do this, the `assert' macro expands to
+
+      (void(0))
+
+*Returns*
+`assert' does not return a value.
+
+*Portability*
+The `assert' macro is required by ANSI, as is the behavior when
+`NDEBUG' is defined.
+
+   Supporting OS subroutines required (only if enabled): `close',
+`fstat', `getpid', `isatty', `kill', `lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: atexit,  Next: atof,  Prev: assert,  Up: Stdlib
+
+`atexit'--request execution of functions at program exit
+========================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int atexit (void (*FUNCTION)(void));
+   *Description*
+You can use `atexit' to enroll functions in a list of functions that
+will be called when your program terminates normally.  The argument is
+a pointer to a user-defined function (which must not require arguments
+and must not return a result).
+
+   The functions are kept in a LIFO stack; that is, the last function
+enrolled by `atexit' will be the first to execute when your program
+exits.
+
+   There is no built-in limit to the number of functions you can enroll
+in this list; however, after every group of 32 functions is enrolled,
+`atexit' will call `malloc' to get space for the next part of the list.
+ The initial list of 32 functions is statically allocated, so you can
+always count on at least that many slots available.
+
+*Returns*
+`atexit' returns `0' if it succeeds in enrolling your function, `-1' if
+it fails (possible only if no space was available for `malloc' to
+extend the list of functions).
+
+*Portability*
+`atexit' is required by the ANSI standard, which also specifies that
+implementations must support enrolling at least 32 functions.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: atof,  Next: atoi,  Prev: atexit,  Up: Stdlib
+
+`atof', `atoff'--string to double or float
+==========================================
+
+*Synopsis*
+     #include <stdlib.h>
+     double atof(const char *S);
+     float atoff(const char *S);
+   *Description*
+`atof' converts the initial portion of a string to a `double'.  `atoff'
+converts the initial portion of a string to a `float'.
+
+   The functions parse the character string S, locating a substring
+which can be converted to a floating-point value. The substring must
+match the format:
+      [+|-]DIGITS[.][DIGITS][(e|E)[+|-]DIGITS]
+   The substring converted is the longest initial fragment of S that
+has the expected format, beginning with the first non-whitespace
+character.  The substring is empty if `str' is empty, consists entirely
+of whitespace, or if the first non-whitespace character is something
+other than `+', `-', `.', or a digit.
+
+   `atof(S)' is implemented as `strtod(S, NULL)'.  `atoff(S)' is
+implemented as `strtof(S, NULL)'.
+
+*Returns*
+`atof' returns the converted substring value, if any, as a `double'; or
+`0.0',  if no conversion could be performed.  If the correct value is
+out of the range of representable values, plus or minus `HUGE_VAL' is
+returned, and `ERANGE' is stored in `errno'.  If the correct value
+would cause underflow, `0.0' is returned and `ERANGE' is stored in
+`errno'.
+
+   `atoff' obeys the same rules as `atof', except that it returns a
+`float'.
+
+*Portability*
+`atof' is ANSI C. `atof', `atoi', and `atol' are subsumed by `strod'
+and `strol', but are used extensively in existing code. These functions
+are less reliable, but may be faster if the argument is verified to be
+in a valid range.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: atoi,  Next: atoll,  Prev: atof,  Up: Stdlib
+
+`atoi', `atol'--string to integer
+=================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int atoi(const char *S);
+     long atol(const char *S);
+     int _atoi_r(struct _reent *PTR, const char *S);
+     long _atol_r(struct _reent *PTR, const char *S);
+   *Description*
+`atoi' converts the initial portion of a string to an `int'.  `atol'
+converts the initial portion of a string to a `long'.
+
+   `atoi(s)' is implemented as `(int)strtol(s, NULL, 10).' `atol(s)' is
+implemented as `strtol(s, NULL, 10).'
+
+   `_atoi_r' and `_atol_r' are reentrant versions of `atoi' and `atol'
+respectively, passing the reentrancy struct pointer.
+
+*Returns*
+The functions return the converted value, if any. If no conversion was
+made, `0' is returned.
+
+*Portability*
+`atoi', `atol' are ANSI.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: atoll,  Next: calloc,  Prev: atoi,  Up: Stdlib
+
+`atoll'--convert a string to a long long integer
+================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     long long atoll(const char *STR);
+     long long _atoll_r(struct _reent *PTR, const char *STR);
+   *Description*
+The function `atoll' converts the initial portion of the string pointed
+to by `*STR' to a type `long long'.  A call to atoll(str) in this
+implementation is equivalent to strtoll(str, (char **)NULL, 10)
+including behavior on error.
+
+   The alternate function `_atoll_r' is a reentrant version.  The extra
+argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+The converted value.
+
+*Portability*
+`atoll' is ISO 9899 (C99) and POSIX 1003.1-2001 compatable.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: calloc,  Next: div,  Prev: atoll,  Up: Stdlib
+
+`calloc'--allocate space for arrays
+===================================
+
+*Synopsis*
+     #include <stdlib.h>
+     void *calloc(size_t N, size_t S);
+     void *calloc_r(void *REENT, size_t <n>, <size_t> S);
+   *Description*
+Use `calloc' to request a block of memory sufficient to hold an array
+of N elements, each of which has size S.
+
+   The memory allocated by `calloc' comes out of the same memory pool
+used by `malloc', but the memory block is initialized to all zero
+bytes.  (To avoid the overhead of initializing the space, use `malloc'
+instead.)
+
+   The alternate function `_calloc_r' is reentrant.  The extra argument
+REENT is a pointer to a reentrancy structure.
+
+*Returns*
+If successful, a pointer to the newly allocated space.
+
+   If unsuccessful, `NULL'.
+
+*Portability*
+`calloc' is ANSI.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: div,  Next: ecvtbuf,  Prev: calloc,  Up: Stdlib
+
+`div'--divide two integers
+==========================
+
+*Synopsis*
+     #include <stdlib.h>
+     div_t div(int N, int D);
+   *Description*
+Divide N/D, returning quotient and remainder as two integers in a
+structure `div_t'.
+
+*Returns*
+The result is represented with the structure
+
+      typedef struct
+      {
+       int quot;
+       int rem;
+      } div_t;
+
+   where the `quot' field represents the quotient, and `rem' the
+remainder.  For nonzero D, if ``R = div(N,D);'' then N equals ``R.rem +
+D*R.quot''.
+
+   To divide `long' rather than `int' values, use the similar function
+`ldiv'.
+
+*Portability*
+`div' is ANSI.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: ecvt,  Next: __env_lock,  Prev: ecvtbuf,  Up: Stdlib
+
+`ecvt', `ecvtf', `fcvt', `fcvtf'--double or float to string
+===========================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     
+     char *ecvt(double VAL, int CHARS, int *DECPT, int *SGN);
+     char *ecvtf(float VAL, int CHARS, int *DECPT, int *SGN);
+     
+     char *fcvt(double VAL, int DECIMALS,
+         int *DECPT, int *SGN);
+     char *fcvtf(float VAL, int DECIMALS,
+         int *DECPT, int *SGN);
+   *Description*
+`ecvt' and `fcvt' produce (null-terminated) strings of digits
+representating the `double' number VAL.  `ecvtf' and `fcvtf' produce
+the corresponding character representations of `float' numbers.
+
+   (The `stdlib' functions `ecvtbuf' and `fcvtbuf' are reentrant
+versions of `ecvt' and `fcvt'.)
+
+   The only difference between `ecvt' and `fcvt' is the interpretation
+of the second argument (CHARS or DECIMALS).  For `ecvt', the second
+argument CHARS specifies the total number of characters to write (which
+is also the number of significant digits in the formatted string, since
+these two functions write only digits).  For `fcvt', the second
+argument DECIMALS specifies the number of characters to write after the
+decimal point; all digits for the integer part of VAL are always
+included.
+
+   Since `ecvt' and `fcvt' write only digits in the output string, they
+record the location of the decimal point in `*DECPT', and the sign of
+the number in `*SGN'.  After formatting a number, `*DECPT' contains the
+number of digits to the left of the decimal point.  `*SGN' contains `0'
+if the number is positive, and `1' if it is negative.
+
+*Returns*
+All four functions return a pointer to the new string containing a
+character representation of VAL.
+
+*Portability*
+None of these functions are ANSI C.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: gvcvt,  Next: exit,  Prev: __env_lock,  Up: Stdlib
+
+`gvcvt', `gcvtf'--format double or float as string
+==================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     
+     char *gcvt(double VAL, int PRECISION, char *BUF);
+     char *gcvtf(float VAL, int PRECISION, char *BUF);
+   *Description*
+`gcvt' writes a fully formatted number as a null-terminated string in
+the buffer `*BUF'.  `gdvtf' produces corresponding character
+representations of `float' numbers.
+
+   `gcvt' uses the same rules as the `printf' format
+``%.PRECISIONg''--only negative values are signed (with ``-''), and
+either exponential or ordinary decimal-fraction format is chosen
+depending on the number of significant digits (specified by PRECISION).
+
+*Returns*
+The result is a pointer to the formatted representation of VAL (the
+same as the argument BUF).
+
+*Portability*
+Neither function is ANSI C.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: ecvtbuf,  Next: ecvt,  Prev: div,  Up: Stdlib
+
+`ecvtbuf', `fcvtbuf'--double or float to string
+===============================================
+
+*Synopsis*
+     #include <stdio.h>
+     
+     char *ecvtbuf(double VAL, int CHARS, int *DECPT,
+         int *SGN, char *BUF);
+     
+     char *fcvtbuf(double VAL, int DECIMALS, int *DECPT,
+         int *SGN, char *BUF);
+   *Description*
+`ecvtbuf' and `fcvtbuf' produce (null-terminated) strings of digits
+representating the `double' number VAL.
+
+   The only difference between `ecvtbuf' and `fcvtbuf' is the
+interpretation of the second argument (CHARS or DECIMALS). For
+`ecvtbuf', the second argument CHARS specifies the total number of
+characters to write (which is also the number of significant digits in
+the formatted string, since these two functions write only digits). For
+`fcvtbuf', the second argument DECIMALS specifies the number of
+characters to write after the decimal point; all digits for the integer
+part of VAL are always included.
+
+   Since `ecvtbuf' and `fcvtbuf' write only digits in the output
+string, they record the location of the decimal point in `*DECPT', and
+the sign of the number in `*SGN'.  After formatting a number, `*DECPT'
+contains the number of digits to the left of the decimal point.  `*SGN'
+contains `0' if the number is positive, and `1' if it is negative.  For
+both functions, you supply a pointer BUF to an area of memory to hold
+the converted string.
+
+*Returns*
+Both functions return a pointer to BUF, the string containing a
+character representation of VAL.
+
+*Portability*
+Neither function is ANSI C.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: __env_lock,  Next: gvcvt,  Prev: ecvt,  Up: Stdlib
+
+`__env_lock', `__env_unlock'--lock environ variable
+===================================================
+
+*Synopsis*
+     #include "envlock.h"
+     void __env_lock (struct _reent *REENT);
+     void __env_unlock (struct _reent *REENT);
+   *Description*
+The `setenv' family of routines call these functions when they need to
+modify the environ variable.  The version of these routines supplied in
+the library use the lock API defined in sys/lock.h.  If multiple
+threads of execution can call `setenv', or if `setenv' can be called
+reentrantly, then you need to define your own versions of these
+functions in order to safely lock the memory pool during a call.  If
+you do not, the memory pool may become corrupted.
+
+   A call to `setenv' may call `__env_lock' recursively; that is, the
+sequence of calls may go `__env_lock', `__env_lock', `__env_unlock',
+`__env_unlock'.  Any implementation of these routines must be careful
+to avoid causing a thread to wait for a lock that it already holds.
+
+
+File: libc.info,  Node: exit,  Next: getenv,  Prev: gvcvt,  Up: Stdlib
+
+`exit'--end program execution
+=============================
+
+*Synopsis*
+     #include <stdlib.h>
+     void exit(int CODE);
+   *Description*
+Use `exit' to return control from a program to the host operating
+environment.  Use the argument CODE to pass an exit status to the
+operating environment: two particular values, `EXIT_SUCCESS' and
+`EXIT_FAILURE', are defined in ``stdlib.h'' to indicate success or
+failure in a portable fashion.
+
+   `exit' does two kinds of cleanup before ending execution of your
+program.  First, it calls all application-defined cleanup functions you
+have enrolled with `atexit'.  Second, files and streams are cleaned up:
+any pending output is delivered to the host system, each open file or
+stream is closed, and files created by `tmpfile' are deleted.
+
+*Returns*
+`exit' does not return to its caller.
+
+*Portability*
+ANSI C requires `exit', and specifies that `EXIT_SUCCESS' and
+`EXIT_FAILURE' must be defined.
+
+   Supporting OS subroutines required: `_exit'.
+
+
+File: libc.info,  Node: getenv,  Next: labs,  Prev: exit,  Up: Stdlib
+
+`getenv'--look up environment variable
+======================================
+
+*Synopsis*
+     #include <stdlib.h>
+     char *getenv(const char *NAME);
+   *Description*
+`getenv' searches the list of environment variable names and values
+(using the global pointer "`char **environ'") for a variable whose name
+matches the string at NAME.  If a variable name matches, `getenv'
+returns a pointer to the associated value.
+
+*Returns*
+A pointer to the (string) value of the environment variable, or `NULL'
+if there is no such environment variable.
+
+*Portability*
+`getenv' is ANSI, but the rules for properly forming names of
+environment variables vary from one system to another.
+
+   `getenv' requires a global pointer `environ'.
+
+
+File: libc.info,  Node: labs,  Next: ldiv,  Prev: getenv,  Up: Stdlib
+
+`labs'--long integer absolute value
+===================================
+
+*Synopsis*
+     #include <stdlib.h>
+     long labs(long I);
+   *Description*
+`labs' returns the absolute value of I (also called the magnitude of
+I).  That is, if I is negative, the result is the opposite of I, but if
+I is nonnegative the result is I.
+
+   The similar function `abs' uses and returns `int' rather than `long'
+values.
+
+*Returns*
+The result is a nonnegative long integer.
+
+*Portability*
+`labs' is ANSI.
+
+   No supporting OS subroutine calls are required.
+
+
+File: libc.info,  Node: ldiv,  Next: llabs,  Prev: labs,  Up: Stdlib
+
+`ldiv'--divide two long integers
+================================
+
+*Synopsis*
+     #include <stdlib.h>
+     ldiv_t ldiv(long N, long D);
+   *Description*
+Divide N/D, returning quotient and remainder as two long integers in a
+structure `ldiv_t'.
+
+*Returns*
+The result is represented with the structure
+
+      typedef struct
+      {
+       long quot;
+       long rem;
+      } ldiv_t;
+
+   where the `quot' field represents the quotient, and `rem' the
+remainder.  For nonzero D, if ``R = ldiv(N,D);'' then N equals ``R.rem
++ D*R.quot''.
+
+   To divide `int' rather than `long' values, use the similar function
+`div'.
+
+*Portability*
+`ldiv' is ANSI.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: llabs,  Next: lldiv,  Prev: ldiv,  Up: Stdlib
+
+`llabs'--compute the absolute value of an long long integer.
+============================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     long long llabs(long long j);
+   *Description*
+The `llabs' function computes the absolute value of the long long
+integer argument J (also called the magnitude of J).
+
+   The similar function `labs' uses and returns `long' rather than
+`long long' values.
+
+*Returns*
+A nonnegative long long integer.
+
+*Portability*
+`llabs' is ISO 9899 (C99) compatable.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: lldiv,  Next: malloc,  Prev: llabs,  Up: Stdlib
+
+`lldiv'--divide two long long integers
+======================================
+
+*Synopsis*
+     #include <stdlib.h>
+     lldiv_t lldiv(long long N, long long D);
+   *Description*
+Divide N/D, returning quotient and remainder as two long long integers
+in a structure `lldiv_t'.
+
+*Returns*
+The result is represented with the structure
+
+      typedef struct
+      {
+       long long quot;
+       long long rem;
+      } lldiv_t;
+
+   where the `quot' field represents the quotient, and `rem' the
+remainder.  For nonzero D, if ``R = ldiv(N,D);'' then N equals ``R.rem
++ D*R.quot''.
+
+   To divide `long' rather than `long long' values, use the similar
+function `ldiv'.
+
+*Portability*
+`lldiv' is ISO 9899 (C99) compatable.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: malloc,  Next: mallinfo,  Prev: lldiv,  Up: Stdlib
+
+`malloc', `realloc', `free'--manage memory
+==========================================
+
+*Synopsis*
+     #include <stdlib.h>
+     void *malloc(size_t NBYTES);
+     void *realloc(void *APTR, size_t NBYTES);
+     void free(void *APTR);
+     
+     void *memalign(size_t ALIGN, size_t NBYTES);
+     
+     size_t malloc_usable_size(void *APTR);
+     
+     void *_malloc_r(void *REENT, size_t NBYTES);
+     void *_realloc_r(void *REENT,
+         void *APTR, size_t NBYTES);
+     void _free_r(void *REENT, void *APTR);
+     
+     void *_memalign_r(void *REENT,
+         size_t ALIGN, size_t NBYTES);
+     
+     size_t _malloc_usable_size_r(void *REENT, void *APTR);
+   *Description*
+These functions manage a pool of system memory.
+
+   Use `malloc' to request allocation of an object with at least NBYTES
+bytes of storage available.  If the space is available, `malloc'
+returns a pointer to a newly allocated block as its result.
+
+   If you already have a block of storage allocated by `malloc', but
+you no longer need all the space allocated to it, you can make it
+smaller by calling `realloc' with both the object pointer and the new
+desired size as arguments.  `realloc' guarantees that the contents of
+the smaller object match the beginning of the original object.
+
+   Similarly, if you need more space for an object, use `realloc' to
+request the larger size; again, `realloc' guarantees that the beginning
+of the new, larger object matches the contents of the original object.
+
+   When you no longer need an object originally allocated by `malloc'
+or `realloc' (or the related function `calloc'), return it to the
+memory storage pool by calling `free' with the address of the object as
+the argument.  You can also use `realloc' for this purpose by calling
+it with `0' as the NBYTES argument.
+
+   The `memalign' function returns a block of size NBYTES aligned to a
+ALIGN boundary.  The ALIGN argument must be a power of two.
+
+   The `malloc_usable_size' function takes a pointer to a block
+allocated by `malloc'.  It returns the amount of space that is
+available in the block.  This may or may not be more than the size
+requested from `malloc', due to alignment or minimum size constraints.
+
+   The alternate functions `_malloc_r', `_realloc_r', `_free_r',
+`_memalign_r', and `_malloc_usable_size_r' are reentrant versions.  The
+extra argument REENT is a pointer to a reentrancy structure.
+
+   If you have multiple threads of execution which may call any of these
+routines, or if any of these routines may be called reentrantly, then
+you must provide implementations of the `__malloc_lock' and
+`__malloc_unlock' functions for your system.  See the documentation for
+those functions.
+
+   These functions operate by calling the function `_sbrk_r' or `sbrk',
+which allocates space.  You may need to provide one of these functions
+for your system.  `_sbrk_r' is called with a positive value to allocate
+more space, and with a negative value to release previously allocated
+space if it is no longer required.  *Note Stubs::.
+
+*Returns*
+`malloc' returns a pointer to the newly allocated space, if successful;
+otherwise it returns `NULL'.  If your application needs to generate
+empty objects, you may use `malloc(0)' for this purpose.
+
+   `realloc' returns a pointer to the new block of memory, or `NULL' if
+a new block could not be allocated.  `NULL' is also the result when you
+use ``realloc(APTR,0)'' (which has the same effect as ``free(APTR)'').
+You should always check the result of `realloc'; successful
+reallocation is not guaranteed even when you request a smaller object.
+
+   `free' does not return a result.
+
+   `memalign' returns a pointer to the newly allocated space.
+
+   `malloc_usable_size' returns the usable size.
+
+*Portability*
+`malloc', `realloc', and `free' are specified by the ANSI C standard,
+but other conforming implementations of `malloc' may behave differently
+when NBYTES is zero.
+
+   `memalign' is part of SVR4.
+
+   `malloc_usable_size' is not portable.
+
+   Supporting OS subroutines required: `sbrk'.
+
+File: libc.info,  Node: mallinfo,  Next: __malloc_lock,  Prev: malloc,  Up: Stdlib
+
+`mallinfo', `malloc_stats', `mallopt'--malloc support
+=====================================================
+
+*Synopsis*
+     #include <malloc.h>
+     struct mallinfo mallinfo(void);
+     void malloc_stats(void);
+     int mallopt(int PARAMETER, VALUE);
+     
+     struct mallinfo _mallinfo_r(void *REENT);
+     void _malloc_stats_r(void *REENT);
+     int _mallopt_r(void *REENT, int PARAMETER, VALUE);
+   *Description*
+`mallinfo' returns a structure describing the current state of memory
+allocation.  The structure is defined in malloc.h.  The following
+fields are defined: `arena' is the total amount of space in the heap;
+`ordblks' is the number of chunks which are not in use; `uordblks' is
+the total amount of space allocated by `malloc'; `fordblks' is the
+total amount of space not in use; `keepcost' is the size of the top
+most memory block.
+
+   `malloc_stats' print some statistics about memory allocation on
+standard error.
+
+   `mallopt' takes a parameter and a value.  The parameters are defined
+in malloc.h, and may be one of the following: `M_TRIM_THRESHOLD' sets
+the maximum amount of unused space in the top most block before
+releasing it back to the system in `free' (the space is released by
+calling `_sbrk_r' with a negative argument); `M_TOP_PAD' is the amount
+of padding to allocate whenever `_sbrk_r' is called to allocate more
+space.
+
+   The alternate functions `_mallinfo_r', `_malloc_stats_r', and
+`_mallopt_r' are reentrant versions.  The extra argument REENT is a
+pointer to a reentrancy structure.
+
+*Returns*
+`mallinfo' returns a mallinfo structure.  The structure is defined in
+malloc.h.
+
+   `malloc_stats' does not return a result.
+
+   `mallopt' returns zero if the parameter could not be set, or
+non-zero if it could be set.
+
+*Portability*
+`mallinfo' and `mallopt' are provided by SVR4, but `mallopt' takes
+different parameters on different systems.  `malloc_stats' is not
+portable.
+
+
+File: libc.info,  Node: __malloc_lock,  Next: mbstowcs,  Prev: mallinfo,  Up: Stdlib
+
+`__malloc_lock', `__malloc_unlock'--lock malloc pool
+====================================================
+
+*Synopsis*
+     #include <malloc.h>
+     void __malloc_lock (struct _reent *REENT);
+     void __malloc_unlock (struct _reent *REENT);
+   *Description*
+The `malloc' family of routines call these functions when they need to
+lock the memory pool.  The version of these routines supplied in the
+library use the lock API defined in sys/lock.h.  If multiple threads of
+execution can call `malloc', or if `malloc' can be called reentrantly,
+then you need to define your own versions of these functions in order
+to safely lock the memory pool during a call.  If you do not, the
+memory pool may become corrupted.
+
+   A call to `malloc' may call `__malloc_lock' recursively; that is,
+the sequence of calls may go `__malloc_lock', `__malloc_lock',
+`__malloc_unlock', `__malloc_unlock'.  Any implementation of these
+routines must be careful to avoid causing a thread to wait for a lock
+that it already holds.
+
+
+File: libc.info,  Node: mblen,  Next: mbtowc,  Prev: mbstowcs,  Up: Stdlib
+
+`mblen'--minimal multibyte length function
+==========================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int mblen(const char *S, size_t N);
+   *Description*
+When _MB_CAPABLE is not defined, this is a minimal ANSI-conforming
+implementation of `mblen'.  In this case, the only "multi-byte
+character sequences" recognized are single bytes, and thus `1' is
+returned unless S is the null pointer or has a length of 0 or is the
+empty string.
+
+   When _MB_CAPABLE is defined, this routine calls `_mbtowc_r' to
+perform the conversion, passing a state variable to allow state
+dependent decoding.  The result is based on the locale setting which may
+be restricted to a defined set of locales.
+
+*Returns*
+This implementation of `mblen' returns `0' if S is `NULL' or the empty
+string; it returns `1' if not _MB_CAPABLE or the character is a
+single-byte character; it returns `-1' if the multi-byte character is
+invalid; otherwise it returns the number of bytes in the multibyte
+character.
+
+*Portability*
+`mblen' is required in the ANSI C standard.  However, the precise
+effects vary with the locale.
+
+   `mblen' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: mbstowcs,  Next: mblen,  Prev: __malloc_lock,  Up: Stdlib
+
+`mbstowcs'--minimal multibyte string to wide char converter
+===========================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int mbstowcs(wchar_t *PWC, const char *S, size_t N);
+   *Description*
+When _MB_CAPABLE is not defined, this is a minimal ANSI-conforming
+implementation of `mbstowcs'.  In this case, the only "multi-byte
+character sequences" recognized are single bytes, and they are
+"converted" to wide-char versions simply by byte extension.
+
+   When _MB_CAPABLE is defined, this routine calls `_mbstowcs_r' to
+perform the conversion, passing a state variable to allow state
+dependent decoding.  The result is based on the locale setting which may
+be restricted to a defined set of locales.
+
+*Returns*
+This implementation of `mbstowcs' returns `0' if S is `NULL' or is the
+empty string; it returns `-1' if _MB_CAPABLE and one of the multi-byte
+characters is invalid or incomplete; otherwise it returns the minimum
+of: `n' or the number of multi-byte characters in `s' plus 1 (to
+compensate for the nul character).  If the return value is -1, the
+state of the `pwc' string is indeterminate.  If the input has a length
+of 0, the output string will be modified to contain a wchar_t nul
+terminator.
+
+*Portability*
+`mbstowcs' is required in the ANSI C standard.  However, the precise
+effects vary with the locale.
+
+   `mbstowcs' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: mbtowc,  Next: on_exit,  Prev: mblen,  Up: Stdlib
+
+`mbtowc'--minimal multibyte to wide char converter
+==================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int mbtowc(wchar_t *PWC, const char *S, size_t N);
+   *Description*
+When _MB_CAPABLE is not defined, this is a minimal ANSI-conforming
+implementation of `mbtowc'.  In this case, only "multi-byte character
+sequences" recognized are single bytes, and they are "converted" to
+themselves.  Each call to `mbtowc' copies one character from `*S' to
+`*PWC', unless S is a null pointer.  The argument n is ignored.
+
+   When _MB_CAPABLE is defined, this routine calls `_mbtowc_r' to
+perform the conversion, passing a state variable to allow state
+dependent decoding.  The result is based on the locale setting which may
+be restricted to a defined set of locales.
+
+*Returns*
+This implementation of `mbtowc' returns `0' if S is `NULL' or is the
+empty string; it returns `1' if not _MB_CAPABLE or the character is a
+single-byte character; it returns `-1' if n is `0' or the multi-byte
+character is invalid; otherwise it returns the number of bytes in the
+multibyte character.  If the return value is -1, no changes are made to
+the `pwc' output string.  If the input is the empty string, a wchar_t
+nul is placed in the output string and 0 is returned.  If the input has
+a length of 0, no changes are made to the `pwc' output string.
+
+*Portability*
+`mbtowc' is required in the ANSI C standard.  However, the precise
+effects vary with the locale.
+
+   `mbtowc' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: on_exit,  Next: rand,  Prev: mbtowc,  Up: Stdlib
+
+`on_exit'--request execution of function with argument at program exit
+======================================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int on_exit (void (*FUNCTION)(int, void *), void *ARG);
+   *Description*
+You can use `on_exit' to enroll functions in a list of functions that
+will be called when your program terminates normally.  The argument is
+a pointer to a user-defined function which takes two arguments.  The
+first is the status code passed to exit and the second argument is of
+type pointer to void.  The function must not return a result.  The value
+of ARG is registered and passed as the argument to FUNCTION.
+
+   The functions are kept in a LIFO stack; that is, the last function
+enrolled by `atexit' or `on_exit' will be the first to execute when
+your program exits.  You can intermix functions using `atexit' and
+`on_exit'.
+
+   There is no built-in limit to the number of functions you can enroll
+in this list; however, after every group of 32 functions is enrolled,
+`atexit'/`on_exit' will call `malloc' to get space for the next part of
+the list.   The initial list of 32 functions is statically allocated, so
+you can always count on at least that many slots available.
+
+*Returns*
+`on_exit' returns `0' if it succeeds in enrolling your function, `-1'
+if it fails (possible only if no space was available for `malloc' to
+extend the list of functions).
+
+*Portability*
+`on_exit' is a non-standard glibc extension
+
+   Supporting OS subroutines required: None
+
+
+File: libc.info,  Node: rand,  Next: rand48,  Prev: on_exit,  Up: Stdlib
+
+`rand', `srand'--pseudo-random numbers
+======================================
+
+*Synopsis*
+     #include <stdlib.h>
+     int rand(void);
+     void srand(unsigned int SEED);
+     int rand_r(unsigned int *SEED);
+   *Description*
+`rand' returns a different integer each time it is called; each integer
+is chosen by an algorithm designed to be unpredictable, so that you can
+use `rand' when you require a random number.  The algorithm depends on
+a static variable called the "random seed"; starting with a given value
+of the random seed always produces the same sequence of numbers in
+successive calls to `rand'.
+
+   You can set the random seed using `srand'; it does nothing beyond
+storing its argument in the static variable used by `rand'.  You can
+exploit this to make the pseudo-random sequence less predictable, if
+you wish, by using some other unpredictable value (often the least
+significant parts of a time-varying value) as the random seed before
+beginning a sequence of calls to `rand'; or, if you wish to ensure (for
+example, while debugging) that successive runs of your program use the
+same "random" numbers, you can use `srand' to set the same random seed
+at the outset.
+
+*Returns*
+`rand' returns the next pseudo-random integer in sequence; it is a
+number between `0' and `RAND_MAX' (inclusive).
+
+   `srand' does not return a result.
+
+*Portability*
+`rand' is required by ANSI, but the algorithm for pseudo-random number
+generation is not specified; therefore, even if you use the same random
+seed, you cannot expect the same sequence of results on two different
+systems.
+
+   `rand' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: rand48,  Next: strtod,  Prev: rand,  Up: Stdlib
+
+`rand48', `drand48', `erand48', `lrand48', `nrand48', `mrand48', `jrand48', `srand48', `seed48', `lcong48'--pseudo-random number generators and initialization routines
+=======================================================================================================================================================================
+
+*Synopsis*
+     #include <stdlib.h>
+     double drand48(void);
+     double erand48(unsigned short XSEED[3]);
+     long lrand48(void);
+     long nrand48(unsigned short XSEED[3]);
+     long mrand48(void);
+     long jrand48(unsigned short XSEED[3]);
+     void srand48(long SEED);
+     unsigned short *seed48(unsigned short XSEED[3]);
+     void lcong48(unsigned short P[7]);
+   *Description*
+The `rand48' family of functions generates pseudo-random numbers using
+a linear congruential algorithm working on integers 48 bits in size.
+The particular formula employed is r(n+1) = (a * r(n) + c) mod m where
+the default values are for the multiplicand a = 0xfdeece66d =
+25214903917 and the addend c = 0xb = 11. The modulo is always fixed at
+m = 2 ** 48.  r(n) is called the seed of the random number generator.
+
+   For all the six generator routines described next, the first
+computational step is to perform a single iteration of the algorithm.
+
+   `drand48' and `erand48' return values of type double. The full 48
+bits of r(n+1) are loaded into the mantissa of the returned value, with
+the exponent set such that the values produced lie in the interval
+[0.0, 1.0].
+
+   `lrand48' and `nrand48' return values of type long in the range [0,
+2**31-1]. The high-order (31) bits of r(n+1) are loaded into the lower
+bits of the returned value, with the topmost (sign) bit set to zero.
+
+   `mrand48' and `jrand48' return values of type long in the range
+[-2**31, 2**31-1]. The high-order (32) bits of r(n+1) are loaded into
+the returned value.
+
+   `drand48', `lrand48', and `mrand48' use an internal buffer to store
+r(n). For these functions the initial value of r(0) = 0x1234abcd330e =
+20017429951246.
+
+   On the other hand, `erand48', `nrand48', and `jrand48' use a
+user-supplied buffer to store the seed r(n), which consists of an array
+of 3 shorts, where the zeroth member holds the least significant bits.
+
+   All functions share the same multiplicand and addend.
+
+   `srand48' is used to initialize the internal buffer r(n) of
+`drand48', `lrand48', and `mrand48' such that the 32 bits of the seed
+value are copied into the upper 32 bits of r(n), with the lower 16 bits
+of r(n) arbitrarily being set to 0x330e.  Additionally, the constant
+multiplicand and addend of the algorithm are reset to the default
+values given above.
+
+   `seed48' also initializes the internal buffer r(n) of `drand48',
+`lrand48', and `mrand48', but here all 48 bits of the seed can be
+specified in an array of 3 shorts, where the zeroth member specifies
+the lowest bits. Again, the constant multiplicand and addend of the
+algorithm are reset to the default values given above.  `seed48'
+returns a pointer to an array of 3 shorts which contains the old seed.
+This array is statically allocated, thus its contents are lost after
+each new call to `seed48'.
+
+   Finally, `lcong48' allows full control over the multiplicand and
+addend used in `drand48', `erand48', `lrand48', `nrand48', `mrand48',
+and `jrand48', and the seed used in `drand48', `lrand48', and `mrand48'.
+An array of 7 shorts is passed as parameter; the first three shorts are
+used to initialize the seed; the second three are used to initialize the
+multiplicand; and the last short is used to initialize the addend.  It
+is thus not possible to use values greater than 0xffff as the addend.
+
+   Note that all three methods of seeding the random number generator
+always also set the multiplicand and addend for any of the six
+generator calls.
+
+   For a more powerful random number generator, see `random'.
+
+*Portability*
+SUS requires these functions.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: strtod,  Next: strtol,  Prev: rand48,  Up: Stdlib
+
+`strtod', `strtof'--string to double or float
+=============================================
+
+*Synopsis*
+     #include <stdlib.h>
+     double strtod(const char *STR, char **TAIL);
+     float strtof(const char *STR, char **TAIL);
+     
+     double _strtod_r(void *REENT,
+         const char *STR, char **TAIL);
+   *Description*
+The function `strtod' parses the character string STR, producing a
+substring which can be converted to a double value.  The substring
+converted is the longest initial subsequence of STR, beginning with the
+first non-whitespace character, that has the format:
+     [+|-]DIGITS[.][DIGITS][(e|E)[+|-]DIGITS]
+   The substring contains no characters if STR is empty, consists
+entirely of whitespace, or if the first non-whitespace character is
+something other than `+', `-', `.', or a digit. If the substring is
+empty, no conversion is done, and the value of STR is stored in
+`*TAIL'.  Otherwise, the substring is converted, and a pointer to the
+final string (which will contain at least the terminating null
+character of STR) is stored in `*TAIL'.  If you want no assignment to
+`*TAIL', pass a null pointer as TAIL.  `strtof' is identical to
+`strtod' except for its return type.
+
+   This implementation returns the nearest machine number to the input
+decimal string.  Ties are broken by using the IEEE round-even rule.
+
+   The alternate function `_strtod_r' is a reentrant version.  The
+extra argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+`strtod' returns the converted substring value, if any.  If no
+conversion could be performed, 0 is returned.  If the correct value is
+out of the range of representable values, plus or minus `HUGE_VAL' is
+returned, and `ERANGE' is stored in errno. If the correct value would
+cause underflow, 0 is returned and `ERANGE' is stored in errno.
+
+   Supporting OS subroutines required: `close', `fstat', `isatty',
+`lseek', `read', `sbrk', `write'.
+
+
+File: libc.info,  Node: strtol,  Next: strtoll,  Prev: strtod,  Up: Stdlib
+
+`strtol'--string to long
+========================
+
+*Synopsis*
+     #include <stdlib.h>
+     long strtol(const char *S, char **PTR,int BASE);
+     
+     long _strtol_r(void *REENT,
+         const char *S, char **PTR,int BASE);
+   *Description*
+The function `strtol' converts the string `*S' to a `long'. First, it
+breaks down the string into three parts: leading whitespace, which is
+ignored; a subject string consisting of characters resembling an
+integer in the radix specified by BASE; and a trailing portion
+consisting of zero or more unparseable characters, and always including
+the terminating null character. Then, it attempts to convert the
+subject string into a `long' and returns the result.
+
+   If the value of BASE is 0, the subject string is expected to look
+like a normal C integer constant: an optional sign, a possible ``0x''
+indicating a hexadecimal base, and a number. If BASE is between 2 and
+36, the expected form of the subject is a sequence of letters and
+digits representing an integer in the radix specified by BASE, with an
+optional plus or minus sign. The letters `a'-`z' (or, equivalently,
+`A'-`Z') are used to signify values from 10 to 35; only letters whose
+ascribed values are less than BASE are permitted. If BASE is 16, a
+leading `0x' is permitted.
+
+   The subject sequence is the longest initial sequence of the input
+string that has the expected form, starting with the first
+non-whitespace character.  If the string is empty or consists entirely
+of whitespace, or if the first non-whitespace character is not a
+permissible letter or digit, the subject string is empty.
+
+   If the subject string is acceptable, and the value of BASE is zero,
+`strtol' attempts to determine the radix from the input string. A
+string with a leading `0x' is treated as a hexadecimal value; a string
+with a leading 0 and no `x' is treated as octal; all other strings are
+treated as decimal. If BASE is between 2 and 36, it is used as the
+conversion radix, as described above. If the subject string begins with
+a minus sign, the value is negated. Finally, a pointer to the first
+character past the converted subject string is stored in PTR, if PTR is
+not `NULL'.
+
+   If the subject string is empty (or not in acceptable form), no
+conversion is performed and the value of S is stored in PTR (if PTR is
+not `NULL').
+
+   The alternate function `_strtol_r' is a reentrant version.  The
+extra argument REENT is a pointer to a reentrancy structure.
+
+*Returns*
+`strtol' returns the converted value, if any. If no conversion was
+made, 0 is returned.
+
+   `strtol' returns `LONG_MAX' or `LONG_MIN' if the magnitude of the
+converted value is too large, and sets `errno' to `ERANGE'.
+
+*Portability*
+`strtol' is ANSI.
+
+   No supporting OS subroutines are required.
+

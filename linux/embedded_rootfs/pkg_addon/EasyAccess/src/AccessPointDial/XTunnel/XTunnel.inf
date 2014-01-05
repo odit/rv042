@@ -1,0 +1,35 @@
+; Sample INF file for XTUNNEL.DLL
+;File Version	= 1.0.0.1
+[version] 
+signature="$CHICAGO$"
+AdvancedINF=2.0  
+
+[Add.Code]
+xtunnel.dll=xtunnel.dll
+ssldrv.sys = ssldrv.sys
+ssldrv.txt = ssldrv.txt
+UninstallVTPassage.exe = UninstallVTPassage.exe
+
+[xtunnel.dll]
+file-win32-x86=thiscab
+clsid={19DFFB5D-E30A-4E3B-8524-0AD8F4D88D32} 
+clsid={50580095-16DB-4B28-BCFC-70989E09AA5F} 
+FileVersion=1,6,1,1
+RegisterServer=yes  
+
+[ssldrv.sys]
+file-win32-x86=thiscab
+FileVersion=1,6,1,1
+DestDir=10
+
+[ssldrv.txt]
+file-win32-x86=thiscab
+FileVersion=1,0,0,1
+DestDir=10
+
+[UninstallVTPassage.exe]
+file-win32-x86=thiscab
+FileVersion=1,6,1,1
+DestDir=10
+
+; end of INF file

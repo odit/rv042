@@ -1,0 +1,142 @@
+<script>
+var j8Selected=2;
+var j8Name="apadmin";
+</script>
+<script src="/js/treeControladmin.js" type="text/javascript"></script>
+<SCRIPT LANGUAGE=JAVASCRIPT TYPE="TEXT/JAVASCRIPT">
+<!--
+var heights=400;
+var winders=0;
+var winpops=0;
+function resizeme(heights){document.getElementById("main").style.height=heights;}
+function launchMenu(){
+var framer;
+framer = window.main.location.toString();
+var newvar=framer.lastIndexOf('cgi-bin');
+var startvar=newvar+8;
+var endvar=newvar+12;
+var temps=framer.substring(startvar,endvar);
+var popurl='/ConfigHelp/confighelp.htm#' + temps + '.htm';
+winpops=window.open(popurl,"OnlineHelp","width=700,height=500,resizable");
+winpops.focus(); return false;
+}
+function launchPortal(){
+winders=window.open("/cgi-bin/portal/","SSLVPNPortal","width=790,height=585,resizable,scrollbars=1,scrolling=1,scroll=1,toolbar=yes,location=1");
+winders.focus(); return false;
+}
+function adminlogout(){
+if (winpops!=0){if(!winpops.closed) winpops.close();}
+if (winders!=0){if(!winders.closed) winders.userslogout();}
+window.location.href='/cgi-bin/userLogout/';
+window.main.closechildren();
+}
+//  -->
+</SCRIPT>
+</head>
+<body class="bodyback" onbeforeunload="closeIt();" >
+<script type="text/javascript">
+function no_error(){return true;}
+window.onerror=no_error;
+</script>
+<center>
+<table border=0 cellpadding=0 cellspacing=0 width=743 class=newtable>
+<tr><td class=maintop0	height=33 width=175 valign=bottom>
+<img src="/images/shim.gif" alt="SSL VPN" border=0 width=172 height=33><BR></td>
+<td height=33 class=maintop1 width=568><img src="/images/shim.gif" alt="SSL VPN" border=0 width=560 height=30></td>
+</tr>
+<tr><td class=maintop2 height=44 colspan=2 width=743>
+<img src="/images/shim.gif" alt="SSL VPN" border=0 width=741 height=9></td></tr>
+<tr><td colspan=2>
+<table border=0 cellpadding=0 cellspacing=0 class=mainback valign=top width=743>
+<tr><td width=1 class=darkback height=400><img src="/images/shim.gif" height=400 width=1></td>
+<td width=176 class=mainback valign=top height=400 valign=top ><!--menu-->
+<table height=314 width=176  border=0 cellpadding=0 cellspacing=0 valign=top >
+<TR valign=top >
+<td width=176 class=menubackground valign=top height=6>
+<img src="/images/shim.gif" border=0 height=6 width=175></td>
+</tr>
+<TR valign=top >
+<td width=176 background="/images/shim.gif" valign=top height=190>
+<script type="text/javascript" language="JavaScript">
+k7=new foldoutMenuObj('k7')
+k7.sub1stay=false;
+k7.sub2stay=false;
+k7.doHighlights= 1;
+k7.doMouseOvers= 1;
+var selectedcolor='';
+k7.clCont="position:relative;"
+var logger='Logout<BR><img src=/images/shim.gif width=175 height=5 border=0><BR><span style="background-color:'+unselect1+'"><img src='+q9+' width=175 height=10 border=0></span><BR><img src='+q8+' width=175 height=1 border=0>';
+if (navigator.appName != "Microsoft Internet Explorer"){
+logger='Logout<BR><span style="background-color:'+unselect1+';width:175px;border-right:1px '+navborder+' solid;border-bottom:1px '+navborder+' solid;"><img src=/images/shim.gif width=175 height=7 border=0></span>';
+}
+k7.makeStyle()
+k7.make('top', 'Status and Logs', '/cgi-bin/status', 'main', q6,q5, 'JavaScript:j8Click(2)', '44');
+k7.make('sub1', 'Status ', '/cgi-bin/status', 'main', q4, q4, 'JavaScript:j8Click(2)', '2');
+k7.make('sub1', 'Event Log ', '/cgi-bin/eventlog', 'main', q4, q4, 'JavaScript:j8Click(45)', '45');
+k7.make('sub1', 'Active Users', '/cgi-bin/activeusers', 'main', q4, q4, 'JavaScript:j8Click(47)', '47');
+k7.make('sub1', 'Log Settings', '/cgi-bin/logconfig', 'main', q4, q4, 'JavaScript:j8Click(46)', '46');
+k7.make('top', 'General ', '/cgi-bin/settings', 'main', q6, q5, 'JavaScript:j8Click(4)', '99');
+k7.make('sub1', 'File Settings ', '/cgi-bin/settings', 'main', q4, q4, 'JavaScript:j8Click(4)', '4');
+k7.make('sub1', 'Restart ', '/cgi-bin/restart', 'main', q4, q4, 'JavaScript:j8Click(25)', '25');
+k7.make('sub1', 'Date ', '/cgi-bin/date', 'main', q4, q4, 'JavaScript:j8Click(3)', '3');
+k7.make('sub1', 'SSL Certificate ', '/cgi-bin/sslcert', 'main', q4, q4, 'JavaScript:j8Click(6)', '6');
+//k7.make('sub1', 'Company&nbsp;Logo', '/cgi-bin/layout', 'main', q4, q4, 'JavaScript:j8Click(7)', '7');
+k7.make('top', 'Network ', '/cgi-bin/networkinterface', 'main', q6,q5, 'JavaScript:j8Click(10)', '9');
+k7.make('sub1', 'Interfaces ', '/cgi-bin/networkinterface', 'main', q4, q4, 'JavaScript:j8Click(10)', '10');
+k7.make('sub1', 'DNS Settings ', '/cgi-bin/dnssettings', 'main', q4, q4, 'JavaScript:j8Click(11)', '11');
+k7.make('sub1', 'Routes ', '/cgi-bin/staticroutes', 'main', q4, q4, 'JavaScript:j8Click(12)', '12');
+k7.make('sub1', 'Host Resolution ', '/cgi-bin/etchosts', 'main', q4, q4, 'JavaScript:j8Click(13)', '13');
+k7.make('top', 'Access ', '/cgi-bin/users', 'main', q6,q5, 'JavaScript:j8Click(15)', '14');
+k7.make('sub1', 'Users and Groups ', '/cgi-bin/users', 'main', q4, q4, 'JavaScript:j8Click(15)', '15');
+k7.make('sub1', 'Network Resources', '/cgi-bin/networkresource', 'main', q4, q4, 'JavaScript:j8Click(46)', '46');
+k7.make('sub1', 'Domains ', '/cgi-bin/domains', 'main', q4, q4, 'JavaScript:j8Click(16)', '16');
+k7.make('sub1', 'Portal Layouts ', '/cgi-bin/portallist', 'main', q4, q4, 'JavaScript:j8Click(8)', '8');
+k7.make('top', 'Virtual Passage ', '/cgi-bin/clientaddresses', 'main', q6,q5, 'JavaScript:j8Click(19)', '18');
+k7.make('sub1', 'Client Addresses ', '/cgi-bin/clientaddresses', 'main', q4, q4, 'JavaScript:j8Click(19)', '19');
+k7.make('sub1', 'Client Routes ', '/cgi-bin/clientroutes', 'main', q4, q4, 'JavaScript:j8Click(49)', '49');
+k7.make('top', 'Virtual Transport ', '/cgi-bin/transportapps', 'main', q6,q5, 'JavaScript:j8Click(78)', '77');
+k7.make('sub1', 'Configuration ', '/cgi-bin/transportapps', 'main', q4, q4, 'JavaScript:j8Click(78)', '78');
+k7.make('top', 'SSL VPN Portal', '', '', q6,q5,'JavaScript:launchPortal()', '');
+k7.make('top', 'Online Help', '', '', q6,q5,'JavaScript:launchMenu()', '');
+k7.make('top', logger, '/cgi-bin/userLogout/', 'main', q6,q5,'JavaScript:adminlogout()', '');
+function start()
+{
+k7.construct()
+}
+onload=start;
+</script></td></tr>
+<tr><td class="mainback" height=80><img src="/images/shim.gif" height=80 width=1></td></tr></table>
+</td>
+<td colspan=2 width=546 class=mainback align=left valign=top>
+<IFRAME name="main" id="main" SRC="/cgi-bin/status" WIDTH=547 HEIGHT=390 scrolling=no scroll=no scrollbars=no border=0 FRAMEBORDER=0></IFRAME></td>
+<script>
+if(j8Selected){
+if(j8Selected==4){document.getElementById('main').src='/cgi-bin/settings';}
+if(j8Selected==45){document.getElementById('main').src='/cgi-bin/eventlog';}
+if(j8Selected==46){document.getElementById('main').src='/cgi-bin/logconfig';}
+if(j8Selected==47){document.getElementById('main').src='/cgi-bin/activeusers';}
+if(j8Selected==25){document.getElementById('main').src='/cgi-bin/restart';}
+if(j8Selected==3){document.getElementById('main').src='/cgi-bin/date';}
+if(j8Selected==6){document.getElementById('main').src='/cgi-bin/sslcert';}
+if(j8Selected==7){document.getElementById('main').src='/cgi-bin/layout';}
+if(j8Selected==8){document.getElementById('main').src='/cgi-bin/portallist';}
+if(j8Selected==10){document.getElementById('main').src='/cgi-bin/networkinterface';}
+if(j8Selected==11){document.getElementById('main').src='/cgi-bin/dnssettings';}
+if(j8Selected==12){document.getElementById('main').src='/cgi-bin/staticroutes';}
+if(j8Selected==13){document.getElementById('main').src='/cgi-bin/etchosts';}
+if(j8Selected==15){document.getElementById('main').src='/cgi-bin/users';}
+if(j8Selected==16){document.getElementById('main').src='/cgi-bin/domains';}
+if(j8Selected==46){document.getElementById('main').src='/cgi-bin/networkresource';}
+if(j8Selected==19){document.getElementById('main').src='/cgi-bin/clientaddresses';}
+if(j8Selected==49){document.getElementById('main').src='/cgi-bin/clientroutes';}
+if(j8Selected==78){document.getElementById('main').src='/cgi-bin/transportapps';}
+}
+</script>
+<td width=19 class=mainback valign=top><img src="/images/shim.gif" height=0 width=15 border=0><BR>
+</td>
+<td width=1 class=darkback height=400><img src="/images/shim.gif" height=400 width=1></td>
+</tr>
+</table>
+</td></tr>
+<tr>
+<td class=mainbottom width=743 height=17 colspan=2><img src="/images/shim.gif" border=0 width=741 height=11></td></tr></table>

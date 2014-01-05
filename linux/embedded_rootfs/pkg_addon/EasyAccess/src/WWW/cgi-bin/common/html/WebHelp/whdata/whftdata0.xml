@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ftstdata>
+<topic name="Accessing an Application" url="Accessing_an_Application.htm" />
+<topic name="Logging into the SSL VPN Portal" url="AccessPoint_Overview.htm" />
+<topic name="Application Bookmarks" url="Application_Bookmarks.htm" />
+<topic name="Authenticating" url="Authenticating.htm" />
+<topic name="Change Password" url="Change_Password.htm" />
+<topic name="clie" url="clie.htm" />
+<topic name="Client Configuration" url="Client_Configuration.htm" />
+<topic name="Desktop Overview" url="desk.htm" />
+<topic name="Desktop Bookmarks" url="Desktop_Bookmarks.htm" />
+<topic name="FTP Client" url="FTP_Client.htm" />
+<topic name="home" url="home.htm" />
+<topic name="Home Page Overview" url="Home_Page_Overview.htm" />
+<topic name="HTTPS Proxy" url="HTTPS_Proxy.htm" />
+<topic name="Java Requirements" url="Java_Requirements.htm" />
+<topic name="AccessPoint SSL VPN Overview" url="Logging_into_the_SSL_VPN_Portal.htm" />
+<topic name="MacOS X Installation" url="MacOS_X_Installation.htm" />
+<topic name="Making the SSL VPN Portal a Trusted Site" url="Making_the_SSL_VPN_Portal_a_Trusted_Site.htm" />
+<topic name="Network Places Overview" url="netw.htm" />
+<topic name="Requirements for MacOS X" url="Requirements_for_MacOS_X.htm" />
+<topic name="Security" url="Security.htm" />
+<topic name="Applications Overview" url="serv.htm" />
+<topic name="SSH Client" url="SSH_Client.htm" />
+<topic name="SSL Handshake" url="SSL_Handshake.htm" />
+<topic name="Virtual Passage Overview" url="sslv.htm" />
+<topic name="Telnet Client" url="Telnet_Client.htm" />
+<topic name="Configure Portal Theme" url="them.htm" />
+<topic name="Applications Overview" url="tsca.htm" />
+<topic name="Using Desktop Remote Access" url="Using_Desktop_Remote_Access.htm" />
+<topic name="Using My Network Places" url="Using_My_Network_Places.htm" />
+<topic name="Virtual Transport" url="virt.htm" />
+<topic name="Virtual Passage Installation" url="Virtual_Passage_Installation.htm" />
+<topic name="VNC Desktop Access" url="VNC_Desktop_Access.htm" />
+<topic name="Installation" url="vtransportinstallation.htm" />
+<topic name="Web Browser" url="Web_Browser.htm" />
+<topic name="Web Proxy" url="web_proxy.html" />
+
+</ftstdata>  

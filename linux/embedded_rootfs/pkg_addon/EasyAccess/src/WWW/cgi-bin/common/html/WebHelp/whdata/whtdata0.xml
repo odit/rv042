@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<tocdata>
+<book name="Overview" >
+  <item name="SSL VPN Overview" url="Logging_into_the_SSL_VPN_Portal.htm" />
+</book>
+<book name="Browser Requirements" >
+  <item name="Web Browser" url="Web_Browser.htm" />
+  <item name="Java Requirements" url="Java_Requirements.htm" />
+  <item name="Making the SSL VPN Portal a Trusted Site" url="Making_the_SSL_VPN_Portal_a_Trusted_Site.htm" />
+</book>
+<book name="Authentication" >
+  <item name="The SSL VPN Portal" url="EasyAccess_Overview.htm" />
+  <item name="Logging into the Portal" url="Authenticating.htm" />
+</book>
+<book name="Home Page" >
+  <item name="Home Page Overview" url="home.htm" />
+</book>
+<book name="Services" >
+  <item name="Services Overview" url="serv.htm" />
+  <item name="Web Proxy" url="web_proxy.html" />
+  <item name="HTTPS Proxy" url="HTTPS_Proxy.htm" />
+  <item name="Telnet Client" url="Telnet_Client.htm" />
+  <item name="SSH Client" url="SSH_Client.htm" />
+  <item name="FTP Client" url="FTP_Client.htm" />
+  <item name="Service Bookmarks" url="Application_Bookmarks.htm" />
+</book>
+<book name="Applications" >
+  <item name="Terminal Services Applications " url="tsca.htm" />
+  <item name="Accessing an Application" url="Accessing_an_Application.htm" />
+</book>
+<book name="My Desktop " >
+  <item name="Desktop Overview" url="desk.htm" />
+  <item name="Terminal Services Desktop Access" url="Using_Desktop_Remote_Access.htm" />
+  <item name="VNC Access" url="VNC_Desktop_Access.htm" />
+  <item name="Desktop Bookmarks" url="Desktop_Bookmarks.htm" />
+</book>
+<book name="My Network Places" >
+  <item name="Overview" url="netw.htm" />
+  <item name="Using My Network Places" url="Using_My_Network_Places.htm" />
+</book>
+<book name="Virtual Passage" >
+  <item name="Requirements for Windows" url="sslv.htm" />
+  <item name="Installation for Windows" url="Virtual_Passage_Installation.htm" />
+  <item name="Requirements for MacOS X" url="clie.htm" />
+  <item name="MacOS X Installation" url="MacOS_X_Installation.htm" />
+</book>
+<book name="Virtual Transport" >
+  <item name="Overview" url="virt.htm" />
+  <item name="Installation" url="vtransportinstallation.htm" />
+</book>
+<book name="Theme Settings" >
+  <item name="Configure Portal Theme" url="them.htm" />
+</book>
+<book name="Change Password" url="Change_Password.htm" >
+  <item name="Change Password" url="Change_Password.htm" />
+</book>
+<book name="Security" >
+  <item name="Security" url="Security.htm" />
+  <item name="SSL Handshake Process" url="SSL_Handshake.htm" />
+</book>
+
+</tocdata>

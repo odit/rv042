@@ -1,0 +1,117 @@
+BODY { 
+      font-family:Arial; 
+      background-color:#ffffff;  }
+H1 { 
+    font-weight:bold; 
+    font-size:17pt; 
+    font-family:Verdana, sans-serif;  }
+LI.kadov-H1 { 
+             font-weight:bold; 
+             font-size:17pt; 
+             font-family:Verdana, sans-serif;  }
+H2 { 
+    font-weight:bold; 
+    font-size:18.0pt; 
+    font-family:Arial;  }
+LI.kadov-H2 { 
+             font-weight:bold; 
+             font-size:18.0pt;  }
+H3 { 
+    font-weight:bold; 
+    font-size:14.0pt; 
+    font-family:Arial;  }
+LI.kadov-H3 { 
+             font-weight:bold; 
+             font-size:14.0pt;  }
+H4 { 
+    font-weight:bold; 
+    color:#ffffff; 
+    font-family:Verdana, sans-serif; 
+    background-color:#001678; 
+    font-size:14pt; 
+    line-height:160%;  }
+LI.kadov-H4 { 
+             font-weight:bold; 
+             color:#ffffff; 
+             font-family:Verdana, sans-serif; 
+             font-size:14pt; 
+             line-height:160%;  }
+H5 { 
+    font-weight:bold; 
+    font-size:16pt; 
+    font-family:Verdana, sans-serif; 
+    color:#001168;  }
+LI.kadov-H5 { 
+             font-weight:bold; 
+             font-size:16pt; 
+             font-family:Verdana, sans-serif; 
+             color:#001168;  }
+H6 { 
+    font-weight:bold; 
+    font-size:8.0pt; 
+    font-family:Arial;  }
+LI.kadov-H6 { 
+             font-weight:bold; 
+             font-size:8.0pt;  }
+P { 
+   margin-top:1; 
+   margin-bottom:1; 
+   font-family:Verdana, sans-serif; 
+   font-size:8pt; 
+   line-height:130%;  }
+LI.kadov-P { 
+            font-family:Verdana, sans-serif; 
+            font-size:8pt; 
+            line-height:130%;  }
+A.expandspot { 
+              color:#008000; 
+              cursor:hand; 
+              font-style:italic; 
+              x-text-underline:off; 
+              x-text-overline:off; 
+              x-text-line-through:off; 
+              text-decoration:none none none;  }
+SPAN.expandtext { 
+                 font-style:italic; 
+                 font-weight:normal; 
+                 color:#ff0000;  }
+A.dropspot { 
+            cursor:hand; 
+            color:#008000; 
+            font-style:italic; 
+            x-text-underline:off; 
+            x-text-overline:off; 
+            x-text-line-through:off; 
+            text-decoration:none none none;  }
+A.glossterm { 
+             color:#800000; 
+             cursor:hand; 
+             font-style:italic; 
+             x-text-underline:off; 
+             x-text-overline:off; 
+             x-text-line-through:off; 
+             text-decoration:none none none;  }
+SPAN.glosstext { 
+                font-style:italic; 
+                font-weight:normal; 
+                color:#0000ff;  }
+OL { 
+    margin-top:0px; 
+    margin-bottom:0px; 
+    font-family:Arial;  }
+UL { 
+    margin-top:0px; 
+    margin-bottom:0px; 
+    font-family:Arial;  }
+ol ol { 
+       maring-top:1; 
+       maring-bottom:1;  }
+ol ul { 
+       maring-top:1; 
+       maring-bottom:1;  }
+ul ul { 
+       maring-top:1; 
+       maring-bottom:1;  }
+ul ol { 
+       maring-top:1; 
+       maring-bottom:1;  }

@@ -1,0 +1,6 @@
+config CONFIG_smtpclient
+	bool "smtpclient"
+	default n
+	help
+		Include smtpclient
+

@@ -1,0 +1,14 @@
+--- Makefile.orig	2006-12-21 11:20:26.000000000 +0530
++++ Makefile	2006-12-21 11:22:19.000000000 +0530
+@@ -1390,8 +1390,9 @@
+ 
+ bin/t_snprintf: lib/snprintf.c
+ 	$(CC) $(FLAGS)  -o $@ $(DYNEXP) -DTEST_SNPRINTF lib/snprintf.c -lm
+-install: installbin installman installscripts installdat installswat installmodules installclientlib installlibmsrpc
+-
++#install: installbin installman installscripts installdat installswat installmodules installclientlib installlibmsrpc
++install: installbin installmodules installclientlib
++        
+ install-everything: install installmodules
+ 
+ # DESTDIR is used here to prevent packagers wasting their time

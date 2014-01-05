@@ -1,0 +1,19 @@
+<html>
+<!-- Sitemap 1.0 -->
+<object type="text/site properties">
+  <param name="FrameName" value="bsscright">
+  <param name="SiteType" value="toc">
+  <param name="Font" value="Verdana,8,0">
+  <param name="Image Width" value="16">
+</object>
+<ul>
+  <li><object type="text/sitemap">
+    <param name="Name" value="Logging into the SSL VPN Portal">
+    <param name="Local" value="EasyAccess_Overview.htm">
+  </object>
+  <li><object type="text/sitemap">
+    <param name="Name" value="EasyAccess SSL VPN Overview">
+    <param name="Local" value="Logging_into_the_SSL_VPN_Portal.htm">
+  </object>
+</ul>
+</html>

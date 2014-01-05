@@ -1,0 +1,50 @@
+#!/bin/sh
+set -x
+
+IMAGE_PATH=/var/images
+IMAGE_NAME=$IMAGE_PATH/EasyAccess.tgz
+POST_INSTALL=/usr/sbin/postinstall
+PRE_INSTALL=/tmp/preinstall
+
+function clean_exit()
+{
+   rm -rf $IMAGE_NAME
+   rm -rf /tmp/sig.chk
+   rm -rf /tmp/build.chk
+   rm -rf /var/images/firmware.err
+   exit 
+}
+
+if [ -e $IMAGE_NAME ]
+then
+	echo "starting installation.."
+
+	tar -tzf $IMAGE_NAME | grep build.chk  > /tmp/sig.chk
+	if [ "$?" -ne "0" ]
+	then
+	   echo "Improper image"
+           clean_exit
+	fi
+
+        cd /tmp; tar -xvz build.chk -f $IMAGE_NAME
+
+        diff = diff build.chk  /tmp/sig.chk
+        if [ ! -z "$diff" ]
+        then
+              echo "Uploaded Image is corrupt"
+              echo $diff
+              clean_exit
+        fi
+
+        cd /
+
+        tar -xvzf $IMAGE_NAME
+
+        $POST_INSTALL
+
+	echo "Installation finished.."
+else
+        echo "No Image to install"
+fi
+
+clean_exit

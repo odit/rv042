@@ -1,0 +1,1281 @@
+This is libc.info, produced by makeinfo version 4.3 from
+/usr/local/Cavium_Networks/toolchain/src/newlib/libc/libc.texinfo.
+
+START-INFO-DIR-ENTRY
+* libc::                        The ANSI C library.
+END-INFO-DIR-ENTRY
+
+   This file documents the ANSI C library.
+
+   Copyright (C) 1992, 1993, 1994-2004 Red Hat, Inc.
+
+   `libc' includes software developed by the University of California,
+Berkeley and its contributors.
+
+   libc includes software developed by Martin Jackson, Graham Haley and
+Steve Chamberlain of Tadpole Technology and released to Cygnus.
+
+   libc uses floating-point conversion software developed at AT&T, which
+includes this copyright information:
+
+   The author of this software is David M. Gay.
+
+   Copyright (c) 1991 by AT&T.
+
+   Permission to use, copy, modify, and distribute this software for any
+purpose without fee is hereby granted, provided that this entire notice
+is included in all copies of any software which is or includes a copy
+or modification of this software and in all copies of the supporting
+documentation for such software.
+
+   THIS SOFTWARE IS BEING PROVIDED "AS IS", WITHOUT ANY EXPRESS OR
+IMPLIED  WARRANTY.  IN PARTICULAR, NEITHER THE AUTHOR NOR AT&T MAKES ANY
+REPRESENTATION OR WARRANTY OF ANY KIND CONCERNING THE MERCHANTABILITY
+OF THIS SOFTWARE OR ITS FITNESS FOR ANY PARTICULAR PURPOSE.
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, subject to the
+terms of the GNU General Public License, which includes the provision
+that the entire resulting derived work is distributed under the terms
+of a permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions.
+
+
+File: libc.info,  Node: strftime,  Next: time,  Prev: mktime,  Up: Timefns
+
+`strftime'--flexible calendar time formatter
+============================================
+
+*Synopsis*
+     #include <time.h>
+     size_t strftime(char *S, size_t MAXSIZE,
+         const char *FORMAT, const struct tm *TIMP);
+   *Description*
+`strftime' converts a `struct tm' representation of the time (at TIMP)
+into a null-terminated string, starting at S and occupying no more than
+MAXSIZE characters.
+
+   You control the format of the output using the string at FORMAT.
+`*FORMAT' can contain two kinds of specifications: text to be copied
+literally into the formatted string, and time conversion
+specifications.  Time conversion specifications are two- and
+three-character sequences beginning with ``%'' (use ``%%'' to include a
+percent sign in the output).  Each defined conversion specification
+selects only the specified field(s) of calendar time data from `*TIMP',
+and converts it to a string in one of the following ways:
+
+`%a'
+     A three-letter abbreviation for the day of the week. [tm_wday]
+
+`%A'
+     The full name for the day of the week, one of ``Sunday'',
+     ``Monday'', ``Tuesday'', ``Wednesday'', ``Thursday'', ``Friday'',
+     or ``Saturday''. [tm_wday]
+
+`%b'
+     A three-letter abbreviation for the month name. [tm_mon]
+
+`%B'
+     The full name of the month, one of ``January'', ``February'',
+     ``March'', ``April'', ``May'', ``June'', ``July'', ``August'',
+     ``September'', ``October'', ``November'', ``December''. [tm_mon]
+
+`%c'
+     A string representing the complete date and time, in the form
+     ``"%a %b %e %H:%M:%S %Y"'' (example "Mon Apr 01 13:13:13 1992").
+     [tm_sec, tm_min, tm_hour, tm_mday, tm_mon, tm_year, tm_wday]
+
+`%C'
+     The century, that is, the year divided by 100 then truncated.  For
+     4-digit years, the result is zero-padded and exactly two
+     characters; but for other years, there may a negative sign or more
+     digits.  In this way, ``%C%y'' is equivalent to ``%Y''. [tm_year]
+
+`%d'
+     The day of the month, formatted with two digits (from ``01'' to
+     ``31''). [tm_mday]
+
+`%D'
+     A string representing the date, in the form ``"%m/%d/%y"''.
+     [tm_mday, tm_mon, tm_year]
+
+`%e'
+     The day of the month, formatted with leading space if single digit
+     (from ``1'' to ``31''). [tm_mday]
+
+`%E`x''
+     In some locales, the E modifier selects alternative
+     representations of certain modifiers `x'.  But in the "C" locale
+     supported by newlib, it is ignored, and treated as %`x'.
+
+`%F'
+     A string representing the ISO 8601:2000 date format, in the form
+     ``"%Y-%m-%d"''. [tm_mday, tm_mon, tm_year]
+
+`%g'
+     The last two digits of the week-based year, see specifier %G (from
+     ``00'' to ``99''). [tm_year, tm_wday, tm_yday]
+
+`%G'
+     The week-based year. In the ISO 8601:2000 calendar, week 1 of the
+     year includes January 4th, and begin on Mondays. Therefore, if
+     January 1st, 2nd, or 3rd falls on a Sunday, that day and earlier
+     belong to the last week of the previous year; and if December
+     29th, 30th, or 31st falls on Monday, that day and later belong to
+     week 1 of the next year.  For consistency with %Y, it always has
+     at least four characters.  Example: "%G" for Saturday 2nd January
+     1999 gives "1998", and for Tuesday 30th December 1997 gives
+     "1998". [tm_year, tm_wday, tm_yday]
+
+`%h'
+     A three-letter abbreviation for the month name (synonym for "%b").
+     [tm_mon]
+
+`%H'
+     The hour (on a 24-hour clock), formatted with two digits (from
+     ``00'' to ``23''). [tm_hour]
+
+`%I'
+     The hour (on a 12-hour clock), formatted with two digits (from
+     ``01'' to ``12''). [tm_hour]
+
+`%j'
+     The count of days in the year, formatted with three digits (from
+     ``001'' to ``366''). [tm_yday]
+
+`%k'
+     The hour (on a 24-hour clock), formatted with leading space if
+     single digit (from ``0'' to ``23''). Non-POSIX extension. [tm_hour]
+
+`%l'
+     The hour (on a 12-hour clock), formatted with leading space if
+     single digit (from ``1'' to ``12''). Non-POSIX extension. [tm_hour]
+
+`%m'
+     The month number, formatted with two digits (from ``01'' to
+     ``12'').  [tm_mon]
+
+`%M'
+     The minute, formatted with two digits (from ``00'' to ``59'').
+     [tm_min]
+
+`%n'
+     A newline character (``\n'').
+
+`%O`x''
+     In some locales, the O modifier selects alternative digit
+     characters for certain modifiers `x'.  But in the "C" locale
+     supported by newlib, it is ignored, and treated as %`x'.
+
+`%p'
+     Either ``AM'' or ``PM'' as appropriate. [tm_hour]
+
+`%r'
+     The 12-hour time, to the second.  Equivalent to "%I:%M:%S %p".
+     [tm_sec, tm_min, tm_hour]
+
+`%R'
+     The 24-hour time, to the minute.  Equivalent to "%H:%M". [tm_min,
+     tm_hour]
+
+`%S'
+     The second, formatted with two digits (from ``00'' to ``60'').  The
+     value 60 accounts for the occasional leap second. [tm_sec]
+
+`%t'
+     A tab character (``\t'').
+
+`%T'
+     The 24-hour time, to the second.  Equivalent to "%H:%M:%S".
+     [tm_sec, tm_min, tm_hour]
+
+`%u'
+     The weekday as a number, 1-based from Monday (from ``1'' to
+     ``7''). [tm_wday]
+
+`%U'
+     The week number, where weeks start on Sunday, week 1 contains the
+     first Sunday in a year, and earlier days are in week 0.  Formatted
+     with two digits (from ``00'' to ``53'').  See also `%W'. [tm_wday,
+     tm_yday]
+
+`%V'
+     The week number, where weeks start on Monday, week 1 contains
+     January 4th, and earlier days are in the previous year.  Formatted
+     with two digits (from ``01'' to ``53'').  See also `%G'. [tm_year,
+     tm_wday, tm_yday]
+
+`%w'
+     The weekday as a number, 0-based from Sunday (from ``0'' to ``6'').
+     [tm_wday]
+
+`%W'
+     The week number, where weeks start on Monday, week 1 contains the
+     first Monday in a year, and earlier days are in week 0.  Formatted
+     with two digits (from ``00'' to ``53''). [tm_wday, tm_yday]
+
+`%x'
+     A string representing the complete date, equivalent to "%m/%d/%y".
+     [tm_mon, tm_mday, tm_year]
+
+`%X'
+     A string representing the full time of day (hours, minutes, and
+     seconds), equivalent to "%H:%M:%S". [tm_sec, tm_min, tm_hour]
+
+`%y'
+     The last two digits of the year (from ``00'' to ``99''). [tm_year]
+
+`%Y'
+     The full year, equivalent to `%C%y'.  It will always have at least
+     four characters, but may have more.  The year is accurate even
+     when tm_year added to the offset of 1900 overflows an int.
+     [tm_year]
+
+`%z'
+     The offset from UTC.  The format consists of a sign (negative is
+     west of Greewich), two characters for hour, then two characters
+     for minutes (-hhmm or +hhmm).  If tm_isdst is negative, the offset
+     is unknown and no output is generated; if it is zero, the offset
+     is the standard offset for the current time zone; and if it is
+     positive, the offset is the daylight savings offset for the
+     current timezone. The offset is determined from the TZ environment
+     variable, as if by calling tzset(). [tm_isdst]
+
+`%Z'
+     The time zone name.  If tm_isdst is negative, no output is
+     generated.  Otherwise, the time zone name is based on the TZ
+     environment variable, as if by calling tzset(). [tm_isdst]
+
+`%%'
+     A single character, ``%''.
+
+*Returns*
+When the formatted time takes up no more than MAXSIZE characters, the
+result is the length of the formatted string.  Otherwise, if the
+formatting operation was abandoned due to lack of room, the result is
+`0', and the string starting at S corresponds to just those parts of
+`*FORMAT' that could be completely filled in within the MAXSIZE limit.
+
+*Portability*
+ANSI C requires `strftime', but does not specify the contents of `*S'
+when the formatted string would require more than MAXSIZE characters.
+Unrecognized specifiers and fields of `timp' that are out of range
+cause undefined results.  Since some formats expand to 0 bytes, it is
+wise to set `*S' to a nonzero value beforehand to distinguish between
+failure and an empty string.  This implementation does not support `s'
+being NULL, nor overlapping `s' and `format'.
+
+   `strftime' requires no supporting OS subroutines.
+
+
+File: libc.info,  Node: time,  Next: __tz_lock,  Prev: strftime,  Up: Timefns
+
+`time'--get current calendar time (as single number)
+====================================================
+
+*Synopsis*
+     #include <time.h>
+     time_t time(time_t *T);
+   *Description*
+`time' looks up the best available representation of the current time
+and returns it, encoded as a `time_t'.  It stores the same value at T
+unless the argument is `NULL'.
+
+*Returns*
+A `-1' result means the current time is not available; otherwise the
+result represents the current time.
+
+*Portability*
+ANSI C requires `time'.
+
+   Supporting OS subroutine required: Some implementations require
+`gettimeofday'.
+
+
+File: libc.info,  Node: __tz_lock,  Next: tzset,  Prev: time,  Up: Timefns
+
+`__tz_lock', `__tz_unlock'--lock time zone global variables
+===========================================================
+
+*Synopsis*
+     #include "local.h"
+     void __tz_lock (void);
+     void __tz_unlock (void);
+   *Description*
+The `tzset' facility functions call these functions when they need to
+ensure the values of global variables.  The version of these routines
+supplied in the library use the lock API defined in sys/lock.h.  If
+multiple threads of execution can call the time functions and give up
+scheduling in the middle, then you you need to define your own versions
+of these functions in order to safely lock the time zone variables
+during a call.  If you do not, the results of `localtime', `mktime',
+`ctime', and `strftime' are undefined.
+
+   The lock `__tz_lock' may not be called recursively; that is, a call
+`__tz_lock' will always lock all subsequent `__tz_lock' calls until the
+corresponding `__tz_unlock' call on the same thread is made.
+
+
+File: libc.info,  Node: tzset,  Prev: __tz_lock,  Up: Timefns
+
+`tzset'--set timezone characteristics from TZ environment variable
+==================================================================
+
+*Synopsis*
+     #include <time.h>
+     void tzset(void);
+     void _tzset_r (struct _reent *);
+   *Description*
+`tzset' examines the TZ environment variable and sets up the three
+external variables: `_timezone', `_daylight', and `tzname'.  The value
+of `_timezone' shall be the offset from the current time zone to GMT.
+The value of `_daylight' shall be 0 if there is no daylight savings
+time for the current time zone, otherwise it will be non-zero.  The
+`tzname' array has two entries: the first is the name of the standard
+time zone, the second is the name of the daylight-savings time zone.
+
+   The TZ environment variable is expected to be in the following POSIX
+format:
+
+   stdoffset1[dst[offset2][,start[/time1],end[/time2]]]
+
+   where: std is the name of the standard time-zone (minimum 3 chars)
+offset1 is the value to add to local time to arrive at Universal time
+it has the form:  hh[:mm[:ss]] dst is the name of the alternate
+(daylight-savings) time-zone (min 3 chars) offset2 is the value to add
+to local time to arrive at Universal time it has the same format as the
+std offset start is the day that the alternate time-zone starts time1
+is the optional time that the alternate time-zone starts (this is in
+local time and defaults to 02:00:00 if not specified) end is the day
+that the alternate time-zone ends time2 is the time that the alternate
+time-zone ends (it is in local time and defaults to 02:00:00 if not
+specified)
+
+   Note that there is no white-space padding between fields.  Also note
+that if TZ is null, the default is Universal GMT which has no
+daylight-savings time.  If TZ is empty, the default EST5EDT is used.
+
+   The function `_tzset_r' is identical to `tzset' only it is reentrant
+and is used for applications that use multiple threads.
+
+*Returns*
+There is no return value.
+
+*Portability*
+`tzset' is part of the POSIX standard.
+
+   Supporting OS subroutine required: None
+
+
+File: libc.info,  Node: Locale,  Next: Reentrancy,  Prev: Timefns,  Up: Top
+
+Locale (`locale.h')
+*******************
+
+A "locale" is the name for a collection of parameters (affecting
+collating sequences and formatting conventions) that may be different
+depending on location or culture.  The `"C"' locale is the only one
+defined in the ANSI C standard.
+
+   This is a minimal implementation, supporting only the required `"C"'
+value for locale; strings representing other locales are not honored.
+(`""' is also accepted; it represents the default locale for an
+implementation, here equivalent to `"C"'.
+
+   `locale.h' defines the structure `lconv' to collect the information
+on a locale, with the following fields:
+
+`char *decimal_point'
+     The decimal point character used to format "ordinary" numbers (all
+     numbers except those referring to amounts of money).  `"."' in the
+     C locale.
+
+`char *thousands_sep'
+     The character (if any) used to separate groups of digits, when
+     formatting ordinary numbers.  `""' in the C locale.
+
+`char *grouping'
+     Specifications for how many digits to group (if any grouping is
+     done at all) when formatting ordinary numbers.  The _numeric
+     value_ of each character in the string represents the number of
+     digits for the next group, and a value of `0' (that is, the
+     string's trailing `NULL') means to continue grouping digits using
+     the last value specified.  Use `CHAR_MAX' to indicate that no
+     further grouping is desired.  `""' in the C locale.
+
+`char *int_curr_symbol'
+     The international currency symbol (first three characters), if
+     any, and the character used to separate it from numbers.  `""' in
+     the C locale.
+
+`char *currency_symbol'
+     The local currency symbol, if any.  `""' in the C locale.
+
+`char *mon_decimal_point'
+     The symbol used to delimit fractions in amounts of money.  `""' in
+     the C locale.
+
+`char *mon_thousands_sep'
+     Similar to `thousands_sep', but used for amounts of money.  `""'
+     in the C locale.
+
+`char *mon_grouping'
+     Similar to `grouping', but used for amounts of money.  `""' in the
+     C locale.
+
+`char *positive_sign'
+     A string to flag positive amounts of money when formatting.  `""'
+     in the C locale.
+
+`char *negative_sign'
+     A string to flag negative amounts of money when formatting.  `""'
+     in the C locale.
+
+`char int_frac_digits'
+     The number of digits to display when formatting amounts of money to
+     international conventions.  `CHAR_MAX' (the largest number
+     representable as a `char') in the C locale.
+
+`char frac_digits'
+     The number of digits to display when formatting amounts of money to
+     local conventions.  `CHAR_MAX' in the C locale.
+
+`char p_cs_precedes'
+     `1' indicates the local currency symbol is used before a _positive
+     or zero_ formatted amount of money; `0' indicates the currency
+     symbol is placed after the formatted number.  `CHAR_MAX' in the C
+     locale.
+
+`char p_sep_by_space'
+     `1' indicates the local currency symbol must be separated from
+     _positive or zero_ numbers by a space; `0' indicates that it is
+     immediately adjacent to numbers.  `CHAR_MAX' in the C locale.
+
+`char n_cs_precedes'
+     `1' indicates the local currency symbol is used before a
+     _negative_ formatted amount of money; `0' indicates the currency
+     symbol is placed after the formatted number.  `CHAR_MAX' in the C
+     locale.
+
+`char n_sep_by_space'
+     `1' indicates the local currency symbol must be separated from
+     _negative_ numbers by a space; `0' indicates that it is
+     immediately adjacent to numbers.  `CHAR_MAX' in the C locale.
+
+`char p_sign_posn'
+     Controls the position of the _positive_ sign for numbers
+     representing money.  `0' means parentheses surround the number;
+     `1' means the sign is placed before both the number and the
+     currency symbol; `2' means the sign is placed after both the number
+     and the currency symbol; `3' means the sign is placed just before
+     the currency symbol; and `4' means the sign is placed just after
+     the currency symbol.  `CHAR_MAX' in the C locale.
+
+`char n_sign_posn'
+     Controls the position of the _negative_ sign for numbers
+     representing money, using the same rules as `p_sign_posn'.
+     `CHAR_MAX' in the C locale.
+
+* Menu:
+
+* setlocale::  Select or query locale
+
+
+File: libc.info,  Node: setlocale,  Up: Locale
+
+`setlocale', `localeconv'--select or query locale
+=================================================
+
+   *Synopsis*
+     #include <locale.h>
+     char *setlocale(int CATEGORY, const char *LOCALE);
+     lconv *localeconv(void);
+     
+     char *_setlocale_r(void *REENT,
+         int CATEGORY, const char *LOCALE);
+     lconv *_localeconv_r(void *REENT);
+   *Description*
+`setlocale' is the facility defined by ANSI C to condition the
+execution environment for international collating and formatting
+information; `localeconv' reports on the settings of the current locale.
+
+   This is a minimal implementation, supporting only the required `"C"'
+value for LOCALE; strings representing other locales are not honored
+unless _MB_CAPABLE is defined in which case three new extensions are
+allowed for LC_CTYPE or LC_MESSAGES only: `"C-JIS"', `"C-EUCJP"',
+`"C-SJIS"', or `"C-ISO-8859-1"'.  (`""' is also accepted; it represents
+the default locale for an implementation, here equivalent to `"C"'.)
+
+   If you use `NULL' as the LOCALE argument, `setlocale' returns a
+pointer to the string representing the current locale (always `"C"' in
+this implementation).  The acceptable values for CATEGORY are defined
+in ``locale.h'' as macros beginning with `"LC_"', but this
+implementation does not check the values you pass in the CATEGORY
+argument.
+
+   `localeconv' returns a pointer to a structure (also defined in
+``locale.h'') describing the locale-specific conventions currently in
+effect.
+
+   `_localeconv_r' and `_setlocale_r' are reentrant versions of
+`localeconv' and `setlocale' respectively.  The extra argument REENT is
+a pointer to a reentrancy structure.
+
+*Returns*
+`setlocale' returns either a pointer to a string naming the locale
+currently in effect (always `"C"' for this implementation, or, if the
+locale request cannot be honored, `NULL'.
+
+   `localeconv' returns a pointer to a structure of type `lconv', which
+describes the formatting and collating conventions in effect (in this
+implementation, always those of the C locale).
+
+*Portability*
+ANSI C requires `setlocale', but the only locale required across all
+implementations is the C locale.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: Reentrancy,  Next: Misc,  Prev: Locale,  Up: Top
+
+Reentrancy
+**********
+
+Reentrancy is a characteristic of library functions which allows
+multiple processes to use the same address space with assurance that
+the values stored in those spaces will remain constant between calls.
+The Red Hat newlib implementation of the library functions ensures that
+whenever possible, these library functions are reentrant.  However,
+there are some functions that can not be trivially made reentrant.
+Hooks have been provided to allow you to use these functions in a fully
+reentrant fashion.
+
+   These hooks use the structure `_reent' defined in `reent.h'.  A
+variable defined as `struct _reent' is called a "reentrancy structure".
+All functions which must manipulate global information are available
+in two versions.  The first version has the usual name, and uses a
+single global instance of the reentrancy structure.  The second has a
+different name, normally formed by prepending `_' and appending `_r',
+and takes a pointer to the particular reentrancy structure to use.
+
+   For example, the function `fopen' takes two arguments, FILE and
+MODE, and uses the global reentrancy structure.  The function
+`_fopen_r' takes the arguments, STRUCT_REENT, which is a pointer to an
+instance of the reentrancy structure, FILE and MODE.
+
+   There are two versions of `struct _reent', a normal one and one for
+small memory systems, controlled by the `_REENT_SMALL' definition from
+the (automatically included) `<sys/config.h>'.
+
+   Each function which uses the global reentrancy structure uses the
+global variable `_impure_ptr', which points to a reentrancy structure.
+
+   This means that you have two ways to achieve reentrancy.  Both
+require that each thread of execution control initialize a unique global
+variable of type `struct _reent':
+
+  1. Use the reentrant versions of the library functions, after
+     initializing a global reentrancy structure for each process.  Use
+     the pointer to this structure as the extra argument for all
+     library functions.
+
+  2. Ensure that each thread of execution control has a pointer to its
+     own unique reentrancy structure in the global variable
+     `_impure_ptr', and call the standard library subroutines.
+
+   The following functions are provided in both reentrant and
+non-reentrant versions.
+
+_Equivalent for errno variable:_
+     _errno_r
+     
+_Locale functions:_
+     _localeconv_r  _setlocale_r
+     
+_Equivalents for stdio variables:_
+     _stdin_r        _stdout_r       _stderr_r
+     
+     
+_Stdio functions:_
+     _fdopen_r       _perror_r       _tempnam_r
+     _fopen_r        _putchar_r      _tmpnam_r
+     _getchar_r      _puts_r         _tmpfile_r
+     _gets_r         _remove_r       _vfprintf_r
+     _iprintf_r      _rename_r       _vsnprintf_r
+     _mkstemp_r      _snprintf_r     _vsprintf_r
+     _mktemp_t       _sprintf_r
+     
+_Signal functions:_
+     _init_signal_r  _signal_r
+     _kill_r         __sigtramp_r
+     _raise_r
+     
+_Stdlib functions:_
+     _calloc_r       _mblen_r        _setenv_r
+     _dtoa_r         _mbstowcs_r     _srand_r
+     _free_r         _mbtowc_r       _strtod_r
+     _getenv_r       _memalign_r     _strtol_r
+     _mallinfo_r     _mstats_r       _strtoul_r
+     _malloc_r       _putenv_r       _system_r
+     _malloc_r       _rand_r         _wcstombs_r
+     _malloc_stats_r _realloc_r      _wctomb_r
+     
+_String functions:_
+     _strdup_r       _strtok_r
+     
+_System functions:_
+     _close_r        _link_r         _unlink_r
+     _execve_r       _lseek_r        _wait_r
+     _fcntl_r        _open_r         _write_r
+     _fork_r         _read_r
+     _fstat_r        _sbrk_r
+     _gettimeofday_r _stat_r
+     _getpid_r       _times_r
+     
+     
+_Time function:_
+     _asctime_r
+
+
+File: libc.info,  Node: Misc,  Next: Syscalls,  Prev: Reentrancy,  Up: Top
+
+Miscellaneous Macros and Functions
+**********************************
+
+   This chapter describes miscellaneous routines not covered elsewhere.
+
+* Menu:
+
+* ffs::      Return first bit set in a word
+* unctrl::   Return printable representation of a character
+
+
+File: libc.info,  Node: ffs,  Next: unctrl,  Up: Misc
+
+`ffs'--find first bit set in a word
+===================================
+
+   *Synopsis*
+     int ffs(int WORD);
+   *Description*
+`ffs' returns the first bit set in a word.
+
+*Returns*
+`ffs' returns 0 if C is 0, 1 if C is odd, 2 if C is a multiple of 2,
+etc.
+
+*Portability*
+`ffs' is not ANSI C.
+
+   No supporting OS subroutines are required.
+
+File: libc.info,  Node: unctrl,  Prev: ffs,  Up: Misc
+
+`unctrl'--get printable representation of a character
+=====================================================
+
+*Synopsis*
+     #include <unctrl.h>
+     char *unctrl(int C);
+     int unctrllen(int C);
+   *Description*
+`unctrl' is a macro which returns the printable representation of C as
+a string.  `unctrllen' is a macro which returns the length of the
+printable representation of C.
+
+*Returns*
+`unctrl' returns a string of the printable representation of C.
+
+   `unctrllen' returns the length of the string which is the printable
+representation of C.
+
+*Portability*
+`unctrl' and `unctrllen' are not ANSI C.
+
+   No supporting OS subroutines are required.
+
+
+File: libc.info,  Node: Syscalls,  Next: Arglists,  Prev: Misc,  Up: Top
+
+System Calls
+************
+
+The C subroutine library depends on a handful of subroutine calls for
+operating system services.  If you use the C library on a system that
+complies with the POSIX.1 standard (also known as IEEE 1003.1), most of
+these subroutines are supplied with your operating system.
+
+   If some of these subroutines are not provided with your system--in
+the extreme case, if you are developing software for a "bare board"
+system, without an OS--you will at least need to provide do-nothing
+stubs (or subroutines with minimal functionality) to allow your
+programs to link with the subroutines in `libc.a'.
+
+* Menu:
+
+* Stubs::		Definitions for OS interface
+* Reentrant Syscalls::	Reentrant covers for OS subroutines
+
+
+File: libc.info,  Node: Stubs,  Next: Reentrant Syscalls,  Up: Syscalls
+
+Definitions for OS interface
+============================
+
+   This is the complete set of system definitions (primarily
+subroutines) required; the examples shown implement the minimal
+functionality required to allow `libc' to link, and fail gracefully
+where OS services are not available.
+
+   Graceful failure is permitted by returning an error code.  A minor
+complication arises here: the C library must be compatible with
+development environments that supply fully functional versions of these
+subroutines.  Such environments usually return error codes in a global
+`errno'.  However, the Red Hat newlib C library provides a _macro_
+definition for `errno' in the header file `errno.h', as part of its
+support for reentrant routines (*note Reentrancy: Reentrancy.).
+
+   The bridge between these two interpretations of `errno' is
+straightforward: the C library routines with OS interface calls capture
+the `errno' values returned globally, and record them in the
+appropriate field of the reentrancy structure (so that you can query
+them using the `errno' macro from `errno.h').
+
+   This mechanism becomes visible when you write stub routines for OS
+interfaces.   You must include `errno.h', then disable the macro, like
+this:
+
+     #include <errno.h>
+     #undef errno
+     extern int errno;
+
+The examples in this chapter include this treatment of `errno'.
+
+`_exit'
+     Exit a program without cleaning up files.  If your system doesn't
+     provide this, it is best to avoid linking with subroutines that
+     require it (`exit', `system').
+
+`close'
+     Close a file.  Minimal implementation:
+
+          int close(int file) {
+            return -1;
+          }
+
+`environ'
+     A pointer to a list of environment variables and their values.
+     For a minimal environment, this empty list is adequate:
+
+          char *__env[1] = { 0 };
+          char **environ = __env;
+
+`execve'
+     Transfer control to a new process.  Minimal implementation (for a
+     system without processes):
+
+          #include <errno.h>
+          #undef errno
+          extern int errno;
+          int execve(char *name, char **argv, char **env) {
+            errno = ENOMEM;
+            return -1;
+          }
+
+`fork'
+     Create a new process.  Minimal implementation (for a system
+     without processes):
+
+          #include <errno.h>
+          #undef errno
+          extern int errno;
+          int fork(void) {
+            errno = EAGAIN;
+            return -1;
+          }
+
+`fstat'
+     Status of an open file.  For consistency with other minimal
+     implementations in these examples, all files are regarded as
+     character special devices.  The `sys/stat.h' header file required
+     is distributed in the `include' subdirectory for this C library.
+
+          #include <sys/stat.h>
+          int fstat(int file, struct stat *st) {
+            st->st_mode = S_IFCHR;
+            return 0;
+          }
+
+`getpid'
+     Process-ID; this is sometimes used to generate strings unlikely to
+     conflict with other processes.  Minimal implementation, for a
+     system without processes:
+
+          int getpid(void) {
+            return 1;
+          }
+
+`isatty'
+     Query whether output stream is a terminal.   For consistency with
+     the other minimal implementations, which only support output to
+     `stdout', this minimal implementation is suggested:
+
+          int isatty(int file) {
+            return 1;
+          }
+
+`kill'
+     Send a signal.  Minimal implementation:
+
+          #include <errno.h>
+          #undef errno
+          extern int errno;
+          int kill(int pid, int sig) {
+            errno = EINVAL;
+            return -1;
+          }
+
+`link'
+     Establish a new name for an existing file.  Minimal implementation:
+
+          #include <errno.h>
+          #undef errno
+          extern int errno;
+          int link(char *old, char *new) {
+            errno = EMLINK;
+            return -1;
+          }
+
+`lseek'
+     Set position in a file.  Minimal implementation:
+
+          int lseek(int file, int ptr, int dir) {
+            return 0;
+          }
+
+`open'
+     Open a file.  Minimal implementation:
+
+          int open(const char *name, int flags, int mode) {
+            return -1;
+          }
+
+`read'
+     Read from a file.  Minimal implementation:
+
+          int read(int file, char *ptr, int len) {
+            return 0;
+          }
+
+`sbrk'
+     Increase program data space.  As `malloc' and related functions
+     depend on this, it is useful to have a working implementation.  The
+     following suffices for a standalone system; it exploits the symbol
+     `_end' automatically defined by the GNU linker.
+
+          caddr_t sbrk(int incr) {
+            extern char _end;		/* Defined by the linker */
+            static char *heap_end;
+            char *prev_heap_end;
+          
+            if (heap_end == 0) {
+              heap_end = &_end;
+            }
+            prev_heap_end = heap_end;
+            if (heap_end + incr > stack_ptr) {
+              write (1, "Heap and stack collision\n", 25);
+              abort ();
+            }
+          
+            heap_end += incr;
+            return (caddr_t) prev_heap_end;
+          }
+
+`stat'
+     Status of a file (by name).  Minimal implementation:
+
+          int stat(char *file, struct stat *st) {
+            st->st_mode = S_IFCHR;
+            return 0;
+          }
+
+`times'
+     Timing information for current process.  Minimal implementation:
+
+          int times(struct tms *buf) {
+            return -1;
+          }
+
+`unlink'
+     Remove a file's directory entry.  Minimal implementation:
+
+          #include <errno.h>
+          #undef errno
+          extern int errno;
+          int unlink(char *name) {
+            errno = ENOENT;
+            return -1;
+          }
+
+`wait'
+     Wait for a child process.  Minimal implementation:
+          #include <errno.h>
+          #undef errno
+          extern int errno;
+          int wait(int *status) {
+            errno = ECHILD;
+            return -1;
+          }
+
+`write'
+     Write to a file.  `libc' subroutines will use this system routine
+     for output to all files, _including_ `stdout'--so if you need to
+     generate any output, for example to a serial port for debugging,
+     you should make your minimal `write' capable of doing this.  The
+     following minimal implementation is an incomplete example; it
+     relies on a `outbyte' subroutine (not shown; typically, you must
+     write this in assembler from examples provided by your hardware
+     manufacturer) to actually perform the output.
+
+          int write(int file, char *ptr, int len) {
+            int todo;
+          
+            for (todo = 0; todo < len; todo++) {
+              outbyte (*ptr++);
+            }
+            return len;
+          }
+
+
+File: libc.info,  Node: Reentrant Syscalls,  Prev: Stubs,  Up: Syscalls
+
+Reentrant covers for OS subroutines
+===================================
+
+   Since the system subroutines are used by other library routines that
+require reentrancy, `libc.a' provides cover routines (for example, the
+reentrant version of `fork' is `_fork_r').  These cover routines are
+consistent with the other reentrant subroutines in this library, and
+achieve reentrancy by using a reserved global data block (*note
+Reentrancy: Reentrancy.).
+
+`_open_r'
+     A reentrant version of `open'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          int _open_r(void *REENT,
+              const char *FILE, int FLAGS, int MODE);
+
+`_close_r'
+     A reentrant version of `close'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          int _close_r(void *REENT, int FD);
+
+`_lseek_r'
+     A reentrant version of `lseek'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          off_t _lseek_r(void *REENT,
+              int FD, off_t POS, int WHENCE);
+
+`_read_r'
+     A reentrant version of `read'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          long _read_r(void *REENT,
+              int FD, void *BUF, size_t CNT);
+
+`_write_r'
+     A reentrant version of `write'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          long _write_r(void *REENT,
+              int FD, const void *BUF, size_t CNT);
+
+`_fork_r'
+     A reentrant version of `fork'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          int _fork_r(void *REENT);
+
+`_wait_r'
+     A reentrant version of `wait'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          int _wait_r(void *REENT, int *STATUS);
+
+`_stat_r'
+     A reentrant version of `stat'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          int _stat_r(void *REENT,
+              const char *FILE, struct stat *PSTAT);
+
+`_fstat_r'
+     A reentrant version of `fstat'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          int _fstat_r(void *REENT,
+              int FD, struct stat *PSTAT);
+
+`_link_r'
+     A reentrant version of `link'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          int _link_r(void *REENT,
+              const char *OLD, const char *NEW);
+
+`_unlink_r'
+     A reentrant version of `unlink'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          int _unlink_r(void *REENT, const char *FILE);
+
+`_sbrk_r'
+     A reentrant version of `sbrk'.  It takes a pointer to the global
+     data block, which holds `errno'.
+
+          char *_sbrk_r(void *REENT, size_t INCR);
+
+
+File: libc.info,  Node: Arglists,  Next: Library Index,  Prev: Syscalls,  Up: Top
+
+Variable Argument Lists
+***********************
+
+   The `printf' family of functions is defined to accept a variable
+number of arguments, rather than a fixed argument list.  You can define
+your own functions with a variable argument list, by using macro
+definitions from either `stdarg.h' (for compatibility with ANSI C) or
+from `varargs.h' (for compatibility with a popular convention prior to
+ANSI C).
+
+* Menu:
+
+* Stdarg::
+* Varargs::
+
+
+File: libc.info,  Node: Stdarg,  Next: Varargs,  Up: Arglists
+
+ANSI-standard macros, `stdarg.h'
+================================
+
+   In ANSI C, a function has a variable number of arguments when its
+parameter list ends in an ellipsis (`...').  The parameter list must
+also include at least one explicitly named argument; that argument is
+used to initialize the variable list data structure.
+
+   ANSI C defines three macros (`va_start', `va_arg', and `va_end') to
+operate on variable argument lists.  `stdarg.h' also defines a special
+type to represent variable argument lists: this type is called
+`va_list'.
+
+* Menu:
+
+* va_start::
+* va_arg::
+* va_end::
+
+
+File: libc.info,  Node: va_start,  Next: va_arg,  Up: Stdarg
+
+Initialize variable argument list
+---------------------------------
+
+   *Synopsis*
+     #include <stdarg.h>
+     void va_start(va_list AP, RIGHTMOST);
+
+   *Description*
+Use `va_start' to initialize the variable argument list AP, so that
+`va_arg' can extract values from it.  RIGHTMOST is the name of the last
+explicit argument in the parameter list (the argument immediately
+preceding the ellipsis `...' that flags variable arguments in an ANSI C
+function header).  You can only use `va_start' in a function declared
+using this ellipsis notation (not, for example, in one of its
+subfunctions).
+
+   *Returns*
+`va_start' does not return a result.
+
+   *Portability*
+ANSI C requires `va_start'.
+
+
+File: libc.info,  Node: va_arg,  Next: va_end,  Prev: va_start,  Up: Stdarg
+
+Extract a value from argument list
+----------------------------------
+
+   *Synopsis*
+     #include <stdarg.h>
+     TYPE va_arg(va_list AP, TYPE);
+
+   *Description*
+`va_arg' returns the next unprocessed value from a variable argument
+list AP (which you must previously create with VA_START).  Specify the
+type for the value as the second parameter to the macro, TYPE.
+
+   You may pass a `va_list' object AP to a subfunction, and use
+`va_arg' from the subfunction rather than from the function actually
+declared with an ellipsis in the header; however, in that case you may
+_only_ use `va_arg' from the subfunction.  ANSI C does not permit
+extracting successive values from a single variable-argument list from
+different levels of the calling stack.
+
+   There is no mechanism for testing whether there is actually a next
+argument available; you might instead pass an argument count (or some
+other data that implies an argument count) as one of the fixed arguments
+in your function call.
+
+   *Returns*
+`va_arg' returns the next argument, an object of type TYPE.
+
+   *Portability*
+ANSI C requires `va_arg'.
+
+
+File: libc.info,  Node: va_end,  Prev: va_arg,  Up: Stdarg
+
+Abandon a variable argument list
+--------------------------------
+
+   *Synopsis*
+     #include <stdarg.h>
+     void va_end(va_list AP);
+
+   *Description*
+Use `va_end' to declare that your program will not use the variable
+argument list AP any further.
+
+   *Returns*
+`va_end' does not return a result.
+
+   *Portability*
+ANSI C requires `va_end'.
+
+
+File: libc.info,  Node: Varargs,  Prev: Stdarg,  Up: Arglists
+
+Traditional macros, `varargs.h'
+===============================
+
+   If your C compiler predates ANSI C, you may still be able to use
+variable argument lists using the macros from the `varargs.h' header
+file.  These macros resemble their ANSI counterparts, but have
+important differences in usage.   In particular, since traditional C has
+no declaration mechanism for variable argument lists, two additional
+macros are provided simply for the purpose of defining functions with
+variable argument lists.
+
+   As with `stdarg.h', the type `va_list' is used to hold a data
+structure representing a variable argument list.
+
+* Menu:
+
+* va_alist::
+* va_start-trad::
+* va_arg-trad::
+* va_end-trad::
+
+
+File: libc.info,  Node: va_alist,  Next: va_start-trad,  Up: Varargs
+
+Declare variable arguments
+--------------------------
+
+   *Synopsis*
+     #include <varargs.h>
+     FUNCTION(va_alist)
+     va_dcl
+
+   *Description*
+To use the `varargs.h' version of variable argument lists, you must
+declare your function with a call to the macro `va_alist' as its
+argument list, and use `va_dcl' as the declaration.  _Do not use a
+semicolon after `va_dcl'._
+
+   *Returns*
+These macros cannot be used in a context where a return is syntactically
+possible.
+
+   *Portability*
+VA_ALIST and VA_DCL were the most widespread method of declaring
+variable argument lists prior to ANSI C.
+
+
+File: libc.info,  Node: va_start-trad,  Next: va_arg-trad,  Prev: va_alist,  Up: Varargs
+
+Initialize variable argument list
+---------------------------------
+
+   *Synopsis*
+     #include <varargs.h>
+     va_list AP;
+     va_start(AP);
+
+   *Description*
+With the `varargs.h' macros, use `va_start' to initialize a data
+structure AP to permit manipulating a variable argument list.  AP must
+have the type VA_ALIST.
+
+   *Returns*
+`va_start' does not return a result.
+
+   *Portability*
+`va_start' is also defined as a macro in ANSI C, but the definitions
+are incompatible; the ANSI version has another parameter besides AP.
+
+
+File: libc.info,  Node: va_arg-trad,  Next: va_end-trad,  Prev: va_start-trad,  Up: Varargs
+
+Extract a value from argument list
+----------------------------------
+
+   *Synopsis*
+     #include <varargs.h>
+     TYPE va_arg(va_list AP, TYPE);
+
+   *Description*
+`va_arg' returns the next unprocessed value from a variable argument
+list AP (which you must previously create with VA_START).  Specify the
+type for the value as the second parameter to the macro, TYPE.
+
+   *Returns*
+`va_arg' returns the next argument, an object of type TYPE.
+
+   *Portability*
+The `va_arg' defined in `varargs.h' has the same syntax and usage as
+the ANSI C version from `stdarg.h'.
+
+
+File: libc.info,  Node: va_end-trad,  Prev: va_arg-trad,  Up: Varargs
+
+Abandon a variable argument list
+--------------------------------
+
+   *Synopsis*
+     #include <varargs.h>
+     va_end(va_list AP);
+
+   *Description*
+Use `va_end' to declare that your program will not use the variable
+argument list AP any further.
+
+   *Returns*
+`va_end' does not return a result.
+
+   *Portability*
+The `va_end' defined in `varargs.h' has the same syntax and usage as
+the ANSI C version from `stdarg.h'.
+

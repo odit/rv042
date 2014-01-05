@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/26/10 15:44:03" />
+    <title>Setting Up Dual WAN and Multi-WAN Connections </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=18;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1088482"> </a><h1 class="pTitle">
+Setting Up Dual WAN and Multi-WAN Connections
+
+</h1>
+<a name="wp1088483"> </a><p class="pBody">
+Use the <em class="cEmphasis">System Management &gt; Dual WAN</em> page (or <em class="cEmphasis">Multi-WAN</em> on RV016) to 
+configure the settings for your Internet connections, if you are using more than one 
+WAN interface. 
+
+</p>
+<a name="wp1087887"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp1088427"> </a><h2 class="pHeading2">
+Mode - Cisco RV042 and Cisco RV082
+</h2>
+<a name="wp1088822"> </a><p class="pBody">
+You can configure up to two Internet connections by using the Internet port and 
+the DMZ/Internet port. You can choose one of the following modes to manage 
+your WAN connections:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1087456"> </a><li class="pSmartList1"><b class="cBold">Smart Link Backup: </b>Choose this mode to ensure continuous connectivity. If 
+the primary WAN connection is unavailable, the backup WAN connection is 
+used. 
+</li>
+<a name="wp1087457"> </a><li class="pSmartList1"><b class="cBold">Load Balance:</b> Choose this mode to use both Internet connections 
+simultaneously to increase the available bandwidth. The router balances the 
+traffic between the two interfaces in a weighted round robin fashion.
+</li>
+<a name="wp1087458"> </a><p class="pListBodyLevel1">
+<b class="cBold">NOTE: </b>DNS queries are not subject to load balancing.
+
+</p>
+</ul></div>
+<a name="wp1087639"> </a><h2 class="pHeading2">
+Mode - Cisco RV016
+</h2>
+<a name="wp1088394"> </a><p class="pBody">
+You can configure up to seven Internet connections by using the two Internet ports 
+and the five dual-function ports. You can choose one of the following modes to 
+manage your WAN connections:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1087460"> </a><li class="pSmartList1"><b class="cBold">Intelligent Balancer (Auto Mode):</b> Select this option to balance traffic 
+between all interfaces to increase the available bandwidth. The router 
+balances the traffic between the interfaces in a weighted round robin 
+fashion.
+</li>
+<a name="wp1087801"> </a><li class="pSmartList1"><b class="cBold">IP Group (By Users): </b>Select this option to group traffic on each WAN 
+interface by priority levels or classes of service (CoS). With this feature, you 
+can ensure bandwidth and higher priority for the specified services and 
+users. All traffic that is not added to the IP Group uses Intelligent Balancer 
+mode. To specify the services and users, click the <b class="cBold">Edit</b> icon for the WAN 
+interface and then add protocol binding entries for each service, IP address, 
+or range of IP addresses.
+</li>
+<a name="wp1087462"> </a><p class="pListBodyLevel1">
+<b class="cBold">NOTE: </b>The Router reserves at least one WAN port for non-IP Group users, 
+so WAN1 will always be set to Intelligent Balancer (Auto Mode). Protocol 
+binding is not available for WAN1.
+
+</p>
+</ul></div>
+<a name="wp1078525"> </a><h2 class="pHeading2">
+Interface Setting
+</h2>
+<a name="wp1074089"> </a><p class="pBody">
+Click the <b class="cBold">Edit</b> icon for the interface that you want to set up. Then enter the settings 
+on the <em class="cEmphasis">Edit Dual WAN</em> settings page. For more information, see the Help topic for 
+that page, <a href="help_index.htm?url=help_edit_sys_dualwan2.html">Editing the Dual WAN and Multi-WAN Settings</a>.
+
+</p>
+<a name="wp1079359"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> If there are unsaved changes on the <em class="cEmphasis">Dual WAN</em> page, a warning appears. You can 
+click <b class="cBold">OK</b> to close the message. Then click <span style="font-weight: bold">Save</span> to save your changes. After saving 
+your changes, click the <b class="cBold">Edit</b> icon. Alternatively, when the warning appears, click 
+<b class="cBold">Cancel</b> to continue to the edit page without saving the changes.
+
+</p>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

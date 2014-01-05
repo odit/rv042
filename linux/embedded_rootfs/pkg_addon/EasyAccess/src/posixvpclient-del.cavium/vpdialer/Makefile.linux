@@ -1,0 +1,56 @@
+include ../posixvpclient.mk
+
+CC = gcc
+CFLAGS = -Wall -DLINUX
+DEBUG = -DDEBUG -DPRINT_PACKET
+JNIFLAGS = -shared
+LDFLAGS = $(LINUX_SSL_LIBS) -lutil
+OBJS=Dialer.o Mgr.o 
+STRIP=strip --strip-unneeded
+#CFLAGS += $(DEBUG) 
+
+DIALER_FILES = $(JNILIB) $(PPP_WRAP) $(ROUTE_WRAP) $(ROUTE) $(DNSCOMMAND)
+
+ifdef IPV6
+
+CFLAGS += -DINET6
+DIALER_FILES += $(IFCONF)
+
+endif
+
+all : $(DIALER_FILES)
+
+clean:
+	$(RM) *.o $(DIALER_FILES)
+
+
+$(JNILIB): $(OBJS) 
+	$(CC) $(CFLAGS) $(JNIFLAGS) -o $@ $(OBJS) $(LDFLAGS) ;\
+	$(STRIP) $@
+
+Dialer.o: Dialer.c Common.h Dialer.h
+	$(CC) $(CFLAGS) $(VPDIALER_INCLUDE_LINUX) -c Dialer.c
+	
+Mgr.o: Mgr.c Common.h Mgr.h getbestroute_linux.c
+	$(CC) $(CFLAGS) $(VPDIALER_INCLUDE_LINUX) -c Mgr.c
+
+$(PPP_WRAP):PPPWrap.c Common.h
+	$(CC) $(CFLAGS) -o $@ PPPWrap.c
+
+$(ROUTE_WRAP):RouteWrap.c Common.h
+	$(CC) $(CFLAGS) -o $@ RouteWrap.c
+
+$(ROUTE): route.o vputil.o vputil.h
+	$(CC) $(CFLAGS) -o $@ route.o vputil.o ;\
+	$(STRIP) $@
+
+$(IFCONF): ifconf.o vputil.o vputil.h
+	$(CC) $(CFLAGS) -o $@ ifconf.o vputil.o ;\
+	$(STRIP) $@
+
+$(DNSCOMMAND): DNSCommand.o vputil.o vputil.h
+	$(CC) $(CFLAGS) -o $@ DNSCommand.o vputil.o ;\
+	$(STRIP) $@
+
+standalone: Dialer.c Common.h
+	$(CC) $(CFLAGS) $(DEBUG) -DSTANDALONE $(VPDIALER_INCLUDE_LINUX) -o dialer Dialer.c $(LDFLAGS) 

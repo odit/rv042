@@ -1,0 +1,1 @@
+bootcmd=bootoctlinux 0x10000000

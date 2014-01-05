@@ -1,0 +1,166 @@
+<!--#nk_get LanPortStatusIdx="1"-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Port 1 Information</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script language=JavaScript>
+var ButtonType = "RefreshClose";
+var Reloadlink = "";
+</script>
+</head>
+<body class="popwindow">
+<form name="form1" method="post" action="">
+  <table class="pop_list" border="0" width="100%" align="center">
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>      
+    <tr> 
+      <td></td>
+      <th valign="middle" colspan="2" align="left" >Summary</th>
+      <td></td>      
+    </tr>   
+    <tr> 
+      <td colspan="4"><img border="0" src="images/_blank.gif" width="1" height="15"></td>
+    </tr>
+    <tr> 
+      <td></td>
+      <td valign="middle" width="160" >Type : </td>
+      <td>10Base-T / 100 Base-TX</td>
+      <td></td> 
+    </tr>   
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">Interface : </td>
+      <td>LAN</td>
+       <td></td> 
+    </tr> 	
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">Link Status : </td>
+      <td><!--#nk_get LanPortStatus="linkstatus"--></td>
+       <td></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+	<tr> 
+       <td></td> 
+      <td valign="middle">Port Activity : </td>
+      <td><!--#nk_get LanPortStatus="portDisable"--></td>
+       <td></td> 
+    </tr>
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">Priority : </td>
+      <td><!--#nk_get LanPortStatus="portPriority"--></td>
+       <td></td> 
+    </tr>
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">Speed Status : </td>
+      <td><!--#nk_get LanPortStatus="portSpeed"--></td>
+       <td></td> 
+    </tr>
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">Duplex Status : </td>
+      <td><!--#nk_get LanPortStatus="portDuplex"--></td>
+       <td></td> 
+    </tr>    
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">Auto Negotiation : </td>
+      <td><!--#nk_get LanPortStatus="portAutoNeg"--></td>
+       <td></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">VLAN : </td>
+      <td><!--#nk_get LanPortStatus="portVLAN"--></td>
+       <td></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>    
+    <tr> 
+      <td></td>
+      <th valign="middle" colspan="2" align="left" >Statistics</th>
+      <td></td>      
+    </tr>   
+    <tr> 
+      <td colspan="4"><img border="0" src="images/_blank.gif" width="1" height="15"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">Receive Packet Count : </td>
+      <td><!--#nk_get LanPortStatus="RxCount"--></td>
+       <td></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>   
+    <tr> 
+       <td></td> 
+      <td valign="middle">Receive Packet Byte Count : </td>
+      <td><!--#nk_get LanPortStatus="RxByteCount"--></td>
+       <td></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr> 
+    <tr> 
+       <td></td> 
+      <td valign="middle">Transmit Packet Count : </td>
+      <td><!--#nk_get LanPortStatus="TxCount"--></td>
+       <td></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">Transmit Packet Byte Count : </td>
+      <td><!--#nk_get LanPortStatus="TxByteCount"--></td>
+       <td></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">Packet Error Count : </td>
+      <td><!--#nk_get LanPortStatus="ErrorCount"--></td>
+       <td></td> 
+    </tr>     
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>     
+  </table>
+  <script>PrintEndPopwindow();</script>
+</body>
+</html>

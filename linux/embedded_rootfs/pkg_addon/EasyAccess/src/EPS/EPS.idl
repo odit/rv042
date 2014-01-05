@@ -1,0 +1,45 @@
+// EPS.idl : IDL source for EPS.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (EPS.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(860EFFF7-EAA9-43F4-8AC3-1D3C57F0B878),
+		dual,
+		helpstring("IEPSClient Interface"),
+		pointer_default(unique)
+	]
+	interface IEPSClient : IDispatch
+	{
+		[id(1), helpstring("method LaunchEPSClient")] HRESULT LaunchEPSClient();
+		[propget, id(2), helpstring("property ServerName")] HRESULT ServerName([out, retval] BSTR *pVal);
+		[propput, id(2), helpstring("property ServerName")] HRESULT ServerName([in] BSTR newVal);
+		[propput, id(3), helpstring("property SessionId")] HRESULT SessionId([in] BSTR newVal);
+		[propput, id(4), helpstring("property CheckForOsUptoDate")] HRESULT CheckForOsUptoDate([in] BOOL newVal);
+		[propput, id(5), helpstring("property CheckForOsPatch")] HRESULT CheckForOsPatch([in] BOOL newVal);
+		[propput, id(6), helpstring("property ServerPort")] HRESULT ServerPort([in] short newVal);
+	};
+
+[
+	uuid(30E8386A-CA99-4565-84FF-3C1C71D7DA3F),
+	version(1.0),
+	helpstring("EPS 1.0 Type Library")
+]
+library EPSLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(F798D8AC-C44C-4E64-B731-6408965B6FE0),
+		helpstring("EPSClient Class")
+	]
+	coclass EPSClient
+	{
+		[default] interface IEPSClient;
+	};
+};

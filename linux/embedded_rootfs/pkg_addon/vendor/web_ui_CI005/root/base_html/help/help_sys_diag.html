@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:13" />
+    <title>Using Built-In Diagnostic Tools </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=22;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998363"> </a><h1 class="pTitle">
+Using Built-In Diagnostic Tools
+
+</h1>
+<a name="wp998364"> </a><p class="pBody">
+Use the System Management &gt; Diagnostic page to access two built-in tools, DNS 
+Name Lookup and Ping. If you suspect a problem with connectivity, you can use 
+these tools to investigate.
+
+</p>
+<a name="wp998366"> </a><p class="pBody">
+Choose the tool that you wish to use, and then enter the destination.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998367"> </a><li class="pSmartList1"><b class="cBold">DNS Name Lookup:</b> Choose this option to test connectivity to the DNS 
+server that you specified on the <em class="cEmphasis">Setup &gt; Network</em> page, or to look up an IP 
+address that you want to use in the Ping test. In the <b class="cBold">Look up the name</b> field, 
+enter a host name, such as www.cisco.com. Do not include a prefix such as 
+<em class="cEmphasis">http://. </em>Then click <b class="cBold">Go</b>. If the test is successful, the IP address of the host 
+appears.
+</li>
+<a name="wp998368"> </a><p class="pListBodyLevel1">
+<b class="cBold">NOTE: </b>This tool requires that the router can connect to a valid DNS server, 
+based on the WAN interface settings (<span style="font-style: oblique">Setup &gt; Network</span> page).
+
+</p>
+<a name="wp998370"> </a><li class="pSmartList1"><b class="cBold">Ping:</b> Choose this option to test connectivity to a specified host by entering 
+the IP address. If you do not know the IP address, use the DNS Lookup tool 
+to learn it. The ping test shows if the router is able to send a packet to a 
+remote host and receive a response. If users on the LAN are having 
+problems accessing services on the Internet, first try pinging your DNS 
+server or other server at your ISP. If this test is successful, try pinging 
+devices outside the ISP. This will show if the problem lies with the ISP&#39;s 
+connection. Enter the IP Address, and then click <b class="cBold">Go</b>. If the test is successful, 
+the following information appears:
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998371"> </a><li class="pSmartList2"><b class="cBold">Status:</b> The status of the ping test: Testing, Test Succeeded, or Test Failed</li>
+<a name="wp998372"> </a><li class="pSmartList2"><b class="cBold">Packets:</b> The number of packets transmitted, number of packets received, and percentage of packets lost in the ping test</li>
+<a name="wp998373"> </a><li class="pSmartList2"><b class="cBold">Round Trip Time:</b> The minimum, maximum, and average round trip times for the ping test</li>
+</ul></div>
+</ul></div>
+<a name="wp998375"> </a><div style="color: #000000; font-size: 7pt; font-style: normal; font-variant: normal; font-weight: normal; margin-bottom: 9pt; margin-left: 0pt; margin-right: 0pt; margin-top: 0pt; text-align: left; text-decoration: none; text-indent: 0pt; text-transform: none">
+
+</div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

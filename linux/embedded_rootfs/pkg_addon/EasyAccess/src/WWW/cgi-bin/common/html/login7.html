@@ -1,0 +1,335 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>QNO</title>
+<script src="/sslvpn_content.js"></script>
+<style type="text/css">
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #94D429;
+}
+.CopyrightFont {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #FFFFFF;
+}
+form {
+	margin: 0px;
+	padding: 0px;
+}
+.Font9 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+}
+.Font9 input {
+	height: 26px;
+	width: 274px;
+	border: 1px solid #C2C2C2;
+	background-color: #F4F4F4;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	padding-top: 5px;
+	padding-right: 4px;
+	padding-left: 4px;
+}
+.Font9 select {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	width: 150px;
+	border: 1px solid #C2C2C2;
+}
+.Font9_white {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #FFFFFF;
+}
+.Font12 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #000000;
+	line-height: 24px;
+}
+.Font12 input {
+	height: 26px;
+	width: 274px;
+	border: 1px solid #C2C2C2;
+	background-color: #F4F4F4;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	color: #000000;
+	padding-top: 3px;
+	padding-right: 4px;
+	padding-left: 4px;
+}
+.Font12 select {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	color: #000000;
+	width: 150px;
+	border: 1px solid #C2C2C2;
+}
+#softkeyboard {
+padding-top:35px;
+padding-bottom:20px;
+}
+#softkeyboard2 {
+padding-top:35px;
+padding-bottom:20px;
+}
+.bbcenter{background-color:#F79B21;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,startColorstr=#ffF79B21, endColorstr=#ffE56B03);border: 1px solid #123f65;margin:2px;height:33px;vertical-align:center;}
+.bbcenteron{background-color:#f2b93F;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,startColorstr=#fff2b93F, endColorstr=#ffe97408);border: 1px solid #123f65;margin:2px;height:33px;vertical-align:center; cursor:hand;}
+.bbuttons{Font-size:16px;font-family:Verdana,Lucida Sans,Tahoma, sans-serif,Arial;text-align:center;font-weight: bold;margin:1px;color:#ffffff;backgr-ound-color:transparent;border-width:0px;padding:0px;cursor:hand;}
+</style>
+<script src="/QNOVirtual_Keyboard.js"></script>
+<script type="text/JavaScript">
+
+var imgLogin0 = new Array("login_bt_on.gif","", "login_bt_on_cn.gif", "login_bt_on_tw.gif");
+var imgLogin1 = new Array("login_bt_over.gif","", "login_bt_over_cn.gif", "login_bt_over_tw.gif");
+
+// get parameter from url when refresh. add by lucy.jiang 20091021
+function request(paras){
+	var url = location.href;  
+	var paraString = url.substring(url.indexOf("?")+1,url.length).split("&");  
+	var paraObj = {}  
+	for (i=0; i<paraString.length; i++){  
+	    j=paraString[i];
+		paraObj[j.substring(0,j.indexOf("=")).toLowerCase()] = j.substring(j.indexOf("=")+1,j.length);  
+	}  
+	var returnValue = paraObj[paras.toLowerCase()];  
+	if(typeof(returnValue)=="undefined"){  
+		return "";  
+	}else{  
+		return returnValue;  
+	}  
+} 
+
+function changeHostHame(mac_string)
+{
+	 var temp="";   
+	 
+	 for(var i=0;i<mac_string.length;i++)
+	 {
+	     if ( mac_string.charCodeAt(i) == 34 || mac_string.charCodeAt(i) == 37 || mac_string.charCodeAt(i) == 39 
+		   || mac_string.charCodeAt(i) == 44 || mac_string.charCodeAt(i) == 59 || mac_string.charCodeAt(i) == 92 )
+		     temp+=mac_string.charCodeAt(i);
+		 else
+			 temp+=mac_string.charAt(i);		     
+	 }
+	return temp;	   
+}
+
+function SendPassword()
+{
+    document.form_contents.password.value=changeHostHame(document.form_contents.password.value);
+    window.status="Login...";
+    document.form_contents.submit();
+}  
+softkeyboard.style.backgroundImage="url(/images/background.png)";
+softkeyboard2.style.backgroundImage="url(/images/background.png)";
+    initCalc();
+var keyborad = null; 
+var	temp_password=null;
+var browser_type=0;
+var hideflag=true;
+if (navigator.appName=='Netscape')
+	browser_type=1;
+if (document.all)
+	browser_type=2;
+
+function loaded()
+{
+var username=request("usr");
+	switch(browser_type)
+	{
+	case 1:
+		if (document.form_contents.elements['username']){
+			
+			if(username=="")
+			document.form_contents.elements['username'].focus();
+			else{
+				document.form_contents.elements['username'].value=username;
+				
+				
+			}
+			
+		}
+		break;
+	case 2:
+			if(username=="")
+		document.form_contents.all['username'].focus();
+			else{
+				document.form_contents.all['username'].value=username;
+			}
+			break;
+			
+	}
+}
+
+//refresh . add by lucy.jiang 20091021
+function refresh()
+{
+switch(browser_type)
+	{
+	case 1:
+	if (document.form_contents.elements['username'])
+		var username=document.form_contents.elements['username'].value;
+		break;
+	case 2:
+		var username=document.form_contents.all['username'].value;
+		break;
+	}
+	
+var url="/cgi-bin/welcome.cgi?usr="+username;
+window.location.href=url;
+
+}
+function keyDown(e)
+{
+	var button_no;
+	switch(browser_type)
+	{
+	case 1:
+		button_no=e.which;
+		break;
+	case 2:
+		button_no=event.keyCode;
+		break;
+	default:
+		return true;
+	}
+	switch(button_no)
+	{
+	case 13:
+		SendPassword();
+		return false;
+	default:
+		return true;
+	}
+}
+document.onkeydown=keyDown;
+if (browser_type==1)
+	document.captureEvents(Event.KEYDOWN);
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+if (keyborad != null)
+{
+	alert("Test");
+	keyborad.moveTo(100, 65);
+}	
+</script>
+</head>
+
+<body onLoad="if (parent.frames.length!=0) top.location='/'; MM_preloadImages('/images/login_bt_over.gif'); loaded();">
+
+<table width="100%" height="100%" border="1" cellpadding="0" cellspacing="0">
+  <input id ="languageStatus" type="hidden" name="languageStatus" value='<!--#languagetype-->'>
+  <script>var languagetype = document.getElementById('languageStatus').value;</script>
+  <tr>
+    <td align="left" valign="top">
+	
+	<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="711" align="left" valign="top"><table width="100%" height="500" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="left" valign="top" background="/images/login_img01_01.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="300" align="right" valign="top"><table border="0" cellspacing="20" cellpadding="0">
+                  <tr>
+                    <td><img src="/images/login_img01_03.gif" width="230" height="95"></td>
+                  </tr>
+                </table></td>
+                <td align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="110">&nbsp;</td>
+                    </tr>
+                  <tr>
+		  <td align="center">&nbsp;</td>
+                    </tr>
+                  <tr>
+                    <td align="center"><form name="form_contents" method="post" action="/cgi-bin/userLogin.cgi">
+                      <table width="275" border="0" cellpadding="0" cellspacing="10">
+                        <tr>
+                          <td class="Font12"><script>document.write(msgUserName[languagetype]);</script>:<br>
+                              <label>
+                              <input type="text" name="username" maxlength="50">
+                            </label></td>
+                        </tr>
+                        <tr>
+                          <td class="Font12"><script>document.write(msgPassword[languagetype]);</script>:
+                          <a onClick="temp_password=form_contents.password;showkeyboard();form_contents.password.readOnly=1;Calc.password.value=''"; style={cursor:hand}><font class="Font9" style="color:#FFFF00">(<script>document.write(Open_virtual_keyboard[languagetype]);</script>)</font></a><br>  
+						  
+                          <label>
+                              <input type="password" name="password" onclick= "if (hideflag){ temp_password=form_contents.password;showkeyboard();hideflag=false;this.readOnly=1;Calc.password.value='';};" onFocus="this.readOnly=0" maxlength="50">
+                            </label></td>
+							
+                        </tr>
+						<tr >
+						<td>
+						<!--start print Validation code-->
+						<!--#PrintValidationCode--> 
+						<!--end print Validation code-->
+						</td>
+                        </tr>
+						<tr>
+						<br>
+						</tr>
+						<input type=hidden name=login value="true">
+						<input type=hidden name=portalname value="CommonPortal">
+	                    <tr>
+		                    <td align="center" valign="top">
+							<script>
+								document.write("<img src='/images/"+imgLogin0[languagetype]+"' alt='Login' name='loginBT' width='90' height='38' border='0' onMouseOut='MM_swapImgRestore()' onMouseOver=\"MM_swapImage('loginBT','','/images/"+imgLogin1[languagetype]+"')\" onClick=\"SendPassword();\">");
+							</script>
+			  				</td>
+                        </tr>
+                        <tr>
+                          <td align="left" valign="top">
+			  <p class="Font9" style="display:none"><script>document.write(msgWelcome1[languagetype]+'<!--#ProdcuctName:1-->'+ msgWelcome3[languagetype]);</script></p>
+			  <p class="Font9" style="display:none"><script>document.write(msgWelcome2[languagetype]+'<!--#ProdcuctName:2-->'+ msgWelcome4[languagetype]);</script></p></td>
+                        </tr>
+                      </table>
+                                        </form>                    </td>
+                  </tr>
+                  
+                </table></td>
+                </tr>
+            </table></td>
+          </tr>
+        </table></td>
+        <td align="right" valign="top">&nbsp;</td>
+        <td width="292" align="right" valign="top" background="/images/login_img01_02.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="24" align="right" bgcolor="#006600"><span class="CopyrightFont">&copy; 2007 QNO Technology Inc. All Rights reserved. &nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+  </tr>
+</table>
+</body>
+</html>

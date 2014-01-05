@@ -1,0 +1,142 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+
+<html>
+
+<!--(==============================================================)-->
+<!--(Document created with RoboEditor. )============================-->
+<!--(==============================================================)-->
+
+<head>
+
+<title>LDAP Attributes</title>
+
+<!--(Meta)==========================================================-->
+
+<meta http-equiv=content-type content="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+<meta name=generator-major-version content=0.1>
+<meta name=generator-minor-version content=1>
+<meta name=filetype content=kadov>
+<meta name=filetype-version content=1>
+<meta name=page-count content=1>
+<meta name=layout-height content=733>
+<meta name=layout-width content=736>
+
+
+<!--(Links)=========================================================-->
+
+<link rel="StyleSheet" href="default.css">
+
+
+
+</head>
+
+<!--(Body)==========================================================-->
+
+
+<body>
+
+<h4>&nbsp;LDAP Attributes </h4>
+
+<p>The LDAP authentication domain enables the EasyAccess administrator 
+ to define LDAP attributes that limit which users may log in to the portal 
+ or determine which resources and bookmarks specific LDAP groups will view. 
+ </p>
+
+<p>&nbsp;</p>
+
+<p>Once an LDAP authentication domain is created, a default LDAP group 
+ will be created with the same name as the domain name. Although additional 
+ groups may be added or deleted from this domain, the default LDAP group 
+ may not be deleted. </p>
+
+<p>&nbsp;</p>
+
+<p>For an LDAP group, you may define LDAP attributes. For example, you 
+ can specify that users in the LDAP group must be members of a specific 
+ group or organizational unit defined on the LDAP server. Or you can enter 
+ an individual LDAP distinguished name. If you define multiple LDAP attributes, 
+ then <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">ALL</span> 
+ attributes must be met by users. </p>
+
+<p>&nbsp;</p>
+
+<p>If no attributes are defined, then any user authorized by the LDAP server 
+ can be a member of the group.</p>
+
+<p>&nbsp;</p>
+
+<p>If multiple groups are defined and a user meets all the LDAP attributes 
+ for both groups, then the user will be considered part of the group with 
+ the most LDAP attributes defined. If the matching LDAP groups have an 
+ equal number of attributes, then the user will be considered a member 
+ of the group based on the alphabetical order of the groups.</p>
+
+<p>&nbsp;</p>
+
+<p style="font-style: italic;"><span style="font-weight: bold;">NOTE:</span> 
+ If a user is manually added to a LDAP group, then the user setting takes 
+ precedence over LDAP attributes. For example, the LDAP attribute <span 
+ style="font-weight: bold;">objectClass=&quot;user&quot;</span> is defined 
+ for group<span style="font-weight: bold;"> Group1</span> and the LDAP 
+ attribute <span style="font-weight: bold;">memberOf=&quot;CN=WINS Users,CN=Users,DC=menlologic,DC=net&quot;</span> 
+ is defined for <span style="font-weight: bold;">Group2</span>. </p>
+
+<p style="font-style: italic;">&nbsp;</p>
+
+<p style="font-style: italic;">If user <span style="font-weight: bold;">Jane</span> 
+ is classified by an LDAP server as a member of the <span style="font-weight: bold;">user 
+ </span>object class, but is <span style="x-text-underline: normal; /*begin!kadov{{*/ text-decoration: underline; /*}}end!kadov*/ ">NOT</span> 
+ a member of the <span style="font-weight: bold;">WINS Users</span> group, 
+ Jane should be in classified as a member of EasyAccess <span style="font-weight: bold;">Group1</span>. 
+ </p>
+
+<p style="font-style: italic;">&nbsp;</p>
+
+<p style="font-style: italic;">But if the administrator adds<span style="font-weight: bold;"> 
+ Jane</span> to EasyAccess <span style="font-weight: bold;">Group2</span>, 
+ then the LDAP attributes will be ignored and <span style="font-weight: bold;">Jane</span> 
+ will be considered a member of <span style="font-weight: bold;">Group2</span>.</p>
+
+<p style="font-weight: bold;">&nbsp;</p>
+
+<p style="font-weight: bold; color: #001168;">Sample LDAP Attributes</p>
+
+<p>&nbsp;</p>
+
+<p>You may enter up to 4 LDAP attributes per group. The following are some 
+ example LDAP attributes of Active Directory LDAP users:</p>
+
+<p>&nbsp;</p>
+
+<p style="font-family: 'Courier New', monospace;">name=&quot;Administrator&quot;</p>
+
+<p style="font-family: 'Courier New', monospace;">memberOf=&quot;CN=Terminal 
+ Server Computers,CN=Users,DC=menlologic,DC=net&quot;</p>
+
+<p style="font-family: 'Courier New', monospace;">objectClass=&quot;user&quot;</p>
+
+<p style="font-family: 'Courier New', monospace;">msNPAllowDialin=&quot;FALSE&quot;</p>
+
+<p>&nbsp;</p>
+
+<p style="font-style: italic;"><span style="font-weight: bold;">NOTE:</span> 
+ If multiple attributes are defined, all attributes must be met by LDAP 
+ users.</p>
+
+<p style="font-style: italic;">&nbsp;</p>
+
+<p style="font-style: italic;"><span style="font-style: normal;">If an 
+ LDAP user fails to meet the LDAP attributes for all LDAP groups configured 
+ on EasyAccess, then the user will not be able to log into the portal. 
+ So the LDAP attributes feature not only allows the administrator to create 
+ individual rules based on the LDAP group or organization, it also allows 
+ the administrator to only allow certain LDAP users to log into the portal.</span></p>
+
+<p style="font-style: italic;">&nbsp;</p>
+
+<p>&nbsp;</p>
+
+</body>
+
+</html>

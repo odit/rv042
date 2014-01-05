@@ -1,0 +1,1609 @@
+<!--#nk_get WanConnActionSetup=""-->
+<!--#nk_get VpnSetting=""-->
+<!--#nk_get SP_Check_rg=""-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	chRenew();
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function chRenew()
+{
+    if (document.formsummary.getHMark.value!="")
+    {
+	document.location="#"+document.formsummary.getHMark.value;
+	document.getElementById("WAN Status").scrollIntoView(true);	
+    }	
+}
+
+function falseSubmit(n)
+{
+  document.formsummary.submitStatus.value=n;
+  document.formsummary.submit();
+}
+
+var UDI = '';
+var Url = '';
+
+function goToURL_buy(F) 
+{
+	if(F=="SP1")
+		wMLan = window.open('http://www.cisco.com/cisco/web/solutions/small_business/products/security/protectlink/index.html','GoBuy');
+	else if(F=="SP2")
+		wMLan = window.open('https://olr.trendmicro.com/registration/us/en-us/cisco_enter_rk.aspx','Registration');
+	else if(F=="SP3")
+	{
+		UDI=document.formsummary.UDI.value;
+		Url='https://olr.trendmicro.com/registration/us/en-us/cisco_activation.aspx?udi=';
+		Url+=UDI;
+		document.formsummary.getspstatus.value=11;
+	  	document.formsummary.submit();
+		wMLan = window.open(Url);
+	}
+}
+function GoPage(FileIndex)
+{
+	if(FileIndex==1)
+	{
+		FileName="f_general.htm";
+	}
+	else if(FileIndex==2)
+	{
+		FileName="access_rules.htm";
+	}
+	else if(FileIndex==3)
+	{
+		FileName="vpn_summary.htm";
+	}
+	else if(FileIndex==4)
+	{
+		FileName="log_setting.htm";
+	}
+	else if(FileIndex==5)
+	{
+		FileName="adv_routing.htm";
+	}
+	else if(FileIndex==6)
+	{
+		FileName="adv_ddns.htm";
+	}
+	else if(FileIndex==7)
+	{
+		FileName="network.htm";
+	}
+	document.location.href=FileName;
+}
+
+function MouseStyleChange(item, event)
+{
+	if(event ==0)
+	{
+		item.style.cursor="pointer";
+	}
+	else
+	{
+		item.style.cursor="default";
+	}
+}
+function display_result()
+{
+    	var result= document.formsummary.result.value;
+	var message;
+	if(result==1)
+		message="Cisco ProtectLink is active.";
+	else if(result==2)
+	{
+		var expire_day=document.formsummary.expire_day.value;
+		message= "Cisco ProtectLink will expire in " + expire_day;
+	}
+	else if(result==3)
+		message="Cisco ProtectLink has expired.";
+	else	if(result==4)	
+		message="Waitting for connect Cisco ProtectLink";		
+	document.write(message);		
+}
+function display_status()
+{
+    var result= document.formsummary.result.value;
+	var message;
+	if(result==1 || result==2)
+		message="Activated";
+	else if(result==3)
+		message="Expired";
+	else if(result==4)
+		message="Waitting....";	
+		
+	document.write(message);		
+}
+var wport_window=null;
+function showPortStatus(link_url)
+{
+	if (wport_window!=null) 
+	{
+		wport_window.close();
+		wport_window = null;
+	}	
+	wport_window=window.open(link_url,'','menubar=no,location=yes,scrollbars=no,width=650,height=580');
+}
+function PrintLinkStatus(PortID, StatusName)
+{
+	var link_url = "";
+	var obj = document.getElementById(StatusName);
+
+	if (PortID < 14)
+		link_url = "port"+PortID+"_information.htm";
+	else if (PortID == 14)
+		link_url = "wan2_port_information.htm";
+	else if (PortID == 15)
+		link_url = "wan1_port_information.htm";	
+	else if (PortID == 16)
+		link_url = "dmz_port_information.htm";
+	if (obj)
+	{	document.write('<a href=\'Javascript:showPortStatus("'+link_url+'");\'>');
+		if (obj.value == 1)
+			document.write('<font color="'+Connectlinkcolor+'">Connected</font></a>');
+		else if (obj.value == 2) 
+			document.write('<font color="'+Disablelinkcolor+'">Disabled</font></a>');
+		else
+			document.write('<font color="'+Enablelinkcolor+'">Enabled</font></a>');
+		return ;	
+	}
+	else 
+		document.write('<font color="red">Disabled</font>');
+}
+
+function chChangeIPmode(val)
+{
+	var obj;
+	var F = document.formsummary;
+
+	if(val==1)
+	{	
+		obj = MM_findObj('WanStatus','');	
+	    obj.style.display=style_display_on();
+		obj = MM_findObj('WanStatus_v6','');	
+	    obj.style.display='none';
+	}
+	else if(val==2)
+	{
+		obj = MM_findObj('WanStatus','');	
+	    obj.style.display='none';
+		obj = MM_findObj('WanStatus_v6','');	
+	    obj.style.display=style_display_on();
+	}
+	
+}
+
+
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "";		// NULL/Refresh/OkCancel/BackOkCancel/ShowTableOkCancel
+var helplink ='help_home.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 750;
+var head_width=185;
+		
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintSystemInfo(0);
+	PrintTrenMicro(1);
+	PrintConfiguration(1);	
+	PrintPortStatistics(1);
+	PrintWANStatus(1);
+	chChangeIPmode(1);
+	PrintFirewallStatus(1);
+	PrintVPNStatus(1);
+	PrintLogStatus(0);
+	PrintEndContent();
+}
+
+function PrintSystemInfo(hasUnderLine)
+{
+	var in_head_width = head_width - 45;
+	PrintBeginBlock(1, "System Information");
+	document.write('<table class="Infotable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+in_head_width+'" colspan=2>');
+	document.write('Serial Number&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td width="200">');	
+	document.write('<!--#nk_get SerialNo=""-->');
+	document.write('</td>');
+	document.write('<td width="158">');
+	document.write('Firmware Version&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');	
+	document.write('<!--#nk_get FwVersion1=""-->');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td width="'+in_head_width+'" colspan=2>');
+	document.write('PID VID&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td width="200">');	
+	document.write('<!--#nk_get PIDVID=""-->');
+	document.write('</td>');
+	document.write('<td width="158">');
+	document.write('Firmware MD5 Checksum&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');	
+	document.write('<!--#nk_get MD5Chsum=""-->');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td width="'+in_head_width+'" colspan=2>');
+	document.write('LAN');	
+	document.write('</td>');
+	document.write('<td>');	
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(5)"><u>');
+	document.write('Working Mode');
+	document.write('</u></span>');
+	document.write('&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');	
+	if('<!--#nk_get RadioHandle="wkMode:4"-->'=="checked")
+		document.write('Gateway');
+	else
+		document.write('Router');		
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr><td width=20></td><td width="'+(in_head_width-20)+'">');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+	document.write('IPv4/&nbsp;Subnet mask');
+	document.write('</u></span>');
+	document.write('&nbsp;:&nbsp;');
+	document.write('</td><td colspan=3>');
+	document.write('<!--#nk_get DisplayOnly="ipAddr"-->/<!--#nk_get DisplayOnly="lanMask"-->');
+	document.write('</td></tr>');
+	document.write('<tr><td width=20></td><td width="'+(in_head_width-20)+'">');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+	document.write('IPv6/&nbsp;Prefix');
+	document.write('</u></span>');
+	document.write('&nbsp;:&nbsp;');
+	document.write('</td><td colspan=3>');
+	
+	if ('<!--#nk_get RadioHandle="setIpMode:0"-->' == "checked" )
+	{
+		document.write(' --- / ---');
+	}else{
+		document.write('<!--#nk_get DisplayOnly="ipAddr_v6"-->/<!--#nk_get DisplayOnly="ipAddr_v6pre"-->');
+	}
+	document.write('</td></tr>');
+	document.write('<tr><td width="'+in_head_width+'" colspan=2>');
+	document.write('System Up Time');
+	document.write('&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td colspan="3">');		
+	document.write('<!--#echo var="UP_TIME"-->');
+	document.write('&nbsp;&nbsp;(Now&nbsp;:&nbsp;'); 
+	document.write('<!--#config timefmt="%a %b %e %Y %H:%M:%S"-->');
+	document.write('<!--#echo var="DATE_LOCAL"-->');
+	document.write(')');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintTrenMicro(hasUnderLine)
+{
+	var TMresult= document.formsummary.result.value;
+	PrintBeginBlock(0);
+	document.write('<table width="'+FixedTableWidth+'">');
+	document.write('<tr><td>');
+	if (TMresult == 0)
+	{
+		document.write('<b class="b1f"></b><b class="b2f head"></b><b class="b3f head"></b><b class="b4f head"></b>');
+		document.write('<div class="head">');
+		document.write('<table width="94%" border="0">');
+		document.write('<tr><td width="52%">');
+		document.write('<span class="style8">Cisco ProtectLink</span><span class="style6"></span></span>');
+		document.write('<img src="images/_blank.gif" width="1" height="20">');
+		document.write('</td>');
+		document.write('<td>');
+		document.write('<div align="right">');	   
+		PrintSTButton("SP1", "Go buy", "goToURL_buy(this.name)");
+		document.write('<img border="0" src="images/_blank.gif" width="10" height="1">');
+		PrintSTButton("SP2", "Register", "goToURL_buy(this.name)");
+		document.write('<img border="0" src="images/_blank.gif" width="10" height="1">');
+		PrintSTButton("SP3", "Activate", "goToURL_buy(this.name)");
+		document.write('</div></td></tr>');
+		document.write('</table>');
+		document.write('</div>');	
+		document.write('<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>');
+	}
+	else
+	{
+		document.write('<b class="b1f"></b><b class="b2f head"></b><b class="b3f head"></b><b class="b4f head"></b>');
+		document.write('<div class="head">');
+		document.write('<table width="94%">');
+		document.write('<tr><td width="52%">');
+		document.write('<span class="style8">Cisco ProtectLink</span><span class="style6"></span></span>');
+		document.write('<img src="images/_blank.gif" width="1" height="20">');
+		document.write('<td><div align="left">');
+		switch(TMresult)
+	        {
+			case "1":
+			case "3":
+			   	document.write('<b>Service is activated</b>');
+				break;
+			case "2":
+			case "104":
+			case "999":
+		  		document.write('<b>Service is expired</b>');
+	    		break;
+		}
+		document.write('</div></td></tr></table>');
+		document.write('</div>');
+		document.write('<b class="b4f"></b><b class="b3f"></b><b class="b2f"></b><b class="b1f"></b>');
+	}
+	document.write('</td></tr></table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintConfiguration(hasUnderLine)
+{
+	PrintBeginBlock(1, "Configuration");
+	document.write('<table width="'+FixedTableWidth+'" border='+Tableborder+' style="'+Tablestyle+'">');
+	document.write('<tr><td>');
+	document.write('If you need guideline to re-configure the router, you may launch wizard.');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	PrintSTButton("B3", "Setup Wizard", "document.location.href=\'wizard.htm\'");
+	document.write('</td></tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintPortStatistics(hasUnderLine)
+{
+	var i=0;
+	PrintBeginBlock(1, "Port Statistics");
+	document.write('<table width="'+FixedTableWidth+'"class="STtable" border="1">');	
+	document.write('<tr><td>');	
+	document.write('<table width="100%" class="Porttable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<th width="50" height="24">Port ID</th>');
+	for (i=1;i<=8;i++)
+	{
+		if (TotalPortNumber < 8  && i > (TotalPortNumber - MaxWanPortNumber) && i < 7)
+			continue;
+
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+		if (TotalPortNumber < 8)
+			document.write('<th width="100"><center>');
+		else
+			document.write('<th width="64"><center>');
+		if (i > TotalPortNumber)
+		{
+			if (i==8)
+				document.write('DMZ/Internet');
+			else	
+				document.write('Internet');
+		}	
+		else	
+		document.write(i);		
+		document.write('</center></th>');
+	}	
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" colspan="'+((i*3)+1)+'" style="height:1px"></td>');
+	document.write('</tr>');		
+	document.write('<tr>');
+	document.write('<th height="24">Interface</th>');	
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');	
+	for (i=1;i<=8;i++)
+	{
+		if (TotalPortNumber < 8 && i+1 > (TotalPortNumber - MaxWanPortNumber))
+			break;
+	}	
+	if (i > 8)
+		i = 8;
+	document.write('<td align="center" colspan="'+((i*3)-2)+'">LAN</td>');	
+	if (TotalPortNumber < 8)
+	{
+		document.write('<td align="center" colspan="3" width="100">WAN1</td>');
+		if (document.formsummary.DmzMode.value == 1)
+			document.write('<td align="center" colspan="3">DMZ</td>');
+		else	
+			document.write('<td align="center" colspan="3">WAN2</td>');
+	}
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" colspan="3" style="height:1px"></td>');	
+	document.write('<td colspan="'+((i*3)-2)+'" style="height:1px"></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<th height="24">Status</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');		
+	for (i=1;i<=8;i++)
+	{
+		if (TotalPortNumber < 8  && i > (TotalPortNumber - MaxWanPortNumber) && i < 7)
+			continue;
+		if (i==1)
+			document.write('<td align="center" class="EvenRow"><center>');
+		else	
+			document.write('<td align="center" colspan="3" class="EvenRow"><center>');
+		if (i==1)
+			PrintLinkStatus(1, "port1Status");
+		else if (i==2)
+			PrintLinkStatus(2, "port2Status");
+		else if (i==3)	
+			PrintLinkStatus(3, "port3Status");
+		else if (i==4)	
+			PrintLinkStatus(4, "port4Status");
+		else if (i==5)	
+			PrintLinkStatus(5, "port5Status");
+		else if (i==6)	
+			PrintLinkStatus(6, "port6Status");
+		else
+		{
+			if (TotalPortNumber < 10)
+			{
+				if (i==8)
+					PrintLinkStatus(9, "port9Status");
+				else if (i==7)		
+					PrintLinkStatus(10, "port10Status");
+			}
+			else if (i==7)
+				PrintLinkStatus(7, "port7Status");
+			else if (i==8)		
+				PrintLinkStatus(8, "port8Status");			
+		}
+		document.write('</center></td>');
+		//RV042  LAN: 1,2,3,4  			WAN: 9,10
+		//RV082	 LAN: 1,2,3,4,5,6,7,8	WAN: 9,10	
+	}	
+	document.write('</tr>');	
+	document.write('</table>');
+	document.write('</td>');
+        document.write('</tr>');
+        document.write('</table>');
+	if (TotalPortNumber > 8)
+	{
+	document.write('<br><table width="'+FixedTableWidth+'"class="STtable" border="1">');	
+	document.write('<tr><td>');	
+	document.write('<table width="100%" class="Porttable" border="'+Tableborder+'">');
+	document.write('<tr>');
+	document.write('<th width="50" height="24">Port ID</th>');	
+		for (i=9;i<=16;i++)
+	{
+		document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+		document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');
+			if (TotalPortNumber > 10)
+			{
+				document.write('<th align="center" width="64"><center>');
+				document.write(i);	
+				document.write('</center></th>');
+			}
+		else
+			{
+				if (i== 9)
+					document.write('<th align="center" width="310"><center>DMZ/Internet</center></th>');
+				else if (i== 10)
+				{
+			document.write('<th align="center" width="310"><center>Internet</center></th>');
+					break;
+				}	
+			}
+	}
+	document.write('</tr>');	
+	document.write('<tr>');
+		document.write('<td bgcolor="#A2B9C9" colspan="'+((i*3)+1)+'" style="height:1px"></td>');
+	document.write('</tr>');		
+	document.write('<tr>');
+	document.write('<th height="24">Interface</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');			
+		for (i=9;i<=16;i++)
+		{
+			if (16 - parseInt(document.formsummary.WanNumber.value, 10) <  i)
+				break;
+		}
+		if (TotalPortNumber == 10)
+		{
+			if (document.formsummary.DmzMode.value == 1)
+				document.write('<td align="center">DMZ</td>');
+			else	
+				document.write('<td align="center">WAN2</td>');
+			document.write('<td align="center" colspan="3">WAN1</td>');
+		}
+		else
+                {
+			if (i>16)
+				i = 16;		
+		
+			if (i > 9)
+				document.write('<td align="center" colspan="'+((i-9)*3-2)+'">LAN</td>');
+			for (var j=i;j<=15;j++)
+			{
+				if (16-j < 7)
+					document.write('<td align="center" colspan="3">WAN'+(16-j)+'</td>');
+				else
+					document.write('<td align="center">WAN'+(16-j)+'</td>');
+                }
+			document.write('<td align="center" colspan="3">DMZ</td>');
+        }
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td bgcolor="#A2B9C9" colspan="3" style="height:1px"></td>');	
+		document.write('<td colspan="'+((i*3)-2)+'" style="height:1px"></td>');
+	document.write('</tr>');		
+	document.write('<tr>');
+	document.write('<th height="24">Status</th>');
+	document.write('<td bgcolor="#FFFFFF" style="width:1px"></td>');
+	document.write('<td bgcolor="#A2B9C9" style="width:1px"></td>');			
+		for (i=9;i<=16;i++)
+	{
+			if (i > TotalPortNumber)
+			break;
+			
+			if (i==9)
+			document.write('<td class="EvenRow"><center>');
+		else	
+			document.write('<td align="center" colspan="3" class="EvenRow"><center>');
+			if (i==9)
+				PrintLinkStatus(9, "port9Status");
+			else if (i==10)
+				PrintLinkStatus(10, "port10Status");
+			else if (i==11)	
+				PrintLinkStatus(11, "port11Status");
+			else if (i==12)	
+				PrintLinkStatus(12, "port12Status");
+			else if (i==13)	
+				PrintLinkStatus(13, "port13Status");
+			else if (i==14)	
+				PrintLinkStatus(14, "port14Status");
+			else if (i==15)	
+				PrintLinkStatus(15, "port15Status");
+			else if (i==16)	
+				PrintLinkStatus(16, "port16Status");					
+		document.write('</center></td>');
+		//RV082	 LAN: 1,2,3,4,5,6,7,8	WAN: 9,10	
+		//RV016  LAN: 1,2,3,4,5,6,7,8,  	WAN: 9,10,11,12,13,14,15,16
+	}	
+	document.write('</tr>');	
+	document.write('</table>');	
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');			
+	}
+	PrintEndBlock(hasUnderLine);	
+}
+function PrintWANStatus(hasUnderLine)
+{
+	var FirstColumeWidth = 0;
+	var WanNumber = parseInt(document.formsummary.WanNumber.value, 10);
+	var SecondColumeWidth = 0;
+	var LastColumeWidth = 0;
+	var portStatus = 0;
+	var portName = "";
+	var ColumeType=0;					//NULL(0), WAN(1), DMZ(2)
+	var head_width=160;
+
+	var FixedTableWidth_All = FixedTableWidth;
+
+	PrintBeginBlock(1, "WAN Status");
+
+	document.write('<table id="WanStatus" width="'+(FixedTableWidth_All)+'" border='+Tableborder+' cellpadding="0" cellspacing="0">');
+	document.write('<tr><td>');
+	PrintIPTypeTab('IPv4','true','IPv6','false');
+	document.write('</td></tr>');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" cellpadding="10" cellspacing="10" bgcolor="#CBD8E1" style="border-left:1px solid #666;border-right:1px solid #666;border-bottom:1px solid #666;"><tr><td>');
+	
+	//Table_v4
+	if (MaxWanPortNumber<=2)
+	{
+		document.write('<table  class="WanStatus" width="'+(FixedTableWidth-130)+'"  border='+Tableborder+'>');
+		FirstColumeWidth = 108;
+		SecondColumeWidth = 200;
+	}
+	else
+	{
+		document.write('<table class="WanStatus" width="'+(FixedTableWidth+18)+'"  border='+Tableborder+'>');	
+		WanNumber = WanNumber - 1;
+		LastColumeWidth = (FixedTableWidth+18) / WanNumber;
+		FirstColumeWidth = LastColumeWidth * 8 / 15;
+		SecondColumeWidth = LastColumeWidth - FirstColumeWidth;
+	}
+	// Interface
+	document.write('<tr>');
+	for (var i=1;i<=4;i++)
+	{
+		if (i > 2 && WanNumber <= 2 && MaxWanPortNumber<=2)
+			break;
+		else if (i > WanNumber+1)
+			continue;	
+
+		if (i == WanNumber + 1 || (i == 2 && document.formsummary.DmzMode.value == 1))
+			ColumeType = 2;
+		else if (i <= WanNumber || (i == 2 && document.formsummary.DmzMode.value == 0))
+			ColumeType = 1;
+		else
+			ColumeType = 0;
+
+		document.write('<th colspan="2">');
+		if (ColumeType == 1)
+			document.write('WAN'+i+'</th>');
+		else if (ColumeType == 2)
+			document.write('DMZ</th>');
+	}
+	document.write('</tr>');
+	// IP Address	
+	document.write('<tr>');
+	for (var i=1;i<=4;i++)
+	{		
+		if ( (WanNumber == 2 && i > WanNumber && MaxWanPortNumber<=2)
+		|| (i > WanNumber+1))
+			break;
+
+		if (i <= WanNumber + 1 || (i==2 && document.formsummary.DmzMode.value == 1))
+		{
+			if (TotalPortNumber == 16)
+				portName = "port"+(16-i)+"Status";
+			else
+				portName = "port"+(11-i)+"Status";
+			if (TotalPortNumber == 16 && i == WanNumber + 1)
+				portStatus = document.getElementById("port16Status").value;
+			else
+			portStatus = document.getElementById(portName).value;
+		
+			document.write('<td width="'+FirstColumeWidth+'">');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('IP Address');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td width="'+SecondColumeWidth+'">');
+			if (portStatus != 1)
+				document.write('0.0.0.0');
+			else if (i==1)
+				document.write('<!--#nk_get WanIP="1"-->');
+			else if (i == WanNumber + 1 || (i == 2 && document.formsummary.DmzMode.value == 1 && MaxWanPortNumber<=2))
+				document.write('<!--#nk_get DisplayDMZIp=""-->');
+			else if (i==2)
+				document.write('<!--#nk_get WanIP="2"-->');			
+			else if (i==3)
+				document.write('<!--#nk_get WanIP="3"-->');
+			else if (i==4)
+				document.write('<!--#nk_get WanIP="4"-->');
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}	
+	}	
+	document.write('</tr>');
+	//Gateway IP
+	document.write('<tr>');
+	for (var i=1;i<=4;i++)
+	{
+		if ( (ShareDMZPort == 1 && i == 2 && document.formsummary.DmzMode.value == 1)
+		|| (i > WanNumber))
+			break;
+		
+		if (i <= WanNumber + 1)
+		{
+			if (TotalPortNumber == 16)
+				portName = "port"+(16-i)+"Status";
+			else
+				portName = "port"+(11-i)+"Status";
+			portStatus = document.getElementById(portName).value;
+		
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('Default Gateway');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td>');
+			if (portStatus != 1)
+				document.write('0.0.0.0');
+			else if (i==1)
+				document.write('<!--#nk_get DisplayOnly="ISPGateway1"-->');
+			else if (i==2)
+				document.write('<!--#nk_get DisplayOnly="ISPGateway2"-->');
+			else if (i==3)
+				document.write('<!--#nk_get DisplayOnly="ISPGateway3"-->');
+			else if (i==4)
+				document.write('<!--#nk_get DisplayOnly="ISPGateway4"-->');
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}	
+	}	
+	document.write('</tr>');
+	// DNS
+	document.write('<tr>');	
+	for (var i=1;i<=4;i++)
+	{
+		if ( (ShareDMZPort == 1 && i == 2 && document.formsummary.DmzMode.value == 1)
+		|| (i > WanNumber))
+			break;
+		
+		if (i <= WanNumber + 1 || (i==2 && document.formsummary.DmzMode.value == 0))
+		{
+			if (TotalPortNumber == 16)
+				portName = "port"+(16-i)+"Status";
+			else
+				portName = "port"+(11-i)+"Status";
+			portStatus = document.getElementById(portName).value;
+		
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('DNS');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td>');
+			if (portStatus != 1)
+				document.write('0.0.0.0');
+			else if (i==1)
+				document.write('<!--#nk_get DevStateReport="dns:ixp1"-->');
+			else if (i==2)
+				document.write('<!--#nk_get DevStateReport="dns:ixp2"-->');
+			else if (i==3)
+				document.write('<!--#nk_get DevStateReport="dns:ixp3"-->');
+			else if (i==4)
+				document.write('<!--#nk_get DevStateReport="dns:ixp4"-->');
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}	
+	}		
+	document.write('</tr>');	
+	// DDNS
+	document.write('<tr>');	
+	for (var i=1;i<=4;i++)
+	{
+		if ( (ShareDMZPort == 1 && i == 2 && document.formsummary.DmzMode.value == 1)
+		|| (i > WanNumber))
+			break;
+		
+		if (i <= WanNumber + 1 || (i==2 && document.formsummary.DmzMode.value == 0))
+		{
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(6)"><u>');
+			document.write('Dynamic DNS');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td width="'+SecondColumeWidth+'">');
+			if (i==1)
+				document.write('<!--#nk_get DdnsService="1"-->');
+			else if (i==2)
+				document.write('<!--#nk_get DdnsService="2"-->');
+			else if (i==3)
+				document.write('<!--#nk_get DdnsService="3"-->');
+			else if (i==4)
+				document.write('<!--#nk_get DdnsService="4"-->');
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}	
+	}		
+	document.write('</tr>');
+	// Extend Action
+	document.write('<tr>');	
+	for (var i=1;i<=4;i++)
+	{
+		if ( (ShareDMZPort == 1 && i == 2 && document.formsummary.DmzMode.value == 1)
+		|| (i > WanNumber))
+			break;
+		
+		if (i <= WanNumber + 1 || (i==2 && document.formsummary.DmzMode.value == 0))
+		{
+			if (TotalPortNumber == 16)
+				portName = "port"+(16-i)+"Status";
+			else
+				portName = "port"+(11-i)+"Status";
+			portStatus = document.getElementById(portName).value;
+		
+			document.write('<td colspan="2" align="center">');
+			if (portStatus != 1);
+			else if (i==1)
+			{
+				<!--#nk_get WanConnActionByDev="ixp1"-->		
+			}	
+			else if (i==2)
+			{
+				<!--#nk_get WanConnActionByDev="ixp2"-->
+			}
+			else if (i==3)
+			{
+				<!--#nk_get WanConnActionByDev="ixp3"-->
+			}
+			else if (i==4)
+			{
+				<!--#nk_get WanConnActionByDev="ixp4"-->
+			}
+			document.write('</td>');
+		}	
+	}		
+	document.write('</tr>');	
+
+	if (document.formsummary.WanNumber.value > 4)
+	{
+		// Interface
+		document.write('<tr>');
+		for (var i=5;i<=8;i++)
+		{	
+			if (i > WanNumber + 1)
+			{
+				document.write('<td colspan="2" rowspan="6">&nbsp;</td>');
+				continue;
+			}	
+
+			if (i == WanNumber + 1)
+				ColumeType = 2;
+			else if (i > WanNumber+1)
+				ColumeType = 0;
+			else 
+				ColumeType = 1;
+
+			document.write('<th colspan="2">');
+			if (ColumeType == 1)
+				document.write('WAN'+i+'</th>');
+			else if (ColumeType == 2)
+				document.write('DMZ</th>');
+		}
+		document.write('</tr>');
+		// IP Address
+		document.write('<tr>');
+		for (var i=5;i<=8;i++)
+		{
+			if (i > WanNumber + 1)
+				break;
+			
+			if (i <= WanNumber+1)
+			{
+				portName = "port"+(16-i)+"Status";			
+				if (i == WanNumber + 1)
+					portStatus = document.getElementById("port16Status").value;
+				else
+					portStatus = document.getElementById(portName).value;
+			
+				document.write('<td>');
+				document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+				document.write('IP Address');
+				document.write('</u></span>');
+				document.write('&nbsp;:&nbsp;</td>');
+				document.write('<td>');
+				if (portStatus != 1)
+					document.write('0.0.0.0');
+				else if (i==(WanNumber+1))
+					document.write('<!--#nk_get DisplayDMZIp=""-->');
+				else if (i==5)
+					document.write('<!--#nk_get WanIP="5"-->');				
+				else if (i==6)
+					document.write('<!--#nk_get WanIP="6"-->');
+				else if (i==7)
+					document.write('<!--#nk_get WanIP="7"-->');		
+				document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+			}	
+		}	
+		document.write('</tr>');
+		//Gateway IP
+		document.write('<tr>');
+		for (var i=5;i<=8;i++)
+		{
+			if (i == WanNumber + 1)
+			{
+				document.write('<td rowspan="4" colspan="2" height="100"></td>');
+				continue;
+			}	
+			else if (i > WanNumber)
+				break;
+
+			portName = "port"+(16-i)+"Status";			
+			portStatus = document.getElementById(portName).value;
+			
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('Default Gateway');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td>');
+			if (portStatus != 1)
+				document.write('0.0.0.0');
+			else if (i==5)
+				document.write('<!--#nk_get DisplayOnly="ISPGateway5"-->');
+			else if (i==6)
+				document.write('<!--#nk_get DisplayOnly="ISPGateway6"-->');
+			else if (i==7)
+				document.write('<!--#nk_get DisplayOnly="ISPGateway7"-->');
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}	
+		document.write('</tr>');
+		//DNS
+		document.write('<tr>');	
+		for (var i=5;i<=8;i++)
+		{
+			if (i > WanNumber)
+				break;
+
+			portName = "port"+(16-i)+"Status";			
+			portStatus = document.getElementById(portName).value;
+
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('DNS');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td>');
+			if (portStatus != 1)
+				document.write('0.0.0.0');
+			else if (i==5)
+				document.write('<!--#nk_get DevStateReport="dns:ixp5"-->');
+			else if (i==6)
+				document.write('<!--#nk_get DevStateReport="dns:ixp6"-->');
+			else if (i==7)
+				document.write('<!--#nk_get DevStateReport="dns:ixp7"-->');
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}		
+		document.write('</tr>');
+		//DDNS
+		document.write('<tr>');	
+		for (var i=5;i<=8;i++)
+		{
+			if (i > WanNumber)
+				break;
+			
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(6)"><u>');
+			document.write('Dynamic DNS');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td>');
+			if (i==5)
+				document.write('<!--#nk_get DdnsService="5"-->');
+			else if (i==6)
+				document.write('<!--#nk_get DdnsService="6"-->');
+			else if (i==7)
+				document.write('<!--#nk_get DdnsService="7"-->');
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}		
+		document.write('</tr>');
+		// Extend Action
+		document.write('<tr>');	
+		for (var i=5;i<=8;i++)
+		{
+			if (i > WanNumber)
+				break;
+
+			portName = "port"+(16-i)+"Status";			
+			portStatus = document.getElementById(portName).value;
+			
+			document.write('<td colspan="2" align="center">');
+			if (portStatus != 1);
+			else if (i==5)
+			{
+				<!--#nk_get WanConnActionByDev="ixp5"-->
+			}	
+			else if (i==6)
+			{
+				<!--#nk_get WanConnActionByDev="ixp6"-->
+			}
+			else if (i==7)
+			{
+				<!--#nk_get WanConnActionByDev="ixp7"-->
+			}
+			document.write('</td>');			
+		}		
+		document.write('</tr>');
+	}
+	document.write('</table>');	
+	//Table_v4 end
+
+	document.write('</td></tr>');	
+	document.write('</table>');
+	
+	document.write('</td></tr>');	
+	document.write('</table>');
+
+
+	document.write('<table id="WanStatus_v6" width="'+(FixedTableWidth_All)+'" border='+Tableborder+' cellpadding="0" cellspacing="0">');
+	document.write('<tr><td>');
+	PrintIPTypeTab('IPv4','false','IPv6','true');
+	document.write('</td></tr>');	
+	document.write('<tr><td>');
+	document.write('<table width="100%" cellpadding="10" cellspacing="10" bgcolor="#CBD8E1" style="border-left:1px solid #666;border-right:1px solid #666;border-bottom:1px solid #666;"><tr><td>');
+
+	if (MaxWanPortNumber<=2)
+	{
+		document.write('<table  class="WanStatus" width="'+(FixedTableWidth-130)+'"  border='+Tableborder+'>');
+	}
+	else
+	{
+		document.write('<table class="WanStatus" width="'+(FixedTableWidth+18)+'"  border='+Tableborder+'>');	
+	}
+	//Table_v6 start
+
+	FirstColumeWidth=108;
+	SecondColumeWidth=200;
+	// Interface
+	for (var i=1;i<=4;i++)
+	{	
+		if (i > 2 && WanNumber <= 2 && MaxWanPortNumber<=2)
+			break;
+		else if (i > WanNumber+1)
+			continue;	
+
+		if ( (WanNumber == 2 && i > WanNumber && MaxWanPortNumber<=2)
+		|| (i > WanNumber+1))
+			break;
+
+		
+
+
+		if(i%2==1)
+			document.write('<tr>');
+
+		if (i == WanNumber + 1 || (i == 2 && document.formsummary.DmzMode.value == 1))
+			ColumeType = 2;
+		else if (i <= WanNumber || (i == 2 && document.formsummary.DmzMode.value == 0))
+			ColumeType = 1;
+		else
+			ColumeType = 0;
+
+		document.write('<td valign="top"><table cellspacing="0" cellpadding="0"><tr>');
+		document.write('<th colspan="2" align="left">');
+		if (ColumeType == 1)
+			document.write('WAN'+i+'</th>');
+		else if (ColumeType == 2)
+			document.write('DMZ</th>');
+
+		document.write('</tr>');
+		document.write('<tr >');
+
+
+
+		if (i <= WanNumber + 1 || (i==2 && document.formsummary.DmzMode.value == 1))
+		{
+			
+			if (TotalPortNumber == 16)
+				portName = "port"+(16-i)+"Status";
+			else
+				portName = "port"+(11-i)+"Status";
+			if (TotalPortNumber == 16 && i == WanNumber + 1)
+				portStatus = document.getElementById("port16Status").value;
+			else
+			portStatus = document.getElementById(portName).value;
+			
+			document.write('<td width="'+FirstColumeWidth+'" valign="top">');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('IP Address');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td width="'+SecondColumeWidth+'">');
+			if ('<!--#nk_get RadioHandle="setIpMode:1"-->' == "checked" )
+			{
+				if (portStatus != 1)
+					document.write('::');
+				else if (i==1)
+					document.write('<!--#nk_get WanIP_v6="1"-->');
+				else if (i == WanNumber + 1 || (i == 2 && document.formsummary.DmzMode.value == 1 && MaxWanPortNumber<=2))
+					document.write('<!--#nk_get DisplayDMZIp_v6=""-->');
+				else if (i==2)
+					document.write('<!--#nk_get WanIP_v6="2"-->');			
+				else if (i==3)
+					document.write('<!--#nk_get WanIP_v6="3"-->');
+				else if (i==4)
+					document.write('<!--#nk_get WanIP_v6="4"-->');
+			}
+			else
+			{
+				document.write('---');
+			}
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}	
+
+		document.write('</tr>');
+
+		if ( (ShareDMZPort == 1 && i == 2 && document.formsummary.DmzMode.value == 1)
+		|| (i > WanNumber)){
+			document.write('</tr></table></td>');
+
+			if(i%2==0)
+				document.write('</tr>');
+			break;
+		} 
+			
+
+		//Gateway IP
+		document.write('<tr>');
+		
+		if (i <= WanNumber + 1)
+		{
+			if (TotalPortNumber == 16)
+				portName = "port"+(16-i)+"Status";
+			else
+				portName = "port"+(11-i)+"Status";
+			portStatus = document.getElementById(portName).value;
+		
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('Default Gateway');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td>');
+			if ('<!--#nk_get RadioHandle="setIpMode:1"-->' == "checked" )
+			{
+				if (portStatus != 1)
+					document.write('::');
+				else if (i==1)
+					document.write('<!--#nk_get DisplayOnly="ISPGateway1_v6"-->');
+				else if (i==2)
+					document.write('<!--#nk_get DisplayOnly="ISPGateway2_v6"-->');
+				else if (i==3)
+					document.write('<!--#nk_get DisplayOnly="ISPGateway3_v6"-->');
+				else if (i==4)
+					document.write('<!--#nk_get DisplayOnly="ISPGateway4_v6"-->');
+			}
+			else
+			{
+				document.write('---');
+			}
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}	
+
+		document.write('</tr>');
+		// DNS
+		document.write('<tr>');	
+
+		
+		if (i <= WanNumber + 1 || (i==2 && document.formsummary.DmzMode.value == 0))
+		{
+			if (TotalPortNumber == 16)
+				portName = "port"+(16-i)+"Status";
+			else
+				portName = "port"+(11-i)+"Status";
+			portStatus = document.getElementById(portName).value;
+		
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('DNS');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td align="left">');
+			if ('<!--#nk_get RadioHandle="setIpMode:1"-->' == "checked" )
+			{
+				if (portStatus != 1)
+					document.write('::');
+				else if (i==1)
+					document.write('<!--#nk_get DevStateReport_v6="dns:ixp1"-->');
+				else if (i==2)
+					document.write('<!--#nk_get DevStateReport_v6="dns:ixp2"-->');
+				else if (i==3)
+					document.write('<!--#nk_get DevStateReport_v6="dns:ixp3"-->');
+				else if (i==4)
+					document.write('<!--#nk_get DevStateReport_v6="dns:ixp4"-->');
+			}
+			else
+			{
+				document.write('---');
+			}
+
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+		}	
+
+		document.write('</tr>');	
+		// Extend Action
+		document.write('<tr>');	
+		
+		if (i <= WanNumber + 1 || (i==2 && document.formsummary.DmzMode.value == 0))
+		{
+			if (TotalPortNumber == 16)
+				portName = "port"+(16-i)+"Status";
+			else
+				portName = "port"+(11-i)+"Status";
+			portStatus = document.getElementById(portName).value;
+		
+			document.write('<td colspan="2" align="center">');
+
+			if ('<!--#nk_get RadioHandle="setIpMode:1"-->' == "checked" )
+			{
+				if (portStatus != 1);
+				else if (i==1)
+				{
+					<!--#nk_get WanConnActionByDev_v6="ixp1"-->		
+				}	
+				else if (i==2)
+				{
+					<!--#nk_get WanConnActionByDev_v6="ixp2"-->
+				}
+				else if (i==3)
+				{
+					<!--#nk_get WanConnActionByDev_v6="ixp3"-->
+				}
+				else if (i==4)
+				{
+					<!--#nk_get WanConnActionByDev_v6="ixp4"-->
+				}
+				document.write('</td>');
+			}
+		
+		}
+		
+		document.write('</tr></table></td>');
+
+		if(i%2==0)
+			document.write('</tr>');
+	}		
+
+	if (document.formsummary.WanNumber.value > 4)
+	{
+		// Interface
+		for (var i=5;i<=8;i++)
+		{	
+			if (i > WanNumber + 1)
+				break;
+
+			if(i%2==1)
+				document.write('<tr>');
+
+			if (i == WanNumber + 1)
+				ColumeType = 2;
+			else if (i > WanNumber+1)
+				ColumeType = 0;
+			else 
+				ColumeType = 1;
+			document.write('<td valign="top"><table border="'+Tableborder+'" cellspacing="0"><tr>');
+			document.write('<th colspan="2" align="left">');
+			if (ColumeType == 1)
+				document.write('WAN'+i+'</th>');
+			else if (ColumeType == 2)
+				document.write('DMZ</th>');
+
+			document.write('</tr>');
+			// IP Address
+			document.write('<tr>');
+
+			if (i <= WanNumber+1)
+			{
+				portName = "port"+(16-i)+"Status";			
+				if (i == WanNumber + 1)
+					portStatus = document.getElementById("port16Status").value;
+				else
+					portStatus = document.getElementById(portName).value;
+			
+				document.write('<td width="'+FirstColumeWidth+'" valign="top">');
+				document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+				document.write('IP Address');
+				document.write('</u></span>');
+				document.write('&nbsp;:&nbsp;</td>');
+				document.write('<td width="'+SecondColumeWidth+'">');
+				if ('<!--#nk_get RadioHandle="setIpMode:1"-->' == "checked" )
+				{
+					if (portStatus != 1)
+						document.write('::');
+					else if (i==(WanNumber+1))
+						document.write('<!--#nk_get DisplayDMZIp_v6=""-->');
+					else if (i==5)
+						document.write('<!--#nk_get WanIP_v6="5"-->');				
+					else if (i==6)
+						document.write('<!--#nk_get WanIP_v6="6"-->');
+					else if (i==7)
+						document.write('<!--#nk_get WanIP_v6="7"-->');	
+				}
+				else
+				{
+					document.write('---');
+				}
+	
+				document.write('</td>');
+			}	
+
+			document.write('</tr>');
+			//Gateway IP
+			document.write('<tr>');
+
+			portName = "port"+(16-i)+"Status";			
+			portStatus = document.getElementById(portName).value;
+			
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('Default Gateway');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td>');
+			if ('<!--#nk_get RadioHandle="setIpMode:1"-->' == "checked" )
+			{
+				if (portStatus != 1)
+					document.write('::');
+				else if (i==5)
+					document.write('<!--#nk_get DisplayOnly="ISPGateway5_v6"-->');
+				else if (i==6)
+					document.write('<!--#nk_get DisplayOnly="ISPGateway6_v6"-->');
+				else if (i==7)
+					document.write('<!--#nk_get DisplayOnly="ISPGateway7_v6"-->');
+			}
+			else
+			{
+				document.write('---');
+			}
+
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+
+			document.write('</tr>');
+			//DNS
+			document.write('<tr>');	
+
+			document.write('<td>');
+			document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(7)"><u>');
+			document.write('DNS');
+			document.write('</u></span>');
+			document.write('&nbsp;:&nbsp;</td>');
+			document.write('<td>');
+			if ('<!--#nk_get RadioHandle="setIpMode:1"-->' == "checked" )
+			{
+				if (portStatus != 1)
+					document.write('::');
+				else if (i==5)
+					document.write('<!--#nk_get DevStateReport_v6="dns:ixp5"-->');
+				else if (i==6)
+					document.write('<!--#nk_get DevStateReport_v6="dns:ixp6"-->');
+				else if (i==7)
+					document.write('<!--#nk_get DevStateReport_v6="dns:ixp7"-->');
+			}
+			else
+			{
+				document.write('---');
+			}
+
+			document.write('<img border="0" src="images/_blank.gif" width="8" height="1"></td>');
+	
+			document.write('</tr>');
+
+			// Extend Action
+			document.write('<tr>');	
+			
+			document.write('<td colspan="2" align="center">');
+			if (portStatus != 1);
+			else if (i==5)
+			{
+				<!--#nk_get WanConnActionByDev_v6="ixp5"-->
+			}	
+			else if (i==6)
+			{
+				<!--#nk_get WanConnActionByDev_v6="ixp6"-->
+			}
+			else if (i==7)
+			{
+				<!--#nk_get WanConnActionByDev_v6="ixp7"-->
+			}
+			document.write('</td>');
+
+			document.write('</tr></table></td>');
+
+			if(i%2==0)
+				document.write('</tr>');
+		}	
+	}
+	
+	document.write('</tr></table>');	
+	//Table_v6 end
+
+	document.write('</td></tr></table>');
+	document.write('</td></tr></table>');
+
+
+	PrintEndBlock(hasUnderLine, 1);
+}
+
+function PrintFirewallStatus(hasUnderLine)
+{
+	PrintBeginBlock(1, "Firewall Setting Status");
+	document.write('<table class="Infotable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(1)"><u>');
+	document.write('SPI (Stateful Packet Inspection)');	
+	document.write('</u></span>');
+	document.write('&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');	
+	if ('<!--#nk_get RadioHandle2="firewall:1"-->'=='checked' && '<!--#nk_get RadioHandle2="spi:1"-->'=='checked') 
+		document.write('<font color='+Connectlinkcolor+'>On</font>');			   
+	else 
+		document.write('<font color='+Disablelinkcolor+'>Off</font>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(1)"><u>');
+	document.write('DoS (Denial of Service)');	
+	document.write('</u></span>');
+	document.write('&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');	
+	if ('<!--#nk_get RadioHandle2="firewall:1"-->'=='checked' && '<!--#nk_get RadioHandle2="dos:1"-->'=='checked')
+		document.write('<font color='+Connectlinkcolor+'>On</font>');	
+	else
+		document.write('<font color='+Disablelinkcolor+'>Off</font>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(1)"><u>');
+	document.write('Block WAN Request');	
+	document.write('</u></span>');
+	document.write('&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');	
+	if ('<!--#nk_get RadioHandle2="firewall:1"-->'=='checked' && '<!--#nk_get RadioHandle2="blockWANReq:1"-->'=='checked')  
+		document.write('<font color='+Connectlinkcolor+'>On</font>');	
+	else
+		document.write('<font color='+Disablelinkcolor+'>Off</font>');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(1)"><u>');
+	document.write('Remote Management');	
+	document.write('</u></span>');
+	document.write('&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');	
+	if ('<!--#nk_get RadioHandle2="firewall:0"-->'=='checked'  ||  '<!--#nk_get RadioHandle2="remoteMng:1"-->'=='checked')
+		document.write('<font color='+Connectlinkcolor+'>On</font>');	
+	else
+		document.write('<font color='+Disablelinkcolor+'>Off</font>');	
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(2)"><u>');
+	document.write('Access Rule');	
+	document.write('</u></span>');
+	document.write('&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');	
+	document.write('<!--#nk_get DisplayOnly="AccessRuleCount"-->');
+	document.write(' Rules Set');
+	document.write('</td>');
+	document.write('</tr>');	
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 1);
+}
+
+function PrintVPNStatus(hasUnderLine)
+{
+	var i='<!--#nk_get VpnTunnelNo="Used"-->';
+	var Max;
+	if(TotalPortNumber==6)
+                Max=50-parseInt(i,10);
+        else
+                Max=100-parseInt(i,10);
+
+	document.write('<tr><td>');
+	document.write('<table id="VPN Setting Status" width="100%" class="block" border="0" cellpadding="0" cellspacing="0">');
+   	document.write('<tr>');
+	document.write('<td align="left" valign="top">');
+
+	document.write('<font class="Grouptitle">');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(3)"><u>VPN Setting Status</u></span>');
+	document.write('</font><br>');
+
+	document.write('<img border="0" src="images/_blank.gif" width="1" height="10">'); 
+	document.write('<table class="Infotable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Tunnel(s) Used &nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td>');	
+	document.write(parseInt(i,10));	
+	document.write(' Tunnels</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Tunnel(s) Available&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td>');	
+	document.write(Max);
+	document.write(' Tunnels</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine, 1);
+}
+
+function PrintLogStatus(hasUnderLine)
+{
+	document.write('<tr><td>');
+	document.write('<table id="Log Setting Status" width="100%" class="block" border="0" cellpadding="0" cellspacing="0">');
+   	document.write('<tr>');
+	document.write('<td align="left" valign="top">');
+
+	document.write('<font class="Grouptitle">');
+	document.write('<span onMouseOver="MouseStyleChange(this, 0)" onMouseOut="MouseStyleChange(this, 1)" onclick="GoPage(4)"><u>Log Setting Status</u></span>');
+	document.write('</font><br>');
+
+	document.write('<img border="0" src="images/_blank.gif" width="1" height="10">'); 
+
+	document.write('<table class="Infotable" width="'+NormallLayoutwidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Syslog Server&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td>');	
+	if('<!--#nk_get CheckboxStatus="remoteLogger"-->'=='checked')
+		document.write('<font color='+Connectlinkcolor+'>On</font>');
+	else
+		document.write('<font color='+Disablelinkcolor+'>Off</font>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('Email Log&nbsp;:&nbsp;');	
+	document.write('</td>');
+	document.write('<td>');	
+	if('<!--#nk_get CheckboxStatus="mailAlert"-->'=='checked')
+		document.write('<font color='+Connectlinkcolor+'>On</font>');
+	else 
+		document.write('<font color='+Disablelinkcolor+'>Off</font>');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 1, 1);		// Set Selected Node
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+	
+	<form name="formsummary" method="post" action="home.htm#1">
+	<input type="hidden" name="submitStatus" value='0'>
+	<input type="hidden" name="getHMark" value='<!--#nk_get handle_tags="HMark"-->'>
+	<input type="hidden" name="WanNumber" value='<!--#nk_get GetSystemNum="wan_port_num"-->'>
+	<input type="hidden" name="DmzMode" value='<!--#nk_get DMZModeCheck=""-->'>	
+	<input type="hidden" name="UDI" value='<!--#nk_get SP_GetUDI=""-->'>
+	<input type="hidden" name="result" value='<!--#nk_get SP_Get_License="status"-->'>
+	<input type="hidden" name="expire_day" value='<!--#nk_get SP_Get_License="expire_day"-->'>
+	<input type="hidden" name="todo" value="">
+	<input type="hidden" name="getspstatus" value="0">
+	<input type="hidden" name="port1Status" id="port1Status" value='<!--#nk_get PortInformation="1"-->'>
+	<input type="hidden" name="port2Status" id="port2Status" value='<!--#nk_get PortInformation="2"-->'>
+	<input type="hidden" name="port3Status" id="port3Status" value='<!--#nk_get PortInformation="3"-->'>
+	<input type="hidden" name="port4Status" id="port4Status" value='<!--#nk_get PortInformation="4"-->'>
+	<input type="hidden" name="port5Status" id="port5Status" value='<!--#nk_get PortInformation="5"-->'>
+	<input type="hidden" name="port6Status" id="port6Status" value='<!--#nk_get PortInformation="6"-->'>
+	<input type="hidden" name="port7Status" id="port7Status" value='<!--#nk_get PortInformation="7"-->'>
+	<input type="hidden" name="port8Status" id="port8Status" value='<!--#nk_get PortInformation="8"-->'>
+	<input type="hidden" name="port9Status" id="port9Status" value='<!--#nk_get PortInformation="9"-->'>
+	<input type="hidden" name="port10Status" id="port10Status" value='<!--#nk_get PortInformation="10"-->'>
+	<input type="hidden" name="port11Status" id="port11Status" value='<!--#nk_get PortInformation="11"-->'>
+	<input type="hidden" name="port12Status" id="port12Status" value='<!--#nk_get PortInformation="12"-->'>
+	<input type="hidden" name="port13Status" id="port13Status" value='<!--#nk_get PortInformation="13"-->'>
+	<input type="hidden" name="port14Status" id="port14Status" value='<!--#nk_get PortInformation="14"-->'>
+	<input type="hidden" name="port15Status" id="port15Status" value='<!--#nk_get PortInformation="15"-->'>
+	<input type="hidden" name="port16Status" id="port16Status" value='<!--#nk_get PortInformation="16"-->'>
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>	
+</table>
+</body>
+</html>
+<!--#nk_get SP_do_LicenseCheck="refresh"-->

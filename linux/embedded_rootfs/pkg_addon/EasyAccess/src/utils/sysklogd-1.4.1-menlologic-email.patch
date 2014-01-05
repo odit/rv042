@@ -1,0 +1,78 @@
+diff -ruN sysklogd-1.4.1-orig/syslogd.c sysklogd-1.4.1/syslogd.c
+--- sysklogd-1.4.1-orig/syslogd.c	2001-03-11 14:40:10.000000000 -0500
++++ sysklogd-1.4.1/syslogd.c	2004-05-16 18:13:29.000000000 -0400
+@@ -621,6 +621,9 @@
+ 			struct sockaddr_in	f_addr;
+ 		} f_forw;		/* forwarding address */
+ 		char	f_fname[MAXFNAME];
++#ifdef MENLOLOGIC
++		char	f_mname[MAXFNAME];
++#endif /* MENLOLOGIC */
+ 	} f_un;
+ 	char	f_prevline[MAXSVLINE];		/* last message logged */
+ 	char	f_lasttime[16];			/* time of last occurrence */
+@@ -661,6 +664,9 @@
+ #define F_FORW_SUSP	7		/* suspended host forwarding */
+ #define F_FORW_UNKN	8		/* unknown host forwarding */
+ #define F_PIPE		9		/* named pipe */
++#ifdef MENLOLOGIC
++#define F_MAIL		10		/* named pipe */
++#endif /* MENLOLOGIC */
+ char	*TypeNames[] = {
+ 	"UNUSED",	"FILE",		"TTY",		"CONSOLE",
+ 	"FORW",		"USERS",	"WALL",		"FORW(SUSPENDED)",
+@@ -769,6 +775,10 @@
+ static void allocate_log(void);
+ void sighup_handler();
+ 
++#ifdef MENLOLOGIC
++int mailto(char *addr, char *line)
++#endif
++
+ #ifdef SYSLOG_UNIXAF
+ static int create_unix_socket(const char *path);
+ #endif
+@@ -1790,6 +1800,14 @@
+ 		break;
+ #endif
+ 
++#ifdef MENLOLOGIC
++	case F_MAIL:
++		dprintf(" %s\n", f->f_un.f_mname);
++	       	if (mailto(f->f_un.f_mnmae, line) < 0)
++		       	logerror("sendto");
++		break;
++#endif /* MENLOLOGIC */
++
+ 	case F_CONSOLE:
+ 		f->f_time = now;
+ #ifdef UNIXPC
+@@ -1980,6 +1998,14 @@
+ 	endutent();
+ 	reenter = 0;
+ }
++#ifdef MENLOLOGIC 
++int mailto(char *addr, char *line)
++{
++   char tmpStr[1024];
++   sprintf(tmpStr, "mail_util.sh -S %s  -s ALARM:EasyAccess %s", line);
++   return system(tmpStr);
++}
++#endif /* MENLOLOGIC */
+ 
+ void reapchild()
+ {
+@@ -2629,6 +2655,13 @@
+ 		 */
+ #endif
+ 		break;
++#ifdef MENLOLOGIC
++	case '%':
++		(void) strcpy(f->f_un.f_mname, ++p);
++		dprintf("mail to id : %s\n", p);	/*ASP*/
++	       	f->f_type = F_MAIL;
++		break;
++#endif /* MENLOLOGIC */
+ 
+         case '|':
+ 	case '/':

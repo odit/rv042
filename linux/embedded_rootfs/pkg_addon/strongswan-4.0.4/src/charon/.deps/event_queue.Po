@@ -1,0 +1,99 @@
+event_queue.o event_queue.o: queues/event_queue.c \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/pthread.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/features.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/cdefs.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wordsize.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gnu/stubs.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sched.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/types.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.1/include/stddef.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/typesizes.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/time.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sched.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/time.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/signal.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sigset.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/pthreadtypes.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/setjmp.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sgidefs.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/stdlib.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/types.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/endian.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/endian.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/select.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/select.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/sysmacros.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/alloca.h \
+  queues/event_queue.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/time.h \
+  ../../src/libstrongswan/types.h \
+  /usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gmp.h \
+  ../../src/libstrongswan/definitions.h queues/jobs/job.h \
+  ../../src/libstrongswan/utils/linked_list.h \
+  ../../src/libstrongswan/utils/iterator.h
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/pthread.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/features.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/cdefs.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/wordsize.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gnu/stubs.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sched.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/types.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../lib/gcc/mips64-octeon-linux-gnu/4.1.1/include/stddef.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/typesizes.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/time.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sched.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/time.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/signal.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/sigset.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/pthreadtypes.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/setjmp.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sgidefs.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/stdlib.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/types.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/endian.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/endian.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/select.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/bits/select.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/sysmacros.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/alloca.h:
+
+queues/event_queue.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/sys/time.h:
+
+../../src/libstrongswan/types.h:
+
+/usr/local/cavium/tools-gcc-4.1/bin/../mips64-octeon-linux-gnu/sys-root/usr/include/gmp.h:
+
+../../src/libstrongswan/definitions.h:
+
+queues/jobs/job.h:
+
+../../src/libstrongswan/utils/linked_list.h:
+
+../../src/libstrongswan/utils/iterator.h:

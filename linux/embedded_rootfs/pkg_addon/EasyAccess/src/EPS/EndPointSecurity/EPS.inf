@@ -1,0 +1,18 @@
+; Sample INF file for MLWebCacheCleaner.DLL
+[version] 
+; version
+signature="$CHICAGO$"
+AdvancedINF=2.0  
+
+[Add.Code]
+EPS.DLL=EPS.DLL
+
+
+[EPS.DLL]
+file=thiscab
+clsid={F798D8AC-C44C-4E64-B731-6408965B6FE0} 
+FileVersion=1,7,1,1
+RegisterServer=yes  
+
+
+; end of INF file

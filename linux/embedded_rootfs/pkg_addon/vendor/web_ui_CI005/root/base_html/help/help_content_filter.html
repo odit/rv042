@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/12/10 11:16:15" />
+    <title>Using Content Filters to Control Internet Access </title>
+    <!-- Copyright � 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=33;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp998295"> </a><h1 class="pTitle">
+Using Content Filters to Control Internet Access
+
+</h1>
+<a name="wp998296"> </a><p class="pBody">
+Use the Firewall &gt; <em class="cEmphasis">Content Filter</em> page to prevent your users from accessing 
+inappropriate websites. You can block access by specifying domains and 
+keywords. 
+
+</p>
+<a name="wp998298"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp998299"> </a><p class="pBody">
+You can block access to specified domains or, to block a wider range of sites, 
+block access to URLs containing specified keywords. You also can specify the 
+days and hours when these filters are active. This page includes these sections:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998303"> </a><li class="pSmartList1"><a href="#wp998317">Forbidden Domains</a>
+</li>
+<a name="wp998307"> </a><li class="pSmartList1"><a href="#wp998326">Website Blocking by Keywords</a>
+</li>
+<a name="wp998311"> </a><li class="pSmartList1"><a href="#wp998334">Schedule</a>
+</li>
+</ul></div>
+<a name="wp998312"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> The content filter rules will be automatically disabled if the Cisco ProtectLink 
+service is activated on the router. Instead configure the ProtectLink features to 
+control Internet access. 
+
+</p>
+<a name="wp998317"> </a><h2 class="pHeading2">
+Forbidden Domains
+</h2>
+<a name="wp998319"> </a><p class="pBody">
+Check the <b class="cBold">Enable Block Forbidden Domains</b> box to allow the router to block 
+access to specified domains. Uncheck the box to disable this feature. 
+
+</p>
+<a name="wp998320"> </a><p class="pBody">
+Add or edit rules as needed. Remember that your entries are not saved until you 
+click the Save button.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998321"> </a><li class="pSmartList1"><b class="cBold">To add an entry to the list: </b>Type the domain name in the <b class="cBold">Add</b> box. Then 
+click <b class="cBold">Add to list</b>. Repeat this task as needed to add other domains.
+</li>
+<a name="wp998322"> </a><p class="pListBodyLevel1">
+Access is blocked if a user enters a specified domain name in the browser 
+address bar or navigates to a web page within a specified domain. For 
+example, assume that <em class="cEmphasis">yahoo.com</em> is blocked. The user cannot successfully 
+enter any URL that begins with <em class="cEmphasis">yahoo.com</em>. Access also is blocked if the 
+user performs a web search and clicks a link for a page within the specified 
+domain, such as <em class="cEmphasis">yahoo.com/news</em>. However, the user can connect to<em class="cEmphasis"> 
+mail.yahoo.com</em>, which is a different domain.
+
+</p>
+<a name="wp998323"> </a><li class="pSmartList1"><b class="cBold">To modify an entry in the list:</b> Click the entry that you want to modify. Make 
+the changes, and then click <b class="cBold">Update</b>. If you do not need to make changes, 
+you can click <b class="cBold">Add New</b> to de-select the entry and clear the text field.
+</li>
+<a name="wp998324"> </a><li class="pSmartList1"><b class="cBold">To delete an entry from the list:</b> Click the entry that you want to delete. 
+Then click <b class="cBold">Delete</b>.
+</li>
+</ul></div>
+<a name="wp998326"> </a><h2 class="pHeading2">
+Website Blocking by Keywords
+</h2>
+<a name="wp998327"> </a><p class="pBody">
+Check the <b class="cBold">Enable Website Blocking By Keywords</b> box to allow the router to 
+block access to URLs that include specified characters. Uncheck the box to 
+disable this feature.
+
+</p>
+<a name="wp998328"> </a><p class="pBody">
+Add or edit rules as needed. Remember that your entries are not saved until you 
+click the Save button.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998329"> </a><li class="pSmartList1"><b class="cBold">To add an entry to the list: </b>Type a keyword in the <b class="cBold">Add</b> box. Then click <b class="cBold">Add 
+to list</b>. A keyword can be a complete word, such as <em class="cEmphasis">government</em>, or a few 
+characters, such as <em class="cEmphasis">gov</em>. Repeat this task as needed to add other keywords.
+</li>
+<a name="wp998330"> </a><p class="pListBodyLevel1">
+Access is blocked if the user enters or navigates to a URL that includes the 
+specified characters. For example, assume that <em class="cEmphasis">yahoo</em> is blocked. The user 
+cannot access <em class="cEmphasis">www.yahoo.com</em>, <em class="cEmphasis">finance.yahoo.com</em>, or <em class="cEmphasis">mydomain.com/
+news/yahoo</em>.
+
+</p>
+<a name="wp998331"> </a><li class="pSmartList1"><b class="cBold">To modify an entry in the list:</b> Click the entry that you want to modify. Make 
+the changes, and then click <b class="cBold">Update</b>. If you do not need to make changes, 
+you can click <b class="cBold">Add New</b> to de-select the entry and clear the text field.
+</li>
+<a name="wp998332"> </a><li class="pSmartList1"><b class="cBold">To delete an entry from the list:</b> Click the entry that you want to delete. 
+Then click <b class="cBold">Delete</b>.
+</li>
+</ul></div>
+<a name="wp998334"> </a><h2 class="pHeading2">
+Schedule 
+</h2>
+<a name="wp998335"> </a><p class="pBody">
+Keep the default settings or specify a schedule when content filtering is active:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp998337"> </a><li class="pSmartList1"><b class="cBold">Time:</b> Choose one of the following options:
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp998338"> </a><li class="pSmartList2"><b class="cBold">Always:</b> Choose this option if the rule applies at all times and on all days of the week. Optionally, you can enter a time period in the <em class="cEmphasis">From</em> and <em class="cEmphasis">To</em> fields. </li>
+<a name="wp998339"> </a><li class="pSmartList2"><b class="cBold">Interval:</b> Choose this option to specify the time period when the rule is active. If you choose this option, you must enter a time period in the <em class="cEmphasis">From</em> and <em class="cEmphasis">To</em> fields. Optionally, you can specify the days of the week.</li>
+</ul></div>
+<a name="wp998340"> </a><li class="pSmartList1"><b class="cBold">From </b>and <b class="cBold">To: </b>If you chose Interval, use these fields to specify the times and 
+days when the rule is active. Enter the start time in the From field and enter 
+end time in the To field. Use hh:mm format, such as 15:30 for 3:30 p.m. Enter 
+00:00 to 00:00 if the rule applies during all times of day.
+</li>
+<a name="wp998342"> </a><li class="pSmartList1"><b class="cBold">Effective on:</b> If you chose Interval, use these check boxes to specify the 
+days when the rule is active. Check the <b class="cBold">Everyday</b> box if the rule is active on 
+all days. To choose specific days, uncheck the <b class="cBold">Everyday</b> box and then 
+check the box for each day when the rule is active.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

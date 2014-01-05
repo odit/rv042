@@ -1,0 +1,86 @@
+<!Sample page for the execution of Virtual Passage Tunnel ActiveX>
+<HTML>
+<HEAD> 
+<!XTunnel Configuration Script>
+<SCRIPT>
+function launchwindow()
+{
+	XTunnel1 = VPLaunch1.GetVPInterface();
+	if (null == XTunnel1)
+	{
+		alert("VP Control could not be instantiated");
+		return;
+	}
+	
+	// check if we are the active VP version
+	VPInst = XTunnel1.CurrentVPInstanceCount;
+	if (1 != VPInst)
+	{
+		alert("Another instance of Virtual Passage already running");
+		return;
+	}
+	//IP Address of AccessPoint server
+	XTunnel1.IPAddress = "192.168.1.42";
+	//AccessPoint Auth String
+	XTunnel1.SessionId = "EasyAccess::::admin";
+	//The lowest possible IP address permissible for clients
+	XTunnel1.ClientIPLower = "192.168.251.1";
+	//The Highest possible IP address permissible for clients
+	XTunnel1.ClientIPHigher = "192.168.251.254";
+	//Whether SSL tunnel or TCP tunnel - 0 for TCP , 1 for SSL
+	XTunnel1.isSSLTunnel = 1;
+	//Server Port to be used for tunneling - default is 443 for SSL and 80 for TCP
+	XTunnel1.ServerPort = 443; 
+	//Uninstall Virtual Passage when the browser window is closed, 0 if UnInstall is not needed, 1 if needed - Default : 1
+	XTunnel1.isUninstallClicked = 1;
+	//Check if the certificate is from a valid root certifying authority - 1 if checking is needed , 0 if not needed - Default : 1
+	XTunnel1.isCertRootValidate = 0;
+	//Additional route entries to be configured at the client
+	//XTunnel1.AddRouteEntry("192.168.4.0", "255.255.255.0");
+	XTunnel1.DNSSuffix = "chn.cavium.com"
+	XTunnel1.NetworkMask = "255.255.255.0"
+	XTunnel1.EnableFullTunnel = 0;
+}	
+
+function LaunchVirtualPassage()
+{
+	XTunnel1 = VPLaunch1.GetVPInterface();
+	if (null == XTunnel1)
+	{
+		alert("VP Control could not be instantiated");
+		return;
+	}
+	VPInst = XTunnel1.CurrentVPInstanceCount;
+	isRunning = XTunnel1.isVirtualPassageRunning;
+	if (1 != VPInst)
+	{
+		alert("Another instance of Virtual Passage already running");
+		return;
+	}
+	if (1 == isRunning)
+	{
+		alert("Virtual Passage already running");
+		return;
+	}
+	XTunnel1.LaunchSSLDialog();
+}
+</SCRIPT>
+<TITLE> SSL VPN Virtual Passage Connector </TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" onload="launchwindow();">
+<!The XTunnel cab is loaded using the OBJECT Tag>
+<!***NOTE***Replace the CODEBASE attribute with the path and version you want>
+<OBJECT ID="VPLaunch1"
+ CLASSID="CLSID:19DFFB5D-E30A-4E3B-8524-0AD8F4D88D32"
+ CODEBASE=".\XTunnel.cab#version=1,6,1,1"
+>
+Object Tag Not Supported by Browser.
+<BR>
+</OBJECT>
+<BR>
+<a href="JavaScript:LaunchVirtualPassage();">
+Launch Virtual Passage</a>
+<BR>
+</BODY>
+</HTML>
+

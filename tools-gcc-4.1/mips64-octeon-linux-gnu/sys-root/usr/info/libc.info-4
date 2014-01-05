@@ -1,0 +1,2874 @@
+This is libc.info, produced by makeinfo version 4.3 from libc.texinfo.
+
+INFO-DIR-SECTION GNU libraries
+START-INFO-DIR-ENTRY
+* Libc: (libc).                 C library.
+END-INFO-DIR-ENTRY
+
+INFO-DIR-SECTION GNU C library functions and macros
+START-INFO-DIR-ENTRY
+* ALTWERASE: (libc)Local Modes.
+* ARGP_ERR_UNKNOWN: (libc)Argp Parser Functions.
+* ARG_MAX: (libc)General Limits.
+* BC_BASE_MAX: (libc)Utility Limits.
+* BC_DIM_MAX: (libc)Utility Limits.
+* BC_SCALE_MAX: (libc)Utility Limits.
+* BC_STRING_MAX: (libc)Utility Limits.
+* BRKINT: (libc)Input Modes.
+* BUFSIZ: (libc)Controlling Buffering.
+* CCTS_OFLOW: (libc)Control Modes.
+* CHILD_MAX: (libc)General Limits.
+* CIGNORE: (libc)Control Modes.
+* CLK_TCK: (libc)CPU Time.
+* CLOCAL: (libc)Control Modes.
+* CLOCKS_PER_SEC: (libc)CPU Time.
+* COLL_WEIGHTS_MAX: (libc)Utility Limits.
+* CPU_CLR: (libc)CPU Affinity.
+* CPU_ISSET: (libc)CPU Affinity.
+* CPU_SET: (libc)CPU Affinity.
+* CPU_SETSIZE: (libc)CPU Affinity.
+* CPU_ZERO: (libc)CPU Affinity.
+* CREAD: (libc)Control Modes.
+* CRTS_IFLOW: (libc)Control Modes.
+* CS5: (libc)Control Modes.
+* CS6: (libc)Control Modes.
+* CS7: (libc)Control Modes.
+* CS8: (libc)Control Modes.
+* CSIZE: (libc)Control Modes.
+* CSTOPB: (libc)Control Modes.
+* DES_FAILED: (libc)DES Encryption.
+* DTTOIF: (libc)Directory Entries.
+* E2BIG: (libc)Error Codes.
+* EACCES: (libc)Error Codes.
+* EADDRINUSE: (libc)Error Codes.
+* EADDRNOTAVAIL: (libc)Error Codes.
+* EADV: (libc)Error Codes.
+* EAFNOSUPPORT: (libc)Error Codes.
+* EAGAIN: (libc)Error Codes.
+* EALREADY: (libc)Error Codes.
+* EAUTH: (libc)Error Codes.
+* EBACKGROUND: (libc)Error Codes.
+* EBADE: (libc)Error Codes.
+* EBADF: (libc)Error Codes.
+* EBADFD: (libc)Error Codes.
+* EBADMSG: (libc)Error Codes.
+* EBADR: (libc)Error Codes.
+* EBADRPC: (libc)Error Codes.
+* EBADRQC: (libc)Error Codes.
+* EBADSLT: (libc)Error Codes.
+* EBFONT: (libc)Error Codes.
+* EBUSY: (libc)Error Codes.
+* ECANCELED: (libc)Error Codes.
+* ECHILD: (libc)Error Codes.
+* ECHO: (libc)Local Modes.
+* ECHOCTL: (libc)Local Modes.
+* ECHOE: (libc)Local Modes.
+* ECHOK: (libc)Local Modes.
+* ECHOKE: (libc)Local Modes.
+* ECHONL: (libc)Local Modes.
+* ECHOPRT: (libc)Local Modes.
+* ECHRNG: (libc)Error Codes.
+* ECOMM: (libc)Error Codes.
+* ECONNABORTED: (libc)Error Codes.
+* ECONNREFUSED: (libc)Error Codes.
+* ECONNRESET: (libc)Error Codes.
+* ED: (libc)Error Codes.
+* EDEADLK: (libc)Error Codes.
+* EDEADLOCK: (libc)Error Codes.
+* EDESTADDRREQ: (libc)Error Codes.
+* EDIED: (libc)Error Codes.
+* EDOM: (libc)Error Codes.
+* EDOTDOT: (libc)Error Codes.
+* EDQUOT: (libc)Error Codes.
+* EEXIST: (libc)Error Codes.
+* EFAULT: (libc)Error Codes.
+* EFBIG: (libc)Error Codes.
+* EFTYPE: (libc)Error Codes.
+* EGRATUITOUS: (libc)Error Codes.
+* EGREGIOUS: (libc)Error Codes.
+* EHOSTDOWN: (libc)Error Codes.
+* EHOSTUNREACH: (libc)Error Codes.
+* EIDRM: (libc)Error Codes.
+* EIEIO: (libc)Error Codes.
+* EILSEQ: (libc)Error Codes.
+* EINPROGRESS: (libc)Error Codes.
+* EINTR: (libc)Error Codes.
+* EINVAL: (libc)Error Codes.
+* EIO: (libc)Error Codes.
+* EISCONN: (libc)Error Codes.
+* EISDIR: (libc)Error Codes.
+* EISNAM: (libc)Error Codes.
+* EKEYEXPIRED: (libc)Error Codes.
+* EKEYREJECTED: (libc)Error Codes.
+* EKEYREVOKED: (libc)Error Codes.
+* EL2HLT: (libc)Error Codes.
+* EL2NSYNC: (libc)Error Codes.
+* EL3HLT: (libc)Error Codes.
+* EL3RST: (libc)Error Codes.
+* ELIBACC: (libc)Error Codes.
+* ELIBBAD: (libc)Error Codes.
+* ELIBEXEC: (libc)Error Codes.
+* ELIBMAX: (libc)Error Codes.
+* ELIBSCN: (libc)Error Codes.
+* ELNRNG: (libc)Error Codes.
+* ELOOP: (libc)Error Codes.
+* EMEDIUMTYPE: (libc)Error Codes.
+* EMFILE: (libc)Error Codes.
+* EMLINK: (libc)Error Codes.
+* EMSGSIZE: (libc)Error Codes.
+* EMULTIHOP: (libc)Error Codes.
+* ENAMETOOLONG: (libc)Error Codes.
+* ENAVAIL: (libc)Error Codes.
+* ENEEDAUTH: (libc)Error Codes.
+* ENETDOWN: (libc)Error Codes.
+* ENETRESET: (libc)Error Codes.
+* ENETUNREACH: (libc)Error Codes.
+* ENFILE: (libc)Error Codes.
+* ENOANO: (libc)Error Codes.
+* ENOBUFS: (libc)Error Codes.
+* ENOCSI: (libc)Error Codes.
+* ENODATA: (libc)Error Codes.
+* ENODEV: (libc)Error Codes.
+* ENOENT: (libc)Error Codes.
+* ENOEXEC: (libc)Error Codes.
+* ENOKEY: (libc)Error Codes.
+* ENOLCK: (libc)Error Codes.
+* ENOLINK: (libc)Error Codes.
+* ENOMEDIUM: (libc)Error Codes.
+* ENOMEM: (libc)Error Codes.
+* ENOMSG: (libc)Error Codes.
+* ENONET: (libc)Error Codes.
+* ENOPKG: (libc)Error Codes.
+* ENOPROTOOPT: (libc)Error Codes.
+* ENOSPC: (libc)Error Codes.
+* ENOSR: (libc)Error Codes.
+* ENOSTR: (libc)Error Codes.
+* ENOSYS: (libc)Error Codes.
+* ENOTBLK: (libc)Error Codes.
+* ENOTCONN: (libc)Error Codes.
+* ENOTDIR: (libc)Error Codes.
+* ENOTEMPTY: (libc)Error Codes.
+* ENOTNAM: (libc)Error Codes.
+* ENOTRECOVERABLE: (libc)Error Codes.
+* ENOTSOCK: (libc)Error Codes.
+* ENOTSUP: (libc)Error Codes.
+* ENOTTY: (libc)Error Codes.
+* ENOTUNIQ: (libc)Error Codes.
+* ENXIO: (libc)Error Codes.
+* EOF: (libc)EOF and Errors.
+* EOPNOTSUPP: (libc)Error Codes.
+* EOVERFLOW: (libc)Error Codes.
+* EOWNERDEAD: (libc)Error Codes.
+* EPERM: (libc)Error Codes.
+* EPFNOSUPPORT: (libc)Error Codes.
+* EPIPE: (libc)Error Codes.
+* EPROCLIM: (libc)Error Codes.
+* EPROCUNAVAIL: (libc)Error Codes.
+* EPROGMISMATCH: (libc)Error Codes.
+* EPROGUNAVAIL: (libc)Error Codes.
+* EPROTO: (libc)Error Codes.
+* EPROTONOSUPPORT: (libc)Error Codes.
+* EPROTOTYPE: (libc)Error Codes.
+* EQUIV_CLASS_MAX: (libc)Utility Limits.
+* ERANGE: (libc)Error Codes.
+* EREMCHG: (libc)Error Codes.
+* EREMOTE: (libc)Error Codes.
+* EREMOTEIO: (libc)Error Codes.
+* ERESTART: (libc)Error Codes.
+* EROFS: (libc)Error Codes.
+* ERPCMISMATCH: (libc)Error Codes.
+* ESHUTDOWN: (libc)Error Codes.
+* ESOCKTNOSUPPORT: (libc)Error Codes.
+* ESPIPE: (libc)Error Codes.
+* ESRCH: (libc)Error Codes.
+* ESRMNT: (libc)Error Codes.
+* ESTALE: (libc)Error Codes.
+* ESTRPIPE: (libc)Error Codes.
+* ETIME: (libc)Error Codes.
+* ETIMEDOUT: (libc)Error Codes.
+* ETOOMANYREFS: (libc)Error Codes.
+* ETXTBSY: (libc)Error Codes.
+* EUCLEAN: (libc)Error Codes.
+* EUNATCH: (libc)Error Codes.
+* EUSERS: (libc)Error Codes.
+* EWOULDBLOCK: (libc)Error Codes.
+* EXDEV: (libc)Error Codes.
+* EXFULL: (libc)Error Codes.
+* EXIT_FAILURE: (libc)Exit Status.
+* EXIT_SUCCESS: (libc)Exit Status.
+* EXPR_NEST_MAX: (libc)Utility Limits.
+* FD_CLOEXEC: (libc)Descriptor Flags.
+* FD_CLR: (libc)Waiting for I/O.
+* FD_ISSET: (libc)Waiting for I/O.
+* FD_SET: (libc)Waiting for I/O.
+* FD_SETSIZE: (libc)Waiting for I/O.
+* FD_ZERO: (libc)Waiting for I/O.
+* FILENAME_MAX: (libc)Limits for Files.
+* FLUSHO: (libc)Local Modes.
+* FOPEN_MAX: (libc)Opening Streams.
+* FP_ILOGB0: (libc)Exponents and Logarithms.
+* FP_ILOGBNAN: (libc)Exponents and Logarithms.
+* F_DUPFD: (libc)Duplicating Descriptors.
+* F_GETFD: (libc)Descriptor Flags.
+* F_GETFL: (libc)Getting File Status Flags.
+* F_GETLK: (libc)File Locks.
+* F_GETOWN: (libc)Interrupt Input.
+* F_OK: (libc)Testing File Access.
+* F_SETFD: (libc)Descriptor Flags.
+* F_SETFL: (libc)Getting File Status Flags.
+* F_SETLK: (libc)File Locks.
+* F_SETLKW: (libc)File Locks.
+* F_SETOWN: (libc)Interrupt Input.
+* HUGE_VAL: (libc)Math Error Reporting.
+* HUGE_VALF: (libc)Math Error Reporting.
+* HUGE_VALL: (libc)Math Error Reporting.
+* HUPCL: (libc)Control Modes.
+* I: (libc)Complex Numbers.
+* ICANON: (libc)Local Modes.
+* ICRNL: (libc)Input Modes.
+* IEXTEN: (libc)Local Modes.
+* IFNAMSIZ: (libc)Interface Naming.
+* IFTODT: (libc)Directory Entries.
+* IGNBRK: (libc)Input Modes.
+* IGNCR: (libc)Input Modes.
+* IGNPAR: (libc)Input Modes.
+* IMAXBEL: (libc)Input Modes.
+* INADDR_ANY: (libc)Host Address Data Type.
+* INADDR_BROADCAST: (libc)Host Address Data Type.
+* INADDR_LOOPBACK: (libc)Host Address Data Type.
+* INADDR_NONE: (libc)Host Address Data Type.
+* INFINITY: (libc)Infinity and NaN.
+* INLCR: (libc)Input Modes.
+* INPCK: (libc)Input Modes.
+* IPPORT_RESERVED: (libc)Ports.
+* IPPORT_USERRESERVED: (libc)Ports.
+* ISIG: (libc)Local Modes.
+* ISTRIP: (libc)Input Modes.
+* IXANY: (libc)Input Modes.
+* IXOFF: (libc)Input Modes.
+* IXON: (libc)Input Modes.
+* LINE_MAX: (libc)Utility Limits.
+* LINK_MAX: (libc)Limits for Files.
+* L_ctermid: (libc)Identifying the Terminal.
+* L_cuserid: (libc)Who Logged In.
+* L_tmpnam: (libc)Temporary Files.
+* MAXNAMLEN: (libc)Limits for Files.
+* MAXSYMLINKS: (libc)Symbolic Links.
+* MAX_CANON: (libc)Limits for Files.
+* MAX_INPUT: (libc)Limits for Files.
+* MB_CUR_MAX: (libc)Selecting the Conversion.
+* MB_LEN_MAX: (libc)Selecting the Conversion.
+* MDMBUF: (libc)Control Modes.
+* MSG_DONTROUTE: (libc)Socket Data Options.
+* MSG_OOB: (libc)Socket Data Options.
+* MSG_PEEK: (libc)Socket Data Options.
+* NAME_MAX: (libc)Limits for Files.
+* NAN: (libc)Infinity and NaN.
+* NCCS: (libc)Mode Data Types.
+* NGROUPS_MAX: (libc)General Limits.
+* NOFLSH: (libc)Local Modes.
+* NOKERNINFO: (libc)Local Modes.
+* NSIG: (libc)Standard Signals.
+* NULL: (libc)Null Pointer Constant.
+* ONLCR: (libc)Output Modes.
+* ONOEOT: (libc)Output Modes.
+* OPEN_MAX: (libc)General Limits.
+* OPOST: (libc)Output Modes.
+* OXTABS: (libc)Output Modes.
+* O_ACCMODE: (libc)Access Modes.
+* O_APPEND: (libc)Operating Modes.
+* O_ASYNC: (libc)Operating Modes.
+* O_CREAT: (libc)Open-time Flags.
+* O_EXCL: (libc)Open-time Flags.
+* O_EXEC: (libc)Access Modes.
+* O_EXLOCK: (libc)Open-time Flags.
+* O_FSYNC: (libc)Operating Modes.
+* O_IGNORE_CTTY: (libc)Open-time Flags.
+* O_NDELAY: (libc)Operating Modes.
+* O_NOATIME: (libc)Operating Modes.
+* O_NOCTTY: (libc)Open-time Flags.
+* O_NOLINK: (libc)Open-time Flags.
+* O_NONBLOCK: (libc)Open-time Flags.
+* O_NONBLOCK: (libc)Operating Modes.
+* O_NOTRANS: (libc)Open-time Flags.
+* O_RDONLY: (libc)Access Modes.
+* O_RDWR: (libc)Access Modes.
+* O_READ: (libc)Access Modes.
+* O_SHLOCK: (libc)Open-time Flags.
+* O_SYNC: (libc)Operating Modes.
+* O_TRUNC: (libc)Open-time Flags.
+* O_WRITE: (libc)Access Modes.
+* O_WRONLY: (libc)Access Modes.
+* PARENB: (libc)Control Modes.
+* PARMRK: (libc)Input Modes.
+* PARODD: (libc)Control Modes.
+* PATH_MAX: (libc)Limits for Files.
+* PA_FLAG_MASK: (libc)Parsing a Template String.
+* PENDIN: (libc)Local Modes.
+* PF_FILE: (libc)Local Namespace Details.
+* PF_INET6: (libc)Internet Namespace.
+* PF_INET: (libc)Internet Namespace.
+* PF_LOCAL: (libc)Local Namespace Details.
+* PF_UNIX: (libc)Local Namespace Details.
+* PIPE_BUF: (libc)Limits for Files.
+* P_tmpdir: (libc)Temporary Files.
+* RAND_MAX: (libc)ISO Random.
+* RE_DUP_MAX: (libc)General Limits.
+* RLIM_INFINITY: (libc)Limits on Resources.
+* R_OK: (libc)Testing File Access.
+* SA_NOCLDSTOP: (libc)Flags for Sigaction.
+* SA_ONSTACK: (libc)Flags for Sigaction.
+* SA_RESTART: (libc)Flags for Sigaction.
+* SEEK_CUR: (libc)File Positioning.
+* SEEK_END: (libc)File Positioning.
+* SEEK_SET: (libc)File Positioning.
+* SIGABRT: (libc)Program Error Signals.
+* SIGALRM: (libc)Alarm Signals.
+* SIGBUS: (libc)Program Error Signals.
+* SIGCHLD: (libc)Job Control Signals.
+* SIGCLD: (libc)Job Control Signals.
+* SIGCONT: (libc)Job Control Signals.
+* SIGEMT: (libc)Program Error Signals.
+* SIGFPE: (libc)Program Error Signals.
+* SIGHUP: (libc)Termination Signals.
+* SIGILL: (libc)Program Error Signals.
+* SIGINFO: (libc)Miscellaneous Signals.
+* SIGINT: (libc)Termination Signals.
+* SIGIO: (libc)Asynchronous I/O Signals.
+* SIGIOT: (libc)Program Error Signals.
+* SIGKILL: (libc)Termination Signals.
+* SIGLOST: (libc)Operation Error Signals.
+* SIGPIPE: (libc)Operation Error Signals.
+* SIGPOLL: (libc)Asynchronous I/O Signals.
+* SIGPROF: (libc)Alarm Signals.
+* SIGQUIT: (libc)Termination Signals.
+* SIGSEGV: (libc)Program Error Signals.
+* SIGSTOP: (libc)Job Control Signals.
+* SIGSYS: (libc)Program Error Signals.
+* SIGTERM: (libc)Termination Signals.
+* SIGTRAP: (libc)Program Error Signals.
+* SIGTSTP: (libc)Job Control Signals.
+* SIGTTIN: (libc)Job Control Signals.
+* SIGTTOU: (libc)Job Control Signals.
+* SIGURG: (libc)Asynchronous I/O Signals.
+* SIGUSR1: (libc)Miscellaneous Signals.
+* SIGUSR2: (libc)Miscellaneous Signals.
+* SIGVTALRM: (libc)Alarm Signals.
+* SIGWINCH: (libc)Miscellaneous Signals.
+* SIGXCPU: (libc)Operation Error Signals.
+* SIGXFSZ: (libc)Operation Error Signals.
+* SIG_ERR: (libc)Basic Signal Handling.
+* SOCK_DGRAM: (libc)Communication Styles.
+* SOCK_RAW: (libc)Communication Styles.
+* SOCK_RDM: (libc)Communication Styles.
+* SOCK_SEQPACKET: (libc)Communication Styles.
+* SOCK_STREAM: (libc)Communication Styles.
+* SOL_SOCKET: (libc)Socket-Level Options.
+* SSIZE_MAX: (libc)General Limits.
+* STREAM_MAX: (libc)General Limits.
+* SUN_LEN: (libc)Local Namespace Details.
+* SV_INTERRUPT: (libc)BSD Handler.
+* SV_ONSTACK: (libc)BSD Handler.
+* SV_RESETHAND: (libc)BSD Handler.
+* S_IFMT: (libc)Testing File Type.
+* S_ISBLK: (libc)Testing File Type.
+* S_ISCHR: (libc)Testing File Type.
+* S_ISDIR: (libc)Testing File Type.
+* S_ISFIFO: (libc)Testing File Type.
+* S_ISLNK: (libc)Testing File Type.
+* S_ISREG: (libc)Testing File Type.
+* S_ISSOCK: (libc)Testing File Type.
+* S_TYPEISMQ: (libc)Testing File Type.
+* S_TYPEISSEM: (libc)Testing File Type.
+* S_TYPEISSHM: (libc)Testing File Type.
+* TMP_MAX: (libc)Temporary Files.
+* TOSTOP: (libc)Local Modes.
+* TZNAME_MAX: (libc)General Limits.
+* VDISCARD: (libc)Other Special.
+* VDSUSP: (libc)Signal Characters.
+* VEOF: (libc)Editing Characters.
+* VEOL2: (libc)Editing Characters.
+* VEOL: (libc)Editing Characters.
+* VERASE: (libc)Editing Characters.
+* VINTR: (libc)Signal Characters.
+* VKILL: (libc)Editing Characters.
+* VLNEXT: (libc)Other Special.
+* VMIN: (libc)Noncanonical Input.
+* VQUIT: (libc)Signal Characters.
+* VREPRINT: (libc)Editing Characters.
+* VSTART: (libc)Start/Stop Characters.
+* VSTATUS: (libc)Other Special.
+* VSTOP: (libc)Start/Stop Characters.
+* VSUSP: (libc)Signal Characters.
+* VTIME: (libc)Noncanonical Input.
+* VWERASE: (libc)Editing Characters.
+* WCHAR_MAX: (libc)Extended Char Intro.
+* WCHAR_MIN: (libc)Extended Char Intro.
+* WCOREDUMP: (libc)Process Completion Status.
+* WEOF: (libc)EOF and Errors.
+* WEOF: (libc)Extended Char Intro.
+* WEXITSTATUS: (libc)Process Completion Status.
+* WIFEXITED: (libc)Process Completion Status.
+* WIFSIGNALED: (libc)Process Completion Status.
+* WIFSTOPPED: (libc)Process Completion Status.
+* WSTOPSIG: (libc)Process Completion Status.
+* WTERMSIG: (libc)Process Completion Status.
+* W_OK: (libc)Testing File Access.
+* X_OK: (libc)Testing File Access.
+* _Complex_I: (libc)Complex Numbers.
+* _Exit: (libc)Termination Internals.
+* _IOFBF: (libc)Controlling Buffering.
+* _IOLBF: (libc)Controlling Buffering.
+* _IONBF: (libc)Controlling Buffering.
+* _Imaginary_I: (libc)Complex Numbers.
+* _PATH_UTMP: (libc)Manipulating the Database.
+* _PATH_WTMP: (libc)Manipulating the Database.
+* _POSIX2_C_DEV: (libc)System Options.
+* _POSIX2_C_VERSION: (libc)Version Supported.
+* _POSIX2_FORT_DEV: (libc)System Options.
+* _POSIX2_FORT_RUN: (libc)System Options.
+* _POSIX2_LOCALEDEF: (libc)System Options.
+* _POSIX2_SW_DEV: (libc)System Options.
+* _POSIX_CHOWN_RESTRICTED: (libc)Options for Files.
+* _POSIX_JOB_CONTROL: (libc)System Options.
+* _POSIX_NO_TRUNC: (libc)Options for Files.
+* _POSIX_SAVED_IDS: (libc)System Options.
+* _POSIX_VDISABLE: (libc)Options for Files.
+* _POSIX_VERSION: (libc)Version Supported.
+* __fbufsize: (libc)Controlling Buffering.
+* __flbf: (libc)Controlling Buffering.
+* __fpending: (libc)Controlling Buffering.
+* __fpurge: (libc)Flushing Buffers.
+* __freadable: (libc)Opening Streams.
+* __freading: (libc)Opening Streams.
+* __fsetlocking: (libc)Streams and Threads.
+* __fwritable: (libc)Opening Streams.
+* __fwriting: (libc)Opening Streams.
+* __gconv_end_fct: (libc)glibc iconv Implementation.
+* __gconv_fct: (libc)glibc iconv Implementation.
+* __gconv_init_fct: (libc)glibc iconv Implementation.
+* __va_copy: (libc)Argument Macros.
+* _exit: (libc)Termination Internals.
+* _flushlbf: (libc)Flushing Buffers.
+* _tolower: (libc)Case Conversion.
+* _toupper: (libc)Case Conversion.
+* a64l: (libc)Encode Binary Data.
+* abort: (libc)Aborting a Program.
+* abs: (libc)Absolute Value.
+* accept: (libc)Accepting Connections.
+* access: (libc)Testing File Access.
+* acos: (libc)Inverse Trig Functions.
+* acosf: (libc)Inverse Trig Functions.
+* acosh: (libc)Hyperbolic Functions.
+* acoshf: (libc)Hyperbolic Functions.
+* acoshl: (libc)Hyperbolic Functions.
+* acosl: (libc)Inverse Trig Functions.
+* addmntent: (libc)mtab.
+* addseverity: (libc)Adding Severity Classes.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
+* aio_cancel64: (libc)Cancel AIO Operations.
+* aio_cancel: (libc)Cancel AIO Operations.
+* aio_error64: (libc)Status of AIO Operations.
+* aio_error: (libc)Status of AIO Operations.
+* aio_fsync64: (libc)Synchronizing AIO Operations.
+* aio_fsync: (libc)Synchronizing AIO Operations.
+* aio_init: (libc)Configuration of AIO.
+* aio_read64: (libc)Asynchronous Reads/Writes.
+* aio_read: (libc)Asynchronous Reads/Writes.
+* aio_return64: (libc)Status of AIO Operations.
+* aio_return: (libc)Status of AIO Operations.
+* aio_suspend64: (libc)Synchronizing AIO Operations.
+* aio_suspend: (libc)Synchronizing AIO Operations.
+* aio_write64: (libc)Asynchronous Reads/Writes.
+* aio_write: (libc)Asynchronous Reads/Writes.
+* alarm: (libc)Setting an Alarm.
+* alloca: (libc)Variable Size Automatic.
+* alphasort64: (libc)Scanning Directory Content.
+* alphasort: (libc)Scanning Directory Content.
+* argp_error: (libc)Argp Helper Functions.
+* argp_failure: (libc)Argp Helper Functions.
+* argp_help: (libc)Argp Help.
+* argp_parse: (libc)Argp.
+* argp_state_help: (libc)Argp Helper Functions.
+* argp_usage: (libc)Argp Helper Functions.
+* argz_add: (libc)Argz Functions.
+* argz_add_sep: (libc)Argz Functions.
+* argz_append: (libc)Argz Functions.
+* argz_count: (libc)Argz Functions.
+* argz_create: (libc)Argz Functions.
+* argz_create_sep: (libc)Argz Functions.
+* argz_delete: (libc)Argz Functions.
+* argz_extract: (libc)Argz Functions.
+* argz_insert: (libc)Argz Functions.
+* argz_next: (libc)Argz Functions.
+* argz_replace: (libc)Argz Functions.
+* argz_stringify: (libc)Argz Functions.
+* asctime: (libc)Formatting Calendar Time.
+* asctime_r: (libc)Formatting Calendar Time.
+* asin: (libc)Inverse Trig Functions.
+* asinf: (libc)Inverse Trig Functions.
+* asinh: (libc)Hyperbolic Functions.
+* asinhf: (libc)Hyperbolic Functions.
+* asinhl: (libc)Hyperbolic Functions.
+* asinl: (libc)Inverse Trig Functions.
+* asprintf: (libc)Dynamic Output.
+* assert: (libc)Consistency Checking.
+* assert_perror: (libc)Consistency Checking.
+* atan2: (libc)Inverse Trig Functions.
+* atan2f: (libc)Inverse Trig Functions.
+* atan2l: (libc)Inverse Trig Functions.
+* atan: (libc)Inverse Trig Functions.
+* atanf: (libc)Inverse Trig Functions.
+* atanh: (libc)Hyperbolic Functions.
+* atanhf: (libc)Hyperbolic Functions.
+* atanhl: (libc)Hyperbolic Functions.
+* atanl: (libc)Inverse Trig Functions.
+* atexit: (libc)Cleanups on Exit.
+* atof: (libc)Parsing of Floats.
+* atoi: (libc)Parsing of Integers.
+* atol: (libc)Parsing of Integers.
+* atoll: (libc)Parsing of Integers.
+* backtrace: (libc)Backtraces.
+* backtrace_symbols: (libc)Backtraces.
+* backtrace_symbols_fd: (libc)Backtraces.
+* basename: (libc)Finding Tokens in a String.
+* basename: (libc)Finding Tokens in a String.
+* bcmp: (libc)String/Array Comparison.
+* bcopy: (libc)Copying and Concatenation.
+* bind: (libc)Setting Address.
+* bind_textdomain_codeset: (libc)Charset conversion in gettext.
+* bindtextdomain: (libc)Locating gettext catalog.
+* brk: (libc)Resizing the Data Segment.
+* bsearch: (libc)Array Search Function.
+* btowc: (libc)Converting a Character.
+* bzero: (libc)Copying and Concatenation.
+* cabs: (libc)Absolute Value.
+* cabsf: (libc)Absolute Value.
+* cabsl: (libc)Absolute Value.
+* cacos: (libc)Inverse Trig Functions.
+* cacosf: (libc)Inverse Trig Functions.
+* cacosh: (libc)Hyperbolic Functions.
+* cacoshf: (libc)Hyperbolic Functions.
+* cacoshl: (libc)Hyperbolic Functions.
+* cacosl: (libc)Inverse Trig Functions.
+* calloc: (libc)Allocating Cleared Space.
+* canonicalize_file_name: (libc)Symbolic Links.
+* carg: (libc)Operations on Complex.
+* cargf: (libc)Operations on Complex.
+* cargl: (libc)Operations on Complex.
+* casin: (libc)Inverse Trig Functions.
+* casinf: (libc)Inverse Trig Functions.
+* casinh: (libc)Hyperbolic Functions.
+* casinhf: (libc)Hyperbolic Functions.
+* casinhl: (libc)Hyperbolic Functions.
+* casinl: (libc)Inverse Trig Functions.
+* catan: (libc)Inverse Trig Functions.
+* catanf: (libc)Inverse Trig Functions.
+* catanh: (libc)Hyperbolic Functions.
+* catanhf: (libc)Hyperbolic Functions.
+* catanhl: (libc)Hyperbolic Functions.
+* catanl: (libc)Inverse Trig Functions.
+* catclose: (libc)The catgets Functions.
+* catgets: (libc)The catgets Functions.
+* catopen: (libc)The catgets Functions.
+* cbc_crypt: (libc)DES Encryption.
+* cbrt: (libc)Exponents and Logarithms.
+* cbrtf: (libc)Exponents and Logarithms.
+* cbrtl: (libc)Exponents and Logarithms.
+* ccos: (libc)Trig Functions.
+* ccosf: (libc)Trig Functions.
+* ccosh: (libc)Hyperbolic Functions.
+* ccoshf: (libc)Hyperbolic Functions.
+* ccoshl: (libc)Hyperbolic Functions.
+* ccosl: (libc)Trig Functions.
+* ceil: (libc)Rounding Functions.
+* ceilf: (libc)Rounding Functions.
+* ceill: (libc)Rounding Functions.
+* cexp: (libc)Exponents and Logarithms.
+* cexpf: (libc)Exponents and Logarithms.
+* cexpl: (libc)Exponents and Logarithms.
+* cfgetispeed: (libc)Line Speed.
+* cfgetospeed: (libc)Line Speed.
+* cfmakeraw: (libc)Noncanonical Input.
+* cfree: (libc)Freeing after Malloc.
+* cfsetispeed: (libc)Line Speed.
+* cfsetospeed: (libc)Line Speed.
+* cfsetspeed: (libc)Line Speed.
+* chdir: (libc)Working Directory.
+* chmod: (libc)Setting Permissions.
+* chown: (libc)File Owner.
+* cimag: (libc)Operations on Complex.
+* cimagf: (libc)Operations on Complex.
+* cimagl: (libc)Operations on Complex.
+* clearenv: (libc)Environment Access.
+* clearerr: (libc)Error Recovery.
+* clearerr_unlocked: (libc)Error Recovery.
+* clock: (libc)CPU Time.
+* clog10: (libc)Exponents and Logarithms.
+* clog10f: (libc)Exponents and Logarithms.
+* clog10l: (libc)Exponents and Logarithms.
+* clog: (libc)Exponents and Logarithms.
+* clogf: (libc)Exponents and Logarithms.
+* clogl: (libc)Exponents and Logarithms.
+* close: (libc)Opening and Closing Files.
+* closedir: (libc)Reading/Closing Directory.
+* closelog: (libc)closelog.
+* confstr: (libc)String Parameters.
+* conj: (libc)Operations on Complex.
+* conjf: (libc)Operations on Complex.
+* conjl: (libc)Operations on Complex.
+* connect: (libc)Connecting.
+* copysign: (libc)FP Bit Twiddling.
+* copysignf: (libc)FP Bit Twiddling.
+* copysignl: (libc)FP Bit Twiddling.
+* cos: (libc)Trig Functions.
+* cosf: (libc)Trig Functions.
+* cosh: (libc)Hyperbolic Functions.
+* coshf: (libc)Hyperbolic Functions.
+* coshl: (libc)Hyperbolic Functions.
+* cosl: (libc)Trig Functions.
+* cpow: (libc)Exponents and Logarithms.
+* cpowf: (libc)Exponents and Logarithms.
+* cpowl: (libc)Exponents and Logarithms.
+* cproj: (libc)Operations on Complex.
+* cprojf: (libc)Operations on Complex.
+* cprojl: (libc)Operations on Complex.
+* creal: (libc)Operations on Complex.
+* crealf: (libc)Operations on Complex.
+* creall: (libc)Operations on Complex.
+* creat64: (libc)Opening and Closing Files.
+* creat: (libc)Opening and Closing Files.
+* crypt: (libc)crypt.
+* crypt_r: (libc)crypt.
+* csin: (libc)Trig Functions.
+* csinf: (libc)Trig Functions.
+* csinh: (libc)Hyperbolic Functions.
+* csinhf: (libc)Hyperbolic Functions.
+* csinhl: (libc)Hyperbolic Functions.
+* csinl: (libc)Trig Functions.
+* csqrt: (libc)Exponents and Logarithms.
+* csqrtf: (libc)Exponents and Logarithms.
+* csqrtl: (libc)Exponents and Logarithms.
+* ctan: (libc)Trig Functions.
+* ctanf: (libc)Trig Functions.
+* ctanh: (libc)Hyperbolic Functions.
+* ctanhf: (libc)Hyperbolic Functions.
+* ctanhl: (libc)Hyperbolic Functions.
+* ctanl: (libc)Trig Functions.
+* ctermid: (libc)Identifying the Terminal.
+* ctime: (libc)Formatting Calendar Time.
+* ctime_r: (libc)Formatting Calendar Time.
+* cuserid: (libc)Who Logged In.
+* dcgettext: (libc)Translation with gettext.
+* dcngettext: (libc)Advanced gettext functions.
+* des_setparity: (libc)DES Encryption.
+* dgettext: (libc)Translation with gettext.
+* difftime: (libc)Elapsed Time.
+* dirfd: (libc)Opening a Directory.
+* dirname: (libc)Finding Tokens in a String.
+* div: (libc)Integer Division.
+* dngettext: (libc)Advanced gettext functions.
+* drand48: (libc)SVID Random.
+* drand48_r: (libc)SVID Random.
+* drem: (libc)Remainder Functions.
+* dremf: (libc)Remainder Functions.
+* dreml: (libc)Remainder Functions.
+* dup2: (libc)Duplicating Descriptors.
+* dup: (libc)Duplicating Descriptors.
+* ecb_crypt: (libc)DES Encryption.
+* ecvt: (libc)System V Number Conversion.
+* ecvt_r: (libc)System V Number Conversion.
+* encrypt: (libc)DES Encryption.
+* encrypt_r: (libc)DES Encryption.
+* endfsent: (libc)fstab.
+* endgrent: (libc)Scanning All Groups.
+* endhostent: (libc)Host Names.
+* endmntent: (libc)mtab.
+* endnetent: (libc)Networks Database.
+* endnetgrent: (libc)Lookup Netgroup.
+* endprotoent: (libc)Protocols Database.
+* endpwent: (libc)Scanning All Users.
+* endservent: (libc)Services Database.
+* endutent: (libc)Manipulating the Database.
+* endutxent: (libc)XPG Functions.
+* envz_add: (libc)Envz Functions.
+* envz_entry: (libc)Envz Functions.
+* envz_get: (libc)Envz Functions.
+* envz_merge: (libc)Envz Functions.
+* envz_strip: (libc)Envz Functions.
+* erand48: (libc)SVID Random.
+* erand48_r: (libc)SVID Random.
+* erf: (libc)Special Functions.
+* erfc: (libc)Special Functions.
+* erfcf: (libc)Special Functions.
+* erfcl: (libc)Special Functions.
+* erff: (libc)Special Functions.
+* erfl: (libc)Special Functions.
+* err: (libc)Error Messages.
+* errno: (libc)Checking for Errors.
+* error: (libc)Error Messages.
+* error_at_line: (libc)Error Messages.
+* errx: (libc)Error Messages.
+* execl: (libc)Executing a File.
+* execle: (libc)Executing a File.
+* execlp: (libc)Executing a File.
+* execv: (libc)Executing a File.
+* execve: (libc)Executing a File.
+* execvp: (libc)Executing a File.
+* exit: (libc)Normal Termination.
+* exp10: (libc)Exponents and Logarithms.
+* exp10f: (libc)Exponents and Logarithms.
+* exp10l: (libc)Exponents and Logarithms.
+* exp2: (libc)Exponents and Logarithms.
+* exp2f: (libc)Exponents and Logarithms.
+* exp2l: (libc)Exponents and Logarithms.
+* exp: (libc)Exponents and Logarithms.
+* expf: (libc)Exponents and Logarithms.
+* expl: (libc)Exponents and Logarithms.
+* expm1: (libc)Exponents and Logarithms.
+* expm1f: (libc)Exponents and Logarithms.
+* expm1l: (libc)Exponents and Logarithms.
+* fabs: (libc)Absolute Value.
+* fabsf: (libc)Absolute Value.
+* fabsl: (libc)Absolute Value.
+* fchdir: (libc)Working Directory.
+* fchmod: (libc)Setting Permissions.
+* fchown: (libc)File Owner.
+* fclean: (libc)Cleaning Streams.
+* fclose: (libc)Closing Streams.
+* fcloseall: (libc)Closing Streams.
+* fcntl: (libc)Control Operations.
+* fcvt: (libc)System V Number Conversion.
+* fcvt_r: (libc)System V Number Conversion.
+* fdatasync: (libc)Synchronizing I/O.
+* fdim: (libc)Misc FP Arithmetic.
+* fdimf: (libc)Misc FP Arithmetic.
+* fdiml: (libc)Misc FP Arithmetic.
+* fdopen: (libc)Descriptors and Streams.
+* fdopendir: (libc)Opening a Directory.
+* feclearexcept: (libc)Status bit operations.
+* fedisableexcept: (libc)Control Functions.
+* feenableexcept: (libc)Control Functions.
+* fegetenv: (libc)Control Functions.
+* fegetexcept: (libc)Control Functions.
+* fegetexceptflag: (libc)Status bit operations.
+* fegetround: (libc)Rounding.
+* feholdexcept: (libc)Control Functions.
+* feof: (libc)EOF and Errors.
+* feof_unlocked: (libc)EOF and Errors.
+* feraiseexcept: (libc)Status bit operations.
+* ferror: (libc)EOF and Errors.
+* ferror_unlocked: (libc)EOF and Errors.
+* fesetenv: (libc)Control Functions.
+* fesetexceptflag: (libc)Status bit operations.
+* fesetround: (libc)Rounding.
+* fetestexcept: (libc)Status bit operations.
+* feupdateenv: (libc)Control Functions.
+* fflush: (libc)Flushing Buffers.
+* fflush_unlocked: (libc)Flushing Buffers.
+* fgetc: (libc)Character Input.
+* fgetc_unlocked: (libc)Character Input.
+* fgetgrent: (libc)Scanning All Groups.
+* fgetgrent_r: (libc)Scanning All Groups.
+* fgetpos64: (libc)Portable Positioning.
+* fgetpos: (libc)Portable Positioning.
+* fgetpwent: (libc)Scanning All Users.
+* fgetpwent_r: (libc)Scanning All Users.
+* fgets: (libc)Line Input.
+* fgets_unlocked: (libc)Line Input.
+* fgetwc: (libc)Character Input.
+* fgetwc_unlocked: (libc)Character Input.
+* fgetws: (libc)Line Input.
+* fgetws_unlocked: (libc)Line Input.
+* fileno: (libc)Descriptors and Streams.
+* fileno_unlocked: (libc)Descriptors and Streams.
+* finite: (libc)Floating Point Classes.
+* finitef: (libc)Floating Point Classes.
+* finitel: (libc)Floating Point Classes.
+* flockfile: (libc)Streams and Threads.
+* floor: (libc)Rounding Functions.
+* floorf: (libc)Rounding Functions.
+* floorl: (libc)Rounding Functions.
+* fma: (libc)Misc FP Arithmetic.
+* fmaf: (libc)Misc FP Arithmetic.
+* fmal: (libc)Misc FP Arithmetic.
+* fmax: (libc)Misc FP Arithmetic.
+* fmaxf: (libc)Misc FP Arithmetic.
+* fmaxl: (libc)Misc FP Arithmetic.
+* fmemopen: (libc)String Streams.
+* fmin: (libc)Misc FP Arithmetic.
+* fminf: (libc)Misc FP Arithmetic.
+* fminl: (libc)Misc FP Arithmetic.
+* fmod: (libc)Remainder Functions.
+* fmodf: (libc)Remainder Functions.
+* fmodl: (libc)Remainder Functions.
+* fmtmsg: (libc)Printing Formatted Messages.
+* fnmatch: (libc)Wildcard Matching.
+* fopen64: (libc)Opening Streams.
+* fopen: (libc)Opening Streams.
+* fopencookie: (libc)Streams and Cookies.
+* fork: (libc)Creating a Process.
+* forkpty: (libc)Pseudo-Terminal Pairs.
+* fpathconf: (libc)Pathconf.
+* fpclassify: (libc)Floating Point Classes.
+* fprintf: (libc)Formatted Output Functions.
+* fputc: (libc)Simple Output.
+* fputc_unlocked: (libc)Simple Output.
+* fputs: (libc)Simple Output.
+* fputs_unlocked: (libc)Simple Output.
+* fputwc: (libc)Simple Output.
+* fputwc_unlocked: (libc)Simple Output.
+* fputws: (libc)Simple Output.
+* fputws_unlocked: (libc)Simple Output.
+* fread: (libc)Block Input/Output.
+* fread_unlocked: (libc)Block Input/Output.
+* free: (libc)Freeing after Malloc.
+* freopen64: (libc)Opening Streams.
+* freopen: (libc)Opening Streams.
+* frexp: (libc)Normalization Functions.
+* frexpf: (libc)Normalization Functions.
+* frexpl: (libc)Normalization Functions.
+* fscanf: (libc)Formatted Input Functions.
+* fseek: (libc)File Positioning.
+* fseeko64: (libc)File Positioning.
+* fseeko: (libc)File Positioning.
+* fsetpos64: (libc)Portable Positioning.
+* fsetpos: (libc)Portable Positioning.
+* fstat64: (libc)Reading Attributes.
+* fstat: (libc)Reading Attributes.
+* fsync: (libc)Synchronizing I/O.
+* ftell: (libc)File Positioning.
+* ftello64: (libc)File Positioning.
+* ftello: (libc)File Positioning.
+* ftruncate64: (libc)File Size.
+* ftruncate: (libc)File Size.
+* ftrylockfile: (libc)Streams and Threads.
+* ftw64: (libc)Working with Directory Trees.
+* ftw: (libc)Working with Directory Trees.
+* funlockfile: (libc)Streams and Threads.
+* futimes: (libc)File Times.
+* fwide: (libc)Streams and I18N.
+* fwprintf: (libc)Formatted Output Functions.
+* fwrite: (libc)Block Input/Output.
+* fwrite_unlocked: (libc)Block Input/Output.
+* fwscanf: (libc)Formatted Input Functions.
+* gamma: (libc)Special Functions.
+* gammaf: (libc)Special Functions.
+* gammal: (libc)Special Functions.
+* gcvt: (libc)System V Number Conversion.
+* get_avphys_pages: (libc)Query Memory Parameters.
+* get_current_dir_name: (libc)Working Directory.
+* get_nprocs: (libc)Processor Resources.
+* get_nprocs_conf: (libc)Processor Resources.
+* get_phys_pages: (libc)Query Memory Parameters.
+* getc: (libc)Character Input.
+* getc_unlocked: (libc)Character Input.
+* getchar: (libc)Character Input.
+* getchar_unlocked: (libc)Character Input.
+* getcontext: (libc)System V contexts.
+* getcwd: (libc)Working Directory.
+* getdate: (libc)General Time String Parsing.
+* getdate_r: (libc)General Time String Parsing.
+* getdelim: (libc)Line Input.
+* getdomainnname: (libc)Host Identification.
+* getegid: (libc)Reading Persona.
+* getenv: (libc)Environment Access.
+* geteuid: (libc)Reading Persona.
+* getfsent: (libc)fstab.
+* getfsfile: (libc)fstab.
+* getfsspec: (libc)fstab.
+* getgid: (libc)Reading Persona.
+* getgrent: (libc)Scanning All Groups.
+* getgrent_r: (libc)Scanning All Groups.
+* getgrgid: (libc)Lookup Group.
+* getgrgid_r: (libc)Lookup Group.
+* getgrnam: (libc)Lookup Group.
+* getgrnam_r: (libc)Lookup Group.
+* getgrouplist: (libc)Setting Groups.
+* getgroups: (libc)Reading Persona.
+* gethostbyaddr: (libc)Host Names.
+* gethostbyaddr_r: (libc)Host Names.
+* gethostbyname2: (libc)Host Names.
+* gethostbyname2_r: (libc)Host Names.
+* gethostbyname: (libc)Host Names.
+* gethostbyname_r: (libc)Host Names.
+* gethostent: (libc)Host Names.
+* gethostid: (libc)Host Identification.
+* gethostname: (libc)Host Identification.
+* getitimer: (libc)Setting an Alarm.
+* getline: (libc)Line Input.
+* getloadavg: (libc)Processor Resources.
+* getlogin: (libc)Who Logged In.
+* getmntent: (libc)mtab.
+* getmntent_r: (libc)mtab.
+* getnetbyaddr: (libc)Networks Database.
+* getnetbyname: (libc)Networks Database.
+* getnetent: (libc)Networks Database.
+* getnetgrent: (libc)Lookup Netgroup.
+* getnetgrent_r: (libc)Lookup Netgroup.
+* getopt: (libc)Using Getopt.
+* getopt_long: (libc)Getopt Long Options.
+* getopt_long_only: (libc)Getopt Long Options.
+* getpagesize: (libc)Query Memory Parameters.
+* getpass: (libc)getpass.
+* getpeername: (libc)Who is Connected.
+* getpgid: (libc)Process Group Functions.
+* getpgrp: (libc)Process Group Functions.
+* getpgrp: (libc)Process Group Functions.
+* getpid: (libc)Process Identification.
+* getppid: (libc)Process Identification.
+* getpriority: (libc)Traditional Scheduling Functions.
+* getprotobyname: (libc)Protocols Database.
+* getprotobynumber: (libc)Protocols Database.
+* getprotoent: (libc)Protocols Database.
+* getpt: (libc)Allocation.
+* getpwent: (libc)Scanning All Users.
+* getpwent_r: (libc)Scanning All Users.
+* getpwnam: (libc)Lookup User.
+* getpwnam_r: (libc)Lookup User.
+* getpwuid: (libc)Lookup User.
+* getpwuid_r: (libc)Lookup User.
+* getrlimit64: (libc)Limits on Resources.
+* getrlimit: (libc)Limits on Resources.
+* getrusage: (libc)Resource Usage.
+* gets: (libc)Line Input.
+* getservbyname: (libc)Services Database.
+* getservbyport: (libc)Services Database.
+* getservent: (libc)Services Database.
+* getsid: (libc)Process Group Functions.
+* getsockname: (libc)Reading Address.
+* getsockopt: (libc)Socket Option Functions.
+* getsubopt: (libc)Suboptions.
+* gettext: (libc)Translation with gettext.
+* gettimeofday: (libc)High-Resolution Calendar.
+* getuid: (libc)Reading Persona.
+* getumask: (libc)Setting Permissions.
+* getutent: (libc)Manipulating the Database.
+* getutent_r: (libc)Manipulating the Database.
+* getutid: (libc)Manipulating the Database.
+* getutid_r: (libc)Manipulating the Database.
+* getutline: (libc)Manipulating the Database.
+* getutline_r: (libc)Manipulating the Database.
+* getutmp: (libc)XPG Functions.
+* getutmpx: (libc)XPG Functions.
+* getutxent: (libc)XPG Functions.
+* getutxid: (libc)XPG Functions.
+* getutxline: (libc)XPG Functions.
+* getw: (libc)Character Input.
+* getwc: (libc)Character Input.
+* getwc_unlocked: (libc)Character Input.
+* getwchar: (libc)Character Input.
+* getwchar_unlocked: (libc)Character Input.
+* getwd: (libc)Working Directory.
+* glob64: (libc)Calling Glob.
+* glob: (libc)Calling Glob.
+* globfree64: (libc)More Flags for Globbing.
+* globfree: (libc)More Flags for Globbing.
+* gmtime: (libc)Broken-down Time.
+* gmtime_r: (libc)Broken-down Time.
+* grantpt: (libc)Allocation.
+* gsignal: (libc)Signaling Yourself.
+* gtty: (libc)BSD Terminal Modes.
+* hasmntopt: (libc)mtab.
+* hcreate: (libc)Hash Search Function.
+* hcreate_r: (libc)Hash Search Function.
+* hdestroy: (libc)Hash Search Function.
+* hdestroy_r: (libc)Hash Search Function.
+* hsearch: (libc)Hash Search Function.
+* hsearch_r: (libc)Hash Search Function.
+* htonl: (libc)Byte Order.
+* htons: (libc)Byte Order.
+* hypot: (libc)Exponents and Logarithms.
+* hypotf: (libc)Exponents and Logarithms.
+* hypotl: (libc)Exponents and Logarithms.
+* iconv: (libc)Generic Conversion Interface.
+* iconv_close: (libc)Generic Conversion Interface.
+* iconv_open: (libc)Generic Conversion Interface.
+* if_freenameindex: (libc)Interface Naming.
+* if_indextoname: (libc)Interface Naming.
+* if_nameindex: (libc)Interface Naming.
+* if_nametoindex: (libc)Interface Naming.
+* ilogb: (libc)Exponents and Logarithms.
+* ilogbf: (libc)Exponents and Logarithms.
+* ilogbl: (libc)Exponents and Logarithms.
+* imaxabs: (libc)Absolute Value.
+* imaxdiv: (libc)Integer Division.
+* in6addr_any: (libc)Host Address Data Type.
+* in6addr_loopback: (libc)Host Address Data Type.
+* index: (libc)Search Functions.
+* inet_addr: (libc)Host Address Functions.
+* inet_aton: (libc)Host Address Functions.
+* inet_lnaof: (libc)Host Address Functions.
+* inet_makeaddr: (libc)Host Address Functions.
+* inet_netof: (libc)Host Address Functions.
+* inet_network: (libc)Host Address Functions.
+* inet_ntoa: (libc)Host Address Functions.
+* inet_ntop: (libc)Host Address Functions.
+* inet_pton: (libc)Host Address Functions.
+* initgroups: (libc)Setting Groups.
+* initstate: (libc)BSD Random.
+* initstate_r: (libc)BSD Random.
+* innetgr: (libc)Netgroup Membership.
+* int: (libc)Random Access Directory.
+* ioctl: (libc)IOCTLs.
+* isalnum: (libc)Classification of Characters.
+* isalpha: (libc)Classification of Characters.
+* isascii: (libc)Classification of Characters.
+* isatty: (libc)Is It a Terminal.
+* isblank: (libc)Classification of Characters.
+* iscntrl: (libc)Classification of Characters.
+* isdigit: (libc)Classification of Characters.
+* isfinite: (libc)Floating Point Classes.
+* isgraph: (libc)Classification of Characters.
+* isgreater: (libc)FP Comparison Functions.
+* isgreaterequal: (libc)FP Comparison Functions.
+* isinf: (libc)Floating Point Classes.
+* isinff: (libc)Floating Point Classes.
+* isinfl: (libc)Floating Point Classes.
+* isless: (libc)FP Comparison Functions.
+* islessequal: (libc)FP Comparison Functions.
+* islessgreater: (libc)FP Comparison Functions.
+* islower: (libc)Classification of Characters.
+* isnan: (libc)Floating Point Classes.
+* isnan: (libc)Floating Point Classes.
+* isnanf: (libc)Floating Point Classes.
+* isnanl: (libc)Floating Point Classes.
+* isnormal: (libc)Floating Point Classes.
+* isprint: (libc)Classification of Characters.
+* ispunct: (libc)Classification of Characters.
+* isspace: (libc)Classification of Characters.
+* isunordered: (libc)FP Comparison Functions.
+* isupper: (libc)Classification of Characters.
+* iswalnum: (libc)Classification of Wide Characters.
+* iswalpha: (libc)Classification of Wide Characters.
+* iswblank: (libc)Classification of Wide Characters.
+* iswcntrl: (libc)Classification of Wide Characters.
+* iswctype: (libc)Classification of Wide Characters.
+* iswdigit: (libc)Classification of Wide Characters.
+* iswgraph: (libc)Classification of Wide Characters.
+* iswlower: (libc)Classification of Wide Characters.
+* iswprint: (libc)Classification of Wide Characters.
+* iswpunct: (libc)Classification of Wide Characters.
+* iswspace: (libc)Classification of Wide Characters.
+* iswupper: (libc)Classification of Wide Characters.
+* iswxdigit: (libc)Classification of Wide Characters.
+* isxdigit: (libc)Classification of Characters.
+* j0: (libc)Special Functions.
+* j0f: (libc)Special Functions.
+* j0l: (libc)Special Functions.
+* j1: (libc)Special Functions.
+* j1f: (libc)Special Functions.
+* j1l: (libc)Special Functions.
+* jn: (libc)Special Functions.
+* jnf: (libc)Special Functions.
+* jnl: (libc)Special Functions.
+* jrand48: (libc)SVID Random.
+* jrand48_r: (libc)SVID Random.
+* kill: (libc)Signaling Another Process.
+* killpg: (libc)Signaling Another Process.
+* l64a: (libc)Encode Binary Data.
+* labs: (libc)Absolute Value.
+* lcong48: (libc)SVID Random.
+* lcong48_r: (libc)SVID Random.
+* ldexp: (libc)Normalization Functions.
+* ldexpf: (libc)Normalization Functions.
+* ldexpl: (libc)Normalization Functions.
+* ldiv: (libc)Integer Division.
+* lfind: (libc)Array Search Function.
+* lgamma: (libc)Special Functions.
+* lgamma_r: (libc)Special Functions.
+* lgammaf: (libc)Special Functions.
+* lgammaf_r: (libc)Special Functions.
+* lgammal: (libc)Special Functions.
+* lgammal_r: (libc)Special Functions.
+* link: (libc)Hard Links.
+* lio_listio64: (libc)Asynchronous Reads/Writes.
+* lio_listio: (libc)Asynchronous Reads/Writes.
+* listen: (libc)Listening.
+* llabs: (libc)Absolute Value.
+* lldiv: (libc)Integer Division.
+* llrint: (libc)Rounding Functions.
+* llrintf: (libc)Rounding Functions.
+* llrintl: (libc)Rounding Functions.
+* llround: (libc)Rounding Functions.
+* llroundf: (libc)Rounding Functions.
+* llroundl: (libc)Rounding Functions.
+* localeconv: (libc)The Lame Way to Locale Data.
+* localtime: (libc)Broken-down Time.
+* localtime_r: (libc)Broken-down Time.
+* log10: (libc)Exponents and Logarithms.
+* log10f: (libc)Exponents and Logarithms.
+* log10l: (libc)Exponents and Logarithms.
+* log1p: (libc)Exponents and Logarithms.
+* log1pf: (libc)Exponents and Logarithms.
+* log1pl: (libc)Exponents and Logarithms.
+* log2: (libc)Exponents and Logarithms.
+* log2f: (libc)Exponents and Logarithms.
+* log2l: (libc)Exponents and Logarithms.
+* log: (libc)Exponents and Logarithms.
+* logb: (libc)Exponents and Logarithms.
+* logbf: (libc)Exponents and Logarithms.
+* logbl: (libc)Exponents and Logarithms.
+* logf: (libc)Exponents and Logarithms.
+* login: (libc)Logging In and Out.
+* login_tty: (libc)Logging In and Out.
+* logl: (libc)Exponents and Logarithms.
+* logout: (libc)Logging In and Out.
+* logwtmp: (libc)Logging In and Out.
+* longjmp: (libc)Non-Local Details.
+* lrand48: (libc)SVID Random.
+* lrand48_r: (libc)SVID Random.
+* lrint: (libc)Rounding Functions.
+* lrintf: (libc)Rounding Functions.
+* lrintl: (libc)Rounding Functions.
+* lround: (libc)Rounding Functions.
+* lroundf: (libc)Rounding Functions.
+* lroundl: (libc)Rounding Functions.
+* lsearch: (libc)Array Search Function.
+* lseek64: (libc)File Position Primitive.
+* lseek: (libc)File Position Primitive.
+* lstat64: (libc)Reading Attributes.
+* lstat: (libc)Reading Attributes.
+* lutimes: (libc)File Times.
+* madvise: (libc)Memory-mapped I/O.
+* makecontext: (libc)System V contexts.
+* mallinfo: (libc)Statistics of Malloc.
+* malloc: (libc)Basic Allocation.
+* mallopt: (libc)Malloc Tunable Parameters.
+* mblen: (libc)Non-reentrant Character Conversion.
+* mbrlen: (libc)Converting a Character.
+* mbrtowc: (libc)Converting a Character.
+* mbsinit: (libc)Keeping the state.
+* mbsnrtowcs: (libc)Converting Strings.
+* mbsrtowcs: (libc)Converting Strings.
+* mbstowcs: (libc)Non-reentrant String Conversion.
+* mbtowc: (libc)Non-reentrant Character Conversion.
+* mcheck: (libc)Heap Consistency Checking.
+* memalign: (libc)Aligned Memory Blocks.
+* memccpy: (libc)Copying and Concatenation.
+* memchr: (libc)Search Functions.
+* memcmp: (libc)String/Array Comparison.
+* memcpy: (libc)Copying and Concatenation.
+* memfrob: (libc)Trivial Encryption.
+* memmem: (libc)Search Functions.
+* memmove: (libc)Copying and Concatenation.
+* mempcpy: (libc)Copying and Concatenation.
+* memrchr: (libc)Search Functions.
+* memset: (libc)Copying and Concatenation.
+* mkdir: (libc)Creating Directories.
+* mkdtemp: (libc)Temporary Files.
+* mkfifo: (libc)FIFO Special Files.
+* mknod: (libc)Making Special Files.
+* mkstemp: (libc)Temporary Files.
+* mktemp: (libc)Temporary Files.
+* mktime: (libc)Broken-down Time.
+* mlock: (libc)Page Lock Functions.
+* mlockall: (libc)Page Lock Functions.
+* mmap64: (libc)Memory-mapped I/O.
+* mmap: (libc)Memory-mapped I/O.
+* modf: (libc)Rounding Functions.
+* modff: (libc)Rounding Functions.
+* modfl: (libc)Rounding Functions.
+* mount: (libc)Mount-Unmount-Remount.
+* mprobe: (libc)Heap Consistency Checking.
+* mrand48: (libc)SVID Random.
+* mrand48_r: (libc)SVID Random.
+* mremap: (libc)Memory-mapped I/O.
+* msync: (libc)Memory-mapped I/O.
+* mtrace: (libc)Tracing malloc.
+* munlock: (libc)Page Lock Functions.
+* munlockall: (libc)Page Lock Functions.
+* munmap: (libc)Memory-mapped I/O.
+* muntrace: (libc)Tracing malloc.
+* nan: (libc)FP Bit Twiddling.
+* nanf: (libc)FP Bit Twiddling.
+* nanl: (libc)FP Bit Twiddling.
+* nanosleep: (libc)Sleeping.
+* nearbyint: (libc)Rounding Functions.
+* nearbyintf: (libc)Rounding Functions.
+* nearbyintl: (libc)Rounding Functions.
+* nextafter: (libc)FP Bit Twiddling.
+* nextafterf: (libc)FP Bit Twiddling.
+* nextafterl: (libc)FP Bit Twiddling.
+* nexttoward: (libc)FP Bit Twiddling.
+* nexttowardf: (libc)FP Bit Twiddling.
+* nexttowardl: (libc)FP Bit Twiddling.
+* nftw64: (libc)Working with Directory Trees.
+* nftw: (libc)Working with Directory Trees.
+* ngettext: (libc)Advanced gettext functions.
+* nice: (libc)Traditional Scheduling Functions.
+* nl_langinfo: (libc)The Elegant and Fast Way.
+* nrand48: (libc)SVID Random.
+* nrand48_r: (libc)SVID Random.
+* ntohl: (libc)Byte Order.
+* ntohs: (libc)Byte Order.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
+* obstack_1grow: (libc)Growing Objects.
+* obstack_1grow_fast: (libc)Extra Fast Growing.
+* obstack_alignment_mask: (libc)Obstacks Data Alignment.
+* obstack_alloc: (libc)Allocation in an Obstack.
+* obstack_base: (libc)Status of an Obstack.
+* obstack_blank: (libc)Growing Objects.
+* obstack_blank_fast: (libc)Extra Fast Growing.
+* obstack_chunk_size: (libc)Obstack Chunks.
+* obstack_copy0: (libc)Allocation in an Obstack.
+* obstack_copy: (libc)Allocation in an Obstack.
+* obstack_finish: (libc)Growing Objects.
+* obstack_free: (libc)Freeing Obstack Objects.
+* obstack_grow0: (libc)Growing Objects.
+* obstack_grow: (libc)Growing Objects.
+* obstack_init: (libc)Preparing for Obstacks.
+* obstack_int_grow: (libc)Growing Objects.
+* obstack_int_grow_fast: (libc)Extra Fast Growing.
+* obstack_next_free: (libc)Status of an Obstack.
+* obstack_object_size: (libc)Growing Objects.
+* obstack_object_size: (libc)Status of an Obstack.
+* obstack_printf: (libc)Dynamic Output.
+* obstack_ptr_grow: (libc)Growing Objects.
+* obstack_ptr_grow_fast: (libc)Extra Fast Growing.
+* obstack_room: (libc)Extra Fast Growing.
+* obstack_vprintf: (libc)Variable Arguments Output.
+* offsetof: (libc)Structure Measurement.
+* on_exit: (libc)Cleanups on Exit.
+* open64: (libc)Opening and Closing Files.
+* open: (libc)Opening and Closing Files.
+* open_memstream: (libc)String Streams.
+* open_obstack_stream: (libc)Obstack Streams.
+* opendir: (libc)Opening a Directory.
+* openlog: (libc)openlog.
+* openpty: (libc)Pseudo-Terminal Pairs.
+* parse_printf_format: (libc)Parsing a Template String.
+* pathconf: (libc)Pathconf.
+* pause: (libc)Using Pause.
+* pclose: (libc)Pipe to a Subprocess.
+* perror: (libc)Error Messages.
+* pipe: (libc)Creating a Pipe.
+* popen: (libc)Pipe to a Subprocess.
+* posix_memalign: (libc)Aligned Memory Blocks.
+* pow10: (libc)Exponents and Logarithms.
+* pow10f: (libc)Exponents and Logarithms.
+* pow10l: (libc)Exponents and Logarithms.
+* pow: (libc)Exponents and Logarithms.
+* powf: (libc)Exponents and Logarithms.
+* powl: (libc)Exponents and Logarithms.
+* pread64: (libc)I/O Primitives.
+* pread: (libc)I/O Primitives.
+* printf: (libc)Formatted Output Functions.
+* printf_size: (libc)Predefined Printf Handlers.
+* printf_size_info: (libc)Predefined Printf Handlers.
+* psignal: (libc)Signal Messages.
+* ptsname: (libc)Allocation.
+* ptsname_r: (libc)Allocation.
+* putc: (libc)Simple Output.
+* putc_unlocked: (libc)Simple Output.
+* putchar: (libc)Simple Output.
+* putchar_unlocked: (libc)Simple Output.
+* putenv: (libc)Environment Access.
+* putpwent: (libc)Writing a User Entry.
+* puts: (libc)Simple Output.
+* pututline: (libc)Manipulating the Database.
+* pututxline: (libc)XPG Functions.
+* putw: (libc)Simple Output.
+* putwc: (libc)Simple Output.
+* putwc_unlocked: (libc)Simple Output.
+* putwchar: (libc)Simple Output.
+* putwchar_unlocked: (libc)Simple Output.
+* pwrite64: (libc)I/O Primitives.
+* pwrite: (libc)I/O Primitives.
+* qecvt: (libc)System V Number Conversion.
+* qecvt_r: (libc)System V Number Conversion.
+* qfcvt: (libc)System V Number Conversion.
+* qfcvt_r: (libc)System V Number Conversion.
+* qgcvt: (libc)System V Number Conversion.
+* qsort: (libc)Array Sort Function.
+* raise: (libc)Signaling Yourself.
+* rand: (libc)ISO Random.
+* rand_r: (libc)ISO Random.
+* random: (libc)BSD Random.
+* random_r: (libc)BSD Random.
+* rawmemchr: (libc)Search Functions.
+* read: (libc)I/O Primitives.
+* readdir64: (libc)Reading/Closing Directory.
+* readdir64_r: (libc)Reading/Closing Directory.
+* readdir: (libc)Reading/Closing Directory.
+* readdir_r: (libc)Reading/Closing Directory.
+* readlink: (libc)Symbolic Links.
+* readv: (libc)Scatter-Gather.
+* realloc: (libc)Changing Block Size.
+* realpath: (libc)Symbolic Links.
+* recv: (libc)Receiving Data.
+* recvfrom: (libc)Receiving Datagrams.
+* recvmsg: (libc)Receiving Datagrams.
+* regcomp: (libc)POSIX Regexp Compilation.
+* regerror: (libc)Regexp Cleanup.
+* regexec: (libc)Matching POSIX Regexps.
+* regfree: (libc)Regexp Cleanup.
+* register_printf_function: (libc)Registering New Conversions.
+* remainder: (libc)Remainder Functions.
+* remainderf: (libc)Remainder Functions.
+* remainderl: (libc)Remainder Functions.
+* remove: (libc)Deleting Files.
+* rename: (libc)Renaming Files.
+* rewind: (libc)File Positioning.
+* rewinddir: (libc)Random Access Directory.
+* rindex: (libc)Search Functions.
+* rint: (libc)Rounding Functions.
+* rintf: (libc)Rounding Functions.
+* rintl: (libc)Rounding Functions.
+* rmdir: (libc)Deleting Files.
+* round: (libc)Rounding Functions.
+* roundf: (libc)Rounding Functions.
+* roundl: (libc)Rounding Functions.
+* rpmatch: (libc)Yes-or-No Questions.
+* sbrk: (libc)Resizing the Data Segment.
+* scalb: (libc)Normalization Functions.
+* scalbf: (libc)Normalization Functions.
+* scalbl: (libc)Normalization Functions.
+* scalbln: (libc)Normalization Functions.
+* scalblnf: (libc)Normalization Functions.
+* scalblnl: (libc)Normalization Functions.
+* scalbn: (libc)Normalization Functions.
+* scalbnf: (libc)Normalization Functions.
+* scalbnl: (libc)Normalization Functions.
+* scandir64: (libc)Scanning Directory Content.
+* scandir: (libc)Scanning Directory Content.
+* scanf: (libc)Formatted Input Functions.
+* sched_get_priority_max: (libc)Basic Scheduling Functions.
+* sched_get_priority_min: (libc)Basic Scheduling Functions.
+* sched_getaffinity: (libc)CPU Affinity.
+* sched_getparam: (libc)Basic Scheduling Functions.
+* sched_getscheduler: (libc)Basic Scheduling Functions.
+* sched_rr_get_interval: (libc)Basic Scheduling Functions.
+* sched_setaffinity: (libc)CPU Affinity.
+* sched_setparam: (libc)Basic Scheduling Functions.
+* sched_setscheduler: (libc)Basic Scheduling Functions.
+* sched_yield: (libc)Basic Scheduling Functions.
+* seed48: (libc)SVID Random.
+* seed48_r: (libc)SVID Random.
+* seekdir: (libc)Random Access Directory.
+* select: (libc)Waiting for I/O.
+* send: (libc)Sending Data.
+* sendmsg: (libc)Receiving Datagrams.
+* sendto: (libc)Sending Datagrams.
+* setbuf: (libc)Controlling Buffering.
+* setbuffer: (libc)Controlling Buffering.
+* setcontext: (libc)System V contexts.
+* setdomainname: (libc)Host Identification.
+* setegid: (libc)Setting Groups.
+* setenv: (libc)Environment Access.
+* seteuid: (libc)Setting User ID.
+* setfsent: (libc)fstab.
+* setgid: (libc)Setting Groups.
+* setgrent: (libc)Scanning All Groups.
+* setgroups: (libc)Setting Groups.
+* sethostent: (libc)Host Names.
+* sethostid: (libc)Host Identification.
+* sethostname: (libc)Host Identification.
+* setitimer: (libc)Setting an Alarm.
+* setjmp: (libc)Non-Local Details.
+* setkey: (libc)DES Encryption.
+* setkey_r: (libc)DES Encryption.
+* setlinebuf: (libc)Controlling Buffering.
+* setlocale: (libc)Setting the Locale.
+* setlogmask: (libc)setlogmask.
+* setmntent: (libc)mtab.
+* setnetent: (libc)Networks Database.
+* setnetgrent: (libc)Lookup Netgroup.
+* setpgid: (libc)Process Group Functions.
+* setpgrp: (libc)Process Group Functions.
+* setpriority: (libc)Traditional Scheduling Functions.
+* setprotoent: (libc)Protocols Database.
+* setpwent: (libc)Scanning All Users.
+* setregid: (libc)Setting Groups.
+* setreuid: (libc)Setting User ID.
+* setrlimit64: (libc)Limits on Resources.
+* setrlimit: (libc)Limits on Resources.
+* setservent: (libc)Services Database.
+* setsid: (libc)Process Group Functions.
+* setsockopt: (libc)Socket Option Functions.
+* setstate: (libc)BSD Random.
+* setstate_r: (libc)BSD Random.
+* settimeofday: (libc)High-Resolution Calendar.
+* setuid: (libc)Setting User ID.
+* setutent: (libc)Manipulating the Database.
+* setutxent: (libc)XPG Functions.
+* setvbuf: (libc)Controlling Buffering.
+* shutdown: (libc)Closing a Socket.
+* sigaction: (libc)Advanced Signal Handling.
+* sigaddset: (libc)Signal Sets.
+* sigaltstack: (libc)Signal Stack.
+* sigblock: (libc)Blocking in BSD.
+* sigdelset: (libc)Signal Sets.
+* sigemptyset: (libc)Signal Sets.
+* sigfillset: (libc)Signal Sets.
+* siginterrupt: (libc)BSD Handler.
+* sigismember: (libc)Signal Sets.
+* siglongjmp: (libc)Non-Local Exits and Signals.
+* sigmask: (libc)Blocking in BSD.
+* signal: (libc)Basic Signal Handling.
+* signbit: (libc)FP Bit Twiddling.
+* significand: (libc)Normalization Functions.
+* significandf: (libc)Normalization Functions.
+* significandl: (libc)Normalization Functions.
+* sigpause: (libc)Blocking in BSD.
+* sigpending: (libc)Checking for Pending Signals.
+* sigprocmask: (libc)Process Signal Mask.
+* sigsetjmp: (libc)Non-Local Exits and Signals.
+* sigsetmask: (libc)Blocking in BSD.
+* sigstack: (libc)Signal Stack.
+* sigsuspend: (libc)Sigsuspend.
+* sigvec: (libc)BSD Handler.
+* sin: (libc)Trig Functions.
+* sincos: (libc)Trig Functions.
+* sincosf: (libc)Trig Functions.
+* sincosl: (libc)Trig Functions.
+* sinf: (libc)Trig Functions.
+* sinh: (libc)Hyperbolic Functions.
+* sinhf: (libc)Hyperbolic Functions.
+* sinhl: (libc)Hyperbolic Functions.
+* sinl: (libc)Trig Functions.
+* sleep: (libc)Sleeping.
+* snprintf: (libc)Formatted Output Functions.
+* socket: (libc)Creating a Socket.
+* socketpair: (libc)Socket Pairs.
+* sprintf: (libc)Formatted Output Functions.
+* sqrt: (libc)Exponents and Logarithms.
+* sqrtf: (libc)Exponents and Logarithms.
+* sqrtl: (libc)Exponents and Logarithms.
+* srand48: (libc)SVID Random.
+* srand48_r: (libc)SVID Random.
+* srand: (libc)ISO Random.
+* srandom: (libc)BSD Random.
+* srandom_r: (libc)BSD Random.
+* sscanf: (libc)Formatted Input Functions.
+* ssignal: (libc)Basic Signal Handling.
+* stat64: (libc)Reading Attributes.
+* stat: (libc)Reading Attributes.
+* stime: (libc)Simple Calendar Time.
+* stpcpy: (libc)Copying and Concatenation.
+* stpncpy: (libc)Copying and Concatenation.
+* strcasecmp: (libc)String/Array Comparison.
+* strcasestr: (libc)Search Functions.
+* strcat: (libc)Copying and Concatenation.
+* strchr: (libc)Search Functions.
+* strchrnul: (libc)Search Functions.
+* strcmp: (libc)String/Array Comparison.
+* strcoll: (libc)Collation Functions.
+* strcpy: (libc)Copying and Concatenation.
+* strcspn: (libc)Search Functions.
+* strdup: (libc)Copying and Concatenation.
+* strdupa: (libc)Copying and Concatenation.
+* strerror: (libc)Error Messages.
+* strerror_r: (libc)Error Messages.
+* strfmon: (libc)Formatting Numbers.
+* strfry: (libc)strfry.
+* strftime: (libc)Formatting Calendar Time.
+* strlen: (libc)String Length.
+* strncasecmp: (libc)String/Array Comparison.
+* strncat: (libc)Copying and Concatenation.
+* strncmp: (libc)String/Array Comparison.
+* strncpy: (libc)Copying and Concatenation.
+* strndup: (libc)Copying and Concatenation.
+* strndupa: (libc)Copying and Concatenation.
+* strnlen: (libc)String Length.
+* strpbrk: (libc)Search Functions.
+* strptime: (libc)Low-Level Time String Parsing.
+* strrchr: (libc)Search Functions.
+* strsep: (libc)Finding Tokens in a String.
+* strsignal: (libc)Signal Messages.
+* strspn: (libc)Search Functions.
+* strstr: (libc)Search Functions.
+* strtod: (libc)Parsing of Floats.
+* strtof: (libc)Parsing of Floats.
+* strtoimax: (libc)Parsing of Integers.
+* strtok: (libc)Finding Tokens in a String.
+* strtok_r: (libc)Finding Tokens in a String.
+* strtol: (libc)Parsing of Integers.
+* strtold: (libc)Parsing of Floats.
+* strtoll: (libc)Parsing of Integers.
+* strtoq: (libc)Parsing of Integers.
+* strtoul: (libc)Parsing of Integers.
+* strtoull: (libc)Parsing of Integers.
+* strtoumax: (libc)Parsing of Integers.
+* strtouq: (libc)Parsing of Integers.
+* strverscmp: (libc)String/Array Comparison.
+* strxfrm: (libc)Collation Functions.
+* stty: (libc)BSD Terminal Modes.
+* swapcontext: (libc)System V contexts.
+* swprintf: (libc)Formatted Output Functions.
+* swscanf: (libc)Formatted Input Functions.
+* symlink: (libc)Symbolic Links.
+* sync: (libc)Synchronizing I/O.
+* syscall: (libc)System Calls.
+* sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
+* syslog: (libc)syslog; vsyslog.
+* system: (libc)Running a Command.
+* sysv_signal: (libc)Basic Signal Handling.
+* tan: (libc)Trig Functions.
+* tanf: (libc)Trig Functions.
+* tanh: (libc)Hyperbolic Functions.
+* tanhf: (libc)Hyperbolic Functions.
+* tanhl: (libc)Hyperbolic Functions.
+* tanl: (libc)Trig Functions.
+* tcdrain: (libc)Line Control.
+* tcflow: (libc)Line Control.
+* tcflush: (libc)Line Control.
+* tcgetattr: (libc)Mode Functions.
+* tcgetpgrp: (libc)Terminal Access Functions.
+* tcgetsid: (libc)Terminal Access Functions.
+* tcsendbreak: (libc)Line Control.
+* tcsetattr: (libc)Mode Functions.
+* tcsetpgrp: (libc)Terminal Access Functions.
+* tdelete: (libc)Tree Search Function.
+* tdestroy: (libc)Tree Search Function.
+* tempnam: (libc)Temporary Files.
+* textdomain: (libc)Locating gettext catalog.
+* tfind: (libc)Tree Search Function.
+* tgamma: (libc)Special Functions.
+* tgammaf: (libc)Special Functions.
+* tgammal: (libc)Special Functions.
+* time: (libc)Simple Calendar Time.
+* timegm: (libc)Broken-down Time.
+* timelocal: (libc)Broken-down Time.
+* times: (libc)Processor Time.
+* tmpfile64: (libc)Temporary Files.
+* tmpfile: (libc)Temporary Files.
+* tmpnam: (libc)Temporary Files.
+* tmpnam_r: (libc)Temporary Files.
+* toascii: (libc)Case Conversion.
+* tolower: (libc)Case Conversion.
+* toupper: (libc)Case Conversion.
+* towctrans: (libc)Wide Character Case Conversion.
+* towlower: (libc)Wide Character Case Conversion.
+* towupper: (libc)Wide Character Case Conversion.
+* trunc: (libc)Rounding Functions.
+* truncate64: (libc)File Size.
+* truncate: (libc)File Size.
+* truncf: (libc)Rounding Functions.
+* truncl: (libc)Rounding Functions.
+* tsearch: (libc)Tree Search Function.
+* ttyname: (libc)Is It a Terminal.
+* ttyname_r: (libc)Is It a Terminal.
+* twalk: (libc)Tree Search Function.
+* tzset: (libc)Time Zone Functions.
+* ulimit: (libc)Limits on Resources.
+* umask: (libc)Setting Permissions.
+* umount2: (libc)Mount-Unmount-Remount.
+* umount: (libc)Mount-Unmount-Remount.
+* uname: (libc)Platform Type.
+* ungetc: (libc)How Unread.
+* ungetwc: (libc)How Unread.
+* unlink: (libc)Deleting Files.
+* unlockpt: (libc)Allocation.
+* unsetenv: (libc)Environment Access.
+* updwtmp: (libc)Manipulating the Database.
+* utime: (libc)File Times.
+* utimes: (libc)File Times.
+* utmpname: (libc)Manipulating the Database.
+* utmpxname: (libc)XPG Functions.
+* va_arg: (libc)Argument Macros.
+* va_end: (libc)Argument Macros.
+* va_start: (libc)Argument Macros.
+* va_start: (libc)Old Varargs.
+* valloc: (libc)Aligned Memory Blocks.
+* vasprintf: (libc)Variable Arguments Output.
+* verr: (libc)Error Messages.
+* verrx: (libc)Error Messages.
+* versionsort64: (libc)Scanning Directory Content.
+* versionsort: (libc)Scanning Directory Content.
+* vfork: (libc)Creating a Process.
+* vfprintf: (libc)Variable Arguments Output.
+* vfscanf: (libc)Variable Arguments Input.
+* vfwprintf: (libc)Variable Arguments Output.
+* vfwscanf: (libc)Variable Arguments Input.
+* vlimit: (libc)Limits on Resources.
+* vprintf: (libc)Variable Arguments Output.
+* vscanf: (libc)Variable Arguments Input.
+* vsnprintf: (libc)Variable Arguments Output.
+* vsprintf: (libc)Variable Arguments Output.
+* vsscanf: (libc)Variable Arguments Input.
+* vswprintf: (libc)Variable Arguments Output.
+* vswscanf: (libc)Variable Arguments Input.
+* vsyslog: (libc)syslog; vsyslog.
+* vtimes: (libc)Resource Usage.
+* vwarn: (libc)Error Messages.
+* vwarnx: (libc)Error Messages.
+* vwprintf: (libc)Variable Arguments Output.
+* vwscanf: (libc)Variable Arguments Input.
+* wait3: (libc)BSD Wait Functions.
+* wait4: (libc)Process Completion.
+* wait: (libc)Process Completion.
+* waitpid: (libc)Process Completion.
+* warn: (libc)Error Messages.
+* warnx: (libc)Error Messages.
+* wcpcpy: (libc)Copying and Concatenation.
+* wcpncpy: (libc)Copying and Concatenation.
+* wcrtomb: (libc)Converting a Character.
+* wcscasecmp: (libc)String/Array Comparison.
+* wcscat: (libc)Copying and Concatenation.
+* wcschr: (libc)Search Functions.
+* wcschrnul: (libc)Search Functions.
+* wcscmp: (libc)String/Array Comparison.
+* wcscoll: (libc)Collation Functions.
+* wcscpy: (libc)Copying and Concatenation.
+* wcscspn: (libc)Search Functions.
+* wcsdup: (libc)Copying and Concatenation.
+* wcsftime: (libc)Formatting Calendar Time.
+* wcslen: (libc)String Length.
+* wcsncasecmp: (libc)String/Array Comparison.
+* wcsncat: (libc)Copying and Concatenation.
+* wcsncmp: (libc)String/Array Comparison.
+* wcsncpy: (libc)Copying and Concatenation.
+* wcsnlen: (libc)String Length.
+* wcsnrtombs: (libc)Converting Strings.
+* wcspbrk: (libc)Search Functions.
+* wcsrchr: (libc)Search Functions.
+* wcsrtombs: (libc)Converting Strings.
+* wcsspn: (libc)Search Functions.
+* wcsstr: (libc)Search Functions.
+* wcstod: (libc)Parsing of Floats.
+* wcstof: (libc)Parsing of Floats.
+* wcstoimax: (libc)Parsing of Integers.
+* wcstok: (libc)Finding Tokens in a String.
+* wcstol: (libc)Parsing of Integers.
+* wcstold: (libc)Parsing of Floats.
+* wcstoll: (libc)Parsing of Integers.
+* wcstombs: (libc)Non-reentrant String Conversion.
+* wcstoq: (libc)Parsing of Integers.
+* wcstoul: (libc)Parsing of Integers.
+* wcstoull: (libc)Parsing of Integers.
+* wcstoumax: (libc)Parsing of Integers.
+* wcstouq: (libc)Parsing of Integers.
+* wcswcs: (libc)Search Functions.
+* wcsxfrm: (libc)Collation Functions.
+* wctob: (libc)Converting a Character.
+* wctomb: (libc)Non-reentrant Character Conversion.
+* wctrans: (libc)Wide Character Case Conversion.
+* wctype: (libc)Classification of Wide Characters.
+* wmemchr: (libc)Search Functions.
+* wmemcmp: (libc)String/Array Comparison.
+* wmemcpy: (libc)Copying and Concatenation.
+* wmemmove: (libc)Copying and Concatenation.
+* wmempcpy: (libc)Copying and Concatenation.
+* wmemset: (libc)Copying and Concatenation.
+* wordexp: (libc)Calling Wordexp.
+* wordfree: (libc)Calling Wordexp.
+* wprintf: (libc)Formatted Output Functions.
+* write: (libc)I/O Primitives.
+* writev: (libc)Scatter-Gather.
+* wscanf: (libc)Formatted Input Functions.
+* y0: (libc)Special Functions.
+* y0f: (libc)Special Functions.
+* y0l: (libc)Special Functions.
+* y1: (libc)Special Functions.
+* y1f: (libc)Special Functions.
+* y1l: (libc)Special Functions.
+* yn: (libc)Special Functions.
+* ynf: (libc)Special Functions.
+* ynl: (libc)Special Functions.
+END-INFO-DIR-ENTRY
+
+   This file documents the GNU C library.
+
+   This is Edition 0.10, last updated 2001-07-06, of `The GNU C Library
+Reference Manual', for Version 2.3.x.
+
+   Copyright (C) 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2001, 2002,
+2003 Free Software Foundation, Inc.
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being "Free Software Needs Free Documentation" and
+"GNU Lesser General Public License", the Front-Cover texts being (a)
+(see below), and with the Back-Cover Texts being (b) (see below).  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   (a) The FSF's Front-Cover Text is:
+
+   A GNU Manual
+
+   (b) The FSF's Back-Cover Text is:
+
+   You have freedom to copy and modify this GNU Manual, like GNU
+software.  Copies published by the Free Software Foundation raise
+funds for GNU development.
+
+
+File: libc.info,  Node: Freeing after Malloc,  Next: Changing Block Size,  Prev: Malloc Examples,  Up: Unconstrained Allocation
+
+Freeing Memory Allocated with `malloc'
+......................................
+
+   When you no longer need a block that you got with `malloc', use the
+function `free' to make the block available to be allocated again.  The
+prototype for this function is in `stdlib.h'.
+
+ - Function: void free (void *PTR)
+     The `free' function deallocates the block of memory pointed at by
+     PTR.
+
+ - Function: void cfree (void *PTR)
+     This function does the same thing as `free'.  It's provided for
+     backward compatibility with SunOS; you should use `free' instead.
+
+   Freeing a block alters the contents of the block.  *Do not expect to
+find any data (such as a pointer to the next block in a chain of
+blocks) in the block after freeing it.*  Copy whatever you need out of
+the block before freeing it!  Here is an example of the proper way to
+free all the blocks in a chain, and the strings that they point to:
+
+     struct chain
+       {
+         struct chain *next;
+         char *name;
+       }
+     
+     void
+     free_chain (struct chain *chain)
+     {
+       while (chain != 0)
+         {
+           struct chain *next = chain->next;
+           free (chain->name);
+           free (chain);
+           chain = next;
+         }
+     }
+
+   Occasionally, `free' can actually return memory to the operating
+system and make the process smaller.  Usually, all it can do is allow a
+later call to `malloc' to reuse the space.  In the meantime, the space
+remains in your program as part of a free-list used internally by
+`malloc'.
+
+   There is no point in freeing blocks at the end of a program, because
+all of the program's space is given back to the system when the process
+terminates.
+
+
+File: libc.info,  Node: Changing Block Size,  Next: Allocating Cleared Space,  Prev: Freeing after Malloc,  Up: Unconstrained Allocation
+
+Changing the Size of a Block
+............................
+
+   Often you do not know for certain how big a block you will
+ultimately need at the time you must begin to use the block.  For
+example, the block might be a buffer that you use to hold a line being
+read from a file; no matter how long you make the buffer initially, you
+may encounter a line that is longer.
+
+   You can make the block longer by calling `realloc'.  This function
+is declared in `stdlib.h'.
+
+ - Function: void * realloc (void *PTR, size_t NEWSIZE)
+     The `realloc' function changes the size of the block whose address
+     is PTR to be NEWSIZE.
+
+     Since the space after the end of the block may be in use, `realloc'
+     may find it necessary to copy the block to a new address where
+     more free space is available.  The value of `realloc' is the new
+     address of the block.  If the block needs to be moved, `realloc'
+     copies the old contents.
+
+     If you pass a null pointer for PTR, `realloc' behaves just like
+     `malloc (NEWSIZE)'.  This can be convenient, but beware that older
+     implementations (before ISO C) may not support this behavior, and
+     will probably crash when `realloc' is passed a null pointer.
+
+   Like `malloc', `realloc' may return a null pointer if no memory
+space is available to make the block bigger.  When this happens, the
+original block is untouched; it has not been modified or relocated.
+
+   In most cases it makes no difference what happens to the original
+block when `realloc' fails, because the application program cannot
+continue when it is out of memory, and the only thing to do is to give
+a fatal error message.  Often it is convenient to write and use a
+subroutine, conventionally called `xrealloc', that takes care of the
+error message as `xmalloc' does for `malloc':
+
+     void *
+     xrealloc (void *ptr, size_t size)
+     {
+       register void *value = realloc (ptr, size);
+       if (value == 0)
+         fatal ("Virtual memory exhausted");
+       return value;
+     }
+
+   You can also use `realloc' to make a block smaller.  The reason you
+would do this is to avoid tying up a lot of memory space when only a
+little is needed.  In several allocation implementations, making a
+block smaller sometimes necessitates copying it, so it can fail if no
+other space is available.
+
+   If the new size you specify is the same as the old size, `realloc'
+is guaranteed to change nothing and return the same address that you
+gave.
+
+
+File: libc.info,  Node: Allocating Cleared Space,  Next: Efficiency and Malloc,  Prev: Changing Block Size,  Up: Unconstrained Allocation
+
+Allocating Cleared Space
+........................
+
+   The function `calloc' allocates memory and clears it to zero.  It is
+declared in `stdlib.h'.
+
+ - Function: void * calloc (size_t COUNT, size_t ELTSIZE)
+     This function allocates a block long enough to contain a vector of
+     COUNT elements, each of size ELTSIZE.  Its contents are cleared to
+     zero before `calloc' returns.
+
+   You could define `calloc' as follows:
+
+     void *
+     calloc (size_t count, size_t eltsize)
+     {
+       size_t size = count * eltsize;
+       void *value = malloc (size);
+       if (value != 0)
+         memset (value, 0, size);
+       return value;
+     }
+
+   But in general, it is not guaranteed that `calloc' calls `malloc'
+internally.  Therefore, if an application provides its own
+`malloc'/`realloc'/`free' outside the C library, it should always
+define `calloc', too.
+
+
+File: libc.info,  Node: Efficiency and Malloc,  Next: Aligned Memory Blocks,  Prev: Allocating Cleared Space,  Up: Unconstrained Allocation
+
+Efficiency Considerations for `malloc'
+......................................
+
+   As opposed to other versions, the `malloc' in the GNU C Library does
+not round up block sizes to powers of two, neither for large nor for
+small sizes.  Neighboring chunks can be coalesced on a `free' no matter
+what their size is.  This makes the implementation suitable for all
+kinds of allocation patterns without generally incurring high memory
+waste through fragmentation.
+
+   Very large blocks (much larger than a page) are allocated with
+`mmap' (anonymous or via `/dev/zero') by this implementation.  This has
+the great advantage that these chunks are returned to the system
+immediately when they are freed.  Therefore, it cannot happen that a
+large chunk becomes "locked" in between smaller ones and even after
+calling `free' wastes memory.  The size threshold for `mmap' to be used
+can be adjusted with `mallopt'.  The use of `mmap' can also be disabled
+completely.
+
+
+File: libc.info,  Node: Aligned Memory Blocks,  Next: Malloc Tunable Parameters,  Prev: Efficiency and Malloc,  Up: Unconstrained Allocation
+
+Allocating Aligned Memory Blocks
+................................
+
+   The address of a block returned by `malloc' or `realloc' in the GNU
+system is always a multiple of eight (or sixteen on 64-bit systems).
+If you need a block whose address is a multiple of a higher power of
+two than that, use `memalign', `posix_memalign', or `valloc'.
+`memalign' is declared in `malloc.h' and `posix_memalign' is declared
+in `stdlib.h'.
+
+   With the GNU library, you can use `free' to free the blocks that
+`memalign', `posix_memalign', and `valloc' return.  That does not work
+in BSD, however--BSD does not provide any way to free such blocks.
+
+ - Function: void * memalign (size_t BOUNDARY, size_t SIZE)
+     The `memalign' function allocates a block of SIZE bytes whose
+     address is a multiple of BOUNDARY.  The BOUNDARY must be a power
+     of two!  The function `memalign' works by allocating a somewhat
+     larger block, and then returning an address within the block that
+     is on the specified boundary.
+
+ - Function: int posix_memalign (void **MEMPTR, size_t ALIGNMENT,
+          size_t SIZE)
+     The `posix_memalign' function is similar to the `memalign'
+     function in that it returns a buffer of SIZE bytes aligned to a
+     multiple of ALIGNMENT.  But it adds one requirement to the
+     parameter ALIGNMENT: the value must be a power of two multiple of
+     `sizeof (void *)'.
+
+     If the function succeeds in allocation memory a pointer to the
+     allocated memory is returned in `*MEMPTR' and the return value is
+     zero.  Otherwise the function returns an error value indicating
+     the problem.
+
+     This function was introduced in POSIX 1003.1d.
+
+ - Function: void * valloc (size_t SIZE)
+     Using `valloc' is like using `memalign' and passing the page size
+     as the value of the second argument.  It is implemented like this:
+
+          void *
+          valloc (size_t size)
+          {
+            return memalign (getpagesize (), size);
+          }
+
+     *Note Query Memory Parameters:: for more information about the
+     memory subsystem.
+
+
+File: libc.info,  Node: Malloc Tunable Parameters,  Next: Heap Consistency Checking,  Prev: Aligned Memory Blocks,  Up: Unconstrained Allocation
+
+Malloc Tunable Parameters
+.........................
+
+   You can adjust some parameters for dynamic memory allocation with the
+`mallopt' function.  This function is the general SVID/XPG interface,
+defined in `malloc.h'.
+
+ - Function: int mallopt (int PARAM, int VALUE)
+     When calling `mallopt', the PARAM argument specifies the parameter
+     to be set, and VALUE the new value to be set.  Possible choices
+     for PARAM, as defined in `malloc.h', are:
+
+    `M_TRIM_THRESHOLD'
+          This is the minimum size (in bytes) of the top-most,
+          releasable chunk that will cause `sbrk' to be called with a
+          negative argument in order to return memory to the system.
+
+    `M_TOP_PAD'
+          This parameter determines the amount of extra memory to
+          obtain from the system when a call to `sbrk' is required.  It
+          also specifies the number of bytes to retain when shrinking
+          the heap by calling `sbrk' with a negative argument.  This
+          provides the necessary hysteresis in heap size such that
+          excessive amounts of system calls can be avoided.
+
+    `M_MMAP_THRESHOLD'
+          All chunks larger than this value are allocated outside the
+          normal heap, using the `mmap' system call.  This way it is
+          guaranteed that the memory for these chunks can be returned
+          to the system on `free'.  Note that requests smaller than
+          this threshold might still be allocated via `mmap'.
+
+    `M_MMAP_MAX'
+          The maximum number of chunks to allocate with `mmap'.
+          Setting this to zero disables all use of `mmap'.
+
+
+
+File: libc.info,  Node: Heap Consistency Checking,  Next: Hooks for Malloc,  Prev: Malloc Tunable Parameters,  Up: Unconstrained Allocation
+
+Heap Consistency Checking
+.........................
+
+   You can ask `malloc' to check the consistency of dynamic memory by
+using the `mcheck' function.  This function is a GNU extension,
+declared in `mcheck.h'.
+
+ - Function: int mcheck (void (*ABORTFN) (enum mcheck_status STATUS))
+     Calling `mcheck' tells `malloc' to perform occasional consistency
+     checks.  These will catch things such as writing past the end of a
+     block that was allocated with `malloc'.
+
+     The ABORTFN argument is the function to call when an inconsistency
+     is found.  If you supply a null pointer, then `mcheck' uses a
+     default function which prints a message and calls `abort' (*note
+     Aborting a Program::).  The function you supply is called with one
+     argument, which says what sort of inconsistency was detected; its
+     type is described below.
+
+     It is too late to begin allocation checking once you have allocated
+     anything with `malloc'.  So `mcheck' does nothing in that case.
+     The function returns `-1' if you call it too late, and `0'
+     otherwise (when it is successful).
+
+     The easiest way to arrange to call `mcheck' early enough is to use
+     the option `-lmcheck' when you link your program; then you don't
+     need to modify your program source at all.  Alternatively you
+     might use a debugger to insert a call to `mcheck' whenever the
+     program is started, for example these gdb commands will
+     automatically call `mcheck' whenever the program starts:
+
+          (gdb) break main
+          Breakpoint 1, main (argc=2, argv=0xbffff964) at whatever.c:10
+          (gdb) command 1
+          Type commands for when breakpoint 1 is hit, one per line.
+          End with a line saying just "end".
+          >call mcheck(0)
+          >continue
+          >end
+          (gdb) ...
+
+     This will however only work if no initialization function of any
+     object involved calls any of the `malloc' functions since `mcheck'
+     must be called before the first such function.
+
+
+ - Function: enum mcheck_status mprobe (void *POINTER)
+     The `mprobe' function lets you explicitly check for inconsistencies
+     in a particular allocated block.  You must have already called
+     `mcheck' at the beginning of the program, to do its occasional
+     checks; calling `mprobe' requests an additional consistency check
+     to be done at the time of the call.
+
+     The argument POINTER must be a pointer returned by `malloc' or
+     `realloc'.  `mprobe' returns a value that says what inconsistency,
+     if any, was found.  The values are described below.
+
+ - Data Type: enum mcheck_status
+     This enumerated type describes what kind of inconsistency was
+     detected in an allocated block, if any.  Here are the possible
+     values:
+
+    `MCHECK_DISABLED'
+          `mcheck' was not called before the first allocation.  No
+          consistency checking can be done.
+
+    `MCHECK_OK'
+          No inconsistency detected.
+
+    `MCHECK_HEAD'
+          The data immediately before the block was modified.  This
+          commonly happens when an array index or pointer is
+          decremented too far.
+
+    `MCHECK_TAIL'
+          The data immediately after the block was modified.  This
+          commonly happens when an array index or pointer is
+          incremented too far.
+
+    `MCHECK_FREE'
+          The block was already freed.
+
+   Another possibility to check for and guard against bugs in the use of
+`malloc', `realloc' and `free' is to set the environment variable
+`MALLOC_CHECK_'.  When `MALLOC_CHECK_' is set, a special (less
+efficient) implementation is used which is designed to be tolerant
+against simple errors, such as double calls of `free' with the same
+argument, or overruns of a single byte (off-by-one bugs).  Not all such
+errors can be protected against, however, and memory leaks can result.
+If `MALLOC_CHECK_' is set to `0', any detected heap corruption is
+silently ignored; if set to `1', a diagnostic is printed on `stderr';
+if set to `2', `abort' is called immediately.  This can be useful
+because otherwise a crash may happen much later, and the true cause for
+the problem is then very hard to track down.
+
+   There is one problem with `MALLOC_CHECK_': in SUID or SGID binaries
+it could possibly be exploited since diverging from the normal programs
+behavior it now writes something to the standard error descriptor.
+Therefore the use of `MALLOC_CHECK_' is disabled by default for SUID
+and SGID binaries.  It can be enabled again by the system administrator
+by adding a file `/etc/suid-debug' (the content is not important it
+could be empty).
+
+   So, what's the difference between using `MALLOC_CHECK_' and linking
+with `-lmcheck'?  `MALLOC_CHECK_' is orthogonal with respect to
+`-lmcheck'.  `-lmcheck' has been added for backward compatibility.
+Both `MALLOC_CHECK_' and `-lmcheck' should uncover the same bugs - but
+using `MALLOC_CHECK_' you don't need to recompile your application.
+
+
+File: libc.info,  Node: Hooks for Malloc,  Next: Statistics of Malloc,  Prev: Heap Consistency Checking,  Up: Unconstrained Allocation
+
+Memory Allocation Hooks
+.......................
+
+   The GNU C library lets you modify the behavior of `malloc',
+`realloc', and `free' by specifying appropriate hook functions.  You
+can use these hooks to help you debug programs that use dynamic memory
+allocation, for example.
+
+   The hook variables are declared in `malloc.h'.
+
+ - Variable: __malloc_hook
+     The value of this variable is a pointer to the function that
+     `malloc' uses whenever it is called.  You should define this
+     function to look like `malloc'; that is, like:
+
+          void *FUNCTION (size_t SIZE, const void *CALLER)
+
+     The value of CALLER is the return address found on the stack when
+     the `malloc' function was called.  This value allows you to trace
+     the memory consumption of the program.
+
+ - Variable: __realloc_hook
+     The value of this variable is a pointer to function that `realloc'
+     uses whenever it is called.  You should define this function to
+     look like `realloc'; that is, like:
+
+          void *FUNCTION (void *PTR, size_t SIZE, const void *CALLER)
+
+     The value of CALLER is the return address found on the stack when
+     the `realloc' function was called.  This value allows you to trace
+     the memory consumption of the program.
+
+ - Variable: __free_hook
+     The value of this variable is a pointer to function that `free'
+     uses whenever it is called.  You should define this function to
+     look like `free'; that is, like:
+
+          void FUNCTION (void *PTR, const void *CALLER)
+
+     The value of CALLER is the return address found on the stack when
+     the `free' function was called.  This value allows you to trace the
+     memory consumption of the program.
+
+ - Variable: __memalign_hook
+     The value of this variable is a pointer to function that `memalign'
+     uses whenever it is called.  You should define this function to
+     look like `memalign'; that is, like:
+
+          void *FUNCTION (size_t ALIGNMENT, size_t SIZE, const void *CALLER)
+
+     The value of CALLER is the return address found on the stack when
+     the `memalign' function was called.  This value allows you to
+     trace the memory consumption of the program.
+
+   You must make sure that the function you install as a hook for one of
+these functions does not call that function recursively without
+restoring the old value of the hook first!  Otherwise, your program
+will get stuck in an infinite recursion.  Before calling the function
+recursively, one should make sure to restore all the hooks to their
+previous value.  When coming back from the recursive call, all the
+hooks should be resaved since a hook might modify itself.
+
+ - Variable: __malloc_initialize_hook
+     The value of this variable is a pointer to a function that is
+     called once when the malloc implementation is initialized.  This
+     is a weak variable, so it can be overridden in the application
+     with a definition like the following:
+
+          void (*__MALLOC_INITIALIZE_HOOK) (void) = my_init_hook;
+
+   An issue to look out for is the time at which the malloc hook
+functions can be safely installed.  If the hook functions call the
+malloc-related functions recursively, it is necessary that malloc has
+already properly initialized itself at the time when `__malloc_hook'
+etc. is assigned to.  On the other hand, if the hook functions provide a
+complete malloc implementation of their own, it is vital that the hooks
+are assigned to _before_ the very first `malloc' call has completed,
+because otherwise a chunk obtained from the ordinary, un-hooked malloc
+may later be handed to `__free_hook', for example.
+
+   In both cases, the problem can be solved by setting up the hooks from
+within a user-defined function pointed to by
+`__malloc_initialize_hook'--then the hooks will be set up safely at the
+right time.
+
+   Here is an example showing how to use `__malloc_hook' and
+`__free_hook' properly.  It installs a function that prints out
+information every time `malloc' or `free' is called.  We just assume
+here that `realloc' and `memalign' are not used in our program.
+
+     /* Prototypes for __malloc_hook, __free_hook */
+     #include <malloc.h>
+     
+     /* Prototypes for our hooks.  */
+     static void my_init_hook (void);
+     static void *my_malloc_hook (size_t, const void *);
+     static void my_free_hook (void*, const void *);
+     
+     /* Override initializing hook from the C library. */
+     void (*__malloc_initialize_hook) (void) = my_init_hook;
+     
+     static void
+     my_init_hook (void)
+     {
+       old_malloc_hook = __malloc_hook;
+       old_free_hook = __free_hook;
+       __malloc_hook = my_malloc_hook;
+       __free_hook = my_free_hook;
+     }
+     
+     static void *
+     my_malloc_hook (size_t size, const void *caller)
+     {
+       void *result;
+       /* Restore all old hooks */
+       __malloc_hook = old_malloc_hook;
+       __free_hook = old_free_hook;
+       /* Call recursively */
+       result = malloc (size);
+       /* Save underlying hooks */
+       old_malloc_hook = __malloc_hook;
+       old_free_hook = __free_hook;
+       /* `printf' might call `malloc', so protect it too. */
+       printf ("malloc (%u) returns %p\n", (unsigned int) size, result);
+       /* Restore our own hooks */
+       __malloc_hook = my_malloc_hook;
+       __free_hook = my_free_hook;
+       return result;
+     }
+     
+     static void
+     my_free_hook (void *ptr, const void *caller)
+     {
+       /* Restore all old hooks */
+       __malloc_hook = old_malloc_hook;
+       __free_hook = old_free_hook;
+       /* Call recursively */
+       free (ptr);
+       /* Save underlying hooks */
+       old_malloc_hook = __malloc_hook;
+       old_free_hook = __free_hook;
+       /* `printf' might call `free', so protect it too. */
+       printf ("freed pointer %p\n", ptr);
+       /* Restore our own hooks */
+       __malloc_hook = my_malloc_hook;
+       __free_hook = my_free_hook;
+     }
+     
+     main ()
+     {
+       ...
+     }
+
+   The `mcheck' function (*note Heap Consistency Checking::) works by
+installing such hooks.
+
+
+File: libc.info,  Node: Statistics of Malloc,  Next: Summary of Malloc,  Prev: Hooks for Malloc,  Up: Unconstrained Allocation
+
+Statistics for Memory Allocation with `malloc'
+..............................................
+
+   You can get information about dynamic memory allocation by calling
+the `mallinfo' function.  This function and its associated data type
+are declared in `malloc.h'; they are an extension of the standard
+SVID/XPG version.
+
+ - Data Type: struct mallinfo
+     This structure type is used to return information about the dynamic
+     memory allocator.  It contains the following members:
+
+    `int arena'
+          This is the total size of memory allocated with `sbrk' by
+          `malloc', in bytes.
+
+    `int ordblks'
+          This is the number of chunks not in use.  (The memory
+          allocator internally gets chunks of memory from the operating
+          system, and then carves them up to satisfy individual
+          `malloc' requests; see *Note Efficiency and Malloc::.)
+
+    `int smblks'
+          This field is unused.
+
+    `int hblks'
+          This is the total number of chunks allocated with `mmap'.
+
+    `int hblkhd'
+          This is the total size of memory allocated with `mmap', in
+          bytes.
+
+    `int usmblks'
+          This field is unused.
+
+    `int fsmblks'
+          This field is unused.
+
+    `int uordblks'
+          This is the total size of memory occupied by chunks handed
+          out by `malloc'.
+
+    `int fordblks'
+          This is the total size of memory occupied by free (not in
+          use) chunks.
+
+    `int keepcost'
+          This is the size of the top-most releasable chunk that
+          normally borders the end of the heap (i.e. the high end of
+          the virtual address space's data segment).
+
+
+ - Function: struct mallinfo mallinfo (void)
+     This function returns information about the current dynamic memory
+     usage in a structure of type `struct mallinfo'.
+
+
+File: libc.info,  Node: Summary of Malloc,  Prev: Statistics of Malloc,  Up: Unconstrained Allocation
+
+Summary of `malloc'-Related Functions
+.....................................
+
+   Here is a summary of the functions that work with `malloc':
+
+`void *malloc (size_t SIZE)'
+     Allocate a block of SIZE bytes.  *Note Basic Allocation::.
+
+`void free (void *ADDR)'
+     Free a block previously allocated by `malloc'.  *Note Freeing
+     after Malloc::.
+
+`void *realloc (void *ADDR, size_t SIZE)'
+     Make a block previously allocated by `malloc' larger or smaller,
+     possibly by copying it to a new location.  *Note Changing Block
+     Size::.
+
+`void *calloc (size_t COUNT, size_t ELTSIZE)'
+     Allocate a block of COUNT * ELTSIZE bytes using `malloc', and set
+     its contents to zero.  *Note Allocating Cleared Space::.
+
+`void *valloc (size_t SIZE)'
+     Allocate a block of SIZE bytes, starting on a page boundary.
+     *Note Aligned Memory Blocks::.
+
+`void *memalign (size_t SIZE, size_t BOUNDARY)'
+     Allocate a block of SIZE bytes, starting on an address that is a
+     multiple of BOUNDARY.  *Note Aligned Memory Blocks::.
+
+`int mallopt (int PARAM, int VALUE)'
+     Adjust a tunable parameter.  *Note Malloc Tunable Parameters::.
+
+`int mcheck (void (*ABORTFN) (void))'
+     Tell `malloc' to perform occasional consistency checks on
+     dynamically allocated memory, and to call ABORTFN when an
+     inconsistency is found.  *Note Heap Consistency Checking::.
+
+`void *(*__malloc_hook) (size_t SIZE, const void *CALLER)'
+     A pointer to a function that `malloc' uses whenever it is called.
+
+`void *(*__realloc_hook) (void *PTR, size_t SIZE, const void *CALLER)'
+     A pointer to a function that `realloc' uses whenever it is called.
+
+`void (*__free_hook) (void *PTR, const void *CALLER)'
+     A pointer to a function that `free' uses whenever it is called.
+
+`void (*__memalign_hook) (size_t SIZE, size_t ALIGNMENT, const void *CALLER)'
+     A pointer to a function that `memalign' uses whenever it is called.
+
+`struct mallinfo mallinfo (void)'
+     Return information about the current dynamic memory usage.  *Note
+     Statistics of Malloc::.
+
+
+File: libc.info,  Node: Allocation Debugging,  Next: Obstacks,  Prev: Unconstrained Allocation,  Up: Memory Allocation
+
+Allocation Debugging
+--------------------
+
+   A complicated task when programming with languages which do not use
+garbage collected dynamic memory allocation is to find memory leaks.
+Long running programs must assure that dynamically allocated objects are
+freed at the end of their lifetime.  If this does not happen the system
+runs out of memory, sooner or later.
+
+   The `malloc' implementation in the GNU C library provides some
+simple means to detect such leaks and obtain some information to find
+the location.  To do this the application must be started in a special
+mode which is enabled by an environment variable.  There are no speed
+penalties for the program if the debugging mode is not enabled.
+
+* Menu:
+
+* Tracing malloc::               How to install the tracing functionality.
+* Using the Memory Debugger::    Example programs excerpts.
+* Tips for the Memory Debugger:: Some more or less clever ideas.
+* Interpreting the traces::      What do all these lines mean?
+
+
+File: libc.info,  Node: Tracing malloc,  Next: Using the Memory Debugger,  Up: Allocation Debugging
+
+How to install the tracing functionality
+........................................
+
+ - Function: void mtrace (void)
+     When the `mtrace' function is called it looks for an environment
+     variable named `MALLOC_TRACE'.  This variable is supposed to
+     contain a valid file name.  The user must have write access.  If
+     the file already exists it is truncated.  If the environment
+     variable is not set or it does not name a valid file which can be
+     opened for writing nothing is done.  The behavior of `malloc' etc.
+     is not changed.  For obvious reasons this also happens if the
+     application is installed with the SUID or SGID bit set.
+
+     If the named file is successfully opened, `mtrace' installs special
+     handlers for the functions `malloc', `realloc', and `free' (*note
+     Hooks for Malloc::).  From then on, all uses of these functions
+     are traced and protocolled into the file.  There is now of course
+     a speed penalty for all calls to the traced functions so tracing
+     should not be enabled during normal use.
+
+     This function is a GNU extension and generally not available on
+     other systems.  The prototype can be found in `mcheck.h'.
+
+ - Function: void muntrace (void)
+     The `muntrace' function can be called after `mtrace' was used to
+     enable tracing the `malloc' calls.  If no (successful) call of
+     `mtrace' was made `muntrace' does nothing.
+
+     Otherwise it deinstalls the handlers for `malloc', `realloc', and
+     `free' and then closes the protocol file.  No calls are
+     protocolled anymore and the program runs again at full speed.
+
+     This function is a GNU extension and generally not available on
+     other systems.  The prototype can be found in `mcheck.h'.
+
+
+File: libc.info,  Node: Using the Memory Debugger,  Next: Tips for the Memory Debugger,  Prev: Tracing malloc,  Up: Allocation Debugging
+
+Example program excerpts
+........................
+
+   Even though the tracing functionality does not influence the runtime
+behavior of the program it is not a good idea to call `mtrace' in all
+programs.  Just imagine that you debug a program using `mtrace' and all
+other programs used in the debugging session also trace their `malloc'
+calls.  The output file would be the same for all programs and thus is
+unusable.  Therefore one should call `mtrace' only if compiled for
+debugging.  A program could therefore start like this:
+
+     #include <mcheck.h>
+     
+     int
+     main (int argc, char *argv[])
+     {
+     #ifdef DEBUGGING
+       mtrace ();
+     #endif
+       ...
+     }
+
+   This is all what is needed if you want to trace the calls during the
+whole runtime of the program.  Alternatively you can stop the tracing at
+any time with a call to `muntrace'.  It is even possible to restart the
+tracing again with a new call to `mtrace'.  But this can cause
+unreliable results since there may be calls of the functions which are
+not called.  Please note that not only the application uses the traced
+functions, also libraries (including the C library itself) use these
+functions.
+
+   This last point is also why it is no good idea to call `muntrace'
+before the program terminated.  The libraries are informed about the
+termination of the program only after the program returns from `main'
+or calls `exit' and so cannot free the memory they use before this time.
+
+   So the best thing one can do is to call `mtrace' as the very first
+function in the program and never call `muntrace'.  So the program
+traces almost all uses of the `malloc' functions (except those calls
+which are executed by constructors of the program or used libraries).
+
+
+File: libc.info,  Node: Tips for the Memory Debugger,  Next: Interpreting the traces,  Prev: Using the Memory Debugger,  Up: Allocation Debugging
+
+Some more or less clever ideas
+..............................
+
+   You know the situation.  The program is prepared for debugging and in
+all debugging sessions it runs well.  But once it is started without
+debugging the error shows up.  A typical example is a memory leak that
+becomes visible only when we turn off the debugging.  If you foresee
+such situations you can still win.  Simply use something equivalent to
+the following little program:
+
+     #include <mcheck.h>
+     #include <signal.h>
+     
+     static void
+     enable (int sig)
+     {
+       mtrace ();
+       signal (SIGUSR1, enable);
+     }
+     
+     static void
+     disable (int sig)
+     {
+       muntrace ();
+       signal (SIGUSR2, disable);
+     }
+     
+     int
+     main (int argc, char *argv[])
+     {
+       ...
+     
+       signal (SIGUSR1, enable);
+       signal (SIGUSR2, disable);
+     
+       ...
+     }
+
+   I.e., the user can start the memory debugger any time s/he wants if
+the program was started with `MALLOC_TRACE' set in the environment.
+The output will of course not show the allocations which happened before
+the first signal but if there is a memory leak this will show up
+nevertheless.
+
+
+File: libc.info,  Node: Interpreting the traces,  Prev: Tips for the Memory Debugger,  Up: Allocation Debugging
+
+Interpreting the traces
+.......................
+
+   If you take a look at the output it will look similar to this:
+
+     = Start
+      [0x8048209] - 0x8064cc8
+      [0x8048209] - 0x8064ce0
+      [0x8048209] - 0x8064cf8
+      [0x80481eb] + 0x8064c48 0x14
+      [0x80481eb] + 0x8064c60 0x14
+      [0x80481eb] + 0x8064c78 0x14
+      [0x80481eb] + 0x8064c90 0x14
+     = End
+
+   What this all means is not really important since the trace file is
+not meant to be read by a human.  Therefore no attention is given to
+readability.  Instead there is a program which comes with the GNU C
+library which interprets the traces and outputs a summary in an
+user-friendly way.  The program is called `mtrace' (it is in fact a
+Perl script) and it takes one or two arguments.  In any case the name of
+the file with the trace output must be specified.  If an optional
+argument precedes the name of the trace file this must be the name of
+the program which generated the trace.
+
+     drepper$ mtrace tst-mtrace log
+     No memory leaks.
+
+   In this case the program `tst-mtrace' was run and it produced a
+trace file `log'.  The message printed by `mtrace' shows there are no
+problems with the code, all allocated memory was freed afterwards.
+
+   If we call `mtrace' on the example trace given above we would get a
+different outout:
+
+     drepper$ mtrace errlog
+     - 0x08064cc8 Free 2 was never alloc'd 0x8048209
+     - 0x08064ce0 Free 3 was never alloc'd 0x8048209
+     - 0x08064cf8 Free 4 was never alloc'd 0x8048209
+     
+     Memory not freed:
+     -----------------
+        Address     Size     Caller
+     0x08064c48     0x14  at 0x80481eb
+     0x08064c60     0x14  at 0x80481eb
+     0x08064c78     0x14  at 0x80481eb
+     0x08064c90     0x14  at 0x80481eb
+
+   We have called `mtrace' with only one argument and so the script has
+no chance to find out what is meant with the addresses given in the
+trace.  We can do better:
+
+     drepper$ mtrace tst errlog
+     - 0x08064cc8 Free 2 was never alloc'd /home/drepper/tst.c:39
+     - 0x08064ce0 Free 3 was never alloc'd /home/drepper/tst.c:39
+     - 0x08064cf8 Free 4 was never alloc'd /home/drepper/tst.c:39
+     
+     Memory not freed:
+     -----------------
+        Address     Size     Caller
+     0x08064c48     0x14  at /home/drepper/tst.c:33
+     0x08064c60     0x14  at /home/drepper/tst.c:33
+     0x08064c78     0x14  at /home/drepper/tst.c:33
+     0x08064c90     0x14  at /home/drepper/tst.c:33
+
+   Suddenly the output makes much more sense and the user can see
+immediately where the function calls causing the trouble can be found.
+
+   Interpreting this output is not complicated.  There are at most two
+different situations being detected.  First, `free' was called for
+pointers which were never returned by one of the allocation functions.
+This is usually a very bad problem and what this looks like is shown in
+the first three lines of the output.  Situations like this are quite
+rare and if they appear they show up very drastically: the program
+normally crashes.
+
+   The other situation which is much harder to detect are memory leaks.
+As you can see in the output the `mtrace' function collects all this
+information and so can say that the program calls an allocation function
+from line 33 in the source file `/home/drepper/tst-mtrace.c' four times
+without freeing this memory before the program terminates.  Whether
+this is a real problem remains to be investigated.
+
+
+File: libc.info,  Node: Obstacks,  Next: Variable Size Automatic,  Prev: Allocation Debugging,  Up: Memory Allocation
+
+Obstacks
+--------
+
+   An "obstack" is a pool of memory containing a stack of objects.  You
+can create any number of separate obstacks, and then allocate objects in
+specified obstacks.  Within each obstack, the last object allocated must
+always be the first one freed, but distinct obstacks are independent of
+each other.
+
+   Aside from this one constraint of order of freeing, obstacks are
+totally general: an obstack can contain any number of objects of any
+size.  They are implemented with macros, so allocation is usually very
+fast as long as the objects are usually small.  And the only space
+overhead per object is the padding needed to start each object on a
+suitable boundary.
+
+* Menu:
+
+* Creating Obstacks::		How to declare an obstack in your program.
+* Preparing for Obstacks::	Preparations needed before you can
+				 use obstacks.
+* Allocation in an Obstack::    Allocating objects in an obstack.
+* Freeing Obstack Objects::     Freeing objects in an obstack.
+* Obstack Functions::		The obstack functions are both
+				 functions and macros.
+* Growing Objects::             Making an object bigger by stages.
+* Extra Fast Growing::		Extra-high-efficiency (though more
+				 complicated) growing objects.
+* Status of an Obstack::        Inquiries about the status of an obstack.
+* Obstacks Data Alignment::     Controlling alignment of objects in obstacks.
+* Obstack Chunks::              How obstacks obtain and release chunks;
+				 efficiency considerations.
+* Summary of Obstacks::
+
+
+File: libc.info,  Node: Creating Obstacks,  Next: Preparing for Obstacks,  Up: Obstacks
+
+Creating Obstacks
+.................
+
+   The utilities for manipulating obstacks are declared in the header
+file `obstack.h'.
+
+ - Data Type: struct obstack
+     An obstack is represented by a data structure of type `struct
+     obstack'.  This structure has a small fixed size; it records the
+     status of the obstack and how to find the space in which objects
+     are allocated.  It does not contain any of the objects themselves.
+     You should not try to access the contents of the structure
+     directly; use only the functions described in this chapter.
+
+   You can declare variables of type `struct obstack' and use them as
+obstacks, or you can allocate obstacks dynamically like any other kind
+of object.  Dynamic allocation of obstacks allows your program to have a
+variable number of different stacks.  (You can even allocate an obstack
+structure in another obstack, but this is rarely useful.)
+
+   All the functions that work with obstacks require you to specify
+which obstack to use.  You do this with a pointer of type `struct
+obstack *'.  In the following, we often say "an obstack" when strictly
+speaking the object at hand is such a pointer.
+
+   The objects in the obstack are packed into large blocks called
+"chunks".  The `struct obstack' structure points to a chain of the
+chunks currently in use.
+
+   The obstack library obtains a new chunk whenever you allocate an
+object that won't fit in the previous chunk.  Since the obstack library
+manages chunks automatically, you don't need to pay much attention to
+them, but you do need to supply a function which the obstack library
+should use to get a chunk.  Usually you supply a function which uses
+`malloc' directly or indirectly.  You must also supply a function to
+free a chunk.  These matters are described in the following section.
+
+
+File: libc.info,  Node: Preparing for Obstacks,  Next: Allocation in an Obstack,  Prev: Creating Obstacks,  Up: Obstacks
+
+Preparing for Using Obstacks
+............................
+
+   Each source file in which you plan to use the obstack functions must
+include the header file `obstack.h', like this:
+
+     #include <obstack.h>
+
+   Also, if the source file uses the macro `obstack_init', it must
+declare or define two functions or macros that will be called by the
+obstack library.  One, `obstack_chunk_alloc', is used to allocate the
+chunks of memory into which objects are packed.  The other,
+`obstack_chunk_free', is used to return chunks when the objects in them
+are freed.  These macros should appear before any use of obstacks in
+the source file.
+
+   Usually these are defined to use `malloc' via the intermediary
+`xmalloc' (*note Unconstrained Allocation::).  This is done with the
+following pair of macro definitions:
+
+     #define obstack_chunk_alloc xmalloc
+     #define obstack_chunk_free free
+
+Though the memory you get using obstacks really comes from `malloc',
+using obstacks is faster because `malloc' is called less often, for
+larger blocks of memory.  *Note Obstack Chunks::, for full details.
+
+   At run time, before the program can use a `struct obstack' object as
+an obstack, it must initialize the obstack by calling `obstack_init'.
+
+ - Function: int obstack_init (struct obstack *OBSTACK-PTR)
+     Initialize obstack OBSTACK-PTR for allocation of objects.  This
+     function calls the obstack's `obstack_chunk_alloc' function.  If
+     allocation of memory fails, the function pointed to by
+     `obstack_alloc_failed_handler' is called.  The `obstack_init'
+     function always returns 1 (Compatibility notice: Former versions of
+     obstack returned 0 if allocation failed).
+
+   Here are two examples of how to allocate the space for an obstack and
+initialize it.  First, an obstack that is a static variable:
+
+     static struct obstack myobstack;
+     ...
+     obstack_init (&myobstack);
+
+Second, an obstack that is itself dynamically allocated:
+
+     struct obstack *myobstack_ptr
+       = (struct obstack *) xmalloc (sizeof (struct obstack));
+     
+     obstack_init (myobstack_ptr);
+
+ - Variable: obstack_alloc_failed_handler
+     The value of this variable is a pointer to a function that
+     `obstack' uses when `obstack_chunk_alloc' fails to allocate
+     memory.  The default action is to print a message and abort.  You
+     should supply a function that either calls `exit' (*note Program
+     Termination::) or `longjmp' (*note Non-Local Exits::) and doesn't
+     return.
+
+          void my_obstack_alloc_failed (void)
+          ...
+          obstack_alloc_failed_handler = &my_obstack_alloc_failed;
+
+
+
+File: libc.info,  Node: Allocation in an Obstack,  Next: Freeing Obstack Objects,  Prev: Preparing for Obstacks,  Up: Obstacks
+
+Allocation in an Obstack
+........................
+
+   The most direct way to allocate an object in an obstack is with
+`obstack_alloc', which is invoked almost like `malloc'.
+
+ - Function: void * obstack_alloc (struct obstack *OBSTACK-PTR, int
+          SIZE)
+     This allocates an uninitialized block of SIZE bytes in an obstack
+     and returns its address.  Here OBSTACK-PTR specifies which obstack
+     to allocate the block in; it is the address of the `struct obstack'
+     object which represents the obstack.  Each obstack function or
+     macro requires you to specify an OBSTACK-PTR as the first argument.
+
+     This function calls the obstack's `obstack_chunk_alloc' function if
+     it needs to allocate a new chunk of memory; it calls
+     `obstack_alloc_failed_handler' if allocation of memory by
+     `obstack_chunk_alloc' failed.
+
+   For example, here is a function that allocates a copy of a string STR
+in a specific obstack, which is in the variable `string_obstack':
+
+     struct obstack string_obstack;
+     
+     char *
+     copystring (char *string)
+     {
+       size_t len = strlen (string) + 1;
+       char *s = (char *) obstack_alloc (&string_obstack, len);
+       memcpy (s, string, len);
+       return s;
+     }
+
+   To allocate a block with specified contents, use the function
+`obstack_copy', declared like this:
+
+ - Function: void * obstack_copy (struct obstack *OBSTACK-PTR, void
+          *ADDRESS, int SIZE)
+     This allocates a block and initializes it by copying SIZE bytes of
+     data starting at ADDRESS.  It calls `obstack_alloc_failed_handler'
+     if allocation of memory by `obstack_chunk_alloc' failed.
+
+ - Function: void * obstack_copy0 (struct obstack *OBSTACK-PTR, void
+          *ADDRESS, int SIZE)
+     Like `obstack_copy', but appends an extra byte containing a null
+     character.  This extra byte is not counted in the argument SIZE.
+
+   The `obstack_copy0' function is convenient for copying a sequence of
+characters into an obstack as a null-terminated string.  Here is an
+example of its use:
+
+     char *
+     obstack_savestring (char *addr, int size)
+     {
+       return obstack_copy0 (&myobstack, addr, size);
+     }
+
+Contrast this with the previous example of `savestring' using `malloc'
+(*note Basic Allocation::).
+
+
+File: libc.info,  Node: Freeing Obstack Objects,  Next: Obstack Functions,  Prev: Allocation in an Obstack,  Up: Obstacks
+
+Freeing Objects in an Obstack
+.............................
+
+   To free an object allocated in an obstack, use the function
+`obstack_free'.  Since the obstack is a stack of objects, freeing one
+object automatically frees all other objects allocated more recently in
+the same obstack.
+
+ - Function: void obstack_free (struct obstack *OBSTACK-PTR, void
+          *OBJECT)
+     If OBJECT is a null pointer, everything allocated in the obstack
+     is freed.  Otherwise, OBJECT must be the address of an object
+     allocated in the obstack.  Then OBJECT is freed, along with
+     everything allocated in OBSTACK since OBJECT.
+
+   Note that if OBJECT is a null pointer, the result is an
+uninitialized obstack.  To free all memory in an obstack but leave it
+valid for further allocation, call `obstack_free' with the address of
+the first object allocated on the obstack:
+
+     obstack_free (obstack_ptr, first_object_allocated_ptr);
+
+   Recall that the objects in an obstack are grouped into chunks.  When
+all the objects in a chunk become free, the obstack library
+automatically frees the chunk (*note Preparing for Obstacks::).  Then
+other obstacks, or non-obstack allocation, can reuse the space of the
+chunk.
+
+
+File: libc.info,  Node: Obstack Functions,  Next: Growing Objects,  Prev: Freeing Obstack Objects,  Up: Obstacks
+
+Obstack Functions and Macros
+............................
+
+   The interfaces for using obstacks may be defined either as functions
+or as macros, depending on the compiler.  The obstack facility works
+with all C compilers, including both ISO C and traditional C, but there
+are precautions you must take if you plan to use compilers other than
+GNU C.
+
+   If you are using an old-fashioned non-ISO C compiler, all the obstack
+"functions" are actually defined only as macros.  You can call these
+macros like functions, but you cannot use them in any other way (for
+example, you cannot take their address).
+
+   Calling the macros requires a special precaution: namely, the first
+operand (the obstack pointer) may not contain any side effects, because
+it may be computed more than once.  For example, if you write this:
+
+     obstack_alloc (get_obstack (), 4);
+
+you will find that `get_obstack' may be called several times.  If you
+use `*obstack_list_ptr++' as the obstack pointer argument, you will get
+very strange results since the incrementation may occur several times.
+
+   In ISO C, each function has both a macro definition and a function
+definition.  The function definition is used if you take the address of
+the function without calling it.  An ordinary call uses the macro
+definition by default, but you can request the function definition
+instead by writing the function name in parentheses, as shown here:
+
+     char *x;
+     void *(*funcp) ();
+     /* Use the macro.  */
+     x = (char *) obstack_alloc (obptr, size);
+     /* Call the function.  */
+     x = (char *) (obstack_alloc) (obptr, size);
+     /* Take the address of the function.  */
+     funcp = obstack_alloc;
+
+This is the same situation that exists in ISO C for the standard library
+functions.  *Note Macro Definitions::.
+
+   *Warning:* When you do use the macros, you must observe the
+precaution of avoiding side effects in the first operand, even in ISO C.
+
+   If you use the GNU C compiler, this precaution is not necessary,
+because various language extensions in GNU C permit defining the macros
+so as to compute each argument only once.
+

@@ -1,0 +1,142 @@
+Cavium Networks, EasyAccess Software Installation procedure.
+########################################################
+
+This document describes the procedure to install and compile
+EasyAccess in standard Linux distributions like Redhat 8.0.
+
+Package Dependecies:
+
+Samba:          Samba 3.0.22
+OpenLDAP:       OpenLDAP 2.1.25
+Kerberos:       krb5-1.3.1
+RRD Tool:       RRD Tool 1.0.49(and Menlo Logic patch for rrdtool)
+Iptables:       iptables-1.3.6
+Logrotate:      logrotate-3.6.5
+NTP:            ntp-4.2.0
+PPP:            ppp-2.4.2(MCCP Patch for PPP)
+SMTP Client:    smtpclient-1.0.0(and Menlo Logic patch for smtpclient)
+Syslogd:        sysklogd-1.4.1(and Menlo Logic patch for email notification)
+MCCP:           linux-{KVER}-mppe-mppc-1.1.patch
+OpenSSL:        OpenSSL-0.97c
+
+            *************************************
+
+Basic System Preparation:
+________________________
+
+Step 1:
+        Install the above packages in standard binary directories. If compiled
+        from source use "prefix=/" as parameter for the configure script.
+                Note: If you have other software installed in the system that
+                      are dependent on the original version of the above
+                      packages they may not work. To avoid problems, please
+                      use a dedicated development machine.
+
+
+Step 2: Provide setuid permissions for pppd.
+                chmod ugo+s /usr/sbin/pppd
+
+Step 3: Add user with nologin permission, called "nobody" and group "nobody".
+
+Step 4: As EasyAccess doesnt support dhcp, it is adviced to provide static
+        IP Address to the devlopment machine. Also it best adviced to name
+        the host as "firebase".
+
+Step 5: Apply the MCCP Kernel patch, recompile the kernel and use it as
+        development environment.
+                Note: This is not must. If kernel is not compiled with MCCP,
+                compression wont be enabled for Virtual Passage.
+
+Step 6: Copy the EasyAccess source code to a non-home directory. 
+        It is suggested to use /usr/local/src/EasyAccess. 
+
+Step 7: Make sure there is no other HTTP Server active in the system.
+
+Step 8: Modify /etc/rc.d/rc.sysinit script to launch /etc/rc.d/rc.firewall.
+        /etc/rc.d/rc.firewall will be created by EasyAccess sofware during
+        installation.
+                Add the following line 
+                                /etc/rc.d/rc.firewall start
+
+        Note: If there is any firewall currently configured, please disable
+        them.
+
+Step 9: Modify /etc/ppp/ip-up and /etc/ppp/ip-down scripts.
+                Add the following line to /etc/ppp/ip-up
+                        /etc/ppp/ip-up.local $@
+
+                Add the following line to /etc/ppp/ip-down
+                        /etc/ppp/ip-down.local $@
+
+                For IPV6 Virtual Passage:
+                Modify the following line in /etc/ppp/ipv6-up
+                        [ -x /etc/ppp/ipv6-up.local ] && /etc/ppp/ipv6-up.local "$@"
+                to
+                        [ -x /etc/ppp/ip6-up.local ] && /etc/ppp/ip6-up.local "$@"
+
+                Modify the following line in /etc/ppp/ipv6-down
+                        [ -x /etc/ppp/ipv6-down.local ] && /etc/ppp/ipv6-down.local "$@"
+                to
+                        [ -x /etc/ppp/ip6-down.local ] && /etc/ppp/ip6-down.local "$@"
+                        
+
+Step 10: Setup the Menlo Logic suggested kernel runtime parameters. This can
+         be done by copying sysctl.conf to /etc/sysctl.conf.
+                sysctl -p will activate the kernel runtime parameters.
+
+Step 11: Create openssl.conf in /etc/ssl/ with required parmeters
+         
+
+Note: Before proceeding further, re-boot the machine in development kernel.
+      
+                     *************************************
+
+
+How to compile and run EasyAccess:
+___________________________________
+
+        1) From the EasyAccess directory, run these commands
+                ./Configure --enable-md5-session --enable-optimization
+                make
+                make install
+
+        2) During make install, you will prompted for self signed certificate
+        parameters. Please refer to OpenSSL documentation for valid field
+        values.
+
+        3) If you wish to use http proxy written in C, use the configure 
+           option --use-c-proxy. Before compiling EasyAccess, create
+           autoconfig options for libxml2 and pcrs located in
+           EasyAccess/src/httprp/[libxml2, pcrs]. Both libxml2 and pcrs
+           are standard version of the software, with few custom
+           modifications.
+
+        4) Include EasyAccess Libraries into default ld cache.
+                a) Add the following line to /etc/ld.so.conf
+                        /usr/local/src/EasyAccess/bin
+                b) Rebuild the cache using the following command
+                        ldconfig -c /etc/ld.so.conf
+
+        5) From EasyAccess/bin directory, launch the system using
+                EasyAccessCtr start
+
+        6) Point your browser to the ipaddress of the host.
+                Note: Loopback adress wont work. This is disabled for
+                security.
+
+        7) Default login is "admin", password is "admin123".
+
+        Please refer to guides from Menlo Logic for configuration and usage.
+
+                     *************************************
+Note:
+
+1) For Editing and viewing the software, use the vimrc included with EasyAccess
+and vim editor.
+
+2) To compile with IPv6 support, use --enable-ipv6 option with the configure
+script. When this flag is used, the included CAVIUM HTTP Server is used 
+instead of Apache. IPv6 support in EasyAccess is dependant on the support for
+IPv6 available in the kernel.
+
+                     *************************************

@@ -1,0 +1,27 @@
+FTP_HEADERS=FtpProtocol.h FtpSession.h
+
+FTP_SOURCES=FtpSession.o\
+	FtpProtocol.o\
+
+BIN=libFtpsession.a
+all: $(BIN)
+include ../make-include-Octeon.mk
+
+CFLAGS+=-I$(SYS_LIB)
+
+libFtpsession.a: $(FTP_SOURCES) $(SYS_LIB)/libSys.a $(FTP_HEADERS)
+	$(AR) cr libFtpsession.a $(FTP_SOURCES)
+
+ftp_test: ftp_test.o FtpProtocol.o $(SYS_LIB)/libSys.a
+	${CC} $(CFLAGS) -o $@ $^ -L$(SYS_LIB) -lSys -lssl -lcrypto -lcrypt
+
+cleanbin:
+	rm $(BIN)
+
+clean:
+	rm -f *.o
+	rm -f $(BIN)
+
+install:
+
+un-install:

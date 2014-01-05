@@ -1,0 +1,78 @@
+%define ver	@VERSION@
+%define rel	1
+%define prefix	/usr
+
+Summary:	DHCP Client Daemon.
+Name:		@PACKAGE@
+Version:	%ver
+Release:	%rel
+Copyright:	GPL
+Group:		Daemons/Networking
+Source:		ftp://ftp.phystech.com/pub/%{name}-%{version}-p16.tar.gz
+URL:		http://www.phystech.com/download
+BuildRoot:	/usr/tmp/%{name}-%{version}-%{rel}-root
+Packager:	Fill In As You Wish
+Docdir:		%{prefix}/doc
+
+%description
+This package contains the development release of a DHCP Client 
+Daemon for Linux kernels 2.1-2.3
+
+Authors:
+	Sergei Viznyuk	<sv@phystech.com>
+
+
+%prep
+%setup -q
+
+
+%build
+# Needed for snapshot releases.
+if [ ! -f configure ]; then
+	CFLAGS="$RPM_OPT_FLAGS" ./autogen.sh --prefix=%prefix
+else
+	CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%prefix
+fi
+
+if [ "$SMP" != "" ]; then
+	JSMP	= '"MAKE=make -k -j $SMP"'
+fi
+
+make ${JSMP};
+
+
+%install
+[ -d ${RPM_BUILD_ROOT} ] && rm -rf ${RPM_BUILD_ROOT}
+
+make prefix=${RPM_BUILD_ROOT}%{prefix} install-strip	\
+	sysconfdir=${RPM_BUILD_ROOT}/etc
+
+#
+# Generating file lists and store them in file-lists
+# Starting with the directory listings
+#
+find ${RPM_BUILD_ROOT}%{prefix}/{bin,man} -type d | sed "s#^${RPM_BUILD_ROOT}#\%attr (-\,root\,root) \%dir #" > file-lists
+
+#
+# Then, the file listings
+#
+echo "%defattr (-, root, root)" >> file-lists
+%{?ETCDR:find ${RPM_BUILD_ROOT}%{!?SYSCF:%{prefix}}/etc/%{name}.conf -type f | sed -e "s#^${RPM_BUILD_ROOT}#%config #g" >> file-lists}
+find ${RPM_BUILD_ROOT}%{prefix} -type f | sed -e "s#^${RPM_BUILD_ROOT}##g" >> file-lists
+
+
+%clean
+(PKGDIR=`pwd`; cd ..; rm -rf ${PKGDIR} ${RPM_BUILD_ROOT})
+
+
+%files -f file-lists
+%defattr (-, root, root)
+%doc AUTHORS
+%doc ChangeLog
+%doc COPYING
+%doc INSTALL
+%doc NEWS
+%doc README
+%doc %{name}-%{version}.lsm
+%doc %{name}.spec.in
+

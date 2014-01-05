@@ -1,0 +1,13 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "vnc_javasrc", "vnc_javasrc.vjp", "{49AD5D43-B6A6-4A85-A804-6BA3FB5FCEDF}"
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {49AD5D43-B6A6-4A85-A804-6BA3FB5FCEDF}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {49AD5D43-B6A6-4A85-A804-6BA3FB5FCEDF}
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

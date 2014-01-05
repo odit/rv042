@@ -1,0 +1,102 @@
+<script src="/js/mainframe.js"></script>
+<SCRIPT src="/js/formval.js" type=text/javascript></script>
+<script>
+function validateOnSubmit() {
+window.document.AddEpsFirewall.submit();
+}
+function setFWVersion(){
+if (window.document.AddEpsFirewall.versioncheck.checked==true){
+window.document.AddEpsFirewall.fwversion.style.backgroundColor="#ffffff";
+window.document.AddEpsFirewall.fwversion.readOnly=false;}
+if (window.document.AddEpsFirewall.versioncheck.checked==false){
+window.document.AddEpsFirewall.fwversion.style.backgroundColor="#bbbbbb";
+window.document.AddEpsFirewall.fwversion.readOnly=true;
+window.document.AddEpsFirewall.fwversion.value="";}
+}
+</script>
+</head>
+<body class="bodyback" leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+<form name="AddEpsFirewall" action="/cgi-bin/addepsfirewall" method="post">
+<center>  
+<table border=0 class="centertable" cellpadding=0 cellspacing=0  style="left:0px;">
+<tbody>
+<tr>
+<td class="bookmarktop" cellspacing=0 colspan=4 width=400 height=21> 
+<img src="/images/shim.gif" border=0 height=18 width=398>
+</td>
+</tr>
+<tr>
+
+<td width=1 height=165 class=darkback><img src="/images/shim.gif" width=1 height=165></td>  
+<td  valign="top" width=398 height=165>		    
+<table border=0  cellpadding=0 cellspacing=0 valign="top">
+<tbody>
+<tr>
+<td width=15><img src="/images/shim.gif" border=0 width=14 height=1></td>
+<td valign="top"><img src="/images/shim.gif" height=18><br>
+<table border=0 cellpadding=0 cellspacing=0 valign="top">
+<tbody>
+<tr>
+<td width=368 height=21 class="titlerow" valign="center">
+&nbsp;<SCRIPT type="text/JavaScript" language="JavaScript">title("Add Firewall"); </script>
+</td>
+</tr>
+</tbody>
+</table>
+
+<img src="/images/shim.gif" height=14><br>
+<table>
+<tbody>
+<tr cellpadding=0 cellspacing=0>
+<td cellpadding=0 cellspacing=0 align="right" width=140><font class="toolbar" id="f1n">Firewall Name:</font></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=215 height=29><input type="text" name="fwname" style="width:215px" class="input" id="f1"> </td>
+</tr>
+<tr cellpadding=0 cellspacing=0>
+<td cellpadding=0 cellspacing=0 align="right" width=140 class="toolbar"><font class="toolbar" id="f2n">Version:</font></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=215 height=29><input type="text" name="fwversion" style="width:215px" class="input" id="f2"> </td>
+</tr>
+<tr cellpadding=0 cellspacing=0>
+<td cellpadding=0 cellspacing=0 align="right" width=140 class="toolbar"><div class=toolbar><Input type=checkbox name=versioncheck onclick="setFWVersion();" value=versioncheck checked align=middle vspace=0 hspace=0 height=14 width=14></div></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=215 height=29><font class="toolbar" id="f3n">Enable Version Check</font> </td>
+</tr>
+<tr cellpadding=0 cellspacing=0>
+<td cellpadding=0 cellspacing=0 align="right" width=140 class="toolbar"><div class=toolbar><Input type=checkbox name=firewallcheck value=fwenablecheck checked align=middle vspace=0 hspace=0 height=14 width=14></div></td>
+<td width=8><img src="/images/shim.gif" height=1 width=8></td>
+<td cellpadding=0 cellspacing=0 width=215 height=29><font class="toolbar" id="f4n">Check for firewall enabled</font> </td>
+</tr>
+<tr>
+<td colspan=3 align="right"><img src="/images/shim.gif" height=12 width=1 border=0><br>
+<table border=0 cellpadding=0 cellspacing=0 valign="top"> 
+<tbody>
+<tr>
+<td width=73 height=22 valign="top" align="center">
+<INPUT type="hidden"  name="Set" value=true>
+<table cellpadding=0 cellspacing=0 border=0 margin=0><TR>
+<td width=74 class=bbcenter align=center onMouseOver="JavaScript:this.className='bbcenteron';window.status='';" 
+onMouseOut="JavaScript:this.className='bbcenter';" onClick="JavaScript:validateOnSubmit();">
+<SCRIPT type="text/JavaScript" language="JavaScript">bbutton(bsubmit); </script> 
+</a></td>
+
+</tr></table>
+</td></tr></form>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>	   <td colspan=3 align="left" height=10><img src="/images/shim.gif" height=10 border=0></td>
+</tr>
+</tbody></table>
+</td> 
+<td width=14><img src="/images/shim.gif" border=0 width=14 height=1></td></tr></tbody></table> 
+</td> <td width=1 height=165 class=darkback><img src="/images/shim.gif" width=1 height=165></td></tr>
+<tr>
+<td class="bookmarkbottom" colspan=4 width=400 height=17>
+<img src="/images/shim.gif" border=0 width=399 height=16></td>
+
+</tr>
+</tbody>
+</table>
+</body></html>

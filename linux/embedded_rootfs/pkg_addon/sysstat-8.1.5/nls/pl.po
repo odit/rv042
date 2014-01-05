@@ -1,0 +1,238 @@
+# Polish NLS support for the sysstat package.
+# Copyright (C) 1999 Sébastien GODARD <sysstat [at] orange.fr> (msgids).
+# This file is distributed under the same license as the sysstat package.
+# Robert Luberda <robert@debian.org>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sysstat 8.1.1\n"
+"Report-Msgid-Bugs-To: sysstat <at> orange.fr\n"
+"POT-Creation-Date: 2008-02-09 18:30+0100\n"
+"PO-Revision-Date: 2008-03-14 20:23+0100\n"
+"Last-Translator: Robert Luberda <robert@debian.org>\n"
+"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: common.c:58
+#, c-format
+msgid "sysstat version %s\n"
+msgstr "sysstat w wersji %s\n"
+
+#: common.c:197 common.c:449 ioconf.c:471 mpstat.c:324 sa_common.c:810
+#: sadc.c:590 sadc.c:599 sadc.c:660 sadc.c:761
+#, c-format
+msgid "Cannot open %s: %s\n"
+msgstr "Nie można otworzyć %s: %s\n"
+
+#: common.c:241
+#, c-format
+msgid "Cannot handle so many processors!\n"
+msgstr "Zbyt dużo procesorów!\n"
+
+#: iostat.c:78 mpstat.c:71 pidstat.c:77 sadc.c:81 sadf.c:81 sar.c:79
+msgid "Usage:"
+msgstr "Użycie:"
+
+#: iostat.c:78 mpstat.c:71 pidstat.c:77 sadc.c:81 sadf.c:81 sar.c:79
+msgid "options..."
+msgstr "opcje..."
+
+#: iostat.c:78 mpstat.c:72 pidstat.c:77 sadc.c:81 sadf.c:81 sar.c:79 sar.c:89
+msgid "interval"
+msgstr "interwał"
+
+#: iostat.c:78 mpstat.c:72 pidstat.c:77 sadc.c:81 sadf.c:82 sar.c:79
+msgid "count"
+msgstr "liczba"
+
+#: iostat.c:80 mpstat.c:74 pidstat.c:79 sadc.c:83 sadf.c:84 sar.c:81
+#, c-format
+msgid "Options are:\n"
+msgstr "Opcje:\n"
+
+#: iostat.c:84
+msgid "device"
+msgstr "urządzenie"
+
+#: iostat.c:1245
+#, c-format
+msgid "Time: %s\n"
+msgstr "Czas: %s\n"
+
+#: iostat.c:1575
+#, c-format
+msgid "-x and -p options are mutually exclusive\n"
+msgstr "Opcje -x i -p wykluczają się nawzajem\n"
+
+#: mpstat.c:77 sadf.c:89 sar.c:89
+msgid "cpu"
+msgstr "cpu"
+
+# sar.c:
+#: mpstat.c:279 pidstat.c:1364 sar.c:962
+msgid "Average:"
+msgstr "Średnia:"
+
+#: mpstat.c:630 sar.c:169
+#, c-format
+msgid "Not that many processors!\n"
+msgstr "Nie ma aż tylu procesorów!\n"
+
+#: pidstat.c:83
+msgid "command"
+msgstr "polecenie"
+
+#: pidstat.c:177 sar.c:1717
+#, c-format
+msgid "Requested activities not available\n"
+msgstr "Żądane statystyki nie są dostępne\n"
+
+#: sa_common.c:708
+#, c-format
+msgid "Error while reading system activity file: %s\n"
+msgstr "Błąd podczas czytania pliku aktywności systemu: %s\n"
+
+#: sa_common.c:718
+#, c-format
+msgid "End of system activity file unexpected\n"
+msgstr "Niespodziewany koniec pliku aktywności systemu\n"
+
+#: sa_common.c:736
+#, c-format
+msgid "File created using sar/sadc from sysstat version %d.%d.%d"
+msgstr "Plik utworzony przez sar/sadc z wersji %d.%d.%d pakietu sysstat"
+
+#: sa_common.c:766
+#, c-format
+msgid "Invalid system activity file: %s\n"
+msgstr "Niepoprawny plik aktywności systemu: %s\n"
+
+#: sa_common.c:773
+#, c-format
+msgid "Current sysstat version can no longer read the format of this file (%#x)\n"
+msgstr "Bieżąca wersja pakietu sysstat nie obsługuje już formatu tego pliku (%#x)\n"
+
+#: sa_common.c:853
+#, c-format
+msgid "Requested activities not available in file %s\n"
+msgstr "Żądane statystyki nie są dostępne w pliku %s\n"
+
+#: sadc.c:81
+msgid "outfile"
+msgstr "plik_wyjściowy"
+
+#: sadc.c:86
+msgid "comment"
+msgstr "komentarz"
+
+#: sadc.c:111
+#, c-format
+msgid "Cannot write data to system activity file: %s\n"
+msgstr "Nie można zapisać danych do pliku aktywności systemu: %s\n"
+
+#: sadc.c:445
+#, c-format
+msgid "Cannot write system activity file header: %s\n"
+msgstr "Nie można zapisać nagłówka pliku aktywności systemu: %s\n"
+
+#: sadc.c:706
+#, c-format
+msgid "Cannot append data to that file (%s)\n"
+msgstr "Nie można dopisać danych do tego pliku (%s)\n"
+
+#: sadf.c:82
+msgid "datafile"
+msgstr "plik_danych"
+
+#: sadf.c:89 sar.c:90
+msgid "hh:mm:ss"
+msgstr "hh:mm:ss"
+
+#: sadf.c:89
+msgid "sar_options..."
+msgstr "opcje_sar..."
+
+#: sadf.c:1767
+#, c-format
+msgid "System activity data file: %s (%#x)\n"
+msgstr "Plik z danymi o aktywności systemu: %s (%#x)\n"
+
+#: sadf.c:1775
+#, c-format
+msgid "Host: "
+msgstr "System: "
+
+#: sadf.c:1780
+#, c-format
+msgid "Activity flag: %#x\n"
+msgstr "Flaga aktywności: %#x\n"
+
+#: sadf.c:1781
+#, c-format
+msgid "Size of a long int: %d\n"
+msgstr "Rozmiar typu long int: %d\n"
+
+#: sadf.c:1782
+#, c-format
+msgid "Number of CPU: %u\n"
+msgstr "Liczba procesorów: %u\n"
+
+#: sadf.c:1783
+#, c-format
+msgid "Number of interrupts per CPU: %u\n"
+msgstr "Liczba przerwań procesora: %u\n"
+
+#: sadf.c:1784
+#, c-format
+msgid "Number of disks: %u\n"
+msgstr "Liczba dysków: %u\n"
+
+#: sadf.c:1785
+#, c-format
+msgid "Number of serial lines: %u\n"
+msgstr "Liczba portów szeregowych: %u\n"
+
+#: sadf.c:1786
+#, c-format
+msgid "Number of network interfaces: %u\n"
+msgstr "Liczba interfejsów sieciowych: %u\n"
+
+#: sar.c:89
+msgid "int"
+msgstr "przerwanie"
+
+#: sar.c:89
+msgid "filename"
+msgstr "nazwa_pliku"
+
+#: sar.c:161
+#, c-format
+msgid "Not an SMP machine...\n"
+msgstr "Komputer niewieloprocesorowy...\n"
+
+#: sar.c:1545
+#, c-format
+msgid "Invalid data format\n"
+msgstr "Niepoprawny format danych\n"
+
+#: sar.c:1549
+#, c-format
+msgid "Using a wrong data collector from a different sysstat version\n"
+msgstr "Używany program do zbierania danych pochodzi z innej wersji pakietu sysstat\n"
+
+#: sar.c:1932
+#, c-format
+msgid "-f and -o options are mutually exclusive\n"
+msgstr "Opcje -f i -o się wykluczają\n"
+
+#: sar.c:1938
+#, c-format
+msgid "Not reading from a system activity file (use -f option)\n"
+msgstr "Czytanie danych nie z pliku aktywności systemu (proszę użyć opcji -f)\n"
+
+#: sar.c:2036
+#, c-format
+msgid "Cannot find the data collector (%s)\n"
+msgstr "Nie można znaleźć programu do zbierania danych (%s)\n"

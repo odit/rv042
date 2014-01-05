@@ -1,0 +1,17 @@
+#!/bin/sh
+
+###
+### Menlo Logic post upgrade script
+###
+
+mv /Library/Java/Extensions/com/menlo/libMenloDialer.jnilib /System/Library/Frameworks/JavaVM.framework/Libraries/libMenloDialer.jnilib
+
+touch /etc/ppp/options
+
+chown -R 0 /Library/Java/Extensions/com
+chgrp -R 0 /Library/Java/Extensions/com
+
+chmod ugo+s /Library/Java/Extensions/com/menlo/pppwrap
+chmod ugo+s /Library/Java/Extensions/com/menlo/pppstop
+chmod ugo+s /Library/Java/Extensions/com/menlo/routewrap
+chmod ugo+s /Library/Java/Extensions/com/menlo/dnscommand

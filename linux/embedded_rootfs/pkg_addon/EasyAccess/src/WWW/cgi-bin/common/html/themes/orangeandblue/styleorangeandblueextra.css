@@ -1,0 +1,24 @@
+
+.cifsbodyback{background-image: url(/images/backallorangeandblue.png);overflow-x:hidden;}
+.cifsmenuleft{background-color:#f9f9f9;}
+.cifstop3{BACKGROUND-COLOR:#f69903;border-top:1px #ffffff solid;height:23px;}
+.cifstop5{border-top:1px #ddeeff solid;border-bottom:1px #000022 solid;border-left:1px #015080 solid;background-color:#0375b0;}
+.cifstop6{background-color:#0375b0;border-top:1px #ddeeff solid;border-bottom:1px #000022 solid;}
+.toolbarcifs{COLOR:#ffffff; font-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:11px; 
+TEXT-DECORATION:none;font-weight:bold;}
+.navigator{COLOR:#ffffcc; font-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:11px; 
+TEXT-DECORATION:none;font-weight:bold;cursor:hand;}
+.mainbackcifs{COLOR:#050505; font-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.onmainbackcifs{COLOR:#050505; background-color:#ffd06a;FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+A.mainbackcifs{COLOR:#050505; font-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:11px;}
+.other{color:#000000;}
+.other2{color:#000070;}
+.cifslefttable{BACKGROUND-COLOR:#ffd06a;vertical-align:top;height:24px;}
+.cifsleftcell{background-color:#fffccf;}
+.cifslefttitle{color:#000000;FONT-FAMILY: Verdana,Arial, Tahoma, Helvetica; FONT-SIZE:11px;FONT-WEIGHT: bold;}
+.disableduplink{color:#99bfff;FONT-FAMILY: Verdana, Arial, Helvetica; FONT-SIZE:11px;font-weight:bold;}
+.cifsback{background-color:#fffccf;}
+.demo1{color:#30363f;font-family:Arial,verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:1px solid; margin:2px;border-top-color:#808790;border-left-color:#808790;border-right-color:#556066;border-bottom-color:#556066;background-color:#e6e2df; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}
+.onhovers{margin:2px;margin-color:#ccbb44;color:#dfbf4f;font-family:verdana,'trebuchet ms',helvetica,sans-serif;font-size:11px;font-weight:bold;border:2px solid #dfbf4f;background-color:#e6e2df;cursor:hand; vertical-align:center;filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#fff4f1ef',EndColorStr='#ffddd8d5');}
+
+ 

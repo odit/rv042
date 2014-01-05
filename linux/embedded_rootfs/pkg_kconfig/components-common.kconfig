@@ -1,0 +1,7 @@
+
+config CONFIG_components-common
+	bool "components-common"
+	default y
+	help
+
+

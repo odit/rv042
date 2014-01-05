@@ -1,0 +1,118 @@
+README
+======
+
+Table of Contents:
+01. What is in this release
+02. Supported Operating Modes
+03. Dependencies
+04. Installed Directory structure
+04. Pre-requisites to Compiling the Engine
+05. Testing Engine using sample application.
+06. Supported Features
+07. Change History
+
+1. What is in this release
+---------------------------
+This release contains the source code for the Octeon OpenSSL Crypto Engine
+v0.2 on Octeon Linux.
+
+2. Supported Operating Modes
+-----------------------------
+     This release supports the following Operating modes
+            - Linux N32
+            - Linux N64
+
+     This release has been tested with Octeon PASS2 Chipset.
+
+3. Dependencies
+---------------
+This release requires the following Octeon RPMS:
+   a) Octeon SDK v1.4.0 (Build 153)
+   b) Octeon Linux v1.4.0 (Build 153)
+   c) Octeon Core Crypto RPM v0.7.0
+
+
+4. Installed Directory structure
+--------------------------------
+
+Octeon SDK is usually installed under /usr/local/Cavium_Networks folder
+as CN3XXX-SDK.
+This rpm is also installed under the same folder as
+
+  |---CN3XXX-SDK
+      |
+      |--- applications/linux_engine
+      |         (source files for building the Engine)
+
+5. Pre-requisites to Compiling the Engine 
+------------------------------------------
+
+a) Setup the Octeon Development environment.
+     #cd /usr/local/Cavium_Networks/CN3XXX-SDK
+     #source env-setup-PASS2.bash
+     (If you are running on any other shell other than bash,
+      corresponding script needs to be run.)
+        This will setup the OCTEON_ROOT environment variable.
+
+b) Compile and boot Linux on Octeon
+     # cd /usr/local/Cavium_Networks/CN3XXX-SDK/linux/embedded_rootfs
+	  # make menuconfig
+	      Select Toolchain ABI to be either 64 or N32.
+			And, also make sure octcrypto and engine are selected.
+			Save this configuration and exit.
+	  # cd /usr/local/Cavium_Networks/CN3XXX-SDK/linux
+	  # make kernel
+     (Please refer to SDK Documentation on HOWTO boot Linux
+      on Octeon)
+
+c) Load the Crypto ModExp Module on Octeon Linux
+     # insmod /lib/modules/cavmodexp.ko
+
+d) Create Crypto Device for interface to the User Application
+   on Octeon Linux.
+      # mknod /dev/octcrypto c 125 0
+
+5. Compiling the Engine Library for Octeon
+-------------------------------------------
+	Compiling the Linux will compile the Engine on Octeon,
+	The libocteon.so is available in the Filesystem as
+	    /usr/lib64   if ABI 64 is selected
+		  or
+		 /usr/lib32   if ABI N32 is selected 
+
+6. Testing  Engine using openssl
+---------------------------------
+#  export LD_LIBRARY_PATH=/usr/lib32
+          or
+   export LD_LIBRARY_PATH=/usr/lib64
+
+# openssl s_server -engine octeon
+     This sample application uses "octeon" crypto acceleration.
+
+8. Supported Features
+---------------------
+
+   a. Ciphers
+         RC4 (128 bit)
+         3DES
+         AES 128
+         AES 256
+         DES (64 bit)
+   b. Digests
+         MD5
+         SHA1
+   c. Key Exchange
+		   RSA
+			DH
+			DSA
+
+9. Change History
+------------------
+
+Release 0.2
+          Installation directory changed.
+			 Destroy engine interface implemented.
+
+Release 0.1     
+           Initial Pre-Release
+

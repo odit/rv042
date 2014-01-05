@@ -1,0 +1,33 @@
+include ../posixvpclient.mk
+
+JC = /System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Commands/javac
+
+JFLAGS = -source 1.3 -target 1.1 -classpath /System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Home/lib/netscape.jar -sourcepath .
+
+JH = /System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Commands/javah
+
+PACKAGE = com/code
+
+JNI_HEADERS = ../$(VPDIALER)/Mgr.h \
+		      ../$(VPDIALER)/Dialer.h
+		      
+CLASSES =  $(PACKAGE)/Debug.class \
+		   $(PACKAGE)/Installer.class \
+		   $(PACKAGE)/UnInstaller.class \
+		   $(PACKAGE)/SSLApplet.class 
+
+.SUFFIXES: .java .class
+
+.java.class:
+	$(JC) $(JFLAGS) $*.java
+
+all: $(CLASSES:.java=.class) $(JNI_HEADERS)
+
+../$(VPDIALER)/Mgr.h:  $(PACKAGE)/Mgr.class 
+	$(JH) -jni -o $@ $(PACKAGE)/Mgr
+
+../$(VPDIALER)/Dialer.h: $(PACKAGE)/Dialer.class 
+	$(JH) -jni -o $@ $(PACKAGE)/Dialer
+
+clean:
+	$(RM) $(PACKAGE)/*.class

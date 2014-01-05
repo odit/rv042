@@ -1,0 +1,35 @@
+Module: Virtual Transport 1.3.0.1 Development Release
+System Release Date: July 27, 2005
+
+Build Requirments:
+------------------
+1. Microsoft Visual Studio 6.0 with Service Pack 6.
+
+2. Platform SDK February 2003.
+
+3. Cabrc utility to create cabinet file.
+
+4. Signcode executable to sign binaries.
+
+5. Licence file.
+
+6. In Visual Studio options->include that Microsoft SDK\Include directory should be in before Visual Studio include directories. 
+
+7. In Visual Studio options->include that Microsoft SDK\Lib directory should be in before Visual Studio lib directories. 
+
+
+Build Procedure:
+-----------------
+1. Extract the zip file to any directory.
+
+2. Goto VirtualTransport directory and open VirtualTransport.dsw in MS Visual Studio 6.0.
+
+5. Set active project as MLVT and build configuration should be Win32 Release and do the build.
+
+6. Set active project as MLVTConfig and build configuration should be Win32 Release and do the build.
+
+7. Set active project as MLVTLSP and build configuration should be Win32 Release and do the build.
+
+8. Set active project as MLVTNSP and build configuration should be Win32 Release and do the build.
+
+9. Set active project as VirtualTransportUninstall and build configuration should be Win32 Release and do the build.

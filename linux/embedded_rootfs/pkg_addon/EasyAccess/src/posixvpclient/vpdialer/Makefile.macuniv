@@ -1,0 +1,55 @@
+include ../posixvpclient.mk
+
+GCC4 = gcc-4.0
+GCC3.3 = gcc-3.3
+
+# whenever INTEL_FLAGS are passed, SDK_ROOT should also be passed alongwith it
+INTEL_FLAGS = -arch i386
+SDK_ROOT = /Developer/SDKs/MacOSX10.4u.sdk
+
+PPC_FLAGS = -arch ppc 
+
+DIALER_FILES = $(JNILIB) $(PPP_WRAP) $(ROUTE_WRAP) $(ROUTE) $(DNSCOMMAND)
+
+ifdef IPV6
+
+DIALER_FILES += $(IFCONF)
+
+endif
+
+default: universal $(DIALER_FILES)
+
+intel:
+	$(MAKE) -f $(MAKEFILE_MACOSX) CC="$(GCC4)" INTEL_FLAGS="$(INTEL_FLAGS)" SDK_ROOT="$(SDK_ROOT)"
+
+ppc:
+	$(MAKE) -f $(MAKEFILE_MACOSX) CC="$(GCC3.3)" PPC_FLAGS="$(PPC_FLAGS)"
+	
+universal:
+	if [ ! -d $(INTEL) ]; then mkdir $(INTEL); fi
+	$(MAKE) -f $(MAKEFILE_MACOSX) CC="$(GCC4)" INTEL_FLAGS="$(INTEL_FLAGS)" SDK_ROOT="$(SDK_ROOT)" DIR=$(INTEL)/
+
+	if [ ! -d $(PPC) ]; then mkdir $(PPC); fi
+	$(MAKE) -f $(MAKEFILE_MACOSX) CC="$(GCC3.3)" PPC_FLAGS="$(PPC_FLAGS)" DIR=$(PPC)/
+
+$(JNILIB): $(INTEL)/$(JNILIB) $(PPC)/$(JNILIB)
+	lipo -create $^ -output $@
+
+$(PPP_WRAP): $(INTEL)/$(PPP_WRAP) $(PPC)/$(PPP_WRAP)
+	lipo -create $^ -output $@
+
+$(ROUTE_WRAP): $(INTEL)/$(ROUTE_WRAP) $(PPC)/$(ROUTE_WRAP)
+	lipo -create $^ -output $@
+
+$(IFCONF): $(INTEL)/$(IFCONF) $(PPC)/$(IFCONF)
+	lipo -create $^ -output $@
+
+$(DNSCOMMAND): $(INTEL)/$(DNSCOMMAND) $(PPC)/$(DNSCOMMAND)
+	lipo -create $^ -output $@
+
+$(ROUTE): $(INTEL)/$(ROUTE) $(PPC)/$(ROUTE)
+	lipo -create $^ -output $@
+
+clean:
+	if [ -d $(PPC) ]; then $(RM_DIR) $(PPC); fi
+	if [ -d $(INTEL) ]; then $(RM_DIR) $(INTEL); fi

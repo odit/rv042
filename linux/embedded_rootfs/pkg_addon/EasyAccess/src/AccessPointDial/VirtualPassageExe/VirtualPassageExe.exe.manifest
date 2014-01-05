@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity
+    version="1.5.1.1"
+    processorArchitecture="*"
+    name="CaviumNetworks.SSLVPN.VirtualPassage"
+    type="win32"
+  />
+  <description>VPN Tunnel COnnector for SSL-VPN</description>
+  <v3:trustInfo xmlns:v3="urn:schemas-microsoft-com:asm.v3">
+    <v3:security>
+      <v3:requestedPrivileges>
+        <!-- level can be "asInvoker", "highestAvailable", or "requireAdministrator" -->
+        <v3:requestedExecutionLevel level="requireAdministrator" />
+      </v3:requestedPrivileges>
+    </v3:security>
+  </v3:trustInfo>
+</assembly>

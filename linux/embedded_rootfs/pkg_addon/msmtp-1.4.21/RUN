@@ -1,0 +1,4 @@
+make clean
+./configure --host=${CROSS} AR="${AR}" ARFLAGS="rc" CC="${CC}" CPP="${CPP}" LIBS="${LIBS}" RANLIB="${RANLIB}" STRIP="${STRIP}" CFLAGS="${CFLAGS} -DNO_ASM" LDFLAGS="${LDFLAFGS}" --prefix="${ROOT}/usr"
+make
+make install

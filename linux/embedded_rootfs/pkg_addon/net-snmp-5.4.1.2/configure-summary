@@ -1,0 +1,12 @@
+  SNMP Versions Supported:    1 2c 3
+  Net-SNMP Version:           5.4.1.2
+  Building for:               linux
+  Network transport support:  Callback Unix TCP UDP
+  SNMPv3 Security Modules:     usm
+  Agent Module list: mk/module_list_code.mk
+  Agent MIB code:             default_modules =>  snmpv3mibs mibII ucd_snmp notification notification-log-mib target agent_mibs agentx disman/event disman/schedule utilities host
+  Embedded Perl support:      disabled
+  SNMP Perl modules:          disabled
+  SNMP Python modules:        disabled
+  Authentication support:     MD5
+  Encryption support:         

@@ -1,0 +1,1288 @@
+This is ../../../src/ddd/ddd/ddd.info, produced by makeinfo version 4.3
+from ../../../src/ddd/ddd/ddd.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD: (ddd).                     The Data Display Debugger.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 15 January, 2004, of `Debugging with DDD'
+for DDD Version 3.3.11.
+
+Copyright (C) 2004 Universität des Saarlandes
+Lehrstuhl Softwaretechnik
+Postfach 15 11 50
+66041 Saarbrücken
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd.info,  Node: Top,  Next: Summary,  Up: (dir)
+
+Debugging with DDD
+******************
+
+   DDD is a graphical front-end for GDB and other command-line
+debuggers.
+
+   This is the First Edition of `Debugging with DDD', 15 January, 2004,
+for DDD Version 3.3.11.
+
+   The first part of this master menu lists the major nodes in this Info
+document, including the label and command indices.  The rest of the menu
+lists all the lower level nodes in the document.
+
+* Menu:
+
+* Summary::                     Summary of DDD.
+
+* Sample Session::              A sample DDD session.
+* Invocation::                  Getting in and out of DDD.
+* Windows::                     The DDD windows, menus, and buttons.
+* Navigating::                  Moving through the source code.
+* Stopping::                    Making your program stop at specific locations.
+* Running::                     Running programs under DDD.
+* Examining Data::              Examining variable values and data structures.
+* Machine-Level Debugging::     Examining machine code and registers.
+* Changing the Program::        Changing source and object code.
+* Commands::                    Entering and editing DDD commands.
+
+* Application Defaults::        Resources used in DDD.
+* Bugs::                        How, when, and why to report DDD bugs.
+* Configuration Notes::         Configuration-specific notes.
+* Dirty Tricks::                Room for your contributions.
+* Extending::                   Extending DDD.
+* FAQ::                         Frequently Answered Questions.
+* License::                     The DDD license.
+* Help and Assistance::         Mailing Lists and other resources.
+* Documentation License::       The license of this document.
+
+* Label Index::                 All labels shown on the DDD GUI.
+* Key Index::                   Keys used to control DDD.
+* Command Index::               Commands that can be typed within DDD.
+* Resource Index::              All resources and environment variables.
+* File Index::                  All programs and files referenced by DDD.
+* Concept Index::               All concepts as mentioned in this manual.
+
+
+
+ --- The Detailed Node Listing ---
+
+Summary of DDD
+
+* About this Manual::           Getting copies in various formats.
+* Free Software::               How to copy and redistribute DDD.
+* Getting DDD::              How to obtain copies of DDD.
+* Contributors::                Who has done all this?
+* History::                     Old DDD versions.
+
+A Sample DDD Session
+
+* Sample Program::              Source `sample.c'
+
+Getting In and Out of DDD
+
+* Invoking::                    How to invoke DDD.
+* Quitting::                    How to quit DDD.
+* Sessions::                    Saving work across invocations.
+* Remote Debugging::            Running DDD on a different host.
+* Customizing Debugger Interaction::  How DDD and GDB communicate.
+
+Invoking DDD
+
+* Choosing an Inferior Debugger::  Which debugger to use?
+* Options::                     How to invoke DDD
+* X Options::                   Setting X properties
+* Inferior Debugger Options::   Customizing GDB, DBX, and so on
+* Multiple Instances::          Running multiple DDD instances
+* X Warnings::                  Turning off obnoxious warnings
+
+Inferior Debugger Options
+
+* GDB Options::
+* DBX and Ladebug Options::
+* XDB Options::
+* JDB Options::
+* PYDB Options::
+* Perl Options::
+* Bash Options::
+
+Persistent Sessions
+
+* Saving Sessions::
+* Resuming Sessions::
+* Deleting Sessions::
+* Customizing Sessions::
+
+Remote Debugging
+
+* Remote Host::                 Running DDD on a Remote Host
+* Remote Debugger::             Using a Remote Inferior Debugger
+* Remote Program::              Debugging a Remote Program
+
+Using DDD with a Remote Inferior Debugger
+
+* Customizing Remote Debugging::
+
+Customizing Interaction with the Inferior Debugger
+
+* Debugger Invocation::
+* Debugger Initialization::
+* Debugger Communication::
+
+Initializing the Inferior Debugger
+
+* GDB Initialization::
+* DBX Initialization::
+* XDB Initialization::
+* JDB Initialization::
+* PYDB Initialization::
+* Perl Initialization::
+* Bash Initialization::
+* Finding a Place to Start::
+* Opening the Selection::
+
+The DDD Windows
+
+* Menu Bar::                    All DDD pull-down menus.
+* Tool Bar::                    The DDD icon buttons.
+* Command Tool::                The floating command tool.
+* Getting Help::                What does this thing mean?
+* Undo and Redo::               Oops!
+* Customizing::                 You can customize DDD
+
+The Menu Bar
+
+* File Menu::                   Selecting programs and processes.
+* Edit Menu::                   Cut, copy, paste, and preferences.
+* View Menu::                   All DDD windows.
+* Program Menu::                Starting and stopping.
+* Commands Menu::               All DDD commands.
+* Status Menu::                 Examining the program status.
+* Source Menu::                 Navigating around.
+* Data Menu::                   Examining data.
+* Maintenance Menu::            Maintaining DDD.
+* Help Menu::                   Getting help.
+* Customizing the Menu Bar::    Alternate key bindings, etc.
+
+Customizing the Menu Bar
+
+* Auto-Raise Menus::
+* Customizing the Edit Menu::
+
+The Tool Bar
+
+* Customizing the Tool Bar::
+
+The Command Tool
+
+* Customizing the Command Tool::
+* Customizing Tool Position::
+
+Customizing the Command Tool
+
+* Disabling the Command Tool::
+
+Command Tool Position
+
+* Customizing Tool Decoration::
+
+Customizing DDD
+
+* How Customizing Works::
+* Customizing Help::
+* Customizing Undo::
+* Customizing Windows::
+* Debugger Settings::
+
+How Customizing DDD Works
+
+* Resources::
+* Changing Resources::
+* Saving Options::
+
+Customizing DDD Help
+
+* Button tips::                 Turning off tips.
+* Tip of the day::              Turning off the tip of the day.
+* Help Helpers::                Helper programs invoked by Help.
+
+Customizing the DDD Windows
+
+* Splash Screen::               Turning off the splash screen.
+* Window Layout::               Re-arranging windows.
+* Customizing Fonts::           Using alternate fonts.
+* Toggling Windows::            Turning off windows.
+* Text Fields::                 Popdown histories.
+* Icons::                       Iconifying DDD windows.
+* Adding Buttons::              Create your own button set.
+* More Customizations::
+
+Navigating through the Code
+
+* Compiling for Debugging::     Always use `-g' to compile.
+* Opening Files::               How to open a program for debugging.
+* Looking up Items::            Searching files and functions.
+* Customizing Source::          Arranging the source window.
+
+Opening Files
+
+* Opening Programs::            How to open a program for debugging.
+* Opening Core Dumps::          Analyze a previous crash.
+* Opening Source Files::        Open a source file of the program.
+* Filtering Files::             DDD only lists matching files.
+
+Looking up Items
+
+* Looking up Definitions::      Jump towards a specific item.
+* Textual Search::              Search within the current source.
+* Looking up Previous Locations::  Navigate back and forth.
+* Source Path::                 Make DDD know where to search.
+
+Customizing the Source Window
+
+* Customizing Glyphs::
+* Customizing Searching::
+* Customizing Source Appearance::
+* Customizing Source Scrolling::
+* Customizing Source Lookup::
+* Customizing File Filtering::
+
+Stopping the Program
+
+* Breakpoints::                 Stop at a certain point.
+* Watchpoints::                 Stop at a certain condition.
+* Interrupting::                Stop manually.
+* Stopping X Programs::         Take care of grabbed pointers!
+
+Breakpoints
+
+* Setting Breakpoints::
+* Deleting Breakpoints::
+* Disabling Breakpoints::
+* Temporary Breakpoints::
+* Editing Breakpoint Properties::
+* Breakpoint Conditions::
+* Breakpoint Ignore Counts::
+* Breakpoint Commands::
+* Moving and Copying Breakpoints::
+* Looking up Breakpoints::
+* Editing all Breakpoints::
+* Hardware-Assisted Breakpoints::
+
+Watchpoints
+
+* Setting Watchpoints::
+* Editing Watchpoint Properties::
+* Editing all Watchpoints::
+* Deleting Watchpoints::
+
+Stopping X Programs
+
+* Customizing Grab Checking::
+
+Running the Program
+
+* Starting Program Execution::
+* Using the Execution Window::
+* Attaching to a Process::
+* Program Stop::
+* Resuming Execution::
+* Continuing Somewhere Else::
+* Stack::
+* Undoing Program Execution::
+* Threads::
+* Signals::
+* Killing the Program::
+
+Starting Program Execution
+
+* Arguments::                   Your program's arguments.
+* Environment::                 Your program's environment.
+* Working Directory::           Your program's directory.
+* Input/Output::                Your program's I/O.
+
+Using the Execution Window
+
+* Customizing the Execution Window::
+
+Attaching to a Running Process
+
+* Customizing Attaching to Processes::
+
+Examining the Stack
+
+* Frames::                      Callers and callees.
+* Backtraces::                  And you may ask yourself, `how did I get here?'
+* Selecting a frame::           Moving up and down.
+
+Examining Data
+
+* Value Tips::                  Just move the pointer on a variable.
+* Printing Values::             Printing a value in the debugger console.
+* Displaying Values::           Displaying structures as graphs.
+* Plotting Values::             Displaying values as plots.
+* Examining Memory::            Low-level memory examination.
+
+Displaying Complex Values in the Data Window
+
+* Display Basics::              How to create, manipulate, and delete displays.
+* Arrays::                      Special functions for arrays.
+* Assignment::                  Setting variable values.
+* Examining Structures::        Dereferencing pointers and other references.
+* Customizing Displays::        Data Themes.
+* Layouting the Graph::         Automatic layout.
+* Printing the Graph::          Printing on paper.
+
+Display Basics
+
+* Creating Single Displays::
+* Selecting Displays::
+* Showing and Hiding Details::
+* Rotating Displays::
+* Displaying Local Variables::
+* Displaying Program Status::
+* Refreshing the Data Window::
+* Placement::
+* Clustering::
+* Creating Multiple Displays::
+* Editing all Displays::
+* Deleting Displays::
+
+Arrays
+
+* Array Slices::                Displaying FROM..TO parts of an array
+* Repeated Values::             How repeated values are handled.
+* Arrays as Tables::            Displaying two-dimensional arrays.
+
+Examining Structures
+
+* Dependent Values::            Edges from values to values.
+* Dereferencing Pointers::      Examining pointer-based data structures.
+* Shared Structures::           Multiple pointers to one display.
+* Display Shortcuts::           Customize your own menus.
+
+Customizing Displays
+
+* Using Data Themes::
+* Applying Data Themes to Several Values::
+* Editing Themes::
+* Writing Data Themes::
+* Display Resources::
+* VSL Resources::
+
+Layouting the Graph
+
+* Moving Displays::
+* Scrolling Data::
+* Aligning Displays::
+* Automatic Layout::
+* Rotating the Graph::
+
+Plotting Values
+
+* Plotting Arrays::             Plotting 1-D and 2-D arrays.
+* Plot Appearance::             Controlling the appearance.
+* Scalars and Composites::      Plotting simple values.
+* Plotting Histories::          Plotting the history of a variable.
+* Printing Plots::              Printing on paper.
+* Entering Plotting Commands::  Raw Gnuplot commands.
+* Exporting Plot Data::         Processing data outside of DDD
+* Animating Plots::             Visualizing dynamic behaviour.
+* Customizing Plots::           All at your leisure.
+
+Customizing Plots
+
+* Gnuplot Invocation::
+* Gnuplot Settings::
+
+Machine-Level Debugging
+
+* Machine Code::                Examining machine code.
+* Machine Code Execution::      Stepping across instructions.
+* Registers::                   Examining registers.
+* Customizing Machine Code::    Settings.
+
+Changing the Program
+
+* Editing Source Code::         You can invoke a source editor from DDD.
+* Recompiling::                 Invoking `make' from within DDD.
+* Patching::                    Changing source and object code.
+
+Editing Source Code
+
+* Customizing Editing::
+* In-Place Editing::
+
+The Command-Line Interface
+
+* Entering Commands::           Direct interaction with the inferior debugger.
+* TTY mode::                    Controlling DDD from a terminal.
+* Integrating DDD::          DDD and your programming environment.
+* Defining Buttons::            Add your own DDD buttons.
+* Defining Commands::           Add your own DDD commands.
+
+Entering Commands
+
+* Command Completion::          Using the <TAB> key.
+* Command History::             Repeating previous commands.
+* Typing in the Source Window::
+
+Defining Buttons
+
+* Customizing Buttons::         Adding your own command buttons.
+
+Defining Commands
+
+* GDB Simple Commands::
+* GDB Argument Commands::
+* Commands with Other Debuggers::
+
+Application Defaults
+
+* Actions::                     All actions used in translation tables.
+* Images::                      All images used in resources,
+
+Actions
+
+* General Actions::
+* Data Display Actions::
+* Debugger Console Actions::
+* Source Window Actions::
+
+Bugs and How To Report Them
+
+* Where to Send Bug Reports::   Our e-mail address.
+* Is it a DDD Bug?::         DDD may not be at fault.
+* How to Report Bugs::          Report all the facts.
+* Bug Reports::                 Include all configuration information.
+* Diagnostics::                 Maintaining DDD
+
+Getting Diagnostics
+
+* Logging::                     DDD logs all interactions.
+* Debugging DDD::            Facilities to debug DDD.
+* Customizing Diagnostics::     All diagnostics resources.
+
+Logging
+
+* Disabling Logging::
+
+Configuration Notes
+
+* GDB::                         Using DDD with GDB
+* DBX::                         Using DDD with DBX
+* Ladebug::                     Using DDD with Ladebug
+* XDB::                         Using DDD with XDB
+* JDB::                         Using DDD with JDB
+* Perl::                        Using DDD with Perl
+* Bash::                        Using DDD with Bash
+* LessTif::                     Using DDD with LessTif
+
+Using DDD with GDB
+
+* WDB::                         Using DDD with WDB
+* WindRiver GDB::               Using DDD with WindRiver GDB (Tornado)
+
+
+File: ddd.info,  Node: Summary,  Next: Sample Session,  Prev: Top,  Up: Top
+
+Summary of DDD
+**************
+
+   The purpose of a debugger such as DDD is to allow you to see what is
+going on "inside" another program while it executes--or what another
+program was doing at the moment it crashed.
+
+   DDD can do four main kinds of things (plus other things in support
+of these) to help you catch bugs in the act:
+
+   * Start your program, specifying anything that might affect its
+     behavior.
+
+   * Make your program stop on specified conditions.
+
+   * Examine what has happened, when your program has stopped.
+
+   * Change things in your program, so you can experiment with
+     correcting the effects of one bug and go on to learn about another.
+
+   Technically speaking, DDD is a front-end to a command-line debugger
+(called "inferior debugger", because it lies at the layer beneath DDD).
+DDD supports the following inferior debuggers:
+
+   * To debug _executable binaries_, you can use DDD with "GDB", "DBX",
+     "Ladebug", or "XDB".
+
+        - "GDB", the GNU debugger, is the recommended inferior debugger
+          for DDD.  GDB supports native executables binaries originally
+          written in C, C++, Java, Modula-2, Modula-3, Pascal, Chill,
+          Ada, and FORTRAN.  (*note Using GDB with Different Languages:
+          (gdb)Languages., for information on language support in GDB.)
+
+        - As an alternative to GDB, you can use DDD with the "DBX"
+          debugger, as found on several UNIX systems.  Most DBX
+          incarnations offer fewer features than GDB, and some of the
+          more advanced DBX features may not be supported by DDD.
+          However, using DBX may be useful if GDB does not understand
+          or fully support the debugging information as generated by
+          your compiler.
+
+        - As an alternative to GDB and DBX, you can use DDD with
+          "Ladebug", as found on Compaq and DEC systems.  Ladebug
+          offers fewer features than GDB, and some of the more advanced
+          Ladebug features may not be supported by DDD.  However, using
+          Ladebug may be useful if GDB or DBX do not understand or
+          fully support the debugging information as generated by your
+          compiler.(1)
+
+        - As another alternative to GDB, you can use DDD with the "XDB"
+          debugger, as found on HP-UX systems.(2).
+
+   * To debug _Java byte code programs_, you can use DDD with "JDB",
+     the Java debugger, as of JDK 1.1 and later.  (DDD has been tested
+     with JDK 1.1 and JDK 1.2.)
+
+   * To debug _Python programs_, you can use DDD with "PYDB", a Python
+     debugger.
+
+   * To debug _Perl programs_, you can use DDD with the "Perl
+     debugger," as of Perl 5.003 and later.
+
+   * To debug _Bash programs_, you need a version Bash that supports
+     extended debugging support. To get this enhanced version see
+     `http://bashdb.sourceforge.net'. You will need version
+     2.05b-debugger-0.32 or later to work with DDD.
+
+   *Note Choosing an Inferior Debugger::, for choosing the appropriate
+inferior debugger.  *Note Sample Session::, for getting a first
+impression of DDD.
+
+* Menu:
+
+* About this Manual::           Getting copies in various formats.
+* Typographic Conventions::     Typographic conventions.
+* Free Software::               How to copy and redistribute DDD.
+* Getting DDD::              How to obtain copies of DDD.
+* Contributors::                Who has done all this?
+* History::                     Old DDD versions.
+
+   ---------- Footnotes ----------
+
+   (1) Within DDD (and this manual), Ladebug is considered a DBX
+variant.  Hence, everything said for DBX also applies to Ladebug,
+unless stated otherwise.
+
+   (2) XDB will no longer be maintained in future DDD releases.  Use a
+recent GDB version instead.
+
+
+File: ddd.info,  Node: About this Manual,  Next: Typographic Conventions,  Up: Summary
+
+About this Manual
+=================
+
+   This manual comes in several formats:
+
+   * The _Info_ format is used for browsing on character devices; it
+     comes without pictures.  You should have a local copy installed,
+     which you can browse via Emacs, the stand-alone `info' program, or
+     from DDD via `Help => DDD Reference'.
+
+     The DDD source distribution `ddd-3.3.11.tar.gz' contains this
+     manual as pre-formatted info files; you can also download them
+     from
+     the DDD WWW page (http://www.gnu.org/software/ddd/).
+
+   * The _PostScript_ format is used for printing on paper; it comes
+     with pictures as well.
+
+     The DDD source distribution `ddd-3.3.11.tar.gz' contains this
+     manual as pre-formatted PostScript file; you can also download it
+     from
+     the DDD WWW page (http://www.gnu.org/software/ddd/).
+
+   * The _PDF_ format is used for printing on paper as well as for
+     online browsing; it comes with pictures as well.
+
+     The DDD source distribution `ddd-3.3.11.tar.gz' contains this
+     manual as pre-formatted PDF file; you can also download it from
+     the DDD WWW page (http://www.gnu.org/software/ddd/).
+
+   * The _HTML_ format is used for browsing on bitmap devices; it
+     includes several pictures.  You can view it using a HTML browser,
+     typically from a local copy.
+
+     A pre-formatted HTML version of this manual comes in a separate
+     DDD package
+     `ddd-3.3.11-html-manual.tar.gz'; you can browse and download it
+     via
+     the DDD WWW page (http://www.gnu.org/software/ddd/).
+
+   The manual itself is written in TeXinfo format; its source code
+`ddd.texi' is contained in the DDD source distribution
+`ddd-3.3.11.tar.gz'.
+
+   The picture sources come in a separate package
+`ddd-3.3.11-pics.tar.gz'; you need this package only if you want to
+re-create the PostScript, HTML, or PDF versions.
+
+
+File: ddd.info,  Node: Typographic Conventions,  Next: Free Software,  Prev: About this Manual,  Up: Summary
+
+Typographic conventions
+=======================
+
+<Ctrl+A>
+     The name for a key on the keyboard (or multiple keys pressed
+     simultaneously)
+
+`run'
+     A sequence of characters to be typed on the keyboard.
+
+`~/.ddd/init'
+     A file.
+
+`Help'
+     A graphical control element, such as a button or menu item.
+
+`File => Open Program'
+     A sequence of menu items, starting at the top-level menu bar.
+
+`argc - 1'
+     Program code or debugger command.
+
+`-g'
+     A command-line option.
+
+`$'
+     System prompt.
+
+`(gdb) '
+     Debugger prompt.
+
+`_'
+     Cursor position.
+
+VERSION
+     A metasyntactic variable; something that stands for another piece
+     of text.
+
+"definition"
+     A definition.
+
+_caution_
+     Emphasis.
+
+*A warning*
+     Strong emphasis.
+
+DDD
+     An acronym.
+
+   Here's an example.  `break LOCATION' is a typed command at the
+``(gdb) '' prompt; the metasyntactic variable `LOCATION' would be
+replaced by the actual location.  ``_'' is the cursor position after
+entering the command.
+
+     (gdb) break LOCATION
+     Breakpoint NUMBER at LOCATION
+     (gdb) _
+
+
+File: ddd.info,  Node: Free Software,  Next: Getting DDD,  Prev: Typographic Conventions,  Up: Summary
+
+Free software
+=============
+
+   DDD is "free"; this means that everyone is free to use it and free
+to redistribute it on a free basis.  DDD is not in the public domain;
+it is copyrighted and there are restrictions on its distribution, but
+these restrictions are designed to permit everything that a good
+cooperating citizen would want to do.  What is not allowed is to try to
+prevent others from further sharing any version of DDD that they might
+get from you.  The precise conditions are found in the GNU General
+Public License that comes with DDD; *Note License::, for details.
+
+   The easiest way to get a copy of DDD is from someone else who has
+it.  You need not ask for permission to do so, or tell any one else;
+just copy it.
+
+
+File: ddd.info,  Node: Getting DDD,  Next: Contributors,  Prev: Free Software,  Up: Summary
+
+Getting DDD
+===========
+
+   If you have access to the Internet, you can get the latest version of
+DDD from the anonymous FTP server `ftp.gnu.org' in the directory
+`/gnu/ddd'.  This should contain the following files:
+
+``ddd-VERSION.tar.gz''
+     The DDD source distribution.  This should be all you need.
+
+``ddd-VERSION-html-manual.tar.gz''
+     The DDD manual in HTML format.  You need this only if you want to
+     install a local copy of the DDD manual in HTML format.
+
+``ddd-VERSION-pics.tar.gz''
+     Sources of images included in the DDD manual.  You need this only
+     if you want to recreate the DDD manual.
+
+   DDD can also be found at numerous other archive sites around the
+world; check the file `ANNOUNCE' in a DDD distribution for the latest
+known list.
+
+
+File: ddd.info,  Node: Contributors,  Next: History,  Prev: Getting DDD,  Up: Summary
+
+Contributors to DDD
+===================
+
+   Dorothea Lütkehaus and Andreas Zeller were the original authors of
+DDD.  Many others have contributed to its development.  The files
+`ChangeLog' and `THANKS' in the DDD distribution approximates a
+blow-by-blow account.
+
+
+File: ddd.info,  Node: History,  Prev: Contributors,  Up: Summary
+
+History of DDD
+==============
+
+   The history of DDD is a story of code recycling.  The oldest parts of
+DDD were written in 1990, when _Andreas Zeller_ designed VSL, a
+box-based visual structure language for visualizing data and program
+structures.  The VSL interpreter and the Box library became part of
+Andreas' Diploma Thesis, a graphical syntax editor based on the
+Programming System Generator PSG.
+
+   In 1992, the VSL and Box libraries were recycled for the NORA
+project.  For NORA, an experimental inference-based software
+development tool set, Andreas wrote a graph editor (based on VSL and
+the Box libraries) and facilities for inter-process knowledge exchange.
+Based on these tools, _Dorothea Lütkehaus_ (now _Dorothea Krabiell_)
+realized DDD as her Diploma Thesis, 1994.
+
+   The original DDD had no source window; this was added by Dorothea
+during the winter of 1994-1995.  In the first quarter of 1995, finally,
+Andreas completed DDD by adding command and execution windows,
+extensions for DBX and remote debugging as well as configuration
+support for several architectures.  Since then, Andreas has further
+maintained and extended DDD, based on the comments and suggestions of
+several DDD users around the world.  See the comments in the DDD source
+for details.
+
+   Major DDD events:
+
+April, 1995
+     DDD 0.9: First DDD beta release.
+
+May, 1995
+     DDD 1.0: First public DDD release.
+
+December, 1995
+     DDD 1.4: Machine-level debugging, glyphs, Emacs integration.
+
+October, 1996
+     DDD 2.0: Color displays, XDB support, generic DBX support, command
+     tool.
+
+May, 1997
+     DDD 2.1: Alias detection, button tips, status displays.
+
+November, 1997
+     DDD 2.2: Sessions, display shortcuts.
+
+June, 1998
+     DDD 3.0: Icon tool bar, Java support, JDB support.
+
+December, 1998
+     DDD 3.1: Data plotting, Perl support, Python support, Undo/Redo.
+
+January, 2000
+     DDD 3.2: New manual, Readline support, Ladebug support.
+
+January, 2001
+     DDD 3.3: Data themes, JDB 1.2 support, VxWorks support.
+
+November, 2002
+     DDD 3.3.2: Bash support.
+
+March, 2003
+     DDD 3.3.3: Better Bash support. Compiles using modern tools thanks
+     to Daniel Schepler.
+
+
+File: ddd.info,  Node: Sample Session,  Next: Invocation,  Prev: Summary,  Up: Top
+
+A Sample DDD Session
+********************
+
+   You can use this manual at your leisure to read all about DDD.
+However, a handful of features are enough to get started using the
+debugger.  This chapter illustrates those features.
+
+   The sample program `sample.c' (*note Sample Program::) exhibits the
+following bug.  Normally, `sample' should sort and print its arguments
+numerically, as in the following example:
+
+     $ ./sample 8 7 5 4 1 3
+     1 3 4 5 7 8
+     $ _
+
+   However, with certain arguments, this goes wrong:
+
+     $ ./sample 8000 7000 5000 1000 4000
+     1000 1913 4000 5000 7000
+     $ _
+
+   Although the output is sorted and contains the right number of
+arguments, some arguments are missing and replaced by bogus numbers;
+here, `8000' is missing and replaced by `1913'.(1)
+
+   Let us use DDD to see what is going on.  First, you must compile
+`sample.c' for debugging (*note Compiling for Debugging::), giving the
+`-g' flag while compiling:
+
+     $ gcc -g -o sample sample.c
+     $ _
+
+* Menu:
+
+* Sample Program::              Source `sample.c'
+
+   Now, you can invoke DDD (*note Invocation::) on the `sample'
+executable:
+
+     $ ddd sample
+
+   After a few seconds, DDD comes up.  The "Source Window" contains the
+source of your debugged program; use the "Scroll Bar" to scroll through
+the file.
+
+   The "Debugger Console" (at the bottom) contains DDD version
+information as well as a GDB prompt.(2)
+
+     GNU DDD Version 3.3.11, by Dorothea Lütkehaus and Andreas Zeller.
+     Copyright (C) 1995-1999 Technische Universität Braunschweig, Germany.
+     Copyright (C) 1999-2001 Universität Passau, Germany.
+     Copyright (C) 2001-2004 Universität des Saarlandes, Germany.
+     Reading symbols from sample...done.
+     (gdb) _
+
+   The first thing to do now is to place a "Breakpoint" (*note
+Breakpoints::), making `sample' stop at a location you are interested
+in.  Click on the blank space left to the initialization of `a'.  The
+"Argument field" `():' now contains the location (`sample.c:31').  Now,
+click on `Break' to create a breakpoint at the location in `()'.  You
+see a little red stop sign appear in line 31.
+
+   The next thing to do is to actually "execute" the program, such that
+you can examine its behavior (*note Running::).  Select `Program =>
+Run' to execute the program; the `Run Program' dialog appears.
+
+   In `Run with Arguments', you can now enter arguments for the
+`sample' program.  Enter the arguments resulting in erroneous behavior
+here--that is, `8000 7000 5000 1000 4000'.  Click on `Run' to start
+execution with the arguments you just entered.
+
+   GDB now starts `sample'.  Execution stops after a few moments as the
+breakpoint is reached.  This is reported in the debugger console.
+
+     (gdb) break sample.c:31
+     Breakpoint 1 at 0x8048666: file sample.c, line 31.
+     (gdb) run 8000 7000 5000 1000 4000
+     Starting program: sample 8000 7000 5000 1000 4000
+     
+     Breakpoint 1, main (argc=6, argv=0xbffff918) at sample.c:31
+     (gdb) _
+
+   The current execution line is indicated by a green arrow.
+
+     => a = (int *)malloc((argc - 1) * sizeof(int));
+
+   You can now examine the variable values.  To examine a simple
+variable, you can simply move the mouse pointer on its name and leave
+it there.  After a second, a small window with the variable value pops
+up (*note Value Tips::).  Try this with `argc' to see its value (`6').
+The local variable `a' is not yet initialized; you'll probably see
+`0x0' or some other invalid pointer value.
+
+   To execute the current line, click on the `Next' button on the
+command tool.  The arrow advances to the following line.  Now, point
+again on `a' to see that the value has changed and that `a' has
+actually been initialized.
+
+   To examine the individual values of the `a' array, enter `a[0]' in
+the argument field (you can clear it beforehand by clicking on `():')
+and then click on the `Print' button.  This prints the current value of
+`()' in the debugger console (*note Printing Values::).  In our case,
+you'll get
+
+     (gdb) print a[0]
+     $1 = 0
+     (gdb) _
+
+or some other value (note that `a' has only been allocated, but the
+contents have not yet been initialized).
+
+   To see all members of `a' at once, you must use a special GDB
+operator.  Since `a' has been allocated dynamically, GDB does not know
+its size; you must specify it explicitly using the `@' operator (*note
+Array Slices::).  Enter `a[0]@(argc - 1)' in the argument field and
+click on the `Print' button.  You get the first `argc - 1' elements of
+`a', or
+
+     (gdb) print a[0]@(argc - 1)
+     $2 = {0, 0, 0, 0, 0}
+     (gdb) _
+
+   Rather than using `Print' at each stop to see the current value of
+`a', you can also "display" `a', such that its is automatically
+displayed.  With `a[0]@(argc - 1)' still being shown in the argument
+field, click on `Display'.  The contents of `a' are now shown in a new
+window, the "Data Window".  Click on `Rotate' to rotate the array
+horizontally.
+
+   Now comes the assignment of `a''s members:
+
+     =>  for (i = 0; i < argc - 1; i++)
+             a[i] = atoi(argv[i + 1]);
+
+   You can now click on `Next' and `Next' again to see how the
+individual members of `a' are being assigned.  Changed members are
+highlighted.
+
+   To resume execution of the loop, use the `Until' button.  This makes
+GDB execute the program until a line greater than the current is
+reached.  Click on `Until' until you end at the call of `shell_sort' in
+
+     =>  shell_sort(a, argc);
+
+   At this point, `a''s contents should be `8000 7000 5000 1000 4000'.
+Click again on `Next' to step over the call to `shell_sort'.  DDD ends
+in
+
+     =>  for (i = 0; i < argc - 1; i++)
+             printf("%d ", a[i]);
+
+and you see that after `shell_sort' has finished, the contents of `a'
+are `1000, 1913, 4000, 5000, 7000'--that is, `shell_sort' has somehow
+garbled the contents of `a'.
+
+   To find out what has happened, execute the program once again.  This
+time, you do not skip through the initialization, but jump directly into
+the `shell_sort' call.  Delete the old breakpoint by selecting it and
+clicking on `Clear'.  Then, create a new breakpoint in line 35 before
+the call to `shell_sort'.  To execute the program once again, select
+`Program => Run Again'.
+
+   Once more, DDD ends up before the call to `shell_sort':
+     =>  shell_sort(a, argc);
+
+   This time, you want to examine closer what `shell_sort' is doing.
+Click on `Step' to step into the call to `shell_sort'.  This leaves
+your program in the first executable line, or
+
+     => int h = 1;
+
+   while the debugger console tells us the function just entered:
+
+     (gdb) step
+     shell_sort (a=0x8049878, size=6) at sample.c:9
+     (gdb) _
+
+   This output that shows the function where `sample' is now suspended
+(and its arguments) is called a "stack frame display".  It shows a
+summary of the stack.  You can use `Status => Backtrace' to see where
+you are in the stack as a whole; selecting a line (or clicking on `Up'
+and `Down') will let you move through the stack.  Note how the `a'
+display disappears when its frame is left.
+
+   Let us now check whether `shell_sort''s arguments are correct.
+After returning to the lowest frame, enter `a[0]@size' in the argument
+field and click on `Print':
+
+     (gdb) print a[0] @ size
+     $4 = {8000, 7000, 5000, 1000, 4000, 1913}
+     (gdb) _
+
+   Surprise!  Where does this additional value `1913' come from?  The
+answer is simple: The array size as passed in `size' to `shell_sort' is
+_too large by one_--`1913' is a bogus value which happens to reside in
+memory after `a'.  And this last value is being sorted in as well.
+
+   To see whether this is actually the problem cause, you can now assign
+the correct value to `size' (*note Assignment::).  Select `size' in the
+source code and click on `Set'.  A dialog pops up where you can edit
+the variable value.
+
+   Change the value of `size' to `5' and click on `OK'.  Then, click on
+`Finish' to resume execution of the `shell_sort' function:
+
+     (gdb) set variable size = 5
+     (gdb) finish
+     Run till exit from #0  shell_sort (a=0x8049878, size=5) at sample.c:9
+     0x80486ed in main (argc=6, argv=0xbffff918) at sample.c:35
+     (gdb) _
+
+   Success!  The `a' display now contains the correct values `1000,
+4000, 5000, 7000, 8000'.
+
+   You can verify that these values are actually printed to standard
+output by further executing the program.  Click on `Cont' to continue
+execution.
+
+     (gdb) cont
+     1000 4000 5000 7000 8000
+     
+     Program exited normally.
+     (gdb) _
+
+   The message `Program exited normally.' is from GDB; it indicates
+that the `sample' program has finished executing.
+
+   Having found the problem cause, you can now fix the source code.
+Click on `Edit' to edit `sample.c', and change the line
+
+     shell_sort(a, argc);
+
+to the correct invocation
+
+     shell_sort(a, argc - 1);
+
+   You can now recompile `sample'
+
+     $ gcc -g -o sample sample.c
+     $ _
+
+and verify (via `Program => Run Again') that `sample' works fine now.
+
+     (gdb) run
+     `sample' has changed; re-reading symbols.
+     Reading in symbols...done.
+     Starting program: sample 8000 7000 5000 1000 4000
+     1000 4000 5000 7000 8000
+     
+     Program exited normally.
+     (gdb) _
+
+   All is done; the program works fine now.  You can end this DDD
+session with `Program => Exit' or `Ctrl+Q'.
+
+   ---------- Footnotes ----------
+
+   (1) Actual numbers and behavior on your system may vary.
+
+   (2) Re-invoke DDD with `--gdb', if you do not see a `(gdb)' prompt
+here (*note Choosing an Inferior Debugger::)
+
+
+File: ddd.info,  Node: Sample Program,  Up: Sample Session
+
+Sample Program
+==============
+
+   Here's the source `sample.c' of the sample program.
+
+     /* sample.c -- Sample C program to be debugged with DDD */
+     
+     #include <stdio.h>
+     #include <stdlib.h>
+     
+     static void shell_sort(int a[], int size)
+     {
+         int i, j;
+         int h = 1;
+         do {
+             h = h * 3 + 1;
+         } while (h <= size);
+         do {
+             h /= 3;
+             for (i = h; i < size; i++)
+             {
+                 int v = a[i];
+                 for (j = i; j >= h && a[j - h] > v; j -= h)
+                     a[j] = a[j - h];
+                 if (i != j)
+                     a[j] = v;
+             }
+         } while (h != 1);
+     }
+     
+     int main(int argc, char *argv[])
+     {
+         int *a;
+         int i;
+     
+         a = (int *)malloc((argc - 1) * sizeof(int));
+         for (i = 0; i < argc - 1; i++)
+             a[i] = atoi(argv[i + 1]);
+     
+         shell_sort(a, argc);
+     
+         for (i = 0; i < argc - 1; i++)
+             printf("%d ", a[i]);
+         printf("\n");
+     
+         free(a);
+         return 0;
+     }
+
+
+File: ddd.info,  Node: Invocation,  Next: Windows,  Prev: Sample Session,  Up: Top
+
+Getting In and Out of DDD
+*************************
+
+This chapter discusses how to start DDD, and how to get out of it.  The
+essentials are:
+
+   * Type `ddd' to start DDD (*note Invoking::).
+
+   * Use `File => Exit' or `Ctrl+Q' to exit (*note Quitting::).
+
+* Menu:
+
+* Invoking::                    How to invoke DDD.
+* Quitting::                    How to quit DDD.
+* Sessions::                    Saving work across invocations.
+* Remote Debugging::            Running DDD on a different host.
+* Customizing Debugger Interaction::  How DDD and GDB communicate.
+
+
+File: ddd.info,  Node: Invoking,  Next: Quitting,  Up: Invocation
+
+Invoking DDD
+============
+
+   Normally, you can run DDD by invoking the program `ddd'.
+
+   You can also run DDD with a variety of arguments and options, to
+specify more of your debugging environment at the outset.
+
+   The most usual way to start DDD is with one argument, specifying an
+executable program:
+
+     ddd PROGRAM
+
+If you use GDB, DBX, Ladebug, or XDB as inferior debuggers, you can also
+start with both an executable program and a core file specified:
+
+     ddd PROGRAM CORE
+
+   You can, instead, specify a process ID as a second argument, if you
+want to debug a running process:
+
+     ddd PROGRAM 1234
+
+would attach DDD to process `1234' (unless you also have a file named
+`1234'; DDD does check for a core file first).
+
+   You can further control DDD by invoking it with specific "options".
+To get a list of DDD options, invoke DDD as
+
+     ddd --help
+
+   Most important are the options to specify the inferior debugger
+(*note Choosing an Inferior Debugger::), but you can also customize
+several aspects of DDD upon invocation (*note Options::).
+
+   DDD also understands the usual X options such as `-display' or
+`-geometry'.  *Note X Options::, for details.
+
+   All arguments and options that are not understood by DDD are passed
+to the inferior debugger; *Note Inferior Debugger Options::, for a
+survey.  To pass an option to the inferior debugger that conflicts with
+an X option, or with a DDD option listed here, use the `--debugger'
+option (*note Options::).
+
+* Menu:
+
+* Choosing an Inferior Debugger::  Which debugger to use?
+* Options::                     How to invoke DDD
+* X Options::                   Setting X properties
+* Inferior Debugger Options::   Customizing GDB, DBX, and so on
+* Multiple Instances::          Running multiple DDD instances
+* X Warnings::                  Turning off obnoxious warnings
+
+
+File: ddd.info,  Node: Choosing an Inferior Debugger,  Next: Options,  Up: Invoking
+
+Choosing an Inferior Debugger
+-----------------------------
+
+   The most frequently required options are those to choose a specific
+inferior debugger.
+
+   Normally, the inferior debugger is determined by the program to
+analyze:
+
+   * If the program requires a specific interpreter, such as Java,
+     Python, Perl or Bash, then you should use a JDB, PYDB, Perl, or
+     Bash inferior debugger.
+
+     Use
+
+          ddd --jdb PROGRAM
+
+          ddd --pydb PROGRAM
+
+          ddd --perl PROGRAM
+
+          ddd --bash PROGRAM
+          ddd --interpreter='_path-to-debugger-bash_ --debugger' PROGRAM
+
+     to run DDD with JDB, PYDB, Perl, or Bash as an inferior debugger.
+
+   * If the program is an executable binary, you should use GDB, DBX,
+     Ladebug, or XDB.  In general, GDB (or its HP variant, WDB)
+     provides the most functionality of these debuggers.
+
+     Use
+
+          ddd --gdb PROGRAM
+
+          ddd --wdb PROGRAM
+
+          ddd --dbx PROGRAM
+
+          ddd --ladebug PROGRAM
+
+          ddd --xdb PROGRAM
+
+     to run DDD with GDB, WDB, DBX, Ladebug, or XDB as inferior
+     debugger.
+
+   If you invoke DDD without any of these options, but give a PROGRAM
+to analyze, then DDD will automatically determine the inferior debugger:
+
+   * If PROGRAM is a Python program, a Perl script, or a Java class,
+     DDD will invoke the appropriate debugger.
+
+   * If PROGRAM is an executable binary, DDD will invoke its default
+     debugger for executables (usually GDB).
+
+   *Note Customizing Debugger Interaction::, for more details on
+determining the inferior debugger.
+

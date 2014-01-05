@@ -1,0 +1,2779 @@
+This is libc.info, produced by makeinfo version 4.3 from libc.texinfo.
+
+INFO-DIR-SECTION GNU libraries
+START-INFO-DIR-ENTRY
+* Libc: (libc).                 C library.
+END-INFO-DIR-ENTRY
+
+INFO-DIR-SECTION GNU C library functions and macros
+START-INFO-DIR-ENTRY
+* ALTWERASE: (libc)Local Modes.
+* ARGP_ERR_UNKNOWN: (libc)Argp Parser Functions.
+* ARG_MAX: (libc)General Limits.
+* BC_BASE_MAX: (libc)Utility Limits.
+* BC_DIM_MAX: (libc)Utility Limits.
+* BC_SCALE_MAX: (libc)Utility Limits.
+* BC_STRING_MAX: (libc)Utility Limits.
+* BRKINT: (libc)Input Modes.
+* BUFSIZ: (libc)Controlling Buffering.
+* CCTS_OFLOW: (libc)Control Modes.
+* CHILD_MAX: (libc)General Limits.
+* CIGNORE: (libc)Control Modes.
+* CLK_TCK: (libc)CPU Time.
+* CLOCAL: (libc)Control Modes.
+* CLOCKS_PER_SEC: (libc)CPU Time.
+* COLL_WEIGHTS_MAX: (libc)Utility Limits.
+* CPU_CLR: (libc)CPU Affinity.
+* CPU_ISSET: (libc)CPU Affinity.
+* CPU_SET: (libc)CPU Affinity.
+* CPU_SETSIZE: (libc)CPU Affinity.
+* CPU_ZERO: (libc)CPU Affinity.
+* CREAD: (libc)Control Modes.
+* CRTS_IFLOW: (libc)Control Modes.
+* CS5: (libc)Control Modes.
+* CS6: (libc)Control Modes.
+* CS7: (libc)Control Modes.
+* CS8: (libc)Control Modes.
+* CSIZE: (libc)Control Modes.
+* CSTOPB: (libc)Control Modes.
+* DES_FAILED: (libc)DES Encryption.
+* DTTOIF: (libc)Directory Entries.
+* E2BIG: (libc)Error Codes.
+* EACCES: (libc)Error Codes.
+* EADDRINUSE: (libc)Error Codes.
+* EADDRNOTAVAIL: (libc)Error Codes.
+* EADV: (libc)Error Codes.
+* EAFNOSUPPORT: (libc)Error Codes.
+* EAGAIN: (libc)Error Codes.
+* EALREADY: (libc)Error Codes.
+* EAUTH: (libc)Error Codes.
+* EBACKGROUND: (libc)Error Codes.
+* EBADE: (libc)Error Codes.
+* EBADF: (libc)Error Codes.
+* EBADFD: (libc)Error Codes.
+* EBADMSG: (libc)Error Codes.
+* EBADR: (libc)Error Codes.
+* EBADRPC: (libc)Error Codes.
+* EBADRQC: (libc)Error Codes.
+* EBADSLT: (libc)Error Codes.
+* EBFONT: (libc)Error Codes.
+* EBUSY: (libc)Error Codes.
+* ECANCELED: (libc)Error Codes.
+* ECHILD: (libc)Error Codes.
+* ECHO: (libc)Local Modes.
+* ECHOCTL: (libc)Local Modes.
+* ECHOE: (libc)Local Modes.
+* ECHOK: (libc)Local Modes.
+* ECHOKE: (libc)Local Modes.
+* ECHONL: (libc)Local Modes.
+* ECHOPRT: (libc)Local Modes.
+* ECHRNG: (libc)Error Codes.
+* ECOMM: (libc)Error Codes.
+* ECONNABORTED: (libc)Error Codes.
+* ECONNREFUSED: (libc)Error Codes.
+* ECONNRESET: (libc)Error Codes.
+* ED: (libc)Error Codes.
+* EDEADLK: (libc)Error Codes.
+* EDEADLOCK: (libc)Error Codes.
+* EDESTADDRREQ: (libc)Error Codes.
+* EDIED: (libc)Error Codes.
+* EDOM: (libc)Error Codes.
+* EDOTDOT: (libc)Error Codes.
+* EDQUOT: (libc)Error Codes.
+* EEXIST: (libc)Error Codes.
+* EFAULT: (libc)Error Codes.
+* EFBIG: (libc)Error Codes.
+* EFTYPE: (libc)Error Codes.
+* EGRATUITOUS: (libc)Error Codes.
+* EGREGIOUS: (libc)Error Codes.
+* EHOSTDOWN: (libc)Error Codes.
+* EHOSTUNREACH: (libc)Error Codes.
+* EIDRM: (libc)Error Codes.
+* EIEIO: (libc)Error Codes.
+* EILSEQ: (libc)Error Codes.
+* EINPROGRESS: (libc)Error Codes.
+* EINTR: (libc)Error Codes.
+* EINVAL: (libc)Error Codes.
+* EIO: (libc)Error Codes.
+* EISCONN: (libc)Error Codes.
+* EISDIR: (libc)Error Codes.
+* EISNAM: (libc)Error Codes.
+* EKEYEXPIRED: (libc)Error Codes.
+* EKEYREJECTED: (libc)Error Codes.
+* EKEYREVOKED: (libc)Error Codes.
+* EL2HLT: (libc)Error Codes.
+* EL2NSYNC: (libc)Error Codes.
+* EL3HLT: (libc)Error Codes.
+* EL3RST: (libc)Error Codes.
+* ELIBACC: (libc)Error Codes.
+* ELIBBAD: (libc)Error Codes.
+* ELIBEXEC: (libc)Error Codes.
+* ELIBMAX: (libc)Error Codes.
+* ELIBSCN: (libc)Error Codes.
+* ELNRNG: (libc)Error Codes.
+* ELOOP: (libc)Error Codes.
+* EMEDIUMTYPE: (libc)Error Codes.
+* EMFILE: (libc)Error Codes.
+* EMLINK: (libc)Error Codes.
+* EMSGSIZE: (libc)Error Codes.
+* EMULTIHOP: (libc)Error Codes.
+* ENAMETOOLONG: (libc)Error Codes.
+* ENAVAIL: (libc)Error Codes.
+* ENEEDAUTH: (libc)Error Codes.
+* ENETDOWN: (libc)Error Codes.
+* ENETRESET: (libc)Error Codes.
+* ENETUNREACH: (libc)Error Codes.
+* ENFILE: (libc)Error Codes.
+* ENOANO: (libc)Error Codes.
+* ENOBUFS: (libc)Error Codes.
+* ENOCSI: (libc)Error Codes.
+* ENODATA: (libc)Error Codes.
+* ENODEV: (libc)Error Codes.
+* ENOENT: (libc)Error Codes.
+* ENOEXEC: (libc)Error Codes.
+* ENOKEY: (libc)Error Codes.
+* ENOLCK: (libc)Error Codes.
+* ENOLINK: (libc)Error Codes.
+* ENOMEDIUM: (libc)Error Codes.
+* ENOMEM: (libc)Error Codes.
+* ENOMSG: (libc)Error Codes.
+* ENONET: (libc)Error Codes.
+* ENOPKG: (libc)Error Codes.
+* ENOPROTOOPT: (libc)Error Codes.
+* ENOSPC: (libc)Error Codes.
+* ENOSR: (libc)Error Codes.
+* ENOSTR: (libc)Error Codes.
+* ENOSYS: (libc)Error Codes.
+* ENOTBLK: (libc)Error Codes.
+* ENOTCONN: (libc)Error Codes.
+* ENOTDIR: (libc)Error Codes.
+* ENOTEMPTY: (libc)Error Codes.
+* ENOTNAM: (libc)Error Codes.
+* ENOTRECOVERABLE: (libc)Error Codes.
+* ENOTSOCK: (libc)Error Codes.
+* ENOTSUP: (libc)Error Codes.
+* ENOTTY: (libc)Error Codes.
+* ENOTUNIQ: (libc)Error Codes.
+* ENXIO: (libc)Error Codes.
+* EOF: (libc)EOF and Errors.
+* EOPNOTSUPP: (libc)Error Codes.
+* EOVERFLOW: (libc)Error Codes.
+* EOWNERDEAD: (libc)Error Codes.
+* EPERM: (libc)Error Codes.
+* EPFNOSUPPORT: (libc)Error Codes.
+* EPIPE: (libc)Error Codes.
+* EPROCLIM: (libc)Error Codes.
+* EPROCUNAVAIL: (libc)Error Codes.
+* EPROGMISMATCH: (libc)Error Codes.
+* EPROGUNAVAIL: (libc)Error Codes.
+* EPROTO: (libc)Error Codes.
+* EPROTONOSUPPORT: (libc)Error Codes.
+* EPROTOTYPE: (libc)Error Codes.
+* EQUIV_CLASS_MAX: (libc)Utility Limits.
+* ERANGE: (libc)Error Codes.
+* EREMCHG: (libc)Error Codes.
+* EREMOTE: (libc)Error Codes.
+* EREMOTEIO: (libc)Error Codes.
+* ERESTART: (libc)Error Codes.
+* EROFS: (libc)Error Codes.
+* ERPCMISMATCH: (libc)Error Codes.
+* ESHUTDOWN: (libc)Error Codes.
+* ESOCKTNOSUPPORT: (libc)Error Codes.
+* ESPIPE: (libc)Error Codes.
+* ESRCH: (libc)Error Codes.
+* ESRMNT: (libc)Error Codes.
+* ESTALE: (libc)Error Codes.
+* ESTRPIPE: (libc)Error Codes.
+* ETIME: (libc)Error Codes.
+* ETIMEDOUT: (libc)Error Codes.
+* ETOOMANYREFS: (libc)Error Codes.
+* ETXTBSY: (libc)Error Codes.
+* EUCLEAN: (libc)Error Codes.
+* EUNATCH: (libc)Error Codes.
+* EUSERS: (libc)Error Codes.
+* EWOULDBLOCK: (libc)Error Codes.
+* EXDEV: (libc)Error Codes.
+* EXFULL: (libc)Error Codes.
+* EXIT_FAILURE: (libc)Exit Status.
+* EXIT_SUCCESS: (libc)Exit Status.
+* EXPR_NEST_MAX: (libc)Utility Limits.
+* FD_CLOEXEC: (libc)Descriptor Flags.
+* FD_CLR: (libc)Waiting for I/O.
+* FD_ISSET: (libc)Waiting for I/O.
+* FD_SET: (libc)Waiting for I/O.
+* FD_SETSIZE: (libc)Waiting for I/O.
+* FD_ZERO: (libc)Waiting for I/O.
+* FILENAME_MAX: (libc)Limits for Files.
+* FLUSHO: (libc)Local Modes.
+* FOPEN_MAX: (libc)Opening Streams.
+* FP_ILOGB0: (libc)Exponents and Logarithms.
+* FP_ILOGBNAN: (libc)Exponents and Logarithms.
+* F_DUPFD: (libc)Duplicating Descriptors.
+* F_GETFD: (libc)Descriptor Flags.
+* F_GETFL: (libc)Getting File Status Flags.
+* F_GETLK: (libc)File Locks.
+* F_GETOWN: (libc)Interrupt Input.
+* F_OK: (libc)Testing File Access.
+* F_SETFD: (libc)Descriptor Flags.
+* F_SETFL: (libc)Getting File Status Flags.
+* F_SETLK: (libc)File Locks.
+* F_SETLKW: (libc)File Locks.
+* F_SETOWN: (libc)Interrupt Input.
+* HUGE_VAL: (libc)Math Error Reporting.
+* HUGE_VALF: (libc)Math Error Reporting.
+* HUGE_VALL: (libc)Math Error Reporting.
+* HUPCL: (libc)Control Modes.
+* I: (libc)Complex Numbers.
+* ICANON: (libc)Local Modes.
+* ICRNL: (libc)Input Modes.
+* IEXTEN: (libc)Local Modes.
+* IFNAMSIZ: (libc)Interface Naming.
+* IFTODT: (libc)Directory Entries.
+* IGNBRK: (libc)Input Modes.
+* IGNCR: (libc)Input Modes.
+* IGNPAR: (libc)Input Modes.
+* IMAXBEL: (libc)Input Modes.
+* INADDR_ANY: (libc)Host Address Data Type.
+* INADDR_BROADCAST: (libc)Host Address Data Type.
+* INADDR_LOOPBACK: (libc)Host Address Data Type.
+* INADDR_NONE: (libc)Host Address Data Type.
+* INFINITY: (libc)Infinity and NaN.
+* INLCR: (libc)Input Modes.
+* INPCK: (libc)Input Modes.
+* IPPORT_RESERVED: (libc)Ports.
+* IPPORT_USERRESERVED: (libc)Ports.
+* ISIG: (libc)Local Modes.
+* ISTRIP: (libc)Input Modes.
+* IXANY: (libc)Input Modes.
+* IXOFF: (libc)Input Modes.
+* IXON: (libc)Input Modes.
+* LINE_MAX: (libc)Utility Limits.
+* LINK_MAX: (libc)Limits for Files.
+* L_ctermid: (libc)Identifying the Terminal.
+* L_cuserid: (libc)Who Logged In.
+* L_tmpnam: (libc)Temporary Files.
+* MAXNAMLEN: (libc)Limits for Files.
+* MAXSYMLINKS: (libc)Symbolic Links.
+* MAX_CANON: (libc)Limits for Files.
+* MAX_INPUT: (libc)Limits for Files.
+* MB_CUR_MAX: (libc)Selecting the Conversion.
+* MB_LEN_MAX: (libc)Selecting the Conversion.
+* MDMBUF: (libc)Control Modes.
+* MSG_DONTROUTE: (libc)Socket Data Options.
+* MSG_OOB: (libc)Socket Data Options.
+* MSG_PEEK: (libc)Socket Data Options.
+* NAME_MAX: (libc)Limits for Files.
+* NAN: (libc)Infinity and NaN.
+* NCCS: (libc)Mode Data Types.
+* NGROUPS_MAX: (libc)General Limits.
+* NOFLSH: (libc)Local Modes.
+* NOKERNINFO: (libc)Local Modes.
+* NSIG: (libc)Standard Signals.
+* NULL: (libc)Null Pointer Constant.
+* ONLCR: (libc)Output Modes.
+* ONOEOT: (libc)Output Modes.
+* OPEN_MAX: (libc)General Limits.
+* OPOST: (libc)Output Modes.
+* OXTABS: (libc)Output Modes.
+* O_ACCMODE: (libc)Access Modes.
+* O_APPEND: (libc)Operating Modes.
+* O_ASYNC: (libc)Operating Modes.
+* O_CREAT: (libc)Open-time Flags.
+* O_EXCL: (libc)Open-time Flags.
+* O_EXEC: (libc)Access Modes.
+* O_EXLOCK: (libc)Open-time Flags.
+* O_FSYNC: (libc)Operating Modes.
+* O_IGNORE_CTTY: (libc)Open-time Flags.
+* O_NDELAY: (libc)Operating Modes.
+* O_NOATIME: (libc)Operating Modes.
+* O_NOCTTY: (libc)Open-time Flags.
+* O_NOLINK: (libc)Open-time Flags.
+* O_NONBLOCK: (libc)Open-time Flags.
+* O_NONBLOCK: (libc)Operating Modes.
+* O_NOTRANS: (libc)Open-time Flags.
+* O_RDONLY: (libc)Access Modes.
+* O_RDWR: (libc)Access Modes.
+* O_READ: (libc)Access Modes.
+* O_SHLOCK: (libc)Open-time Flags.
+* O_SYNC: (libc)Operating Modes.
+* O_TRUNC: (libc)Open-time Flags.
+* O_WRITE: (libc)Access Modes.
+* O_WRONLY: (libc)Access Modes.
+* PARENB: (libc)Control Modes.
+* PARMRK: (libc)Input Modes.
+* PARODD: (libc)Control Modes.
+* PATH_MAX: (libc)Limits for Files.
+* PA_FLAG_MASK: (libc)Parsing a Template String.
+* PENDIN: (libc)Local Modes.
+* PF_FILE: (libc)Local Namespace Details.
+* PF_INET6: (libc)Internet Namespace.
+* PF_INET: (libc)Internet Namespace.
+* PF_LOCAL: (libc)Local Namespace Details.
+* PF_UNIX: (libc)Local Namespace Details.
+* PIPE_BUF: (libc)Limits for Files.
+* P_tmpdir: (libc)Temporary Files.
+* RAND_MAX: (libc)ISO Random.
+* RE_DUP_MAX: (libc)General Limits.
+* RLIM_INFINITY: (libc)Limits on Resources.
+* R_OK: (libc)Testing File Access.
+* SA_NOCLDSTOP: (libc)Flags for Sigaction.
+* SA_ONSTACK: (libc)Flags for Sigaction.
+* SA_RESTART: (libc)Flags for Sigaction.
+* SEEK_CUR: (libc)File Positioning.
+* SEEK_END: (libc)File Positioning.
+* SEEK_SET: (libc)File Positioning.
+* SIGABRT: (libc)Program Error Signals.
+* SIGALRM: (libc)Alarm Signals.
+* SIGBUS: (libc)Program Error Signals.
+* SIGCHLD: (libc)Job Control Signals.
+* SIGCLD: (libc)Job Control Signals.
+* SIGCONT: (libc)Job Control Signals.
+* SIGEMT: (libc)Program Error Signals.
+* SIGFPE: (libc)Program Error Signals.
+* SIGHUP: (libc)Termination Signals.
+* SIGILL: (libc)Program Error Signals.
+* SIGINFO: (libc)Miscellaneous Signals.
+* SIGINT: (libc)Termination Signals.
+* SIGIO: (libc)Asynchronous I/O Signals.
+* SIGIOT: (libc)Program Error Signals.
+* SIGKILL: (libc)Termination Signals.
+* SIGLOST: (libc)Operation Error Signals.
+* SIGPIPE: (libc)Operation Error Signals.
+* SIGPOLL: (libc)Asynchronous I/O Signals.
+* SIGPROF: (libc)Alarm Signals.
+* SIGQUIT: (libc)Termination Signals.
+* SIGSEGV: (libc)Program Error Signals.
+* SIGSTOP: (libc)Job Control Signals.
+* SIGSYS: (libc)Program Error Signals.
+* SIGTERM: (libc)Termination Signals.
+* SIGTRAP: (libc)Program Error Signals.
+* SIGTSTP: (libc)Job Control Signals.
+* SIGTTIN: (libc)Job Control Signals.
+* SIGTTOU: (libc)Job Control Signals.
+* SIGURG: (libc)Asynchronous I/O Signals.
+* SIGUSR1: (libc)Miscellaneous Signals.
+* SIGUSR2: (libc)Miscellaneous Signals.
+* SIGVTALRM: (libc)Alarm Signals.
+* SIGWINCH: (libc)Miscellaneous Signals.
+* SIGXCPU: (libc)Operation Error Signals.
+* SIGXFSZ: (libc)Operation Error Signals.
+* SIG_ERR: (libc)Basic Signal Handling.
+* SOCK_DGRAM: (libc)Communication Styles.
+* SOCK_RAW: (libc)Communication Styles.
+* SOCK_RDM: (libc)Communication Styles.
+* SOCK_SEQPACKET: (libc)Communication Styles.
+* SOCK_STREAM: (libc)Communication Styles.
+* SOL_SOCKET: (libc)Socket-Level Options.
+* SSIZE_MAX: (libc)General Limits.
+* STREAM_MAX: (libc)General Limits.
+* SUN_LEN: (libc)Local Namespace Details.
+* SV_INTERRUPT: (libc)BSD Handler.
+* SV_ONSTACK: (libc)BSD Handler.
+* SV_RESETHAND: (libc)BSD Handler.
+* S_IFMT: (libc)Testing File Type.
+* S_ISBLK: (libc)Testing File Type.
+* S_ISCHR: (libc)Testing File Type.
+* S_ISDIR: (libc)Testing File Type.
+* S_ISFIFO: (libc)Testing File Type.
+* S_ISLNK: (libc)Testing File Type.
+* S_ISREG: (libc)Testing File Type.
+* S_ISSOCK: (libc)Testing File Type.
+* S_TYPEISMQ: (libc)Testing File Type.
+* S_TYPEISSEM: (libc)Testing File Type.
+* S_TYPEISSHM: (libc)Testing File Type.
+* TMP_MAX: (libc)Temporary Files.
+* TOSTOP: (libc)Local Modes.
+* TZNAME_MAX: (libc)General Limits.
+* VDISCARD: (libc)Other Special.
+* VDSUSP: (libc)Signal Characters.
+* VEOF: (libc)Editing Characters.
+* VEOL2: (libc)Editing Characters.
+* VEOL: (libc)Editing Characters.
+* VERASE: (libc)Editing Characters.
+* VINTR: (libc)Signal Characters.
+* VKILL: (libc)Editing Characters.
+* VLNEXT: (libc)Other Special.
+* VMIN: (libc)Noncanonical Input.
+* VQUIT: (libc)Signal Characters.
+* VREPRINT: (libc)Editing Characters.
+* VSTART: (libc)Start/Stop Characters.
+* VSTATUS: (libc)Other Special.
+* VSTOP: (libc)Start/Stop Characters.
+* VSUSP: (libc)Signal Characters.
+* VTIME: (libc)Noncanonical Input.
+* VWERASE: (libc)Editing Characters.
+* WCHAR_MAX: (libc)Extended Char Intro.
+* WCHAR_MIN: (libc)Extended Char Intro.
+* WCOREDUMP: (libc)Process Completion Status.
+* WEOF: (libc)EOF and Errors.
+* WEOF: (libc)Extended Char Intro.
+* WEXITSTATUS: (libc)Process Completion Status.
+* WIFEXITED: (libc)Process Completion Status.
+* WIFSIGNALED: (libc)Process Completion Status.
+* WIFSTOPPED: (libc)Process Completion Status.
+* WSTOPSIG: (libc)Process Completion Status.
+* WTERMSIG: (libc)Process Completion Status.
+* W_OK: (libc)Testing File Access.
+* X_OK: (libc)Testing File Access.
+* _Complex_I: (libc)Complex Numbers.
+* _Exit: (libc)Termination Internals.
+* _IOFBF: (libc)Controlling Buffering.
+* _IOLBF: (libc)Controlling Buffering.
+* _IONBF: (libc)Controlling Buffering.
+* _Imaginary_I: (libc)Complex Numbers.
+* _PATH_UTMP: (libc)Manipulating the Database.
+* _PATH_WTMP: (libc)Manipulating the Database.
+* _POSIX2_C_DEV: (libc)System Options.
+* _POSIX2_C_VERSION: (libc)Version Supported.
+* _POSIX2_FORT_DEV: (libc)System Options.
+* _POSIX2_FORT_RUN: (libc)System Options.
+* _POSIX2_LOCALEDEF: (libc)System Options.
+* _POSIX2_SW_DEV: (libc)System Options.
+* _POSIX_CHOWN_RESTRICTED: (libc)Options for Files.
+* _POSIX_JOB_CONTROL: (libc)System Options.
+* _POSIX_NO_TRUNC: (libc)Options for Files.
+* _POSIX_SAVED_IDS: (libc)System Options.
+* _POSIX_VDISABLE: (libc)Options for Files.
+* _POSIX_VERSION: (libc)Version Supported.
+* __fbufsize: (libc)Controlling Buffering.
+* __flbf: (libc)Controlling Buffering.
+* __fpending: (libc)Controlling Buffering.
+* __fpurge: (libc)Flushing Buffers.
+* __freadable: (libc)Opening Streams.
+* __freading: (libc)Opening Streams.
+* __fsetlocking: (libc)Streams and Threads.
+* __fwritable: (libc)Opening Streams.
+* __fwriting: (libc)Opening Streams.
+* __gconv_end_fct: (libc)glibc iconv Implementation.
+* __gconv_fct: (libc)glibc iconv Implementation.
+* __gconv_init_fct: (libc)glibc iconv Implementation.
+* __va_copy: (libc)Argument Macros.
+* _exit: (libc)Termination Internals.
+* _flushlbf: (libc)Flushing Buffers.
+* _tolower: (libc)Case Conversion.
+* _toupper: (libc)Case Conversion.
+* a64l: (libc)Encode Binary Data.
+* abort: (libc)Aborting a Program.
+* abs: (libc)Absolute Value.
+* accept: (libc)Accepting Connections.
+* access: (libc)Testing File Access.
+* acos: (libc)Inverse Trig Functions.
+* acosf: (libc)Inverse Trig Functions.
+* acosh: (libc)Hyperbolic Functions.
+* acoshf: (libc)Hyperbolic Functions.
+* acoshl: (libc)Hyperbolic Functions.
+* acosl: (libc)Inverse Trig Functions.
+* addmntent: (libc)mtab.
+* addseverity: (libc)Adding Severity Classes.
+* adjtime: (libc)High-Resolution Calendar.
+* adjtimex: (libc)High-Resolution Calendar.
+* aio_cancel64: (libc)Cancel AIO Operations.
+* aio_cancel: (libc)Cancel AIO Operations.
+* aio_error64: (libc)Status of AIO Operations.
+* aio_error: (libc)Status of AIO Operations.
+* aio_fsync64: (libc)Synchronizing AIO Operations.
+* aio_fsync: (libc)Synchronizing AIO Operations.
+* aio_init: (libc)Configuration of AIO.
+* aio_read64: (libc)Asynchronous Reads/Writes.
+* aio_read: (libc)Asynchronous Reads/Writes.
+* aio_return64: (libc)Status of AIO Operations.
+* aio_return: (libc)Status of AIO Operations.
+* aio_suspend64: (libc)Synchronizing AIO Operations.
+* aio_suspend: (libc)Synchronizing AIO Operations.
+* aio_write64: (libc)Asynchronous Reads/Writes.
+* aio_write: (libc)Asynchronous Reads/Writes.
+* alarm: (libc)Setting an Alarm.
+* alloca: (libc)Variable Size Automatic.
+* alphasort64: (libc)Scanning Directory Content.
+* alphasort: (libc)Scanning Directory Content.
+* argp_error: (libc)Argp Helper Functions.
+* argp_failure: (libc)Argp Helper Functions.
+* argp_help: (libc)Argp Help.
+* argp_parse: (libc)Argp.
+* argp_state_help: (libc)Argp Helper Functions.
+* argp_usage: (libc)Argp Helper Functions.
+* argz_add: (libc)Argz Functions.
+* argz_add_sep: (libc)Argz Functions.
+* argz_append: (libc)Argz Functions.
+* argz_count: (libc)Argz Functions.
+* argz_create: (libc)Argz Functions.
+* argz_create_sep: (libc)Argz Functions.
+* argz_delete: (libc)Argz Functions.
+* argz_extract: (libc)Argz Functions.
+* argz_insert: (libc)Argz Functions.
+* argz_next: (libc)Argz Functions.
+* argz_replace: (libc)Argz Functions.
+* argz_stringify: (libc)Argz Functions.
+* asctime: (libc)Formatting Calendar Time.
+* asctime_r: (libc)Formatting Calendar Time.
+* asin: (libc)Inverse Trig Functions.
+* asinf: (libc)Inverse Trig Functions.
+* asinh: (libc)Hyperbolic Functions.
+* asinhf: (libc)Hyperbolic Functions.
+* asinhl: (libc)Hyperbolic Functions.
+* asinl: (libc)Inverse Trig Functions.
+* asprintf: (libc)Dynamic Output.
+* assert: (libc)Consistency Checking.
+* assert_perror: (libc)Consistency Checking.
+* atan2: (libc)Inverse Trig Functions.
+* atan2f: (libc)Inverse Trig Functions.
+* atan2l: (libc)Inverse Trig Functions.
+* atan: (libc)Inverse Trig Functions.
+* atanf: (libc)Inverse Trig Functions.
+* atanh: (libc)Hyperbolic Functions.
+* atanhf: (libc)Hyperbolic Functions.
+* atanhl: (libc)Hyperbolic Functions.
+* atanl: (libc)Inverse Trig Functions.
+* atexit: (libc)Cleanups on Exit.
+* atof: (libc)Parsing of Floats.
+* atoi: (libc)Parsing of Integers.
+* atol: (libc)Parsing of Integers.
+* atoll: (libc)Parsing of Integers.
+* backtrace: (libc)Backtraces.
+* backtrace_symbols: (libc)Backtraces.
+* backtrace_symbols_fd: (libc)Backtraces.
+* basename: (libc)Finding Tokens in a String.
+* basename: (libc)Finding Tokens in a String.
+* bcmp: (libc)String/Array Comparison.
+* bcopy: (libc)Copying and Concatenation.
+* bind: (libc)Setting Address.
+* bind_textdomain_codeset: (libc)Charset conversion in gettext.
+* bindtextdomain: (libc)Locating gettext catalog.
+* brk: (libc)Resizing the Data Segment.
+* bsearch: (libc)Array Search Function.
+* btowc: (libc)Converting a Character.
+* bzero: (libc)Copying and Concatenation.
+* cabs: (libc)Absolute Value.
+* cabsf: (libc)Absolute Value.
+* cabsl: (libc)Absolute Value.
+* cacos: (libc)Inverse Trig Functions.
+* cacosf: (libc)Inverse Trig Functions.
+* cacosh: (libc)Hyperbolic Functions.
+* cacoshf: (libc)Hyperbolic Functions.
+* cacoshl: (libc)Hyperbolic Functions.
+* cacosl: (libc)Inverse Trig Functions.
+* calloc: (libc)Allocating Cleared Space.
+* canonicalize_file_name: (libc)Symbolic Links.
+* carg: (libc)Operations on Complex.
+* cargf: (libc)Operations on Complex.
+* cargl: (libc)Operations on Complex.
+* casin: (libc)Inverse Trig Functions.
+* casinf: (libc)Inverse Trig Functions.
+* casinh: (libc)Hyperbolic Functions.
+* casinhf: (libc)Hyperbolic Functions.
+* casinhl: (libc)Hyperbolic Functions.
+* casinl: (libc)Inverse Trig Functions.
+* catan: (libc)Inverse Trig Functions.
+* catanf: (libc)Inverse Trig Functions.
+* catanh: (libc)Hyperbolic Functions.
+* catanhf: (libc)Hyperbolic Functions.
+* catanhl: (libc)Hyperbolic Functions.
+* catanl: (libc)Inverse Trig Functions.
+* catclose: (libc)The catgets Functions.
+* catgets: (libc)The catgets Functions.
+* catopen: (libc)The catgets Functions.
+* cbc_crypt: (libc)DES Encryption.
+* cbrt: (libc)Exponents and Logarithms.
+* cbrtf: (libc)Exponents and Logarithms.
+* cbrtl: (libc)Exponents and Logarithms.
+* ccos: (libc)Trig Functions.
+* ccosf: (libc)Trig Functions.
+* ccosh: (libc)Hyperbolic Functions.
+* ccoshf: (libc)Hyperbolic Functions.
+* ccoshl: (libc)Hyperbolic Functions.
+* ccosl: (libc)Trig Functions.
+* ceil: (libc)Rounding Functions.
+* ceilf: (libc)Rounding Functions.
+* ceill: (libc)Rounding Functions.
+* cexp: (libc)Exponents and Logarithms.
+* cexpf: (libc)Exponents and Logarithms.
+* cexpl: (libc)Exponents and Logarithms.
+* cfgetispeed: (libc)Line Speed.
+* cfgetospeed: (libc)Line Speed.
+* cfmakeraw: (libc)Noncanonical Input.
+* cfree: (libc)Freeing after Malloc.
+* cfsetispeed: (libc)Line Speed.
+* cfsetospeed: (libc)Line Speed.
+* cfsetspeed: (libc)Line Speed.
+* chdir: (libc)Working Directory.
+* chmod: (libc)Setting Permissions.
+* chown: (libc)File Owner.
+* cimag: (libc)Operations on Complex.
+* cimagf: (libc)Operations on Complex.
+* cimagl: (libc)Operations on Complex.
+* clearenv: (libc)Environment Access.
+* clearerr: (libc)Error Recovery.
+* clearerr_unlocked: (libc)Error Recovery.
+* clock: (libc)CPU Time.
+* clog10: (libc)Exponents and Logarithms.
+* clog10f: (libc)Exponents and Logarithms.
+* clog10l: (libc)Exponents and Logarithms.
+* clog: (libc)Exponents and Logarithms.
+* clogf: (libc)Exponents and Logarithms.
+* clogl: (libc)Exponents and Logarithms.
+* close: (libc)Opening and Closing Files.
+* closedir: (libc)Reading/Closing Directory.
+* closelog: (libc)closelog.
+* confstr: (libc)String Parameters.
+* conj: (libc)Operations on Complex.
+* conjf: (libc)Operations on Complex.
+* conjl: (libc)Operations on Complex.
+* connect: (libc)Connecting.
+* copysign: (libc)FP Bit Twiddling.
+* copysignf: (libc)FP Bit Twiddling.
+* copysignl: (libc)FP Bit Twiddling.
+* cos: (libc)Trig Functions.
+* cosf: (libc)Trig Functions.
+* cosh: (libc)Hyperbolic Functions.
+* coshf: (libc)Hyperbolic Functions.
+* coshl: (libc)Hyperbolic Functions.
+* cosl: (libc)Trig Functions.
+* cpow: (libc)Exponents and Logarithms.
+* cpowf: (libc)Exponents and Logarithms.
+* cpowl: (libc)Exponents and Logarithms.
+* cproj: (libc)Operations on Complex.
+* cprojf: (libc)Operations on Complex.
+* cprojl: (libc)Operations on Complex.
+* creal: (libc)Operations on Complex.
+* crealf: (libc)Operations on Complex.
+* creall: (libc)Operations on Complex.
+* creat64: (libc)Opening and Closing Files.
+* creat: (libc)Opening and Closing Files.
+* crypt: (libc)crypt.
+* crypt_r: (libc)crypt.
+* csin: (libc)Trig Functions.
+* csinf: (libc)Trig Functions.
+* csinh: (libc)Hyperbolic Functions.
+* csinhf: (libc)Hyperbolic Functions.
+* csinhl: (libc)Hyperbolic Functions.
+* csinl: (libc)Trig Functions.
+* csqrt: (libc)Exponents and Logarithms.
+* csqrtf: (libc)Exponents and Logarithms.
+* csqrtl: (libc)Exponents and Logarithms.
+* ctan: (libc)Trig Functions.
+* ctanf: (libc)Trig Functions.
+* ctanh: (libc)Hyperbolic Functions.
+* ctanhf: (libc)Hyperbolic Functions.
+* ctanhl: (libc)Hyperbolic Functions.
+* ctanl: (libc)Trig Functions.
+* ctermid: (libc)Identifying the Terminal.
+* ctime: (libc)Formatting Calendar Time.
+* ctime_r: (libc)Formatting Calendar Time.
+* cuserid: (libc)Who Logged In.
+* dcgettext: (libc)Translation with gettext.
+* dcngettext: (libc)Advanced gettext functions.
+* des_setparity: (libc)DES Encryption.
+* dgettext: (libc)Translation with gettext.
+* difftime: (libc)Elapsed Time.
+* dirfd: (libc)Opening a Directory.
+* dirname: (libc)Finding Tokens in a String.
+* div: (libc)Integer Division.
+* dngettext: (libc)Advanced gettext functions.
+* drand48: (libc)SVID Random.
+* drand48_r: (libc)SVID Random.
+* drem: (libc)Remainder Functions.
+* dremf: (libc)Remainder Functions.
+* dreml: (libc)Remainder Functions.
+* dup2: (libc)Duplicating Descriptors.
+* dup: (libc)Duplicating Descriptors.
+* ecb_crypt: (libc)DES Encryption.
+* ecvt: (libc)System V Number Conversion.
+* ecvt_r: (libc)System V Number Conversion.
+* encrypt: (libc)DES Encryption.
+* encrypt_r: (libc)DES Encryption.
+* endfsent: (libc)fstab.
+* endgrent: (libc)Scanning All Groups.
+* endhostent: (libc)Host Names.
+* endmntent: (libc)mtab.
+* endnetent: (libc)Networks Database.
+* endnetgrent: (libc)Lookup Netgroup.
+* endprotoent: (libc)Protocols Database.
+* endpwent: (libc)Scanning All Users.
+* endservent: (libc)Services Database.
+* endutent: (libc)Manipulating the Database.
+* endutxent: (libc)XPG Functions.
+* envz_add: (libc)Envz Functions.
+* envz_entry: (libc)Envz Functions.
+* envz_get: (libc)Envz Functions.
+* envz_merge: (libc)Envz Functions.
+* envz_strip: (libc)Envz Functions.
+* erand48: (libc)SVID Random.
+* erand48_r: (libc)SVID Random.
+* erf: (libc)Special Functions.
+* erfc: (libc)Special Functions.
+* erfcf: (libc)Special Functions.
+* erfcl: (libc)Special Functions.
+* erff: (libc)Special Functions.
+* erfl: (libc)Special Functions.
+* err: (libc)Error Messages.
+* errno: (libc)Checking for Errors.
+* error: (libc)Error Messages.
+* error_at_line: (libc)Error Messages.
+* errx: (libc)Error Messages.
+* execl: (libc)Executing a File.
+* execle: (libc)Executing a File.
+* execlp: (libc)Executing a File.
+* execv: (libc)Executing a File.
+* execve: (libc)Executing a File.
+* execvp: (libc)Executing a File.
+* exit: (libc)Normal Termination.
+* exp10: (libc)Exponents and Logarithms.
+* exp10f: (libc)Exponents and Logarithms.
+* exp10l: (libc)Exponents and Logarithms.
+* exp2: (libc)Exponents and Logarithms.
+* exp2f: (libc)Exponents and Logarithms.
+* exp2l: (libc)Exponents and Logarithms.
+* exp: (libc)Exponents and Logarithms.
+* expf: (libc)Exponents and Logarithms.
+* expl: (libc)Exponents and Logarithms.
+* expm1: (libc)Exponents and Logarithms.
+* expm1f: (libc)Exponents and Logarithms.
+* expm1l: (libc)Exponents and Logarithms.
+* fabs: (libc)Absolute Value.
+* fabsf: (libc)Absolute Value.
+* fabsl: (libc)Absolute Value.
+* fchdir: (libc)Working Directory.
+* fchmod: (libc)Setting Permissions.
+* fchown: (libc)File Owner.
+* fclean: (libc)Cleaning Streams.
+* fclose: (libc)Closing Streams.
+* fcloseall: (libc)Closing Streams.
+* fcntl: (libc)Control Operations.
+* fcvt: (libc)System V Number Conversion.
+* fcvt_r: (libc)System V Number Conversion.
+* fdatasync: (libc)Synchronizing I/O.
+* fdim: (libc)Misc FP Arithmetic.
+* fdimf: (libc)Misc FP Arithmetic.
+* fdiml: (libc)Misc FP Arithmetic.
+* fdopen: (libc)Descriptors and Streams.
+* fdopendir: (libc)Opening a Directory.
+* feclearexcept: (libc)Status bit operations.
+* fedisableexcept: (libc)Control Functions.
+* feenableexcept: (libc)Control Functions.
+* fegetenv: (libc)Control Functions.
+* fegetexcept: (libc)Control Functions.
+* fegetexceptflag: (libc)Status bit operations.
+* fegetround: (libc)Rounding.
+* feholdexcept: (libc)Control Functions.
+* feof: (libc)EOF and Errors.
+* feof_unlocked: (libc)EOF and Errors.
+* feraiseexcept: (libc)Status bit operations.
+* ferror: (libc)EOF and Errors.
+* ferror_unlocked: (libc)EOF and Errors.
+* fesetenv: (libc)Control Functions.
+* fesetexceptflag: (libc)Status bit operations.
+* fesetround: (libc)Rounding.
+* fetestexcept: (libc)Status bit operations.
+* feupdateenv: (libc)Control Functions.
+* fflush: (libc)Flushing Buffers.
+* fflush_unlocked: (libc)Flushing Buffers.
+* fgetc: (libc)Character Input.
+* fgetc_unlocked: (libc)Character Input.
+* fgetgrent: (libc)Scanning All Groups.
+* fgetgrent_r: (libc)Scanning All Groups.
+* fgetpos64: (libc)Portable Positioning.
+* fgetpos: (libc)Portable Positioning.
+* fgetpwent: (libc)Scanning All Users.
+* fgetpwent_r: (libc)Scanning All Users.
+* fgets: (libc)Line Input.
+* fgets_unlocked: (libc)Line Input.
+* fgetwc: (libc)Character Input.
+* fgetwc_unlocked: (libc)Character Input.
+* fgetws: (libc)Line Input.
+* fgetws_unlocked: (libc)Line Input.
+* fileno: (libc)Descriptors and Streams.
+* fileno_unlocked: (libc)Descriptors and Streams.
+* finite: (libc)Floating Point Classes.
+* finitef: (libc)Floating Point Classes.
+* finitel: (libc)Floating Point Classes.
+* flockfile: (libc)Streams and Threads.
+* floor: (libc)Rounding Functions.
+* floorf: (libc)Rounding Functions.
+* floorl: (libc)Rounding Functions.
+* fma: (libc)Misc FP Arithmetic.
+* fmaf: (libc)Misc FP Arithmetic.
+* fmal: (libc)Misc FP Arithmetic.
+* fmax: (libc)Misc FP Arithmetic.
+* fmaxf: (libc)Misc FP Arithmetic.
+* fmaxl: (libc)Misc FP Arithmetic.
+* fmemopen: (libc)String Streams.
+* fmin: (libc)Misc FP Arithmetic.
+* fminf: (libc)Misc FP Arithmetic.
+* fminl: (libc)Misc FP Arithmetic.
+* fmod: (libc)Remainder Functions.
+* fmodf: (libc)Remainder Functions.
+* fmodl: (libc)Remainder Functions.
+* fmtmsg: (libc)Printing Formatted Messages.
+* fnmatch: (libc)Wildcard Matching.
+* fopen64: (libc)Opening Streams.
+* fopen: (libc)Opening Streams.
+* fopencookie: (libc)Streams and Cookies.
+* fork: (libc)Creating a Process.
+* forkpty: (libc)Pseudo-Terminal Pairs.
+* fpathconf: (libc)Pathconf.
+* fpclassify: (libc)Floating Point Classes.
+* fprintf: (libc)Formatted Output Functions.
+* fputc: (libc)Simple Output.
+* fputc_unlocked: (libc)Simple Output.
+* fputs: (libc)Simple Output.
+* fputs_unlocked: (libc)Simple Output.
+* fputwc: (libc)Simple Output.
+* fputwc_unlocked: (libc)Simple Output.
+* fputws: (libc)Simple Output.
+* fputws_unlocked: (libc)Simple Output.
+* fread: (libc)Block Input/Output.
+* fread_unlocked: (libc)Block Input/Output.
+* free: (libc)Freeing after Malloc.
+* freopen64: (libc)Opening Streams.
+* freopen: (libc)Opening Streams.
+* frexp: (libc)Normalization Functions.
+* frexpf: (libc)Normalization Functions.
+* frexpl: (libc)Normalization Functions.
+* fscanf: (libc)Formatted Input Functions.
+* fseek: (libc)File Positioning.
+* fseeko64: (libc)File Positioning.
+* fseeko: (libc)File Positioning.
+* fsetpos64: (libc)Portable Positioning.
+* fsetpos: (libc)Portable Positioning.
+* fstat64: (libc)Reading Attributes.
+* fstat: (libc)Reading Attributes.
+* fsync: (libc)Synchronizing I/O.
+* ftell: (libc)File Positioning.
+* ftello64: (libc)File Positioning.
+* ftello: (libc)File Positioning.
+* ftruncate64: (libc)File Size.
+* ftruncate: (libc)File Size.
+* ftrylockfile: (libc)Streams and Threads.
+* ftw64: (libc)Working with Directory Trees.
+* ftw: (libc)Working with Directory Trees.
+* funlockfile: (libc)Streams and Threads.
+* futimes: (libc)File Times.
+* fwide: (libc)Streams and I18N.
+* fwprintf: (libc)Formatted Output Functions.
+* fwrite: (libc)Block Input/Output.
+* fwrite_unlocked: (libc)Block Input/Output.
+* fwscanf: (libc)Formatted Input Functions.
+* gamma: (libc)Special Functions.
+* gammaf: (libc)Special Functions.
+* gammal: (libc)Special Functions.
+* gcvt: (libc)System V Number Conversion.
+* get_avphys_pages: (libc)Query Memory Parameters.
+* get_current_dir_name: (libc)Working Directory.
+* get_nprocs: (libc)Processor Resources.
+* get_nprocs_conf: (libc)Processor Resources.
+* get_phys_pages: (libc)Query Memory Parameters.
+* getc: (libc)Character Input.
+* getc_unlocked: (libc)Character Input.
+* getchar: (libc)Character Input.
+* getchar_unlocked: (libc)Character Input.
+* getcontext: (libc)System V contexts.
+* getcwd: (libc)Working Directory.
+* getdate: (libc)General Time String Parsing.
+* getdate_r: (libc)General Time String Parsing.
+* getdelim: (libc)Line Input.
+* getdomainnname: (libc)Host Identification.
+* getegid: (libc)Reading Persona.
+* getenv: (libc)Environment Access.
+* geteuid: (libc)Reading Persona.
+* getfsent: (libc)fstab.
+* getfsfile: (libc)fstab.
+* getfsspec: (libc)fstab.
+* getgid: (libc)Reading Persona.
+* getgrent: (libc)Scanning All Groups.
+* getgrent_r: (libc)Scanning All Groups.
+* getgrgid: (libc)Lookup Group.
+* getgrgid_r: (libc)Lookup Group.
+* getgrnam: (libc)Lookup Group.
+* getgrnam_r: (libc)Lookup Group.
+* getgrouplist: (libc)Setting Groups.
+* getgroups: (libc)Reading Persona.
+* gethostbyaddr: (libc)Host Names.
+* gethostbyaddr_r: (libc)Host Names.
+* gethostbyname2: (libc)Host Names.
+* gethostbyname2_r: (libc)Host Names.
+* gethostbyname: (libc)Host Names.
+* gethostbyname_r: (libc)Host Names.
+* gethostent: (libc)Host Names.
+* gethostid: (libc)Host Identification.
+* gethostname: (libc)Host Identification.
+* getitimer: (libc)Setting an Alarm.
+* getline: (libc)Line Input.
+* getloadavg: (libc)Processor Resources.
+* getlogin: (libc)Who Logged In.
+* getmntent: (libc)mtab.
+* getmntent_r: (libc)mtab.
+* getnetbyaddr: (libc)Networks Database.
+* getnetbyname: (libc)Networks Database.
+* getnetent: (libc)Networks Database.
+* getnetgrent: (libc)Lookup Netgroup.
+* getnetgrent_r: (libc)Lookup Netgroup.
+* getopt: (libc)Using Getopt.
+* getopt_long: (libc)Getopt Long Options.
+* getopt_long_only: (libc)Getopt Long Options.
+* getpagesize: (libc)Query Memory Parameters.
+* getpass: (libc)getpass.
+* getpeername: (libc)Who is Connected.
+* getpgid: (libc)Process Group Functions.
+* getpgrp: (libc)Process Group Functions.
+* getpgrp: (libc)Process Group Functions.
+* getpid: (libc)Process Identification.
+* getppid: (libc)Process Identification.
+* getpriority: (libc)Traditional Scheduling Functions.
+* getprotobyname: (libc)Protocols Database.
+* getprotobynumber: (libc)Protocols Database.
+* getprotoent: (libc)Protocols Database.
+* getpt: (libc)Allocation.
+* getpwent: (libc)Scanning All Users.
+* getpwent_r: (libc)Scanning All Users.
+* getpwnam: (libc)Lookup User.
+* getpwnam_r: (libc)Lookup User.
+* getpwuid: (libc)Lookup User.
+* getpwuid_r: (libc)Lookup User.
+* getrlimit64: (libc)Limits on Resources.
+* getrlimit: (libc)Limits on Resources.
+* getrusage: (libc)Resource Usage.
+* gets: (libc)Line Input.
+* getservbyname: (libc)Services Database.
+* getservbyport: (libc)Services Database.
+* getservent: (libc)Services Database.
+* getsid: (libc)Process Group Functions.
+* getsockname: (libc)Reading Address.
+* getsockopt: (libc)Socket Option Functions.
+* getsubopt: (libc)Suboptions.
+* gettext: (libc)Translation with gettext.
+* gettimeofday: (libc)High-Resolution Calendar.
+* getuid: (libc)Reading Persona.
+* getumask: (libc)Setting Permissions.
+* getutent: (libc)Manipulating the Database.
+* getutent_r: (libc)Manipulating the Database.
+* getutid: (libc)Manipulating the Database.
+* getutid_r: (libc)Manipulating the Database.
+* getutline: (libc)Manipulating the Database.
+* getutline_r: (libc)Manipulating the Database.
+* getutmp: (libc)XPG Functions.
+* getutmpx: (libc)XPG Functions.
+* getutxent: (libc)XPG Functions.
+* getutxid: (libc)XPG Functions.
+* getutxline: (libc)XPG Functions.
+* getw: (libc)Character Input.
+* getwc: (libc)Character Input.
+* getwc_unlocked: (libc)Character Input.
+* getwchar: (libc)Character Input.
+* getwchar_unlocked: (libc)Character Input.
+* getwd: (libc)Working Directory.
+* glob64: (libc)Calling Glob.
+* glob: (libc)Calling Glob.
+* globfree64: (libc)More Flags for Globbing.
+* globfree: (libc)More Flags for Globbing.
+* gmtime: (libc)Broken-down Time.
+* gmtime_r: (libc)Broken-down Time.
+* grantpt: (libc)Allocation.
+* gsignal: (libc)Signaling Yourself.
+* gtty: (libc)BSD Terminal Modes.
+* hasmntopt: (libc)mtab.
+* hcreate: (libc)Hash Search Function.
+* hcreate_r: (libc)Hash Search Function.
+* hdestroy: (libc)Hash Search Function.
+* hdestroy_r: (libc)Hash Search Function.
+* hsearch: (libc)Hash Search Function.
+* hsearch_r: (libc)Hash Search Function.
+* htonl: (libc)Byte Order.
+* htons: (libc)Byte Order.
+* hypot: (libc)Exponents and Logarithms.
+* hypotf: (libc)Exponents and Logarithms.
+* hypotl: (libc)Exponents and Logarithms.
+* iconv: (libc)Generic Conversion Interface.
+* iconv_close: (libc)Generic Conversion Interface.
+* iconv_open: (libc)Generic Conversion Interface.
+* if_freenameindex: (libc)Interface Naming.
+* if_indextoname: (libc)Interface Naming.
+* if_nameindex: (libc)Interface Naming.
+* if_nametoindex: (libc)Interface Naming.
+* ilogb: (libc)Exponents and Logarithms.
+* ilogbf: (libc)Exponents and Logarithms.
+* ilogbl: (libc)Exponents and Logarithms.
+* imaxabs: (libc)Absolute Value.
+* imaxdiv: (libc)Integer Division.
+* in6addr_any: (libc)Host Address Data Type.
+* in6addr_loopback: (libc)Host Address Data Type.
+* index: (libc)Search Functions.
+* inet_addr: (libc)Host Address Functions.
+* inet_aton: (libc)Host Address Functions.
+* inet_lnaof: (libc)Host Address Functions.
+* inet_makeaddr: (libc)Host Address Functions.
+* inet_netof: (libc)Host Address Functions.
+* inet_network: (libc)Host Address Functions.
+* inet_ntoa: (libc)Host Address Functions.
+* inet_ntop: (libc)Host Address Functions.
+* inet_pton: (libc)Host Address Functions.
+* initgroups: (libc)Setting Groups.
+* initstate: (libc)BSD Random.
+* initstate_r: (libc)BSD Random.
+* innetgr: (libc)Netgroup Membership.
+* int: (libc)Random Access Directory.
+* ioctl: (libc)IOCTLs.
+* isalnum: (libc)Classification of Characters.
+* isalpha: (libc)Classification of Characters.
+* isascii: (libc)Classification of Characters.
+* isatty: (libc)Is It a Terminal.
+* isblank: (libc)Classification of Characters.
+* iscntrl: (libc)Classification of Characters.
+* isdigit: (libc)Classification of Characters.
+* isfinite: (libc)Floating Point Classes.
+* isgraph: (libc)Classification of Characters.
+* isgreater: (libc)FP Comparison Functions.
+* isgreaterequal: (libc)FP Comparison Functions.
+* isinf: (libc)Floating Point Classes.
+* isinff: (libc)Floating Point Classes.
+* isinfl: (libc)Floating Point Classes.
+* isless: (libc)FP Comparison Functions.
+* islessequal: (libc)FP Comparison Functions.
+* islessgreater: (libc)FP Comparison Functions.
+* islower: (libc)Classification of Characters.
+* isnan: (libc)Floating Point Classes.
+* isnan: (libc)Floating Point Classes.
+* isnanf: (libc)Floating Point Classes.
+* isnanl: (libc)Floating Point Classes.
+* isnormal: (libc)Floating Point Classes.
+* isprint: (libc)Classification of Characters.
+* ispunct: (libc)Classification of Characters.
+* isspace: (libc)Classification of Characters.
+* isunordered: (libc)FP Comparison Functions.
+* isupper: (libc)Classification of Characters.
+* iswalnum: (libc)Classification of Wide Characters.
+* iswalpha: (libc)Classification of Wide Characters.
+* iswblank: (libc)Classification of Wide Characters.
+* iswcntrl: (libc)Classification of Wide Characters.
+* iswctype: (libc)Classification of Wide Characters.
+* iswdigit: (libc)Classification of Wide Characters.
+* iswgraph: (libc)Classification of Wide Characters.
+* iswlower: (libc)Classification of Wide Characters.
+* iswprint: (libc)Classification of Wide Characters.
+* iswpunct: (libc)Classification of Wide Characters.
+* iswspace: (libc)Classification of Wide Characters.
+* iswupper: (libc)Classification of Wide Characters.
+* iswxdigit: (libc)Classification of Wide Characters.
+* isxdigit: (libc)Classification of Characters.
+* j0: (libc)Special Functions.
+* j0f: (libc)Special Functions.
+* j0l: (libc)Special Functions.
+* j1: (libc)Special Functions.
+* j1f: (libc)Special Functions.
+* j1l: (libc)Special Functions.
+* jn: (libc)Special Functions.
+* jnf: (libc)Special Functions.
+* jnl: (libc)Special Functions.
+* jrand48: (libc)SVID Random.
+* jrand48_r: (libc)SVID Random.
+* kill: (libc)Signaling Another Process.
+* killpg: (libc)Signaling Another Process.
+* l64a: (libc)Encode Binary Data.
+* labs: (libc)Absolute Value.
+* lcong48: (libc)SVID Random.
+* lcong48_r: (libc)SVID Random.
+* ldexp: (libc)Normalization Functions.
+* ldexpf: (libc)Normalization Functions.
+* ldexpl: (libc)Normalization Functions.
+* ldiv: (libc)Integer Division.
+* lfind: (libc)Array Search Function.
+* lgamma: (libc)Special Functions.
+* lgamma_r: (libc)Special Functions.
+* lgammaf: (libc)Special Functions.
+* lgammaf_r: (libc)Special Functions.
+* lgammal: (libc)Special Functions.
+* lgammal_r: (libc)Special Functions.
+* link: (libc)Hard Links.
+* lio_listio64: (libc)Asynchronous Reads/Writes.
+* lio_listio: (libc)Asynchronous Reads/Writes.
+* listen: (libc)Listening.
+* llabs: (libc)Absolute Value.
+* lldiv: (libc)Integer Division.
+* llrint: (libc)Rounding Functions.
+* llrintf: (libc)Rounding Functions.
+* llrintl: (libc)Rounding Functions.
+* llround: (libc)Rounding Functions.
+* llroundf: (libc)Rounding Functions.
+* llroundl: (libc)Rounding Functions.
+* localeconv: (libc)The Lame Way to Locale Data.
+* localtime: (libc)Broken-down Time.
+* localtime_r: (libc)Broken-down Time.
+* log10: (libc)Exponents and Logarithms.
+* log10f: (libc)Exponents and Logarithms.
+* log10l: (libc)Exponents and Logarithms.
+* log1p: (libc)Exponents and Logarithms.
+* log1pf: (libc)Exponents and Logarithms.
+* log1pl: (libc)Exponents and Logarithms.
+* log2: (libc)Exponents and Logarithms.
+* log2f: (libc)Exponents and Logarithms.
+* log2l: (libc)Exponents and Logarithms.
+* log: (libc)Exponents and Logarithms.
+* logb: (libc)Exponents and Logarithms.
+* logbf: (libc)Exponents and Logarithms.
+* logbl: (libc)Exponents and Logarithms.
+* logf: (libc)Exponents and Logarithms.
+* login: (libc)Logging In and Out.
+* login_tty: (libc)Logging In and Out.
+* logl: (libc)Exponents and Logarithms.
+* logout: (libc)Logging In and Out.
+* logwtmp: (libc)Logging In and Out.
+* longjmp: (libc)Non-Local Details.
+* lrand48: (libc)SVID Random.
+* lrand48_r: (libc)SVID Random.
+* lrint: (libc)Rounding Functions.
+* lrintf: (libc)Rounding Functions.
+* lrintl: (libc)Rounding Functions.
+* lround: (libc)Rounding Functions.
+* lroundf: (libc)Rounding Functions.
+* lroundl: (libc)Rounding Functions.
+* lsearch: (libc)Array Search Function.
+* lseek64: (libc)File Position Primitive.
+* lseek: (libc)File Position Primitive.
+* lstat64: (libc)Reading Attributes.
+* lstat: (libc)Reading Attributes.
+* lutimes: (libc)File Times.
+* madvise: (libc)Memory-mapped I/O.
+* makecontext: (libc)System V contexts.
+* mallinfo: (libc)Statistics of Malloc.
+* malloc: (libc)Basic Allocation.
+* mallopt: (libc)Malloc Tunable Parameters.
+* mblen: (libc)Non-reentrant Character Conversion.
+* mbrlen: (libc)Converting a Character.
+* mbrtowc: (libc)Converting a Character.
+* mbsinit: (libc)Keeping the state.
+* mbsnrtowcs: (libc)Converting Strings.
+* mbsrtowcs: (libc)Converting Strings.
+* mbstowcs: (libc)Non-reentrant String Conversion.
+* mbtowc: (libc)Non-reentrant Character Conversion.
+* mcheck: (libc)Heap Consistency Checking.
+* memalign: (libc)Aligned Memory Blocks.
+* memccpy: (libc)Copying and Concatenation.
+* memchr: (libc)Search Functions.
+* memcmp: (libc)String/Array Comparison.
+* memcpy: (libc)Copying and Concatenation.
+* memfrob: (libc)Trivial Encryption.
+* memmem: (libc)Search Functions.
+* memmove: (libc)Copying and Concatenation.
+* mempcpy: (libc)Copying and Concatenation.
+* memrchr: (libc)Search Functions.
+* memset: (libc)Copying and Concatenation.
+* mkdir: (libc)Creating Directories.
+* mkdtemp: (libc)Temporary Files.
+* mkfifo: (libc)FIFO Special Files.
+* mknod: (libc)Making Special Files.
+* mkstemp: (libc)Temporary Files.
+* mktemp: (libc)Temporary Files.
+* mktime: (libc)Broken-down Time.
+* mlock: (libc)Page Lock Functions.
+* mlockall: (libc)Page Lock Functions.
+* mmap64: (libc)Memory-mapped I/O.
+* mmap: (libc)Memory-mapped I/O.
+* modf: (libc)Rounding Functions.
+* modff: (libc)Rounding Functions.
+* modfl: (libc)Rounding Functions.
+* mount: (libc)Mount-Unmount-Remount.
+* mprobe: (libc)Heap Consistency Checking.
+* mrand48: (libc)SVID Random.
+* mrand48_r: (libc)SVID Random.
+* mremap: (libc)Memory-mapped I/O.
+* msync: (libc)Memory-mapped I/O.
+* mtrace: (libc)Tracing malloc.
+* munlock: (libc)Page Lock Functions.
+* munlockall: (libc)Page Lock Functions.
+* munmap: (libc)Memory-mapped I/O.
+* muntrace: (libc)Tracing malloc.
+* nan: (libc)FP Bit Twiddling.
+* nanf: (libc)FP Bit Twiddling.
+* nanl: (libc)FP Bit Twiddling.
+* nanosleep: (libc)Sleeping.
+* nearbyint: (libc)Rounding Functions.
+* nearbyintf: (libc)Rounding Functions.
+* nearbyintl: (libc)Rounding Functions.
+* nextafter: (libc)FP Bit Twiddling.
+* nextafterf: (libc)FP Bit Twiddling.
+* nextafterl: (libc)FP Bit Twiddling.
+* nexttoward: (libc)FP Bit Twiddling.
+* nexttowardf: (libc)FP Bit Twiddling.
+* nexttowardl: (libc)FP Bit Twiddling.
+* nftw64: (libc)Working with Directory Trees.
+* nftw: (libc)Working with Directory Trees.
+* ngettext: (libc)Advanced gettext functions.
+* nice: (libc)Traditional Scheduling Functions.
+* nl_langinfo: (libc)The Elegant and Fast Way.
+* nrand48: (libc)SVID Random.
+* nrand48_r: (libc)SVID Random.
+* ntohl: (libc)Byte Order.
+* ntohs: (libc)Byte Order.
+* ntp_adjtime: (libc)High Accuracy Clock.
+* ntp_gettime: (libc)High Accuracy Clock.
+* obstack_1grow: (libc)Growing Objects.
+* obstack_1grow_fast: (libc)Extra Fast Growing.
+* obstack_alignment_mask: (libc)Obstacks Data Alignment.
+* obstack_alloc: (libc)Allocation in an Obstack.
+* obstack_base: (libc)Status of an Obstack.
+* obstack_blank: (libc)Growing Objects.
+* obstack_blank_fast: (libc)Extra Fast Growing.
+* obstack_chunk_size: (libc)Obstack Chunks.
+* obstack_copy0: (libc)Allocation in an Obstack.
+* obstack_copy: (libc)Allocation in an Obstack.
+* obstack_finish: (libc)Growing Objects.
+* obstack_free: (libc)Freeing Obstack Objects.
+* obstack_grow0: (libc)Growing Objects.
+* obstack_grow: (libc)Growing Objects.
+* obstack_init: (libc)Preparing for Obstacks.
+* obstack_int_grow: (libc)Growing Objects.
+* obstack_int_grow_fast: (libc)Extra Fast Growing.
+* obstack_next_free: (libc)Status of an Obstack.
+* obstack_object_size: (libc)Growing Objects.
+* obstack_object_size: (libc)Status of an Obstack.
+* obstack_printf: (libc)Dynamic Output.
+* obstack_ptr_grow: (libc)Growing Objects.
+* obstack_ptr_grow_fast: (libc)Extra Fast Growing.
+* obstack_room: (libc)Extra Fast Growing.
+* obstack_vprintf: (libc)Variable Arguments Output.
+* offsetof: (libc)Structure Measurement.
+* on_exit: (libc)Cleanups on Exit.
+* open64: (libc)Opening and Closing Files.
+* open: (libc)Opening and Closing Files.
+* open_memstream: (libc)String Streams.
+* open_obstack_stream: (libc)Obstack Streams.
+* opendir: (libc)Opening a Directory.
+* openlog: (libc)openlog.
+* openpty: (libc)Pseudo-Terminal Pairs.
+* parse_printf_format: (libc)Parsing a Template String.
+* pathconf: (libc)Pathconf.
+* pause: (libc)Using Pause.
+* pclose: (libc)Pipe to a Subprocess.
+* perror: (libc)Error Messages.
+* pipe: (libc)Creating a Pipe.
+* popen: (libc)Pipe to a Subprocess.
+* posix_memalign: (libc)Aligned Memory Blocks.
+* pow10: (libc)Exponents and Logarithms.
+* pow10f: (libc)Exponents and Logarithms.
+* pow10l: (libc)Exponents and Logarithms.
+* pow: (libc)Exponents and Logarithms.
+* powf: (libc)Exponents and Logarithms.
+* powl: (libc)Exponents and Logarithms.
+* pread64: (libc)I/O Primitives.
+* pread: (libc)I/O Primitives.
+* printf: (libc)Formatted Output Functions.
+* printf_size: (libc)Predefined Printf Handlers.
+* printf_size_info: (libc)Predefined Printf Handlers.
+* psignal: (libc)Signal Messages.
+* ptsname: (libc)Allocation.
+* ptsname_r: (libc)Allocation.
+* putc: (libc)Simple Output.
+* putc_unlocked: (libc)Simple Output.
+* putchar: (libc)Simple Output.
+* putchar_unlocked: (libc)Simple Output.
+* putenv: (libc)Environment Access.
+* putpwent: (libc)Writing a User Entry.
+* puts: (libc)Simple Output.
+* pututline: (libc)Manipulating the Database.
+* pututxline: (libc)XPG Functions.
+* putw: (libc)Simple Output.
+* putwc: (libc)Simple Output.
+* putwc_unlocked: (libc)Simple Output.
+* putwchar: (libc)Simple Output.
+* putwchar_unlocked: (libc)Simple Output.
+* pwrite64: (libc)I/O Primitives.
+* pwrite: (libc)I/O Primitives.
+* qecvt: (libc)System V Number Conversion.
+* qecvt_r: (libc)System V Number Conversion.
+* qfcvt: (libc)System V Number Conversion.
+* qfcvt_r: (libc)System V Number Conversion.
+* qgcvt: (libc)System V Number Conversion.
+* qsort: (libc)Array Sort Function.
+* raise: (libc)Signaling Yourself.
+* rand: (libc)ISO Random.
+* rand_r: (libc)ISO Random.
+* random: (libc)BSD Random.
+* random_r: (libc)BSD Random.
+* rawmemchr: (libc)Search Functions.
+* read: (libc)I/O Primitives.
+* readdir64: (libc)Reading/Closing Directory.
+* readdir64_r: (libc)Reading/Closing Directory.
+* readdir: (libc)Reading/Closing Directory.
+* readdir_r: (libc)Reading/Closing Directory.
+* readlink: (libc)Symbolic Links.
+* readv: (libc)Scatter-Gather.
+* realloc: (libc)Changing Block Size.
+* realpath: (libc)Symbolic Links.
+* recv: (libc)Receiving Data.
+* recvfrom: (libc)Receiving Datagrams.
+* recvmsg: (libc)Receiving Datagrams.
+* regcomp: (libc)POSIX Regexp Compilation.
+* regerror: (libc)Regexp Cleanup.
+* regexec: (libc)Matching POSIX Regexps.
+* regfree: (libc)Regexp Cleanup.
+* register_printf_function: (libc)Registering New Conversions.
+* remainder: (libc)Remainder Functions.
+* remainderf: (libc)Remainder Functions.
+* remainderl: (libc)Remainder Functions.
+* remove: (libc)Deleting Files.
+* rename: (libc)Renaming Files.
+* rewind: (libc)File Positioning.
+* rewinddir: (libc)Random Access Directory.
+* rindex: (libc)Search Functions.
+* rint: (libc)Rounding Functions.
+* rintf: (libc)Rounding Functions.
+* rintl: (libc)Rounding Functions.
+* rmdir: (libc)Deleting Files.
+* round: (libc)Rounding Functions.
+* roundf: (libc)Rounding Functions.
+* roundl: (libc)Rounding Functions.
+* rpmatch: (libc)Yes-or-No Questions.
+* sbrk: (libc)Resizing the Data Segment.
+* scalb: (libc)Normalization Functions.
+* scalbf: (libc)Normalization Functions.
+* scalbl: (libc)Normalization Functions.
+* scalbln: (libc)Normalization Functions.
+* scalblnf: (libc)Normalization Functions.
+* scalblnl: (libc)Normalization Functions.
+* scalbn: (libc)Normalization Functions.
+* scalbnf: (libc)Normalization Functions.
+* scalbnl: (libc)Normalization Functions.
+* scandir64: (libc)Scanning Directory Content.
+* scandir: (libc)Scanning Directory Content.
+* scanf: (libc)Formatted Input Functions.
+* sched_get_priority_max: (libc)Basic Scheduling Functions.
+* sched_get_priority_min: (libc)Basic Scheduling Functions.
+* sched_getaffinity: (libc)CPU Affinity.
+* sched_getparam: (libc)Basic Scheduling Functions.
+* sched_getscheduler: (libc)Basic Scheduling Functions.
+* sched_rr_get_interval: (libc)Basic Scheduling Functions.
+* sched_setaffinity: (libc)CPU Affinity.
+* sched_setparam: (libc)Basic Scheduling Functions.
+* sched_setscheduler: (libc)Basic Scheduling Functions.
+* sched_yield: (libc)Basic Scheduling Functions.
+* seed48: (libc)SVID Random.
+* seed48_r: (libc)SVID Random.
+* seekdir: (libc)Random Access Directory.
+* select: (libc)Waiting for I/O.
+* send: (libc)Sending Data.
+* sendmsg: (libc)Receiving Datagrams.
+* sendto: (libc)Sending Datagrams.
+* setbuf: (libc)Controlling Buffering.
+* setbuffer: (libc)Controlling Buffering.
+* setcontext: (libc)System V contexts.
+* setdomainname: (libc)Host Identification.
+* setegid: (libc)Setting Groups.
+* setenv: (libc)Environment Access.
+* seteuid: (libc)Setting User ID.
+* setfsent: (libc)fstab.
+* setgid: (libc)Setting Groups.
+* setgrent: (libc)Scanning All Groups.
+* setgroups: (libc)Setting Groups.
+* sethostent: (libc)Host Names.
+* sethostid: (libc)Host Identification.
+* sethostname: (libc)Host Identification.
+* setitimer: (libc)Setting an Alarm.
+* setjmp: (libc)Non-Local Details.
+* setkey: (libc)DES Encryption.
+* setkey_r: (libc)DES Encryption.
+* setlinebuf: (libc)Controlling Buffering.
+* setlocale: (libc)Setting the Locale.
+* setlogmask: (libc)setlogmask.
+* setmntent: (libc)mtab.
+* setnetent: (libc)Networks Database.
+* setnetgrent: (libc)Lookup Netgroup.
+* setpgid: (libc)Process Group Functions.
+* setpgrp: (libc)Process Group Functions.
+* setpriority: (libc)Traditional Scheduling Functions.
+* setprotoent: (libc)Protocols Database.
+* setpwent: (libc)Scanning All Users.
+* setregid: (libc)Setting Groups.
+* setreuid: (libc)Setting User ID.
+* setrlimit64: (libc)Limits on Resources.
+* setrlimit: (libc)Limits on Resources.
+* setservent: (libc)Services Database.
+* setsid: (libc)Process Group Functions.
+* setsockopt: (libc)Socket Option Functions.
+* setstate: (libc)BSD Random.
+* setstate_r: (libc)BSD Random.
+* settimeofday: (libc)High-Resolution Calendar.
+* setuid: (libc)Setting User ID.
+* setutent: (libc)Manipulating the Database.
+* setutxent: (libc)XPG Functions.
+* setvbuf: (libc)Controlling Buffering.
+* shutdown: (libc)Closing a Socket.
+* sigaction: (libc)Advanced Signal Handling.
+* sigaddset: (libc)Signal Sets.
+* sigaltstack: (libc)Signal Stack.
+* sigblock: (libc)Blocking in BSD.
+* sigdelset: (libc)Signal Sets.
+* sigemptyset: (libc)Signal Sets.
+* sigfillset: (libc)Signal Sets.
+* siginterrupt: (libc)BSD Handler.
+* sigismember: (libc)Signal Sets.
+* siglongjmp: (libc)Non-Local Exits and Signals.
+* sigmask: (libc)Blocking in BSD.
+* signal: (libc)Basic Signal Handling.
+* signbit: (libc)FP Bit Twiddling.
+* significand: (libc)Normalization Functions.
+* significandf: (libc)Normalization Functions.
+* significandl: (libc)Normalization Functions.
+* sigpause: (libc)Blocking in BSD.
+* sigpending: (libc)Checking for Pending Signals.
+* sigprocmask: (libc)Process Signal Mask.
+* sigsetjmp: (libc)Non-Local Exits and Signals.
+* sigsetmask: (libc)Blocking in BSD.
+* sigstack: (libc)Signal Stack.
+* sigsuspend: (libc)Sigsuspend.
+* sigvec: (libc)BSD Handler.
+* sin: (libc)Trig Functions.
+* sincos: (libc)Trig Functions.
+* sincosf: (libc)Trig Functions.
+* sincosl: (libc)Trig Functions.
+* sinf: (libc)Trig Functions.
+* sinh: (libc)Hyperbolic Functions.
+* sinhf: (libc)Hyperbolic Functions.
+* sinhl: (libc)Hyperbolic Functions.
+* sinl: (libc)Trig Functions.
+* sleep: (libc)Sleeping.
+* snprintf: (libc)Formatted Output Functions.
+* socket: (libc)Creating a Socket.
+* socketpair: (libc)Socket Pairs.
+* sprintf: (libc)Formatted Output Functions.
+* sqrt: (libc)Exponents and Logarithms.
+* sqrtf: (libc)Exponents and Logarithms.
+* sqrtl: (libc)Exponents and Logarithms.
+* srand48: (libc)SVID Random.
+* srand48_r: (libc)SVID Random.
+* srand: (libc)ISO Random.
+* srandom: (libc)BSD Random.
+* srandom_r: (libc)BSD Random.
+* sscanf: (libc)Formatted Input Functions.
+* ssignal: (libc)Basic Signal Handling.
+* stat64: (libc)Reading Attributes.
+* stat: (libc)Reading Attributes.
+* stime: (libc)Simple Calendar Time.
+* stpcpy: (libc)Copying and Concatenation.
+* stpncpy: (libc)Copying and Concatenation.
+* strcasecmp: (libc)String/Array Comparison.
+* strcasestr: (libc)Search Functions.
+* strcat: (libc)Copying and Concatenation.
+* strchr: (libc)Search Functions.
+* strchrnul: (libc)Search Functions.
+* strcmp: (libc)String/Array Comparison.
+* strcoll: (libc)Collation Functions.
+* strcpy: (libc)Copying and Concatenation.
+* strcspn: (libc)Search Functions.
+* strdup: (libc)Copying and Concatenation.
+* strdupa: (libc)Copying and Concatenation.
+* strerror: (libc)Error Messages.
+* strerror_r: (libc)Error Messages.
+* strfmon: (libc)Formatting Numbers.
+* strfry: (libc)strfry.
+* strftime: (libc)Formatting Calendar Time.
+* strlen: (libc)String Length.
+* strncasecmp: (libc)String/Array Comparison.
+* strncat: (libc)Copying and Concatenation.
+* strncmp: (libc)String/Array Comparison.
+* strncpy: (libc)Copying and Concatenation.
+* strndup: (libc)Copying and Concatenation.
+* strndupa: (libc)Copying and Concatenation.
+* strnlen: (libc)String Length.
+* strpbrk: (libc)Search Functions.
+* strptime: (libc)Low-Level Time String Parsing.
+* strrchr: (libc)Search Functions.
+* strsep: (libc)Finding Tokens in a String.
+* strsignal: (libc)Signal Messages.
+* strspn: (libc)Search Functions.
+* strstr: (libc)Search Functions.
+* strtod: (libc)Parsing of Floats.
+* strtof: (libc)Parsing of Floats.
+* strtoimax: (libc)Parsing of Integers.
+* strtok: (libc)Finding Tokens in a String.
+* strtok_r: (libc)Finding Tokens in a String.
+* strtol: (libc)Parsing of Integers.
+* strtold: (libc)Parsing of Floats.
+* strtoll: (libc)Parsing of Integers.
+* strtoq: (libc)Parsing of Integers.
+* strtoul: (libc)Parsing of Integers.
+* strtoull: (libc)Parsing of Integers.
+* strtoumax: (libc)Parsing of Integers.
+* strtouq: (libc)Parsing of Integers.
+* strverscmp: (libc)String/Array Comparison.
+* strxfrm: (libc)Collation Functions.
+* stty: (libc)BSD Terminal Modes.
+* swapcontext: (libc)System V contexts.
+* swprintf: (libc)Formatted Output Functions.
+* swscanf: (libc)Formatted Input Functions.
+* symlink: (libc)Symbolic Links.
+* sync: (libc)Synchronizing I/O.
+* syscall: (libc)System Calls.
+* sysconf: (libc)Sysconf Definition.
+* sysctl: (libc)System Parameters.
+* syslog: (libc)syslog; vsyslog.
+* system: (libc)Running a Command.
+* sysv_signal: (libc)Basic Signal Handling.
+* tan: (libc)Trig Functions.
+* tanf: (libc)Trig Functions.
+* tanh: (libc)Hyperbolic Functions.
+* tanhf: (libc)Hyperbolic Functions.
+* tanhl: (libc)Hyperbolic Functions.
+* tanl: (libc)Trig Functions.
+* tcdrain: (libc)Line Control.
+* tcflow: (libc)Line Control.
+* tcflush: (libc)Line Control.
+* tcgetattr: (libc)Mode Functions.
+* tcgetpgrp: (libc)Terminal Access Functions.
+* tcgetsid: (libc)Terminal Access Functions.
+* tcsendbreak: (libc)Line Control.
+* tcsetattr: (libc)Mode Functions.
+* tcsetpgrp: (libc)Terminal Access Functions.
+* tdelete: (libc)Tree Search Function.
+* tdestroy: (libc)Tree Search Function.
+* tempnam: (libc)Temporary Files.
+* textdomain: (libc)Locating gettext catalog.
+* tfind: (libc)Tree Search Function.
+* tgamma: (libc)Special Functions.
+* tgammaf: (libc)Special Functions.
+* tgammal: (libc)Special Functions.
+* time: (libc)Simple Calendar Time.
+* timegm: (libc)Broken-down Time.
+* timelocal: (libc)Broken-down Time.
+* times: (libc)Processor Time.
+* tmpfile64: (libc)Temporary Files.
+* tmpfile: (libc)Temporary Files.
+* tmpnam: (libc)Temporary Files.
+* tmpnam_r: (libc)Temporary Files.
+* toascii: (libc)Case Conversion.
+* tolower: (libc)Case Conversion.
+* toupper: (libc)Case Conversion.
+* towctrans: (libc)Wide Character Case Conversion.
+* towlower: (libc)Wide Character Case Conversion.
+* towupper: (libc)Wide Character Case Conversion.
+* trunc: (libc)Rounding Functions.
+* truncate64: (libc)File Size.
+* truncate: (libc)File Size.
+* truncf: (libc)Rounding Functions.
+* truncl: (libc)Rounding Functions.
+* tsearch: (libc)Tree Search Function.
+* ttyname: (libc)Is It a Terminal.
+* ttyname_r: (libc)Is It a Terminal.
+* twalk: (libc)Tree Search Function.
+* tzset: (libc)Time Zone Functions.
+* ulimit: (libc)Limits on Resources.
+* umask: (libc)Setting Permissions.
+* umount2: (libc)Mount-Unmount-Remount.
+* umount: (libc)Mount-Unmount-Remount.
+* uname: (libc)Platform Type.
+* ungetc: (libc)How Unread.
+* ungetwc: (libc)How Unread.
+* unlink: (libc)Deleting Files.
+* unlockpt: (libc)Allocation.
+* unsetenv: (libc)Environment Access.
+* updwtmp: (libc)Manipulating the Database.
+* utime: (libc)File Times.
+* utimes: (libc)File Times.
+* utmpname: (libc)Manipulating the Database.
+* utmpxname: (libc)XPG Functions.
+* va_arg: (libc)Argument Macros.
+* va_end: (libc)Argument Macros.
+* va_start: (libc)Argument Macros.
+* va_start: (libc)Old Varargs.
+* valloc: (libc)Aligned Memory Blocks.
+* vasprintf: (libc)Variable Arguments Output.
+* verr: (libc)Error Messages.
+* verrx: (libc)Error Messages.
+* versionsort64: (libc)Scanning Directory Content.
+* versionsort: (libc)Scanning Directory Content.
+* vfork: (libc)Creating a Process.
+* vfprintf: (libc)Variable Arguments Output.
+* vfscanf: (libc)Variable Arguments Input.
+* vfwprintf: (libc)Variable Arguments Output.
+* vfwscanf: (libc)Variable Arguments Input.
+* vlimit: (libc)Limits on Resources.
+* vprintf: (libc)Variable Arguments Output.
+* vscanf: (libc)Variable Arguments Input.
+* vsnprintf: (libc)Variable Arguments Output.
+* vsprintf: (libc)Variable Arguments Output.
+* vsscanf: (libc)Variable Arguments Input.
+* vswprintf: (libc)Variable Arguments Output.
+* vswscanf: (libc)Variable Arguments Input.
+* vsyslog: (libc)syslog; vsyslog.
+* vtimes: (libc)Resource Usage.
+* vwarn: (libc)Error Messages.
+* vwarnx: (libc)Error Messages.
+* vwprintf: (libc)Variable Arguments Output.
+* vwscanf: (libc)Variable Arguments Input.
+* wait3: (libc)BSD Wait Functions.
+* wait4: (libc)Process Completion.
+* wait: (libc)Process Completion.
+* waitpid: (libc)Process Completion.
+* warn: (libc)Error Messages.
+* warnx: (libc)Error Messages.
+* wcpcpy: (libc)Copying and Concatenation.
+* wcpncpy: (libc)Copying and Concatenation.
+* wcrtomb: (libc)Converting a Character.
+* wcscasecmp: (libc)String/Array Comparison.
+* wcscat: (libc)Copying and Concatenation.
+* wcschr: (libc)Search Functions.
+* wcschrnul: (libc)Search Functions.
+* wcscmp: (libc)String/Array Comparison.
+* wcscoll: (libc)Collation Functions.
+* wcscpy: (libc)Copying and Concatenation.
+* wcscspn: (libc)Search Functions.
+* wcsdup: (libc)Copying and Concatenation.
+* wcsftime: (libc)Formatting Calendar Time.
+* wcslen: (libc)String Length.
+* wcsncasecmp: (libc)String/Array Comparison.
+* wcsncat: (libc)Copying and Concatenation.
+* wcsncmp: (libc)String/Array Comparison.
+* wcsncpy: (libc)Copying and Concatenation.
+* wcsnlen: (libc)String Length.
+* wcsnrtombs: (libc)Converting Strings.
+* wcspbrk: (libc)Search Functions.
+* wcsrchr: (libc)Search Functions.
+* wcsrtombs: (libc)Converting Strings.
+* wcsspn: (libc)Search Functions.
+* wcsstr: (libc)Search Functions.
+* wcstod: (libc)Parsing of Floats.
+* wcstof: (libc)Parsing of Floats.
+* wcstoimax: (libc)Parsing of Integers.
+* wcstok: (libc)Finding Tokens in a String.
+* wcstol: (libc)Parsing of Integers.
+* wcstold: (libc)Parsing of Floats.
+* wcstoll: (libc)Parsing of Integers.
+* wcstombs: (libc)Non-reentrant String Conversion.
+* wcstoq: (libc)Parsing of Integers.
+* wcstoul: (libc)Parsing of Integers.
+* wcstoull: (libc)Parsing of Integers.
+* wcstoumax: (libc)Parsing of Integers.
+* wcstouq: (libc)Parsing of Integers.
+* wcswcs: (libc)Search Functions.
+* wcsxfrm: (libc)Collation Functions.
+* wctob: (libc)Converting a Character.
+* wctomb: (libc)Non-reentrant Character Conversion.
+* wctrans: (libc)Wide Character Case Conversion.
+* wctype: (libc)Classification of Wide Characters.
+* wmemchr: (libc)Search Functions.
+* wmemcmp: (libc)String/Array Comparison.
+* wmemcpy: (libc)Copying and Concatenation.
+* wmemmove: (libc)Copying and Concatenation.
+* wmempcpy: (libc)Copying and Concatenation.
+* wmemset: (libc)Copying and Concatenation.
+* wordexp: (libc)Calling Wordexp.
+* wordfree: (libc)Calling Wordexp.
+* wprintf: (libc)Formatted Output Functions.
+* write: (libc)I/O Primitives.
+* writev: (libc)Scatter-Gather.
+* wscanf: (libc)Formatted Input Functions.
+* y0: (libc)Special Functions.
+* y0f: (libc)Special Functions.
+* y0l: (libc)Special Functions.
+* y1: (libc)Special Functions.
+* y1f: (libc)Special Functions.
+* y1l: (libc)Special Functions.
+* yn: (libc)Special Functions.
+* ynf: (libc)Special Functions.
+* ynl: (libc)Special Functions.
+END-INFO-DIR-ENTRY
+
+   This file documents the GNU C library.
+
+   This is Edition 0.10, last updated 2001-07-06, of `The GNU C Library
+Reference Manual', for Version 2.3.x.
+
+   Copyright (C) 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2001, 2002,
+2003 Free Software Foundation, Inc.
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with the
+Invariant Sections being "Free Software Needs Free Documentation" and
+"GNU Lesser General Public License", the Front-Cover texts being (a)
+(see below), and with the Back-Cover Texts being (b) (see below).  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   (a) The FSF's Front-Cover Text is:
+
+   A GNU Manual
+
+   (b) The FSF's Back-Cover Text is:
+
+   You have freedom to copy and modify this GNU Manual, like GNU
+software.  Copies published by the Free Software Foundation raise
+funds for GNU development.
+
+
+File: libc.info,  Node: Memory-mapped I/O,  Next: Waiting for I/O,  Prev: Scatter-Gather,  Up: Low-Level I/O
+
+Memory-mapped I/O
+=================
+
+   On modern operating systems, it is possible to "mmap" (pronounced
+"em-map") a file to a region of memory.  When this is done, the file can
+be accessed just like an array in the program.
+
+   This is more efficient than `read' or `write', as only the regions
+of the file that a program actually accesses are loaded.  Accesses to
+not-yet-loaded parts of the mmapped region are handled in the same way
+as swapped out pages.
+
+   Since mmapped pages can be stored back to their file when physical
+memory is low, it is possible to mmap files orders of magnitude larger
+than both the physical memory _and_ swap space.  The only limit is
+address space.  The theoretical limit is 4GB on a 32-bit machine -
+however, the actual limit will be smaller since some areas will be
+reserved for other purposes.  If the LFS interface is used the file size
+on 32-bit systems is not limited to 2GB (offsets are signed which
+reduces the addressable area of 4GB by half); the full 64-bit are
+available.
+
+   Memory mapping only works on entire pages of memory.  Thus, addresses
+for mapping must be page-aligned, and length values will be rounded up.
+To determine the size of a page the machine uses one should use
+
+     size_t page_size = (size_t) sysconf (_SC_PAGESIZE);
+
+These functions are declared in `sys/mman.h'.
+
+ - Function: void * mmap (void *ADDRESS, size_t LENGTH,int PROTECT, int
+          FLAGS, int FILEDES, off_t OFFSET)
+     The `mmap' function creates a new mapping, connected to bytes
+     (OFFSET) to (OFFSET + LENGTH - 1) in the file open on FILEDES.  A
+     new reference for the file specified by FILEDES is created, which
+     is not removed by closing the file.
+
+     ADDRESS gives a preferred starting address for the mapping.
+     `NULL' expresses no preference. Any previous mapping at that
+     address is automatically removed. The address you give may still be
+     changed, unless you use the `MAP_FIXED' flag.
+
+     PROTECT contains flags that control what kind of access is
+     permitted.  They include `PROT_READ', `PROT_WRITE', and
+     `PROT_EXEC', which permit reading, writing, and execution,
+     respectively.  Inappropriate access will cause a segfault (*note
+     Program Error Signals::).
+
+     Note that most hardware designs cannot support write permission
+     without read permission, and many do not distinguish read and
+     execute permission.  Thus, you may receive wider permissions than
+     you ask for, and mappings of write-only files may be denied even
+     if you do not use `PROT_READ'.
+
+     FLAGS contains flags that control the nature of the map.  One of
+     `MAP_SHARED' or `MAP_PRIVATE' must be specified.
+
+     They include:
+
+    `MAP_PRIVATE'
+          This specifies that writes to the region should never be
+          written back to the attached file.  Instead, a copy is made
+          for the process, and the region will be swapped normally if
+          memory runs low.  No other process will see the changes.
+
+          Since private mappings effectively revert to ordinary memory
+          when written to, you must have enough virtual memory for a
+          copy of the entire mmapped region if you use this mode with
+          `PROT_WRITE'.
+
+    `MAP_SHARED'
+          This specifies that writes to the region will be written back
+          to the file.  Changes made will be shared immediately with
+          other processes mmaping the same file.
+
+          Note that actual writing may take place at any time.  You
+          need to use `msync', described below, if it is important that
+          other processes using conventional I/O get a consistent view
+          of the file.
+
+    `MAP_FIXED'
+          This forces the system to use the exact mapping address
+          specified in ADDRESS and fail if it can't.
+
+    `MAP_ANONYMOUS'
+    `MAP_ANON'
+          This flag tells the system to create an anonymous mapping,
+          not connected to a file.  FILEDES and OFF are ignored, and
+          the region is initialized with zeros.
+
+          Anonymous maps are used as the basic primitive to extend the
+          heap on some systems.  They are also useful to share data
+          between multiple tasks without creating a file.
+
+          On some systems using private anonymous mmaps is more
+          efficient than using `malloc' for large blocks.  This is not
+          an issue with the GNU C library, as the included `malloc'
+          automatically uses `mmap' where appropriate.
+
+     `mmap' returns the address of the new mapping, or -1 for an error.
+
+     Possible errors include:
+
+    `EINVAL'
+          Either ADDRESS was unusable, or inconsistent FLAGS were given.
+
+    `EACCES'
+          FILEDES was not open for the type of access specified in
+          PROTECT.
+
+    `ENOMEM'
+          Either there is not enough memory for the operation, or the
+          process is out of address space.
+
+    `ENODEV'
+          This file is of a type that doesn't support mapping.
+
+    `ENOEXEC'
+          The file is on a filesystem that doesn't support mapping.
+
+
+ - Function: void * mmap64 (void *ADDRESS, size_t LENGTH,int PROTECT,
+          int FLAGS, int FILEDES, off64_t OFFSET)
+     The `mmap64' function is equivalent to the `mmap' function but the
+     OFFSET parameter is of type `off64_t'.  On 32-bit systems this
+     allows the file associated with the FILEDES descriptor to be
+     larger than 2GB.  FILEDES must be a descriptor returned from a
+     call to `open64' or `fopen64' and `freopen64' where the descriptor
+     is retrieved with `fileno'.
+
+     When the sources are translated with `_FILE_OFFSET_BITS == 64' this
+     function is actually available under the name `mmap'.  I.e., the
+     new, extended API using 64 bit file sizes and offsets transparently
+     replaces the old API.
+
+ - Function: int munmap (void *ADDR, size_t LENGTH)
+     `munmap' removes any memory maps from (ADDR) to (ADDR + LENGTH).
+     LENGTH should be the length of the mapping.
+
+     It is safe to unmap multiple mappings in one command, or include
+     unmapped space in the range.  It is also possible to unmap only
+     part of an existing mapping.  However, only entire pages can be
+     removed.  If LENGTH is not an even number of pages, it will be
+     rounded up.
+
+     It returns 0 for success and -1 for an error.
+
+     One error is possible:
+
+    `EINVAL'
+          The memory range given was outside the user mmap range or
+          wasn't page aligned.
+
+
+ - Function: int msync (void *ADDRESS, size_t LENGTH, int FLAGS)
+     When using shared mappings, the kernel can write the file at any
+     time before the mapping is removed.  To be certain data has
+     actually been written to the file and will be accessible to
+     non-memory-mapped I/O, it is necessary to use this function.
+
+     It operates on the region ADDRESS to (ADDRESS + LENGTH).  It may
+     be used on part of a mapping or multiple mappings, however the
+     region given should not contain any unmapped space.
+
+     FLAGS can contain some options:
+
+    `MS_SYNC'
+          This flag makes sure the data is actually written _to disk_.
+          Normally `msync' only makes sure that accesses to a file with
+          conventional I/O reflect the recent changes.
+
+    `MS_ASYNC'
+          This tells `msync' to begin the synchronization, but not to
+          wait for it to complete.
+
+     `msync' returns 0 for success and -1 for error.  Errors include:
+
+    `EINVAL'
+          An invalid region was given, or the FLAGS were invalid.
+
+    `EFAULT'
+          There is no existing mapping in at least part of the given
+          region.
+
+
+ - Function: void * mremap (void *ADDRESS, size_t LENGTH, size_t
+          NEW_LENGTH, int FLAG)
+     This function can be used to change the size of an existing memory
+     area. ADDRESS and LENGTH must cover a region entirely mapped in
+     the same `mmap' statement. A new mapping with the same
+     characteristics will be returned with the length NEW_LENGTH.
+
+     One option is possible, `MREMAP_MAYMOVE'. If it is given in FLAGS,
+     the system may remove the existing mapping and create a new one of
+     the desired length in another location.
+
+     The address of the resulting mapping is returned, or -1. Possible
+     error codes include:
+
+    `EFAULT'
+          There is no existing mapping in at least part of the original
+          region, or the region covers two or more distinct mappings.
+
+    `EINVAL'
+          The address given is misaligned or inappropriate.
+
+    `EAGAIN'
+          The region has pages locked, and if extended it would exceed
+          the process's resource limit for locked pages.  *Note Limits
+          on Resources::.
+
+    `ENOMEM'
+          The region is private writable, and insufficient virtual
+          memory is available to extend it.  Also, this error will
+          occur if `MREMAP_MAYMOVE' is not given and the extension
+          would collide with another mapped region.
+
+
+   This function is only available on a few systems.  Except for
+performing optional optimizations one should not rely on this function.
+
+   Not all file descriptors may be mapped.  Sockets, pipes, and most
+devices only allow sequential access and do not fit into the mapping
+abstraction.  In addition, some regular files may not be mmapable, and
+older kernels may not support mapping at all.  Thus, programs using
+`mmap' should have a fallback method to use should it fail. *Note Mmap:
+(standards)Mmap.
+
+ - Function: int madvise (void *ADDR, size_t LENGTH, int ADVICE)
+     This function can be used to provide the system with ADVICE about
+     the intended usage patterns of the memory region starting at ADDR
+     and extending LENGTH bytes.
+
+     The valid BSD values for ADVICE are:
+
+    `MADV_NORMAL'
+          The region should receive no further special treatment.
+
+    `MADV_RANDOM'
+          The region will be accessed via random page references. The
+          kernel should page-in the minimal number of pages for each
+          page fault.
+
+    `MADV_SEQUENTIAL'
+          The region will be accessed via sequential page references.
+          This may cause the kernel to aggressively read-ahead,
+          expecting further sequential references after any page fault
+          within this region.
+
+    `MADV_WILLNEED'
+          The region will be needed.  The pages within this region may
+          be pre-faulted in by the kernel.
+
+    `MADV_DONTNEED'
+          The region is no longer needed.  The kernel may free these
+          pages, causing any changes to the pages to be lost, as well
+          as swapped out pages to be discarded.
+
+     The POSIX names are slightly different, but with the same meanings:
+
+    `POSIX_MADV_NORMAL'
+          This corresponds with BSD's `MADV_NORMAL'.
+
+    `POSIX_MADV_RANDOM'
+          This corresponds with BSD's `MADV_RANDOM'.
+
+    `POSIX_MADV_SEQUENTIAL'
+          This corresponds with BSD's `MADV_SEQUENTIAL'.
+
+    `POSIX_MADV_WILLNEED'
+          This corresponds with BSD's `MADV_WILLNEED'.
+
+    `POSIX_MADV_DONTNEED'
+          This corresponds with BSD's `MADV_DONTNEED'.
+
+     `msync' returns 0 for success and -1 for error.  Errors include:
+    `EINVAL'
+          An invalid region was given, or the ADVICE was invalid.
+
+    `EFAULT'
+          There is no existing mapping in at least part of the given
+          region.
+
+
+
+File: libc.info,  Node: Waiting for I/O,  Next: Synchronizing I/O,  Prev: Memory-mapped I/O,  Up: Low-Level I/O
+
+Waiting for Input or Output
+===========================
+
+   Sometimes a program needs to accept input on multiple input channels
+whenever input arrives.  For example, some workstations may have devices
+such as a digitizing tablet, function button box, or dial box that are
+connected via normal asynchronous serial interfaces; good user interface
+style requires responding immediately to input on any device.  Another
+example is a program that acts as a server to several other processes
+via pipes or sockets.
+
+   You cannot normally use `read' for this purpose, because this blocks
+the program until input is available on one particular file descriptor;
+input on other channels won't wake it up.  You could set nonblocking
+mode and poll each file descriptor in turn, but this is very
+inefficient.
+
+   A better solution is to use the `select' function.  This blocks the
+program until input or output is ready on a specified set of file
+descriptors, or until a timer expires, whichever comes first.  This
+facility is declared in the header file `sys/types.h'.
+
+   In the case of a server socket (*note Listening::), we say that
+"input" is available when there are pending connections that could be
+accepted (*note Accepting Connections::).  `accept' for server sockets
+blocks and interacts with `select' just as `read' does for normal input.
+
+   The file descriptor sets for the `select' function are specified as
+`fd_set' objects.  Here is the description of the data type and some
+macros for manipulating these objects.
+
+ - Data Type: fd_set
+     The `fd_set' data type represents file descriptor sets for the
+     `select' function.  It is actually a bit array.
+
+ - Macro: int FD_SETSIZE
+     The value of this macro is the maximum number of file descriptors
+     that a `fd_set' object can hold information about.  On systems
+     with a fixed maximum number, `FD_SETSIZE' is at least that number.
+     On some systems, including GNU, there is no absolute limit on the
+     number of descriptors open, but this macro still has a constant
+     value which controls the number of bits in an `fd_set'; if you get
+     a file descriptor with a value as high as `FD_SETSIZE', you cannot
+     put that descriptor into an `fd_set'.
+
+ - Macro: void FD_ZERO (fd_set *SET)
+     This macro initializes the file descriptor set SET to be the empty
+     set.
+
+ - Macro: void FD_SET (int FILEDES, fd_set *SET)
+     This macro adds FILEDES to the file descriptor set SET.
+
+     The FILEDES parameter must not have side effects since it is
+     evaluated more than once.
+
+ - Macro: void FD_CLR (int FILEDES, fd_set *SET)
+     This macro removes FILEDES from the file descriptor set SET.
+
+     The FILEDES parameter must not have side effects since it is
+     evaluated more than once.
+
+ - Macro: int FD_ISSET (int FILEDES, const fd_set *SET)
+     This macro returns a nonzero value (true) if FILEDES is a member
+     of the file descriptor set SET, and zero (false) otherwise.
+
+     The FILEDES parameter must not have side effects since it is
+     evaluated more than once.
+
+   Next, here is the description of the `select' function itself.
+
+ - Function: int select (int NFDS, fd_set *READ-FDS, fd_set *WRITE-FDS,
+          fd_set *EXCEPT-FDS, struct timeval *TIMEOUT)
+     The `select' function blocks the calling process until there is
+     activity on any of the specified sets of file descriptors, or
+     until the timeout period has expired.
+
+     The file descriptors specified by the READ-FDS argument are
+     checked to see if they are ready for reading; the WRITE-FDS file
+     descriptors are checked to see if they are ready for writing; and
+     the EXCEPT-FDS file descriptors are checked for exceptional
+     conditions.  You can pass a null pointer for any of these
+     arguments if you are not interested in checking for that kind of
+     condition.
+
+     A file descriptor is considered ready for reading if a `read' call
+     will not block.  This usually includes the read offset being at
+     the end of the file or there is an error to report.  A server
+     socket is considered ready for reading if there is a pending
+     connection which can be accepted with `accept'; *note Accepting
+     Connections::.  A client socket is ready for writing when its
+     connection is fully established; *note Connecting::.
+
+     "Exceptional conditions" does not mean errors--errors are reported
+     immediately when an erroneous system call is executed, and do not
+     constitute a state of the descriptor.  Rather, they include
+     conditions such as the presence of an urgent message on a socket.
+     (*Note Sockets::, for information on urgent messages.)
+
+     The `select' function checks only the first NFDS file descriptors.
+     The usual thing is to pass `FD_SETSIZE' as the value of this
+     argument.
+
+     The TIMEOUT specifies the maximum time to wait.  If you pass a
+     null pointer for this argument, it means to block indefinitely
+     until one of the file descriptors is ready.  Otherwise, you should
+     provide the time in `struct timeval' format; see *Note
+     High-Resolution Calendar::.  Specify zero as the time (a `struct
+     timeval' containing all zeros) if you want to find out which
+     descriptors are ready without waiting if none are ready.
+
+     The normal return value from `select' is the total number of ready
+     file descriptors in all of the sets.  Each of the argument sets is
+     overwritten with information about the descriptors that are ready
+     for the corresponding operation.  Thus, to see if a particular
+     descriptor DESC has input, use `FD_ISSET (DESC, READ-FDS)' after
+     `select' returns.
+
+     If `select' returns because the timeout period expires, it returns
+     a value of zero.
+
+     Any signal will cause `select' to return immediately.  So if your
+     program uses signals, you can't rely on `select' to keep waiting
+     for the full time specified.  If you want to be sure of waiting
+     for a particular amount of time, you must check for `EINTR' and
+     repeat the `select' with a newly calculated timeout based on the
+     current time.  See the example below.  See also *Note Interrupted
+     Primitives::.
+
+     If an error occurs, `select' returns `-1' and does not modify the
+     argument file descriptor sets.  The following `errno' error
+     conditions are defined for this function:
+
+    `EBADF'
+          One of the file descriptor sets specified an invalid file
+          descriptor.
+
+    `EINTR'
+          The operation was interrupted by a signal.  *Note Interrupted
+          Primitives::.
+
+    `EINVAL'
+          The TIMEOUT argument is invalid; one of the components is
+          negative or too large.
+
+   *Portability Note:*  The `select' function is a BSD Unix feature.
+
+   Here is an example showing how you can use `select' to establish a
+timeout period for reading from a file descriptor.  The `input_timeout'
+function blocks the calling process until input is available on the
+file descriptor, or until the timeout period expires.
+
+     #include <errno.h>
+     #include <stdio.h>
+     #include <unistd.h>
+     #include <sys/types.h>
+     #include <sys/time.h>
+     
+     int
+     input_timeout (int filedes, unsigned int seconds)
+     {
+       fd_set set;
+       struct timeval timeout;
+     
+       /* Initialize the file descriptor set. */
+       FD_ZERO (&set);
+       FD_SET (filedes, &set);
+     
+       /* Initialize the timeout data structure. */
+       timeout.tv_sec = seconds;
+       timeout.tv_usec = 0;
+     
+       /* `select' returns 0 if timeout, 1 if input available, -1 if error. */
+       return TEMP_FAILURE_RETRY (select (FD_SETSIZE,
+                                          &set, NULL, NULL,
+                                          &timeout));
+     }
+     
+     int
+     main (void)
+     {
+       fprintf (stderr, "select returned %d.\n",
+                input_timeout (STDIN_FILENO, 5));
+       return 0;
+     }
+
+   There is another example showing the use of `select' to multiplex
+input from multiple sockets in *Note Server Example::.
+
+
+File: libc.info,  Node: Synchronizing I/O,  Next: Asynchronous I/O,  Prev: Waiting for I/O,  Up: Low-Level I/O
+
+Synchronizing I/O operations
+============================
+
+   In most modern operating systems, the normal I/O operations are not
+executed synchronously.  I.e., even if a `write' system call returns,
+this does not mean the data is actually written to the media, e.g., the
+disk.
+
+   In situations where synchronization points are necessary, you can use
+special functions which ensure that all operations finish before they
+return.
+
+ - Function: int sync (void)
+     A call to this function will not return as long as there is data
+     which has not been written to the device.  All dirty buffers in
+     the kernel will be written and so an overall consistent system can
+     be achieved (if no other process in parallel writes data).
+
+     A prototype for `sync' can be found in `unistd.h'.
+
+     The return value is zero to indicate no error.
+
+   Programs more often want to ensure that data written to a given file
+is committed, rather than all data in the system.  For this, `sync' is
+overkill.
+
+ - Function: int fsync (int FILDES)
+     The `fsync' function can be used to make sure all data associated
+     with the open file FILDES is written to the device associated with
+     the descriptor.  The function call does not return unless all
+     actions have finished.
+
+     A prototype for `fsync' can be found in `unistd.h'.
+
+     This function is a cancellation point in multi-threaded programs.
+     This is a problem if the thread allocates some resources (like
+     memory, file descriptors, semaphores or whatever) at the time
+     `fsync' is called.  If the thread gets canceled these resources
+     stay allocated until the program ends.  To avoid this, calls to
+     `fsync' should be protected using cancellation handlers.
+
+     The return value of the function is zero if no error occurred.
+     Otherwise it is -1 and the global variable ERRNO is set to the
+     following values:
+    `EBADF'
+          The descriptor FILDES is not valid.
+
+    `EINVAL'
+          No synchronization is possible since the system does not
+          implement this.
+
+   Sometimes it is not even necessary to write all data associated with
+a file descriptor.  E.g., in database files which do not change in size
+it is enough to write all the file content data to the device.
+Meta-information, like the modification time etc., are not that
+important and leaving such information uncommitted does not prevent a
+successful recovering of the file in case of a problem.
+
+ - Function: int fdatasync (int FILDES)
+     When a call to the `fdatasync' function returns, it is ensured
+     that all of the file data is written to the device.  For all
+     pending I/O operations, the parts guaranteeing data integrity
+     finished.
+
+     Not all systems implement the `fdatasync' operation.  On systems
+     missing this functionality `fdatasync' is emulated by a call to
+     `fsync' since the performed actions are a superset of those
+     required by `fdatasync'.
+
+     The prototype for `fdatasync' is in `unistd.h'.
+
+     The return value of the function is zero if no error occurred.
+     Otherwise it is -1 and the global variable ERRNO is set to the
+     following values:
+    `EBADF'
+          The descriptor FILDES is not valid.
+
+    `EINVAL'
+          No synchronization is possible since the system does not
+          implement this.
+
+
+File: libc.info,  Node: Asynchronous I/O,  Next: Control Operations,  Prev: Synchronizing I/O,  Up: Low-Level I/O
+
+Perform I/O Operations in Parallel
+==================================
+
+   The POSIX.1b standard defines a new set of I/O operations which can
+significantly reduce the time an application spends waiting at I/O.  The
+new functions allow a program to initiate one or more I/O operations and
+then immediately resume normal work while the I/O operations are
+executed in parallel.  This functionality is available if the
+`unistd.h' file defines the symbol `_POSIX_ASYNCHRONOUS_IO'.
+
+   These functions are part of the library with realtime functions named
+`librt'.  They are not actually part of the `libc' binary.  The
+implementation of these functions can be done using support in the
+kernel (if available) or using an implementation based on threads at
+userlevel.  In the latter case it might be necessary to link
+applications with the thread library `libpthread' in addition to
+`librt'.
+
+   All AIO operations operate on files which were opened previously.
+There might be arbitrarily many operations running for one file.  The
+asynchronous I/O operations are controlled using a data structure named
+`struct aiocb' ("AIO control block").  It is defined in `aio.h' as
+follows.
+
+ - Data Type: struct aiocb
+     The POSIX.1b standard mandates that the `struct aiocb' structure
+     contains at least the members described in the following table.
+     There might be more elements which are used by the implementation,
+     but depending upon these elements is not portable and is highly
+     deprecated.
+
+    `int aio_fildes'
+          This element specifies the file descriptor to be used for the
+          operation.  It must be a legal descriptor, otherwise the
+          operation will fail.
+
+          The device on which the file is opened must allow the seek
+          operation.  I.e., it is not possible to use any of the AIO
+          operations on devices like terminals where an `lseek' call
+          would lead to an error.
+
+    `off_t aio_offset'
+          This element specifies the offset in the file at which the
+          operation (input or output) is performed.  Since the
+          operations are carried out in arbitrary order and more than
+          one operation for one file descriptor can be started, one
+          cannot expect a current read/write position of the file
+          descriptor.
+
+    `volatile void *aio_buf'
+          This is a pointer to the buffer with the data to be written
+          or the place where the read data is stored.
+
+    `size_t aio_nbytes'
+          This element specifies the length of the buffer pointed to by
+          `aio_buf'.
+
+    `int aio_reqprio'
+          If the platform has defined `_POSIX_PRIORITIZED_IO' and
+          `_POSIX_PRIORITY_SCHEDULING', the AIO requests are processed
+          based on the current scheduling priority.  The `aio_reqprio'
+          element can then be used to lower the priority of the AIO
+          operation.
+
+    `struct sigevent aio_sigevent'
+          This element specifies how the calling process is notified
+          once the operation terminates.  If the `sigev_notify' element
+          is `SIGEV_NONE', no notification is sent.  If it is
+          `SIGEV_SIGNAL', the signal determined by `sigev_signo' is
+          sent.  Otherwise, `sigev_notify' must be `SIGEV_THREAD'.  In
+          this case, a thread is created which starts executing the
+          function pointed to by `sigev_notify_function'.
+
+    `int aio_lio_opcode'
+          This element is only used by the `lio_listio' and
+          `lio_listio64' functions.  Since these functions allow an
+          arbitrary number of operations to start at once, and each
+          operation can be input or output (or nothing), the
+          information must be stored in the control block.  The
+          possible values are:
+
+         `LIO_READ'
+               Start a read operation.  Read from the file at position
+               `aio_offset' and store the next `aio_nbytes' bytes in the
+               buffer pointed to by `aio_buf'.
+
+         `LIO_WRITE'
+               Start a write operation.  Write `aio_nbytes' bytes
+               starting at `aio_buf' into the file starting at position
+               `aio_offset'.
+
+         `LIO_NOP'
+               Do nothing for this control block.  This value is useful
+               sometimes when an array of `struct aiocb' values
+               contains holes, i.e., some of the values must not be
+               handled although the whole array is presented to the
+               `lio_listio' function.
+
+     When the sources are compiled using `_FILE_OFFSET_BITS == 64' on a
+     32 bit machine, this type is in fact `struct aiocb64', since the
+     LFS interface transparently replaces the `struct aiocb' definition.
+
+   For use with the AIO functions defined in the LFS, there is a
+similar type defined which replaces the types of the appropriate
+members with larger types but otherwise is equivalent to `struct
+aiocb'.  Particularly, all member names are the same.
+
+ - Data Type: struct aiocb64
+    `int aio_fildes'
+          This element specifies the file descriptor which is used for
+          the operation.  It must be a legal descriptor since otherwise
+          the operation fails for obvious reasons.
+
+          The device on which the file is opened must allow the seek
+          operation.  I.e., it is not possible to use any of the AIO
+          operations on devices like terminals where an `lseek' call
+          would lead to an error.
+
+    `off64_t aio_offset'
+          This element specifies at which offset in the file the
+          operation (input or output) is performed.  Since the
+          operation are carried in arbitrary order and more than one
+          operation for one file descriptor can be started, one cannot
+          expect a current read/write position of the file descriptor.
+
+    `volatile void *aio_buf'
+          This is a pointer to the buffer with the data to be written
+          or the place where the read data is stored.
+
+    `size_t aio_nbytes'
+          This element specifies the length of the buffer pointed to by
+          `aio_buf'.
+
+    `int aio_reqprio'
+          If for the platform `_POSIX_PRIORITIZED_IO' and
+          `_POSIX_PRIORITY_SCHEDULING' are defined the AIO requests are
+          processed based on the current scheduling priority.  The
+          `aio_reqprio' element can then be used to lower the priority
+          of the AIO operation.
+
+    `struct sigevent aio_sigevent'
+          This element specifies how the calling process is notified
+          once the operation terminates.  If the `sigev_notify',
+          element is `SIGEV_NONE' no notification is sent.  If it is
+          `SIGEV_SIGNAL', the signal determined by `sigev_signo' is
+          sent.  Otherwise, `sigev_notify' must be `SIGEV_THREAD' in
+          which case a thread which starts executing the function
+          pointed to by `sigev_notify_function'.
+
+    `int aio_lio_opcode'
+          This element is only used by the `lio_listio' and
+          `[lio_listio64' functions.  Since these functions allow an
+          arbitrary number of operations to start at once, and since
+          each operation can be input or output (or nothing), the
+          information must be stored in the control block.  See the
+          description of `struct aiocb' for a description of the
+          possible values.
+
+     When the sources are compiled using `_FILE_OFFSET_BITS == 64' on a
+     32 bit machine, this type is available under the name `struct
+     aiocb64', since the LFS transparently replaces the old interface.
+
+* Menu:
+
+* Asynchronous Reads/Writes::    Asynchronous Read and Write Operations.
+* Status of AIO Operations::     Getting the Status of AIO Operations.
+* Synchronizing AIO Operations:: Getting into a consistent state.
+* Cancel AIO Operations::        Cancellation of AIO Operations.
+* Configuration of AIO::         How to optimize the AIO implementation.
+
+
+File: libc.info,  Node: Asynchronous Reads/Writes,  Next: Status of AIO Operations,  Up: Asynchronous I/O
+
+Asynchronous Read and Write Operations
+--------------------------------------
+
+ - Function: int aio_read (struct aiocb *AIOCBP)
+     This function initiates an asynchronous read operation.  It
+     immediately returns after the operation was enqueued or when an
+     error was encountered.
+
+     The first `aiocbp->aio_nbytes' bytes of the file for which
+     `aiocbp->aio_fildes' is a descriptor are written to the buffer
+     starting at `aiocbp->aio_buf'.  Reading starts at the absolute
+     position `aiocbp->aio_offset' in the file.
+
+     If prioritized I/O is supported by the platform the
+     `aiocbp->aio_reqprio' value is used to adjust the priority before
+     the request is actually enqueued.
+
+     The calling process is notified about the termination of the read
+     request according to the `aiocbp->aio_sigevent' value.
+
+     When `aio_read' returns, the return value is zero if no error
+     occurred that can be found before the process is enqueued.  If
+     such an early error is found, the function returns -1 and sets
+     `errno' to one of the following values:
+
+    `EAGAIN'
+          The request was not enqueued due to (temporarily) exceeded
+          resource limitations.
+
+    `ENOSYS'
+          The `aio_read' function is not implemented.
+
+    `EBADF'
+          The `aiocbp->aio_fildes' descriptor is not valid.  This
+          condition need not be recognized before enqueueing the
+          request and so this error might also be signaled
+          asynchronously.
+
+    `EINVAL'
+          The `aiocbp->aio_offset' or `aiocbp->aio_reqpiro' value is
+          invalid.  This condition need not be recognized before
+          enqueueing the request and so this error might also be
+          signaled asynchronously.
+
+     If `aio_read' returns zero, the current status of the request can
+     be queried using `aio_error' and `aio_return' functions.  As long
+     as the value returned by `aio_error' is `EINPROGRESS' the
+     operation has not yet completed.  If `aio_error' returns zero, the
+     operation successfully terminated, otherwise the value is to be
+     interpreted as an error code.  If the function terminated, the
+     result of the operation can be obtained using a call to
+     `aio_return'.  The returned value is the same as an equivalent
+     call to `read' would have returned.  Possible error codes returned
+     by `aio_error' are:
+
+    `EBADF'
+          The `aiocbp->aio_fildes' descriptor is not valid.
+
+    `ECANCELED'
+          The operation was canceled before the operation was finished
+          (*note Cancel AIO Operations::)
+
+    `EINVAL'
+          The `aiocbp->aio_offset' value is invalid.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64' this
+     function is in fact `aio_read64' since the LFS interface
+     transparently replaces the normal implementation.
+
+ - Function: int aio_read64 (struct aiocb *AIOCBP)
+     This function is similar to the `aio_read' function.  The only
+     difference is that on 32 bit machines, the file descriptor should
+     be opened in the large file mode.  Internally, `aio_read64' uses
+     functionality equivalent to `lseek64' (*note File Position
+     Primitive::) to position the file descriptor correctly for the
+     reading, as opposed to `lseek' functionality used in `aio_read'.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64', this
+     function is available under the name `aio_read' and so
+     transparently replaces the interface for small files on 32 bit
+     machines.
+
+   To write data asynchronously to a file, there exists an equivalent
+pair of functions with a very similar interface.
+
+ - Function: int aio_write (struct aiocb *AIOCBP)
+     This function initiates an asynchronous write operation.  The
+     function call immediately returns after the operation was enqueued
+     or if before this happens an error was encountered.
+
+     The first `aiocbp->aio_nbytes' bytes from the buffer starting at
+     `aiocbp->aio_buf' are written to the file for which
+     `aiocbp->aio_fildes' is an descriptor, starting at the absolute
+     position `aiocbp->aio_offset' in the file.
+
+     If prioritized I/O is supported by the platform, the
+     `aiocbp->aio_reqprio' value is used to adjust the priority before
+     the request is actually enqueued.
+
+     The calling process is notified about the termination of the read
+     request according to the `aiocbp->aio_sigevent' value.
+
+     When `aio_write' returns, the return value is zero if no error
+     occurred that can be found before the process is enqueued.  If
+     such an early error is found the function returns -1 and sets
+     `errno' to one of the following values.
+
+    `EAGAIN'
+          The request was not enqueued due to (temporarily) exceeded
+          resource limitations.
+
+    `ENOSYS'
+          The `aio_write' function is not implemented.
+
+    `EBADF'
+          The `aiocbp->aio_fildes' descriptor is not valid.  This
+          condition may not be recognized before enqueueing the
+          request, and so this error might also be signaled
+          asynchronously.
+
+    `EINVAL'
+          The `aiocbp->aio_offset' or `aiocbp->aio_reqprio' value is
+          invalid.  This condition may not be recognized before
+          enqueueing the request and so this error might also be
+          signaled asynchronously.
+
+     In the case `aio_write' returns zero, the current status of the
+     request can be queried using `aio_error' and `aio_return'
+     functions.  As long as the value returned by `aio_error' is
+     `EINPROGRESS' the operation has not yet completed.  If `aio_error'
+     returns zero, the operation successfully terminated, otherwise the
+     value is to be interpreted as an error code.  If the function
+     terminated, the result of the operation can be get using a call to
+     `aio_return'.  The returned value is the same as an equivalent
+     call to `read' would have returned.  Possible error codes returned
+     by `aio_error' are:
+
+    `EBADF'
+          The `aiocbp->aio_fildes' descriptor is not valid.
+
+    `ECANCELED'
+          The operation was canceled before the operation was finished.
+          (*note Cancel AIO Operations::)
+
+    `EINVAL'
+          The `aiocbp->aio_offset' value is invalid.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64', this
+     function is in fact `aio_write64' since the LFS interface
+     transparently replaces the normal implementation.
+
+ - Function: int aio_write64 (struct aiocb *AIOCBP)
+     This function is similar to the `aio_write' function.  The only
+     difference is that on 32 bit machines the file descriptor should
+     be opened in the large file mode.  Internally `aio_write64' uses
+     functionality equivalent to `lseek64' (*note File Position
+     Primitive::) to position the file descriptor correctly for the
+     writing, as opposed to `lseek' functionality used in `aio_write'.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64', this
+     function is available under the name `aio_write' and so
+     transparently replaces the interface for small files on 32 bit
+     machines.
+
+   Besides these functions with the more or less traditional interface,
+POSIX.1b also defines a function which can initiate more than one
+operation at a time, and which can handle freely mixed read and write
+operations.  It is therefore similar to a combination of `readv' and
+`writev'.
+
+ - Function: int lio_listio (int MODE, struct aiocb *const LIST[], int
+          NENT, struct sigevent *SIG)
+     The `lio_listio' function can be used to enqueue an arbitrary
+     number of read and write requests at one time.  The requests can
+     all be meant for the same file, all for different files or every
+     solution in between.
+
+     `lio_listio' gets the NENT requests from the array pointed to by
+     LIST.  The operation to be performed is determined by the
+     `aio_lio_opcode' member in each element of LIST.  If this field is
+     `LIO_READ' a read operation is enqueued, similar to a call of
+     `aio_read' for this element of the array (except that the way the
+     termination is signalled is different, as we will see below).  If
+     the `aio_lio_opcode' member is `LIO_WRITE' a write operation is
+     enqueued.  Otherwise the `aio_lio_opcode' must be `LIO_NOP' in
+     which case this element of LIST is simply ignored.  This
+     "operation" is useful in situations where one has a fixed array of
+     `struct aiocb' elements from which only a few need to be handled at
+     a time.  Another situation is where the `lio_listio' call was
+     canceled before all requests are processed (*note Cancel AIO
+     Operations::) and the remaining requests have to be reissued.
+
+     The other members of each element of the array pointed to by
+     `list' must have values suitable for the operation as described in
+     the documentation for `aio_read' and `aio_write' above.
+
+     The MODE argument determines how `lio_listio' behaves after having
+     enqueued all the requests.  If MODE is `LIO_WAIT' it waits until
+     all requests terminated.  Otherwise MODE must be `LIO_NOWAIT' and
+     in this case the function returns immediately after having
+     enqueued all the requests.  In this case the caller gets a
+     notification of the termination of all requests according to the
+     SIG parameter.  If SIG is `NULL' no notification is send.
+     Otherwise a signal is sent or a thread is started, just as
+     described in the description for `aio_read' or `aio_write'.
+
+     If MODE is `LIO_WAIT', the return value of `lio_listio' is 0 when
+     all requests completed successfully.  Otherwise the function
+     return -1 and `errno' is set accordingly.  To find out which
+     request or requests failed one has to use the `aio_error' function
+     on all the elements of the array LIST.
+
+     In case MODE is `LIO_NOWAIT', the function returns 0 if all
+     requests were enqueued correctly.  The current state of the
+     requests can be found using `aio_error' and `aio_return' as
+     described above.  If `lio_listio' returns -1 in this mode, the
+     global variable `errno' is set accordingly.  If a request did not
+     yet terminate, a call to `aio_error' returns `EINPROGRESS'.  If
+     the value is different, the request is finished and the error
+     value (or 0) is returned and the result of the operation can be
+     retrieved using `aio_return'.
+
+     Possible values for `errno' are:
+
+    `EAGAIN'
+          The resources necessary to queue all the requests are not
+          available at the moment.  The error status for each element
+          of LIST must be checked to determine which request failed.
+
+          Another reason could be that the system wide limit of AIO
+          requests is exceeded.  This cannot be the case for the
+          implementation on GNU systems since no arbitrary limits exist.
+
+    `EINVAL'
+          The MODE parameter is invalid or NENT is larger than
+          `AIO_LISTIO_MAX'.
+
+    `EIO'
+          One or more of the request's I/O operations failed.  The
+          error status of each request should be checked to determine
+          which one failed.
+
+    `ENOSYS'
+          The `lio_listio' function is not supported.
+
+     If the MODE parameter is `LIO_NOWAIT' and the caller cancels a
+     request, the error status for this request returned by `aio_error'
+     is `ECANCELED'.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64', this
+     function is in fact `lio_listio64' since the LFS interface
+     transparently replaces the normal implementation.
+
+ - Function: int lio_listio64 (int MODE, struct aiocb *const LIST, int
+          NENT, struct sigevent *SIG)
+     This function is similar to the `lio_listio' function.  The only
+     difference is that on 32 bit machines, the file descriptor should
+     be opened in the large file mode.  Internally, `lio_listio64' uses
+     functionality equivalent to `lseek64' (*note File Position
+     Primitive::) to position the file descriptor correctly for the
+     reading or writing, as opposed to `lseek' functionality used in
+     `lio_listio'.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64', this
+     function is available under the name `lio_listio' and so
+     transparently replaces the interface for small files on 32 bit
+     machines.
+
+
+File: libc.info,  Node: Status of AIO Operations,  Next: Synchronizing AIO Operations,  Prev: Asynchronous Reads/Writes,  Up: Asynchronous I/O
+
+Getting the Status of AIO Operations
+------------------------------------
+
+   As already described in the documentation of the functions in the
+last section, it must be possible to get information about the status
+of an I/O request.  When the operation is performed truly
+asynchronously (as with `aio_read' and `aio_write' and with
+`lio_listio' when the mode is `LIO_NOWAIT'), one sometimes needs to
+know whether a specific request already terminated and if so, what the
+result was.  The following two functions allow you to get this kind of
+information.
+
+ - Function: int aio_error (const struct aiocb *AIOCBP)
+     This function determines the error state of the request described
+     by the `struct aiocb' variable pointed to by AIOCBP.  If the
+     request has not yet terminated the value returned is always
+     `EINPROGRESS'.  Once the request has terminated the value
+     `aio_error' returns is either 0 if the request completed
+     successfully or it returns the value which would be stored in the
+     `errno' variable if the request would have been done using `read',
+     `write', or `fsync'.
+
+     The function can return `ENOSYS' if it is not implemented.  It
+     could also return `EINVAL' if the AIOCBP parameter does not refer
+     to an asynchronous operation whose return status is not yet known.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64' this
+     function is in fact `aio_error64' since the LFS interface
+     transparently replaces the normal implementation.
+
+ - Function: int aio_error64 (const struct aiocb64 *AIOCBP)
+     This function is similar to `aio_error' with the only difference
+     that the argument is a reference to a variable of type `struct
+     aiocb64'.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64' this
+     function is available under the name `aio_error' and so
+     transparently replaces the interface for small files on 32 bit
+     machines.
+
+ - Function: ssize_t aio_return (const struct aiocb *AIOCBP)
+     This function can be used to retrieve the return status of the
+     operation carried out by the request described in the variable
+     pointed to by AIOCBP.  As long as the error status of this request
+     as returned by `aio_error' is `EINPROGRESS' the return of this
+     function is undefined.
+
+     Once the request is finished this function can be used exactly
+     once to retrieve the return value.  Following calls might lead to
+     undefined behavior.  The return value itself is the value which
+     would have been returned by the `read', `write', or `fsync' call.
+
+     The function can return `ENOSYS' if it is not implemented.  It
+     could also return `EINVAL' if the AIOCBP parameter does not refer
+     to an asynchronous operation whose return status is not yet known.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64' this
+     function is in fact `aio_return64' since the LFS interface
+     transparently replaces the normal implementation.
+
+ - Function: int aio_return64 (const struct aiocb64 *AIOCBP)
+     This function is similar to `aio_return' with the only difference
+     that the argument is a reference to a variable of type `struct
+     aiocb64'.
+
+     When the sources are compiled with `_FILE_OFFSET_BITS == 64' this
+     function is available under the name `aio_return' and so
+     transparently replaces the interface for small files on 32 bit
+     machines.
+

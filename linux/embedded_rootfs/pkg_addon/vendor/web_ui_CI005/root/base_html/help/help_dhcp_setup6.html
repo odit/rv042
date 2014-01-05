@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="GENERATOR" content="Quadralay WebWorks AutoMap 2003 Platinum Edition Client for FrameMaker 8.6.6597.0" />
+    <meta name="TEMPLATEBASE" content="emwebh8-1-17" />
+    <meta name="LASTUPDATED" content="07/26/10 15:44:03" />
+    <title>Setting Up the DHCP Server</title>
+    <!-- Copyright ? 2002-2010, Cisco Systems, Inc. All rights reserved. -->
+
+    <link rel="StyleSheet" href="document.css" type="text/css" />
+    <link rel="StyleSheet" href="catalog.css" type="text/css" />
+
+
+<script type="text/javascript" language="JavaScript1.2" src="expand.js"></script>
+    <script type="text/javascript" language="JavaScript1.2" src="page.js"></script>
+
+    <script type="text/javascript" language="JavaScript1.2">
+     <!--
+      function  WWNoOp() {}
+      function  WWNoValue() { return ""; }
+
+      var  VarDropDown;
+
+      if (typeof(HTMLHelp_Object) != "undefined")
+      {
+        VarDropDown = new WWDropDown_Object();
+      }
+      else
+      {
+        VarDropDown = new Object();
+        VarDropDown.fAnchorOpen  = WWNoOp;
+        VarDropDown.fAnchorClose = WWNoOp;
+        VarDropDown.fDIVOpen  = WWNoOp;
+        VarDropDown.fDIVClose = WWNoOp;
+      }
+     // -->
+    </script>
+
+  
+<SCRIPT language="javascript">
+<!--
+//  self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+//  myid=15;
+//  self.document.write("<script type='text/javascript' language='JavaScript' src='con_utils.js'></scr"+"ipt>");
+//-->
+</SCRIPT>
+</head>
+
+  <body onload="highlightSearchTerms();"; bgcolor="#ffffff">
+
+    
+    <blockquote>
+    <a name="top"></a>
+
+    
+    
+
+
+<a name="wp1075902"> </a><h1 class="pTitle">
+Setting Up the DHCP Server
+
+</h1>
+<a name="wp1080537"> </a><p class="pBody">
+Use the <em class="cEmphasis">DHCP &gt; DHCP Setup</em> page to configure this router as a DHCP (Dynamic 
+Host Configuration Protocol) server agent. A DHCP server 
+automatically assigns available IP addresses to computers on your network. An 
+address is &quot;leased&quot; to a client for a specified time, and then it expires and can be 
+assigned to a different device. If a device needs to have an unchanging IP 
+addresses, you can add the device to the Static IP list. Optionally, you can use the 
+Static IP list to block access by devices that are not on the list or do not have the 
+correct IP address.
+
+</p>
+<a name="wp1086314"> </a><p class="pBodyAutonumNoRule">
+<strong>NOTE	&nbsp;&nbsp;&nbsp;</strong> Before navigating away from this page, click <span style="font-weight: bold">Save</span> to save your settings, or click 
+<b class="cBold">Cancel</b> to undo them. Any unsaved changes are abandoned.
+
+</p>
+<a name="wp1077885"> </a><h2 class="pHeading2">
+Enabling DHCP Server
+</h2>
+<a name="wp1086051"> </a><p class="pBody">
+Choose one of the following options:
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1075280"> </a><li class="pSmartList1"><b class="cBold">Enable DHCP server: </b>When this feature is enabled, the router can 
+dynamically assign IP addresses to up to 128 connected devices. 
+</li>
+<a name="wp1084559"> </a><p class="pListBodyLevel1">
+<em class="cEmphasis">Required: </em>Enter the settings in the <b class="cBold">Dynamic IP</b><em class="cEmphasis"> </em>section of the page, as 
+described below. Other sections of this page are optional.
+
+</p>
+</ul></div>
+<a name="wp1084373"> </a><h2 class="pHeading2">
+Dynamic IP
+</h2>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1084707"> </a><li class="pSmartList1"><b class="cBold">Client Lease Time:</b> The Client Lease Time is the amount of time that a 
+network user is allowed to connect to the router with the current dynamic IP 
+address. Enter the amount of time in minutes. The range is 5-43,200 
+minutes. The default is 1440 minutes, which is 24 hours. 
+</li>
+<a name="wp1084708"> </a><p class="pListBodyLevel1">
+<b class="cBold">NOTE: </b>To receive an IP address from the DHCP server, a client device must 
+be configured to obtain an IP address automatically from a DHCP server. By 
+default, Windows computers are set to obtain an IP automatically.
+
+</p>
+<a name="wp1084709"> </a><li class="pSmartList1"><b class="cBold">Range Start </b>and <b class="cBold">Range End:</b> Enter a starting IP address and an ending IP 
+address to create a range of IP addresses that can be assigned 
+dynamically. The range can include up to 512 IP addresses, which is the 
+maximum that the server can assign. The default range is 100-17f. Make 
+sure the router&#39;s LAN IP address is not in this dynamic IP range. For 
+example, if the router uses the default LAN IP address, <span style="font-weight: bold">fc00::1</span>, then the 
+starting value must be fc00::2 or greater.
+</li>
+</ul></div>
+<a name="wp1084705"> </a><h2 class="pHeading2">
+DNS
+</h2>
+<a name="wp1084389"> </a><p class="pBody">
+Optionally, enter the IP address of a <b class="cBold">DNS Server</b>. You also can enter a secondary 
+DNS server. Specifying a DNS server can provide quicker access than using a 
+DNS server that is dynamically assigned through the WAN settings. You can keep 
+the default setting of :: to use a dynamically assigned DNS server.
+
+</p>
+<a name="wp1076804"> </a><h2 class="pHeading2">
+DNS Local Database
+</h2>
+<a name="wp1077275"> </a><p class="pBody">
+Domain Name Service (DNS) is a service that matches a domain name to its 
+routable IP address. You can set up a DNS Local Database that enables the router 
+to act as a local DNS server for commonly used domain names. Using a local 
+database may be faster than using an external DNS server. If a requested domain 
+name is not found in the local database, then the request is forwarded to the DNS 
+server that is specified on the <em class="cEmphasis">Setup &gt; Network </em>page, <em class="cEmphasis">WAN Setting</em> section.
+
+</p>
+<a name="wp1077691"> </a><p class="pBody">
+If you enable this feature, you also must configure the client devices to use the 
+router as the DNS server. By default, Windows computers are set to obtain a DNS 
+server address automatically, from the WAN settings. You need to change the 
+TCP/IP connection settings. For example, on a PC running Windows, go to the 
+<em class="cEmphasis">Local Area Connection Properties &gt; Internet Protocol &gt; TCP/IP Properties</em> 
+window. Choose <em class="cEmphasis">Use the following DNS server address</em>, and then enter the LAN 
+IP address of the router as the Preferred DNS Server. For more information, refer 
+to the documentation for the client that you are configuring.
+
+</p>
+<a name="wp1077363"> </a><p class="pBody">
+Add or update entries as needed. Remember that the settings are not saved until 
+you click the Save button.
+
+</p>
+<div class="pSmartList1"><ul class="pSmartList1">
+<a name="wp1079746"> </a><li class="pSmartList1"><b class="cBold">To add a new entry:</b> Enter the following information. Then click <b class="cBold">Add to list</b>.
+</li>
+<div class="pSmartList2"><ul class="pSmartList2">
+<a name="wp1077364"> </a><li class="pSmartList2"><b class="cBold">Host Name: </b>Enter the domain name, such as <em class="cEmphasis">example.com</em> or <em class="cEmphasis">example.org</em>. If you do not include the final level of the domain name, Microsoft Windows? will automatically append your entry with <em class="cEmphasis">.com</em>.</li>
+<a name="wp1077396"> </a><li class="pSmartList2"><b class="cBold">IP Address</b>: Enter the IP address of the resource.</li>
+</ul></div>
+<a name="wp1079807"> </a><li class="pSmartList1"><b class="cBold">To add another new entry: </b>Enter the information, and then click <b class="cBold">Add to list</b>.
+</li>
+<a name="wp1077758"> </a><li class="pSmartList1"><b class="cBold">To modify the settings for a device: </b>Click a device in the list. The 
+information appears in the text fields. Make the changes, and then click 
+<span style="font-weight: bold">Update</span>. If you do not need to make changes, you can click <b class="cBold">Add New</b> to de-
+select the entry and clear the text fields.
+</li>
+<a name="wp1085746"> </a><li class="pSmartList1"><b class="cBold">To delete an entry from the list:</b> Click the entry that you want to delete, and 
+then click <b class="cBold">Delete</b>. To select a block of entries, click the first entry, hold down 
+the Shift key, and then click the final entry in the block. To select individual 
+entries, press the Ctrl key while clicking each entry. To de-select an entry, 
+press the Ctrl key while clicking the entry.
+</li>
+</ul></div>
+ 
+
+    </blockquote>
+
+  </body>
+</html>

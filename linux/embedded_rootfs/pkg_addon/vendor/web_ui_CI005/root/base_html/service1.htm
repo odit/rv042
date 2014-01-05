@@ -1,0 +1,464 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Service Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+<script language=JavaScript>
+function Entryfunction()
+{
+}
+	
+function Leavefunction()
+{
+	opener.serviceWindow1=null;
+}
+
+var sID=0;
+function falseSubmit(F)
+{
+  F.submitStatus.value=0; 
+  F.submit();
+}
+function tmpWord(n)
+{
+  this.length=n;
+  for (var i=1; i<=n; i++)
+  this[i]=0;
+  return this;
+}
+
+function delSel(s,I)
+{
+  var z;  
+  var k;
+
+  if (s.length > 0)
+  {
+    tmp=new tmpWord(s.length);
+    tmpChanged=new tmpWord(s.length); 
+    opvtmp=new tmpWord(s.length);
+    opvtmpChanged=new tmpWord(s.length); 
+
+    for (var i=0; i < s.length; i++)
+	{
+	  tmp[i+1]=s.options[i].text;
+	  opvtmp[i+1]=s.options[i].value;
+	}	
+
+    for (var i=0; i < s.length; i++)
+	{
+	  if (s.options[i].selected==true)
+	  { 
+		    s.options[i].text="";
+		    s.options[i].value="";
+	        tmp[i+1]=" ";
+	        opvtmp[i+1]=" ";		
+		    s.options[i].selected=false;	
+	  }
+	}
+	k=1;
+	z=0;
+	for (var j=1; j<=s.length; j++) 
+	{ 
+		if (tmp[j]!=" ") 
+		{
+			tmpChanged[k]=tmp[j];
+			opvtmpChanged[k]=opvtmp[j];
+			k++;
+		}
+		 else
+		 {
+	 		z++;
+		 }
+	}
+	for (var i=0; i < s.length-z; i++)
+	{
+	    s.options[i].text=tmpChanged[i+1]; 
+	    s.options[i].value=opvtmpChanged[i+1];  	 
+	}
+	s.length-=z;
+  }
+  clearContent(s.form,I); 
+}
+
+function clearContent(F,I)
+{
+  if (I==F.deletePortRangeService)
+  {
+	F.addPortRangeService.disabled=false;  
+	F.V_name.value="";
+	F.V_protocol.options[0].selected=true;  
+	F.V_portS.value="";
+
+	F.V_name.disabled=false;
+	F.V_protocol.disabled=false;  
+	F.V_portS.disabled=false;
+	F.Vpint.disabled=false;
+	F.Vpint.value="";
+
+	for (var i=0; i < F.PortRangeList.length; i++)
+	  F.PortRangeList.options[i].selected=false;
+    
+	 F.addPortRangeService.value=sAddtoList; 
+	 SetButtonStatus("addPortRangeService", "");	
+	 SetButtonStatus("deletePortRangeService", "disabled");  	 
+	 SetButtonStatus("showNew", "disabled");   
+	
+	//MM_showHideLayers('btnNew','','hidden'); 
+	F.V_name.select();
+  }
+}
+
+function showList(s)
+{
+  if (s.selectedIndex==-1) return;
+  var p;
+  var q; 
+  var forwardString=s.options[s.selectedIndex].value; 
+  var ssID=0;  
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(6); 
+
+  rightString=forwardString;
+  q=rightString.length;      
+  p=rightString.indexOf(splitVarforSpecialWordField);  
+  ts[1]=rightString.substring(0,p);
+  tmpString=rightString; 
+  rightString=tmpString.substring(p+splitVarforSpecialWordField.length,q); 
+
+/*----------------------------------------------------*/  
+    for (var j=2; j<=5; j++)
+    {  
+      q=rightString.length;
+      p=rightString.indexOf(";");
+      ts[j]=rightString.substring(0,p); 
+      tmpString=rightString;
+      rightString=tmpString.substring(p+1,q); 
+    }
+    q=rightString.length;
+    p=rightString.indexOf("}");
+    ts[6]=rightString.substring(0,p); 
+    tmpString=rightString;
+    rightString=tmpString.substring(p+1,q); 
+/*-----------------------------------------------------*/  
+	s.form.V_name.value=ts[1];
+	sID=ts[2];
+	ssID=parseInt(ts[2]);
+	if (ts[3]==6) s.form.V_protocol.selectedIndex=0;
+	if (ts[3]==17) s.form.V_protocol.selectedIndex=1;
+	if (ts[3]==1) s.form.V_protocol.selectedIndex=2;
+	s.form.V_portS.value=ts[4]; 
+	s.form.Vpint.value=ts[6]; 
+	s.form.addPortRangeService.value=sUpdateService; 
+	
+	if (!(ssID>0 && ssID<21))  //new ui
+	{
+		s.form.addPortRangeService.value=sUpdateService;
+		s.form.V_name.disabled =  false; 
+		s.form.V_protocol.disabled =  false; 
+		s.form.V_portS.disabled =  false;  
+		s.form.Vpint.disabled =  false;
+		SetButtonStatus("addPortRangeService", ""); 
+		SetButtonStatus("deletePortRangeService", "");     	
+	}
+	else
+	{
+		//It is default service, you can't delete it!
+		s.form.addPortRangeService.value=sAddtoList;   
+		s.form.V_name.disabled =  true; 
+		s.form.V_protocol.disabled =  true; 
+		s.form.V_portS.disabled =  true;  
+		s.form.Vpint.disabled =  true;   
+		SetButtonStatus("addPortRangeService", "disabled");
+		SetButtonStatus("deletePortRangeService", "disabled");    
+	}
+	
+	SetButtonStatus("showNew", "");  
+}
+function PortRangeaddSel(aName,Pro,ePo1,ePo2,iPo,s) /* */
+{
+  var p=-1;
+  var efP=0;
+  var etP=0;
+
+  var p1;
+  var q; 
+  var forwardString; 
+  var rightString;
+  var tmpString;
+  var ts=new tmpWord(7); 
+    
+  if (aName.value=="")
+  {
+    	alert(aServiceName);
+	return;
+  }
+  else if (ePo1.value=="" || ePo2.value=="")   
+  {
+	alert(aPortExternal);	  
+	return;	
+  }
+  else
+  {
+	if (iPo.value=="") 
+	{
+	  alert(aPortInternal);
+	  return;
+	}	
+
+	if (chValue(aName,Pro,ePo1,ePo2,iPo,s) < 0) return;
+	  
+	if (parseInt(ePo2.value)<parseInt(ePo1.value))   
+	{
+	  efP=ePo1.value;
+	  etP=ePo2.value;
+	  ePo1.value=etP;
+	  ePo2.value=efP;
+	}	
+	
+	if (s.form.addPortRangeService.value==sUpdateService)
+	{
+		p=-1;
+		while (s.form.PortRangeList.options[++p].selected != true);
+	}
+	
+    for (var i=0; i < document.formservice.PortRangeList.length; i++)
+    {
+          
+		forwardString=s.options[i].value; 		  
+		rightString=forwardString;
+		q=rightString.length;      
+		p1=rightString.indexOf(splitVarforSpecialWordField);  
+		ts[1]=rightString.substring(0,p1);
+		tmpString=rightString; 
+		rightString=tmpString.substring(p1+splitVarforSpecialWordField.length,q);      
+
+    		for (var j=2; j<=5; j++)
+    		{  
+      			q=rightString.length;
+      			p1=rightString.indexOf(";");
+      			ts[j]=rightString.substring(0,p1); 
+      			tmpString=rightString;
+      			rightString=tmpString.substring(p1+1,q); 
+    		}
+    		q=rightString.length;
+    		p1=rightString.indexOf("}");
+    		ts[6]=rightString.substring(0,p1); 
+    		tmpString=rightString;
+    		rightString=tmpString.substring(p1+1,q); 	  
+		  
+    }
+	  	
+	for (var i=0; i < s.form.PortRangeList.length; i++)
+    {
+        s.form.PortRangeList.options[i].selected=false;
+    }
+	
+	if (s.form.addPortRangeService.value==sAddtoList)
+	{
+	
+		if (document.formservice.PortRangeList.length>=LimitService)
+  		{
+	      		alert(aLimitService+LimitService+aLimitEnd);
+	      		return;
+  		}	
+		sID=0; 
+		p=s.length; 
+		s.length+=1;
+	}
+	s.options[p].value=aName.value;
+	s.options[p].value+=splitVarforSpecialWordField;
+	s.options[p].value+=sID;
+	s.options[p].value+=";";	
+	s.options[p].value+=Pro.value;
+	s.options[p].value+=";";	
+	s.options[p].value+=ePo1.value;
+	s.options[p].value+=";";
+	s.options[p].value+=ePo2.value;
+	s.options[p].value+=";";
+	s.options[p].value+=iPo.value; 
+	s.options[p].value+="}";   
+	s.options[p].text=aName.value+"["+Pro.options[Pro.selectedIndex].text+"/"+ePo1.value+"->"+iPo.value+"]";
+    
+	clearContent(s.form,s.form.deletePortRangeService);
+  }  		
+}
+
+function chValue(aName,Pro,ePo1,ePo2,iPo,s)
+{
+    if (PortCheck(ePo1) < 0) return -1;
+	if (PortCheck(iPo) < 0) return -1;
+	
+    return 1;
+}
+
+function PortCheck(I)
+{
+  var d;
+  d=parseInt(I.value,10);
+  if (!(d<=65535 && d>0)) 
+  {
+    alert(aPortCheck);
+    I.select();
+    return -1;    
+  }
+  I.value=d;
+  return 1;
+}
+
+function selAll(s)
+{
+	if (s.length>0)
+	{
+		for (var i=0; i < s.length; i++)
+			s.options[i].selected=true;
+	}
+}
+
+function chSubmit(F)
+{
+//new ui
+  F.submitStatus.value=1;
+  selAll(F.PortRangeList); 
+if(opener)
+  opener.closeService();
+  window.status=wSave;   
+  F.submit();
+}
+
+function addtoList()
+{
+  PortRangeaddSel(document.formservice.V_name,document.formservice.V_protocol,document.formservice.V_portS,document.formservice.V_portS,document.formservice.Vpint,document.formservice.PortRangeList);
+}
+var ButtonType = "OkCancelClose";
+var Savelink = "chSubmit(document.formservice);";
+var Cancellink = ""; 
+/************************************************************************/
+</script>
+</head>
+<body class="popwindow">
+<form name="formservice" method="post" action="service1.htm">
+<input type="hidden" name="submitStatus" value="0">
+<input type="hidden" name="service_menu" value='<!--#nk_get serviceListHandle="3"-->'>
+  <table class="pop_list" border="0" width="100%" align="center" cellspacing = "0" cellpadding ="0">
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>      
+    <tr> 
+      <td width="10"></td>
+      <td valign="middle" width="140">Service Name : </td>
+      <td valign="top">
+        <input type="text" name="V_name" maxlength="20" size="20" onFocus="">
+      </td>
+      <td width="10"></td>      
+    </tr>   
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+      <td></td>
+      <td valign="middle">Protocol : </td>
+      <td>
+        <select class="Select" name="V_protocol">
+          <option value="6" selected>TCP</option>
+          <option value="17">UDP</option>
+        </select>
+      </td>
+      <td></td> 
+    </tr>   
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+    <tr> 
+       <td></td> 
+      <td valign="middle">External Port : </td>
+      <td>
+        <input type="text" name="V_portS" maxlength="5" onFocus="this.select();" size="5">
+      </td>
+       <td></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>
+	<tr> 
+       <td></td> 
+      <td valign="middle">Internal Port : </td>
+      <td>
+        <input type="text" name="Vpint" maxlength="5" size="5" onFocus="this.select();">
+      </td>
+       <td></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" height="10"></td>
+    </tr>    
+    <tr> 
+      <td></td>
+      <td align="center" valign="top" colspan="2" height="32">
+         <script>PrintSTButton("addPortRangeService", "Add to list", "addtoList()");</script></td>         
+       <td></td>  
+    </tr>    
+    <tr> 
+      <td></td>
+      <td align="center" colspan="2">    
+        <select multiple class="MultiSelect" name="PortRangeList" size="12" onChange="showList(this.form.PortRangeList);" style="width: 100%">
+	<script language=JavaScript>
+	var i=0, j=-1;
+	var k=0, l, m;
+	var tmp, tmp2, tmp3, tmp4;
+	var outputer;
+	tmp=document.formservice.service_menu.value;
+
+	do{
+		k=tmp.length;
+		index=tmp.indexOf("</option>");
+		tmp2=tmp.substring(0,index);
+		tmp=tmp.substring(index+8,k);
+		/*trace tmp2*/
+		tmp3=tmp2;
+		l=tmp3.indexOf(splitVarforSpecialWordField)
+		tmp4=tmp3.substring(l+splitVarforSpecialWordField.length, tmp3.length);
+	
+		l=tmp4.indexOf("[");
+		m=tmp4.indexOf("/",l+1);
+		PT=tmp4.substring(l+1,m);
+		/*trace tmp2*/
+		if((PT=="TCP")||(PT=="UDP"))
+		{
+			outputer+=tmp2;
+			outputer+="</option>";
+		}
+	}while(index != "-1");
+
+	document.write(outputer);
+	</script>
+        </select> 
+        </td>
+        <td></td>
+    </tr> 
+    <tr> 
+      <td></td>
+      <td align="center" colspan="2" height="40" style="padding-top:5px;padding-bottom:10px">
+       <script>
+           PrintSTButton("deletePortRangeService", "Delete", "delSel(this.form.PortRangeList,this);");
+	    SetButtonStatus("deletePortRangeService", "disabled");
+       </script>         
+	<img border="0" src="images/_blank.gif" width="5" height="0">
+       <script>
+	PrintSTButton("showNew", "Add New", "clearContent(this.form,this.form.deletePortRangeService);");
+	SetButtonStatus("showNew", "disabled");
+       </script> 	   	
+      </td>
+       <td></td>
+    </tr>    
+  </table>
+  <script>PrintEndPopwindow();</script>
+</form>     
+</body>
+</html>
+<!--#nk_get DBUpdate=""-->

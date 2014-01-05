@@ -1,0 +1,2 @@
+::sysinit:/sbin/rc boot
+::respawn:/bin/sh

@@ -1,0 +1,96 @@
+This is ../../src/ld/ld.info, produced by makeinfo version 4.3 from
+../../src/ld/ld.texinfo.
+
+START-INFO-DIR-ENTRY
+* Ld: (ld).                       The GNU linker.
+END-INFO-DIR-ENTRY
+
+   This file documents the GNU linker LD version 2.17.
+
+   Copyright (C) 1991, 92, 93, 94, 95, 96, 97, 98, 99, 2000, 2001,
+2002, 2003, 2004 Free Software Foundation, Inc.
+
+
+Indirect:
+ld.info-1: 357
+
+Tag Table:
+(Indirect)
+Node: Top357
+Node: Overview1122
+Node: Invocation2235
+Node: Options2642
+Node: Environment77277
+Node: Scripts79032
+Node: Basic Script Concepts80765
+Node: Script Format83467
+Node: Simple Example84325
+Node: Simple Commands87416
+Node: Entry Point87862
+Node: File Commands88612
+Node: Format Commands92469
+Node: Miscellaneous Commands94426
+Node: Assignments96647
+Node: Simple Assignments97133
+Node: PROVIDE98856
+Node: PROVIDE_HIDDEN100052
+Node: Source Code Reference100287
+Node: SECTIONS103863
+Node: Output Section Description105749
+Node: Output Section Name106793
+Node: Output Section Address107660
+Node: Input Section109294
+Node: Input Section Basics110086
+Node: Input Section Wildcards112421
+Node: Input Section Common117141
+Node: Input Section Keep118610
+Node: Input Section Example119087
+Node: Output Section Data120044
+Node: Output Section Keywords122812
+Node: Output Section Discarding126371
+Node: Output Section Attributes127316
+Node: Output Section Type128311
+Node: Output Section LMA129452
+Node: Forced Output Alignment131720
+Node: Forced Input Alignment131975
+Node: Output Section Region132347
+Node: Output Section Phdr132764
+Node: Output Section Fill133415
+Node: Overlay Description134544
+Node: MEMORY138783
+Node: PHDRS142978
+Node: VERSION148017
+Node: Expressions155811
+Node: Constants156682
+Node: Symbols157232
+Node: Orphan Sections157959
+Node: Location Counter158711
+Node: Operators163018
+Node: Evaluation163929
+Node: Expression Section165283
+Node: Builtin Functions166759
+Node: Implicit Linker Scripts174237
+Node: Machine Dependent175005
+Node: H8/300175865
+Node: i960177485
+Node: ARM179165
+Node: HPPA ELF32182076
+Node: MMIX183694
+Node: MSP430184906
+Node: PowerPC ELF32185949
+Node: PowerPC64 ELF64188235
+Node: TI COFF192641
+Node: WIN32193168
+Node: Xtensa211279
+Node: BFD214394
+Node: BFD outline215848
+Node: BFD information loss217129
+Node: Canonical format219637
+Node: Reporting Bugs223983
+Node: Bug Criteria224676
+Node: Bug Reporting225370
+Node: MRI232391
+Node: GNU Free Documentation License237015
+Node: Index256714
+
+End Tag Table

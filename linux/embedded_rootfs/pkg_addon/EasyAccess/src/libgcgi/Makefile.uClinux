@@ -1,0 +1,25 @@
+SOURCES= code.o\
+       	common.o\
+       	crlfstringbuf.o\
+       	crypt.o\
+       	gcgi.o\
+       	mime.o\
+       	parse.o
+
+LIB=libgcgi.a
+
+all: $(LIB)
+include ../make-include-uClinux.mk
+
+CFLAGS+=-DHAVE_CONFIG_H -I .
+
+$(LIB): $(SOURCES)
+	$(AR) cr libgcgi.a $(SOURCES)
+
+install:
+
+un-install:
+
+clean:
+	rm -f $(LIB)
+	rm -f *.o

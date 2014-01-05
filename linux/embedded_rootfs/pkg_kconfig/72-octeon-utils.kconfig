@@ -1,0 +1,23 @@
+menu "Octeon Utilities"
+
+config OCTEON_UTILS
+	bool "Include Octeon Utilities"
+	default y
+	help
+		Include Octeon utilities
+
+config CONFIG_oct-linux-csr
+	bool "oct-linux-csr"
+	depends OCTEON_UTILS
+	default y
+	help
+		Usage: oct-linux-csr <CSR> [value]
+		
+		Read or write a CSR by name.
+
+		CSR     Name of CSR to read or write.
+		value   If present, write this value to the CSR. Otherwise do a read.
+
+		If CSR is a partial name, the list of CSRs starting with it are displayed.
+
+endmenu

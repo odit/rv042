@@ -1,0 +1,23 @@
+body{FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+.bodyback{FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px; BACKGROUND-COLOR:#ffffff;}
+.mainback{BACKGROUND-COLOR:#ffffff; COLOR:#393c3f; FONT-FAMILY: Tahoma, Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TD.mainback{BACKGROUND-COLOR:#e7f2fe; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TR.mainback{BACKGROUND-COLOR:#e7f2fe; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+A{TEXT-DECORATION:none;COLOR:#50606a;}
+A:visited{TEXT-DECORATION:none;COLOR:#50606a;}
+a:hover{COLOR:#ffffff; cursor:pointer; cursor:hand;}
+.darkback{BACKGROUND-COLOR:#66769f; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+TD.darkback{BACKGROUND-COLOR:#66769f; COLOR:#393c3f; FONT-FAMILY: Tahoma, Verdana, Arial, Helvetica; FONT-SIZE:12px;}
+DIV.clk7{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#ffffff; border-right:1px solid #66769f;} 
+DIV.clk7k{position:relative; left:0px; height:28px; width:175px; visibility:visible; background-color:#d1e7ff; border-right:1px solid #66769f;}
+DIV.clk7Sub1{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#ffffff; border-right:1px solid #66769f;} 
+DIV.menubottomrow{background-color:#ffffff;border-bottom:1px solid #66769f; border-right:1px solid #66769f;}
+DIV.clk7Sub1k{position:absolute; left:0px; height:26px; width:175px; visibility:hidden; background-color:#d1e7ff; border-right:1px solid #66769f;} 
+#divk7Cont{position:relative; left:0px; top:0px; height:322px; width:175px; visibility:hidden}
+A.clk7Links{font-family:Verdana, Arial, Helvetica; font-size:11px; text-decoration:none; color:#20506a; width:175px; height:25px; line-height:180%}
+A.clk71Links{font-family:Verdana, Arial, Helvetica; font-size:11px; text-decoration:none; color:#20506a; width:175px; height:25px; line-height:180%}
+td.mainbottom{background: url("/images/bottomseafoam.png");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop1{background: url("/images/toprightseafoam.png");background-repeat: no-repeat;margin:0px;padding:0px;}
+td.maintop0{background: url("/images/mainlogo.gif");}
+td.maintop2{background: url("/images/topseafoam.png");background-repeat: no-repeat;margin:0px;padding:0px;background-color:#e7f2fe;}
+.menubackground{background-color:#ffffff;border-right:1px solid #66769f;}

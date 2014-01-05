@@ -1,0 +1,36 @@
+SMM_HEADERS=ConfMgr.h\
+	SmmMain.h\
+
+SMM_SOURCES=Smm.o\
+	SmmMain.o\
+	ConfMgr.o\
+	UserMgr.o\
+	Options.o \
+        Utils.o \
+        TimerLib.o \
+	PortalMgr.o\
+	IptablesMgr.o
+
+BIN=libSmm.a
+
+all: $(BIN)
+
+include ../make-include-uClinux.mk
+
+CFLAGS+=-I$(SYS_LIB) -I$(AUTH_LIB)
+
+libSmm.a: $(SMM_SOURCES) $(SYS_LIB)/libSys.a $(SMM_HEADERS)
+	$(AR) cr libSmm.a $(SMM_SOURCES)
+
+cleanbin:
+	rm $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+clean:
+	rm -f *.o
+	rm -f $(BIN)
+	if [ -n '$(LIB)' ]; then rm -rf $(LIB); fi
+
+install:
+
+un-install:

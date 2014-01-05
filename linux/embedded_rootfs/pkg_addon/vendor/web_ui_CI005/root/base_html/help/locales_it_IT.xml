@@ -1,0 +1,751 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<WebWorksLocales version="1.0.0">
+  <Locale name="en">
+<Strings>
+      <String name="TOCTitle" value="Sommario" />
+      <String name="IXTitle" value="Indice" />
+      <String name="TOCTabLabel" value="Sommario" />
+      <String name="IXTabLabel" value="Indice" />
+      <String name="SearchTabLabel" value="Ricerca" />
+      <String name="Previous" value="Precedente" />
+      <String name="Next" value="Successivo" />
+      <String name="RelatedTopics" value="Argomenti correlati" />
+      <String name="LinkToThumbnail" value="Collegamento a %s" />
+      <String name="SeeAlso" value="Fare riferimento anche alla funzione" />
+      <String name="RequiredIndexEntry" value="Manifesto" />
+      <String name="MapTOCStyles" value="Mappare stili TOC!" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Indietro" />
+   <String name="CollapseLabel" value="Comprimi tutto" />
+   <String name="CloseButton" value="Chiudi" />
+   <String name="ExpandLabel" value="Espandi tutto" />
+   <String name="FavoritesButton" value="Preferiti" />
+   <String name="FavoritesAddButton" value="Aggiungi" />
+   <String name="FavoritesEnterLabel" value="Argomento corrente:" />
+   <String name="FavoritesRemoveButton" value="Rimuovi" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Reindirizza" />
+   <String name="GlossaryButton" value="Glossario" />
+   <String name="GoButton" value="Vai" />
+   <String name="HideButton" value="Nascondi" />
+   <String name="HomeButton" value="Casa" />
+   <String name="IndexEnterLabel" value="Digita la parola chiave da trovare:" />
+   <String name="IndexPopupText" value="Per individuare informazioni su questa parola chiave selezionare una delle sotto-voci nell’elenco." />
+   <String name="PDFButton" value="Visualizza PDF" />
+   <String name="PrintButton" value="Stampa" />
+   <String name="UsingHelpButton" value="Utilizzo della Guida" />
+   <String name="SearchButton" value="Ricerca" />
+   <String name="SeeAlsoButton" value="Elementi facoltativi" />
+   <String name="ShowButton" value="Mostra" />
+   <String name="ContentsTab" value="Sommario" />
+   <String name="IndexTab" value="Indice" />
+   <String name="hideSum" value="Nascondi riepiloghi"/>  
+   <String name="showSum" value="Mostra riepiloghi"/>  
+   <String name="totResults" value="totale risultati per"/>  
+   <String name="searchResults" value="CERCA RISULTATI"/>  
+   <String name="noMatches" value="Nessuna corrispondenza"/>  
+   <String name="open" value="apri"/>  
+   <String name="newWindow" value="in una nuova finestra"/>
+
+
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="See " />
+        <SeeAlso value="See also " />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="Numerics" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z" />
+        <Group name="Symbols" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="2" />
+      <StopWords>
+    a about after all also am an and another any are as at
+    be because been before being between both but by
+    came can come copyright corp corporation could
+    did do does
+    each etc
+    for from
+    get goes got
+    had has have he her here him himself his how
+    if in inc into is it its
+    let like
+    make many me might more most much must my
+    never nor not now
+    of off on one only or other our out over own
+    reserved rights
+    said same see set shall she should since so some still such
+    take than that the their them then there these they this those though through to too
+    under us use
+    very
+    was way we well were what when where which while who why will with would
+    yes yet you your
+    </StopWords>
+    </Search>
+  </Locale>
+  <Locale name="de">
+    <Strings>
+      <String name="TOCTitle" value="Inhaltsverzeichnis" />
+      <String name="IXTitle" value="Index" />
+      <String name="TOCTabLabel" value="Inhalt" />
+      <String name="IXTabLabel" value="Index" />
+      <String name="SearchTabLabel" value="Suche" />
+      <String name="Previous" value="Zurück" />
+      <String name="Next" value="Weiter" />
+      <String name="RelatedTopics" value="Ähnliche Themen" />
+      <String name="LinkToThumbnail" value="Link zu %s" />
+      <String name="SeeAlso" value="Siehe auch" />
+      <String name="RequiredIndexEntry" value="Manifest" />
+      <String name="MapTOCStyles" value="Ordnen Sie die Formate für das Inhaltsverzeichnis zu!" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="Siehe " />
+        <SeeAlso value="Siehe auch" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="Zahlen" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z" />
+        <Group name="Symbole" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="2" />
+      <StopWords>
+      </StopWords>
+    </Search>
+  </Locale>
+  <Locale name="es">
+    <Strings>
+      <String name="TOCTitle" value="Índice" />
+      <String name="IXTitle" value="Índice alfabético" />
+      <String name="TOCTabLabel" value="Contenido" />
+      <String name="IXTabLabel" value="Índice alfabético" />
+      <String name="SearchTabLabel" value="Buscar" />
+      <String name="Previous" value="Anterior" />
+      <String name="Next" value="Siguiente" />
+      <String name="RelatedTopics" value="Temas relacionados" />
+      <String name="LinkToThumbnail" value="Enlace con %s" />
+      <String name="SeeAlso" value="Consulte también" />
+      <String name="RequiredIndexEntry" value="Manifiesto" />
+      <String name="MapTOCStyles" value="Asigne los estilos del índice" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="Consulte " />
+        <SeeAlso value="Consulte también" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="Números" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;Ñ;O;P;Q;R;S;T;U;V;W;X;Y;Z" />
+        <Group name="Símbolos" members="¡!¿?@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="2" />
+      <StopWords>
+    un uno una unos unas acerca de después todo toda todos todas también soy estoy y otro otra otros otras cualquier cualquiera cualesquiera eres somos sois son estás estamos están como a en
+    ser estar porque sido estado antes siendo estando entre ambos pero por
+    vine viniste vino vinimos vinisteis vinieron quizá quizás venir copyright  corporación 
+    
+    cada etc.
+    para desde
+    
+    tuve tuviste tuvo tuvimos tuvisteis tuvieron tiene tener tengo tienes tenemos tenéis tienen él ella aquí su suyo suya suyos suyas cómo
+   si en inc dentro es está sus
+    tan tanto
+    hacer hago haces hace hacemos hacéis hacen muchos muchas mí puede más máximo mucho mucha mi mis
+    nunca ni no ahora
+    de fuera sobre único sólo solamente o nuestro nuestra nuestros nuestras afuera encima
+    derechos reservados
+    decir dije dijiste dijo dijimos dijisteis dijeron mismo misma mismos mismas igual ver veo ves vemos veis ven así algún alguno alguna algunos algunas aún tal
+    que el la los las ellos ellas entonces estos estas esos esas ahí allí allá este esta esto ese esa eso esos aunque a través asimismo
+    bajo debajo nosotros uso usar
+    muy
+    era eras era éramos erais eran estaba estabas estaba estábamos estabais estaban fui fuiste fue fuimos fuisteis fueron estuve estuviste estuvo estuvimos estuvisteis estuvieron forma manera bien bueno qué cuándo dónde cuál cuáles mientras mientrastanto entretanto quién quiénes por qué con podría
+    sí todavía tú tu tus tuyo tuya tuyos tuyas
+   </StopWords>
+    </Search>
+  </Locale>
+  <Locale name="fr">
+    <Strings>
+      <String name="TOCTitle" value="Table des matières" />
+      <String name="IXTitle" value="Index" />
+      <String name="TOCTabLabel" value="Sommaire" />
+      <String name="IXTabLabel" value="Index" />
+      <String name="SearchTabLabel" value="Recherche" />
+      <String name="Previous" value="Précédent" />
+      <String name="Next" value="Suivant" />
+      <String name="RelatedTopics" value="Rubriques connexes" />
+      <String name="LinkToThumbnail" value="Lien vers %s" />
+      <String name="SeeAlso" value="Voir aussi" />
+      <String name="RequiredIndexEntry" value="Manifeste" />
+      <String name="MapTOCStyles" value="Associez les styles de table des matières !" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="Voir " />
+        <SeeAlso value="Voir aussi" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="Chiffres" members="1234567890" />
+        <DefaultGroup headers="A; Æ;B;C;D;E;F;G;H;I;J;K;L;M;N;O;Œ;P;Q;R;S;T;U;V;W;X;Y;Z" />
+        <Group name="Symboles" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="2" />
+      <StopWords>
+    a à ai allez allons alors après as aussi autre autres avaient avais avait avant avec avez aviez avions avons
+    beaucoup bien
+    car ceci cela celles-ci celles-là ces ceux-ci ceux-là chacun chacune chaque comme comment copyright corporation
+    dans de dedans définir depuis devez devons devraient devrais devrait devriez devrions dîmes dirent dis dit dîtes dois doit doivent donc droits
+    elle elles en encore entre es est et étaient étais était étant etc été êtes étiez étions être eu eux 
+    faire fais faisons fait faites fîmes firent fis fit fîtes font
+    ici il ils
+    jamais
+    la là le les leur leurs lui lui-même
+    ma maintenant mais me même mêmes mes moi mon
+    ni nombreuses nombreux nos notre nous
+    on ont ou où oui
+    par pas pendant peut peuvent peux plus pour pourquoi pourraient pourrais pourrait pourriez pourrions pouvez pouvons prendre 
+    quand que quel quelle quelles quelque quelques quels qui
+    réservé réservée réservées réservés
+    sa ses seulement si sien sienne siennes siens sommes son sont sous suis sur
+    tel telle telles tels tes ton toujours tous tout toute toutes très tu
+    un une utiliser
+    va vais vas venez venons via viennent viens vient vînmes vinrent vins vint vîntes voir vont vos votre vous
+ 
+   </StopWords>
+    </Search>
+  </Locale>
+  <Locale name="it">
+    <Strings>
+      <String name="TOCTitle" value="Sommario" />
+      <String name="IXTitle" value="Indice" />
+      <String name="TOCTabLabel" value="Contenuto" />
+      <String name="IXTabLabel" value="Indice" />
+      <String name="SearchTabLabel" value="Ricerca" />
+      <String name="Previous" value="Precedente" />
+      <String name="Next" value="Avanti" />
+      <String name="RelatedTopics" value="Argomenti correlati" />
+      <String name="LinkToThumbnail" value="Collegamento a %s" />
+      <String name="SeeAlso" value="Vedere anche" />
+      <String name="RequiredIndexEntry" value="Manifest" />
+      <String name="MapTOCStyles" value="Mappa stili sommario" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="Vedere " />
+        <SeeAlso value="Vedere anche" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="Cifre" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z" />
+        <Group name="Simboli" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="2" />
+      <StopWords>
+    un uno una su dopo tutto tutti tutta tutto anche sono e altro altra altri qualsiasi qualunque sono sei è siamo siete mentre come a al alla allo agli alle ai in essere perché stato stata state stati prima essendo tra fra entrambi sia ma per da posso puoi può possiamo potete potere possono venire veniamo vengono copyright azienda ditta potrebbe fare fa fanno ogni ognuno ognuna ciascuno ciascuna etc. eccetera ecc. per da va vanno avuto avuta avute avuti ho hai ha abbiamo avete hanno egli essa essi lui lei qui lui stesso suo sua sue suoi come se in nel nei nelle negli inc è esso ciò come faccio fai fa facciamo fate fare fanno molto molta molte molti tanto tanta tante tanti io me mi potrei potresti potrebbe potremmo potrebbero più devo dei deve dobbiamo dovete dovere devono mio mia mie miei mai né non ora adesso di su uno una solo soltanto o oppure altro altra altre altri nostro nostre nostra nostri fuori sopra proprio diritti riservati detto detta detti stesso stessa stessi stesse alla allora vedere vedono lei da per così alcuno alcuna alcune alcuni ancora così quello quella quelli quelle come prendere prendono di che il lo la i gli le loro l' essi quindi poi dopo là questi questo questa sebbene nonostante però attraverso tramite mediante a anche verso sotto noi usare usano era modo via noi bene fossi ero era erano eravate eravamo erano cosa quando dove che mentre intanto chi perché con sì ancora tu tuo tua tuoi sarò sarai sarà saremo sarete saranno avrò avrai avranno avrete
+   </StopWords>
+    </Search>
+  </Locale>
+  <Locale name="ja">
+    <Strings>
+      <String name="TOCTitle" value="目次" />
+      <String name="IXTitle" value="索引" />
+      <String name="TOCTabLabel" value="目次" />
+      <String name="IXTabLabel" value="索引" />
+      <String name="SearchTabLabel" value="検索" />
+      <String name="Previous" value="前へ" />
+      <String name="Next" value="次へ" />
+      <String name="RelatedTopics" value="関連トピック" />
+      <String name="LinkToThumbnail" value="%s へのリンク" />
+      <String name="SeeAlso" value="関連項目" />
+      <String name="RequiredIndexEntry" value="マニフェスト" />
+      <String name="MapTOCStyles" value="TOC スタイルをマッピングしてください!" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="参照 " />
+        <SeeAlso value="関連項目" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="数値" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z;あ;い;う;え;お;か;き;く;け;こ;さ;し;す;せ;そ;た;ち;つ;て;と;な;に;ぬ;ね;の;は;ひ;ふ;へ;ほ;ま;み;む;め;も;や;ゆ;よ;ら;り;る;れ;ろ;わ;を;ん" />
+        <Group name="記号" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="1" />
+      <StopWords>
+      </StopWords>
+    </Search>
+  </Locale>
+  <Locale name="ko">
+    <Strings>
+      <String name="TOCTitle" value="목차" />
+      <String name="IXTitle" value="색인" />
+      <String name="TOCTabLabel" value="컨텐츠" />
+      <String name="IXTabLabel" value="색인" />
+      <String name="SearchTabLabel" value="검색" />
+      <String name="Previous" value="이전" />
+      <String name="Next" value="다음" />
+      <String name="RelatedTopics" value="관련 항목" />
+      <String name="LinkToThumbnail" value="%s 링크" />
+      <String name="SeeAlso" value="참조" />
+      <String name="RequiredIndexEntry" value="목록" />
+      <String name="MapTOCStyles" value="목차 스타일을 작성하십시오." />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="참조 " />
+        <SeeAlso value="참조" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="숫자" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z;ㄱ[가];ㄴ[나];ㄷ[다];ㄹ[라];ㅁ[마];ㅂ[바];ㅅ[사];ㅇ[아];ㅈ[자];ㅊ[차];ㅋ[카];ㅌ[타];ㅍ[파];ㅎ[하]" />
+        <Group name="기호" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="1" />
+      <StopWords>
+      </StopWords>
+    </Search>
+  </Locale>
+  <Locale name="pt">
+    <Strings>
+      <String name="TOCTitle" value="Sumário" />
+      <String name="IXTitle" value="Índice" />
+      <String name="TOCTabLabel" value="Conteúdo" />
+      <String name="IXTabLabel" value="Índice" />
+      <String name="SearchTabLabel" value="Pesquisar" />
+      <String name="Previous" value="Anterior" />
+      <String name="Next" value="Avançar" />
+      <String name="RelatedTopics" value="Tópicos relacionados" />
+      <String name="LinkToThumbnail" value="Link para %s" />
+      <String name="SeeAlso" value="Ver também" />
+      <String name="RequiredIndexEntry" value="Manifesto" />
+      <String name="MapTOCStyles" value="Mapeie estilos de sumário!" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="Ver " />
+        <SeeAlso value="Ver também" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="Numéricos" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z" />
+        <Group name="Símbolos" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="2" />
+      <StopWords>
+    um uma sobre após tudo todo toda todos todas também sou um uma e outro outra outros outras qualquer algum alguma alguns algumas são tão como em no na às
+    ser porque sido antes sendo entre ambos ambas tanto mas por pelo pela pelos pelas
+    veio pode vir vem copyright direitos autorais empresa organização poderia pôde
+    fez fazer faz
+    cada etc
+    para
+    obter obtém vai obteve
+    teve tem ele dela aqui ele próprio própria próprios próprias dele como
+    se em no na nos nas é isso disso
+    deixar deixa gostar gosta
+    criar cria muitos muitas mim possa mais maioria muito muita deve meu minha meus minhas
+    nunca nem não agora
+    de do da dos das em no na nos nas sobre um uma apenas somente ou outro outra outros outras nosso nossa nossos nossas fora acima possui possuir
+    reservados
+    disse mesmo mesma mesmos mesmas ver vê definir define devo devemos ela deve desde portanto algum alguma alguns algumas ainda tal
+    tomar toma que o a os as deles delas eles elas então lá aí estes estas eles isto este esta esses essas aqueles aquelas embora apesar através a ao aos para também
+    sob nós usar usa
+    muito
+    era estava caminho maneira bem eram estavam qual quais quando onde enquanto quem vai com iria
+    sim ainda já você seu sua seus suas
+   </StopWords>
+    </Search>
+  </Locale>
+  <Locale name="sv">
+    <Strings>
+      <String name="TOCTitle" value="Innehållsförteckning" />
+      <String name="IXTitle" value="Index" />
+      <String name="TOCTabLabel" value="Innehåll" />
+      <String name="IXTabLabel" value="Index" />
+      <String name="SearchTabLabel" value="Sök" />
+      <String name="Previous" value="Föregående" />
+      <String name="Next" value="Nästa" />
+      <String name="RelatedTopics" value="Närliggande information" />
+      <String name="LinkToThumbnail" value="Länk till %s" />
+      <String name="SeeAlso" value="Se även" />
+      <String name="RequiredIndexEntry" value="Manifest" />
+      <String name="MapTOCStyles" value="Avbilda innehållsförteckningsformat" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="Se " />
+        <SeeAlso value="Se även" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="Siffror" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z;Å;Ä;Ö" />
+        <Group name="Symboler" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="2" />
+      <StopWords>
+    aldrig alla alldeles alls allt alltför alltid alltså annars att av
+    bakom bara bland blev bli blir blivit borde brukar bör
+  cirka
+  de dem den denna deras dess det detta dig dit du då där därefter däremot därför
+  eftersom egen egentligen eget egna eller en enda endast ens ett 
+   faktiskt fanns fast finns fram för före förstås
+  ganska
+   ha hade hans har helst henne hennes hittills hon honom hos hur här
+  i ibland in inför inte
+  ja jag ju just
+   kan knappt 
+  mig min mitt mot
+    nej nästan 
+  och också om omkring oss
+  per precis på 
+  sa sade sagt samt se sen sig sin sina sitt själv själva skulle som så
+   ta tagit 
+   vad var varför varit varje vars vem verkar vi via vilken vilket vilka vår våra vårt 
+  ytterligare 
+  än är även
+ över övriga övrigt</StopWords>
+    </Search>
+  </Locale>
+  <Locale name="zh">
+    <Strings>
+      <String name="TOCTitle" value="目录" />
+      <String name="IXTitle" value="索引" />
+      <String name="TOCTabLabel" value="目录" />
+      <String name="IXTabLabel" value="索引" />
+      <String name="SearchTabLabel" value="搜索" />
+      <String name="Previous" value="上一个" />
+      <String name="Next" value="下一个" />
+      <String name="RelatedTopics" value="相关主题" />
+      <String name="LinkToThumbnail" value="链接至 %s" />
+      <String name="SeeAlso" value="另请参阅" />
+      <String name="RequiredIndexEntry" value="清单" />
+      <String name="MapTOCStyles" value="请映射目录样式！" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="参阅 " />
+        <SeeAlso value="另请参阅" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="数字" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z" />
+        <Group name="符号" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="1" />
+      <StopWords>
+      </StopWords>
+    </Search>
+  </Locale>
+  <Locale name="zh_TW">
+    <Strings>
+      <String name="TOCTitle" value="目錄" />
+      <String name="IXTitle" value="索引" />
+      <String name="TOCTabLabel" value="內容" />
+      <String name="IXTabLabel" value="索引" />
+      <String name="SearchTabLabel" value="搜尋" />
+      <String name="Previous" value="上一頁" />
+      <String name="Next" value="下一頁" />
+      <String name="RelatedTopics" value="相關主題" />
+      <String name="LinkToThumbnail" value="連結到 %s" />
+      <String name="SeeAlso" value="另請參閱" />
+      <String name="RequiredIndexEntry" value="資訊清單" />
+      <String name="MapTOCStyles" value="請對應目錄樣式！" />
+<!-- Cisco Additions Follow -->
+   <String name="BackButton" value="Back" />
+   <String name="CollapseLabel" value="Collapse All" />
+   <String name="CloseButton" value="Close" />
+   <String name="ExpandLabel" value="Expand All" />
+   <String name="FavoritesButton" value="Favorites" />
+   <String name="FavoritesAddButton" value="Add" />
+   <String name="FavoritesEnterLabel" value="Current Topic:" />
+   <String name="FavoritesRemoveButton" value="Remove" />
+   <String name="FeedbackButton" value="Feedback" />
+   <String name="ForwardButton" value="Forward" />
+   <String name="GlossaryButton" value="Glossary" />
+   <String name="GoButton" value="Go" />
+   <String name="HideButton" value="Hide" />
+   <String name="HomeButton" value="Home" />
+   <String name="IndexEnterLabel" value="Type the keyword to find:" />
+   <String name="IndexPopupText" value="To locate information about this keyword, please select one of the subentries in the list." />
+   <String name="PDFButton" value="View PDF" />
+   <String name="PrintButton" value="Print" />
+   <String name="UsingHelpButton" value="Using Help" />
+   <String name="SearchButton" value="Search" />
+   <String name="SeeAlsoButton" value="Optional" />
+   <String name="ShowButton" value="Show" />
+   <String name="ContentsTab" value="Contents" />
+   <String name="IndexTab" value="Index" />
+<!-- End Cisco Additions -->
+    </Strings>
+    <Index>
+      <SeeAlsoPatterns>
+        <SeeAlso value="請參閱 " />
+        <SeeAlso value="另請參閱" />
+      </SeeAlsoPatterns>
+      <Groupings>
+        <Group name="數字" members="1234567890" />
+        <DefaultGroup headers="A;B;C;D;E;F;G;H;I;J;K;L;M;N;O;P;Q;R;S;T;U;V;W;X;Y;Z;一畫[一];二畫[丁];三畫[三];四畫[丑];五畫[丙];六畫[丞];七畫[串];八畫[並];九畫[亭];十畫[乘];十一畫[乾];十二畫[傢];十三畫[亂];十四畫[僧];十五畫[億];十六畫[儒];十七畫[優];十八畫[叢];十九畫[儳];二十畫[嚷];二十一畫[儷];二十二畫[儼];二十三畫[囌];二十四畫[囑];二十五畫以上[廳]" />
+        <Group name="符號" members="!@#$%^&amp;-=+_*\(\)[]\\;:.,&lt;&gt;'&quot;" />
+      </Groupings>
+    </Index>
+    <Search>
+      <MinimumWordLength value="1" />
+      <StopWords>
+      </StopWords>
+    </Search>
+  </Locale>
+</WebWorksLocales>

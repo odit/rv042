@@ -1,0 +1,1346 @@
+This is ../../../src/ddd/ddd/ddd.info, produced by makeinfo version 4.3
+from ../../../src/ddd/ddd/ddd.texi.
+
+INFO-DIR-SECTION Programming & development tools.
+START-INFO-DIR-ENTRY
+* DDD: (ddd).                     The Data Display Debugger.
+END-INFO-DIR-ENTRY
+
+DDD is a graphical front-end for GDB and other command-line debuggers.
+
+This is the First Edition, 15 January, 2004, of `Debugging with DDD'
+for DDD Version 3.3.11.
+
+Copyright (C) 2004 Universität des Saarlandes
+Lehrstuhl Softwaretechnik
+Postfach 15 11 50
+66041 Saarbrücken
+GERMANY
+
+Distributed by
+Free Software Foundation, Inc.
+59 Temple Place - Suite 330
+Boston, MA 02111-1307
+USA
+
+DDD and this manual are available via the DDD WWW page
+(http://www.gnu.org/software/ddd/).
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts and no Back-Cover Texts.  A
+copy of the license is included in the section entitled "GNU Free
+Documentation License".
+
+   Send questions, comments, suggestions, etc. to <ddd@gnu.org>.
+Send bug reports to <bug-ddd@gnu.org>.
+
+File: ddd.info,  Node: Selecting Displays,  Next: Showing and Hiding Details,  Prev: Creating Single Displays,  Up: Display Basics
+
+Selecting Displays
+..................
+
+   Each display in the data window has a _title bar_ containing the
+_display number_ and the displayed expression (the _display name_).
+Below the title, the _display value_ is shown.
+
+   You can select single displays by clicking on them with _mouse
+button 1_.
+
+   You can _extend_ an existing selection by pressing the <Shift> key
+while selecting.  You can also _toggle_ an existing selection by
+pressing the <Shift> key while selecting already selected displays.
+
+   Single displays may also be selected by using the arrow keys <Up>,
+<Down>, <Left>, and <Right>.
+
+   _Multiple displays_ are selected by pressing and holding _mouse
+button 1_ somewhere on the window background.  By moving the pointer
+while holding the button, a selection rectangle is shown; all displays
+fitting in the rectangle are selected when mouse button 1 is released.
+
+   If the <Shift> key is pressed while selecting, the existing
+selection is _extended_.
+
+   By double-clicking on a display title, the display itself and all
+connected displays are automatically selected.
+
+
+File: ddd.info,  Node: Showing and Hiding Details,  Next: Rotating Displays,  Prev: Selecting Displays,  Up: Display Basics
+
+Showing and Hiding Details
+..........................
+
+   Aggregate values (i.e. records, structs, classes, and arrays) can be
+shown _expanded_, that is, displaying all details, or _hidden_, that
+is, displayed as `{...}'.
+
+   To show details about an aggregate, select the aggregate by clicking
+_mouse button 1_ on its name or value and click on the `Show' button.
+Details are shown for the aggregate itself as well as for all contained
+sub-aggregates.
+
+   To hide details about an aggregate, select the aggregate by clicking
+_mouse button 1_ on its name or value and click on the `Hide' button.
+
+   When pressing and holding _mouse button 1_ on the `Show/Hide'
+button, a menu pops up with even more alternatives:
+
+`Show More ()'
+     Shows details of all aggregates currently hidden, but not of their
+     sub-aggregates.  You can invoke this item several times in a row to
+     reveal more and more details of the selected aggregate.
+
+`Show Just ()'
+     Shows details of the selected aggregate, but hides all
+     sub-aggregates.
+
+`Show All ()'
+     Shows all details of the selected aggregate and of its
+     sub-aggregates.  This item is equivalent to the `Show' button.
+
+`Hide ()'
+     Hide all details of the selected aggregate.  This item is
+     equivalent to the `Hide' button.
+
+   As a faster alternative, you can also press _mouse button 3_ on the
+aggregate and select the appropriate menu item.
+
+   As an even faster alternative, you can also double-click _mouse
+button 1_ on a value.  If some part of the value is hidden, more details
+will be shown; if the entire value is shown, double-clicking will
+_hide_ the value instead.  This way, you can double-click on a value
+until you get the right amount of details.
+
+   If _all_ details of a display are hidden, the display is called
+"disabled"; this is indicated by the string `(Disabled)'.
+
+   Displays can also be disabled or enabled via a DDD command, which
+you enter at the debugger prompt:
+
+     graph disable display DISPLAYS...
+
+disables the given displays.
+
+     graph enable display DISPLAYS...
+
+re-enables the given displays.
+
+   In both commands, DISPLAYS... is either
+   * a space-separated list of display numbers to disable or enable, or
+
+   * a single display name.  If you specify a display by name, all
+     displays with this name will be affected.
+
+   Use `Edit => Undo' to undo disabling or enabling displays.
+
+
+File: ddd.info,  Node: Rotating Displays,  Next: Displaying Local Variables,  Prev: Showing and Hiding Details,  Up: Display Basics
+
+Rotating Displays
+.................
+
+   Arrays, structures and lists can be oriented horizontally or
+vertically.  To change the orientation of a display, select it and then
+click on the `Rotate' button.
+
+   As a faster alternative, you can also press _mouse button 3_ on the
+array and select `Rotate' from the popup menu.
+
+   If a structure or list is oriented horizontally, DDD automatically
+suppresses the member names.  This can be handy for saving space.
+
+   The last chosen display orientation is used for the creation of new
+displays.  If you recently rotated an array to horizontal orientation,
+the next array you create will also be oriented horizontally.  These
+settings are tied to the following resources:
+
+ - Resource: arrayOrientation (class Orientation)
+     How arrays are to be oriented.  Possible values are `XmVERTICAL'
+     (default) and `XmHORIZONTAL'.
+
+ - Resource: showMemberNames (class ShowMemberNames)
+     Whether to show struct member names or not.  Default is `on'.
+
+ - Resource: structOrientation (class Orientation)
+     How structs are to be oriented.  Possible values are `XmVERTICAL'
+     (default) and `XmHORIZONTAL'.
+
+
+File: ddd.info,  Node: Displaying Local Variables,  Next: Displaying Program Status,  Prev: Rotating Displays,  Up: Display Basics
+
+Displaying Local Variables
+..........................
+
+   You can display all local variables at once by choosing `Data =>
+Display Local Variables'.  When using DBX, XDB, JDB, or Perl, this
+displays all local variables, including the arguments of the current
+function.  When using GDB or PYDB, function arguments are contained in
+a separate display, activated by `Data => Display Arguments'.
+
+   The display showing the local variables can be manipulated just like
+any other data display.  Individual variables can be selected and
+dereferenced.
+
+
+File: ddd.info,  Node: Displaying Program Status,  Next: Refreshing the Data Window,  Prev: Displaying Local Variables,  Up: Display Basics
+
+Displaying Program Status
+.........................
+
+   You can create a display from the output of an arbitrary debugger
+command.  By entering
+
+     graph display `COMMAND`
+
+the output of COMMAND is turned into a _status display_ updated each
+time the program stops.
+
+   For instance, the command
+
+     graph display `where`
+
+creates a status display named `Where' that shows the current backtrace.
+
+   If you are using GDB, DDD provides a panel from which you can choose
+useful status displays.  Select `Data => Status Displays' and pick your
+choice from the list.
+
+   Refreshing status displays at each stop takes time; you should delete
+status displays as soon as you don't need them any more.
+
+
+File: ddd.info,  Node: Refreshing the Data Window,  Next: Placement,  Prev: Displaying Program Status,  Up: Display Basics
+
+Refreshing the Data Window
+..........................
+
+   The data window is automatically updated or "refreshed" each time
+the program stops.  Values that have changed since the last refresh are
+highlighted.
+
+   However, there may be situations where you should refresh the data
+window explicitly.  This is especially the case whenever you changed
+debugger settings that could affect the data format, and want the data
+window to reflect these settings.
+
+   You can refresh the data window by selecting `Data => Refresh
+Displays'.
+
+   As an alternative, you can press _mouse button 3_ on the background
+of the data window and select the `Refresh Displays' item.
+
+   Typing
+
+     graph refresh
+
+at the debugger prompt has the same effect.
+
+
+File: ddd.info,  Node: Placement,  Next: Clustering,  Prev: Refreshing the Data Window,  Up: Display Basics
+
+Display Placement
+.................
+
+   By default, displays are created from _top to bottom_--that is, each
+new display is placed below the downmost one.  You can change this
+setting to _left to right_ via `Edit => Preferences => Data =>
+Placement => Left to right'.
+
+   This setting is tied to the following resource:
+
+ - Resource: displayPlacement (class Orientation)
+     If this is `XmVERTICAL' (default), DDD places each new independent
+     display below the downmost one.  If this is `XmHORIZONTAL', each
+     new independent display is placed on the right of the rightmost
+     one.
+
+   Note that changing the placement of new displays also affects the
+placement of _dependent displays_ (*note Dependent Values::).  In _top
+to bottom_ mode, dependent displays are created on the right of the
+originating display; in _left to right_ mode, dependent displays are
+created on the below the originating display.
+
+
+File: ddd.info,  Node: Clustering,  Next: Creating Multiple Displays,  Prev: Placement,  Up: Display Basics
+
+Clustering Displays
+...................
+
+   If you examine several variables at once, having a separate display
+for each of them uses a lot of screen space.  This is why DDD supports
+"clusters".  A cluster merges several logical data displays into one
+physical display, saving screen space.
+
+   There are two ways to create clusters:
+   * You can create clusters _manually_.  This is done by selecting the
+     displays to be clustered and choosing `Undisp => Cluster ()'.
+     This creates a new cluster from all selected displays.  If an
+     already existing cluster is selected, too, the selected displays
+     will be clustered into the selected cluster.
+
+   * You can create a cluster _automatically_ for all independent data
+     displays, such that all new data displays will automatically be
+     clustered, too.  This is achieved by enabling `Edit => Preferences
+     => Data => Placement => clustered'.
+
+   Displays in a cluster can be selected and manipulated like parts of
+an ordinary display; in particular, you can show and hide details, or
+dereference pointers.  However, edges leading to clustered displays can
+not be shown, and you must either select one or all clustered displays.
+
+   Disabling a cluster is called _unclustering_, and again, there are
+two ways of doing it:
+
+   * You can uncluster displays _manually_, by selecting the cluster
+     and choosing `Undisp => Uncluster ()'.
+
+   * You can uncluster all current and future displays by disabling
+     `Edit => Preferences => Data => Placement => clustered'.
+
+
+File: ddd.info,  Node: Creating Multiple Displays,  Next: Editing all Displays,  Prev: Clustering,  Up: Display Basics
+
+Creating Multiple Displays
+..........................
+
+   To display several successive objects of the same type (a section of
+an array, or an array of dynamically determined size), you can use the
+notation `FROM..TO' in display expressions.
+
+   FROM and TO are numbers that denote the first and last expression to
+display.  Thus,
+
+     graph display argv[0..9]
+
+creates 10 new displays for `argv[0]', `argv[1]', ..., `argv[9]'.  The
+displays are clustered automatically (*note Clustering::), such that
+you can easily handle the set just like an array.
+
+   The `FROM..TO' notation can also be used multiple times.  For
+instance,
+
+     graph display 1..5 * 1..5
+
+creates a handy small multiplication table.
+
+   The `FROM..TO' notation creates several displays, which takes time
+to create and update.  If you want to display only a part of an array,
+_array slices_ are a more efficient way.  *Note Array Slices::, for a
+discussion.
+
+
+File: ddd.info,  Node: Editing all Displays,  Next: Deleting Displays,  Prev: Creating Multiple Displays,  Up: Display Basics
+
+Editing all Displays
+....................
+
+   You can view the state of all displays by selecting `Data =>
+Displays'.  This invokes the "Display Editor".
+
+   The Display Editor shows the properties of each display, using the
+following fields:
+
+`Num'
+     The display number.
+
+`Expression'
+     The displayed expression.
+
+`State'
+     One of
+
+    `enabled'
+          Normal state.
+
+    `disabled'
+          Disabled; all details are hidden.  Use `Show' to enable.
+
+    `not active'
+          Out of scope.
+
+    `deferred'
+          Will be created as soon as its `Scope' is reached (*note
+          Creating Single Displays::).
+
+    `clustered'
+          Part of a cluster (*note Clustering::).  Use `Undisp =>
+          Uncluster' to uncluster.
+
+    `alias of DISPLAY'
+          A suppressed alias of display DISPLAY (*note Shared
+          Structures::).
+
+`Scope'
+     The scope in which the display was created.  For deferred
+     displays, this is the scope in which the display will be created.
+
+`Address'
+     The address of the displayed expression.  Used for resolving
+     aliases (*note Shared Structures::).
+
+
+File: ddd.info,  Node: Deleting Displays,  Prev: Editing all Displays,  Up: Display Basics
+
+Deleting Displays
+.................
+
+   To delete a single display, select its title or value and click on
+the `Undisp' button.  As an alternative, you can also press _mouse
+button 3_ on the display and select the `Undisplay' item.
+
+   When a display is deleted, its immediate ancestors and descendants
+are automatically selected, so that you can easily delete entire graphs.
+
+   If you have selected only part of a display, clicking on the
+`Undisp' button allows you to _suppress_ this part--by applying the
+_Suppress Values_ theme on the part.  You'll be asked for confirmation
+first.  *Note Using Data Themes::, for details.
+
+   To delete several displays at once, use the `Undisp' button in the
+Display Editor (invoked via `Data => Displays').  Select any number of
+display items in the usual way and delete them by pressing `Undisp'.
+
+   As an alternative, you can also use a DDD command:
+
+     graph undisplay DISPLAYS...
+
+   Here, DISPLAYS... is either
+   * a space-separated list of display numbers to disable or enable, or
+
+   * a single display name.  If you specify a display by name, all
+     displays with this name will be affected.
+
+   If you are using stacked windows, deleting the last display from the
+data window also automatically closes the data window.  (You can change
+this via `Edit => Preferences => Data => Close data window when
+deleting last display'.)
+
+   If you deleted a display by mistake, use `Edit => Undo' to re-create
+it.
+
+   Finally, you can also cut, copy, and paste displays using the `Cut',
+`Copy', and `Paste' items from the `Edit' menu.  The clipboard holds
+the _commands_ used to create the displays; `Paste' inserts the display
+commands in the debugger console.  This allows you to save displays for
+later usage or to copy displays across multiple DDD instances.
+
+
+File: ddd.info,  Node: Arrays,  Next: Assignment,  Prev: Display Basics,  Up: Displaying Values
+
+Arrays
+------
+
+   DDD has some special features that facilitate handling of arrays.
+
+* Menu:
+
+* Array Slices::                Displaying FROM..TO parts of an array
+* Repeated Values::             How repeated values are handled.
+* Arrays as Tables::            Displaying two-dimensional arrays.
+
+
+File: ddd.info,  Node: Array Slices,  Next: Repeated Values,  Up: Arrays
+
+Array Slices
+............
+
+   It is often useful to print out several successive objects of the
+same type in memory; a "slice" (section) of an array, or an array of
+dynamically determined size for which only a pointer exists in the
+program.
+
+   Using DDD, you can display slices using the `FROM..TO' notation
+(*note Creating Multiple Displays::).  But this requires that you
+already know FROM and TO; it is also inefficient to create several
+single displays.  If you use GDB, you have yet another alternative.
+
+   Using GDB, you can display successive objects by referring to a
+contiguous span of memory as an "artificial array", using the binary
+operator `@'.  The left operand of `@' should be the first element of
+the desired array and be an individual object.  The right operand
+should be the desired length of the array.  The result is an array
+value whose elements are all of the type of the left argument.  The
+first element is actually the left argument; the second element comes
+from bytes of memory immediately following those that hold the first
+element, and so on.
+
+   Here is an example.  If a program says
+
+     int *array = (int *) malloc (len * sizeof (int));
+
+you can print the contents of `array' with
+
+     print array[0]@len
+
+and display the contents with
+
+     graph display array[0]@len
+
+   The general form of displaying an array slice is thus
+
+     graph display ARRAY[FIRST]@NELEMS
+
+where ARRAY is the name of the array to display, FIRST is the index of
+the first element, and NELEMS is the number of elements to display.
+
+   The left operand of `@' must reside in memory.  Array values made
+with `@' in this way behave just like other arrays in terms of
+subscripting, and are coerced to pointers when used in expressions.
+
+
+File: ddd.info,  Node: Repeated Values,  Next: Arrays as Tables,  Prev: Array Slices,  Up: Arrays
+
+Repeated Values
+...............
+
+   Using GDB, an array value that is repeated 10 or more times is
+displayed only once.  The value is shown with a `<Nx>' postfix added,
+where N is the number of times the value is repeated.  Thus, the
+display `0x0 <30x>' stands for 30 array elements, each with the value
+`0x0'.  This saves a lot of display space, especially with homogeneous
+arrays.
+
+   The default GDB threshold for repeated array values is 10.  You can
+change it via `Edit => GDB Settings => Threshold for repeated print
+elements'.  Setting the threshold to `0' will cause GDB (and DDD) to
+display each array element individually.  Be sure to refresh the data
+window via `Data => Refresh Displays' after a change in GDB settings.
+
+   You can also configure DDD to display each array element
+individually:
+
+ - Resource: expandRepeatedValues (class ExpandRepeatedValues)
+     GDB can print repeated array elements as `VALUE <repeated N
+     times>'.  If `expandRepeatedValues' is `on', DDD will display N
+     instances of VALUE instead.  If `expandRepeatedValues' is `off'
+     (default), DDD will display VALUE with `<Nx>' appended to indicate
+     the repetition.
+
+
+File: ddd.info,  Node: Arrays as Tables,  Prev: Repeated Values,  Up: Arrays
+
+Arrays as Tables
+................
+
+   By default, DDD lays out two-dimensional arrays as tables, such that
+all array elements are aligned with each other.(1)  To disable this
+feature, unset `Edit => Preferences => Data => Display Two-Dimensional
+Arrays as Tables'.  This is tied to the following resource:
+
+ - Resource: align2dArrays (class Align2dArrays)
+     If `on' (default), DDD lays out two-dimensional arrays as tables,
+     such that all array elements are aligned with each other.  If
+     `off', DDD treats a two-dimensional array as an array of
+     one-dimensional arrays, each aligned on its own.
+
+   ---------- Footnotes ----------
+
+   (1) This requires that the full array size is known to the debugger.
+
+
+File: ddd.info,  Node: Assignment,  Next: Examining Structures,  Prev: Arrays,  Up: Displaying Values
+
+Assignment to Variables
+-----------------------
+
+   During program execution, you can change the values of arbitrary
+variables.(1)
+
+   To change the value of a variable, enter its name in `()'--for
+instance, by selecting an occurrence or a display.  Then, click on the
+`Set' button.  In a dialog, you can edit the variable value at will;
+clicking the `OK' or `Apply' button commits your change and assigns the
+new value to the variable.
+
+   To change a displayed value, you can also select `Set Value' menu
+from the data popup menu,
+
+   If you made a mistake, you can use `Edit => Undo' to re-set the
+variable to its previous value.
+
+   ---------- Footnotes ----------
+
+   (1) JDB 1.1 does not support changing variable values.
+
+
+File: ddd.info,  Node: Examining Structures,  Next: Customizing Displays,  Prev: Assignment,  Up: Displaying Values
+
+Examining Structures
+--------------------
+
+   Besides displaying simple values, DDD can also visualize the
+"Dependencies" between values--especially pointers and other references
+that make up complex data structures.
+
+* Menu:
+
+* Dependent Values::            Edges from values to values.
+* Dereferencing Pointers::      Examining pointer-based data structures.
+* Shared Structures::           Multiple pointers to one display.
+* Display Shortcuts::           Customize your own menus.
+
+
+File: ddd.info,  Node: Dependent Values,  Next: Dereferencing Pointers,  Up: Examining Structures
+
+Displaying Dependent Values
+...........................
+
+   Dependent displays are created from an existing display.  The
+dependency is indicated by an "edge" leading from the originating
+display to the dependent display.
+
+   To create a dependent display, select the originating display or
+display part and enter the dependent expression in the `():' argument
+field.  Then click on the `Display' button.
+
+   Using dependent displays, you can investigate the data structure of a
+tree for example and lay it out according to your intuitive image of the
+tree data structure.
+
+   By default, DDD does not recognize shared data structures (i.e. a
+data object referenced by multiple other data objects).  *Note Shared
+Structures::, for details on how to examine such structures.
+
+
+File: ddd.info,  Node: Dereferencing Pointers,  Next: Shared Structures,  Prev: Dependent Values,  Up: Examining Structures
+
+Dereferencing Pointers
+......................
+
+   There are special shortcuts for creating dependent displays showing
+the value of a dereferenced pointer.  This allows for rapid examination
+of pointer-based data structures.
+
+   To dereference a pointer, select the originating pointer value or
+name and click on the `Disp *' button.  A new display showing the
+dereferenced pointer value is created.
+
+   As a faster alternative, you can also press _mouse button 3_ on the
+originating pointer value or name and select the `Display *' menu item.
+
+   As an even faster alternative, you can also double-click _mouse
+button 1_ on the originating pointer value or name.  If you press
+<Ctrl> while double-clicking, the display will be dereferenced _in
+place_-that is, it will be replaced by the dereferenced display.
+
+   The `Display *()' function is also accessible by pressing and
+holding the `Display' button.
+
+
+File: ddd.info,  Node: Shared Structures,  Next: Display Shortcuts,  Prev: Dereferencing Pointers,  Up: Examining Structures
+
+Shared Structures
+.................
+
+   By default, DDD does not recognize shared data structures--that is,
+a data object referenced by multiple other data objects.  For instance,
+if two pointers `p1' and `p2' point at the same data object `d', the
+data displays `d', `*p1', and `*p2' will be separate, although they
+denote the same object.
+
+   DDD provides a special mode which makes it detect these situations.
+DDD recognizes if two or more data displays are stored at the same
+physical address, and if this is so, merges all these "aliases" into
+one single data display, the _original data display_.  This mode is
+called _Alias Detection_; it is enabled via `Data => Detect Aliases'.
+
+   When alias detection is enabled, DDD inquires the memory location
+(the _address_) of each data display after each program step.  If two
+displays have the same address, they are merged into one.  More
+specifically, only the one which has least recently changed remains
+(the _original data display_); all other aliases are _suppressed_, i.e.
+completely hidden.  The edges leading to the aliases are replaced by
+edges leading to the original data display.
+
+   An edge created by alias detection is somewhat special: rather than
+connecting two displays directly, it goes through an "edge hint",
+describing an arc connecting the two displays and the edge hint.
+
+   Each edge hint is a placeholder for a suppressed alias; selecting an
+edge hint is equivalent to selecting the alias.  This way, you can
+easily delete display aliases by simply selecting the edge hint and
+clicking on `Undisp'.
+
+   To access suppressed display aliases, you can also use the Display
+Editor.  Suppressed displays are listed in the Display Editor as
+_aliases_ of the original data display.  Via the Display Editor, you
+can select, change, and delete suppressed displays.
+
+   Suppressed displays become visible again as soon as
+
+   * alias detection is disabled,
+
+   * their address changes such that they are no more aliases, or
+
+   * the original data display is deleted, such that the least recently
+     changed alias becomes the new original data display.
+
+   Please note the following _caveats_ with alias detection:
+
+   * Alias detection requires that the current programming language
+     provides a means to determine the address of an arbitrary data
+     object.  Currently, only C, C++, and Java are supported.
+
+   * Some inferior debuggers (for instance, SunOS DBX) produce incorrect
+     output for address expressions.  Given a pointer P, you may verify
+     the correct function of your inferior debugger by comparing the
+     values of P and `&P' (unless P actually points to itself).  You
+     can also examine the data display addresses, as shown in the
+     Display Editor.
+
+   * Alias detection slows down DDD slightly, which is why you can turn
+     it off.  You may consider to enable it only at need--for instance,
+     while examining some complex data structure--and disable it while
+     examining control flow (i.e., stepping through your program).  DDD
+     will automatically restore edges and data displays when switching
+     modes.
+
+   Alias detection is controlled by the following resources:
+
+ - Resource: deleteAliasDisplays (class DeleteAliasDisplays)
+     If this is `on' (default), the `Undisplay ()' button also deletes
+     all aliases of the selected displays.  If this is `off', only the
+     selected displays are deleted; the aliases remain, and one of the
+     aliases will be unsuppressed.
+
+ - Resource: detectAliases (class DetectAliases)
+     If `on' (default), DDD attempts to recognize shared data
+     structures.  If `off', shared data structures are not recognized.
+
+ - Resource: typedAliases (class TypedAliases)
+     If `on' (default), DDD requires structural equivalence in order to
+     recognize shared data structures.  If this is `off', two displays
+     at the same address are considered aliases, regardless of their
+     structure.
+
+
+File: ddd.info,  Node: Display Shortcuts,  Prev: Shared Structures,  Up: Examining Structures
+
+Display Shortcuts
+.................
+
+   DDD maintains a _shortcut menu_ of frequently used display
+expressions.  This menu is activated
+
+   * by pressing and holding the `Display' button, or
+
+   * by pressing _mouse button 3_ on some display and selecting `New
+     Display', or
+
+   * by pressing <Shift> and _mouse button 3_ on some display.
+
+   By default, the shortcut menu contains frequently used base
+conversions.
+
+   The `Other' entry in the shortcut menu lets you create a new display
+that _extends_ the shortcut menu.
+
+   As an example, assume you have selected a display named `date_ptr'.
+Selecting `Display => Other' pops up a dialog that allows you to enter
+a new expression to be displayed--for instance, you can cast the
+display `date_ptr' to a new display `(char *)date_ptr'.  If the
+`Include in `New Display' Menu' toggle was activated, the shortcut menu
+will then contain a new entry `Display (char *)()' that will cast _any_
+selected display DISPLAY to `(char *)DISPLAY'.  Such shortcuts can save
+you a lot of time when examining complex data structures.
+
+   You can edit the contents of the `New Display' menu by selecting its
+`Edit Menu' item.  This pops up the _Shortcut Editor_ containing all
+shortcut expressions, which you can edit at leisure.  Each line
+contains the expression for exactly one menu item.  Clicking on `Apply'
+re-creates the `New Display' menu from the text.  If the text is empty,
+the `New Display' menu will be empty, too.
+
+   DDD also allows you to specify individual labels for user-defined
+buttons.  You can write such a label after the expression, separated by
+`//'.  This feature is used in the default contents of the GDB `New
+Display' menu, where each of the base conversions has a label:
+
+     /t ()   // Convert to Bin
+     /d ()   // Convert to Dec
+     /x ()   // Convert to Hex
+     /o ()   // Convert to Oct
+
+   Feel free to add other conversions here.  DDD supports up to 20 `New
+Display' menu items.
+
+   The shortcut menu is controlled by the following resources:
+
+ - Resource: dbxDisplayShortcuts (class DisplayShortcuts)
+     A newline-separated list of display expressions to be included in
+     the `New Display' menu for DBX.
+
+     If a line contains a label delimiter(1), the string before the
+     delimiter is used as EXPRESSION, and the string after the
+     delimiter is used as label.  Otherwise, the label is `Display
+     EXPRESSION'.  Upon activation, the string `()' in EXPRESSION is
+     replaced by the name of the currently selected display.
+
+ - Resource: gdbDisplayShortcuts (class DisplayShortcuts)
+     A newline-separated list of display expressions to be included in
+     the `New Display' menu for GDB.  See the description of
+     `dbxDisplayShortcuts', above.
+
+ - Resource: jdbDisplayShortcuts (class DisplayShortcuts)
+     A newline-separated list of display expressions to be included in
+     the `New Display' menu for JDB.  See the description of
+     `dbxDisplayShortcuts', above.
+
+ - Resource: perlDisplayShortcuts (class DisplayShortcuts)
+     A newline-separated list of display expressions to be included in
+     the `New Display' menu for Perl.  See the description of
+     `dbxDisplayShortcuts', above.
+
+ - Resource: bashDisplayShortcuts (class DisplayShortcuts)
+     A newline-separated list of display expressions to be included in
+     the `New Display' menu for Bash.  See the description of
+     `dbxDisplayShortcuts', above.
+
+ - Resource: pydbDisplayShortcuts (class DisplayShortcuts)
+     A newline-separated list of display expressions to be included in
+     the `New Display' menu for PYDB.  See the description of
+     `dbxDisplayShortcuts', above.
+
+ - Resource: xdbDisplayShortcuts (class DisplayShortcuts)
+     A newline-separated list of display expressions to be included in
+     the `New Display' menu for XDB.  See the description of
+     `dbxDisplayShortcuts', above.
+
+   ---------- Footnotes ----------
+
+   (1) The string `//'; can be changed via the `labelDelimiter'
+resource.  *Note Customizing Buttons::, for details.
+
+
+File: ddd.info,  Node: Customizing Displays,  Next: Layouting the Graph,  Prev: Examining Structures,  Up: Displaying Values
+
+Customizing Displays
+--------------------
+
+* Menu:
+
+* Using Data Themes::
+* Applying Data Themes to Several Values::
+* Editing Themes::
+* Writing Data Themes::
+* Display Resources::
+* VSL Resources::
+
+
+File: ddd.info,  Node: Using Data Themes,  Next: Applying Data Themes to Several Values,  Up: Customizing Displays
+
+Using Data Themes
+.................
+
+   DDD provides a simple method to customize displays.  DDD comes with
+a number of _visual modifiers_, called _data themes_.
+
+   Each theme modifies a particular aspect of a data display.  It can be
+applied to individual displays or to a number of displays.  The themes
+installed with DDD include:
+
+`Small Titles'
+     Apply this theme to show display titles in a smaller font.
+
+`Small Values'
+     Apply this theme to display values in a smaller font.
+
+`Tiny Values'
+     Apply this theme to display values in a tiny font.
+
+`Suppress Values'
+     Apply this theme to display values not at all.
+
+   Each of these themes can be applied for specific displays.
+
+   To apply a theme on a display,
+  1. Press _mouse button 3_ on the display.
+
+  2. Select `Theme'
+
+  3. Select the theme to apply.
+
+   For instance, to display the variable `s' in a tiny font, click
+_mouse button 3_ on the display of `s', and select `Theme => Tiny
+Values => Apply'.
+
+   To unapply a theme, just click on `Undo' (if you just applied it) or
+repeat the sequence as above.
+
+
+File: ddd.info,  Node: Applying Data Themes to Several Values,  Next: Editing Themes,  Prev: Using Data Themes,  Up: Customizing Displays
+
+Applying Data Themes to Several Values
+......................................
+
+   Whenever you want to apply a theme on a _struct member_ or an _array
+element,_ you will be asked whether to
+
+   * apply the theme on the single value only, or
+
+   * apply the theme on all similar values.
+
+   Suppose, for instance, that you don't want to see `vptr' members
+anymore.  Then you'd apply the theme _Suppress Values_ on all similar
+values.
+
+   On the other hand, if you want to highlight one single value only,
+you'd apply the theme _Red Background_ on only one single value.
+
+   If you find this confirmation annoying, you can define a command
+button which directly applies the theme.  *Note Defining Commands::,
+for details on defining commands.
+
+   Applying and unapplying themes is associated with the following
+commands:
+
+     graph apply theme NAME PATTERN
+   applies the theme NAME on PATTERN.
+
+     graph unapply theme NAME PATTERN
+   unapplies the theme NAME on PATTERN.
+
+     graph toggle theme NAME PATTERN
+   applies the theme NAME on PATTERN if it was not already applied, and
+unapplies it otherwise.
+
+
+File: ddd.info,  Node: Editing Themes,  Next: Writing Data Themes,  Prev: Applying Data Themes to Several Values,  Up: Customizing Displays
+
+Editing Themes
+..............
+
+   Each theme can be globally activated or not.  If a theme is
+activated, it is applied to all expressions that match its _pattern_.
+
+   Normally, these patterns are automatically maintained by simply
+selecting the themes for the individual displays.  However, you can also
+edit patterns directly.
+
+   Patterns are separated by `;' and contain shell-like metacharacters:
+   * `*' matches any sequence of characters.
+
+   * `?' matches any single character.
+
+   * `[SET]' matches any character in SET.  Character ranges can be
+     expressed using FROM-TO: `[0-9a-zA-Z_]' is the set of characters
+     allowed in C characters.
+
+   * `[!SET]' matches any character not in SET.
+
+   * To suppress the special syntactic significance of any
+     metacharacter\n\ and match the character exactly, precede it with
+     `\' (backslash).
+
+   * To suppress the syntactic significance of _all_ metacharacters,\n\
+     enclose the pattern in double or single quotes.\n\
+
+   To edit the set of themes, invoke `Data => Themes'.
+
+   To apply changes you made to the themes, click on `Apply'.  To
+revert the themes to the last saved, click on `Reset'.
+
+
+File: ddd.info,  Node: Writing Data Themes,  Next: Display Resources,  Prev: Editing Themes,  Up: Customizing Displays
+
+Writing Data Themes
+...................
+
+   You can write your own data themes, customizing the display to match
+your need.  *Note Top: (ddd-themes)Top, for details.
+
+
+File: ddd.info,  Node: Display Resources,  Next: VSL Resources,  Prev: Writing Data Themes,  Up: Customizing Displays
+
+Display Resources
+.................
+
+   You can use these resources to control display appearance:
+
+ - Resource: autoCloseDataWindow (class AutoClose)
+     If this is `on' (default) and DDD is in stacked window mode,
+     deleting the last display automatically closes the data window.
+     If this is `off', the data window stays open even after deleting
+     the last display.
+
+ - Resource: bumpDisplays (class BumpDisplays)
+     If some display D changes size and this resource is `on'
+     (default), DDD assigns new positions to displays below and on the
+     right of D such that the distance between displays remains
+     constant.  If this is `off', other displays are not rearranged.
+
+ - Resource: clusterDisplays (class ClusterDisplays)
+     If `on', new independent data displays will automatically be
+     clustered.  Default is `off', meaning to leave new displays
+     unclustered.
+
+ - Resource: hideInactiveDisplays (class HideInactiveDisplays)
+     If some display gets out of scope and this resource is `on'
+     (default), DDD removes it from the data display.  If this is
+     `off', it is simply disabled.
+
+ - Resource: showBaseDisplayTitles (class ShowDisplayTitles)
+     Whether to assign titles to base (independent) displays or not.
+     Default is `on'.
+
+ - Resource: showDependentDisplayTitles (class ShowDisplayTitles)
+     Whether to assign titles to dependent displays or not.  Default is
+     `off'.
+
+ - Resource: suppressTheme (class Theme)
+     The theme to apply when selecting `Undisp' on a data value.
+     Default is `suppress.vsl'.
+
+ - Resource: themes (class Themes)
+     A newline-separated list of themes.  Each theme has the format
+     NAME, tabulator character, PATTERN.
+
+
+File: ddd.info,  Node: VSL Resources,  Prev: Display Resources,  Up: Customizing Displays
+
+VSL Resources
+.............
+
+   The following resources control the VSL interpreter:
+
+ - Resource: vslBaseDefs (class VSLDefs)
+     A string with additional VSL definitions that are appended to the
+     builtin VSL library.  This resource is prepended to the `vslDefs'
+     resource below and set in the DDD application defaults file; don't
+     change it.
+
+ - Resource: vslDefs (class VSLDefs)
+     A string with additional VSL definitions that are appended to the
+     builtin VSL library.  The default value is an empty string.  This
+     resource can be used to override specific VSL definitions that
+     affect the data display.  The preferred method, though, is to
+     write a specific data theme (*note Writing Data Themes::).
+
+ - Resource: vslLibrary (class VSLLibrary)
+     The VSL library to use.  `builtin' (default) means to use the
+     built-in library, any other value is used as file name.
+
+ - Resource: vslPath (class VSLPath)
+     A colon-separated list of directories to search for VSL include
+     files.  The following directory names are special:
+        * The special directory name `user_themes' stands for your
+          individual theme directory, typically `~/.ddd/themes/'.
+
+        * The special directory name `ddd_themes' stands for the
+          installed theme directory, typically
+          `/usr/local/share/ddd-3.3.11/themes/'.
+     Default is `user_themes:ddd_themes:.', which means that DDD first
+     searches your theme directory, followed by the system directory
+     and the current directory.
+
+   If your DDD source distribution is installed in `/opt/src', you can
+use the following settings to read the VSL library from
+`/home/joe/ddd.vsl':
+
+     Ddd*vslLibrary: /home/joe/ddd.vsl
+     Ddd*vslPath:    user_themes:.:/opt/src/ddd/ddd:/opt/src/ddd/vsllib
+
+   VSL include files referenced by `/home/joe/ddd.vsl' are searched
+first in the current directory `.', then in your theme directory, then
+in `/opt/src/ddd/ddd/', and then in `/opt/src/ddd/vsllib/'.
+
+   Instead of supplying another VSL library, it is often easier to
+specify some minor changes to the built-in library (*note Writing Data
+Themes::).
+
+
+File: ddd.info,  Node: Layouting the Graph,  Next: Printing the Graph,  Prev: Customizing Displays,  Up: Displaying Values
+
+Layouting the Graph
+-------------------
+
+   If you have several displays at once, you may wish to arrange them
+according to your personal preferences.  This section tells you how you
+can do this.
+
+* Menu:
+
+* Moving Displays::
+* Scrolling Data::
+* Aligning Displays::
+* Automatic Layout::
+* Rotating the Graph::
+
+
+File: ddd.info,  Node: Moving Displays,  Next: Scrolling Data,  Up: Layouting the Graph
+
+Moving Displays
+...............
+
+   From time to time, you may wish to move displays at another place in
+the data window.  You can move a single display by pressing and holding
+_mouse button 1_ on the display title.  Moving the pointer while
+holding the button causes all selected displays to move along with the
+pointer.
+
+   Edge hints can be selected and moved around like other displays.  If
+an arc goes through the edge hint, you can change the shape of the arc
+by moving the edge hint around.
+
+   For fine-grain movements, selected displays may also be moved using
+the arrow keys.  Pressing <Shift> and an arrow key moves displays by
+single pixels.  Pressing <Ctrl> and arrow keys moves displays by grid
+positions.
+
+
+File: ddd.info,  Node: Scrolling Data,  Next: Aligning Displays,  Prev: Moving Displays,  Up: Layouting the Graph
+
+Scrolling Data
+..............
+
+   If the data window becomes too small to hold all displays, scroll
+bars are created.  If your DDD is set up to use _panners_ instead, a
+panner is created in the lower right edge.  When the panner is moved
+around, the window view follows the position of the panner.
+
+   To change from scroll bars to panners, use `Edit => Startup => Data
+Scrolling' and choose either `Panner' or `Scrollbars'.
+
+   This setting is tied to the following resource:
+
+ - Resource: pannedGraphEditor (class PannedGraphEditor)
+     The control to scroll the graph.
+
+        * If this is `on', an Athena panner is used (a kind of
+          two-directional scrollbar).
+
+        * If this is `off' (default), two M*tif scrollbars are used.
+
+     *Note Options::, for the `--scrolled-graph-editor' and
+     `--panned-graph-editor' options.
+
+
+File: ddd.info,  Node: Aligning Displays,  Next: Automatic Layout,  Prev: Scrolling Data,  Up: Layouting the Graph
+
+Aligning Displays
+.................
+
+   You can align all displays on the nearest grid position by selecting
+`Data => Align on Grid'.  This is useful for keeping edges strictly
+horizontal or vertical.
+
+   You can enforce alignment by selecting `Edit => Preferences => Data
+=> Auto-align Displays on Nearest Grid Point'.  If this feature is
+enabled, displays can be moved on grid positions only.
+
+
+File: ddd.info,  Node: Automatic Layout,  Next: Rotating the Graph,  Prev: Aligning Displays,  Up: Layouting the Graph
+
+Automatic Layout
+................
+
+   You can layout the entire graph as a tree by selecting `Data =>
+Layout Graph'.  The layout direction is determined from the display
+placement (*note Placement::) and from the last rotation (*note
+Rotating the Graph::).
+
+   Layouting the graph may introduce "edge hints"; that is, edges are
+no more straight lines, but lead to an edge hint and from there to their
+destination.  Edge hints can be moved around like arbitrary displays.
+
+   To enable a more compact layout, you can set the `Edit =>
+Preferences => Data => Compact Layout' option.  This realizes an
+alternate layout algorithm, where successors are placed next to their
+parents.  This algorithm is suitable for homogeneous data structures
+only.
+
+   You can enforce layout by setting `Edit => Preferences => Data =>
+Automatic Layout'.  If automatic layout is enabled, the graph is
+layouted after each change.
+
+
+File: ddd.info,  Node: Rotating the Graph,  Prev: Automatic Layout,  Up: Layouting the Graph
+
+Rotating the Graph
+..................
+
+   You can rotate the entire graph clockwise by 90 degrees by selecting
+`Data => Rotate Graph'.  You may need to layout the graph after
+rotating it; *Note Automatic Layout::, for details.
+
+
+File: ddd.info,  Node: Printing the Graph,  Prev: Layouting the Graph,  Up: Displaying Values
+
+Printing the Graph
+------------------
+
+   DDD allows for printing the graph picture on PostScript printers or
+into files.  This is useful for documenting program states.
+
+   To print the graph on a PostScript printer, select `File => Print
+Graph'.  Enter the printing command in the `Print Command' field.
+Click on the `OK' or the `Apply' button to start printing.
+
+   As an alternative, you may also print the graph in a file.  Click on
+the `File' button and enter the file name in the `File Name' field.
+Click on the `Print' button to create the file.
+
+   When the graph is printed in a file, two formats are available:
+
+   * `PostScript'--suitable for enclosing the graph in another document;
+
+   * `FIG'--suitable for post-processing, using the `xfig' graphic
+     editor, or for conversion into other formats (among others, IBMGL,
+     TeX, PIC), using the `transfig' or `fig2dev' programs.
+
+   Please note the following _caveats_ related to printing graphs:
+
+   * If any displays were selected when invoking the `Print' dialog, the
+     option `Selected Only' is set.  This makes DDD print only the
+     selected displays.
+
+   * The `Color', `Orientation', and `Paper Size' options are
+     meaningful for PostScript only.
+
+   These settings are tied to the following resources:
+
+ - Resource: printCommand (class PrintCommand)
+     The command to print a PostScript file.  Usually `lp' or `lpr'.
+
+ - Resource: paperSize (class PaperSize)
+     The paper size used for printing, in format `WIDTH x HEIGHT'.  The
+     default is ISO A4 format, or `210mm x 297mm'.
+
+
+File: ddd.info,  Node: Plotting Values,  Next: Examining Memory,  Prev: Displaying Values,  Up: Examining Data
+
+Plotting Values
+===============
+
+   If you have huge amounts of numerical data to examine, a picture
+often says more than a thousand numbers.  Therefore, DDD allows you to
+draw numerical values in nice 2-D and 3-D plots.
+
+* Menu:
+
+* Plotting Arrays::             Plotting 1-D and 2-D arrays.
+* Plot Appearance::             Controlling the appearance.
+* Scalars and Composites::      Plotting simple values.
+* Plotting Histories::          Plotting the history of a variable.
+* Printing Plots::              Printing on paper.
+* Entering Plotting Commands::  Raw Gnuplot commands.
+* Exporting Plot Data::         Processing data outside of DDD
+* Animating Plots::             Visualizing dynamic behaviour.
+* Customizing Plots::           All at your leisure.
+
+
+File: ddd.info,  Node: Plotting Arrays,  Next: Plot Appearance,  Up: Plotting Values
+
+Plotting Arrays
+---------------
+
+   Basically, DDD can plot two types of numerical values:
+
+   * One-dimensional arrays.  These are drawn in a 2-D X/Y space, where
+     X denotes the array index, and Y the element value.
+
+   * Two-dimensional arrays.  These are drawn in a 3-D X/Y/Z space,
+     where X and Y denote the array indexes, and Z the element value.
+
+   To plot a fixed-size array, select its name by clicking _mouse
+button 1_ on an occurrence.  The array name is copied to the argument
+field.  By clicking the `Plot' button, a new display is created in the
+data window, followed by a new top-level window containing the value
+plot.
+
+   To plot a dynamically sized array, you must use an array slice
+(*note Array Slices::).  In the argument field, enter
+
+     ARRAY[FIRST]@NELEMS
+
+where ARRAY is the name of the array to display, FIRST is the index of
+the first element, and NELEMS is the number of elements to display.
+Then, click on `Plot' to start the plot.
+
+   To plot a value, you can also enter a command at the debugger prompt:
+
+     graph plot EXPR
+
+works like `graph display EXPR' (and takes the same arguments; *note
+Creating Single Displays::), but the value is additionally shown in the
+plot window.
+
+   Each time the value changes during program execution, the plot is
+updated to reflect the current values.  The plot window remains active
+until you close it (via `File => Close') or until the associated
+display is deleted.
+
+
+File: ddd.info,  Node: Plot Appearance,  Next: Scalars and Composites,  Prev: Plotting Arrays,  Up: Plotting Values
+
+Changing the Plot Appearance
+----------------------------
+
+   The actual drawing is not done by DDD itself.  Instead, DDD relies
+on an external `gnuplot' program to create the drawing.
+
+   DDD adds a menu bar to the Gnuplot plot window that lets you
+influence the appearance of the plot:
+
+   * The `View' menu toggles optional parts of the plot, such as border
+     lines or a background grid.
+
+   * The `Plot' menu changes the "plotting style".  The `3-D Lines'
+     option is useful for plotting two-dimensional arrays.
+
+   * The `Scale' menu allows you to enable logarithmic scaling and to
+     enable or disable the scale tics.
+
+   * The `Contour' menu adds contour lines to 3-D plots.
+
+   In a 3-D plot, you can use the scroll bars to change your view
+position.  The horizontal scroll bar rotates the plot around the Z
+axis, that is, to the left and right.  The vertical scroll bar rotates
+the plot around the Y axis, that is, up and down.
+
+   You can also resize the plot window as desired.
+
+
+File: ddd.info,  Node: Scalars and Composites,  Next: Plotting Histories,  Prev: Plot Appearance,  Up: Plotting Values
+
+Plotting Scalars and Composites
+-------------------------------
+
+   Besides plotting arrays, DDD also allows you to plot scalars (simple
+numerical values).  This works just like plotting arrays--you select
+the numerical variable, click on `Plot', and here comes the plot.
+However, plotting a scalar is not very exciting.  A plot that contains
+nothing but a scalar simply draws the scalar's value as a Y
+constant--that is, a horizontal line.
+
+   So why care about scalars at all?  DDD allows you to combine
+_multiple values into one plot._  The basic idea is: if you want to
+plot something that is neither an array nor a scalar, DDD takes all
+numerical sub-values it can find and plots them all together in one
+window.  For instance, you can plot all local variables by selecting
+`Data => Display Local Variables', followed by `Plot'.  This will
+create a plot containing all numerical values as found in the current
+local variables.  Likewise, you can plot all numeric members contained
+in a structure by selecting it, followed by `Plot'.
+
+   If you want more control about what to include in a plot and what
+not, you can use _display clusters_ (*note Clustering::).  A common
+scenario is to plot a one-dimensional array together with the current
+index position.  This is done in three steps:
+
+  1. Display the array and the index, using `Display'.
+
+  2. Cluster both displays: select them and choose `Undisp => Cluster
+     ()'.
+
+  3. Plot the cluster by pressing `Plot'.
+
+   Scalars that are displayed together with arrays can be displayed
+either as vertical lines or horizontal lines.  By default, scalars are
+plotted as horizontal lines.  However, if a scalar is a valid index for
+an array that was previously plotted, it is shown as a vertical line.
+You can change this initial orientation by selecting the scalar
+display, followed by `Rotate'.
+

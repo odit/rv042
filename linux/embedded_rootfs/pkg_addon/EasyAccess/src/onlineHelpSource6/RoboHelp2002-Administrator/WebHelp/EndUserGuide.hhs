@@ -1,0 +1,234 @@
+[TOPICS=2]
+"Logging into the SSL VPN Portal","EasyAccess_Overview.htm"
+"EasyAccess SSL VPN Overview","Logging_into_the_SSL_VPN_Portal.htm"
+
+
+[KEYWORDS=115]
+"acces", 1, 0
+"accessibl", 1
+"EasyAccess", 1, 0
+"administrator", 1, 0
+"allow", 0
+"application", 1, 0
+"as", 1
+"authenticat", 1, 0
+"authoriz", 1
+"automatical", 1
+"bas", 0
+"brows", 1, 0
+"calendar", 1
+"clear", 1
+"client", 1, 0
+"communication", 0
+"configur", 1, 0
+"configuration", 1
+"connect", 1
+"connection", 0
+"connectivity", 0
+"contact", 1
+"cooki", 0
+"customer", 1, 0
+"defin", 1
+"depend", 1
+"desktop", 1, 0
+"determin", 1
+"devic", 1, 0
+"download", 1, 0
+"email", 1
+"enabl", 0
+"encrypt", 0
+"explor", 0
+"expres", 1
+"extranet", 1, 0
+"fil", 1, 0
+"follow", 1
+"forward", 1
+"gateway", 1, 0
+"high", 0
+"http", 1, 0
+"ibm", 1
+"information", 1
+"instal", 0
+"internal", 1, 0
+"internet", 0
+"intranet", 1, 0
+"java", 0
+"javascript", 0
+"jr", 0
+"just", 1
+"launch", 1
+"location", 0
+"log", 1, 0
+"lotu", 1
+"mad", 1
+"mail", 1
+"manag", 0
+"management", 1
+"microsoft", 1
+"mobil", 1, 0
+"mozilla", 0
+"neighborhood", 1, 0
+"netscap", 1
+"network", 1, 0
+"not", 1
+"operat", 0
+"outlook", 1
+"overview", 1
+"partner", 1, 0
+"perform", 0
+"polici", 1
+"portal", 1, 0
+"protocol", 1
+"provid", 1, 0
+"receiv", 1
+"remot", 1, 0
+"request", 1
+"requirement", 0
+"resourc", 1, 0
+"secur", 1, 0
+"secure", 1, 0
+"send", 1
+"serv", 1
+"server", 1
+"session", 1
+"setting", 1
+"shar", 1
+"should", 1
+"sit", 1, 0
+"softwar", 1, 0
+"ssh", 1, 0
+"ssl", 1, 0
+"standard", 1, 0
+"sun", 0
+"system", 0
+"telecommuter", 1
+"telnet", 1, 0
+"text", 1
+"through", 1, 0
+"traffic", 0
+"transparent", 1
+"try", 1
+"underly", 1
+"unix", 0
+"upload", 1, 0
+"us", 1
+"via", 1
+"vpn", 1, 0
+"way", 1
+"web", 1, 0
+"window", 0
+"worker", 1, 0
+"x", 0
+
+
+[STOPWORDS=110]
+"a"
+"after"
+"all"
+"along"
+"already"
+"also"
+"am"
+"among"
+"an"
+"and"
+"another"
+"any"
+"are"
+"at"
+"be"
+"because"
+"been"
+"between"
+"but"
+"by"
+"can"
+"do"
+"does"
+"doesn"
+"done"
+"each"
+"either"
+"for"
+"from"
+"get"
+"has"
+"have"
+"here"
+"how"
+"i"
+"if"
+"in"
+"into"
+"is"
+"isn"
+"it"
+"like"
+"may"
+"maybe"
+"more"
+"must"
+"need"
+"non"
+"not"
+"of"
+"ok"
+"okay"
+"on"
+"or"
+"other"
+"rather"
+"re"
+"s"
+"same"
+"see"
+"so"
+"some"
+"such"
+"t"
+"than"
+"that"
+"the"
+"their"
+"them"
+"then"
+"there"
+"these"
+"they"
+"this"
+"those"
+"to"
+"too"
+"unless"
+"use"
+"used"
+"using"
+"was"
+"were"
+"ve"
+"want"
+"way"
+"what"
+"when"
+"whenever"
+"where"
+"when"
+"whether"
+"which"
+"will"
+"with"
+"within"
+"without"
+"yet"
+"you"
+"your"
+"1"
+"2"
+"3"
+"4"
+"5"
+"6"
+"7"
+"8"
+"9"
+"0"

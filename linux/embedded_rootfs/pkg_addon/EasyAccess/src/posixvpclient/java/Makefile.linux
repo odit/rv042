@@ -1,0 +1,29 @@
+include ../posixvpclient.mk
+
+JC = javac 
+JFLAGS = -source 1.3 -target 1.1
+PACKAGE = com/cavium
+
+JNI_HEADERS = ../$(VPDIALER)/CaviumMgr.h \
+		      ../$(VPDIALER)/CaviumDialer.h
+		      
+CLASSES =  $(PACKAGE)/Debug.class \
+		   $(PACKAGE)/Installer.class \
+		   $(PACKAGE)/UnInstaller.class \
+		   $(PACKAGE)/CaviumSSLApplet.class 
+
+.SUFFIXES: .java .class
+
+.java.class:
+	$(JC) $(JFLAGS) $*.java
+
+all: $(CLASSES:.java=.class) $(JNI_HEADERS)
+
+../$(VPDIALER)/CaviumMgr.h:  $(PACKAGE)/CaviumMgr.class 
+	javah -jni -o $@ $(PACKAGE)/CaviumMgr
+	
+../$(VPDIALER)/CaviumDialer.h: $(PACKAGE)/CaviumDialer.class 
+	javah -jni -o $@ $(PACKAGE)/CaviumDialer
+
+clean:
+	$(RM) $(PACKAGE)/*.class

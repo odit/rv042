@@ -1,0 +1,26 @@
+HKCR
+{
+	MLWebCacheCleaner.WebCacheCleaner.1 = s 'WebCacheCleaner Class'
+	{
+		CLSID = s '{79D6214F-CFCE-480F-9901-27950E78F1E6}'
+	}
+	MLWebCacheCleaner.WebCacheCleaner = s 'WebCacheCleaner Class'
+	{
+		CLSID = s '{79D6214F-CFCE-480F-9901-27950E78F1E6}'
+		CurVer = s 'MLWebCacheCleaner.WebCacheCleaner.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {79D6214F-CFCE-480F-9901-27950E78F1E6} = s 'WebCacheCleaner Class'
+		{
+			ProgID = s 'MLWebCacheCleaner.WebCacheCleaner.1'
+			VersionIndependentProgID = s 'MLWebCacheCleaner.WebCacheCleaner'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{8A2EB073-C64D-4FB4-86B0-45FA58CD986C}'
+		}
+	}
+}

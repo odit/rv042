@@ -1,0 +1,211 @@
+Cavium Networks, EasyAccess Installation procedure on CN2xx Nitrox SOHO:
+-----------------------------------------------------------------------
+
+Dependencies:
+        Source code for EasyAccess Release 1.5
+        uClinux SDK 2.8.2 with IPV6 Enabled
+
+Basic Installation and compilation:
+        * untar EasyAccess in uClinux/uC-src/real
+        * To build software ssl to support 201/210 build 'sslvpn' target.
+                - make sslvpn from uClinux/brecis/compilescripts
+        * To build hardware accelerated target for CN22X
+                - make turbosslvpn
+        * To build hardware accelerated target for CN22X including IPV6
+                - make turbosslvpn6
+
+How to change the Vendor ID and Product ID:
+        By default the Vendor ID is "Cavium Networks" and Product ID is
+        "EasyAccess". They can be changed in EasyAccess/src/lib/SysComm.h
+
+        Note1: Product ID, must be a single word, space is not allowed.
+
+        Note2: Changing the Product ID will also change the default local
+               user database name and the default portal.
+
+        EasyAcess/src/uiaddon must be updated with the new HomePage theme.
+
+How to change the default Vendor Logo:
+        Change the logo*.gif in EasyAccess/src/WWW/cgi-bin/common/images
+
+Other configurable elements in EasyAccess:
+        Please refer to EasyAccess/src/lib/SysComm.h, to change the '#define'
+
+PRODUCT_ID: Product ID of the software, Default = EasyAccess
+VENDOR_ID: Vendor ID, Default = "Cavium Networks"
+PRODUCT_STRING: Product name, Default = "Cavium Networks EasyAccess SSL VPN"
+DEFAULT_LOCAL_DOMAIN: Database name for local user database, 
+                Default = $PRODUCT_ID
+
+DEFAULT_LOCAL_GROUP: Default group name of local user database,
+        Default=MainGroup
+
+DEFAULT_ADMIN_USER: First commission administrative user name, Default = "admin" 
+DEFAULT_ADMIN_PASSWD: First commission administravie password, Default="admin123"
+AP_COOKIE_NAME: Cookie name that will be used to store sessions, Default="mlap"
+AP_SMB_USER_NAME: WebCIFS session cookie name, Default="mlsun"
+AP_SMB_USER_PASSWD: WebCIFS session password cookie name, Default="mlsup"
+LOGROTATE_FILE_SIZE: Max log file size, Default = "250k"
+ROTATELOGS_HISTORY: Max number of backup logs stored, Default=8
+MAX_USER_COUNT: Maxiumum number of users supported, Default=128
+MAX_USER_SESSIONS: Maxiumum concurrent users, Default=64
+MAX_DOMAIN_COUNT: Maximum number of authentication domains, Default=32
+MAX_BOOKMARK_COUNT: Maximum number of bookmarks per user, Default=32
+MAX_POLICY_COUNT: Maximum number of policies per user, Default=32
+MAX_GROUP_COUNT: Maximum number of user groups, Default=32
+MAX_FTP_SESSIONS: Maximum number of ftp sessions per user, Default=8
+ACCESSPOINT_DEFAULT_START_ADDR
+ACCESSPOINT_DEFAULT_END_ADDR: First commission address pool start for 
+        Virtual Passage, Default="192.168.251.1" to "192.168.251.254"
+
+
+Components of EasyAccess:
+        smm: System Services Manager
+                * Handles all the user login, policy
+                * Data base manager for user database, group, domain, policy,
+                  bookmarks, portals and other SSL VPN related information.
+                * smm's configuration file is EasyAcess/var/conf/ssm.conf
+                * smm can be launched from CLI as 'smm -d'
+        
+        firebase: firebase is the OS manger.
+                * Handles IP Address, Routes, Name Services, Virtal hosting,
+                  and other linx management.
+                * firebase's configuration is stored in
+                  EasyAccess/var/conf/firebase.conf
+                * firebase can be launched from CLI as 'firebase -d'
+
+        httpd: Single threaded http server with SSL support. This is the core
+               of the SSL VPN services. All the SSL VPN services like Virtual
+               Passage, Virtual Transport, RDP 5.0 Terminal Services use httpd
+               Cavium's CONNECT schema. Httpd uses a SOCKS V based proxy
+               mechanism for providing SSL VPN services.
+                * Httpd is configured in EasyAcess/src/httpd/HttpdConfig.c
+                        - sslServerPort: HTTPS Port number for SSL VPN,
+                        Default=443
+                        - serverPort: HTTP Port number for SSL VPN,
+                        Default = 80
+                        - serverUID: User ID as which the httpd server will
+                        run, Default=0
+                        - serverGID: Group ID as which the httpd server will
+                        run, Default=0
+                        - pServerAdmin: Administrative user name of SSL VPN,
+                        Default=root@sslvpn
+                        - pErrorLog: Log file to which errors will be logged,
+                        Default='/dev/null'
+                        - pAccessLog: Log file to which HTTP requests will be
+                        logged, Default='/dev/null'
+                        - pDocumentRoot: Directory aliased to HTTP '/',
+                        Default=/usr/local/src/EasyAccess/www/htdocs
+                        - pCgiPath: Directory aliased to HTTP '/cgi-bin',
+                        Default=/usr/local/src/EasyAccess/www/cgi-bin
+
+               Note: Some of the above parameters are generated by 'RUN' script in
+               EasyAccess.
+
+WebFTP:
+        * ftpsession: WebFTP backend service provider. ftpsession 'forks()' a
+          child for every active ftp connection in the gateway. Source is
+          located in EasyAccess/src/ftpsession
+        * CGI are located in 'EasyAccess/src/WWW/cgi-bin/user-pages/services
+        
+        How to turnoff WebFTP:
+                1) Remove ftpsession from EasyAccess/src/Makefile.in
+                2) Remove 'ftp-upload', 'ftp-download', 'ftp-addnew' from
+                EasyAccess/src/WWW/cgi-bin/user-pages/services/Makefile
+                3) Edit CGI_LIST in EasyAccess/src/WWW/single_cgi, and
+                re-generate single_cgi_files.c using
+                EasyAccess/src/WWW/single_cgi/make.sh
+                4) Remove 'ftp-upload', 'ftp-download' and 'ftp-addnew' from
+                EasyAccess/src/WWW/single_cgi/single_cgi.c
+                5) Remove 'ftpsession' and 'libFtpsession.a' from
+                EasyAccess/src/single_bin/Makefile and
+                EasyAccess/src/single_bin/single_bin.c
+                6) Disable the portal flag in EasyAccess/src/lib/SysComm.h
+                  DEFAULT_FTP_FLAG
+WebCIFS:
+        * Web based Windows file sharing module.
+        * Source is located in EasyAccess/src/WWW/user-pages/cifs
+
+        How to turnoff WebCIFS:
+                1) Remove cifs from
+                 EasyAccess/src/WWW/cgi-bin/user-pages/Makefile
+                2) Remove cifs from 
+                EasyAccess/src/WWW/Makefile.uClinux
+                3) Disable the portal flag in EasyAccess/src/lib/SysComm.h
+                  DEFAULT_CIFS_PAGE_FLAG
+
+Telnet/SSH:
+        * Java based Telnet/SSH applet. Source code is located in
+          EasyAccess/src/WWW/Java/TelSSh. Pre-compiled Java jar is located in
+          EasyAccess/src/WWW/jar.
+        * CGIs are located in EasyAccess/src/WWW/cgi-bin/user-pages/services.
+
+        How to turn off Telnet/SSH:
+                1) Remove WebTelnet.jar from EasyAccess/src/WWW/Java/Makefile
+                2) Remove telnet, ssh from
+                EasyAccess/src/WWW/user-pages/servcies/Makefile
+                3) Remove telnet and ssh from
+                EasyAccess/src/WWW/single_cgi/single_cgi.c
+                4) Remove telnet and ssh from
+                EasyAccess/src/WWW/single_cgi/CGI_LIST, and generate
+                sigle_cgi_files.c using make_cgi.sh
+                5) Disable telnet and ssh portal flags from
+                EasyAccess/src/lib/SysComm.h
+                DEFAULT_TELNET_FLAG
+                DEFAULT_SSH_FLAG
+
+Virtual Passage for Windows:
+        Virtual Passage is the full network access client. Source code is
+        written using VC++, PSDK 2000 and DDK 2003.
+
+        How to compile Virtual Passage: Please refer to build instructions
+           in EasyAccess/src/AccessPointDial/ReadMe.txt or 
+	   EasyAccess/WinClientsBuildNotes.txt
+
+        Pre-compiled binaries are located in EasyAccess/src/AccessPointDial/Release/
+        
+        	1) XTunnel.cab or XTunnel6.cab (For IPv6)
+        	2) WindowsVPDialer.jar  or WindowsVPDialer6.jar (For IPv6)
+        	3) WindowsVPInstaller.jar
+       
+        Note: XTunnel.cab (or XTunnel6.cab) and WindowsVPInstaller.jar 
+	(or WindowsVPDialer6.jar) are by default signed with Cavium Code 
+	signing certificate. OEM's must re-sign with their own code 
+	signing certificate.
+
+        How to Disable Virtual Passage:
+                1) Disable the DEFAULT_VIRTUALPASSAGE_PAGE_FLAG from
+                  EasyAccess/src/lib/SysComm.h
+                2) Remove Virtual Passage from
+                EasyAccess/src/WWW/cgi-bin/user-pages/client/Makefile
+                3) Remove Virtual Passage from
+                EasyAccess/src/WWW/cgi-bin/admin-pages/sslvpnclient/Makefile
+                4) Remove Virtual Passage CGI_LIST and single_cgi.c in 
+                EasyAccess/src/WWW/single_cgi. Re-create single_cgi.c using
+                make_cgi.sh
+                5) Remove Virtual Passage from EasyAccess/src/Makefile
+
+Virtual Transport:
+	Virtual Transport is the TCP only port forwarding client. Source code is
+        written using VC++ and PSDK 2000.
+
+	How to compile Virtual Transport: Please refer to build instructions
+           in EasyAccess/WinClientsBuildNotes.txt
+        
+	Pre-compiled binaries are located in EasyAccess/src/VirtualTransport/Release
+		1)MenloLSP.cab
+
+	Note: MenloLSP.cab is by default signed with Cavium Code signing 
+	certificate. OEM's must re-sign with their own code 
+	signing certificate.
+
+	How to Disable Virtual Transport:
+                1) Disable the DEFAULT_VIRTUALTRANSPORT_PAGE_FLAG from
+                  EasyAccess/src/lib/SysComm.h
+                2) Remove Virtual Transport from
+                EasyAccess/src/WWW/cgi-bin/user-pages/client/Makefile
+                3) Remove Virtual Transport from
+                EasyAccess/src/WWW/cgi-bin/admin-pages/sslvpnclient/Makefile
+                4) Remove Virtual Transport CGI_LIST and single_cgi.c in 
+                EasyAccess/src/WWW/single_cgi. 
+                5) Remove Virtual Transport from EasyAccess/src/Makefile

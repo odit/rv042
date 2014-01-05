@@ -1,0 +1,7 @@
+
+config CONFIG_octcrypto
+	bool "octcrypto"
+	default y
+	help
+		This is a Octeon Kernel Module for Offloading ModExp and ModExp-CRT
+		Operations.

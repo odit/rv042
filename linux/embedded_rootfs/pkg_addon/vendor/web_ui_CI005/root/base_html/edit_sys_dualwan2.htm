@@ -1,0 +1,1039 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<!--#nk_get RedirectPage="sys_dualwan2.htm:0"-->
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Web Management</title>
+<link type="text/css" rel="stylesheet" href="nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<!--#nk_get JavaScript="lg:0"--><script src="lg.js"></script><!--#nk_get JavaScript="lg:1"-->
+<script  language="JavaScript">
+/***************************************************/
+/*												     */	
+/*      		Begin of content's JavaScript function    	    */
+/*												    */	
+/***************************************************/
+function Entryfunction()
+{
+	setiName();
+	chDismatch();
+	chNSD(document.formedit_sys_dualwan2);
+}
+function Leavefunction()
+{
+	chLeave();
+}
+
+function setiName()
+{
+	var F=document.formedit_sys_dualwan2;
+	if (parseInt(F.editInterface.value)<=parseInt(document.formdualwan.wanNumber.value) && parseInt(F.editInterface.value)>=1)
+		F.iName.value="WAN"+F.editInterface.value;
+	else if (F.editInterface.value==2) F.iName.value="WAN2";
+	else if (F.editInterface.value==3) F.iName.value="WAN3";
+	else if (F.editInterface.value==4) F.iName.value="WAN4";
+	else if (F.editInterface.value==5) F.iName.value="WAN5";
+	else if (F.editInterface.value==6) F.iName.value="WAN6";
+	else if (F.editInterface.value==7) F.iName.value="WAN7";
+	else if (F.editInterface.value==8) F.iName.value="WAN8";
+}
+function chDismatch()
+{
+	var nsdTable=document.getElementById('nsd_table');
+	if(document.formedit_sys_dualwan2.nsd_enabled_check)
+	if(document.formedit_sys_dualwan2.nsd_enabled_check.checked==true)
+		nsdTable.style.display="";
+	else 
+  		nsdTable.style.display="none";
+}
+
+function chNSD(F)
+{
+	if (F.nsd_enabled_check)
+	if (F.nsd_enabled_check.checked == true)
+	{
+	    if (F.isphost_enabled_check)
+	    if (F.isphost_enabled_check.checked == true) F.wan_nsd_isp_host.disabled=false;
+		else F.wan_nsd_isp_host.disabled=true;
+
+		if (F.remotehost_enabled_check)
+		if (F.remotehost_enabled_check.checked == true) F.wan_nsd_remote_host.disabled=false;
+		else F.wan_nsd_remote_host.disabled=true;
+
+		if (F.dnshost_enabled_check)
+		if (F.dnshost_enabled_check.checked == true) F.wan_nsd_dns_host.disabled=false;
+		else F.wan_nsd_dns_host.disabled=true;
+	}	
+}
+
+function checkTheSameDNS(F)
+{
+	for(var i=0;i<7;i++)
+		if(F.NsdHostValue[i].value=="YES")
+			if(i!=(F.editInterface.value-1))
+				if(F.DnsHostValue[i].value==F.wan_nsd_dns_host.value)
+					return -1;
+	return 1;
+}
+function checkIPformate(s)  
+{
+  var p;
+  var q; 
+
+  var rightString=new String(s.value);
+  var tmpString;
+  var i;
+  var ts=new tmpWord(5); 
+
+  if (rightString.length<=0)
+  {
+
+	 return -1;
+  }
+
+	for(i=1; i<=3;i++)
+	{
+		q=rightString.length;
+		p=rightString.indexOf(".");
+
+    	if(p<0)
+		{
+			return -1;	
+		}
+    	ts[i]=rightString.substring(0,p);
+    	tmpString=rightString;
+    	rightString=tmpString.substring(p+1,q); 
+		if(rightString.length<=0||ts[i].length>3)
+		{
+			return -1;
+		}
+	
+	}
+
+    q=rightString.length;
+	if(q<=3)
+	    ts[4]=rightString.substring(0,q); 
+	else
+	{
+		return -1;
+	}
+	
+	for(var temp=1; temp<=4; temp++)
+	{
+		for( var idx = 0 ; idx <ts[temp].length ; idx++ )
+		{
+			if( (ts[temp].charAt(idx)< '0') || (ts[temp].charAt(idx) > '9' ))
+			{
+				return -1;
+			}
+		}
+	}
+	return 1;
+}
+function chSubmit(F)
+{	
+	if (F.nsd_enabled_check) 
+	{ 
+		if (F.nsd_enabled_check.checked == true)
+  		{
+			if (F.wan_nsd_def_gw_checkbox.checked==false && F.isphost_enabled_check.checked==false && F.remotehost_enabled_check.checked==false && F.dnshost_enabled_check.checked==false)
+			{	  
+				  alert(aNSDwan);
+				  F.wan_nsd_def_gw_checkbox.focus();
+				  return;
+			}
+
+			if (F.check_io_input)
+			{
+				if(checkio(F.check_io_input)<0)
+				{			
+			  		F.check_io_input.select();
+			  		return;
+				}
+			}		
+			if (F.isphost_enabled_check)
+			if (F.isphost_enabled_check.checked == true)
+			{
+				if(F.wan_nsd_isp_host.value.length == 0)
+				{
+					alert(aISPHostwan);
+					F.wan_nsd_isp_host.select();
+					return;
+				}
+				if(IPCheck(F.wan_nsd_isp_host, 1, 254, 0, 0, 1)<0)
+				{
+					alert(aIOIPCheck);
+					F.wan_nsd_isp_host.select();
+					return;			
+				}
+			}  
+			if (F.remotehost_enabled_check)
+			if (F.remotehost_enabled_check.checked == true)
+			{
+				if(F.wan_nsd_remote_host.value.length == 0)
+				{
+					  alert(aRemoteHostwan);
+					F.wan_nsd_remote_host.select();
+					return;
+				}
+				if(IPCheck(F.wan_nsd_remote_host, 1, 254, 0, 0, 1)<0)
+				{
+					alert(aIOIPCheck);
+					F.wan_nsd_remote_host.select();
+					return;
+				}
+			}
+			if (F.dnshost_enabled_check)  
+			if (F.dnshost_enabled_check.checked == true)
+			{
+				if(F.wan_nsd_dns_host.value.length == 0)
+				{
+					alert(aDNSHostwan);
+					F.wan_nsd_dns_host.select();
+					return;
+				}
+				if(checkIPformate(F.wan_nsd_dns_host) > 0)
+				{
+					alert(aDomainCheck);
+					F.wan_nsd_dns_host.select();
+					return;
+				}
+			}
+			if (F.dnshost_enabled_check)  
+			if (F.dnshost_enabled_check.checked == true)
+			{
+
+				if(checkTheSameDNS(F)==-1)
+				{
+					alert(aDNSHostSame);
+					return;
+				}  
+			} 
+		}	
+	} 
+    F.submitStatus.value=1;
+
+	if(F.nsd_enabled_check.checked==true)
+		F.nsd_enabled.value=1;
+	else
+		F.nsd_enabled.value=0;
+	if(document.getElementById("check_io"))
+	{
+		if(F.check_io_check.checked==true)
+			F.check_io.value=1;
+		else
+			F.check_io.value=0;
+	}
+	if(document.getElementById("wan_nsd_def_gw"))
+	{
+		if(F.wan_nsd_def_gw_checkbox.checked==true)
+			F.wan_nsd_def_gw.value=1;
+		else
+			F.wan_nsd_def_gw.value=0;
+	}
+	if(document.getElementById("isphost_enabled"))
+	{
+		if(F.isphost_enabled_check.checked==true)
+			F.isphost_enabled.value=1;
+		else
+			F.isphost_enabled.value=0;
+	}
+	if(document.getElementById("remotehost_enabled"))
+	{
+		if(F.remotehost_enabled_check.checked==true)
+			F.remotehost_enabled.value=1;
+		else
+			F.remotehost_enabled.value=0;
+	}
+	if(document.getElementById("dnshost_enabled"))
+	{
+		if(F.dnshost_enabled_check.checked==true)
+			F.dnshost_enabled.value=1;
+		else
+			F.dnshost_enabled.value=0;
+	}
+		if (F.PortBindingList) selAll(F.PortBindingList); 
+	window.status=wSave;  
+	MM_showHideLayers('AutoNumber15','','hide');  	
+	F.log_ch.value=1;
+	F.submit();	
+  
+}
+
+var serviceWindow0=null;
+var serviceWindow1=null;
+function openService(n)
+{
+  if (n==0) serviceWindow0=window.open('service0.htm','sW0','menubar=no,scrollbars=no,width=500,height=420');
+  if (n==1) serviceWindow1=window.open('service1.htm','sW1','menubar=no,scrollbars=no,width=500,height=420');  
+}
+
+function closeService()
+{
+  timer1=setTimeout("closeChild()",1000);
+  timer2=setTimeout("refreshMe()",3000);
+}
+function closeChild()
+{
+  if (serviceWindow0!=null)
+  {
+    serviceWindow0.close();
+	serviceWindow0=null;
+  }
+  if (serviceWindow1!=null)
+  {
+    serviceWindow1.close();
+	serviceWindow1=null;
+  }  
+  return;
+}
+
+function refreshMe()
+{
+    document.formedit_sys_dualwan2.submitStatus.value=100;
+	document.formedit_sys_dualwan2.action="edit_sys_dualwan2.htm";
+ 
+	document.formedit_sys_dualwan2.submit();
+}
+function countCheck(I)
+{
+    var d;
+    d=parseInt(I.value,10);
+    if (!(d<100000 && d>0))
+    {
+        alert(aCountCheck);
+        I.value=I.defaultValue;
+        return;
+    }
+    I.value=d;
+}
+
+function timeoutCheck(I)
+{
+    var d;
+    d=parseInt(I.value,10);
+    if (!(d<10000000 && d>0))
+    {
+        alert(aTimeoutCheck);
+        I.value=I.defaultValue;
+        return;
+    }
+    I.value=d;
+}
+function PortBindingaddSel(Pro,IPBeg,IPEnd, destBeg, destEnd, status,s,iFace) /* */
+{
+	var SBeg;
+	var SEnd;
+    var pos;
+	var p=-1;
+    var ss;
+	var sString,sName, sEnable;
+	if (Pro.length==0) 
+   {
+      alert(aPressService);
+	  return;
+   }
+ 
+   if (IPBeg.value=="" || IPEnd.value=="" ) 
+   {
+      alert(aIPRangeSrc);
+	  
+	   if (IPBeg.value=="") IPBeg.select();
+	  else IPEnd.select(); 
+	  return;
+   }
+
+  if(destBeg.value=="" || destEnd.value=="" )
+  {
+  	alert(aIPAddressDes);
+	if(destBeg.value=="") destBeg.select();
+	else if(destEnd.value=="") destEnd.select();
+	
+	return;
+  }
+  if( parseInt(IpToArray(IPBeg.value, 4))>parseInt(IpToArray(IPEnd.value, 4)) )   
+  {
+  	SBeg=IPBeg.value;
+		SEnd=IPEnd.value;
+		IPBeg.value=SEnd;
+		IPEnd.value=SBeg;
+  	
+  }
+  
+  if(IPRangeCheck(IPBeg,IPEnd,IPBeg,document.formedit_sys_dualwan2.forbiddenIP)<0) return -1; // will changed 
+ 
+
+  if(IPCheck(destBeg, 0, 255)<0) return -1;	
+   
+  if(IPCheck(destEnd, 0, 255)<0) return -1;
+
+     
+	if (status.checked==true)
+	{
+		sEnable=" [Enabled]";
+	  	ss="1";
+	}
+	else
+	{
+		sEnable=" [Disabled]";
+	  	ss="0";
+	}
+ 
+ 
+ var addr1= IpToArray(destBeg.value, 1);
+ var addr8= IpToArray(destEnd.value, 1);
+ var addr2= IpToArray(destBeg.value, 2);
+ var addr7= IpToArray(destEnd.value, 2);
+ var addr3= IpToArray(destBeg.value, 3);
+ var addr6= IpToArray(destEnd.value, 3);
+ var addr4= IpToArray(destBeg.value, 4);
+ var addr5= IpToArray(destEnd.value, 4);
+ 
+ 
+  if (parseInt(addr8)<parseInt(addr1))   
+  {
+  	SBeg=destEnd.value;
+	  SEnd=destBeg.value;
+	  destEnd.value = SEnd ;
+	  destBeg.value = SBeg ;
+	
+  }
+  if(parseInt(addr8)==parseInt(addr1)&&parseInt(addr7)<parseInt(addr2))
+  {
+  	SBeg=destEnd.value;
+	  SEnd=destBeg.value;
+	  destEnd.value = SEnd ;
+	  destBeg.value = SBeg ;
+  }
+  if(parseInt(addr8)==parseInt(addr1)&&parseInt(addr7)==parseInt(addr2)&&parseInt(addr6)<parseInt(addr3))
+  {
+  	SBeg=destEnd.value;
+	  SEnd=destBeg.value;
+	  destEnd.value = SEnd ;
+	  destBeg.value = SBeg ;
+  }
+
+  if(parseInt(addr8)==parseInt(addr1)&&parseInt(addr7)==parseInt(addr2)&&parseInt(addr6)==parseInt(addr3)&&parseInt(addr5)<parseInt(addr4))
+  {
+  	SBeg=destEnd.value;
+	  SEnd=destBeg.value;
+	  destEnd.value = SEnd ;
+	  destBeg.value = SBeg ;
+  }
+
+  if (s.form.addPortBindingApplication.value==sUpdateAp)
+  {
+      p=-1;
+      while (s.form.PortBindingList.options[++p].selected != true);
+      var def_value= s.options[p].value ;
+     
+  }
+  for (var i=0; i < s.form.PortBindingList.length; i++)
+  {
+        s.form.PortBindingList.options[i].selected=false;
+  }
+  if (s.form.addPortBindingApplication.value==sAddtoList)
+  {
+   	if (s.length>=LimitProtocolBinding)
+   	{
+	     	alert(aLimitProtocolBinding+LimitProtocolBinding+aLimitEnd);
+      		return;
+   	}
+        p=s.length;
+	s.length+=1;
+  }	
+ 
+    s.options[p].value=Pro.value;
+
+    s.options[p].value+= "{";
+
+		s.options[p].value+=IPBeg.value;
+		s.options[p].value+=";";
+		s.options[p].value+=IPEnd.value;
+        
+	
+		s.options[p].value+="(";
+		s.options[p].value+=destBeg.value;
+		
+		s.options[p].value+=";";
+		s.options[p].value+=destEnd.value;
+	
+		s.options[p].value+=")";
+		
+		s.options[p].value+=ss+"}";
+
+		if (document.formedit_sys_dualwan2.modeLB0.value == "2")
+		s.options[p].value+=(iFace.selectedIndex+2);
+		else
+		s.options[p].value+=(iFace.selectedIndex+1);
+		
+  if (s.form.addPortBindingApplication.value==sAddtoList)
+  {
+	  	 for (var i=0; i < s.form.PortBindingList.length -1; i++)
+	  {
+	       if( s.options[p].value== s.form.PortBindingList.options[i].value)
+	       {
+	       	
+	       	s.form.PortBindingList.length = s.form.PortBindingList.length -1;
+	        alert(aDuplicatedEntry);
+	       return;
+	       }
+	  }
+  }
+  else
+  {
+	  	 for (var i=0; i < s.form.PortBindingList.length ; i++)
+	  {
+	       if( s.options[p].value== s.form.PortBindingList.options[i].value && p != i )
+	       {
+	       	
+	       		s.options[p].value = def_value ;
+	       		s.options[p].selected = true ;
+	          alert(aDuplicatedEntry);
+	         return;
+	       }
+	  }
+  	
+  }
+	
+		sString=Pro.options[Pro.selectedIndex].text;
+		
+			s.options[p].text=sString+"->"+IPBeg.value+"~"+IPEnd.value+"("+destBeg.value+"~"+destEnd.value+")";
+			s.options[p].text+=iFace.options[iFace.selectedIndex].text;
+	s.options[p].text+=sEnable;
+    clearContent(s.form,s.form.deletePortBindingApplication);
+   		
+}
+function clearContent(F,I)
+{				
+	F.srcIPStart.value="";
+	F.srcIPEnd.value="";
+	F.destIPStart.value	="";
+	F.destIPEnd.value	="";
+
+	F.V_valid.checked=false;  
+	for (var i=0; i < F.PortBindingList.length; i++)
+	{
+		F.PortBindingList.options[i].selected=false;
+	}	    
+	F.addPortBindingApplication.value=sAddtoList; 
+	SetButtonStatus("deletePortBindingApplication", "disabled");
+	SetButtonStatus("showNew", "disabled"); 
+	SetButtonStatus("upRate", "disabled");
+	SetButtonStatus("downRate", "disabled");
+}
+function showList(s)
+{
+	if (s.selectedIndex==-1) return;
+	var p,pp,portName ;
+	var q,k; 
+	var forwardString=s.options[s.selectedIndex].value; 
+	var rightString;
+	var tmpString;
+	var ts=new tmpWord(1); 
+
+	rightString=forwardString;
+	q=rightString.length;      
+	p=rightString.lastIndexOf("{"); 
+
+	ts[1] = rightString.substring(0,p);
+
+	rightString=rightString.substring(p+1,q);
+
+	End=rightString.indexOf("("); 
+
+	q=rightString.indexOf(";"); 
+
+	if( q < End )                 
+	{
+	  var src_start= rightString.substring(0,q);
+	  rightString = rightString.substring(q+1,rightString.length);
+	  
+	  q= rightString.indexOf('(');
+	  var src_end= rightString.substring(0,q);
+	  rightString = rightString.substring(q+1,rightString.length);
+	  
+	  q= rightString.indexOf(';');
+	  var dest_start= rightString.substring(0,q);
+	  rightString = rightString.substring(q+1,rightString.length);
+	 
+	  q= rightString.indexOf(')');
+	  var dest_end= rightString.substring(0,q);
+	  rightString = rightString.substring(q+1,rightString.length);
+	 
+	 
+	  q= rightString.indexOf('}');
+	  var pb_enable= rightString.substring(0,q);
+
+	  tmpString=rightString;
+	  rightString=tmpString.substring(q+1,q+2);
+	}
+  
+ 
+	for (var i=0; i < s.form.V_protocol.length; i++)
+	{
+		if (s.form.V_protocol.options[i].value==ts[1] ||s.form.V_protocol.options[i].text == ts[1])
+		s.form.V_protocol.options[i].selected=true;
+	}
+
+	s.form.srcIPStart.value=src_start ;
+	s.form.srcIPEnd.value=src_end ;
+	s.form.destIPStart.value=dest_start ;
+	s.form.destIPEnd.value=dest_end ;
+
+	var totalWanNum;
+	totalWanNum = s.form.iFace.length;
+	for (var i=0; i < totalWanNum; i++)
+	{
+		if (s.form.iFace.options[i].value==rightString)
+			s.form.iFace.options[i].selected=true;
+	}
+
+	SetButtonStatus("upRate", "disabled");
+	SetButtonStatus("downRate", "disabled");
+	if(s.options[0].selected!=true)
+		SetButtonStatus("upRate", "");
+	if(s.options[s.length-1].selected!=true)
+		SetButtonStatus("downRate", "");
+
+	if (pb_enable=="1") s.form.V_valid.checked=true;
+	else s.form.V_valid.checked=false;  
+	s.form.addPortBindingApplication.value=sUpdateAp; 
+	SetButtonStatus("deletePortBindingApplication", "");
+	SetButtonStatus("showNew", ""); 
+       
+}
+
+function IPStrim(thisIP)
+{
+	if(thisIP)
+	{
+		var s = thisIP.value;
+		var reg = /\s/g;
+		var ss = s.replace(reg, "");
+		thisIP.value = ss ;
+	}
+}
+function streamCheck(I)
+{
+	validatenum(I, 100001, 1, aStreamCheck);
+}
+//================= End =================*/
+
+/***************************************************/
+/*												   */	
+/*      			  Begin of content    				   */
+/*												   */	
+/***************************************************/
+var ButtonType = "BackOkCancel";
+var Reloadlink = "";
+var Savelink = "chSubmit(document.formedit_sys_dualwan2)";
+var Cancellink = ""; 
+var Backlink = "sys_dualwan2.htm";
+var helplink ='help_edit_sys_dualwan2.htm';
+var UserName = '<!--#nk_get DisplayOnly="nUser"-->';
+var FixedTableWidth = 700;
+var head_width=170;		
+
+function PrintContent()
+{
+	PrintBeginContent();
+	PrintMax_Bandwidth(1);
+	if (MaxWanPortNumber==2 && (document.formedit_sys_dualwan2.isDMZmode.value== 1 || document.formedit_sys_dualwan2.modeLB0.value == "0"))
+		PrintNSD(0);
+	else
+	{
+		PrintNSD(1);
+		PrintProtocolBindinglist(0);
+	}	
+	PrintEndContent();
+}
+
+function PrintMax_Bandwidth(hasUnderLine)
+{
+	setiName();
+	PrintBeginBlock(1, "The Max Bandwidth Provided by ISP");  
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Interface&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td><font color="#8e8e8e">');
+	document.write(document.formedit_sys_dualwan2.iName.value);
+	document.write('</font></td>');
+	document.write('</tr>');	
+	document.write('<tr>');
+	document.write('<td width="'+head_width+'">');
+	document.write('Upstream&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="ibwuWAN" size="6" maxlength="6" onKeypress="return Check_User_Input(event)" value=\'<!--#nk_get 1to1_HandleByInf="ibwuWAN"-->\' onBlur="streamCheck(this)" onFocus="this.select();">'); 
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('Kbit/Sec');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');	
+	document.write('<td>');
+	document.write('Downstream&nbsp;:&nbsp;');
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="ibwWAN" size="6" maxlength="6" onKeypress="return Check_User_Input(event)" value=\'<!--#nk_get 1to1_HandleByInf="ibwWAN"-->\' onBlur="streamCheck(this)" onFocus="this.select();">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('Kbit/Sec');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintNSD(hasUnderLine)
+{
+	var in_head_width=head_width-27;
+	PrintBeginBlock(1, "Network Service Detection");
+	
+	document.write('<table class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width="20" align="left">');
+	document.write('<input type=hidden name="nsd_enabled" value=\'<!--#nk_get CheckboxSaveByInf="nsd_enabled"-->\'>');
+	document.write('<input type="checkbox" name="nsd_enabled_check" value="1" onClick="chDismatch();" <!--#nk_get CheckboxStatusByInf="nsd_enabled"-->>');
+	document.write('</td>');
+	document.write('<td  align="left" colspan="3">');
+	document.write('Enable Network Service Detection ');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	
+ 	document.write('<table name="nsd_table" id="nsd_table" class="Setuptable" width="'+FixedTableWidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width="20" align="left">');
+	document.write('&nbsp;</td>'); 
+	document.write('<td width='+in_head_width+' align="left">');
+	document.write('Retry count : ');
+	document.write('</td>') 
+	document.write('<td align="left">')
+	document.write('<input type="text" name="nsd_retry_count" size="5" maxlength="5" onKeypress="return Check_User_Input(event)" value=\'<!--#nk_get 1to1_HandleByInf="nsd_retry_count"-->\'  onFocus=\'this.select();\' onBlur=\' countCheck(this)\'>');
+	document.write('</td>');  
+	document.write('</tr>');
+
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('&nbsp;</td>');
+	document.write('<td width='+in_head_width+' align="left">');
+	document.write('Retry timeout : ');
+	document.write('</td >');
+	document.write('<td align="left">');
+	document.write('<input type="text" name="nsd_retry_timeout" size="7" maxlength="7" onKeypress="return Check_User_Input(event)" value=\'<!--#nk_get 1to1_HandleByInf="nsd_retry_timeout"-->\' onFocus=\'this.select();\' onBlur=\'timeoutCheck(this)\'>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('second ');
+	document.write('</td>');
+	document.write('</tr>'); 
+
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('&nbsp;</td>');
+	document.write('<td width='+in_head_width+' align="left">');
+	document.write('When Fail : ');
+	document.write('</td >');
+	document.write('<td align="left">');
+	document.write('<select class="Select" name="nsd_action" style="width:300px">');
+	document.write('<option value="0" <!--#nk_get SelectHandleByInf="nsd_action:0"-->> Generate the Error Condition in the System Log</option>');
+	document.write('<option value="1"<!--#nk_get SelectHandleByInf="nsd_action:1"-->> Keep System Log and Remove the Connection</option>');
+	document.write('</select>');
+	document.write('</td>');
+	document.write('</tr>'); 
+	
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('</td>'); 
+	document.write('<td align="left" colspan="2">');
+	document.write('<input type=hidden name="wan_nsd_def_gw" id="wan_nsd_def_gw" value=\'<!--#nk_get CheckboxSaveByInf="wan_nsd_def_gw"-->\'>');
+	document.write('<input type="checkbox" name="wan_nsd_def_gw_checkbox" value="1" <!--#nk_get CheckboxStatusByInf="wan_nsd_def_gw"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('Default Gateway');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('</td>');
+	document.write('<td width='+in_head_width+' align="left">');
+	document.write('<input type="hidden" name="isphost_enabled" id="isphost_enabled" value=\'<!--#nk_get CheckboxSaveByInf="isphost_enabled"-->\'>');
+	document.write('<input type="checkbox" name="isphost_enabled_check" value="1" onClick="chNSD(this.form)" <!--#nk_get CheckboxStatusByInf="isphost_enabled"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('ISP Host');
+	document.write('</td>');
+	document.write('<td align="left">');
+	document.write('<input type="text" name="wan_nsd_isp_host" size="20" maxlength="15" onBlur="IPCheck(this)" onKeypress="return Check_User_Input(event)" value=\'<!--#nk_get 1to1_HandleByInf="wan_nsd_isp_host"-->\' onFocus="this.select();">');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('</td>');
+	document.write('<td width='+in_head_width+' align="left">');
+	document.write('<input type=hidden name="remotehost_enabled" id="remotehost_enabled" value=\'<!--#nk_get CheckboxSaveByInf="remotehost_enabled"-->\'>');
+	document.write('<input type="checkbox" name="remotehost_enabled_check" value="1" onClick="chNSD(this.form)" <!--#nk_get CheckboxStatusByInf="remotehost_enabled"-->>');;
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('Remote Host');
+	document.write('</td>');
+	document.write('<td align="left">');
+	document.write('<input type="text" name="wan_nsd_remote_host" size="20" maxlength="15" onBlur="IPCheck(this)" onKeypress="return Check_User_Input(event)" value=\'<!--#nk_get 1to1_HandleByInf="wan_nsd_remote_host"-->\' onFocus="this.select();">');
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td>');
+	document.write('</td>');
+	document.write('<td width='+in_head_width+' align="left">');
+	document.write('<input type=hidden name="dnshost_enabled" id="dnshost_enabled" value=\'<!--#nk_get CheckboxSaveByInf="dnshost_enabled"-->\'>');
+	document.write('<input type="checkbox" name="dnshost_enabled_check" value="1" onClick="chNSD(this.form)" <!--#nk_get CheckboxStatusByInf="dnshost_enabled"-->>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="0">');
+	document.write('DNS Lookup Host');
+	document.write('</td>');
+	document.write('<td align="left">');
+	document.write('<input type="text" name="wan_nsd_dns_host" size="20" maxlength="60" onBlur="sTrim(this);" value=\'<!--#nk_get 1to1_HandleByInf="wan_nsd_dns_host"-->\' onFocus="this.select();">');
+	document.write('</td>');
+	document.write('</tr>'); 
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+function PrintProtocolBindinglist(hasUnderLine)
+{
+	var in_head_width=head_width;
+	PrintBeginBlock(1, "Protocol Binding");
+	if ( MaxWanPortNumber == 7 && document.formedit_sys_dualwan2.editInterface.value=="1") 
+	{
+		if (document.formedit_sys_dualwan2.modeLB0.value == "2" )
+		{
+			document.write('<table class="Infotable" width="'+FixedTableWidth+'" border='+Tableborder+'>');
+			document.write('<tr>'); 
+			document.write('<td valign="middle" align="center" height="420">');
+			document.write('<font style="color:#F00; font-size:18px; font-family:sans-serif, Verdana, Arial; font-weight:bold">');
+			document.write('This port always uses Intelligent Balancer (Auto Mode)');
+			document.write('</font>');
+			document.write('</td>');
+			document.write('</tr>');
+			document.write('</table>');	
+			return ;
+		}
+	}
+	document.write('<table class="opacitytable" width="'+SmallLayoutwidth+'" border='+Tableborder+'>');	
+	document.write('<tr>');
+	document.write('<td width=10 height=10></td>');
+	document.write('<td colspan="2"></td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width="'+in_head_width+'">Service&nbsp;:&nbsp;</td>');
+	document.write('<td >');
+	document.write('<select class="Select" name="V_protocol" style="width:240px">');
+	var i=0, j=-1;
+	var k=0, l, m, n, p;
+	var tmp, tmp2, tmp3;
+	var outputer;
+	tmp=document.formedit_sys_dualwan2.service_menu.value;
+	k=tmp.length;
+	index=tmp.indexOf("</option>");
+	tmp2=tmp.substring(0,index);
+	tmp=tmp.substring(index+8,k);
+	outputer+=tmp2;
+	outputer+="</option>";	  
+	do{
+	  k=tmp.length;
+	  index=tmp.indexOf("</option>");
+	  tmp2=tmp.substring(0,index);
+	  tmp=tmp.substring(index+8,k);
+
+	  tmp3=tmp2;
+	  l=tmp3.indexOf("[");
+	  m=tmp3.indexOf("/",l+1);
+	  n=tmp3.indexOf("]",m+1);
+	  PT=tmp3.substring(l+1,m);
+	  PO=tmp3.substring(m+1,n);
+
+	  if((PO!="0~0"))
+	  {
+	       outputer+=tmp2;
+	       outputer+="</option>";
+	  }
+	}while(index != "-1");
+	document.write(outputer);
+	document.write('</select>');
+	document.write('</td>');	
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td></td>');
+	document.write('<td>');	
+	PrintSTButton("sM", "Service Management", "openService(0)");	
+	document.write('</td>');
+	document.write('<td width=10></td>');	
+	document.write('</tr>');
+	
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('Source IP&nbsp;:&nbsp;');		
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="srcIPStart" maxlength="15" onFocus="this.select();" onBlur="IPStrim(this.form.srcIPStart)" onKeypress="return Check_User_Input(event)" size="15" value="">');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('to');		
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="text" name="srcIPEnd" maxlength="15" onFocus="this.select();" onBlur="IPStrim(this.form.srcIPEnd)" onKeypress="return Check_User_Input(event)" size="15" value="">');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td>');
+	document.write('Destination IP&nbsp;:&nbsp;');		
+	document.write('</td>');
+	document.write('<td>');
+	document.write('<input type="text" name="destIPStart" maxlength="15" onFocus="this.select();" onBlur="IPStrim(this.form.destIPStart)" onKeypress="return Check_User_Input(event)" size="15" value=\'\'>');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('to');
+	document.write('<img border="0" src="images/_blank.gif" width="8" height="1">');
+	document.write('<input type="text" name="destIPEnd" maxlength="15" onFocus="this.select();" onBlur="IPStrim(this.form.destIPEnd)" onKeypress="return Check_User_Input(event)" size="15" value=\'\'>');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left" >Interface&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('&nbsp;<select name="iFace">');
+	var RealWanNumber;
+	RealWanNumber = parseInt(document.formedit_sys_dualwan2.wanNumbers.value);
+	if (document.formedit_sys_dualwan2.modeLB0.value == "2")
+	{
+		for (i=2; i <= RealWanNumber; i++)
+		{			
+			document.write('<option value="'+i+'">');
+			document.write("WAN"+i);
+			document.write('</option>');
+		}
+	}
+	else
+	{
+		for (i=1; i <= RealWanNumber; i++)
+		{			
+			document.write('<option value="'+i+'">');
+			document.write("WAN"+i);
+			document.write('</option>');
+		}
+	}
+	document.write('</select>');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');
+	document.write('<td width='+in_head_width+' align="left" >Enable&nbsp;:&nbsp;</td>');
+	document.write('<td align="left">');
+	document.write('<input type="checkbox" name="V_valid" value="0" ');
+	document.write('</td>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td width="10"></td>');
+	document.write('<th colspan="2">');
+	document.write('<table width="100%" border="0" cellpadding="0" cellspacing="0">');
+	document.write('<tr>');
+	document.write('<td width="33%" align="left">');
+	PrintSTButton("upRate", "Move Up", "UpSel(this.form.PortBindingList,1)");
+	SetButtonStatus("upRate", "disabled");
+	document.write('</td>');
+	document.write('<td width="34%" align="center">');
+	PrintSTButton("addPortBindingApplication", "Add to list", "PortBindingaddSel(this.form.V_protocol,this.form.srcIPStart, this.form.srcIPEnd, this.form.destIPStart, this.form.destIPEnd,this.form.V_valid,this.form.PortBindingList,this.form.iFace)");
+	document.write('</td>');
+	document.write('<td width="33%" align="right">');
+	PrintSTButton("downRate", "Move Down", "UpSel(this.form.PortBindingList,-1)");
+	SetButtonStatus("downRate", "disabled");
+	document.write('</td>');
+	document.write('</tr>');
+	document.write('</table>');
+	document.write('</th>');
+	document.write('<td width="10"></td>');
+	document.write('</tr>'); 
+	document.write('<tr>');
+	document.write('<td width="10"></td>');
+	document.write('<th colspan="2" align="center">');
+	document.write('<select multiple class="MultiSelect" name="PortBindingList" size="10" onChange="showList(this.form.PortBindingList);" style="width: 100%" >');
+	document.write('<!--#nk_get PortBindingList=""-->');
+	document.write('</select>');
+	document.write('</th>');
+	document.write('<td></td>');
+	document.write('</tr>');
+	document.write('<tr>');
+	document.write('<td></td>');	
+	document.write('<td align="center" valign="top" colspan="2">');
+	PrintSTButton("deletePortBindingApplication","Delete","delSel(this.form.PortBindingList,this)");
+	SetButtonStatus("deletePortBindingApplication", "disabled");
+	document.write('<img border="0" src="images/_blank.gif" width="5" height="1">');
+	PrintSTButton("showNew","Add New","clearContent(this.form,this.form.deletePortBindingApplication)");
+	SetButtonStatus("showNew", "disabled");
+	document.write('<br><img border="0" src="images/_blank.gif" width="1" height="3"></td>');
+	document.write('<td></td>');	
+	document.write('</tr>');
+	document.write('</table>');
+	PrintEndBlock(hasUnderLine);
+}
+
+//=============== End of content ===============*/
+</script>
+</head>
+<body class="mainframe" onLoad="Entryfunction();" onUnload="Leavefunction();" onResize="ChangeBgsize()" style="overflow:hidden">
+<script>PrintBackground();</script>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <form name="formdualwan" method="post" action="">
+      <input type="hidden" name="wanNumber" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>
+    </form>
+    
+	<!--#nk_get JavaScript="menu:0"--><script src="menu.js"></script><!--#nk_get JavaScript="menu:1"-->
+	<script>
+         SetItemInit(foldersTree, 4, 1);		// Set Selected Node
+	  if (document.formdualwan.wanNumber.value <= 2)
+	  	SetItemStr(foldersTree, 4, 1, "Dual WAN");	
+         initializeTree(foldersTree); 			// Draw Menu & Layout
+	</script>
+	
+	<form name="formedit_sys_dualwan2" method="post" action="edit_sys_dualwan2.htm">
+	<input type="hidden" name="page" value="edit_sys_dualwan2.htm">
+	<input type="hidden" name="submitStatus" value="0">
+	<input type="hidden" name="log_ch" value="0">
+	<input type="hidden" name="iName" value=''>
+	<input type="hidden" name="editInterface" value='<!--#nk_get WanEditInterface=""-->'>
+	<input type="hidden" name="LanIp" value='<!--#nk_get DisplayOnly="LanIp"-->'>
+	<input type="hidden" name="LanMask" value='<!--#nk_get DisplayOnly="LanMask"-->'>
+	<input type="hidden" name="service_menu" id="service_menu" value='<!--#nk_get serviceList="2"-->'>
+	<input type="hidden" name="NsdHostValue" value='<!--#nk_get DisplayOnly="wan1_nsdhost"-->'>
+	<input type="hidden" name="NsdHostValue" value='<!--#nk_get DisplayOnly="wan2_nsdhost"-->'>
+	<input type="hidden" name="NsdHostValue" value='<!--#nk_get DisplayOnly="wan3_nsdhost"-->'>
+	<input type="hidden" name="NsdHostValue" value='<!--#nk_get DisplayOnly="wan4_nsdhost"-->'>
+	<input type="hidden" name="NsdHostValue" value='<!--#nk_get DisplayOnly="wan5_nsdhost"-->'>
+	<input type="hidden" name="NsdHostValue" value='<!--#nk_get DisplayOnly="wan6_nsdhost"-->'>
+	<input type="hidden" name="NsdHostValue" value='<!--#nk_get DisplayOnly="wan7_nsdhost"-->'>
+	<input type="hidden" name="DnsHostValue" value='<!--#nk_get DisplayOnly="wan1_dnshost"-->'>
+	<input type="hidden" name="DnsHostValue" value='<!--#nk_get DisplayOnly="wan2_dnshost"-->'>
+	<input type="hidden" name="DnsHostValue" value='<!--#nk_get DisplayOnly="wan3_dnshost"-->'>
+	<input type="hidden" name="DnsHostValue" value='<!--#nk_get DisplayOnly="wan4_dnshost"-->'>
+	<input type="hidden" name="DnsHostValue" value='<!--#nk_get DisplayOnly="wan5_dnshost"-->'>
+	<input type="hidden" name="DnsHostValue" value='<!--#nk_get DisplayOnly="wan6_dnshost"-->'>
+	<input type="hidden" name="DnsHostValue" value='<!--#nk_get DisplayOnly="wan7_dnshost"-->'>
+	<input type="hidden" name="isDMZmode" value='<!--#nk_get DMZModeCheck=""-->'>
+	<input type="hidden" name="IPRange1" value='<!--#nk_get IPHandle1="ipAddr:1"-->'>
+	<input type="hidden" name="IPRange2" value='<!--#nk_get IPHandle1="ipAddr:2"-->'>	
+	<input type="hidden" name="IPRange3" value='<!--#nk_get IPHandle1="ipAddr:3"-->'>	
+	<input type="hidden" name="modeLB0" id="modeLB0" value='<!--#nk_get DisplayOnly="modeLB0"-->'>
+	<input type="hidden" name="forbiddenIP" value='0.0.0.0'>
+	<input type="hidden" name="wanNumbers" value='<!--#nk_get GetSystemNum="wan_port_num_now"-->'>       
+	<script>PrintContent();</script>
+	<script>PrintRight();</script>      
+	<script>PrintBottom();</script>   
+</table>
+</body>
+</html>
+<!--#nk_get SysLogChange="edit_sys_dualwan2.htm"-->
+<!--#nk_get DualwanUpdate=""-->

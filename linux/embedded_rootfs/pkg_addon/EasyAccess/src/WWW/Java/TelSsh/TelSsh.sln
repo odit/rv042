@@ -1,0 +1,13 @@
+Microsoft Visual Studio Solution File, Format Version 1.00
+Project("{66355F20-A65B-11D0-BFB5-00A0C91EBFA0}") = "TelSsh", "TelSsh.vjp", "{3D0F7D8D-B887-413F-A6A1-5100E8180CB0}"
+EndProject
+Global
+	GlobalSection(LocalDeployment) = postSolution
+		StartupProject = {3D0F7D8D-B887-413F-A6A1-5100E8180CB0}
+	EndGlobalSection
+	GlobalSection(BuildOrder) = postSolution
+		0 = {3D0F7D8D-B887-413F-A6A1-5100E8180CB0}
+	EndGlobalSection
+	GlobalSection(DeploymentRoot) = postSolution
+	EndGlobalSection
+EndGlobal

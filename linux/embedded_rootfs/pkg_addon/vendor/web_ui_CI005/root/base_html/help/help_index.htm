@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Pragma" content="No-Cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title></title>
+<link type="text/css" rel="stylesheet" href="../nk.css">
+<!--#nk_get JavaScript="nk:0"--><script src="../nk.js"></script><!--#nk_get JavaScript="nk:1"-->
+<script language="javascript" type="text/javascript" src="../jquery.js"></script>
+<SCRIPT language="javascript">
+<!--
+
+self.document.write("<link href='style.css' rel='stylesheet' type='text/css'>");
+document.title = "Cisco " + "<!--#nk_get JavaScript="help_title:0"-->" + " Help";
+myid=52;
+mymodel="<!--#nk_get JavaScript="help_title:0"-->";
+//-->
+</SCRIPT>
+
+</head>
+<body class="mainframe" onResize="ChangeBgsize()" style="overflow-x:hidden;">
+<script>PrintBackground("help")</script>  
+	<tr>
+		<td valign="top">
+			<table class="helpblock" width="100%" border="0">
+			<tr>
+				<td>
+				<div id="feeds"></div>
+		<script>
+                var url=location.href;
+		var str="",str2="", tmp=""; 
+
+                if(url.indexOf("url=")!=-1)
+		{
+                    var ary=url.split("url=");
+		    str+=ary[1];
+                }
+                if(str.indexOf(".")!=-1)
+		{
+		    var ary=str.split(".")	
+		    str2 = ary[1];                  
+                }
+                if(str.indexOf("#")!=-1)
+		{
+		    var ary=str.split("#")	
+		    tmp = ary[1];                  
+                }
+		else
+		{
+		    if(str2 == 'htm')
+		        str += "l";
+		}
+		$("#feeds").load(str, function(response, status, xhr){
+		if (status == "error")
+		{
+		    $("#feeds").load("help_home.html");
+		}
+		});
+		if(document.getElementById(tmp))
+		{
+		    document.getElementById(tmp).scrollIntoView(true);
+		}
+                </script>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>  
+</table>
+</body>
+</html>

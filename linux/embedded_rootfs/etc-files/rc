@@ -1,0 +1,39 @@
+#!/bin/sh
+echo $0 starting
+
+# If we have depmod, run it to create module dependencies
+if [ -e /sbin/depmod ]
+then
+    echo Updating module dependencies
+    depmod -a
+fi
+
+# Load IPv6 if it exists so telnetd will be happy
+if [ -e /lib/modules/net/ipv6/ipv6.ko ]
+then
+    echo Loading IPv6 module
+    insmod /lib/modules/net/ipv6/ipv6.ko
+fi
+
+echo Mounting file systems
+mount -a
+
+echo Setting up loopback
+ifconfig lo 127.0.0.1
+
+echo "Create /var/run/utmp"
+/bin/mkdir /var/run
+/bin/touch /var/run/utmp
+/bin/chmod 777 /var/run /var/run/utmp
+
+echo "Starting syslogd"
+mkdir /var/log
+/sbin/syslogd 
+
+echo Starting telnetd
+telnetd -l /bin/ash
+
+rc.local
+
+echo $0 complete
+
